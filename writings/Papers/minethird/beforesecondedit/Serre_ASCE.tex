@@ -1,0 +1,608 @@
+\documentclass[SingleSpace,12pt]{Serre_ASCE}
+
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[pdf]{pstricks}
+\usepackage{psfrag}
+\usepackage{pifont}
+\usepackage{epstopdf}
+%\usepackage{topcapt}
+\usepackage{lscape}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage{geometry}
+\usepackage{fleqn}
+\usepackage{txfonts}
+\usepackage{wasysym}
+\usepackage{lineno}
+\usepackage{enumerate}
+\usepackage{url}
+\usepackage{times}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{longtable}
+%\usepackage{citeref}
+\usepackage[skip=0pt]{caption}
+
+% TIME ON EVERY PAGE AS WELL AS THE FILE NAME
+\usepackage{fancyhdr}
+\usepackage{currfile}
+\usepackage[us,12hr]{datetime} % `us' makes \today behave as usual in TeX/LaTeX
+\fancypagestyle{plain}{
+\fancyhf{}
+\rfoot{\small Draft Paper \\ File Name: {\currfilename} \\ Date: {\ddmmyyyydate\today} at \currenttime}
+\lfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0pt}}
+\pagestyle{plain}
+
+\begin{document}
+
+\title{A comparison of different order hybrid finite difference-volume methods for solving the Serre equations in conservative law form}
+
+\author{
+Jordan~Pitt,%
+\thanks{Mathematical Sciences Institute, Australian National University, Canberra, ACT 0200, Australia, E-mail: Jordan.Pitt@anu.edu.au. The work undertaken by the first author was supported financially by an Australian National University Postgraduate Research Award.}
+\\
+Christopher~Zoppou,\footnotemark[1]%
+%
+% Adding a second author with the same affiliation (still using \thanks):
+\\
+Stephen~G.~Roberts,\footnotemark[1]
+}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\KeyWords{dispersive waves, conservation laws, Serre equation, finite volume method, finite difference method}
+
+\linenumbers
+
+%--------------------------------------------------------------------------------
+\section{Introduction} \label{intro}
+Free surface flows occur in many important applications such as; tsunamis, storm surges, tidal bores and riverine flooding. As these surfaces vary more rapidly the assumption of hydrostatic pressure in a fluid column breaks down and vertical acceleration inside the fluid becomes important. Therefore, the use of the shallow water wave equations is not fully justified as they enforce a hydrostatic pressure distribution. While numerical methods for the full Euler equations are not yet computationally efficient enough to deal with these problems over large domains to high accuracy. Thus the Serre equations have been developed to approximate the flow regime where the fluid is shallow $\sigma \ll 1$ and fully non-linear $\epsilon \sim 1$ \cite{Bonneton-Lannes-2009-16601}. 
+
+The Serre equations were first derived by \citeN{Serre-F-1953-857} for flat bottom topographies in one dimension. \citeN{Su-Gardener-1969-536} obtained equations for any smooth bottom topographies in one dimension and \citeN{Green-Naghdi-1976-237} did the same in two dimensions. These equations have been handled in many different ways \cite{Dutykh-2014-315,Bonneton-etal-2011-1479,Antunes-do-Carmo-etal-1993-725,Chazel-etal-2011-105,Barthelemy-2006-51-1217,Barthelemy-2007-53-1423,Clamond-2011-315}. This paper follows the decomposition of the Serre equations into conservative law form \cite{Hank-etal-2010-2034,Guyenne-etal-2014-169} and then follows the formulation of \citeN{Hank-etal-2010-2034} and \citeN{Zoppou-2014} to build a first-, second- and third-order scheme. The benefits of this method are its steep gradient handling capability and its ability to be extended to two dimensions. This paper investigates the steep gradient handling capability of the method while also examining how accurate a numerical scheme for the Serrre equations should be to capture the important behaviour in one dimension; as a foundation for future work in two dimensions. 
+
+\citeN{Zoppou-Roberts-1996} demonstrated that first- and third-order schemes produce diffusive errors smearing steep gradients. While second-order schemes produce dissipative errors introducing non-physical oscillations around steep gradients. Because steep gradients arise naturally in fluid flows and the Serre equations produce dispersive waves around them \cite{El-etal-2006} it is important that these oscillations are not significantly polluted by either diffusion or dissipation. Which was a problem apparent in the conflicting results of \citeN{El-etal-2006} and \citeN{Hank-etal-2010-2034} with relation to the dam break problem replicated in this paper. 
+
+%--------------------------------------------------------------------------------
+\section{Serre Equations}
+\label{section:Serre Equations}
+The Serre equations can derived as an approximation to the full Euler equations by depth integration similar to \citeN{Su-Gardener-1969-536}. They can also be seen as an asymptotic expansion to the Euler equations \cite{Bonneton-Lannes-2009-16601}. The former is more consistent with the perspective from which numerical methods will be developed in this paper while the latter indicates the appropriate regions in which to use these equations as a model for fluid flow.
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=7.0cm]{one-dimensional-axis_Serre.eps}
+\end{center}
+\caption{The notation used for one-dimensional flow governed by the Serre equation.}
+\label{fig:Notation}
+\end{figure}
+
+The scenario under which the Serre approximation is made consists of a two dimensional $\textbf{x} = (x,z)$ fluid over a bottom topography as in Figure \ref{fig:Notation}, under the action of gravity. The water depth is $h(x,t)$ and $z_b(x)$ is the bed elevation. The fluid is subject to the pressure, $p(\textbf{x},t)$ and  gravitational acceleration, $\textbf{g} = (0,g)^T$ and has a velocity $\textbf{u} = (u(\textbf{x},t),w(\textbf{x},t))$,  where $u(\textbf{x},t)$ is the velocity in the $x$-coordinate and $w(\textbf{x},t)$ is the velocity in the $z$-coordinate and $t$ is time. Assuming that $z_b(x)$ is constant the Serre equations read \cite{Guyenne-etal-2014-169,Zoppou-2014}
+\begin{linenomath*}
+\begin{subequations}\label{eq:Serre_conservative_form}
+\begin{gather}
+\dfrac{\partial h}{\partial t} + \dfrac{\partial (\bar{u}h)}{\partial x} = 0
+\label{eq:Serre_continuity}
+\end{gather}
+\begin{gather}
+\underbrace{\underbrace{\dfrac{\partial (\bar{u}h)}{\partial t} + \dfrac{\partial}{\partial x} \left ( \bar{u}^2h + \dfrac{gh^2}{2}\right )}_{\text{Shallow Water Wave Equations}} + \underbrace{\dfrac{\partial}{\partial x} \left (  \dfrac{h^3}{3} \left [ \dfrac{\partial \bar{u} }{\partial x} \dfrac{\partial \bar{u}}{\partial x} - \bar{u} \dfrac{\partial^2 \bar{u}}{\partial x^2}  - \dfrac{\partial^2 \bar{u}}{\partial x \partial t}\right ] \right )}_{\text{Dispersion Terms}} = 0.}_{\text{Serre Equations}}
+\label{eq:Serre_momentum}
+\end{gather}
+\end{subequations}
+\end{linenomath*}
+Where $\bar{u}$ is the average of $u$ over the depth of water.
+%--------------------------------------------------------------------------------
+\subsection{Alternative Conservation Law Form of the Sere Equations}
+\label{section:Alternative Conservation Law Form of the Sere Equations}
+%--------------------------------------------------------------------------------
+In \citeN{Hank-etal-2010-2034} and \citeN{Zoppou-2014} it is demonstrated that the Serre equations can be rearranged into a conservation law form, by introducing a new quantity
+\begin{linenomath*}
+\begin{gather}
+\label{eq:Gdefinition}
+G = uh - h^2 \dfrac{\partial h}{\partial x} \dfrac{\partial u}{\partial x} - \frac{h^3}{3} \dfrac{\partial^2 u}{\partial x^2}.
+\end{gather}
+\end{linenomath*}
+Consequently, the equations can be rewritten as
+\begin{linenomath*}
+\begin{subequations}
+\begin{gather}
+\dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0,
+\label{eq:Serrecon_continuity}
+\end{gather}
+and
+\begin{gather}
+\dfrac{\partial G}{\partial t} + \dfrac{\partial}{\partial x}\left(Gu + \dfrac{gh^2}{2} - \dfrac{2h^3}{3}\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x}\right) = 0
+\label{eq:Serrecon_momentum}
+\end{gather}
+\label{eq:Serrecon}
+\end{subequations}
+\end{linenomath*}
+where the bar over $u$ has been dropped to simplify the notation. Thus a hybrid method can be developed for the Serre equations that solves the elliptic problem \eqref{eq:Gdefinition} for $u$ and then the conservation law \eqref{eq:Serrecon} for $h$ and $G$ at some later time. Replicating the process of \citeN{Hank-etal-2010-2034} and \citeN{Zoppou-2014}.
+%--------------------------------------------------------------------------------
+\section{Numerically Solving the Serre Equations Written in Conservation Law Form}
+\label{section:Solving the Serre Equations Written in Conservation Law Form}
+%--------------------------------------------------------------------------------
+There are numerous ways a numerical method could be built to solve the Serre equations in conservation law form, \eqref{eq:Serrecon}. For flows that contain steep gradients the finite volume method seems the most appropriate. A finite volume method to solve \eqref{eq:Serrecon} updates the conserved quantities $h$ and $G$ over a single time step $\Delta t$ for instance from time $t^n$ to $t^{n+1}$. So that
+\begin{linenomath*}
+\begin{gather}
+\left[\begin{array}{c}
+ h^{n+1} \\
+ G^{n+1} \end{array}\right] = \mathcal{L}(h^{n},G^{n},u^n,\Delta t)
+\label{eq:L}
+\end{gather}
+\end{linenomath*}
+where $\mathcal{L}$ is some numerical solver for \eqref{eq:Serrecon}. The complete solution also involves solving \eqref{eq:Gdefinition} for $u$ given $h$ and $G$ denoted by 
+\begin{linenomath*}
+\begin{gather}
+u = \mathcal{A}(h,G)
+\label{eq:A}
+\end{gather}
+\end{linenomath*}
+%--------------------------------------------------------------------------------
+\section{Method for $\mathcal{A}$}
+%--------------------------------------------------------------------------------
+In the above section a very general map of a typical update in these hybrid methods for the Serre equations and a discretisation in time were given. In this paper a fully discrete system will be built hence a discretisation of space is also introduced; denoted by subscript $i$ for example $h^n_i \approx h(x_i , t^n)$. Additionally, assuming that this discretisation in space has a fixed resolution so that $\forall i$ $x_{i+1} - x_{i} = \Delta x$; allows for a simple finite difference approximation to \eqref{eq:Gdefinition} as a suitable method for $\mathcal{A}$ \cite{Hank-etal-2010-2034,Zoppou-2014}. Since the goal of this paper is to develop and compare a range of different order methods for this problem both a second- and fourth-order centred finite difference approximation to \eqref{eq:Gdefinition} were used. By taking such approximations to the first- and second-order spatial derivatives the second- and fourth-order analogues of \eqref{eq:Gdefinition} are given by
+\begin{linenomath*}
+\begin{gather}\label{eq:Gsecondord}
+G_i = u_ih_i - h_i^2 \left(\dfrac{h_{i+1} - h_{i-1}}{2\Delta x}\right) \left(\dfrac{u_{i+1} - u_{i-1}}{2\Delta x}\right) - \frac{h_i^3}{3} \left(\dfrac{u_{i+1} - 2 u_{i} + u_{i-1}}{\Delta x^2}\right),
+\end{gather}
+\end{linenomath*}
+and
+\begin{linenomath*}
+\begin{gather}
+\begin{split}
+G_i = u_ih_i - h_i^2 \left(\dfrac{-h_{i+2} + 8h_{i+1} - 8h_{i-1} + h_{i-2}}{12\Delta x}\right) \left(\dfrac{-u_{i+2} + 8u_{i+1} - 8u_{i-1} + u_{i-2}}{12\Delta x}\right) \\ - \frac{h_i^3}{3} \left(\dfrac{-u_{i+2} + 16u_{i+1} - 30u_{i} + 16u_{i-1} - u_{i-2}}{12\Delta x^2}\right).
+\end{split}
+\end{gather}
+\label{eq:Gfourthord}
+\end{linenomath*}
+Both of these can be rearranged into a matrix equation with the following form 
+\begin{linenomath*}
+\begin{gather*}
+\left[\begin{array}{c}
+  u_0 \\
+  \vdots \\
+  u_m \end{array}\right] = A^{-1}
+\left[\begin{array}{c}
+ G_0 \\
+ \vdots \\
+ G_m \end{array}\right] =: \mathcal{A}(\boldsymbol{h},\boldsymbol{G})
+\end{gather*}
+\end{linenomath*}
+For a second-order approximation the matrix $A$ is tri-diagonal while for a fourth-order scheme it is penta-diagonal.
+%--------------------------------------------------------------------------------
+\section{Method for $\mathcal{L}$}
+%--------------------------------------------------------------------------------
+A finite volume method of sufficient order was developed to solve \eqref{eq:Serrecon}. Unlike finite difference schemes which utilise nodal values of quantities, finite volume schemes use the average of a value over a cell. To this end new notation is introduced by example, the average water depth over a cell which spans $\left[x_{i - \frac{1}{2}} , x_{i + \frac{1}{2}}\right]$ is 
+\begin{linenomath*}
+\begin{gather*}
+\bar{h}_i = \dfrac{1}{\Delta x} \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}} h(x,t) \, dx 
+\end{gather*}
+\end{linenomath*}
+where $x_{i \pm \frac{1}{2}} = x_i \pm \Delta x/2$. Finite volume methods update the cell average values by the following scheme
+\begin{linenomath*}
+\begin{gather}\label{eq:FVMupdate}
+\bar{U}^{n+1}_i = \bar{U}^{n}_i - \dfrac{\Delta t}{\Delta x} \left(F^n_{i+ \frac{1}{2}} - F^n_{i - \frac{1}{2}} \right)
+\end{gather}
+\end{linenomath*}
+where $\bar{U}^{n}_i = \left[ \bar{h}^{n}_i \; \bar{G}^{n}_i \right] ^T$ is an approximation of the vector of the conserved quantities averaged over the cell at time $t^n$. While $F^n_{i\pm 1/2}$ is an approximation of the average flux at $x_{i \pm 1/2 }$ over the time interval $[t^n, t^{n+1}]$ which is given by solving the Riemann problem at the cell boundaries.
+%--------------------------------------------------------------------------------
+\subsubsection{Local Riemann Problem} %
+%--------------------------------------------------------------------------------
+Since $\bar{U}^{n}_i$ is known what remains is to calculate the two time  averaged fluxes $F_{i \pm 1/2}$. In \citeN{Kurganov-etal-2001-707} the time averaged inter-cell flux is approximated by
+\begin{linenomath*}
+\begin{gather}\label{eq:HLL_flux}
+F_{i+\frac{1}{2}} = \dfrac{a^+_{i+\frac{1}{2}} f\left(q^-_{i+\frac{1}{2}}\right) - a^-_{i+\frac{1}{2}} f\left(q^+_{i+\frac{1}{2}}\right)}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}}  + \dfrac{a^+_{i+\frac{1}{2}} \, a^-_{i+\frac{1}{2}}}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ].
+\end{gather}
+\end{linenomath*}
+where $f$ is the instantaneous flux of the conservative law for the conserved quantity $q$. While $a^-_{i+1/2}$ and $a^+_{i+1/2}$ are given by
+\begin{subequations}
+\begin{gather}
+a^-_{i+\frac{1}{2}} = \min \left[\lambda_1\left(q^-_{i + \frac{1}{2}}\right), \lambda_1\left(q^+_{i + \frac{1}{2}}\right), 0 \right],
+\label{eq:aatcelledgep}
+\end{gather}
+and
+\begin{gather}
+a^+_{i+\frac{1}{2}} = \max \left[\lambda_2\left(q^-_{i + \frac{1}{2}}\right), \lambda_2\left(q^+_{i + \frac{1}{2}}\right), 0 \right]
+\label{eq:aatcelledgem}
+\end{gather}
+\end{subequations}
+where $\lambda_1$ and $\lambda_2$ are estimates of the smallest and largest eigenvalues respectively of the Jacobian. Which corresponds to the maximum and minimum phase speed $\upsilon_p$ of the Serre equations.
+%--------------------------------------------------------------------------------
+\subsubsection{Propagation Speeds of a Local Shock} %
+%--------------------------------------------------------------------------------
+As demonstrated in \citeN{Zoppou-2014} $\lambda_1$ and $\lambda_2$ are bounded by the phase speed of the shallow water wave equations, so that
+\begin{linenomath*}
+\begin{gather}
+ \lambda_1 := u - \sqrt{gh} \le \upsilon_p \le u + \sqrt{gh} =: \lambda_2.
+\end{gather}
+\end{linenomath*}
+Thus $a^-_{i+1/2}$ and $a^+_{i+1/2}$ are fully determined.
+%--------------------------------------------------------------------------------
+\subsubsection{Reconstruction} %
+%--------------------------------------------------------------------------------
+The quantities $q^-_{i + 1/2}$ and $q^+_{i + 1/2}$ are given by the two reconstructions at $x_{i + 1/2}$ one from the cell to the left $[x_{i - 1/2}, x_{i+ 1/2}]$ and one from the cell to the right $[x_{i + 1/2}, x_{i+ 3/2}]$, denoted by the superscripts $-$ and $+$ respectively. The order of the polynomials used to reconstruct the quantities inside the cells determines the order of the scheme in space. Polynomials that are constant functions result in a first-order method \cite{Godunov-1959-271}. Similarly first- and second-degree polynomials result in second- and third-order schemes respectively. 
+
+For a zero-degree polynomial the interpolant has the value $\bar{q}_i$ at $x_i$, this is also the case for linear interpolation functions. Thus in the zero-degree case the interpolants are fully determined and monotinicity preserving. However, for higher-degree interpolants there are a variety of way to construct them. Not all of these are necessarily monotoncity preserving which can result in the introduction of oscillations during the reconstruction process. To suppress these non-physical oscillations in higher order schemes limiting must be implemented. For the second-order scheme the minmod limiter was used as in \citeN{Kurganov-etal-2001-707}. While for the third-order scheme the Koren limiter was used \cite{Koren-1993}. This results in the following fitting scheme for second-order
+\begin{linenomath*}
+\begin{subequations}\label{eq:recon1}
+\begin{gather}\label{eq:recon11}
+q^-_{i + \frac{1}{2}} =  \bar{q}_i + a_i \frac{\Delta x}{2},
+\end{gather}
+and
+\begin{gather}\label{eq:recon12}
+q^+_{i + \frac{1}{2}} =  \bar{q}_{i+1} - a_{i + 1} \frac{\Delta x}{2},
+\end{gather}
+where
+\begin{gather}\label{eq:recon13}
+a_i = \text{minmod}\left\lbrace\theta \frac{\bar{q}_{i+1} - \bar{q}_{i}}{\Delta x}, \frac{\bar{q}_{i+1} - \bar{q}_{i-1}}{2\Delta x} ,\theta \frac{\bar{q}_{i} - \bar{q}_{i-1}}{\Delta x}\right\rbrace \quad \text{for} \; \theta \in \left[1,2\right].
+\end{gather}
+\end{subequations}
+\end{linenomath*}
+For third-order
+\begin{linenomath*}
+\begin{subequations}\label{eq:recon2}
+\begin{gather}\label{eq:recon21}
+q^-_{i + \frac{1}{2}} = \bar{q}_i + \frac{1}{2}\phi^-\left(r_i\right)\left(\bar{q}_i -\bar{q}_{i-1} \right),
+\end{gather}
+and
+\begin{gather}\label{eq:recon22}
+q^+_{i + \frac{1}{2}} = \bar{q}_i - \frac{1}{2}\phi^+\left(r_i\right)\left(\bar{q}_i -\bar{q}_{i-1} \right)
+\end{gather}
+where
+\begin{gather}\label{eq:recon2p1}
+\phi^-\left(r_i\right) = \max\left[0, \min\left[2 r_i, \frac{1 + 2r_i}{3},2\right]\right],
+\end{gather}
+\begin{gather}\label{eq:recon2p2}
+\phi^+\left(r_i\right) = \max\left[0, \min\left[2 r_i, \frac{2 + r_i}{3},2\right]\right],
+\end{gather}
+and
+\begin{gather}\label{eq:recon2r}
+r_i = \frac{\bar{q}_{i+1} - \bar{q}_{i} }{\bar{q}_{i} - \bar{q}_{i-1}}.
+\end{gather}
+\end{subequations}
+\end{linenomath*}
+%--------------------------------------------------------------------------------
+\subsubsection{Fully discrete approximations to flux function} %
+%--------------------------------------------------------------------------------
+For the water depth, the fully discrete approximation to $f(h^\pm_{i + 1/2})$ is given by
+\begin{linenomath*}
+\begin{gather}\label{eq:fforheightp}
+f\left(h^\pm_{i + \frac{1}{2}}\right) = u^\pm_{i + \frac{1}{2}} h^\pm_{i + \frac{1}{2}}
+\end{gather}
+\end{linenomath*}
+which is independent of the order of accuracy of the scheme. The flux $f(G^\pm_{i + 1/2})$ is more complicated because of the derivative and is given by
+\begin{linenomath*}
+\begin{gather}\label{eq:fforGp}
+f\left(G^\pm_{i + \frac{1}{2}}\right)= u^\pm_{i + \frac{1}{2}} G^\pm_{i + \frac{1}{2}} + \frac{g \left(h^\pm_{i + \frac{1}{2}} \right)^2}{2} - \frac{2 \left(h^\pm_{i + \frac{1}{2}} \right)^3}{3} \left[\left(\frac{\partial u}{\partial x}\right)^\pm_{i + \frac{1}{2}}\right]^2.
+\end{gather}
+\end{linenomath*}
+There are multiple ways to approximate this derivative with different corresponding orders of accuracy. The first- and third-order approximations to the derivatives can be obtained by an upwind finite difference approximation. Additionally assuming that $u$ is continuous a second-order approximation that has the correct order and is simpler to implement than its corresponding upwind finite difference approximation can be used. Thus the following approximations to the derivatives were obtained for first-order
+\begin{linenomath*}
+\begin{subequations}
+\begin{gather}\label{eq:derivdisco1p}
+\left(\frac{\partial u}{\partial x}\right)^+_{i + \frac{1}{2}} = \frac{ u^+_{i + \frac{3}{2}} - u^+_{i + \frac{1}{2}}}{\Delta x},
+\end{gather}
+\begin{gather}\label{eq:derivdisco1m}
+\left(\frac{\partial u}{\partial x}\right)^-_{i + \frac{1}{2}} = \frac{ u^-_{i + \frac{1}{2}} - u^-_{i - \frac{1}{2}}}{\Delta x},
+\end{gather}
+\end{subequations}
+\label{eq:derivdisco1}
+\end{linenomath*}
+second-order
+\begin{linenomath*}
+\begin{gather}\label{eq:derivdisco2}
+\left(\frac{\partial u}{\partial x}\right)^-_{i + \frac{1}{2}} = \left(\frac{\partial u}{\partial x}\right)^+_{i + \frac{1}{2}} = \frac{u_{i + 1} - u_{i}}{\Delta x},
+\end{gather}
+\end{linenomath*}
+and third-order
+\begin{linenomath*}
+\begin{subequations}
+\begin{gather}\label{eq:derivdisco3p}
+\left(\frac{\partial u}{\partial x}\right)^+_{i + \frac{1}{2}} = \frac{ -u^+_{i + \frac{3}{2}} + 4u^+_{i + \frac{3}{2}}  -3 u^+_{i + \frac{1}{2}}}{\Delta x},
+\end{gather}
+\begin{gather}\label{eq:derivdisco3m}
+\left(\frac{\partial u}{\partial x}\right)^-_{i + \frac{1}{2}} = \frac{ 3u^-_{i + \frac{1}{2}} - 4u^-_{i - \frac{1}{2}} + u^-_{i - \frac{3}{2}}}{\Delta x}.
+\end{gather}
+\end{subequations}
+\label{eq:derivdisco3}
+\end{linenomath*}
+ %--------------------------------------------------------------------------------
+\subsection{Transforming between nodal values and cell averages} %
+%--------------------------------------------------------------------------------
+The operator $\mathcal{L}$ in \eqref{eq:L} uses cell averages and values at the cell boundaries obtained from them in the reconstruction process. While the operator $\mathcal{A}$ in \eqref{eq:A} uses nodal values at the cell centres. Therefore, a transformation from the cell averages to the nodal values must be made. For the first- and second-order schemes this distinction is trivial since $\bar{q}_i = q_i$. However, for the third-order scheme this is a very important distinction and failure to handle this correctly will result in a loss of accuracy. For this problem it is sufficient to use a quadratic polynomial that gives the correct cell averages for the cell centred at $x_i$ and its two neighbours. Such a polynomial satisfies this equation
+\begin{linenomath*}
+\begin{gather}\label{eq:midtoca}
+q_i = \frac{- \bar{q}_{i+1} + 26\bar{q}_{i} - \bar{q}_{i-1}}{24}.
+\end{gather}
+\end{linenomath*}
+This results in a tri-diagonal matrix equation that transforms from cell averages to nodal values denoted by $\mathcal{M}$. The inverse transformation $\mathcal{M}^{-1}$ denotes the solution of the tri-diagonal matrix equation given nodal values resulting in cell averages. This completes the effort to solve the Serre equations \eqref{eq:Gdefinition} and \eqref{eq:Serrecon} with the following process denoted by $\mathcal{H}$
+\begin{linenomath*}
+\begin{gather}
+\mathcal{H}\left(\boldsymbol{\bar{U}}^n,\Delta t \right) = \left\lbrace 
+\begin{array}{c c c} 
+	\boldsymbol{U}^n &=& \mathcal{M}^{-1}\left(\boldsymbol{\bar{U}}^n\right) \\
+	\boldsymbol{u}^n &=& \mathcal{A}\left(\boldsymbol{U}^n\right) \\
+	\boldsymbol{\bar{u}}^n &=&  \mathcal{M}\left(\boldsymbol{u}^n\right) \\
+	\boldsymbol{\bar{U}}^{n+1} &=& \mathcal{L}\left(\boldsymbol{\bar{U}}^{n},\boldsymbol{\bar{u}}^n,\Delta t\right)							
+\end{array} \right.
+\end{gather}
+\end{linenomath*}
+%--------------------------------------------------------------------------------
+\subsection{Strong-Stability-Preserving Runge-Kutta Scheme} %
+%--------------------------------------------------------------------------------
+The process above is first-order accurate in time. There are many methods to increase the accuracy of a time step, this paper will follow the method of strong stability Runge-Kutta steps as in \citeN{Gottlieb-etal-2009-251} to construct fully second- and third-order schemes. These are constructed by linear combinations of applications of $\mathcal{H}$. This leads to the following processes for first-, second- and third-order time stepping schemes respectively
+\begin{linenomath*}
+\begin{gather}\label{eq:SSPRK1}
+\boldsymbol{\bar{U}}^{n+1} = \mathcal{H}\left(\boldsymbol{\bar{U}}^{n},\Delta t\right),
+\end{gather}
+\end{linenomath*}
+and
+\begin{linenomath*}
+\begin{subequations}
+\begin{gather}\label{eq:SSPRK21}
+\boldsymbol{\bar{U}}^{\left(1\right)} = \mathcal{H}\left(\boldsymbol{\bar{U}}^{n},\Delta t\right)
+\end{gather}
+\begin{gather}\label{eq:SSPRK22}
+\boldsymbol{\bar{U}}^{\left(2\right)} = \mathcal{H}\left(\boldsymbol{\bar{U}}^{\left(1\right)},\Delta t\right)
+\end{gather}
+\begin{gather}\label{eq:SSPRK23}
+\boldsymbol{\bar{U}}^{n+1} = \frac{1}{2}\left(\boldsymbol{\bar{U}}^{\left(1\right)} + \boldsymbol{\bar{U}}^{\left(2\right)}  \right),
+\end{gather}
+\end{subequations}
+\label{eq:SSPRK2}
+\end{linenomath*}
+and
+\begin{linenomath*}
+\begin{subequations}
+\begin{gather}\label{eq:SSPRK31}
+\boldsymbol{\bar{U}}^{\left(1\right)} = \mathcal{H}\left(\boldsymbol{\bar{U}}^{n},\Delta t\right)
+\end{gather}
+\begin{gather}\label{eq:SSPRK32}
+\boldsymbol{\bar{U}}^{\left(2\right)} = \mathcal{H}\left(\boldsymbol{\bar{U}}^{\left(1\right)},\Delta t\right)
+\end{gather}
+\begin{gather}\label{eq:SSPRK33}
+\boldsymbol{\bar{U}}^{\left(3\right)}= \frac{3}{4}\boldsymbol{\bar{U}}^{n} + \frac{1}{4}\boldsymbol{\bar{U}}^{\left(2\right)} ,
+\end{gather}
+\begin{gather}\label{eq:SSPRK34}
+\boldsymbol{\bar{U}}^{\left(4\right)} = \mathcal{H}\left(\boldsymbol{\bar{U}}^{\left(3\right)},\Delta t\right)
+\end{gather}
+\begin{gather}\label{eq:SSPRK35}
+\boldsymbol{\bar{U}}^{n+1}= \frac{1}{3}\boldsymbol{\bar{U}}^{n} + \frac{2}{3}\boldsymbol{\bar{U}}^{\left(4\right)}.
+\end{gather}
+\end{subequations}
+\label{eq:SSPRK3}
+\end{linenomath*}
+%--------------------------------------------------------------------------------
+\subsubsection{Stability Constraint} %
+%--------------------------------------------------------------------------------
+A necessary condition for stability of this scheme based on the finite volume method is the Courant-Friedrichs-Lewy condition \cite{LeVeque-2002} which states that
+\begin{linenomath*}
+\begin{gather}
+\Delta t < \dfrac{\Delta x}{2 \max\left(\left|\lambda_i\right|\right)} \, \forall i
+\end{gather}
+\end{linenomath*}
+where $\lambda_i$ is the $i$th eigenvalue of the Jacobian of the flux vector. 
+%--------------------------------------------------------------------------------
+\section{Numerical Simulations}
+\label{section:Numerical Simulations}
+%--------------------------------------------------------------------------------
+The discussed methods will now be used to solve three different situations; the soliton which is an analytic solution of the Serre equations, one of the experiments conducted by \citeN{Hammack-Segur-1978-337} and a dam break problem from \citeN{El-etal-2006}  and \citeN{Hank-etal-2010-2034}. The first two will be used to validate the models with the soliton used to establish the order of convergence of the models; while the second validates the behaviour of a steep gradient against experimental data. Lastly the dam break will be used to compare the results of this scheme with those of \citeN{El-etal-2006} and \citeN{Hank-etal-2010-2034}. 
+%--------------------------------------------------------------------------------
+\subsection{Soliton}
+\label{section:Convergence Rate}
+%--------------------------------------------------------------------------------
+\subfiglabelskip=0pt
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:solitoncono1}\includegraphics[width=7.0cm]{./results/soliton/con/sto1-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoncono2}\includegraphics[width=7.0cm]{./results/soliton/con/sto2-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoncono3}\includegraphics[width=7.0cm]{./results/soliton/con/sto3-figure0.pdf}}
+\caption{Convergence of relative error using L1 norm for analytic soliton solution for both $h$ ($\circ$) and $u$ ($\diamond$) for the; (a) first-, (b) second- and (c) third-order schemes.}
+\label{fig:solitoncon}
+\end{figure}
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:solitoneo1h}\includegraphics[width=6.0cm]{./results/soliton/ex/newo1-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoneo1u}\includegraphics[width=6.0cm]{./results/soliton/ex/newo1u-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoneo2h}\includegraphics[width=6.0cm]{./results/soliton/ex/newo2-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoneo2u}\includegraphics[width=6.0cm]{./results/soliton/ex/newo2u-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoneo3h}\includegraphics[width=6.0cm]{./results/soliton/ex/newo3-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoneo3u}\includegraphics[width=6.0cm]{./results/soliton/ex/newo3u-figure0.pdf}}
+\caption{The first-, second- and third-order simulation of a soliton with $\Delta x = 100 /2^{6}\text{m}$ ($\circ$) plotted against the analytic solution of \eqref{eq:sol} (\---) with black for $t =0\text{s}$ and blue for $t=100\text{s}$.}
+\label{fig:solitone}
+\end{figure}
+Currently cnoidal waves are the only family of analytic solutions to the Serre equations \cite{Carter-Cienfuegos-2010-259}. Solitons are a particular instance of cnoidal waves and have been used to verify the convergence rates of the proposed methods in this paper. 
+
+Solitons travel without deformation and for the Serre equations they have the following form
+\begin{linenomath*}
+\begin{subequations}
+\begin{gather}\label{eq:sol1}
+h\left(x,t\right) = a_0 + a_1\text{sech}^2\left( \kappa\left(x - ct\right)\right),
+\end{gather}
+\begin{gather}\label{eq:sol2}
+u\left(x,t\right) = c\left(1 - \dfrac{a_0}{h(x,t)} \right),
+\end{gather}
+\begin{gather}\label{eq:sol3}
+\kappa = \dfrac{\sqrt{3a_1}}{2a_0 \sqrt{ a_0 + a_1}},
+\end{gather}
+and
+\begin{gather}\label{eq:sol4}
+c = \sqrt{g \left(a_0 + a_1\right)},
+\end{gather}
+\end{subequations}
+\label{eq:sol}
+\end{linenomath*}
+where, $a_0$ and $a_1$ are input parameters that determine the depth of the quiescent water and the maximum height of the soliton above that respectively. In the simulation $a_0 = 10\text{m}$, $a_1 = 1\text{m}$ for $x\in\left[-500\text{m},1500\text{m}\right]$ and $t\in\left[0\text{s},100\text{s}\right]$. With $\Delta t = \lambda \Delta x$ where $\lambda = 0.01$ and $\theta = 1.2$ for the second-order reconstruction \eqref{eq:recon1}. The example results for $\Delta x = 100 /2^{6}\text{m}$ can be seen in Figure \ref{fig:solitone}, while the relative error as measured by the L1-norm of the method can be seen in Figure \ref{fig:solitoncon}. For a vector $\boldsymbol{q}$ and an approximation to it $\boldsymbol{q}^*$ the relative error as measured by the L1-norm is
+\begin{linenomath*}
+\begin{gather}
+\text{L1}\left(\boldsymbol{q},\boldsymbol{q}^*\right) = \frac{\sum_{i=1}^{m} |q_i - q^*_i|}{\sum_{i=1}^{m} |q_i|}.
+\end{gather}
+\end{linenomath*}
+
+Figure \ref{fig:solitoncon} demonstrates that the schemes all have the correct order of convergence in both time and space as desired since $\Delta t = \lambda \Delta x$. However, this order of convergence is not over all $\Delta x$. When $\Delta x$ is large the actual problem is not discretised well since the cells are too large to adequately resolve the problem; this causes the observed suboptimal rate of convergence in Figure \ref{fig:solitoncon}. When $\Delta x$ is sufficiently small the numerical errors become small enough that floating point errors are significant and this can also lead to suboptimal rates of convergence as can be seen for the third-order method in Figure \ref{fig:solitoncono3}. Therefore, the order of convergence for all methods is confirmed.
+
+Figure \ref{fig:solitone} demonstrates the superiority of the second- and third-order methods compared to the first-order method. With the first-order methods significant attenuation of the wave due to its diffusive behaviour which creates a wider wave profile and some smaller trailing waves. However, the first-order method does produce the correct speed of the wave with a small phase error. 
+
+The second- and third-order methods resolve the soliton solution without noticeable deformation on a relatively coarse grid with less than $500$ cells representing the actual wave. While Figure \ref{fig:solitoncono2} and Figure \ref{fig:solitoncono3}  demonstrate that these schemes both have similar errors for the example soliton.
+
+Due to higher complexity more computational effort is required for the third-order method than the first- and second-order methods. In particular on average a single time step for the first- and second-order methods took approximately $14\%$ and $50\%$ respectively of the time taken for a single time step of a third-order method. Even though these higher order methods take longer to do a single time step. Because the convergence rates are higher, coarser grids allow for an accurate resolution of the solution as demonstrated in Figure \ref{fig:solitoncon}. Therefore, computational time can be recovered by decreasing resolution to get a method of similar accuracy that is quicker to run.
+
+Since both the second- and third-order schemes have similar errors and resolve the problem well the extra effort in both building and running a third-order scheme as compared to a second-order one is not justified in this case. While the effort required to go from a first-order to a second-order scheme is justified since attaining a similar accuracy between them requires a restrictively small $\Delta x$ for a first-order method.   
+
+%--------------------------------------------------------------------------------
+\subsection{Segur Labratory Experiment}\label{Laboratory_Experiments}
+%--------------------------------------------------------------------------------
+\subfiglabelskip=0pt
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:Seguro1p0}\includegraphics[width=7cm]{./results/segurdata/o1/plotp0-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro1p5}\includegraphics[width=7cm]{./results/segurdata/o1/plotp5-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro1p10}\includegraphics[width=7cm]{./results/segurdata/o1/plotp10-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro1p15}\includegraphics[width=7cm]{./results/segurdata/o1/plotp15-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro1p20}\includegraphics[width=7cm]{./results/segurdata/o1/plotp20-figure0.pdf}}
+\caption{Simulation of the rectangular wave experiment using the for first-order scheme at $x/h_0$ : (a) $0$, (b) $50$, (c) $100$, (d) $150$ and (e) $200$}
+\label{fig:Seguro1}
+\end{figure}
+%
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:Seguro2p0}\includegraphics[width=7cm]{./results/segurdata/o2/plotp0-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro2p5}\includegraphics[width=7cm]{./results/segurdata/o2/plotp5-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro2p10}\includegraphics[width=7cm]{./results/segurdata/o2/plotp10-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro2p15}\includegraphics[width=7cm]{./results/segurdata/o2/plotp15-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro2p20}\includegraphics[width=7cm]{./results/segurdata/o2/plotp20-figure0.pdf}}
+\caption{Simulation of the rectangular wave experiment using the for second-order scheme at $x/h_0$ : (a) $0$, (b) $50$, (c) $100$, (d) $150$ and (e) $200$}
+\label{fig:Seguro2}
+\end{figure}
+%
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:Seguro3p0}\includegraphics[width=7cm]{./results/segurdata/o3/plotp0-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro3p5}\includegraphics[width=7cm]{./results/segurdata/o3/plotp5-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro3p10}\includegraphics[width=7cm]{./results/segurdata/o3/plotp10-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro3p15}\includegraphics[width=7cm]{./results/segurdata/o3/plotp15-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro3p20}\includegraphics[width=7cm]{./results/segurdata/o3/plotp20-figure0.pdf}}
+\caption{Simulation of the rectangular wave experiment using the for third-order scheme at $x/h_0$ : (a) $0$, (b) $50$, (c) $100$, (d) $150$ and (e) $200$}
+\label{fig:Seguro3}
+\end{figure}
+\citeN{Hammack-Segur-1978-337} conducted an experiment that produced rectangular waves with the stroke of a $0.61\text{m}$ long piston flush with the wall of a wave tank $31.6\text{m}$ long. The water height was recorded at $0\text{m}$, $5\text{m}$, $10\text{m}$, $15\text{m}$ and $20\text{m}$ from the edge of the piston furthest from the wall over time. The quiescent water height $h_1$ was $0.1\text{m}$ while the stroke of the piston caused a depression with water suddenly $h_0 = 0.095\text{m}$ deep. To run this as a numerical simulation the reflected problem was used. This reflects the initial conditions of the simulation around the origin and doubles $h_1 - h_0$ by changing $h_0$. Thus the domain was chosen to be from $-60\text{m}$ to $60\text{m}$ and the simulation was run for $50\text{s}$ with $\Delta x = 0.01 \text{m}$, $\lambda = 0.2/\sqrt{g h_1} \text{m/s}$ and $\theta = 1.2$. The results of this simulation are displayed in figures \ref{fig:Seguro1} - \ref{fig:Seguro3}.
+
+In this experiment for the positive side of the axis the initial depression causes a right going rarefaction fan and a left going shock. The shocks from both sides then reflect in the middle and so the shock and the rarefaction fan will travel in the same direction. The leading wave in all the related figures is the rarefaction fan while the trailing dispersive waves are the result of the reflected shock.  
+
+From all the related figures it can be seen that all models show good agreement between the arrival of the first wave and the period of all the waves. While Figure \ref{fig:Seguro1} shows the first-order model is too diffusive and thus under estimates the heights of the dispersive waves. While the second- and third-order methods over estimate them. This discrepancy can be explained by the Serre equations not taking into account viscous effects that may diffuse the dispersive waves and so the Serre equations are actually producing an upper bound on the wave heights for fluids with viscosity. Although even without these effects these numerical methods show good agreement with the experimental data thus validating them to correctly handle rapidly-varying fluids. In addition, it demonstrates that the oscillations observed by the produced numerical solutions of the Serre equation around steep gradients as in the dam break problem below, are physical and not numerical. This is of particular importance to the second-order method which is known \cite{Zoppou-Roberts-1996} to produce non-physical oscillations in the solution.  
+%--------------------------------------------------------------------------------
+\subsection{Dam Break}
+%--------------------------------------------------------------------------------
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=14.0cm]{./results/dambreak/L1con/both-figure0.pdf}
+\end{center}
+\caption{The change in total variation (TV) over $\Delta x$ for; ($\circ$) first- , ($\square$) second-, and ($\pentagon$) third-order schemes.}
+\label{fig:DBL1}
+\end{figure}
+\begin{figure}[htb]
+\subfigure[][]{\label{fig:DBo1}\includegraphics[width=8.5cm]{./results/dambreak/ex/o1-figure0.pdf}}
+\subfigure[][]{\label{fig:DBo2}\includegraphics[width=8.5cm]{./results/dambreak/ex/o2-figure0.pdf}}
+\subfigure[][]{\label{fig:DBo3}\includegraphics[width=8.5cm]{./results/dambreak/ex/o3-figure0.pdf}}
+\caption{Solution of the dam break problem using the (a) first-, (b) second- and (c) third-order schemes.}
+\label{fig:DB}
+\end{figure}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=15.0cm]{./results/dambreak/ex/o1-figure1.pdf}
+\caption{Solution of the dam break problem using first-order scheme with $\Delta x = 100 /2^{16} \text{m}$ }
+\label{fig:DB1o1}
+\end{figure}
+The dam break problem can be defined as such
+\begin{linenomath*}
+\begin{gather}
+h(x,0) = \left\lbrace \begin{array}{c c}
+1.8 & x < 500\\
+1.0 & x \ge 500\\
+\end{array} \right. ,
+\end{gather}
+\begin{gather}
+u(x,0) = 0.0m/s.
+\end{gather}
+\end{linenomath*}
+With $x \in \left[0\text{m},1000\text{m}\right]$ for $t \in \left[0\text{s},30\text{m}\right]$. Where $\lambda = 0.01 \text{m/s}$ and $\theta = 1.2$. This corresponds to sub-critical flow and was a situation demonstrated in \citeN{El-etal-2006} and \citeN{Hank-etal-2010-2034}. An example was plotted for $\Delta x = 100 /2^{10}\text{m}$ for all the methods in Figure \ref{fig:DB}. To determine if the oscillations that occur in the solution indeed converge to some limit as $\Delta x \rightarrow 0$ multiple $\Delta x$ values were run and then the amount of variation in the solution measured. This will measure how oscillatory the solution was and be used to determine the growth of the oscillations. A common way to measure this is the total variation $TV$ \cite{LeVeque-2002} which for $\boldsymbol{q}$ is given by
+\begin{linenomath*}
+\begin{gather}
+TV(\boldsymbol{q}) = \sum_{\forall i >1} |q_{i} - q_{i-1}|.
+\end{gather}
+\end{linenomath*}
+If the solution does indeed converge then the TV must at some point plateau so that more oscillations cannot be introduced and those that are already present are bounded.
+
+This was indeed the findings of the experiments as can be seen by Figure \ref{fig:DBL1}. As for larger $\Delta x$ the TV increased as $\Delta x$ decreased because the models resolved more dispersive waves. While as $\Delta x$ decreased further the TV plateaued and so the size and number of oscillations was bounded. Therefore, the scheme has not become unstable which supports that this formulation handles steep gradients and the resultant dispersive waves well. There is also good agreement between the second- and third-order schemes under this measure. 
+
+These solutions compare very well to the findings in \cite{El-etal-2006} with both the second- and third-order schemes resolving the oscillations around the 'contact discontinuity'\cite{El-etal-2006} between the rarefaction fan and the shock. In \citeN{Hank-etal-2010-2034} it was reported that for their first-order scheme such oscillatory behaviour was not seen. However, for the first order scheme proposed in this paper when $\Delta x = 100 /2^{16}$ it was resolved as in Figure \ref{fig:DB1o1}. Thus this scheme validates the findings in \citeN{El-etal-2006}.
+
+There is also a good agreement between the second- and third-order simulations of the dam break problem as can be seen in Figure \ref{fig:DB}. Although more oscillations are resolved by the third-order scheme over the second-order scheme, there is no significant change in the resolved behaviour of this problem between the two. As noted in the introduction second-order errors are dissipative, since the diffusive third-order scheme resolved the same oscillations it was demonstrated that none of the dissipative errors significantly polluted the wave train and so the second-order scheme sufficiently resolved the problem.
+%--------------------------------------------------------------------------------
+\section{Conclusions}
+\label{section:Conclusions}
+%--------------------------------------------------------------------------------
+A first-, second- and third-order hybrid finite difference-volume scheme were developed to solve the Serre equations written in conservative law form. The schemes were then tested and validated. Firstly the order of the schemes were all verified, secondly the schemes steep gradient handling capability was validated by comparison with experimental data. Thirdly the behaviour of the solutions matched previous findings in \citeN{El-etal-2006}. Thus it can be concluded that these methods are all valid and they properly handle shocks. It was also demonstrated that for these equations although second-order is not as accurate as third-order it still provides a satisfactory method for reasonable $\Delta x$ unlike the first-order method which due to strong diffusion requires computationally restrictive $\Delta x$ to produce satisfactory accuracy.
+%--------------------------------------------------------------------------------
+\section{Acknowledgements}
+%--------------------------------------------------------------------------------
+
+
+%--------------------------------------------------------------------------------
+\bibliography{Serre_ASCE}
+%--------------------------------------------------------------------------------
+
+\section{Notation}
+\emph{The following symbols are used in this paper:}%\par\vspace{0.10in}
+\nopagebreak
+%\par
+\begin{longtable}{r  @{\hspace{1em}=\hspace{1em}}  l}
+$\mathcal{A}$		& Scheme to solve \eqref{eq:Gdefinition} \\
+$a$					& characteristic order of free surface amplitude; \\
+$B$					& characteristic order of bottom topography variation;\\
+$g$					& acceleration due to gravity on earth (m/$s^2$) \\
+$\mathcal{H}$		& Scheme to solve \eqref{eq:Serre_conservative_form} over a single time step \\
+$H$					& characteristic water depth; \\
+$h$					& water depth (m); \\
+$\mathcal{L}$		& Scheme to solve \eqref{eq:Serrecon} \\
+$L$					& characteristic horizontal scale; \\
+$p$                 & pressure (N/m$^2$); \\
+$u$                 & fluid particle velocity $x$-direction (m/s); \\
+$w$                 & fluid particle velocity $z$-direction (m/s); \\
+$\epsilon$			& nonlinearity parameter $a/H$ ;\\
+$\xi$				& water depth from free surface (m) ;\\
+$\Delta x$			& fixed resolution of $x$ ;\\
+$\Delta t$			& resolution of $t$ ;\\
+$\lambda$			& eigenvalues of the Jacobian ;\\
+$\sigma$            & shallowness parameter $H^2/L^2$.
+
+\end{longtable}
+
+\section{Subscripts}
+\nopagebreak
+\par
+\begin{tabular}{r  @{\hspace{1em}=\hspace{1em}}  l}
+$i$                    & space discretisation.\\
+\end{tabular}
+\section{Superscripts}
+\nopagebreak
+\par
+\begin{tabular}{r  @{\hspace{1em}=\hspace{1em}}  l}
+$n$                    & time discretisation.\\
+\end{tabular}
+\section{accents}
+\nopagebreak
+\par
+\begin{tabular}{r  @{\hspace{1em}=\hspace{1em}}  l}
+$\bar{q}$                    &  quantity $q$ averaged over the depth of water\\
+$\bar{q}$                    &  quantity $q$ averaged over a $\Delta x$ length interval of space [only make sense given a $x$ position to center the interval]\\
+\end{tabular}
+
+\end{document}

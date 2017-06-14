@@ -1,0 +1,37 @@
+\documentclass[]{article}
+\usepackage{pgfplots}
+\usepgfplotslibrary{external}
+\tikzexternalize
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usetikzlibrary{calc}
+\pgfplotsset{compat = newest,
+	every x tick label/.append style={font=\scriptsize},
+	every y tick label/.append style={font=\scriptsize}}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+	ylabel near ticks,
+	xlabel near ticks,
+	yticklabel style={
+        /pgf/number format/fixed,
+        /pgf/number format/precision=5,
+	},
+	xtick={-500,0,500,1000,1500},
+	ytick={9.8,10.0,10.2,10.4,10.6,10.8,11.0,11.2},
+	scaled y ticks=false,
+	clip mode=individual,
+	xmin=-500,
+	xmax=1500,
+	ymin = 9.8,
+	ymax = 11.2,
+	xlabel=$x$ (m),
+	ylabel=$h$ (m)]
+\addplot [red,only marks,mark =*,mark size =0.5pt] table {o3/h.dat};
+\addplot [blue] table {o3/ht.dat};
+\addplot [black] table {o3/hti.dat};
+\end{axis}
+\end{tikzpicture}
+\end{document}

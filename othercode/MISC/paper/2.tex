@@ -1,0 +1,33 @@
+\documentclass[]{article} 
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+ \usepackage{amsmath} 
+  \usepackage{pgfplots} 
+ \usetikzlibrary{calc} 
+\pgfplotsset{compat = newest,every x tick label/.append style={font=\scriptsize,color = white},every y tick label/.append style={font=\scriptsize,color = white}, every axis plot post/.style={line join=round}}
+\begin{document} 
+ \begin{tikzpicture} 
+ \begin{axis}[ 
+axis lines=left, xtick=\empty,
+ytick={1.0,1.3707},
+ clip mode=individual,
+  xmin=570, 
+ xmax=630, 
+ ymin = 1, 
+  ymax = 1.8,
+xlabel=$x$ ($m$), 
+ ylabel=$h$ ($m$)]
+\addplot [blue] table {hS.dat};
+\addplot [black, dotted] coordinates {(570,1.6825 ) (630,1.6825)};
+\node[left] at (axis cs:570,1.6825 ) {$A^+$};
+extra y ticks = {1,1.36},
+extra y tick style={yticklabel style={font=\scriptsize,color=white}},
+\node[left] at (axis cs:570,1 ) {$h_0$};
+\node[left] at (axis cs:570,1.36898 ) {$h_b$};
+
+\end{axis} 
+ \end{tikzpicture} 
+ \end{document} 
+ 

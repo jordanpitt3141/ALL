@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Serre Equations}
+
+The elliptic equation we want to solve in strong form is:
+
+\[\vec{G} = h\vec{u} - \nabla \left[\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right]\]
+
+First step is to take this equations dot product with a vector of smooth test functions $\vec{v}$.
+
+\[\vec{G} \cdot \vec{v} = h\vec{u}\cdot \vec{v} - \nabla \left[\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right] \cdot \vec{v}\]
+
+Integrate over the domain $\Omega$
+
+\[\int_{\Omega}\vec{G} \cdot \vec{v} \, dx = \int_{\Omega} h\vec{u}\cdot \vec{v} \, dx - \int_{\Omega}\nabla \left[\frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right] \cdot \vec{v}\, dx\]
+
+Now we can apply integration by parts to the bottom equation, we will use Dirichlet boundaries (with zero velocities), so we lose the surface integral.
+
+\[\int_{\Omega}\vec{G} \cdot \vec{v} \, dx = \int_{\Omega} h\vec{u}\cdot \vec{v} \, dx + \int_{\Omega} \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right) \left(\nabla\cdot \vec{v}\right) \, dx\]
+
+So our problem becomes.
+
+Find $\vec{u} \in V$ such that
+\[\vec{u} = 0 \quad on \, \partial \Omega\]
+\[\int_{\Omega}\vec{G} \cdot \vec{v} \, dx = \int_{\Omega} h\vec{u}\cdot \vec{v} \, dx + \int_{\Omega} \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right) \left(\nabla\cdot \vec{v}\right) \, dx\]
+$\forall \vec{v}$ who are smooth $\Re^2$ valued functions.
+
+In particular this analysis gives that $\vec{u}$ is in $H(div)$ as long as $\vec{G}$ and $h$ are square integrable, (proof?).
+
+\section{Is this sufficient?}
+Our equations for conservation are:
+
+\begin{equation}
+\label{h}
+h_t + (uh)_x + (vh)_y = 0
+\end{equation}
+
+\eqref{h} we can expand this to get
+\[h_t + h(u_x + v_y) + h_xu + h_yv = 0\]
+
+\[h_t + \nabla \cdot (h\vec{u}) = 0\]
+
+\begin{equation}
+\label{Fx}
+F^x = \left[ \begin{array}{c}
+G^xu + \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - v\frac{\partial}{\partial y}\left( \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right) \\
+uvh
+\end{array} \right] 
+\end{equation}
+
+\begin{equation}
+\label{Fy}
+F^y = \left[ \begin{array}{c}
+uvh \\
+G^yv + \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - u\frac{\partial}{\partial x}\left( \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)
+\end{array} \right] 
+\end{equation}
+
+Such that
+\[\frac{\partial \vec{G}}{\partial t} + \nabla \cdot \vec{F} = 0\]
+Expanding
+
+\[\frac{\partial G^x}{\partial t} + \frac{\partial }{\partial x} \left(G^xu + \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - v\frac{\partial}{\partial y}\left( \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right) \right) + \frac{\partial }{\partial y}\left(uvh\right)= 0\]
+
+\[\frac{\partial G^y}{\partial t} + \frac{\partial }{\partial x} \left(uvh \right) + \frac{\partial }{\partial y}\left(G^yv + \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - u\frac{\partial}{\partial x}\left( \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\right)= 0\]
+
+We can group things together a little differently. For instance
+\begin{multline}
+\left[ \begin{array}{c}
+\frac{\partial }{\partial x} \left(G^xu + \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - v\frac{\partial}{\partial y}\left( \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right) \right) \\
+\frac{\partial }{\partial y}\left(G^yv + \frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2 - u\frac{\partial}{\partial x}\left( \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\right)
+\end{array} \right] = \\
+\nabla\left(\vec{G} \cdot \vec{u} + \left(\frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2\right)\left[\begin{array}{c}
+1 \\
+1\\
+\end{array}\right] + \left[\begin{array}{c c}
+0 & 1 \\
+1 & 0\\
+\end{array}\right]\left(\vec{u} \cdot \nabla\left( \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right)\right)\right)
+\end{multline}
+
+And
+\begin{equation}
+\left[ \begin{array}{c}
+\frac{\partial }{\partial y} \left(uvh \right) \\
+\frac{\partial }{\partial x} \left(uvh \right)
+\end{array} \right] = 
+\left[\begin{array}{c c}
+0 & 1 \\
+1 & 0\\
+\end{array}\right] \nabla (uvh)  = \left[\begin{array}{c c}
+0 & 1 \\
+1 & 0\\
+\end{array}\right] \nabla \left(h \vec{u}\cdot\left[\begin{array}{c c}
+0 & 0.5 \\
+0.5 & 0\\
+\end{array}\right]\vec{u} \right)
+\end{equation}
+
+So we have
+\begin{multline}
+\frac{\partial \vec{G}}{\partial t} + \nabla\left(\vec{G} \cdot \vec{u} + \left(\frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2\right)\left[\begin{array}{c}
+1 \\
+1\\
+\end{array}\right] + \left[\begin{array}{c c}
+0 & 1 \\
+1 & 0\\
+\end{array}\right]\left(\vec{u} \cdot \nabla\left( \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right) \right)\right) \\ + \left[\begin{array}{c c}
+0 & 1 \\
+1 & 0\\
+\end{array}\right] \nabla (uvh)  = 0
+\end{multline}
+
+Taking the dot product of this with a text function $\vec{w}$
+
+\begin{multline}
+\frac{\partial \vec{G}}{\partial t} + \nabla\left(\vec{G} \cdot \vec{u} + \left(\frac{gh^2}{2} - \frac{2h^3}{3}\left(\nabla \cdot \vec{u}\right)^2\right)\left[\begin{array}{c}
+1 \\
+1\\
+\end{array}\right] + \left[\begin{array}{c c}
+0 & 1 \\
+1 & 0\\
+\end{array}\right]\left(\vec{u} \cdot \nabla\left( \frac{h^3}{3} \left(\nabla \cdot \vec{u}\right)\right) \right)\right) \\ + \left[\begin{array}{c c}
+0 & 1 \\
+1 & 0\\
+\end{array}\right] \nabla (uvh)  = 0
+\end{multline}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

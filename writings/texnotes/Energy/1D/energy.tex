@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Serre Equations}
+
+The Serre Equations read
+(height/mass)
+\[\frac{\partial h}{\partial t} + \frac{\partial uh}{\partial x} = 0 \]
+
+Phi
+\[\Phi = \frac{\partial b}{\partial x}\left(u \frac{\partial u}{\partial x}\right) + u^2 \frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}\frac{\partial u}{\partial t}\]
+
+Gamma
+\[\Gamma = \left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\]
+
+Pressure
+\[p|_\xi = p_a + \rho g \xi + \frac{\rho}{2}\xi\left(2h - \xi\right)\Gamma + \rho \xi \Phi \]
+
+
+Momentum(velocity)
+x
+\[ \frac{\partial (uh)}{\partial t} + \frac{\partial}{\partial x}\left(u^2 h + \frac{gh^2}{2} + \frac{h^3}{3}\Gamma + \frac{h^2}{2} \Phi\right) + h \frac{\partial b}{\partial x}\left(g + \frac{h}{2}\Gamma + \Phi\right) = 0\]
+
+z
+\[w|_z = \frac{z - b}{h} \frac{\partial h}{\partial t} + u \frac{\partial b}{\partial x}\]
+
+The total energy of the Euler system is $E = \frac{1}{2} |\vec{u}|^2 + g(z-b)$:
+\[\frac{\partial E}{\partial t} + \nabla \cdot \left(E\vec{u} + p\vec{u}\right) = 0\]
+
+Integrating over depth $s = h + b$
+
+
+\[\int_b^sE \, dz = \int_b^s \frac{1}{2}\left(u^2 + w^2\right) + g(z-b) \, dz\]
+
+\[\int_b^s \frac{1}{2}\left(u^2+ w^2\right) + gz \, dz = \frac{1}{2}\left(\bar{u}^2h + \int_b^s  w^2 \, dz \right) + \int_b^s g(z-b)  \, dz \]
+
+Calculating the P.E first (simplest)
+\[\int_b^s g(z-b)  \, dz = g \left[\frac{1}{2}z^2\right]^s_b - gb\left[z\right]^s_b = g\frac{h^2 + 2hb + b^2 - b^2}{2} - gb(h) = \frac{g}{2}\left(h^2\right)\]
+
+Calculating the vertical velocity
+\[\int_b^s  w^2 \, dz = \int_b^s  \left(\frac{z - b}{h} \frac{\partial h}{\partial t} + u \frac{\partial b}{\partial x}\right)^2 \, dz \]
+
+\[ = \int_b^s  \left(\frac{z - b}{h} \frac{\partial h}{\partial t}\right)^2 + 2\left(\frac{z - b}{h} \frac{\partial h}{\partial t}\right)\left(u \frac{\partial b}{\partial x}\right) + \left( u \frac{\partial b}{\partial x} \right)^2 \, dz  \]
+
+\[ = \int_b^s  \left(\frac{z - b}{h} \frac{\partial h}{\partial t}\right)^2  \, dz  +  \int_b^s 2\left(\frac{z - b}{h} \frac{\partial h}{\partial t}\right)\left(u \frac{\partial b}{\partial x}\right)  \, dz  + h\left( \bar{u} \frac{\partial b}{\partial x} \right)^2 \]
+
+\[ = \left( \frac{1}{h}\frac{\partial h}{\partial t}\right)^2 \int_b^s  \left(z- b\right)^2  \, dz  +  2\frac{1}{h}\frac{\partial h}{\partial t}\frac{\partial b}{\partial x}\int_b^s \left(z - b\right)\left(u \right)  \, dz  + h\left( \bar{u} \frac{\partial b}{\partial x} \right)^2 \]
+
+Can use that the velocity profile is constant over depth ($u|_x,z$ = $\bar{u}(x)$)
+
+\[ = \left( \frac{1}{h}\frac{\partial h}{\partial t}\right)^2 \int_b^s  \left(z- b\right)^2  \, dz  +  2\frac{\bar{u}}{h}\frac{\partial h}{\partial t}\frac{\partial b}{\partial x}\int_b^s \left(z - b\right)  \, dz  + h\left( \bar{u} \frac{\partial b}{\partial x} \right)^2 \]
+
+Integrals:
+
+\[\int_b^s \left(z - b\right)  \, dz = \int_b^s z\, dx - \int_b^s b \, dz\]
+\[= \left[\frac{z^2}{2}\right]_{b}^{s} - b\int_b^s 1 \, dz\]
+
+\[= \left[\frac{z^2}{2}\right]_{b}^{s} - b\left[s - b\right]\]
+
+\[= \frac{s^2}{2} - \frac{b^2}{2} - b\left[h + b - b\right]\]
+
+\[= \frac{h^2 + 2hb + b^2}{2} - \frac{b^2}{2} - bh\]
+
+\[= \frac{h^2 + 2hb}{2} - bh\]
+
+\[= \frac{h^2}{2}\]
+
+Second
+
+\[\int_b^s \left(z - b\right)^2  \, dz = \int_b^s z^2 - 2zb + b^2  \, dz\]
+\[= \int_b^s z^2 \, dz - \int_b^s2zb \, dz+ \int_b^s b^2  \, dz\]
+
+\[= \int_b^s z^2 \, dz - 2b\int_b^s z \, dz+ b^2\int_b^s 1  \, dz\]
+
+\[= \left[\frac{z^3}{3}\right]_{b}^{s} - 2b\left[\frac{z^2}{2}\right]_{b}^{s}+ b^2h\]
+
+\[= \left(\frac{s^3}{3} - \frac{b^3}{3}\right) - 2b\left(\frac{h^2 + 2hb}{2}\right)+ b^2h\]
+
+\[= \left(\frac{h^3 + 3 h^2 b + 3 h b^2 + b^3}{3} - \frac{b^3}{3}\right) - bh^2 -  2hb^2+ b^2h\]
+
+\[= \left(\frac{h^3 + 3 h^2 b + 3 h b^2}{3}\right) - bh^2 -  hb^2\]
+
+\[= \left(\frac{h^3}{3}\right)\]
+
+(identity that applies)
+
+Back to it
+\[ = \left( \frac{1}{h}\frac{\partial h}{\partial t}\right)^2 \int_b^s  \left(z- b\right)^2  \, dz  +  2\frac{\bar{u}}{h}\frac{\partial h}{\partial t}\frac{\partial b}{\partial x}\int_b^s \left(z - b\right)  \, dz  + h\left( \bar{u} \frac{\partial b}{\partial x} \right)^2 \]
+
+\[ = \left( \frac{1}{h}\frac{\partial h}{\partial t}\right)^2 \left(\frac{h^3}{3}\right) +  2\frac{\bar{u}}{h}\frac{\partial h}{\partial t}\frac{\partial b}{\partial x}\left(\frac{h^2}{2}\right)  + h\left( \bar{u} \frac{\partial b}{\partial x} \right)^2 \]
+
+\[ = \frac{h}{3}\left(\frac{\partial h}{\partial t}\right)^2  + \bar{u}h  \frac{\partial h}{\partial t}\frac{\partial b}{\partial x}  + h\left( \bar{u} \frac{\partial b}{\partial x} \right)^2 \]
+
+\[ = \frac{h}{3}\left( - \frac{\partial h\bar{u}}{\partial x}\right)^2  + \bar{u}h  \left(- \frac{\partial h\bar{u}}{\partial x}\right)\frac{\partial b}{\partial x}  + h\bar{u} ^2\left( \frac{\partial b}{\partial x} \right)^2 \]
+
+\[ = \frac{h}{3}\left( \frac{\partial \left(h\bar{u}\right)}{\partial x}\right)^2  - \bar{u}h  \frac{\partial \left(h\bar{u}\right)}{\partial x}\frac{\partial b}{\partial x}  + h\bar{u} ^2\left( \frac{\partial b}{\partial x} \right)^2 \]
+
+So
+
+\[\int_b^sE \, dz  = \frac{1}{2}\left(\bar{u}^2h + \frac{h}{3}\left( \frac{\partial \left(h\bar{u}\right)}{\partial x}\right)^2  - \bar{u}h  \frac{\partial \left(h\bar{u}\right)}{\partial x}\frac{\partial b}{\partial x}  + h\bar{u} ^2\left( \frac{\partial b}{\partial x} \right)^2 \right) + \frac{gh^2}{2} \]
+
+\[\int_b^sE \, dz  = \frac{1}{2} \left( \bar{u}^2h + \frac{h}{3}\left( \frac{\partial \left(h\bar{u}\right)}{\partial x}\right)^2  - \bar{u}h  \frac{\partial \left(h\bar{u}\right)}{\partial x}\frac{\partial b}{\partial x}  + h\bar{u} ^2\left( \frac{\partial b}{\partial x} \right)^2  + gh^2 \right)\]
+
+\[\int_b^sE \, dz  = \frac{1}{2} \left( \bar{u}^2h + \frac{h}{3}\left(\frac{\partial h}{\partial x}\bar{u} + \frac{\partial \bar{u}}{\partial x}h\right)^2  - \bar{u}h  \left(\frac{\partial h}{\partial x}\bar{u} + \frac{\partial \bar{u}}{\partial x}h\right)\frac{\partial b}{\partial x}  + h\bar{u} ^2\left( \frac{\partial b}{\partial x} \right)^2   + gh^2 \right)\]
+
+\[ = \frac{1}{2} \left( \bar{u}^2h + \frac{h}{3}\left( \left(\frac{\partial h}{\partial x}\bar{u}\right)^2 + 2 \left(\frac{\partial h}{\partial x}\bar{u}\right) \left(\frac{\partial \bar{u}}{\partial x}h\right) + \left(\frac{\partial \bar{u}}{\partial x}h\right)^2 \right)  - \bar{u}h  \left(\frac{\partial h}{\partial x}\bar{u} + \frac{\partial \bar{u}}{\partial x}h\right)\frac{\partial b}{\partial x}  + h\bar{u} ^2\left( \frac{\partial b}{\partial x} \right)^2 + gh^2 \right)\]
+
+\[ = \frac{1}{2} \left( \bar{u}^2h + \frac{h}{3}\left( h_x^2 \bar{u}^2 +  2h _x \bar{u} h \bar{u}_x + \bar{u}^2_xh^2 \right)  - \bar{u}h  \left(h_x\bar{u} + \bar{u}_xh\right) b_x  + h\bar{u} ^2b_x^2  + gh^2 \right)\]
+
+\[ = \frac{1}{2} \left( \bar{u}^2h + \frac{h}{3}\left( h_x^2 \bar{u}^2 +  2\bar{u} h \bar{u}_xh_x + \bar{u}^2_xh^2 \right)  - \bar{u}h  \left(h_x\bar{u} + \bar{u}_xh\right) b_x  + h\bar{u} ^2b_x^2  + gh^2 \right)\]
+
+\[ = \frac{1}{2} \left( \bar{u}^2h + \frac{h}{3}\left( h_x^2 \bar{u}^2 +  2\bar{u} h \bar{u}_xh_x + \bar{u}^2_xh^2 \right)  - \bar{u}hb_x   \left(h_x\bar{u} + \bar{u}_xh\right) + h\bar{u} ^2b_x^2  + gh^2 \right)\]
+
+If $b= 0$ then
+
+\[ = \frac{1}{2} \left( \bar{u}^2h + \frac{h}{3}\left( h_x^2 \bar{u}^2 +  2\bar{u} h \bar{u}_xh_x + \bar{u}^2_xh^2 \right)   + gh^2  \right)\]
+
+
+
+\end{document}

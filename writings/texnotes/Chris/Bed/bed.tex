@@ -1,0 +1,333 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Serre Equations}
+These are the equations, same as in your paper
+
+\begin{equation}
+\label{eqnSerreconmass}
+ \frac{\partial h}{\partial t} + \frac{\partial \bar{u} h}{\partial x}  = 0
+\end{equation}
+
+
+
+\begin{equation}
+\label{eqnSerremomcomp}
+\frac{\partial\bar{u} h }{\partial t} + \frac{\partial}{\partial x} \left(\bar{u}^2 h + \frac{gh^2}{2} + \frac{h^3}{3}  \Gamma + \frac{h^2}{2}\Phi \right)   + \left(gh + \frac{h^2}{2}\Gamma + h \Phi \right) \frac{\partial b}{\partial x} = 0
+\end{equation}
+
+where
+
+\begin{align*}
+\Gamma &= \left(\frac{\partial \bar{u}}{\partial x} \right)^2 - \bar{u}\frac{\partial^2 \bar{u}}{\partial x^2} - \frac{\partial^2 \bar{u}}{\partial x \partial t} \\
+\Phi &= \frac{\partial \bar{u}}{\partial t} \frac{\partial b}{\partial x} + \bar{u}\frac{\partial \bar{u}}{\partial x}\frac{\partial b}{\partial x} + \bar{u}^2\frac{\partial^2 b}{\partial x^2}
+\end{align*}
+
+\subsection{Conservative Form}
+
+Introducing
+
+\[ G =  h \bar{u} \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial \bar{u}}{\partial x}\right)\]
+
+We rewrite the momentum equation as
+
+\begin{multline}
+\label{eqnSerreconsconmom}
+\frac{\partial}{\partial t} \left( G \right)  + \frac{\partial}{\partial x} \left( \bar{u} G + \frac{gh^2}{2} - \frac{2}{3}h^3 \frac{\partial \bar{u}}{\partial x}^2 + h^2 \bar{u}\frac{\partial \bar{u}}{\partial x}\frac{\partial b}{\partial x} \right) \\ + \frac{1}{2}h^2 \bar{u} \frac{\partial \bar{u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  - h \bar{u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2} + gh\frac{\partial b}{\partial x} = 0
+\end{multline}
+
+\subsection{Linearisation} \label{seclinearise}
+Throughout the rest of this thesis to keep notation simple $u$ will be used to refer to the depth averaged velocity $\bar{u}$. We have
+%
+\begin{align*}
+\frac{\partial h}{\partial t} + \frac{\partial u h}{\partial x}  &= 0\\
+\frac{\partial}{\partial t} \left( G \right)  + \frac{\partial}{\partial x} \left( u G + \frac{gh^2}{2} - \frac{2}{3}h^3 \frac{\partial u}{\partial x}^2 + h^2 u\frac{\partial u}{\partial x}\frac{\partial b}{\partial x} \right) &= 0
+\end{align*}
+%
+To obtain a linearisation assume that the main quantities ${u}(x,t)$, $h(x,t)$ and $b(x,t)$ are composed of a base constant $u_0$, $h_0$ and $b_0$ with small disturbances from the base ${u_1}(x,t)$, $h_1(x,t)$ and $b_1(x,t)$. These disturbances are such that $ |{u_1}(x,t)| \ll |u_0|$, $|h_1(x,t)| \ll |h_0|$ and $|b_1(x,t)| \ll |b_0|$ for all $x$ and $t$. Beginning with the conservation of mass
+%
+\begin{align*}
+\frac{\partial h}{\partial t} + \frac{\partial {u} h}{\partial x}  &= 0\\
+\frac{\partial h}{\partial t} + h\frac{\partial {u}}{\partial x} +  {u}\frac{\partial h}{\partial x} &= 0\\
+\end{align*}
+%
+substituting in the decomposition mentioned above
+%
+\begin{multline*}
+\frac{\partial}{\partial t} \left(h_0 + h_1(x,t)\right) + \left(h_0 + h_1(x,t)\right)\frac{\partial}{\partial x} \left( {u_0} + {u_1}(x,t)\right) \\ + \left( {u_0} + {u_1}(x,t)\right)\frac{\partial }{\partial x}\left(h_0 + h_1(x,t)\right) = 0
+\end{multline*}
+\[\frac{\partial h_1(x,t)}{\partial t} + \left(h_0 + h_1(x,t)\right)\frac{\partial  {u_1}(x,t)}{\partial x} + \left({u_0} + {u_1}(x,t)\right)\frac{\partial h_1(x,t)}{\partial x} = 0\]
+%
+Since $ |{u_1}(x,t)| \ll |u_0|$. Then it is that
+$\left|{u_1}(x,t) \frac{\partial u_1(x,t)}{\partial x} \right| \ll \left|{u_0} \frac{\partial u_1(x,t)}{\partial x} \right|$. With similar results for $h$ and its derivatives. To linearise the much smaller terms such as $|{u_1}(x,t) \frac{\partial u_1(x,t)}{\partial x}|$ and products of derivatives are neglected. Thus
+\begin{equation}
+\label{eqnSerrelinearmass}
+\frac{\partial h_1(x,t)}{\partial t} + h_0\frac{\partial \bar{u_1}(x,t)}{\partial x} + \bar{u_0}\frac{\partial h_1(x,t)}{\partial x} = 0
+\end{equation}
+
+Throughout the linearisation of the momentum equations the terms which multiply derivatives will be dropped as above. By the definition of $G$ 
+%
+\[ G =  h {u} \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right)\]
+%
+By dropping the multiplication of derivatives and expanding it is obtained that
+%
+\begin{align*}
+G &=  h {u} + \frac{1}{2}h^2 {u}\frac{\partial^2 b}{\partial x^2} - \frac{1}{3}h^3  \frac{\partial^2 {u}}{\partial x^2} \\
+\frac{\partial G}{\partial t} &= h\frac{\partial {u}}{\partial t} + {u}\frac{\partial h}{\partial t}  + \frac{1}{2}h^2 {u}\frac{\partial^3 b}{\partial x^2 \partial t} - \frac{1}{3}h^3  \frac{\partial^3 {u}}{\partial x^2 \partial t}
+\end{align*}
+%
+Similarly 
+%
+\[\frac{\partial G}{\partial x} = h\frac{\partial {u}}{\partial x} + {u}\frac{\partial h}{\partial x}  + \frac{1}{2}h^2 {u}\frac{\partial^3 b}{\partial x^3} - \frac{1}{3}h^3  \frac{\partial^3 {u}}{\partial x^3}\]
+%
+By using the conservation of mass equation \eqref{eqnSerreconmass} and the independence of $b$ and hence its space derivatives from $t$ for the equation for $\frac{\partial G}{\partial t}$
+%
+\[\frac{\partial G}{\partial t} = h\frac{\partial {u}}{\partial t}  -{u}^2\frac{\partial h}{\partial x} - h{u}\frac{\partial {u}}{\partial x}  - \frac{1}{3}h^3  \frac{\partial^3 {u}}{\partial x^2 \partial t}\]
+%
+From the spatial derivative of flux it is obtained that
+%
+\[\frac{\partial}{\partial x} \left({u} G + \frac{gh^2}{2} - \frac{2}{3}h^3 \frac{\partial {u}}{\partial x}^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right)\]
+%
+becomes
+%
+\[\frac{\partial {u}}{\partial x} G + {u}\frac{\partial G}{\partial x} + gh\frac{\partial h}{\partial x} \]
+%
+Bringing this all together
+%
+\[h\frac{\partial {u}}{\partial t}  -{u}^2\frac{\partial h}{\partial x} - h{u}\frac{\partial {u}}{\partial x}  - \frac{1}{3}h^3  \frac{\partial^3 {u}}{\partial x^2 \partial t} + \frac{\partial{u}}{\partial x} G + {u}\frac{\partial G}{\partial x} + gh\frac{\partial h}{\partial x} = 0\]
+%
+\begin{multline*}
+h\frac{\partial {u}}{\partial t}  -{u}^2\frac{\partial h}{\partial x} - h{u}\frac{\partial {u}}{\partial x} - \frac{1}{3}h^3  \frac{\partial^3 {u}}{\partial x^2 \partial t} + hu\frac{\partial{u}}{\partial x} \\ +  h{u}\frac{\partial {u}}{\partial x} + {u}^2\frac{\partial h}{\partial x}  + \frac{1}{2}h^2 {u}^2\frac{\partial^3 b}{\partial x^3} - \frac{1}{3}h^3 {u}  \frac{\partial^3 {u}}{\partial x^3} + gh\frac{\partial h}{\partial x} = 0
+\end{multline*}
+%
+\[h\frac{\partial {u}}{\partial t} +  h{u}\frac{\partial {u}}{\partial x} + gh\frac{\partial h}{\partial x} + \frac{1}{2}h^2 {u}^2\frac{\partial^3 b}{\partial x^3}   - \frac{1}{3}h^3  \frac{\partial^3 {u}}{\partial x^2 \partial t}  - \frac{1}{3}h^3 {u}  \frac{\partial^3 {u}}{\partial x^3} = 0\]
+%
+Using the linearisation gives the linearised momentum equations, and removing common factors
+%
+\begin{equation}
+\label{eqnSerrelinearmomentum}
+\frac{\partial {u_1}}{\partial t} +  {u_0}\frac{\partial {u_1}}{\partial x} + g\frac{\partial h_1}{\partial x} + \frac{1}{2}h_0{u_0}^2\frac{\partial^3 b_1}{\partial x^3}   - \frac{1}{3}h_0^2  \frac{\partial^3 {u_1}}{\partial x^2 \partial t}  - \frac{1}{3}h_0^2 {u_0}  \frac{\partial^3 {u_1}}{\partial x^3} = 0
+\end{equation} \\
+
+To investigate the behaviour of harmonic waves, assume that
+%
+\[{u_1}(x,t) = Ue^{i(kx - \omega t)} , \quad h_1(x,t) = Ae^{i(kx - \omega t)}  ,\quad b_1(x,t) = Be^{i(kx - \omega t)}\]
+%
+Substituting these into the linearised equations for conservation of mass \eqref{eqnSerrelinearmass} and momentum \eqref{eqnSerrelinearmomentum} gives
+%
+\begin{subequations}
+\begin{align}
+-A\omega + h_0 U k + {u_0}A k &= 0  \label{eqnlinearserremassharmonic}\\
+-U\omega +  {u_0}Uk + gAk - \frac{1}{2}h_0 {u_0}^2k^3B   - \frac{1}{3}h_0^2  U\omega k^2 + \frac{1}{3}h_0^2 {u_0}  U k^3 &= 0 \label{eqnlinearserremomentumharmonic} \\
+-B\omega &= 0 \label{eqnlinearserrebottomharmonic}
+\end{align}
+\end{subequations}
+%
+Where \eqref{eqnlinearserrebottomharmonic} was added in and represents the fact that the bottom topography in the model is constant and so $\frac{\partial b}{\partial t} = 0$. Thus the system of equations can be rewritten as
+%
+\[\left[\begin{array}{ccc}
+{u_0}k - \omega & h_0k & 0 \\
+gk & {u_0}k - \frac{1}{3}h_0^2\omega k^2 + \frac{1}{3}h_0^2{u_0}k^3 - \omega & - \frac{1}{2}h_0 {u_0}^2k^3 \\
+0 & 0 & - \omega \end{array}\right] \left[ \begin{array}{c}
+A \\
+U \\
+B \end{array} \right]  = 0\]
+%
+This system admits a non-trivial solution when the determinant of the matrix is 0. The determinant can be calculated from one of the many classical methods to be
+%
+\begin{align*}
+-\omega \left[\left({u_0}k - \omega\right)\left({u_0}k - \frac{1}{3}h_0^2\omega k^2 + \frac{1}{3}h_0^2{u_0}k^3 - \omega\right) - g h_0 k^2\right] &= 0 \\
+-\omega \left[\left(1 + \frac{1}{3}h_0^2k^2\right)\omega^2 + \left(-2{u_0}k - \frac{2}{3}h_0^2{u_0}k^3\right)\omega + {u_0}^2k^2 + \frac{1}{3}h_0^2{u_0}^2k^4 - gh_0k^2\right] &= 0
+\end{align*}
+%
+So one of the roots of $\omega$ is 0 and the other two are given by the quadratic formula:
+%
+\begin{align*}
+\omega &= \frac{\left(2{u_0}k + \frac{2}{3}h_0^2{u_0}k^3\right) \pm \sqrt{\left(2{u_0}k + \frac{2}{3}h_0^2{u_0}k^3\right)^2 - 4\left(1 + \frac{1}{3}h_0^2k^2\right)\left({u_0}^2k^2 +\frac{1}{3}h_0^2{u_0}^2k^4 - gh_0k^2\right)}}{2\left(1 + \frac{1}{3}h_0^2k^2\right)} \\
+\omega &= {u_0}k \pm \sqrt{\frac{ 4{u_0}^2k^2 \left(1 + \frac{1}{3}h_0^2k^2\right)^2 - 4\left(1 + \frac{1}{3}h_0^2k^2\right)\left({u_0}^2k^2 + \frac{1}{3}h_0^2{u_0}^2k^4 - gh_0k^2\right)}{4\left(1 + \frac{1}{3}h_0^2k^2\right)^2}} \\
+\omega &= {u_0}k \pm \sqrt{{u_0}^2k^2 - \frac{ {u_0}^2k^2\left(1 + \frac{1}{3}h_0^2k^2\right) - gh_0k^2}{\left(1 + \frac{1}{3}h_0^2k^2\right)}} \\
+\omega &= {u_0}k \pm k\sqrt{gh_0}\sqrt{\frac{3}{3 + h_0^2k^2}}
+\end{align*}
+%
+So there are 3 possibilities for the dispersion relation $\omega = 0,{u_0}k \pm k\sqrt{gh_0}\sqrt{\frac{3}{3 + h_0^2k^2}} $. For the SWWE it turns out that the dispersion relation is $\omega = {u_0}k \pm k\sqrt{gh_0}$. So then as $h_0^2k^2 \rightarrow 0 $ the frequency for the linearised Serre equations are identical to that of the SWWE in the limit. However, as $h_0^2k^2 \rightarrow \infty $ the frequency goes to $\omega = 0,{u_0}$. Therefore the frequency of the Serre equations are bounded by the frequency of the SWW equations. Importantly the phase speed $v_p$ is given by $v_p = \frac{Re(\omega)}{k}$ and so is
+%
+\[v_p = 0, {u_0} \pm \sqrt{gh_0}\sqrt{\frac{3}{3 + h_0^2k^2}} \] 
+%
+which by the previous discussion is bounded so that
+%
+\[ {u_0} -  \sqrt{gh_0} \le v_p \le {u_0} +  \sqrt{gh_0}\]
+%
+Thus the wave speeds of the Serre equations are bounded by the same wave speeds as the SWWE which are ${u_0} \pm \sqrt{gh_0}$ where the one corresponding to the plus is the maximum wave speed and the minus is the minimum wave speed. This matches the bounds on wave speed given by \cite{LeMetayer2010}. Thus information can only propagate as fast as the wave speeds in the system, a fact that is very important to the development of the FVM used in this thesis. Now that all the analysis for the construction of the method is complete, this chapter will focus on the analysis used to validate the numerical method obtained in chapter \ref{chapter4}.
+
+(I basically just copied from my hons thesis, so will need to be cut down, but yeah this demonstrates that the wave speed bound is unchanged)
+
+\subsection{Conservative law form explicit}
+want
+\[\frac{\partial \vec{q}}{\partial t} + \frac{\partial \vec{F(\vec{q})}}{\partial x} = \vec{S}\]
+
+In this form
+
+\[\vec{q} = \left[\begin{array}{c}
+h  \\ G
+\end{array}\right]\]
+
+\[\vec{F(\vec{q})} = \left[\begin{array}{c}
+u h  \\ u G + \frac{gh^2}{2} - \frac{2}{3}h^3 \frac{\partial u}{\partial x}^2 + h^2 u\frac{\partial u}{\partial x}\frac{\partial b}{\partial x}
+\end{array}\right]\]
+
+\[\vec{S} = \left[\begin{array}{c}
+0 \\ -\frac{1}{2}h^2 u \frac{\partial u}{\partial x} \frac{\partial^2 b}{\partial x^2}  + h u^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2} - gh\frac{\partial b}{\partial x}
+\end{array}\right]\]
+
+\subsection{fluxes}
+
+\[f^\pm_{j + 1/2} = u^\pm_{j + 1/2} G^\pm_{j + 1/2} + \frac{g{h^\pm_{j + 1/2}}^2}{2} - \frac{2}{3}{h^\pm_{j + 1/2}}^3 {\left(\frac{\partial u}{\partial x}\right)^\pm_{j + 1/2}}^2 + {h^\pm_{j + 1/2}}^2 u^\pm_{j + 1/2} \left(\frac{\partial u}{\partial x}\right)^\pm_{j + 1/2}\left(\frac{\partial b}{\partial x}\right)^\pm_{j + 1/2}\]
+
+with different approximations to the derivatives (q is general here)
+
+\begin{subequations}
+\begin{gather}\label{eq:derivdisco1p}
+\left(\frac{\partial q}{\partial x}\right)^+_{i + \frac{1}{2}} = \frac{ q^+_{i + \frac{3}{2}} - q^+_{i + \frac{1}{2}}}{\Delta x},
+\end{gather}
+\begin{gather}\label{eq:derivdisco1m}
+\left(\frac{\partial q}{\partial x}\right)^-_{i + \frac{1}{2}} = \frac{ q^-_{i + \frac{1}{2}} - q^-_{i - \frac{1}{2}}}{\Delta x},
+\end{gather}
+\end{subequations}
+\label{eq:derivdisco1}
+\begin{subequations}
+\begin{gather}\label{eq:derivdisco2p}
+\left(\frac{\partial q}{\partial x}\right)^+_{i + \frac{1}{2}} = \frac{ q^+_{i + \frac{3}{2}} - q^+_{i + \frac{1}{2}}}{\Delta x},
+\end{gather}
+\begin{gather}\label{eq:derivdisco2m}
+\left(\frac{\partial q}{\partial x}\right)^-_{i + \frac{1}{2}} = \frac{ q^-_{i + \frac{1}{2}} - q^-_{i - \frac{1}{2}}}{\Delta x},
+\end{gather}
+\end{subequations}
+\begin{subequations}
+\begin{gather}\label{eq:derivdisco3p}
+\left(\frac{\partial q}{\partial x}\right)^+_{i + \frac{1}{2}} = \frac{ -q^+_{i + \frac{3}{2}} + 4q^+_{i + \frac{3}{2}}  -3 q^+_{i + \frac{1}{2}}}{\Delta x},
+\end{gather}
+\begin{gather}\label{eq:derivdisco3m}
+\left(\frac{\partial q}{\partial x}\right)^-_{i + \frac{1}{2}} = \frac{ 3q^-_{i + \frac{1}{2}} - 4q^-_{i - \frac{1}{2}} + q^-_{i - \frac{3}{2}}}{\Delta x},
+\end{gather}
+\end{subequations}
+\label{eq:derivdisco3}
+
+For the first- , second- and third-order schemes respectively. 
+
+
+along with the following reconstruction scheme for the second-order method
+\begin{gather*}
+q^-_{i + \frac{1}{2}} =  \bar{q}_i + a_i \frac{\Delta x}{2}
+\end{gather*}
+and
+\begin{gather*}
+q^+_{i + \frac{1}{2}} =  \bar{q}_{i+1} - a_{i + 1} \frac{\Delta x}{2}
+\end{gather*}
+where
+\begin{gather*}
+a_i = \text{minmod}\left\lbrace\theta \frac{\bar{q}_{i+1} - \bar{q}_{i}}{\Delta x}, \frac{\bar{q}_{i+1} - \bar{q}_{i-1}}{2\Delta x} ,\theta \frac{\bar{q}_{i} - \bar{q}_{i-1}}{\Delta x}\right\rbrace \quad \text{for} \; \theta \in \left[1,2\right].
+\end{gather*}
+While for the third-order method the reconstruction scheme is
+\begin{gather*}
+q^-_{i + \frac{1}{2}} = \bar{q}_i + \frac{1}{2}\phi^-\left(r_i\right)\left(\bar{q}_i -\bar{q}_{i-1} \right)
+\end{gather*}
+and
+\begin{gather*}
+q^+_{i + \frac{1}{2}} = \bar{q}_{i+1} - \frac{1}{2}\phi^+\left(r_{i+1}\right)\left(\bar{q}_{i+1} -\bar{q}_{i} \right)
+\end{gather*}
+where
+\begin{gather*}
+\phi^-\left(r_i\right) = \max\left[0, \min\left[2 r_i, \frac{1 + 2r_i}{3},2\right]\right],
+\end{gather*}
+\begin{gather*}
+\phi^+\left(r_i\right) = \max\left[0, \min\left[2 r_i, \frac{2 + r_i}{3},2\right]\right]
+\end{gather*}
+and
+\begin{gather*}
+r_i = \frac{\bar{q}_{i+1} - \bar{q}_{i} }{\bar{q}_{i} - \bar{q}_{i-1}}.
+\end{gather*}
+
+\subsection{solving using steps}
+
+
+\begin{gather}
+\mathcal{H}\left(\boldsymbol{\bar{U}}^n,\Delta t \right) = \left\lbrace 
+\begin{array}{c c c} 
+	\boldsymbol{U}^n &=& \mathcal{M}^{-1}\left(\boldsymbol{\bar{U}}^n\right) \\
+	\boldsymbol{u}^n &=& \mathcal{A}\left(\boldsymbol{U}^n\right) \\
+	\boldsymbol{\bar{u}}^n &=&  \mathcal{M}\left(\boldsymbol{u}^n\right) \\
+	\boldsymbol{\bar{U}}^{n+1} &=& \mathcal{L}\left(\boldsymbol{\bar{U}}^{n},\boldsymbol{\bar{u}}^n,\Delta t\right)							
+\end{array} \right.
+\end{gather}
+
+Where $\mathcal{M}$ is identiy for first and second order methods and for the third order method it is the matrix generated by this
+
+
+\begin{gather}\label{eq:midtoca}
+q_i = \frac{- \bar{q}_{i+1} + 26\bar{q}_{i} - \bar{q}_{i-1}}{24}.
+\end{gather}
+
+$\mathcal{A}$ is for second order
+
+\begin{multline}
+\label{chp3FDHtou}
+G_i =  \left[ \frac{1}{2\Delta x}h_i^2 \frac{h_{i+1} - h_{i-1}}{2\Delta x}  -  \frac{1}{\Delta x^2} \frac{1}{3}h_i^3 \right]u_{i-1} + h_iu_i \times \\ \left[ 1 + \frac{h_{i+1} - h_{i-1}}{2\Delta x} \frac{b_{i+1} - b_{i-1}}{2\Delta x} + \frac{1}{2}h_i\frac{b_{i+1} -2b_i + b_{i-1}}{\Delta x^2} + \left(\frac{b_{i+1} - b_{i-1}}{2\Delta x}\right)^2 + \frac{2}{ 3 \Delta x^2} h_i^2 \right] \\ + \left[ -\frac{1}{2\Delta x}h_i^2 \frac{h_{i+1} - h_{i-1}}{2\Delta x}  -  \frac{1}{\Delta x^2} \frac{1}{3}h_i^3 \right]u_{i+1}
+\end{multline}
+
+\subsection{Well Balancing}
+
+\label{MethodWellBalancedAudusse}
+\begin{enumerate}
+  \item Use the second order reconstruction to get the interface values for both $u$ and $G$ giving $u^{-}_{i + \frac{1}{2}}$, $u^{+}_{i + \frac{1}{2}}$, $G^{-}_{i + \frac{1}{2}}$ and $G^{+}_{i + \frac{1}{2}}$.
+  \item Use the second order reconstruction to get the interface values for $h+b$ and $h$ giving $(h+b)^{-}_{i + \frac{1}{2}}$, $(h+b)^{+}_{i + \frac{1}{2}}$, $h^{-}_{i + \frac{1}{2}}$ and $h^{+}_{i + \frac{1}{2}}$.
+  \item Calculate the interface values for $b$ by using the reconstructed values of $h+b$ and $h$ above by simply taking the difference giving $b^{-}_{i + \frac{1}{2}}$ and $b^{+}_{i + \frac{1}{2}}$.
+  \item Define $\acute{b}_{i + \frac{1}{2}} = \max\left(b^{-}_{i + \frac{1}{2}} , b^{+}_{i + \frac{1}{2}}\right)$
+  \item Define $\acute{h}^{-}_{i + \frac{1}{2}} = \max\left(0 ,(h+b)^{-}_{i + \frac{1}{2}} - \acute{b}_{i + \frac{1}{2}} \right)$ and $\acute{h}^{+}_{i + \frac{1}{2}} = \max\left(0 ,(h+b)^{+}_{i + \frac{1}{2}} - \acute{b}_{i + \frac{1}{2}} \right)$
+  \item Calculate the flux as in chapter \ref{chapter4} at $x_{i + \frac{1}{2}}$ using $\acute{U}^{+}_{i + \frac{1}{2}} = \left(\begin{array}{c}
+    \acute{h}^{+}_{i + \frac{1}{2}} \\
+    G^+_{i + \frac{1}{2}}
+    \end{array}\right)$ and $\acute{U}^{-}_{i + \frac{1}{2}} = \left(\begin{array}{c}
+      \acute{h}^{-}_{i + \frac{1}{2}} \\
+      G^-_{i + \frac{1}{2}}
+      \end{array}\right)$ as the conserved variables on the right and left respectively. With the $u^{+}_{i + \frac{1}{2}}$ and $b^{+}_{i + \frac{1}{2}}$ giving the right velocity and bed. While $u^{-}_{i + \frac{1}{2}}$ and $b^{-}_{i + \frac{1}{2}}$ gives the left velocity and bed.
+  \item Repeat for the other boundary at $x_{i - \frac{1}{2}}$ 
+  \item Calculate the source term $S_{ci}$ 
+    \[S_{ci} = \Delta x \left(\begin{array}{c}
+    0 \\
+    -g h \frac{\partial b}{\partial x} - \frac{1}{2} h^2 {u} \frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2} + h {u}^2 \frac{\partial b}{\partial x} \frac{\partial^2 b}{\partial x^2}
+    \end{array}\right)\]
+    by a finite difference approach so that:
+    \begin{align*}
+     h &= h_i \\
+     u &= u_i \\ 
+     -\frac{\partial b}{\partial x} &= \frac{b^{-}_{i + \frac{1}{2}} - b^{+}_{i - \frac{1}{2}}}{\Delta x}\\
+     -\frac{\partial u}{\partial x} &= \frac{u^{-}_{i + \frac{1}{2}} - u^{+}_{i - \frac{1}{2}}}{\Delta x} \\
+     \frac{\partial^2 b}{\partial x^2} &= \frac{b_{i+1} - 2 b_i + b_{i-1}}{\Delta x^2}
+    \end{align*}
+  \item Calculate the corrective source term $S_{bi}$ where $S_{bi} = S^{-}_{i + \frac{1}{2}} + S^{+}_{i - \frac{1}{2}}$
+  %  
+  \[S^{-}_{i + \frac{1}{2}} = \left(\begin{array}{c} 0 \\ \frac{g}{2} \left(\acute{h}^{-}_{i + \frac{1}{2}} \right)^2 - \frac{g}{2} \left(h^{-}_{i + \frac{1}{2}} \right)^2  \end{array}\right) \]
+  \[S^{+}_{i - \frac{1}{2}} = \left(\begin{array}{c} 0 \\ \frac{g}{2} \left(h^{+}_{i - \frac{1}{2}}\right)^2 - \frac{g}{2}\left(\acute{h}^{+}_{i - \frac{1}{2}}\right)^2  \end{array}\right) \]
+  %
+  \item The source term we add is then $S_i = S_{ci} + S^{-}_{i + \frac{1}{2}} + S^{+}_{i - \frac{1}{2}}$, so our update becomes (bar for average over cell)
+  
+  \[\bar{G}^{n+1}_i = \bar{G}^{n}_i - \frac{\Delta t}{\Delta x}(F^n_{i+ 1/2} -F^n_{i- 1/2}) + \frac{\Delta t}{\Delta x}\left(S_{ci} + S^{-}_{i + \frac{1}{2}} + S^{+}_{i - \frac{1}{2}}\right) \]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

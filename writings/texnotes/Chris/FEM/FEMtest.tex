@@ -1,0 +1,60 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Elliptic Equation}
+\[-u_x = f\]
+
+We begin by multiplying by a test functioin then integrating
+
+for all v
+
+\[-u_x v = fv\]
+
+\[-\int_{I} u_x v = \int_{I_{i}}fv\]
+
+Assuming Dirchlet boundary conditions we have by integration by parts
+
+
+\[\int_I u v_x = \int_Ifv\]
+
+Now we also have basis functions $\phi$ such that
+
+$$u = \sum^N_{i=1} u_i \phi_i$$
+
+and it covers the whole space of interest so
+
+for all $\phi_i$
+
+\[\int_I u (\phi_x)_i = \int_If\phi_i\]
+
+also can write this per element as
+
+for all $\phi_i$
+\[\sum_{\forall e} \int_e u (\phi_x)_i dx =  \sum_{\forall e} \int_ef\phi_i dx \]
+
+The sum is simple, what we are interest in is one abstract $e$
+
+We have 
+\[\phi_i(x) = \left\lbrace \begin{array}{c c}
+0 & x < x_{i-1}\\
+\frac{x - x_{i-1}}{\Delta x} & x_{i-1}\ge x < x_{i}\\
+1 - \frac{x - x_{i-1}}{\Delta x} & x_{i}\ge x < x_{i+1}\\
+0 & x_{i+1}\ge x
+\end{array} \right.\]
+
+Thus
+
+\[{(\phi_x)}_i = \left\lbrace \begin{array}{c c}
+0 & x < x_{i-1}\\
+1/\Delta x & x_{i-1}\ge x < x_{i}\\
+- 1/\Delta x& x_{i}\ge x < x_{i+1}\\
+0 & x_{i+1}\ge x
+\end{array} \right.\]
+
+
+
+
+\end{document}

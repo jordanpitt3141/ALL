@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{authblk}
+\usepackage{lineno}
+
+\title{Title Of The Paper}
+\author[]{J. Pitt\thanks{email: Jordan.Pitt@anu.edu.au}}
+\author[]{S. Roberts\thanks{email: Stephen.Roberts@anu.edu.au}}
+\author[]{C. Zoppou\thanks{email: Chris.Zoppou@anu.edu.au}}
+\affil[]{Mathematics Science Institute, Australian National University, Canberra, ACT 2001, Australia.}
+
+\begin{document}
+  \maketitle
+  \section{Abstract}
+  \tableofcontents
+  \linenumbers
+  \section{Introduction}
+Free surface flows occur in many important and different applications such as; tsunamis, storm surges, tidal bores and riverine flooding. As these surfaces vary more rapidly the assumption of hydrostatic pressure in a fluid column breaks down and vertical acceleration inside the fluid becomes important. Therefore it is no longer fully justified to use the shallow water wave equations in this flow regime because they enforce a hydrostatic pressure distribution. At the other end numerical methods for the Euler equations are not yet computationally efficient enough to deal with these problems over large domains to high accuracy. Thus a large family of equations has been developed to approximate this regime where fluid is still shallow () but now we also allow different nonlinearity parameters (). 
+  \section{One Dimensional Serre Equations}
+  The Serre equations are derived as an approximation to the full Euler equations by depth integration as in []. They can also be seen as an asymptotic expansion to the Euler equations as well []. The former is more consistent with the perspective from which numerical methods will be developed while the latter indicates the appropriate regions in which to use these equations as a model for fluid flow. Restricting to the two dimensional problem, the Euler equations are.        
+  \subsection{Conservative Form}
+  \subsection{Bounding Wave Speeds}
+  \section{Hybrid Finite Difference, Finite Volume Method Solver}
+  \subsection{First Order}
+  \subsection{Second Order}
+  \subsection{Third Order}
+  \section{Numerical Experiments}
+  \subsection{Soliton}
+  \subsection{Experimental Data}
+  \subsection{Dam Break}
+  \cite{Kurganov2001}
+
+\bibliography{bibliography} 
+\bibliographystyle{ieeetr}  
+\end{document}

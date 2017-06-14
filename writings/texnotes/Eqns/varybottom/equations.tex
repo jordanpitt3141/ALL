@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{xfrac}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Serre Equations}
+
+The Serre Equations read
+(height/mass)
+\[\frac{\partial h}{\partial t} + \frac{\partial uh}{\partial x} = 0 \]
+
+Phi
+\[\Phi = \frac{\partial b}{\partial x}\left(u \frac{\partial u}{\partial x}\right) + u^2 \frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}\frac{\partial u}{\partial t}\]
+
+Gamma
+\[\Gamma = \left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\]
+
+Pressure
+\[p|_\xi = p_a + \rho g \xi + \frac{\rho}{2}\xi\left(2h - \xi\right)\Gamma + \rho \xi \Phi \]
+
+
+Momentum(velocity)
+x
+\[ \frac{\partial (uh)}{\partial t} + \frac{\partial}{\partial x}\left(u^2 h + \frac{gh^2}{2} + \frac{h^3}{3}\Gamma + \frac{h^2}{2} \Phi\right) + h \frac{\partial b}{\partial x}\left(g + \frac{h}{2}\Gamma + \Phi\right) = 0\]
+
+z
+\[w|_z = \frac{z - b}{h} \frac{\partial h}{\partial t} + u \frac{\partial b}{\partial x}\]
+
+
+So
+
+For the conservation of mass
+
+\[\frac{\partial h}{\partial t} + \frac{\partial uh}{\partial x} = 0 \]
+
+\[h_t + uh_x + hu_x = 0 \]
+
+For the conservation ofg momentum
+\begin{multline*}
+u_th + uh_t + \frac{\partial}{\partial x}\scalebox{3}{[}u^2 h + \frac{gh^2}{2} + \frac{h^3}{3}\left(\left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\right) \\ + \frac{h^2}{2} \left(\frac{\partial b}{\partial x}\left(u \frac{\partial u}{\partial x}\right) + u^2 \frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}\frac{\partial u}{\partial t}\right)\scalebox{3}{]}  \\ + h \frac{\partial b}{\partial x}\left(g + \frac{h}{2}\left(\left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\right) + \left(\frac{\partial b}{\partial x}\left(u \frac{\partial u}{\partial x}\right) + u^2 \frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}\frac{\partial u}{\partial t}\right)\right) = 0
+\end{multline*}
+
+\begin{multline*}
+u_th + uh_t + 2uu_xh + u^2h_x + ghh_x    \\ + \frac{\partial}{\partial x}\scalebox{3}{[} \frac{h^3}{3}\left(u_x^2 - uu_{xx} - u_{xt}\right) + \frac{h^2}{2} \left(uu_xb_x + u^2 b_{xx} + b_xu_t\right)\scalebox{3}{]}  \\ + h \frac{\partial b}{\partial x}\left(g +  \frac{h}{2}\left(u_x^2 - uu_{xx} - u_{xt}\right) + \left(uu_xb_x + u^2 b_{xx} + b_xu_t\right)\right) = 0
+\end{multline*}
+
+\begin{multline*}
+u_th + uh_t + 2uu_xh + u^2h_x + ghh_x    \\ +\scalebox{3}{[} h^2h_x\left(u_x^2 - uu_{xx} - u_{xt}\right) + hh_x\left(uu_xb_x + u^2 b_{xx} + b_xu_t\right)\scalebox{3}{]} \\ + \scalebox{3}{[} \frac{h^3}{3}\left(u_x^2 - uu_{xx} - u_{xt}\right)_x + \frac{h^2}{2} \left(uu_xb_x + u^2 b_{xx} + b_xu_t\right)_x\scalebox{3}{]}  \\ + h \frac{\partial b}{\partial x}\left(g +  \frac{h}{2}\left(u_x^2 - uu_{xx} - u_{xt}\right) + \left(uu_xb_x + u^2 b_{xx} + b_xu_t\right)\right) = 0
+\end{multline*}
+
+\begin{multline*}
+u_th + uh_t + 2uu_xh + u^2h_x + ghh_x    \\ + h^2h_x\left(u_x^2 - uu_{xx} - u_{xt}\right) + hh_x\left(uu_xb_x + u^2 b_{xx} + b_xu_t\right) \\ + \scalebox{3}{[} \frac{h^3}{3}\left(2u_xu_{xx} - u_xu_{xx} - u u_{xxx} - u_{xtx}\right)  \\ + \frac{h^2}{2} \left( u_x^2b_x + uu_{xx}b_x +uu_xb_{xx} + 2uu_xb_{xx}+ u^2b_{xxx}  + b_{xx}u_t + b_xu_{tx}\right)\scalebox{3}{]}  \\ + h b_x\left(g +  \frac{h}{2}\left(u_x^2 - uu_{xx} - u_{xt}\right) + \left(uu_xb_x + u^2 b_{xx} + b_xu_t\right)\right) = 0
+\end{multline*}
+
+\begin{multline*}
+u_th + uh_t + 2uu_xh + u^2h_x + ghh_x    \\ + h^2h_x\left(u_x^2 - uu_{xx} - u_{xt}\right) + hh_x\left(uu_xb_x + u^2 b_{xx} + b_xu_t\right) \\ + \frac{h^3}{3}\left(u_xu_{xx} - u u_{xxx} - u_{xtx}\right)  \\ + \frac{h^2}{2} \left( u_x^2b_x + uu_{xx}b_x + 3uu_xb_{xx}+ u^2b_{xxx}  + b_{xx}u_t + b_xu_{tx}\right) \\ + h b_x\left(g +  \frac{h}{2}\left(u_x^2 - uu_{xx} - u_{xt}\right) + \left(uu_xb_x + u^2 b_{xx} + b_xu_t\right)\right) = 0
+\end{multline*}
+
+Since $h_t = - uh_x - hu_x$
+
+\begin{multline*}
+u_th - u^2h_x - uhu_x + 2uu_xh + u^2h_x + ghh_x    \\ + h^2h_x\left(u_x^2 - uu_{xx} - u_{xt}\right) + hh_x\left(uu_xb_x + u^2 b_{xx} + b_xu_t\right) \\ + \frac{h^3}{3}\left(u_xu_{xx} - u u_{xxx} - u_{xtx}\right)  \\ + \frac{h^2}{2} \left( u_x^2b_x + uu_{xx}b_x + 3uu_xb_{xx}+ u^2b_{xxx}  + b_{xx}u_t + b_xu_{tx}\right) \\ + h b_x\left(g +  \frac{h}{2}\left(u_x^2 - uu_{xx} - u_{xt}\right) + \left(uu_xb_x + u^2 b_{xx} + b_xu_t\right)\right) = 0
+\end{multline*}
+
+\begin{multline*}
+u_th + uu_xh + ghh_x \\ + h^2h_xu_x^2 - h^2h_xuu_{xx} - h^2h_xu_{xt} + hh_xuu_xb_x + hh_xu^2 b_{xx} + hh_xb_xu_t \\ + \frac{h^3}{3}u_xu_{xx} - \frac{h^3}{3}u u_{xxx} - \frac{h^3}{3}u_{xtx}  \\ +  \frac{h^2}{2}u_x^2b_x + \frac{h^2}{2}uu_{xx}b_x + 3\frac{h^2}{2}uu_xb_{xx}+ \frac{h^2}{2}u^2b_{xxx}  + \frac{h^2}{2}b_{xx}u_t + \frac{h^2}{2}b_xu_{tx} \\ + gh b_x +  \frac{h}{2}h b_xu_x^2 - h \frac{h}{2}b_xuu_{xx} - \frac{h}{2}h b_xu_{xt} + h b_xuu_xb_x + u^2 h b_xb_{xx} + h b_xb_xu_t = 0
+\end{multline*}
+
+\begin{multline*}
+u_th + uu_xh + ghh_x \\ + h^2h_xu_x^2 - h^2h_xuu_{xx} - h^2h_xu_{xt} + uhh_xu_xb_x + u^2hh_xb_{xx} + hh_xb_xu_t \\ + \frac{h^3}{3}u_xu_{xx} - \frac{h^3}{3}u u_{xxx} - \frac{h^3}{3}u_{xtx}  \\ +  \frac{h^2}{2}u_x^2b_x + \frac{h^2}{2}uu_{xx}b_x + \frac{3h^2}{2}uu_xb_{xx}+ \frac{h^2}{2}u^2b_{xxx}  + \frac{h^2}{2}b_{xx}u_t + \frac{h^2}{2}b_xu_{tx} \\ + gh b_x +  \frac{h^2}{2} b_xu_x^2 - u\frac{h^2}{2}b_xu_{xx} - \frac{h^2}{2} b_xu_{xt} + uh u_xb_x^2 + u^2 h b_xb_{xx} + h b_x^2u_t = 0
+\end{multline*}
+
+\begin{multline*}
+u_th + uu_xh + ghh_x \\ + h^2h_xu_x^2 - h^2h_xuu_{xx} - h^2h_xu_{xt} + uhh_xu_xb_x + u^2hh_xb_{xx} + hh_xb_xu_t \\ + \frac{h^3}{3}u_xu_{xx} - \frac{h^3}{3}u u_{xxx} - \frac{h^3}{3}u_{xtx}  \\ +  h^2u_x^2b_x  + \frac{3h^2}{2}uu_xb_{xx}+ \frac{h^2}{2}u^2b_{xxx}  + \frac{h^2}{2}b_{xx}u_t  \\ + gh b_x  + uh u_xb_x^2 + u^2 h b_xb_{xx} + h b_x^2u_t = 0
+\end{multline*}
+
+\begin{multline*}
+u_th + uu_xh + ghh_x  + h^2h_xu_x^2 - h^2h_xuu_{xx}  - h^2h_xu_{xt} + uhh_xu_xb_x \\ + u^2hh_xb_{xx} + hh_xb_xu_t  + \frac{h^3}{3}u_xu_{xx} - \frac{h^3}{3}u u_{xxx} - \frac{h^3}{3}u_{xtx}  \\ +  h^2u_x^2b_x  + \frac{3h^2}{2}uu_xb_{xx}+ \frac{h^2}{2}u^2b_{xxx}  + \frac{h^2}{2}b_{xx}u_t   + gh b_x \\  + uh u_xb_x^2 + u^2 h b_xb_{xx} + h b_x^2u_t = 0
+\end{multline*}
+
+Divide through by $h$
+
+\begin{multline*}
+u_t+ uu_x + gh_x  + hh_xu_x^2 - hh_xuu_{xx}  - hh_xu_{xt} + uh_xu_xb_x \\ + u^2h_xb_{xx} + h_xb_xu_t  + \frac{h^2}{3}u_xu_{xx} - \frac{h^2}{3}u u_{xxx} - \frac{h^2}{3}u_{xtx}  \\ +  hu_x^2b_x  + \frac{3h}{2}uu_xb_{xx}+ \frac{h}{2}u^2b_{xxx}  + \frac{h}{2}b_{xx}u_t   + gb_x \\  + u u_xb_x^2 + u^2 b_xb_{xx} +  b_x^2u_t = 0
+\end{multline*}
+
+\begin{multline*}
+u_t\left(1 + h_xb_x + \frac{h}{2}b_{xx} + b_x^2u_t \right) - hh_xu_{xt} - \frac{h^2}{3}u_{xtx} + uu_x\left(1 + h_xb_x + \frac{3h}{2}b_{xx} + b_x^2 \right) + g\left(h_x + b_x\right) \\ + hh_xu_x^2 - hh_xuu_{xx} + u^2h_xb_{xx}  + \frac{h^2}{3}u_xu_{xx} - \frac{h^2}{3}u u_{xxx}  +  hu_x^2b_x + \frac{h}{2}u^2b_{xxx}  + u^2 b_xb_{xx} = 0
+\end{multline*}
+
+
+
+
+
+\end{document}

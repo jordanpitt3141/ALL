@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Elliptic Equation}
+The linearised elliptic equation is
+
+\[G = Hu - \frac{H^3}{3}u_{xx}\]
+
+Want to find out the FEM approximation to this $G'$ such that
+
+\[G' = \mathcal{G}_{FE_1} u\]
+
+for $P^1$ FEM
+
+\[G' = \mathcal{G}_{FE_2} u\]
+
+for $P^2$ FEM.
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+\[Gv = Huv - \frac{H^3}{3}u_{xx}v\]
+
+and then we integrate over the entire domain to get 
+\[\int_\Omega Gv dx = \int_\Omega Huv dx - \int_\Omega \frac{H^3}{3}u_{xx}vdx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega Huv dx + \int_\Omega \frac{H^3}{3}u_{x}v_xdx\]
+
+Our FVM discretisation already has a natrual structure with linear functions intervals of $[x_{j- 1/2} , x_{j+1/2}]$, to achieve this in $P^1$ we have our nodes at the boundaries, thus
+
+So we can reformulate this as 
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Gv dx = \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Huv dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{H^3}{3}u_{x}v_{x}dx\]
+
+or more aptly
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Gv dx - \int_{x_{j-1/2}}^{x_{j+3/2}} Huv dx - \int_{x_{j-1/2}}^{x_{j+3/2}} \frac{H^3}{3}u_{x}v_{x}dx = 0 \]
+
+for all v
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Gv dx - H\int_{x_{j-1/2}}^{x_{j+3/2}} uv dx -  \frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+3/2}}u_{x}v_{x}dx = 0 \]
+
+\section{P1 FEM}
+We are going to corodainte tranform from x space the interval $[x_{i-1/2},x_{i+1/2} ,x_{i+3/2}]$ to the $\xi$ space interval $[-1,0,1]$. To accomplish this we have the following relation
+
+$$x = \xi\Delta x + x_{j+1/2}$$
+
+Taking the derivative we see
+
+$dx = d\xi\Delta x$ , $\frac{dx}{d\xi} = \Delta x$ , $\frac{d\xi}{dx} = \frac{1}{\Delta x}$ 
+
+
+For this FEM we are intereseted in $G_{i+1/2}$ and then we can just get a shift operator to get the otherones. For FEM we replace the functions by their P1 approximations so
+
+\[G \approx G' = \sum_{j}G_{j+ 1/2}v_{j+ 1/2}\]
+\[u \approx u' = \sum_{j}u_{j+ 1/2}v_{j+ 1/2}\]
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} G'v dx - H\int_{x_{j-1/2}}^{x_{j+3/2}} u'v dx -  \frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+3/2}}u'_{x}v_{x}dx = 0 \]
+
+We break this up into the integrals because of the domain of dependence of the basis functions is covered. We also just use a particular basis function as the test function, in particular we choose $v_{j + 1/2}$
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}} G'(x)v_{j + 1/2} dx = \int_{-1}^{1} G'(\xi)v_{j + 1/2}(\xi) \frac{d x}{d\xi}d\xi\]
+
+\[= \Delta x \int_{-1}^{1} \left(G_{j- 1/2}v_{j - 1/2} + G_{j+ 1/2}v_{j+ 1/2} +G_{j+ 3/2}v_{j+ 3/2} \right)v_{j + 1/2} d\xi\]
+
+\[= \Delta x \left[G_{j- 1/2} \int_{-1}^{1} v_{j - 1/2}v_{j + 1/2} d\xi + G_{j+ 1/2} \int_{-1}^{1} v_{j + 1/2}v_{j + 1/2} d\xi +  G_{j+3/2} \int_{-1}^{1} v_{j + 3/2}v_{j + 1/2} d\xi\right]\]
+
+We have the 
+
+\[\int_{-1}^{1} v_{j - 1/2}v_{j + 1/2} d\xi =  \int_{-1}^{1} v_{j + 3/2}v_{j + 1/2} d\xi = \frac{1}{6}\]
+
+\[\int_{-1}^{1} v_{j + 1/2}v_{j + 1/2} d\xi = \frac{2}{3}\]
+
+\[= \Delta x \left[G_{j- 1/2} \frac{1}{6} + G_{j+ 1/2} \frac{2}{3} +  G_{j+3/2} \frac{1}{6}\right]\]
+
+\[=  \frac{\Delta x}{6} \left[G_{j- 1/2} + 4G_{j+ 1/2} +  G_{j+3/2} \right]\]
+
+Similarly we have
+
+\[- H\int_{x_{j-1/2}}^{x_{j+3/2}} u'v_{j+ 1/2} dx = -\frac{H\Delta x}{6} \left[u_{j- 1/2} + 4u_{j+ 1/2} +  u_{j+3/2} \right] \]
+
+
+
+\[-\frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+3/2}}u'_{x}(v_{j+ 1/2})_{x}dx = -\frac{H^3}{3}\int_{-1}^{1}u'_{\xi}\frac{d \xi }{dx}(v_{j+ 1/2})_{\xi}\frac{d \xi }{dx} \frac{d x}{d\xi} d\xi   \]
+
+\[= -\frac{H^3}{3\Delta x}\int_{-1}^{1}u'_{\xi}(v_{j+ 1/2})_{\xi} d\xi   \]
+
+where $'$ denotes derivative
+\[= -\frac{H^3}{3\Delta x}\int_{-1}^{1}\left(u_{j- 1/2}'v_{j - 1/2}' + u_{j+ 1/2}'v_{j+ 1/2}' +u_{j+ 3/2}'v_{j+ 3/2}' \right)v_{j+ 1/2}' d\xi   \]
+
+\[= -\frac{H^3}{3\Delta x}\left[u_{j- 1/2} \int_{-1}^{1} v_{j - 1/2}'v_{j + 1/2}' d\xi + u_{j+ 1/2} \int_{-1}^{1} v_{j + 1/2}'v_{j + 1/2}' d\xi +  u_{j+3/2} \int_{-1}^{1} v_{j + 3/2}'v_{j + 1/2}' d\xi\right]   \]
+
+We have that 
+
+\[\int_{-1}^{1} v_{j - 1/2}'v_{j + 1/2}' d\xi = -1 = \int_{-1}^{1} v_{j + 3/2}'v_{j + 1/2}' d\xi \]
+
+\[\int_{-1}^{1} v_{j + 1/2}'v_{j + 1/2}' d\xi = 2\]
+
+\[= -\frac{H^3}{3\Delta x}\left[-u_{j- 1/2}  + 2u_{j+ 1/2} -  u_{j+3/2} \right]   \]
+
+Then our equation becomes
+
+\begin{multline}
+\frac{\Delta x}{6} \left[G_{j- 1/2} + 4G_{j+ 1/2} +  G_{j+3/2} \right] = \\ \frac{H\Delta x}{6} \left[u_{j- 1/2} + 4u_{j+ 1/2} +  u_{j+3/2} \right] +  \frac{H^3}{3\Delta x}\left[-u_{j- 1/2}  + 2u_{j+ 1/2} -  u_{j+3/2} \right]
+\end{multline}
+
+\begin{multline}
+\left[G_{j- 1/2} + 4G_{j+ 1/2} +  G_{j+3/2} \right] = \\ H \left[u_{j- 1/2} + 4u_{j+ 1/2} +  u_{j+3/2} \right] +  \frac{2H^3}{\Delta x^2}\left[-u_{j- 1/2}  + 2u_{j+ 1/2} -  u_{j+3/2} \right]
+\end{multline}
+
+This formula is correct for $u= 1,x,x^2$
+
+By shifting we also get
+
+\begin{multline}
+\left[G_{j- 3/2} + 4G_{j-1/2} +  G_{j+1/2} \right] = \\ H \left[u_{j- 3/2} + 4u_{j- 1/2} +  u_{j+1/2} \right] +  \frac{2H^3}{\Delta x^2}\left[-u_{j- 3/2}  + 2u_{j- 1/2} -  u_{j+1/2} \right]
+\end{multline}
+
+\begin{multline}
+\left[G_{j+ 1/2} + 4G_{j+ 3/2} +  G_{j+5/2} \right] = \\ H \left[u_{j+1/2} + 4u_{j+ 3/2} +  u_{j+5/2} \right] +  \frac{2H^3}{\Delta x^2}\left[-u_{j+ 1/2}  + 2u_{j+ 3/2} -  u_{j+5/2} \right]
+\end{multline}
+
+We begin by assuming the analytic structure for $G$ and $u$ (to get easy shift operators).
+Let quantity $q$ is given by so that
+$q(x,t) = q(0,0) e^{i\left(\omega t + kx\right)}$. The use of this comes when we use our uniform grid in space, so that $q(x_j,t) = q_j$ then $q_{j \pm l} = q_j e^{\pm ik l\Delta x} $
+
+Then we have 
+
+\begin{multline}
+\left[G_j e^{- ik \frac{1}{2}\Delta x} + 4G_j e^{ik \frac{1}{2}\Delta x}  +  G_j e^{ik \frac{3}{2}\Delta x}  \right] = \\ H \left[u_j e^{- ik \frac{1}{2}\Delta x} + 4u_j e^{ik \frac{1}{2}\Delta x}  +  u_j e^{ik \frac{3}{2}\Delta x}  \right] +  \frac{2H^3}{\Delta x^2}\left[-u_j e^{- ik \frac{1}{2}\Delta x}  + 2u_j e^{ik \frac{1}{2}\Delta x} -  u_j e^{ik \frac{3}{2}\Delta x} \right]
+\end{multline}
+
+\begin{multline}
+G_j\left[e^{- ik \frac{1}{2}\Delta x} + 4 e^{ik \frac{1}{2}\Delta x}  +  e^{ik \frac{3}{2}\Delta x}  \right] = \\ \left( H \left[e^{- ik \frac{1}{2}\Delta x} + 4 e^{ik \frac{1}{2}\Delta x}  +  e^{ik \frac{3}{2}\Delta x}  \right] +  \frac{2H^3}{\Delta x^2}\left[- e^{- ik \frac{1}{2}\Delta x}  + 2 e^{ik \frac{1}{2}\Delta x} -  e^{ik \frac{3}{2}\Delta x} \right] \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j= \\ \left( H  +  \frac{2H^3}{\Delta x^2}\frac{\left[- e^{- ik \frac{1}{2}\Delta x}  + 2 e^{ik \frac{1}{2}\Delta x} -  e^{ik \frac{3}{2}\Delta x} \right]}{\left[e^{- ik \frac{1}{2}\Delta x} + 4 e^{ik \frac{1}{2}\Delta x}  +  e^{ik \frac{3}{2}\Delta x}  \right]} \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j= \\ \left( H  +  \frac{2H^3}{\Delta x^2}\frac{\left[2i\sin\left(k \frac{1}{2}\Delta x\right) +  e^{ik \frac{1}{2}\Delta x} -  e^{ik \frac{3}{2}\Delta x} \right]}{\left[e^{- ik \frac{1}{2}\Delta x} + 4 e^{ik \frac{1}{2}\Delta x}  +  e^{ik \frac{3}{2}\Delta x}  \right]} \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j= \\ \left( H  +  \frac{2H^3}{\Delta x^2}\frac{2i\sin\left(k \frac{1}{2}\Delta x\right) +  e^{ik\Delta x}\left(e^{-ik \frac{1}{2}\Delta x} -  e^{ik \frac{1}{2}\Delta x} \right) }{\left[e^{- ik \frac{1}{2}\Delta x} + 4 e^{ik \frac{1}{2}\Delta x}  +  e^{ik \frac{3}{2}\Delta x}  \right]} \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j= \\ \left( H  +  \frac{2H^3}{\Delta x^2}\frac{2i\sin\left(k \frac{1}{2}\Delta x\right) -  2ie^{ik\Delta x}\sin\left(k \frac{1}{2}\Delta x\right) }{\left[e^{- ik \frac{1}{2}\Delta x} + 4 e^{ik \frac{1}{2}\Delta x}  +  e^{ik \frac{3}{2}\Delta x}  \right]} \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j= \\ \left( H  +  \frac{2H^3}{\Delta x^2}\frac{2i\sin\left(k \frac{1}{2}\Delta x\right) -  2ie^{ik\Delta x}\sin\left(k \frac{1}{2}\Delta x\right) }{\left[ 2\cos\left(k \frac{1}{2}\Delta x\right)+ 2 e^{ik \frac{1}{2}\Delta x} + e^{ik \frac{1}{2}\Delta x}  +  e^{ik \frac{3}{2}\Delta x}  \right]} \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j= \\ \left( H  +  \frac{2H^3}{\Delta x^2}\frac{2i\sin\left(k \frac{1}{2}\Delta x\right) -  2ie^{ik\Delta x}\sin\left(k \frac{1}{2}\Delta x\right) }{\left[ 2\cos\left(k \frac{1}{2}\Delta x\right)+ 2 e^{ik \frac{1}{2}\Delta x} + 2e^{ik\Delta x}\cos\left(k \frac{1}{2}\Delta x\right)  \right]} \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j= \\ \left( H  +  \frac{2H^3 i}{\Delta x^2}\frac{\sin\left(k \frac{1}{2}\Delta x\right) -  e^{ik\Delta x}\sin\left(k \frac{1}{2}\Delta x\right) }{\left[\cos\left(k \frac{1}{2}\Delta x\right)+ e^{ik \frac{1}{2}\Delta x} + e^{ik\Delta x}\cos\left(k \frac{1}{2}\Delta x\right)  \right]} \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j= \\ \left( H  +  \frac{2H^3 i}{\Delta x^2}\frac{\left(1 -e^{ik\Delta x} \right)\sin\left(k \frac{1}{2}\Delta x\right) }{\left(1  + e^{ik\Delta x} \right)\cos\left(k \frac{1}{2}\Delta x\right)+ e^{ik \frac{1}{2}\Delta x} } \right)u_j
+\end{multline}
+
+So we have
+
+\[\mathcal{G}_{FEM_2} = \left( H  +  \frac{2H^3 i}{\Delta x^2}\frac{\left(1 -e^{ik\Delta x} \right)\sin\left(k \frac{1}{2}\Delta x\right) }{\left(1  + e^{ik\Delta x} \right)\cos\left(k \frac{1}{2}\Delta x\right)+ e^{ik \frac{1}{2}\Delta x} } \right) \]
+
+With taylor expansion
+
+\[\mathcal{G}_{FEM_2} = H + \frac{H^3k^2}{3} + O(\Delta x ^2)\]
+
+as desired.
+
+
+\end{document}

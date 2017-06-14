@@ -1,0 +1,40 @@
+\documentclass[]{article} 
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+ \usepackage{amsmath} 
+  \usepackage{pgfplots} 
+ \usetikzlibrary{calc} 
+\pgfplotsset{compat = newest,every x tick label/.append style={font=\scriptsize},every y tick label/.append style={font=\scriptsize}, every axis plot post/.style={line join=round}}\begin{document} 
+ \begin{tikzpicture} 
+ \begin{axis}[ 
+ ylabel near ticks,
+ xlabel near ticks, 
+yticklabel style={/pgf/number format/fixed,/pgf/number format/precision=5,}, 
+xtick={0,200,400,600,800,1000}, 
+ytick={0.8,1.0,1.2,1.4,1.6,1.8,2.0}, 
+scaled y ticks=false, 
+ clip mode=individual,
+  xmin=0, 
+ xmax=1000, 
+ ymin = 0.8, 
+  ymax = 2,
+xlabel=$x$ ($m$), 
+ ylabel=$h$ ($m$)]
+
+\addplot [black] table {h.dat};
+
+\node[label={($h_1$,$0$)}] at (110,1.76){};
+
+\node[label={($h_2$,$u_2$)}] at (510,1.33){};
+
+\node[label={($h_0$,$0$)}] at (900,0.96){};
+
+\node[label={$S_2$}] at (748,1.17){};
+\draw [->] (710,1.19) -- (790,1.19);
+
+\end{axis} 
+ \end{tikzpicture} 
+ \end{document} 
+ 

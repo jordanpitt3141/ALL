@@ -1,0 +1,92 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{psfrag}
+\usepackage{pifont}
+\usepackage{epstopdf}
+\usepackage{lscape}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage{geometry}
+\usepackage{fleqn}
+\usepackage{txfonts}
+\usepackage{wasysym}
+\usepackage{lineno}
+\usepackage{enumerate}
+\usepackage{url}
+\usepackage{times}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{longtable}
+
+\begin{document}
+
+%--------------------------------------------------------------------------------
+\section{Method for $\mathcal{A}$}
+%--------------------------------------------------------------------------------
+Fourth order centered difference approximation
+\begin{linenomath*}
+	\begin{gather}
+	\begin{split}
+	G_i = u_ih_i - h_i^2 \left(\dfrac{-h_{i+2} + 8h_{i+1} - 8h_{i-1} + h_{i-2}}{12\Delta x}\right) \left(\dfrac{-u_{i+2} + 8u_{i+1} - 8u_{i-1} + u_{i-2}}{12\Delta x}\right) \\ - \frac{h_i^3}{3} \left(\dfrac{-u_{i+2} + 16u_{i+1} - 30u_{i} + 16u_{i-1} - u_{i-2}}{12\Delta x^2}\right).
+	\end{split}
+	\end{gather}
+	\label{eq:Gfourthord}
+\end{linenomath*}
+Can be rearranged into a matrix equation with the following form 
+\begin{linenomath*}
+	\begin{gather*}
+	\left[\begin{array}{c}
+	G_0 \\
+	\vdots \\
+	G_m \end{array}\right]
+	= A \left[\begin{array}{c}
+	u_0 \\
+	\vdots \\
+	u_m \end{array}\right].
+	\end{gather*}
+\end{linenomath*}
+Where
+\begin{linenomath*}
+	\begin{gather*}
+	A =
+	\left[\begin{array}{ccccccccc}
+	c_0 & d_0 & e_0 & 0 & \dotsm & \dotsm & \dotsm & \dotsm & 0 \\
+	b_1 & c_1 & d_1 & e_1 & 0 & \dotsm & \dotsm & \dotsm & 0 \\
+	a_2 & b_2 & c_2 & d_2 & e_2 & 0 & \dotsm & \dotsm & 0  \\
+	0 & a_3 & b_3 & c_3 & d_3 & e_3 & 0 & \dotsm & 0  \\
+	\vdots &  &\ddots &\ddots &\ddots &\ddots &\ddots &  & \vdots \\
+	0 & \dotsm & 0 & a_{m-3} & b_{m-3} & c_{m-3} & d_{m-3} & e_{m-3} & 0 \\
+	0 & \dotsm & \dotsm & 0 & a_{m-2} & b_{m-2} & c_{m-2} & d_{m-2} & e_{m-2} \\
+	0 & \dotsm & \dotsm & \dotsm & 0 & a_{m-1} & b_{m-1} & c_{m-1} & d_{m-1} \\
+	0 & \dotsm & \dotsm & \dotsm & \dotsm & 0 & a_{m} & b_{m} & c_{m}\\
+	\end{array}\right]
+	\end{gather*}
+\end{linenomath*}
+For a fourth-order scheme these are given by
+\begin{subequations}
+	\begin{gather}
+	a_i = -\left(\dfrac{-h_{i+2} + 8 h_{i+1} - 8 h_{i-1} + h_{i-2}}{144 \Delta x^2}\right)h^2_i + \dfrac{h^3_i}{36 \Delta x^2},
+	\label{eq:fourthoa}
+	\end{gather}
+	\begin{gather}
+	b_i = 8\left(\dfrac{-h_{i+2} + 8 h_{i+1} - 8 h_{i-1} + h_{i-2}}{144 \Delta x^2}\right)h^2_i - 16\dfrac{h^3_i}{36 \Delta x^2},
+	\label{eq:fourthob}
+	\end{gather}
+	\begin{gather}
+	c_i = h_i +\dfrac{30h_i^3}{36\Delta x^2},
+	\label{eq:fourthoc}
+	\end{gather}
+	\begin{gather}
+	d_i = -8\left(\dfrac{-h_{i+2} + 8 h_{i+1} - 8 h_{i-1} + h_{i-2}}{144 \Delta x^2}\right)h^2_i - 16\dfrac{h^3_i}{36 \Delta x^2},
+	\label{eq:fourthod}
+	\end{gather}
+	\begin{gather}
+	e_i = \left(\dfrac{-h_{i+2} + 8 h_{i+1} - 8 h_{i-1} + h_{i-2}}{144 \Delta x^2}\right)h^2_i + \dfrac{h^3_i}{36 \Delta x^2}.
+	\label{eq:fourthoe}
+	\end{gather}
+\end{subequations}
+%------------------------
+\end{document}

@@ -1,0 +1,13 @@
+\documentclass[]{article}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepgfplotslibrary{external}
+\tikzexternalize
+\pgfplotsset{compat = newest, every axis plot post/.style={
+        line join=round
+    }}
+
+\begin{document}
+\input{o3.tikz}
+\end{document}

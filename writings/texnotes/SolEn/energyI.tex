@@ -1,0 +1,59 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Energy in DB}
+
+\[\mathcal{H} (t) = \frac{1}{2}\int_{-\infty}^{\infty} hu^2 + gh^2 + \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2\, dx \]
+
+For the Soliton at $t = 0 $
+
+\[h(x,0) = a_0 + a_1 sech^2\left(\kappa x\right)\]
+\[u(x,0) = c\left(1 - \frac{a_0}{a_0 + a_1 sech^2\left(\kappa x\right)}\right)\]
+
+
+\begin{gather}
+\kappa = \dfrac{\sqrt{3a_1}}{2a_0 \sqrt{ a_0 + a_1}}
+\end{gather}
+and
+\begin{gather}
+c = \sqrt{g \left(a_0 + a_1\right)}
+\end{gather}
+
+For $a_0 = 1.0$,  $a_1 = 0.7$, $g = 9.81$
+
+\[\kappa = \dfrac{\sqrt{2.1}}{2 \sqrt{ 1.7}}\]
+\[\kappa = \sqrt{\dfrac{21}{68}}\]
+
+\[c = \sqrt{9.81 \left(1.7\right)}\]
+\[c = \sqrt{16.677}\]
+
+\[h(x,0) = 1 + 0.7 sech^2\left(\sqrt{\dfrac{21}{68}}x\right)\]
+
+\[u(x,t) = \sqrt{16.677}\left(1 - \frac{1}{1+ 0.7 sech^2\left(\sqrt{\dfrac{21}{68}} x\right)}\right)\]
+
+\[\frac{\partial }{\partial x}u(x,t) = -\frac{3.17718 \tanh\left(\sqrt{\frac{21}{68}} x\right)\text{sech}^2\left(\sqrt{\frac{21}{68}} x\right)}{\left(1+ 0.7 sech^2\left(\sqrt{\dfrac{21}{68}} x\right) \right)^2}\]
+
+Using Wolfram
+
+
+\[\int gh^2  dx = 9.81x + \tanh\left(0.555719 x\right)\left(2.88329 \text{sech}^2\left(0.555719 x\right) + 30.4805\right)  \]
+
+\[\int hu^2 \, dx = 21.0068\tanh\left(0.555719 x\right) - 19.2569\tanh^{-1}\left(0.641689 \tanh\left(0.555719 x\right)\right) \]
+
+\begin{multline}
+\int \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2\,  dx  \\
+= 307.641 \Bigg(\tanh\left(0.55719 x\right)\left(0.049539 - 0.00937224\text{sech}^2\left(0.555719 x\right)\right) \\  - 0.0625954\tanh^{-1}\left(0.641689 \tanh\left(0.555719 x\right)\right) \Bigg)
+\end{multline}
+
+
+
+
+
+
+\end{document}

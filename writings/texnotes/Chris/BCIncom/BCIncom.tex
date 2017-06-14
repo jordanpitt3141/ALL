@@ -1,0 +1,136 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+
+
+\section{Linearised Equations}
+
+We begin with the linearised equations from Chris's thesis/papers.
+
+
+continuity:
+
+\[\frac{\partial  h_1}{\partial  t} + h_0\frac{\partial  u_1}{\partial  x} + u_0\frac{\partial  h_1}{\partial  x} = 0 \]
+
+velocity:
+
+\[\frac{\partial  u_1}{\partial  t} + g\frac{\partial  h_1}{\partial  x} + u_0\frac{\partial  u_1}{\partial  x} - \frac{h_0^2}{3}\left(u_0\frac{\partial^3  u_1}{\partial  x^3} + \frac{\partial^3  u_1}{\partial  x^3 \partial  t}  \right)  = 0 \]
+
+Also G
+
+\[G = u_0h_0 + u_0h_1 + h_0u_1 -\frac{h_0^3}{3} \frac{\partial^2 u_1}{\partial x^2}\]
+
+Now for simplicity, and because its all we need, we assume the water is still (except for the pertubations) so that $u_0 = 0$ thus we get:
+
+\[\frac{\partial  h_1}{\partial  t} + h_0\frac{\partial  u_1}{\partial  x} = 0 \]
+
+\[\frac{\partial  u_1}{\partial  t} + g\frac{\partial  h_1}{\partial  x}  - \frac{h_0^2}{3} \frac{\partial^3  u_1}{\partial  x^3 \partial  t}   = 0 \]
+
+\[G = h_0u_1 -\frac{h_0^3}{3} \frac{\partial^2 u_1}{\partial x^2}\]
+
+Importantly by multiplying the velocity by $h_0$ to get the momentum equation we have
+
+\[\frac{\partial  u_1}{\partial  t}h_0 + g\frac{\partial  h_1}{\partial  x}h_0  - \frac{h_0^3}{3} \frac{\partial^3  u_1}{\partial  x^3 \partial  t}   = 0 \]
+
+and thus
+
+\[\frac{\partial  G}{\partial  t} + g\frac{\partial  h_1}{\partial  x}h_0   = 0 \]
+
+So we finally have 
+
+\[\frac{\partial  h_1}{\partial  t} + h_0\frac{\partial  u_1}{\partial  x} = 0 \]
+
+\[\frac{\partial  G}{\partial  t} + g\frac{\partial  h_1}{\partial  x}h_0   = 0 \]
+
+\[G = h_0u_1 -\frac{h_0^3}{3} \frac{\partial^2 u_1}{\partial x^2}\]
+
+For convenience I will make the following notational changes $H = h_0$, $h = h_1$ and $u = u_1$ . So that 
+
+\[\frac{\partial  h}{\partial  t} + H\frac{\partial  u}{\partial  x} = 0 \]
+
+\[\frac{\partial  G}{\partial  t} + gH\frac{\partial  h}{\partial  x}   = 0 \]
+
+\[G = Hu -\frac{H^3}{3} \frac{\partial^2 u}{\partial x^2}\]
+
+We know that the dispersion relation is given by
+
+\[\omega =  \pm k\sqrt{gH}\sqrt{\frac{3}{k^2H^2 + 3}}\]
+
+\section{Source Term in Mass Equation}
+
+We introduce a source term to the mass equation to get
+
+\[h_t + Hu_x = f(x,t) \]
+
+\[u_tH + gHh_x - \frac{H^3}{3} u_{xxt}   = 0 \]
+
+\[G = Hu -\frac{H^3}{3} \frac{\partial^2 u}{\partial x^2}\]
+
+We introduce a velocity potential $u = \Phi_x$ so
+
+\[h_t + H\Phi_{xx} = f(x,t) \]
+\[\Phi_{tx}H + gHh_x - \frac{H^3}{3} \Phi_{xxtx}   = 0 \]
+
+So the equations become
+
+\[h_t + H\Phi_{xx} = f(x,t) \]
+\[\Phi_{t}H + gHh - \frac{H^3}{3} \Phi_{xxt}   = 0 \]
+
+So
+
+\[h = \frac{\frac{H^3}{3} \Phi_{xxt} - \Phi_{t}H}{gH} \]
+
+Subbing this into the continuity equation this becomes
+
+\[\left[\frac{\frac{H^2}{3} \Phi_{xxt} - \Phi_{t}}{g}\right]_t + H\Phi_{xx} = f(x,t) \]
+
+\[\frac{1}{g}\left[{\frac{H^2}{3} \Phi_{xxtt} - \Phi_{tt}}\right]+ H\Phi_{xx} = f(x,t) \]
+
+So 
+
+\[ \Phi_{tt} - \frac{H^2}{3} \Phi_{xxtt} - gH\Phi_{xx} = -gf(x,t) \]
+
+We assume that things are nice enough to perform fourier transforms on $\Phi$ and $f$ and we get that
+
+\[\Phi(x,t) = \frac{1}{2 \pi} \int_{-\infty}^{\infty} \hat{\Phi}(x,\omega) \exp\left(-i\omega t\right) \; d\omega\]
+
+\[f(x,t) = \frac{1}{2 \pi} \int_{-\infty}^{\infty} \hat{f}(x,\omega) \exp\left(-i\omega t\right) \; d\omega\]
+
+\[  \omega^2\hat{\Phi} - \frac{H^2}{3} \omega^2\hat{\Phi}'' - gH\hat{\Phi}''= -g\hat{f}(x,t) \]
+
+\[  \omega^2\hat{\Phi} - \left[ \frac{H^2}{3} \omega^2 + gH\right]\hat{\Phi}''= -g\hat{f}(x,t) \]
+
+So from here, its more clear that we have the same equations as them but with $\alpha = 1/3$ So that we have the solution.
+
+\[\hat{\Phi} = \int_{-\infty}^{\infty} G(x,x')g\hat{f}(x) dx'\]
+\[ = \int_{-\infty}^{x} G_+(x,x')g\hat{f}(x) dx' + \int_{x}^{\infty} G_-(x,x')g\hat{f}(x) dx' \]
+
+where
+
+\[G(x,x') = \left\lbrace \begin{array}{c c}
+ae^{il(x - x')} & x > x' \\ ae^{il(x' - x)} & x < x'
+\end{array} \right.\]
+
+\subsection{Their Example}
+
+\[\hat{f} = D \exp\left(-\beta x^2\right)\]
+
+which gives
+
+\[\hat{\Phi} = gDaI_1 \exp\left(ilx\right)\]
+
+\[D = \frac{2 \eta_0 \omega}{I_1 k(1 - \alpha(kh)^2)}\]
+
+\[I_1= \sqrt{\frac{\pi}{\beta}} \exp\left( - \frac{l^2}{4\beta}\right)\]
+
+
+
+
+
+
+
+
+\end{document}

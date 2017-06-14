@@ -1,0 +1,59 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Serre Equations}
+
+The Serre Equations read
+(height/mass)
+\[\frac{\partial h}{\partial t} + \frac{\partial uh}{\partial x} = 0 \]
+
+Phi
+\[\Phi = \frac{\partial b}{\partial x}\left(u \frac{\partial u}{\partial x}\right) + u^2 \frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}\frac{\partial u}{\partial t}\]
+
+Gamma
+\[\Gamma = \left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\]
+
+Pressure
+\[p|_\xi = p_a + \rho g \xi + \frac{\rho}{2}\xi\left(2h - \xi\right)\Gamma + \rho \xi \Phi \]
+
+
+Momentum(velocity)
+x
+\[ \frac{\partial (uh)}{\partial t} + \frac{\partial}{\partial x}\left(u^2 h + \frac{gh^2}{2} + \frac{h^3}{3}\Gamma + \frac{h^2}{2} \Phi\right) + h \frac{\partial b}{\partial x}\left(g + \frac{h}{2}\Gamma + \Phi\right) = 0\]
+
+z
+\[w|_z = \frac{z - b}{h} \frac{\partial h}{\partial t} + u \frac{\partial b}{\partial x}\]
+
+
+For a flat bottom we have
+
+\[\frac{\partial h}{\partial t} + \frac{\partial uh}{\partial x} = 0 \]
+
+\[h_t + uh_x + hu_x = 0 \]
+
+\[ \frac{\partial (uh)}{\partial t} + \frac{\partial}{\partial x}\left(u^2 h + \frac{gh^2}{2} + \frac{h^3}{3}\left[\left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\right]\right)  = 0\]
+
+\[u_th + u h_t + 2uhu_x + u^2h_x + ghh_x  + \frac{\partial}{\partial x}\left( \frac{h^3}{3}\left[\left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\right]\right)  = 0\]
+
+\[u_th + u \left(-u_xh - uh_x\right) + 2uhu_x + u^2h_x + ghh_x  + \frac{\partial}{\partial x}\left( \frac{h^3}{3}\left[\left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\right]\right)  = 0\]
+
+\[u_th  + uhu_x + ghh_x  + \frac{\partial}{\partial x}\left( \frac{h^3}{3}\left[\left(\frac{\partial u}{\partial x} \right)^2 - u \left(\frac{\partial^2 u}{\partial x^2} \right) - \left(\frac{\partial^2 u}{\partial x \partial t} \right)\right]\right)  = 0\]
+
+\[u_th  + uhu_x + ghh_x  + h^2 h_x \left[u_x^2 - uu_{xx} -u_{xt}\right] + \frac{h^3}{3} \frac{\partial}{\partial x}\left[u_x^2 - uu_{xx} -u_{xt}\right]  = 0\]
+
+\[u_th  + uhu_x + ghh_x  + h^2 h_x \left[u_x^2 - uu_{xx} -u_{xt}\right] + \frac{h^3}{3} \left[2u_xu_{xx} -u_xu_{xx} - uu_{xxx} -u_{xtx}\right]  = 0\]
+ Remove factor of $h$
+ 
+ \[u_t  + uu_x + gh_x  + h h_x \left[u_x^2 - uu_{xx} -u_{xt}\right] + \frac{h^2}{3} \left[u_xu_{xx} - uu_{xxx} -u_{xtx}\right]  = 0\]
+ 
+Venezian, 1974,1975,1976, (Basco)
+
+
+
+\end{document}

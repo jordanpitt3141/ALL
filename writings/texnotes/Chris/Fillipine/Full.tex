@@ -1,0 +1,408 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+
+
+\section{Linearised Equations}
+
+We begin with the linearised equations from Chris's thesis/papers.
+
+
+continuity:
+
+\[\frac{\partial  h_1}{\partial  t} + h_0\frac{\partial  u_1}{\partial  x} + u_0\frac{\partial  h_1}{\partial  x} = 0 \]
+
+velocity:
+
+\[\frac{\partial  u_1}{\partial  t} + g\frac{\partial  h_1}{\partial  x} + u_0\frac{\partial  u_1}{\partial  x} - \frac{h_0^2}{3}\left(u_0\frac{\partial^3  u_1}{\partial  x^3} + \frac{\partial^3  u_1}{\partial  x^3 \partial  t}  \right)  = 0 \]
+
+Also G
+
+\[G = u_0h_0 + u_0h_1 + h_0u_1 -\frac{h_0^3}{3} \frac{\partial^2 u_1}{\partial x^2}\]
+
+Now in the Fillipine paper, we assume the water is still (except for the pertubations) so that $u_0 = 0$ thus we get:
+
+\[\frac{\partial  h_1}{\partial  t} + h_0\frac{\partial  u_1}{\partial  x} = 0 \]
+
+\[\frac{\partial  u_1}{\partial  t} + g\frac{\partial  h_1}{\partial  x}  - \frac{h_0^2}{3} \frac{\partial^3  u_1}{\partial  x^3 \partial  t}   = 0 \]
+
+\[G = h_0u_1 -\frac{h_0^3}{3} \frac{\partial^2 u_1}{\partial x^2}\]
+
+Importantly by multiplying the velocity by $h_0$ to get the momentum equation we have
+
+\[\frac{\partial  u_1}{\partial  t}h_0 + g\frac{\partial  h_1}{\partial  x}h_0  - \frac{h_0^3}{3} \frac{\partial^3  u_1}{\partial  x^3 \partial  t}   = 0 \]
+
+and thus
+
+\[\frac{\partial  G}{\partial  t} + g\frac{\partial  h_1}{\partial  x}h_0   = 0 \]
+
+So we finally have 
+
+\[\frac{\partial  h_1}{\partial  t} + h_0\frac{\partial  u_1}{\partial  x} = 0 \]
+
+\[\frac{\partial  G}{\partial  t} + g\frac{\partial  h_1}{\partial  x}h_0   = 0 \]
+
+\[G = h_0u_1 -\frac{h_0^3}{3} \frac{\partial^2 u_1}{\partial x^2}\]
+
+For convenience I will make the following notational changes $H = h_0$, $h = h_1$ and $u = u_1$ . So that 
+
+\[\frac{\partial  h}{\partial  t} + H\frac{\partial  u}{\partial  x} = 0 \]
+
+\[\frac{\partial  G}{\partial  t} + gH\frac{\partial  h}{\partial  x}   = 0 \]
+
+\[G = Hu -\frac{H^3}{3} \frac{\partial^2 u}{\partial x^2}\]
+
+\section{Dispersion Error}
+To perform the dispersion error we replace both $h$ and $u$ by fourier modes, which for some quantity $q$ is given by so that
+$q(x,t) = q(0,0) e^{i\left(\omega t + kx\right)}$. The use of this comes when we use our uniform grid in space, so that $q(x_j,t) = q_j$ then $q_{j \pm l} = q_j e^{\pm ik l\Delta x} $ and we use this to work with just a point and then factors. 
+
+\subsection{Elliptic Equation}
+
+I will start by analysing the dispersion error on the elliptic equation
+
+\[G_j = Hu_j -\frac{H^3}{3} \left(\frac{\partial^2 u}{\partial x^2}\right)_j\]
+
+For the different order schemes we approximate the derivative of $u$ differently. For the first and second order method we use second order central differencing so that
+
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \frac{u_{j+1} - 2u_{j} + u_{j-1}}{\Delta x^2}\]
+
+for the third order method we use 4th order central differencing so that
+
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \frac{-u_{j+2} + 16u_{j+1} - 30u_{j} + 16u_{j-1} -u_{j-2}}{12\Delta x^2}\]
+
+Using our relations from above for the second order central difference
+
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \frac{u_{j} e^{ik\Delta x} - 2u_{j} + u_{j}e^{-ik\Delta x}}{\Delta x^2}\]
+
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \frac{ e^{ik\Delta x} - 2 + e^{-ik\Delta x}}{\Delta x^2} u_{j}\]
+
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2} u_{j}\]
+
+We introduce the following notation:
+
+\[\mathcal{C}_2 = \frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\]
+
+thus 
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \mathcal{C}_2 u_{j}\]
+
+This agrees with the a result in the Fillipine paper.
+
+For the fourth order central difference 
+
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \frac{-u_{j}e^{2ik\Delta x}  + 16u_{j}e^{ik\Delta x}  - 30u_{j} + 16u_{j}e^{-ik\Delta x}  -u_{j}e^{-2ik\Delta x} }{12\Delta x^2}\]
+
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \frac{-e^{2ik\Delta x}  + 16e^{ik\Delta x}  - 30 + 16e^{-ik\Delta x}  -e^{-2ik\Delta x} }{12\Delta x^2} u_{j}\]
+
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \frac{-2\cos\left(2k\Delta x\right) + 32\cos\left(k\Delta x\right)  - 30 }{12\Delta x^2} u_{j}\]
+
+We introduce the following notation:
+
+\[\mathcal{C}_4 = \frac{-2\cos\left(2k\Delta x\right) + 32\cos\left(k\Delta x\right)  - 30 }{12\Delta x^2}\]
+
+thus 
+\[ \left(\frac{\partial^2 u}{\partial x^2}\right)_j = \mathcal{C}_4 u_{j}\]
+
+An easy way to check this is to see how well this relaiton holds $k^2 \approx \mathcal{C}_4 $ as well as what happens as $\Delta x \rightarrow 0$. Both of these check out for these approximations so we continue. 
+
+Thus
+
+\[G_j = Hu_j -\frac{H^3}{3} \mathcal{C}u_j\]
+
+(we leave the order ambigious here)
+
+Thus 
+
+\[G_j = \left[H -\frac{H^3}{3} \mathcal{C}\right]u_j\]
+
+We define:
+\[\mathcal{G} = \left[H -\frac{H^3}{3} \mathcal{C}\right]\]
+
+In particular for the first($\mathcal{G}_1$) and second($\mathcal{G}_2$) order we use $\mathcal{C}_2$, while for the third ($\mathcal{G}_3$) order we use $\mathcal{C}_4$ as $\mathcal{C}$.
+
+Thus 
+
+\[G_j = \mathcal{G}u_j\]
+
+\subsection{Conservation Equations}
+
+\[\frac{\partial  h}{\partial  t} + H\frac{\partial  u}{\partial  x} = 0 \]
+
+\[\frac{\partial  G}{\partial  t} + gH\frac{\partial  h}{\partial  x}   = 0 \]
+
+Our analysis has continuous time, so we can do this time derivatives properly 
+
+\[i\omega h + H\frac{\partial  u}{\partial  x} = 0 \]
+
+Since $G$ is some factor times u we can do this to $G$ as well [pretty lax on this, but yes it would, we could derive a space continuous factor similar to above]
+
+\[ i\omega G_j + gH\frac{\partial  h}{\partial  x}   = 0 \]
+
+For our method we approximate the flux, and not the individual derivative terms so we get
+
+\[i\omega h_j + \frac{1}{\Delta x}\left[F^h_{j + \frac{1}{2}} - F^h_{j - \frac{1}{2}}\right] = 0 \]
+
+\[i\omega G_j + \frac{1}{\Delta x}\left[F^u_{j + \frac{1}{2}} - F^u_{j - \frac{1}{2}}\right] = 0 \]
+
+where $F^h$ and $F^u$ are given by Kurganovs method. WE also use the cell averages for that time derivative term, so that 
+
+\[ i\omega \mathcal{G} \bar{u} + gH\frac{\partial  h}{\partial  x}   = 0 \]
+
+For our method we approximate the flux, and not the individual derivative terms so we get
+
+\[i\omega \bar{h}_j + \frac{1}{\Delta x}\left[F^h_{j + \frac{1}{2}} - F^h_{j - \frac{1}{2}}\right] = 0 \]
+
+\[i\omega \bar{G}_j + \frac{1}{\Delta x}\left[F^u_{j + \frac{1}{2}} - F^u_{j - \frac{1}{2}}\right] = 0 \]
+
+[should have made this clear earlier, since the average is an integral it comes out as a factor anyway, but what we are interested in is the numerical factor from conversion].
+
+For the first and second order methods this distinction is trivial, for the third order method we have the following relation
+\[q_{j} =\frac{-\bar{q}_{j+1} +26\bar{q}_{j}  -\bar{q}_{j-1}}{24} \]
+
+\[q_{j} = \bar{q}_{j}\frac{-e^{ik\Delta x} +26  -e^{-ik\Delta x}}{24} \]
+
+\[q_{j} = \bar{q}_{j}\frac{26  -2\cos\left(k\Delta x\right)}{24} \]
+
+Defining
+\[\mathcal{M}_3= \frac{26  -2\cos\left(k\Delta x\right)}{24}\]
+
+We again will suppress order subscripts further on, but we also have $\mathcal{M}_1 = \mathcal{M}_2 = 1$.
+So we have 
+
+\[i\omega \mathcal{M}h_j + \frac{1}{\Delta x}\left[F^h_{j + \frac{1}{2}} - F^h_{j - \frac{1}{2}}\right] = 0 \]
+
+\[i\omega \mathcal{M} \mathcal{G}u_j + \frac{1}{\Delta x}\left[F^u_{j + \frac{1}{2}} - F^u_{j - \frac{1}{2}}\right] = 0 \]
+
+Now the only thing that changes between the different orders for the calculation of the flux is the reconstruction process. 
+\subsubsection{Reconstruction}
+
+For the first order method
+
+\[q^+_{j + 1/2} = q_{j+1} = e^{ik\Delta x} q_j\]
+
+\[q^-_{j + 1/2} = q_{j}\]
+
+So we define $\mathcal{R}^+_1 =  e^{ik\Delta x}$ and $\mathcal{R}^-_1 =  1$. 
+
+For the second order method we have 
+
+\[q^-_{j + 1/2} = q_j + \frac{q_{j+1} - q_{j-1}}{4}\]
+\[q^+_{j + 1/2} = q_{j+1} + \frac{q_{j+2} - q_{j}}{4}\]
+
+Applying our fourier mode
+
+\[q^-_{j + 1/2} = q_j + \frac{q_{j}e^{ik\Delta x} - q_{j}e^{-ik\Delta x}}{4}\]
+
+\[q^-_{j + 1/2} = q_j\left(1  + \frac{e^{ik\Delta x} - e^{-ik\Delta x}}{4} \right)\]
+
+\[q^-_{j + 1/2} = q_j\left(1  + \frac{2i\sin\left(k\Delta x\right)}{4} \right)\]
+
+\[q^-_{j + 1/2} = q_j\left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+for the plus we get the same result with a shift so that (because its around j+1) and a minus
+
+\[q^+_{j + 1/2} = q_j e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+So we have that
+\[\mathcal{R}_2^- = 1  + \frac{i\sin\left(k\Delta x\right)}{2}\]
+\[\mathcal{R}_2^+ = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+For the third order method we have 
+
+\[q^-_{j + 1/2} = \bar{q}_j + \frac{1}{6}\left( \bar{q}_j - \bar{q}_{j-1}\right) + \frac{1}{3}\left( \bar{q}_{j+1} - \bar{q}_{j}\right)\]
+\[q^+_{j + 1/2} = \bar{q}_{j+1} - \frac{1}{3}\left( \bar{q}_{j+1} - \bar{q}_{j}\right) - \frac{1}{6}\left( \bar{q}_{j+2} - \bar{q}_{j+1}\right)\]
+
+
+So we have
+
+\[q^-_{j + 1/2} =\mathcal{M}_3\left[q_j + \frac{1}{6}\left( q_j - q_{j-1}\right) + \frac{1}{3}\left( q_{j+1} - q_{j}\right)\right]\]
+
+\[q^-_{j + 1/2} =\mathcal{M}_3q_j\left[1 + \frac{1}{6}\left( 1 - e^{-ik\Delta x}\right) + \frac{1}{3}\left( e^{ik\Delta x} - 1\right)\right]\]
+
+\[q^-_{j + 1/2} =\mathcal{M}_3q_j\left[\frac{5}{6} + \frac{1}{6}\left( - e^{-ik\Delta x}\right) + \frac{1}{3}\left( e^{ik\Delta x} \right)\right]\]
+
+\[q^-_{j + 1/2} =\frac{\mathcal{M}_3}{6}\left[5 +  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]q_j\]
+
+So defining 
+\[R_3^-= \frac{\mathcal{M}_3}{6}\left[5 +  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\]
+
+
+for plus 
+
+\[q^+_{j + 1/2} =\mathcal{M}_3\left[ q_{j+1} - \frac{1}{3}\left( q_{j+1} - q_{j}\right) - \frac{1}{6}\left( q_{j+2} - q_{j+1}\right) \right]\]
+
+\[q^+_{j + 1/2} =\mathcal{M}_3\left[1 - \frac{1}{3}\left(1 - e^{-k\Delta x}\right) - \frac{1}{6}\left( e^{k\Delta x} - 1\right) \right]  q_{j+1}\]
+
+\[q^+_{j + 1/2} =\mathcal{M}_3\left[\frac{5}{6} + \frac{1}{3}e^{-k\Delta x} - \frac{1}{6} e^{k\Delta x} \right]  q_{j+1}\]
+
+\[q^+_{j + 1/2} = \frac{\mathcal{M}_3}{6}\left[5 + 2e^{-k\Delta x} - e^{k\Delta x} \right]  q_{j+1}\]
+
+\[q^+_{j + 1/2} = \frac{\mathcal{M}_3 e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]  q_{j}\]
+
+Defining
+
+\[R_3^+= \frac{\mathcal{M}_3 e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\] 
+
+
+So for the reconstruction we have 
+
+\[q^-_{j + 1/2} = \mathcal{R}^- q_j\]
+\[q^+_{j + 1/2} = \mathcal{R}^+ q_j\]
+
+Actually, we do reconstruction of u differently.
+
+For the first and second order method
+
+\[u^-_{j + 1/2} = u^+_{j + 1/2} = \frac{u_{j+1} + u_{j}}{2}\]
+
+\[u^-_{j + 1/2} = \frac{u_{j}e^{ik\Delta x } + u_{j}}{2} =  \frac{e^{ik\Delta x } + 1}{2} u_{j}\]
+
+so we define 
+\[R^u_2 = \frac{e^{ik\Delta x } + 1}{2} \]
+
+For the third order method we use
+
+\[u^-_{j + 1/2} = u^+_{j + 1/2} = \frac{-3u_{j+2} + 27u_{j+1} + 27u_{j} - 3u_{j-1}}{48}\]
+
+\[u^-_{j + 1/2}  = \frac{-3e^{2ik\Delta x } + 27e^{ik\Delta x } + 27 - 3e^{-ik\Delta x }}{48} u_j\]
+[We could probably do something smarter here]
+so we define 
+\[R^u_3 = \frac{-3e^{2ik\Delta x } + 27e^{ik\Delta x } + 27 - 3e^{-ik\Delta x }}{48}\]
+
+\subsubsection{Kurganovs Method}
+Up to the order of our linearisation we can just use the background wavespeed, instead of the wavespeed at a point so that
+
+\[a^-_{j+ 1/2} =  - \sqrt{g H}\]
+
+\[a^+_{j+ 1/2} = \sqrt{g H}\]
+
+
+We have that 
+
+\begin{gather}\label{eq:HLL_flux}
+F_{i+\frac{1}{2}} = \dfrac{a^+_{i+\frac{1}{2}} f\left(q^-_{i+\frac{1}{2}}\right) - a^-_{i+\frac{1}{2}} f\left(q^+_{i+\frac{1}{2}}\right)}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}}  + \dfrac{a^+_{i+\frac{1}{2}} \, a^-_{i+\frac{1}{2}}}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
+\end{gather}
+
+\begin{multline}
+F_{i+\frac{1}{2}} = \dfrac{\left(\sqrt{g H}\right) f\left(q^-_{i+\frac{1}{2}}\right) - \left( - \sqrt{g H}\right) f\left(q^+_{i+\frac{1}{2}}\right)}{\left(\sqrt{g H}\right) - \left( - \sqrt{g H}\right)} \\ + \dfrac{\left( \sqrt{g H}\right) \, \left( - \sqrt{g H}\right)}{\left( + \sqrt{g H}\right) - \left( - \sqrt{g H}\right)} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
+\end{multline}
+
+\begin{multline}
+F_{i+\frac{1}{2}} = \dfrac{\left(+ \sqrt{g H}\right) f\left(q^-_{i+\frac{1}{2}}\right) - \left( - \sqrt{g H}\right) f\left(q^+_{i+\frac{1}{2}}\right)}{ 2\sqrt{g H}} \\ + \dfrac{\left( + \sqrt{g H}\right) \, \left( - \sqrt{g H}\right)}{{ 2\sqrt{gH}}} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
+\end{multline}
+
+\begin{multline}
+F_{i+\frac{1}{2}} = \dfrac{\left(+ \sqrt{g H}\right) f\left(q^-_{i+\frac{1}{2}}\right) - \left( - \sqrt{g H}\right) f\left(q^+_{i+\frac{1}{2}}\right)}{ 2\sqrt{g H}} \\ + \dfrac{ - g H}{ 2\sqrt{gH}} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
+\end{multline}
+
+\begin{multline}
+F_{i+\frac{1}{2}} = \dfrac{ f\left(q^-_{i+\frac{1}{2}}\right) + f\left(q^+_{i+\frac{1}{2}}\right)}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \dfrac{ f\left(q^-_{j+\frac{1}{2}}\right) + f\left(q^+_{j+\frac{1}{2}}\right)}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
+\end{multline}
+
+For the mass equation $f = Hu$
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \dfrac{ Hu^-_{j+\frac{1}{2}} + Hu^+_{j+\frac{1}{2}}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ h^+_{j+\frac{1}{2}} - h^-_{j+\frac{1}{2}} \right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \dfrac{ H\mathcal{R}^uu_{j} + H\mathcal{R}^uu_{j}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ \mathcal{R}^+h_{j} - \mathcal{R}^-h_{j} \right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} =  H\mathcal{R}^uu_{j}  - \dfrac{ \sqrt{gH}}{ 2} \left [ \mathcal{R}^+- \mathcal{R}^- \right ] h_{j}
+\end{multline}
+
+From this we define
+
+\[\mathcal{F}^{h,u} = H\mathcal{R}^u\]
+
+\[\mathcal{F}^{h,h} = -\dfrac{ \sqrt{gH}}{ 2} \left [ \mathcal{R}^+- \mathcal{R}^- \right ]\]
+
+So that 
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \mathcal{F}^{h,u}u_{j}  + \mathcal{F}^{h,h} h_{j}
+\end{multline}
+
+For the momentum equation $f = gHh$
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \dfrac{ gHh^-_{j+\frac{1}{2}} + gHh^+_{j+\frac{1}{2}}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ G^+_{j+\frac{1}{2}} - G^-_{j+\frac{1}{2}} \right ]
+\end{multline}
+
+Because we reconstruct G, we dont need to use u's reconstruction, just the old one.
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \dfrac{ gH \mathcal{R}^-h_{j} + gH \mathcal{R}^+h_{j}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ \mathcal{R}^+G_{j} -  \mathcal{R}^-G_{j} \right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \dfrac{ gH \mathcal{R}^-h_{j} + gH \mathcal{R}^+h_{j}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ \mathcal{R}^+ \mathcal{G}u_{j} -  \mathcal{R}^- \mathcal{G}u_{j} \right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \dfrac{ gH \mathcal{R}^- + gH \mathcal{R}^+}{ 2} h_j  - \dfrac{ \sqrt{gH}}{ 2} \mathcal{G} \left [ \mathcal{R}^+ \ -  \mathcal{R}^-  \right ] u_{j}
+\end{multline}
+
+From this we define
+
+\[\mathcal{F}^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \mathcal{G} \left [ \mathcal{R}^+ \ -  \mathcal{R}^-  \right ]\]
+
+\[\mathcal{F}^{u,h} = \dfrac{ gH \mathcal{R}^- + gH \mathcal{R}^+}{ 2}\]
+
+So we have 
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \mathcal{F}^{u,u}u_{j}  + \mathcal{F}^{u,h} h_{j}
+\end{multline}
+
+To get the flux at $j -1/2$ we just shift everything back so we pick up one factor
+
+\subsubsection{Solving}
+
+So our equations become 
+
+for mass
+\[i\omega \mathcal{M}h_j + \frac{1}{\Delta x}\left[\mathcal{F}^{h,u}u_{j}  + \mathcal{F}^{h,h} h_{j} - e^{-ik\Delta x}\mathcal{F}^{h,u}u_{j}  - e^{-ik\Delta x}\mathcal{F}^{h,h} h_{j}\right] = 0 \]
+
+\[\left[i\omega\mathcal{M} + \frac{1}{\Delta x}\mathcal{F}^{h,h}   - e^{-ik\Delta x}\mathcal{F}^{h,h}  \frac{1}{\Delta x} \right]h_j + \frac{1}{\Delta x}\left[\mathcal{F}^{h,u}  - e^{-ik\Delta x}\mathcal{F}^{h,u}\right] u_{j} = 0 \]
+
+Defining $\mathcal{D} = 1 -e^{-ik\Delta x}$
+
+\[\left[i\omega\mathcal{M} + \frac{1}{\Delta x} \mathcal{D} \mathcal{F}^{h,h} \right]h_j + \frac{1}{\Delta x}\mathcal{D}\mathcal{F}^{h,u} u_{j} = 0 \]
+
+for momentum
+
+\[i\omega \mathcal{M} \mathcal{G}u_j + \frac{1}{\Delta x}\left[\mathcal{D}\mathcal{F}^{u,u}u_{j}  + \mathcal{D}\mathcal{F}^{u,h} h_{j}\right] = 0 \]
+
+\[\left(i\omega \mathcal{M} \mathcal{G} + \frac{1}{\Delta x}\mathcal{D}\mathcal{F}^{u,u}\right)u_j + \frac{1}{\Delta x}\left[ \mathcal{D}\mathcal{F}^{u,h}\right]h_{j} = 0 \]
+
+So we have
+
+\[ \left[\begin{array}{c c}
+i\omega\mathcal{M} + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}^{h,h}  & \frac{1}{\Delta x} \mathcal{D}\mathcal{F}^{h,u}\\
+\frac{1}{\Delta x} \mathcal{D}\mathcal{F}^{u,h} &
+i\omega \mathcal{M} \mathcal{G} + \frac{1}{\Delta x}\mathcal{D}\mathcal{F}^{u,u}
+\end{array} \right] 
+\left[\begin{array}{c}
+h_j \\
+u_j
+\end{array} \right] = 0\]
+
+The nontrivial solutions are given when 
+\[\left[i\omega\mathcal{M} + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}^{h,h} \right]\left[i\omega \mathcal{M} \mathcal{G} + \frac{1}{\Delta x}\mathcal{D}\mathcal{F}^{u,u}\right] -\frac{1}{\Delta x} \mathcal{D}\mathcal{F}^{h,u}\frac{1}{\Delta x} \mathcal{D}\mathcal{F}^{u,h} = 0  \]
+
+\[-\omega^2 \mathcal{M}^2 \mathcal{G} + i\omega\mathcal{M}\frac{1}{\Delta x}\mathcal{D}\mathcal{F}^{u,u} + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}^{h,h}i\omega \mathcal{M} \mathcal{G} + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}^{h,h}\frac{1}{\Delta x}\mathcal{D}\mathcal{F}^{u,u}  -\frac{1}{\Delta x^2} \mathcal{D}^2\mathcal{F}^{h,u}\mathcal{F}^{u,h} = 0  \]
+
+\[-\mathcal{M}^2 \mathcal{G} \omega^2 + i\mathcal{M}\frac{1}{\Delta x}\mathcal{D}\left( \mathcal{F}^{u,u} + \mathcal{F}^{h,h} \mathcal{G} \right) \omega + \frac{1}{\Delta x^2} \mathcal{D}^2 \left(\mathcal{F}^{h,h}\mathcal{F}^{u,u}  -\mathcal{F}^{h,u}\mathcal{F}^{u,h} \right) = 0  \]
+
+We solve this quadratic with a program. 
+
+\end{document}

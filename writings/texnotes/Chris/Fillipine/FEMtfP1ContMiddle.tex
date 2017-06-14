@@ -1,0 +1,190 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Elliptic Equation}
+The linearised elliptic equation is
+
+\[G = Hu - \frac{H^3}{3}u_{xx}\]
+
+Want to find out the FEM approximation factor $\mathcal{G}_{FE_1}$ such that
+
+\[G = \mathcal{G}_{FE_1} u\]
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+\[Gv = Huv - \frac{H^3}{3}u_{xx}v\]
+
+and then we integrate over the entire domain to get 
+\[\int_\Omega Gv dx = \int_\Omega Huv dx - \int_\Omega \frac{H^3}{3}u_{xx}vdx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega Huv dx + \int_\Omega \frac{H^3}{3}u_{x}v_xdx\]
+
+We are going to use $x_j$ as the nodes, which generate the basis functions $\phi_j$, which for us will be the space of continuous linear elements. These are such that $\phi_j(x) \neq 0$ when $x_{j-1} < x< x_{j+1}$ and are the usual hat functions centered at $x_j$.
+So we can reformulate this as 
+
+\[\sum_{j}\int_{x_{j-1}}^{x_{j+1}} Gv dx = \sum_{j}\int_{x_{j-1}}^{x_{j+1}}  Huv dx + \sum_{j}\int_{x_{j-1}}^{x_{j+1}}  \frac{H^3}{3}u_{x}v_{x}dx\]
+
+
+for all v
+
+\section{P1 FEM}
+We are going to coordinate tranform from x space the interval $[x_{j-1},x_{j} ,x_{j+1}]$ to the $\xi$ space interval $[-1,0,1]$. To accomplish this we have the following relation
+
+$$x = \xi\Delta x + x_{j}$$
+
+Taking the derivatives we see
+
+
+$dx = d\xi\Delta x$ , $\frac{dx}{d\xi} = \Delta x$ , $\frac{d\xi}{dx} = \frac{1}{\Delta x}$. \\
+
+Our $\phi_j$ can be described in $\xi$ space as
+
+\begin{equation}
+\phi_j = \left\lbrace \begin{array}{c c}
+1 + \xi & \xi < 0 \\
+1 - \xi & \xi > 0\\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+\phi_{j-1} = \left\lbrace \begin{array}{c c}
+-\xi & \xi < 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+\phi_{j+1} = \left\lbrace \begin{array}{c c}
+\xi & \xi > 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+For FEM we replace the functions by their P1 approximations so
+
+\[G \approx G' = \sum_{j}G_{j}\phi_{j}\]
+\[u \approx u' = \sum_{j}u_{j}\phi_{j}\]
+
+\[\sum_{j}\int_{x_{j-1}}^{x_{j+1}} G'\phi_{j} dx - H\int_{x_{j-1}}^{x_{j+1}} u'\phi_{j} dx -  \frac{H^3}{3}\int_{x_{j-1}}^{x_{j+1}}u'_{x}(\phi_{x})_{j}dx = 0 \]
+
+For all $\phi_j$. For this analysis we choose a particular basis function $\phi_j$ and we look at all the integrals. Beginning with the first one:
+
+\[\int_{x_{j-1}}^{x_{j+1}} G'(x)v_{j} dx = \int_{-1}^{1} G'(\xi)v_{j}(\xi) \frac{d x}{d\xi}d\xi\]
+
+\[= \Delta x \int_{-1}^{1} \left(G_{j- 1}v_{j - 1} + G_{j}v_{j} +G_{j+ 1}v_{j+ 1} \right)v_{j} d\xi\]
+
+\[= \Delta x \left[G_{j- 1} \int_{-1}^{1} v_{j - 1}v_{j} d\xi + G_{j} \int_{-1}^{1} v_{j}v_{j} d\xi +  G_{j+1} \int_{-1}^{1} v_{j + 1}v_{j} d\xi\right]\]
+
+We have that
+
+\[\int_{-1}^{1} v_{j - 1}v_{j} d\xi =  \int_{-1}^{1} v_{j + 1}v_{j} d\xi = \frac{1}{6}\]
+
+\[\int_{-1}^{1} v_{j}v_{j} d\xi = \frac{2}{3}\]
+
+So
+
+\[= \Delta x \left[G_{j- 1} \frac{1}{6} + G_{j} \frac{2}{3} +  G_{j+1} \frac{1}{6}\right]\]
+
+\[=  \frac{\Delta x}{6} \left[G_{j- 1} + 4G_{j} +  G_{j+1} \right]\]
+
+Similarly we have
+
+\[- H\int_{x_{j-1}}^{x_{j+1}} u'v_{j} dx = -\frac{H\Delta x}{6} \left[u_{j- 1} + 4u_{j} +  u_{j+1} \right] \]
+
+
+
+\[-\frac{H^3}{3}\int_{x_{j-1}}^{x_{j+1}}u'_{x}(v_{j})_{x}dx = -\frac{H^3}{3}\int_{-1}^{1}u'_{\xi}\frac{d \xi }{dx}(v_{\xi})_{j}\frac{d \xi }{dx} \frac{d x}{d\xi} d\xi   \]
+
+\[= -\frac{H^3}{3\Delta x}\int_{-1}^{1}u'_{\xi}(v_{\xi})_{j} d\xi   \]
+
+We will now use $'$ to denote derivative
+\[= -\frac{H^3}{3\Delta x}\int_{-1}^{1}\left(u_{j- 1}'v_{j - 1}' + u_{j}'v_{j}' +u_{j+ 1}'v_{j+ 1}' \right)v_{j}' d\xi   \]
+
+\[= -\frac{H^3}{3\Delta x}\left[u_{j- 2} \int_{-1}^{1} v_{j - 1}'v_{j}' d\xi + u_{j} \int_{-1}^{1} v_{j}'v_{j}' d\xi +  u_{j+1} \int_{-1}^{1} v_{j + 1}'v_{j}' d\xi\right]   \]
+
+We have that 
+
+\[\int_{-1}^{1} v_{j-1}'v_{j}' d\xi = -1 = \int_{-1}^{1} v_{j+1}'v_{j}' d\xi \]
+
+\[\int_{-1}^{1} v_{j}'v_{j}' d\xi = 2\]
+
+Therefore
+
+\[= -\frac{H^3}{3\Delta x}\left[-u_{j- 1}  + 2u_{j} -  u_{j+1} \right]   \]
+
+Then our equation becomes
+
+\begin{multline}
+\frac{\Delta x}{6} \left[G_{j- 1} + 4G_{j} +  G_{j+1} \right] = \\ \frac{H\Delta x}{6} \left[u_{j} + 4u_{j} +  u_{j+1} \right] +  \frac{H^3}{3\Delta x}\left[-u_{j- 1}  + 2u_{j} -  u_{j+1} \right]
+\end{multline}
+
+\begin{multline}
+\left[G_{j-1} + 4G_{j} +  G_{j+1} \right] = \\ H \left[u_{j- 1} + 4u_{j} +  u_{j+1} \right] +  \frac{2H^3}{\Delta x^2}\left[-u_{j- 1}  + 2u_{j} -  u_{j+1} \right]
+\end{multline}
+
+This formula is correct for $u= 1,x,x^2$
+ 
+
+We now assume the following form for $u$ and $G$.
+
+Let quantity $q$ is given by so that
+$q(x,t) = q(0,0) e^{i\left(\omega t + kx\right)}$. The use of this comes when we use our uniform grid in space, so that $q(x_j,t) = q_j$ then $q_{j \pm l} = q_j e^{\pm ik l\Delta x} $
+
+Then we have 
+
+\begin{multline}
+\left[G_j e^{- ik\Delta x} + 4G_j +  G_j e^{ik\Delta x}  \right] = \\ H \left[u_j e^{- ik \Delta x} + 4u_j  +  u_j e^{ik\Delta x}  \right] +  \frac{2H^3}{\Delta x^2}\left[-u_j e^{- ik \Delta x}  + 2u_j  -  u_j e^{ik \Delta x} \right]
+\end{multline}
+
+\begin{multline}
+G_j\left[e^{- ik\Delta x} + 4  +  e^{ik\Delta x}  \right] = \\ \left( H \left[e^{- ik \Delta x} + 4   +  e^{ik \Delta x}  \right] +  \frac{2H^3}{\Delta x^2}\left[- e^{- ik \Delta x}  + 2 -  e^{ik \Delta x} \right] \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j= \\ \left( H  +  \frac{2H^3}{\Delta x^2}\frac{\left[- e^{- ik\Delta x}  + 2  -  e^{ik \Delta x} \right]}{\left[e^{- ik\Delta x} + 4  +  e^{ik\Delta x}  \right]} \right)u_j
+\end{multline}
+
+\begin{multline}
+G_j=  \left( H  +  \frac{2H^3}{\Delta x^2}\frac{ 2  -2\cos\left(k \Delta x\right) }{4   +2\cos\left(k \Delta x\right) } \right)u_j
+\end{multline}
+
+\[
+G_j=  \left( H  +  \frac{2H^3}{\Delta x^2}\frac{1  -\cos\left(k \Delta x\right) }{2   +\cos\left(k \Delta x\right) } \right)u_j\]
+
+We want something like
+
+\[\frac{k^2}{3} \approx  \frac{2}{\Delta x^2}\frac{1  -\cos\left(k \Delta x\right) }{2   +\cos\left(k \Delta x\right) }\]
+
+and we want to compare it to the FD approximation
+
+\[\frac{k^2}{3} \approx  \frac{2}{3\Delta x^2}\left(1  -\cos\left(k \Delta x\right)\right)\]
+
+For the FEM we have the taylor series
+
+\begin{multline}
+ \frac{2}{\Delta x^2}\frac{1  -\cos\left(k \Delta x\right) }{2   +\cos\left(k \Delta x\right) } = \\ \frac{k^2}{3} + \frac{k^4 \Delta x^2}{36} + \frac{k^6  \Delta x^4}{1080} - \frac{17k^8 \Delta x^6}{181440} - \frac{11k^{10} \Delta x^{8}}{604800} + O(\Delta x^{10})
+\end{multline}
+
+\begin{multline}
+\frac{2}{3\Delta x^2}\left(1  -\cos\left(k \Delta x\right)\right) = \\ \frac{k^2}{3} - \frac{k^4 \Delta x^2}{36} + \frac{k^6 \Delta x^4}{1080} - \frac{k^8 \Delta x^6}{60480} - \frac{k^{10} \Delta x^{8}}{5443200} + O(\Delta x^{10})
+\end{multline}
+
+We can see that because the FD error alternates earlier its error is actualy slightly smaler than the FEM error, hence why it is worse. Although this is a better approximationg than the discontinuous edges one. 
+
+
+
+
+
+
+\end{document}

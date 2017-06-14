@@ -1,0 +1,107 @@
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=7.0cm]{one-dimensional-axis_Serre.eps}
+\end{center}
+\caption{The notation used for one-dimensional flow governed by the Serre equation.}
+\label{fig:Notation}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:solitoncono1}\includegraphics[width=7.0cm]{./results/soliton/con/sto1-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoncono2}\includegraphics[width=7.0cm]{./results/soliton/con/sto2-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoncono3}\includegraphics[width=7.0cm]{./results/soliton/con/sto3-figure0.pdf}}
+\caption{Convergence of relative error using L1 norm for analytic soliton solution for both $h$ ($\circ$) and $u$ ($\diamond$) for first (a), second (b) and third (c) order schemes.}
+\label{fig:solitoncon}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:solitoneo1h}\includegraphics[width=7.0cm]{./results/soliton/ex/newo1-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoneo1u}\includegraphics[width=7.0cm]{./results/soliton/ex/newo1u-figure0.pdf}}
+\caption{Plotted example soliton simulation for first-order scheme ($\circ$) with $dx = 1.5625m$ against the analytic solution of \eqref{eq:sol} (\---) with black and blue for $t =0s$ and $t=100s$ respectively.}
+\label{fig:solitoneo1}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:solitoneo2h}\includegraphics[width=7.0cm]{./results/soliton/ex/newo2-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoneo2u}\includegraphics[width=7.0cm]{./results/soliton/ex/newo2u-figure0.pdf}}
+\caption{Plotted example soliton simulation for second-order scheme ($\circ$) with $dx = 1.5625m$ against the analytic solution of \eqref{eq:sol} (\---) with black and blue for $t =0s$ and $t=100s$ respectively.}
+\label{fig:solitoneo2}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:solitoneo3h}\includegraphics[width=7.0cm]{./results/soliton/ex/newo3-figure0.pdf}}
+\subfigure[][]{\label{fig:solitoneo3u}\includegraphics[width=7.0cm]{./results/soliton/ex/newo3u-figure0.pdf}}
+\caption{Plotted example soliton simulation for third-order scheme ($\circ$) with $dx = 1.5625m$ against the analytic solution of \eqref{eq:sol} (\---) with black and blue for $t =0s$ and $t=100s$ respectively.}
+\label{fig:solitoneo3}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:Seguro1p0}\includegraphics[width=6.0cm]{./results/segurdata/o1/plotp0-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro1p5}\includegraphics[width=6.0cm]{./results/segurdata/o1/plotp5-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro1p10}\includegraphics[width=6.0cm]{./results/segurdata/o1/plotp10-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro1p15}\includegraphics[width=6.0cm]{./results/segurdata/o1/plotp15-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro1p20}\includegraphics[width=6.0cm]{./results/segurdata/o1/plotp20-figure0.pdf}}
+\caption{Rectangular wave experiment for first order scheme at $\frac{x}{h_1}$ : $0$ (a), $50$ (b), $100$ (c), $150$ (d) and $200$ (e)}
+\label{fig:Seguro1}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:Seguro2p0}\includegraphics[width=6.0cm]{./results/segurdata/o2/plotp0-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro2p5}\includegraphics[width=6.0cm]{./results/segurdata/o2/plotp5-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro2p10}\includegraphics[width=6.0cm]{./results/segurdata/o2/plotp10-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro2p15}\includegraphics[width=6.0cm]{./results/segurdata/o2/plotp15-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro2p20}\includegraphics[width=6.0cm]{./results/segurdata/o2/plotp20-figure0.pdf}}
+\caption{Rectangular wave experiment for second order scheme at $\frac{x}{h_1}$ : $0$ (a), $50$ (b), $100$ (c), $150$ (d) and $200$ (e)}
+\label{fig:Seguro2}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:Seguro3p0}\includegraphics[width=6.0cm]{./results/segurdata/o3/plotp0-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro3p5}\includegraphics[width=6.0cm]{./results/segurdata/o3/plotp5-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro3p10}\includegraphics[width=6.0cm]{./results/segurdata/o3/plotp10-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro3p15}\includegraphics[width=6.0cm]{./results/segurdata/o3/plotp15-figure0.pdf}}
+\subfigure[][]{\label{fig:Seguro3p20}\includegraphics[width=6.0cm]{./results/segurdata/o3/plotp20-figure0.pdf}}
+\caption{Rectangular wave experiment for third order scheme at $\frac{x}{h_0}$ : $0$ (a), $50$ (b), $100$ (c), $150$ (d) and $200$ (e)}
+\label{fig:Seguro3}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=10.0cm]{./results/dambreak/L1con/both-figure0.pdf}
+\end{center}
+\caption{The change in total variation (TV) over $\Delta x$ for first ($\circ$) , second ($\square$), and third ($\diamond$) order schemes.}
+\label{fig:DBL1}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htb]
+\centering
+\subfigure[][]{\label{fig:DBo1}\includegraphics[width=7.0cm]{./results/dambreak/ex/o1-figure0.pdf}}
+\subfigure[][]{\label{fig:DBo2}\includegraphics[width=7.0cm]{./results/dambreak/ex/o2-figure0.pdf}}
+\subfigure[][]{\label{fig:DBo3}\includegraphics[width=7.0cm]{./results/dambreak/ex/o3-figure0.pdf}}
+\caption{Solutions for the dam break problem for first- (a), second- (b) and third-order (c) schemes}
+\label{fig:DB}
+\end{figure}[]
+\begin{figure}[htb]
+\centering
+\includegraphics[width=15.0cm]{./results/dambreak/ex/o1-figure1.pdf}
+\caption{Solution for the dam break problem for first-order scheme with $\Delta x = 0.00152587890625$}
+\label{fig:DB1o1}
+\end{figure}
+\efloatseparator
+ 

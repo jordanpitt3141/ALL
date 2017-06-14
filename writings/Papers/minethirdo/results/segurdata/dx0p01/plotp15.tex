@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepgfplotslibrary{external}
+\tikzexternalize
+\pgfplotsset{compat = 1.3,
+	every x tick label/.append style={font=\scriptsize, yshift=0.5ex},
+	every y tick label/.append style={font=\scriptsize, xshift=0.5ex}}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+	ylabel near ticks,
+	xlabel near ticks,
+	yticklabel style={
+        /pgf/number format/fixed,
+        /pgf/number format/precision=5,
+	},
+	scaled y ticks=false,
+	clip mode=individual,
+	ymin = -0.13,
+	ymax = 0.06,
+	xmin = -10.0,
+	xmax = 250,
+	xlabel=$t\sqrt{\frac{g}{h_1}} - \frac{x}{h_1}$,
+	ylabel=$\frac{h - h_1}{h_1}$]
+\addplot [red,only marks,mark =*,mark size =0.1pt] table {o3/msegurp15.dat};
+\addplot [blue] table {o3/esegurp15.dat};	
+\end{axis}
+\end{tikzpicture}
+\end{document}

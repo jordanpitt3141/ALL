@@ -1,0 +1,64 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Modifications}
+Here I go through my corrections to Chris's paper using the section titles as subsections
+
+\subsection{Abstract}
+\begin{itemize}
+\item I think we should use conservation laws, or equations in conservative law form instead of hyperbolic equations in reference to the techniques we use.
+\end{itemize}
+
+
+\subsection{Introduction}
+\begin{itemize}
+\item ``is used to solve the stiff source term, which contain the ...'' should be `contains'
+\item ``with the water depth and a new quantity as conservative variables'', should it be conserved instead of conservative?
+
+\end{itemize}
+
+\subsection{Solving the Serre Equations Written in Conservation Law Form}
+\subsubsection{Approximate Riemann Solver}
+Here the change is rather significant, I have changed the way we handle $u$ assuming it is continuous. So basically we can use what is already written below equation (24) for all the variables except $u$. Then in addition we have to add how we handle $u$. \\
+For the First and Second order method the derivative of $u$ at the edge is:
+
+\[ \left(\frac{\partial u}{\partial x}\right)_{j + \frac{1}{2}} = \frac{u_{j+1} - u_{j}}{\Delta x}\]
+
+For the third order method the derivative of $u$ at the edge is:
+
+\[ \left(\frac{\partial u}{\partial x}\right)_{j + \frac{1}{2}} = \frac{-u_{j + 2} + 27u_{j+1} - 27u_{j} + u_{j-1}}{24 \Delta x}\]\\ \\
+
+Now for the $u$ reconstruction.
+For the first and second order method we use
+\[u_{j + \frac{1}{2}} = \frac{u_{j+1} + u_j}{2}\]
+for the third order method
+\[u_{j + \frac{1}{2}} = \frac{-3u_{j+2} + 27u_{j+1} + 27u_j - 3u_{j-1}}{48}\]
+
+\subsection{Numerical Simulations}
+\subsubsection{Steady Flow over a Bump}
+Because of this change in the handling of $u$ I think it is only appropriate to change the source term's gradient of $u$ as well. So now in $S_{ci}$ instead of
+\[\frac{u^-_{j + 1/2} - u^+_{j-1/2}}{\Delta x}\]
+it should be replaced with 
+\[\frac{u_{j + 1} - u_{j-1}}{2 \Delta x}\]
+
+This change has improved our results for conservation of the energy, also I think it is probably more informative to a reader to give both $\mathcal{H}(0)$ and $\mathcal{H}(50s)$ then report the relative error.
+From my experiments I have:
+
+\[\mathcal{H}(0) = 2250.56717819\]
+\[\mathcal{H}(50s) = 2250.56244098\]
+
+So we have
+
+\[\frac{\left|\mathcal{H}(0) - \mathcal{H}(50s)\right|}{\left|\mathcal{H}(0) \right|} = 2.1048960662740493 \times 10^{-6}\]
+
+
+
+
+
+\end{document}

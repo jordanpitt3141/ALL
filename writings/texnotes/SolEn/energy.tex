@@ -1,0 +1,69 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Energy in DB}
+
+\[\mathcal{H} (t) = \frac{1}{2}\int_{-\infty}^{\infty} hu^2 + gh^2 + \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2\, dx \]
+
+For the Soliton at $t = 0 $
+
+\[h(x,0) = a_0 + a_1 sech^2\left(\kappa x\right)\]
+\[u(x,0) = c\left(1 - \frac{a_0}{a_0 + a_1 sech^2\left(\kappa x\right)}\right)\]
+
+
+\begin{gather}
+\kappa = \dfrac{\sqrt{3a_1}}{2a_0 \sqrt{ a_0 + a_1}}
+\end{gather}
+and
+\begin{gather}
+c = \sqrt{g \left(a_0 + a_1\right)}
+\end{gather}
+
+For $a_0 = 1.0$,  $a_1 = 0.7$, $g = 9.81$
+
+\[\kappa = \dfrac{\sqrt{2.1}}{2 \sqrt{ 1.7}}\]
+\[\kappa = \sqrt{\dfrac{21}{68}}\]
+
+\[c = \sqrt{9.81 \left(1.7\right)}\]
+\[c = \sqrt{16.677}\]
+
+\[h(x,0) = 1 + 0.7 sech^2\left(\sqrt{\dfrac{21}{68}}x\right)\]
+
+\[u(x,t) = \sqrt{16.677}\left(1 - \frac{1}{1+ 0.7 sech^2\left(\sqrt{\dfrac{21}{68}} x\right)}\right)\]
+
+\[u(x,t) = \sqrt{16.677}\left(\frac{0.7 sech^2\left(\sqrt{\dfrac{21}{68}} x\right)}{1+ 0.7 sech^2\left(\sqrt{\dfrac{21}{68}} x\right)}\right)\]
+
+Using Wolfram
+
+\[\int_{-50}^{0} hu^2 \, dx = 6.3515462294 \]
+\[\int_{0}^{250} hu^2 \, dx = 6.3515462294\]
+
+\[\int_{-50}^{0} gh^2  dx = 520.9805164602 \]
+
+\[\int_{0}^{250} gh^2  dx = 2482.9805164602 \]
+
+
+\[\int_{-50}^{0} \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2\,  dx = 0.5849610348 \]
+\[\int_{0}^{250} \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2\,  dx = 0.5849610348 \]
+
+So we have 
+
+\[\mathcal{H} (0) = \frac{1}{2}\left[2\times 6.3515462294  + 2 \times 0.5849610348  + 520.9805164602 + 2482.9805164602\right] \]
+
+\[\mathcal{H} (0) = 6.3515462294 +  0.5849610348  +  \frac{1}{2}\left[ 520.9805164602 + 2482.9805164602 \right] \]
+
+\[\mathcal{H} (0) =  6.9365072642 +  \frac{1}{2}\left[ 3003.9610329204 \right] \]
+
+\[\mathcal{H} (0) = 6.9365072642 +  1501.9805164602\]
+
+\[\mathcal{H} (0) = 1508.9170237244 \]
+
+
+
+\end{document}

@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Energy in DB}
+
+\[\mathcal{H} (t) = \frac{1}{2}\int_{-\infty}^{\infty} hu^2 + gh^2 + \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^3\, dx \]
+
+For the DB $u = 0$ and
+
+\[h(x,0) = h_0 + \frac{h_1 - h_0}{2}\left(1 + \tanh\left(\alpha\left(x_0 - x\right)\right)\right)\]
+at t=0 so
+\[\mathcal{H} (0) = \frac{1}{2}\int_{-\infty}^{\infty}  gh^2 \, dx \]
+
+\[\mathcal{H} (0) = \frac{1}{2}\int_{-\infty}^{\infty}  g\left(h_0 + \frac{h_1 - h_0}{2}\left(1 + \tanh\left(\alpha\left(x_0 - x\right)\right)\right)\right)^2 \, dx \]
+
+\begin{multline}
+\mathcal{H} (0) = \frac{g}{2}\int_{-\infty}^{\infty}  h_0^2 + 2h_0\frac{h_1 - h_0}{2}\left(1 + \tanh\left(\alpha\left(x_0 - x\right)\right)\right)  \\ + \left(\frac{h_1 - h_0}{2}\right)^2\left(1 + \tanh\left(\alpha\left(x_0 - x\right)\right)\right)^2 \, dx 
+\end{multline}
+
+\begin{multline}
+\mathcal{H} (0) = \frac{g}{2}\int_{-\infty}^{\infty}  h_0^2 + h_0(h_1 - h_0)\left(1 + \tanh\left(\alpha\left(x_0 - x\right)\right)\right)  \\ + \left(\frac{h_1 - h_0}{2}\right)^2\left(1 + 2\tanh\left(\alpha\left(x_0 - x\right)\right) + \tanh\left(\alpha\left(x_0 - x\right)\right)^2\right) \, dx 
+\end{multline}
+
+$h_0 = 1$  $h_1 = 1.8$
+
+\begin{multline}
+\mathcal{H} (0) = \frac{g}{2}\int_{-\infty}^{\infty}  1 + 0.8\left(1 + \tanh\left(\alpha\left(x_0 - x\right)\right)\right)  \\ + 0.16\left(1 + 2\tanh\left(\alpha\left(x_0 - x\right)\right) + \tanh\left(\alpha\left(x_0 - x\right)\right)^2\right) \, dx 
+\end{multline}
+
+
+\begin{multline}
+\mathcal{H} (0) = \frac{g}{2}\int_{-\infty}^{\infty}  1 + 0.8\left(1\right)  + 0.16\left(1\right) \, dx + \\
+\frac{g}{2}\int_{-\infty}^{\infty}  0.8\left(\tanh\left(\alpha\left(x_0 - x\right)\right)\right)   + 0.16\left(2\tanh\left(\alpha\left(x_0 - x\right)\right) + \tanh\left(\alpha\left(x_0 - x\right)\right)^2\right) \, dx 
+\end{multline}
+
+\begin{multline}
+\mathcal{H} (0) = \frac{g}{2}\int_{-\infty}^{\infty}  1.96 \, dx + \\
+\frac{g}{2}\int_{-\infty}^{\infty}  1.12\left(\tanh\left(\alpha\left(x_0 - x\right)\right)\right)   + 0.16\left(\tanh\left(\alpha\left(x_0 - x\right)\right)^2\right) \, dx 
+\end{multline}
+
+\begin{multline}
+\mathcal{H} (0) = \frac{g}{2}\int_{-\frac{\Delta x}{2}}^{1000 + \frac{\Delta x}{2}}  1.96 \, dx + \\
+\frac{g}{2}\int_{-\frac{\Delta x}{2}}^{1000 + \frac{\Delta x}{2}} 1.12\left(\tanh\left(\alpha\left(500 - x\right)\right)\right)   + 0.16\left(\tanh\left(\alpha\left(500 - x\right)\right)^2\right) \, dx 
+\end{multline}
+
+\begin{multline}
+\mathcal{H} (0) = 1.96\frac{g}{2}(1000 + \Delta x) + \\
+\frac{g}{2}\int_{-\frac{\Delta x}{2}}^{1000 + \frac{\Delta x}{2}} 1.12\left(\tanh\left(\alpha\left(500 - x\right)\right)\right) \, dx  + \frac{g}{2}\int_{-\frac{\Delta x}{2}}^{1000 + \frac{\Delta x}{2}} 0.16\left(\tanh\left(\alpha\left(500 - x\right)\right)^2\right) \, dx 
+\end{multline}
+
+The integral of tanh is 0 over the interval as its odd around dambreak (at the center).
+
+\begin{multline}
+\mathcal{H} (0) = 1.96\frac{g}{2}(1000 + \Delta x)+  \frac{g}{2}\int_{-\frac{\Delta x}{2}}^{1000 + \frac{\Delta x}{2}} 0.16\left(\tanh\left(\alpha\left(500 - x\right)\right)^2\right) \, dx 
+\end{multline}
+
+\begin{multline}
+\mathcal{H} (0) = 1.96\frac{g}{2}(1000 + \Delta x)+  0.16\frac{g}{2}\int_{0}^{1000} \tanh\left(\alpha\left(500 - x\right)\right)^2 \, dx 
+\end{multline}
+
+$g = 9.81$
+
+\begin{multline}
+\mathcal{H} (0) = 9.6138(1000 + \Delta x) +  0.7848\times\int_{-\frac{\Delta x}{2}}^{1000 + \frac{\Delta x}{2}} \tanh\left(\alpha\left(500 - x\right)\right)^2 \, dx 
+\end{multline}
+
+\begin{multline}
+\mathcal{H} (0) = 9.6138(1000 + \Delta x) +  0.7848\times \left[x + \frac{\tanh\left(\alpha \times(500 -x)\right)}{\alpha}\right]_{-\frac{\Delta x}{2}}^{1000 + \frac{\Delta x}{2}}
+\end{multline}
+
+
+\begin{multline}
+\mathcal{H} (0) = 9.6138(1000 + \Delta x) +  \\ 0.7848\times\left[1000 + \frac{\Delta x}{2} + \frac{\tanh\left(\alpha \times(500 -1000 - \frac{\Delta x}{2})\right)}{\alpha} + \frac{\Delta x}{2} - \frac{\tanh\left(\alpha \times(500 + \frac{\Delta x}{2})\right)}{\alpha}\right]
+\end{multline}
+
+\begin{multline}
+\mathcal{H} (0) = 9.6138(1000 + \Delta x) +  \\ 0.7848\times\left[1000 + \Delta x + \frac{\tanh\left(\alpha \times(-\left(500 + \frac{\Delta x}{2}\right))\right)}{\alpha} - \frac{\tanh\left(\alpha \times(500 + \frac{\Delta x}{2})\right)}{\alpha}\right]
+\end{multline}
+
+Since tanh is odd
+
+\begin{multline}
+\mathcal{H} (0) = 9.6138(1000 + \Delta x) +  \\ 0.7848\times\left[1000 + \Delta x - \frac{2}{\alpha}\tanh\left(\alpha \times\left(500 + \frac{\Delta x}{2}\right)\right)\right]
+\end{multline}
+
+\begin{multline}
+\mathcal{H} (0) = 9.6138(1000 + \Delta x) + 0.7848\times\left(1000 + \Delta x\right) +  \\ 0.7848\times\left[1000 + \Delta x - \frac{2}{\alpha}\tanh\left(\alpha \times\left(500 + \frac{\Delta x}{2}\right)\right)\right]
+\end{multline}
+
+\begin{multline}
+\mathcal{H} (0) = 10.3986(1000 + \Delta x) +  \\ 0.7848\times\left[1000 + \Delta x - \frac{2}{\alpha}\tanh\left(\alpha \times\left(500 + \frac{\Delta x}{2}\right)\right)\right]
+\end{multline}
+
+
+
+
+
+
+
+\end{document}

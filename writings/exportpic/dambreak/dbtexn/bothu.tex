@@ -1,0 +1,37 @@
+\documentclass[margin=1cm]{standalone}
+\usepackage{pgfplots}
+%\usepgfplotslibrary{external}
+%\tikzexternalize
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usetikzlibrary{calc}
+\pgfplotsset{compat = newest,
+	every x tick label/.append style={font=\scriptsize, yshift=0.5ex},
+	every y tick label/.append style={font=\scriptsize, xshift=0.5ex}}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{loglogaxis}[
+	ylabel near ticks,
+	xlabel near ticks,
+	yticklabel style={
+        /pgf/number format/fixed,
+        /pgf/number format/precision=5,
+	},
+	xtickten = {-3,-2,...,0},
+	ytickten = {-1,-0,...,2},
+	xmin=0.001,
+	xmax=1.0,
+	ymin = 0.1,
+	ymax = 1000.0,
+	scaled y ticks=false,
+	clip mode=individual,
+	xlabel= $\Delta x$ (m),
+	ylabel= TV]
+\addplot [red,only marks,mark =o,mark size =2pt] table {o1/u.dat};
+\addplot [blue,only marks,mark =square,mark size = 2pt] table {o2/u.dat};
+\addplot [black,only marks,mark =asterisk,mark size = 2.0pt] table {o3/u.dat};
+\end{loglogaxis}
+\end{tikzpicture}
+\end{document}

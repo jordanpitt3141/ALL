@@ -1,0 +1,457 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\usepackage{lscape}
+\begin{document}
+
+\section{Elliptic Equation}
+The elliptic equation is
+\[G = uh - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)\]
+
+with bed terms it is
+
+\[G = uh + u\left(\frac{\partial}{\partial x}\left( \frac{h^2}{2}b_x\right) + h b_x^2\right) - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)\]
+
+
+\section{Finite Element}
+
+
+\[G = uh + u\left(\frac{\partial}{\partial x}\left( \frac{h^2}{2}b_x\right) + h b_x^2\right) - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)\]
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+
+\[Gv = uhv + uv\left(\frac{\partial}{\partial x}\left( \frac{h^2}{2}b_x\right) + h b_x^2\right) - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)v\]
+
+and then we integrate over the entire domain to get 
+
+\[\int_\Omega Gv \; dx = \int_\Omega uhv \; dx + \int_\Omega u\left(\frac{\partial}{\partial x}\left( \frac{h^2}{2}b_x\right) + h b_x^2\right)v \; dx - \int_\Omega \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)v \; dx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega uhv dx + \int_\Omega\frac{h^3}{3}u_{x}v_xdx + \int_\Omega u\left(\frac{\partial}{\partial x}\left( \frac{h^2}{2}b_x\right) + h b_x^2\right)v \; dx\]
+
+\[\int_\Omega Gv dx = \int_\Omega uhv dx + \int_\Omega\frac{h^3}{3}u_{x}v_xdx + \int_\Omega \frac{\partial}{\partial x}\left( \frac{h^2}{2}b_x\right) uv \; dx + \int_\Omega u h b_x^2 v \; dx\]
+
+\[\int_\Omega Gv dx = \int_\Omega uhv dx + \int_\Omega\frac{h^3}{3}u_{x}v_xdx - \int_\Omega  \frac{h^2}{2}b_x \frac{\partial}{\partial x}\left(uv\right)  \; dx + \int_\Omega u h b_x^2 v \; dx\]
+
+\[\int_\Omega Gv dx = \int_\Omega uhv dx + \int_\Omega\frac{h^3}{3}u_{x}v_xdx - \int_\Omega  \frac{h^2}{2}b_x u_x v \; dx - \int_\Omega  \frac{h^2}{2}b_x u v_x \; dx + \int_\Omega u h b_x^2 v \; dx\]
+
+So importantly we just require that $b_x$ is well behaved, and in particular it must be continuous
+
+
+\begin{multline*}
+\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Gv dx = \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}}  uhv dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{h^3}{3}u_{x}v_{x}dx \\- \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{h^2}{2}b_x u_x vdx -\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}}  \frac{h^2}{2}b_x u v_x dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} u h b_x^2 vdx 
+\end{multline*}
+
+\section{P1 FEM}
+We are going to cordinate tranform from x space the interval $[x_{j-1/2},x_{j+1/2} ,x_{j+3/2}]$ to the $\xi$ space interval $[-1,0,1]$. To accomplish this we have the following relation
+
+$$x = \xi\Delta x + x_{j+1/2}$$
+
+Taking the derivatives we see
+
+
+$dx = d\xi\Delta x$ , $\frac{dx}{d\xi} = \Delta x$ , $\frac{d\xi}{dx} = \frac{1}{\Delta x}$ . \\ \\ We can describe the basis functions in the $\xi$ space
+
+\begin{equation}
+\phi_{j+1/2} = \left\lbrace \begin{array}{c c}
+1 + \xi & \xi < 0 \\
+1 - \xi & \xi > 0\\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+\phi_{j-1/2} = \left\lbrace \begin{array}{c c}
+-\xi & \xi < 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+\phi_{j+3/2} = \left\lbrace \begin{array}{c c}
+\xi & \xi > 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+While the descriptions for $w$'s is
+\begin{equation}
+w^+_{j+1/2} = \left\lbrace \begin{array}{c c}
+1-\xi & \xi > 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+w^-_{j+1/2} = \left\lbrace \begin{array}{c c}
+1+\xi & \xi < 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+w^+_{j-1/2} = \left\lbrace \begin{array}{c c}
+-\xi & \xi < 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+w^-_{j+3/2} = \left\lbrace \begin{array}{c c}
+\xi & \xi > 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+We now replace our functions by our approximations to them
+
+\[G \approx G' = \sum_{j}G_{j+1/2}w_{j+1/2}\]
+\[u \approx u' = \sum_{j}u_{j+1/2}\phi_{j+1/2}\]
+\[b \approx b' = \sum_{j}b_{j+1/2}\phi_{j+1/2}\]
+\[h \approx h' = \sum_{j}h_{j+1/2}w_{j+1/2}\]
+
+For all $\phi_{j+1/2}$. For this analysis we choose a particular basis function $\phi_{j+1/2}$ and we look at all the integrals. Now we have already done the integrals with no bed term, so we focus on the bed terms now
+
+which are
+
+\[
+- \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{h^2}{2}b_x u_x vdx -\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}}  \frac{h^2}{2}b_x u v_x dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} u h b_x^2 vdx 
+\]
+
+Lets begin with the rightmost, first we change variable from $x$ to $\xi$
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{(h'(x))^2}{2}b_x(x) u_x(x) \phi_{j+1/2}(x)dx = \int_{-1}^{1} \frac{(h'(\xi))^2}{2}b'(\xi)_{\xi}\frac{d\xi}{dx}  u'(\xi)_{\xi} \frac{d\xi}{dx} \phi_{j+1/2}(\xi)  \frac{dx}{d\xi} dx\]
+
+\[= \frac{1}{\Delta x}\int_{-1}^{1} \frac{(h')^2}{2}b'_{\xi} u'_{\xi} \phi_{j+1/2} d\xi\]
+
+Now we expand to the P1 approximations to include only where $\phi_{j+1/2}$ is non zero, also we use $'$ to denote derivatives
+
+which is
+
+\[h' = h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} + h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}   \]
+
+\[b_{\xi}' = b'_{j-1/2} \phi'_{j-1/2} +  b'_{j+1/2} \phi'_{j+1/2} +  b'_{j+3/2} \phi'_{j+3/2}   \]
+
+\[u_{\xi}' = u'_{j-1/2} \phi'_{j-1/2} +  u'_{j+1/2} \phi'_{j+1/2} + u'_{j+3/2} \phi'_{j+3/2}   \]
+
+\begin{multline}
+= \frac{1}{2\Delta x}\int_{-1}^{1} \left[h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} + h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}\right]^2 \times \\
+\left[b'_{j-1/2} \phi'_{j-1/2} +  b'_{j+1/2} \phi'_{j+1/2} +  b'_{j+3/2} \phi'_{j+3/2} \right] \times \\
+\left[u'_{j-1/2} \phi'_{j-1/2} +  u'_{j+1/2} \phi'_{j+1/2} + u'_{j+3/2} \phi'_{j+3/2} \right] \phi_{j+1/2} d\xi
+\end{multline}
+
+Note that we can square $a + b + c +d$ simply because $ac = ad = bc = bd = 0$ so we get that
+\[[a +b + c + d]^2 = (a+b)^2 + (c+d)^2\] therefore
+
+\begin{multline}
+= \frac{1}{2\Delta x}\int_{-1}^{1} \bigg[\left(h^+_{j-1/2} w^+_{j-1/2}\right)^2 + 2h^+_{j-1/2} w^+_{j-1/2}h^-_{j+1/2} w^-_{j+1/2} + \left(h^-_{j+1/2} w^-_{j+1/2}\right)^2  \\+ \left(h^+_{j+1/2} w^+_{j+1/2}\right)^2 + 2h^+_{j+1/2} w^+_{j+1/2}h^-_{j+3/2} w^-_{j+3/2} + \left(h^-_{j+3/2} w^-_{j+3/2}\right)^2\bigg] \times \\
+\bigg[b'_{j-1/2} \phi'_{j-1/2}u'_{j-1/2} \phi'_{j-1/2} + b'_{j-1/2} \phi'_{j-1/2}u'_{j+1/2} \phi'_{j+1/2}  +  b'_{j-1/2} \phi'_{j-1/2} u'_{j+3/2} \phi'_{j+3/2} \\+ b'_{j+1/2} \phi'_{j+1/2}u'_{j-1/2} \phi'_{j-1/2} + b'_{j+1/2} \phi'_{j+1/2}u'_{j+1/2} \phi'_{j+1/2} +  b'_{j+1/2} \phi'_{j+1/2}u'_{j+3/2} \phi'_{j+3/2} \\+  b'_{j+3/2} \phi'_{j+3/2} u'_{j-1/2} \phi'_{j-1/2} +   b'_{j+3/2} \phi'_{j+3/2} u'_{j+1/2} \phi'_{j+1/2} +  b'_{j+3/2} \phi'_{j+3/2} u'_{j+3/2} \phi'_{j+3/2}   \bigg] \phi_{j+1/2} d\xi
+\end{multline}
+
+\begin{multline}
+= \frac{1}{2\Delta x}\int_{-1}^{1} \bigg[\left(h^+_{j-1/2} w^+_{j-1/2}\right)^2 + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} + \left(h^-_{j+1/2} w^-_{j+1/2}\right)^2  \\+ \left(h^+_{j+1/2} w^+_{j+1/2}\right)^2 + 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} + \left(h^-_{j+3/2} w^-_{j+3/2}\right)^2\bigg] \times \\
+\bigg[b'_{j-1/2}u'_{j-1/2} \phi'_{j-1/2} \phi'_{j-1/2} + b'_{j-1/2}u'_{j+1/2} \phi'_{j-1/2} \phi'_{j+1/2}  +  b'_{j-1/2}u'_{j+3/2}  \phi'_{j-1/2} \phi'_{j+3/2} \\+ b'_{j+1/2} u'_{j-1/2}\phi'_{j+1/2} \phi'_{j-1/2} + b'_{j+1/2}u'_{j+1/2} \phi'_{j+1/2} \phi'_{j+1/2} +  b'_{j+1/2}u'_{j+3/2} \phi'_{j+1/2} \phi'_{j+3/2} \\+  b'_{j+3/2}u'_{j-1/2} \phi'_{j+3/2}  \phi'_{j-1/2} +   b'_{j+3/2} u'_{j+1/2} \phi'_{j+3/2} \phi'_{j+1/2} +  b'_{j+3/2}\phi'_{j+3/2}  \phi'_{j+3/2} u'_{j+3/2}   \bigg] \phi_{j+1/2} d\xi
+\end{multline}
+
+but $\phi'_{j+3/2}  \phi'_{j-1/2}$ is zero everywhere
+
+
+\begin{multline}
+= \frac{1}{2\Delta x}\int_{-1}^{1} \bigg[\left(h^+_{j-1/2} w^+_{j-1/2}\right)^2 + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} + \left(h^-_{j+1/2} w^-_{j+1/2}\right)^2  \\+ \left(h^+_{j+1/2} w^+_{j+1/2}\right)^2 + 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} + \left(h^-_{j+3/2} w^-_{j+3/2}\right)^2\bigg] \times \\
+\bigg[b'_{j-1/2}u'_{j-1/2} \phi'_{j-1/2} \phi'_{j-1/2} + b'_{j-1/2}u'_{j+1/2} \phi'_{j-1/2} \phi'_{j+1/2}  + b'_{j+1/2} u'_{j-1/2}\phi'_{j+1/2} \phi'_{j-1/2} \\+ b'_{j+1/2}u'_{j+1/2} \phi'_{j+1/2} \phi'_{j+1/2} \\ +   b'_{j+1/2}u'_{j+3/2} \phi'_{j+1/2} \phi'_{j+3/2} +   b'_{j+3/2} u'_{j+1/2} \phi'_{j+3/2} \phi'_{j+1/2} +  b'_{j+3/2}\phi'_{j+3/2}  \phi'_{j+3/2} u'_{j+3/2}   \bigg] \phi_{j+1/2} d\xi
+\end{multline}
+
+\begin{multline}
+= \frac{1}{2\Delta x}\int_{-1}^{1} \\
+ \bigg(\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} + h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \times \\\big[b'_{j-1/2}u'_{j-1/2} \phi'_{j-1/2} \phi'_{j-1/2} + b'_{j-1/2}u'_{j+1/2} \phi'_{j-1/2} \phi'_{j+1/2}  + b'_{j+1/2} u'_{j-1/2}\phi'_{j+1/2} \phi'_{j-1/2} \\+ b'_{j+1/2}u'_{j+1/2} \phi'_{j+1/2} \phi'_{j+1/2}  \big]  \\ +  \bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} + h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \times\\\big[ b'_{j+1/2}u'_{j+1/2} \phi'_{j+1/2} \phi'_{j+1/2} \\ +   b'_{j+1/2}u'_{j+3/2} \phi'_{j+1/2} \phi'_{j+3/2} +   b'_{j+3/2} u'_{j+1/2} \phi'_{j+3/2} \phi'_{j+1/2} +  b'_{j+3/2}\phi'_{j+3/2}  \phi'_{j+3/2} u'_{j+3/2}   \big]  \bigg) \phi_{j+1/2} d\xi
+\end{multline}
+
+breaking this down we have two integrals over seperate domains in particular the first term is only non zero on $\xi \in [-1,0]$ and the second is only non-zero on $\xi \in [0,1]$
+
+For the first term when $\xi \in [-1,0]$ then
+\[\phi'_{j-1/2} \phi'_{j-1/2} = \phi'_{j+1/2} \phi'_{j+1/2}  =1\]
+and
+\[\phi'_{j-1/2} \phi'_{j+1/2} = -1\]
+
+So we can simplify it to be
+
+\begin{multline*}
+\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} + h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \times \\\big[b'_{j-1/2}u'_{j-1/2} - b'_{j-1/2}u'_{j+1/2}  - b'_{j+1/2} u'_{j-1/2} + b'_{j+1/2}u'_{j+1/2}  \big]
+\end{multline*}
+
+Thus
+
+\begin{multline*}
+=\bigg[b'_{j-1/2}u'_{j-1/2} h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2b'_{j-1/2}u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\+ b'_{j-1/2}u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \\- \bigg[ b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\ + b'_{j-1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \\- \bigg[ b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\+ b'_{j+1/2} u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg]\\+ \bigg[ b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\+ b'_{j+1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg]
+\end{multline*}
+
+for the second term when $\xi \in [0,0]$ then
+\[\phi'_{j+1/2} \phi'_{j+1/2} = \phi'_{j+3/2} \phi'_{j+3/2}  =1\]
+and
+\[\phi'_{j+1/2} \phi'_{j+3/2} = -1\]
+
+\begin{multline*}
+\bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} + h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \times\\\big[ b'_{j+1/2}u'_{j+1/2}  -   b'_{j+1/2}u'_{j+3/2} -  b'_{j+3/2} u'_{j+1/2}  +  b'_{j+3/2} u'_{j+3/2}   \big] 
+\end{multline*}
+
+
+\begin{multline*}
+\bigg[b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ b'_{j+1/2}u'_{j+1/2} h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \\- \bigg[b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ b'_{j+1/2}u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \\- \bigg[b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ b'_{j+3/2} u'_{j+1/2}h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \\+ \bigg[b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ b'_{j+3/2} u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] 
+\end{multline*}
+
+So we have
+
+\begin{multline}
+\frac{1}{2\Delta x}\int_{-1}^{1} {(h')^2}b'_{\xi} u'_{\xi} \phi_{j+1/2} d\xi =  \frac{1}{2\Delta x} \times\\ \bigg( \int_{-1}^{0}\bigg\lbrace \bigg[b'_{j-1/2}u'_{j-1/2} h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2b'_{j-1/2}u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\+ b'_{j-1/2}u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \\- \bigg[ b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\ + b'_{j-1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \\- \bigg[ b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\+ b'_{j+1/2} u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg]\\+ \bigg[ b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\+ b'_{j+1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \bigg\rbrace \phi_{j+1/2} d\xi\\
++ \int_{0}^{1} \bigg\lbrace \bigg[b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ b'_{j+1/2}u'_{j+1/2} h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \\- \bigg[b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ b'_{j+1/2}u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \\- \bigg[b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ b'_{j+3/2} u'_{j+1/2}h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \\+ \bigg[b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ b'_{j+3/2} u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \bigg\rbrace \phi_{j+1/2} d\xi\bigg)
+\end{multline}
+
+
+Only the basis functions are indeed functions so we just compute them
+
+\[\int_{-1}^{0} w^+_{j-1/2}w^+_{j-1/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi)(\xi) (\xi + 1) = \frac{1}{12}\]
+\[\int_{-1}^{0} w^+_{j-1/2}w^-_{j+1/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi)(\xi + 1) (\xi + 1) = -\frac{1}{12}\]
+\[\int_{-1}^{0} w^-_{j+1/2}w^-_{j+1/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi + 1)(\xi + 1) (\xi + 1) = \frac{1}{4}\]
+
+\[\int_{0}^{1} w^+_{j+1/2}w^+_{j+1/2} \phi_{j+1/2} d\xi =\int_{0}^{1} (\xi -1)(\xi -1)(\xi - 1 ) d\xi =  - \frac{1}{4}\]
+\[\int_{0}^{1} w^-_{j+3/2}w^+_{j+1/2} \phi_{j+1/2} d\xi =\int_{0}^{1} (\xi)(\xi -1)(\xi - 1 ) d\xi = \frac{1}{12}\]
+
+\[\int_{0}^{1} w^-_{j+3/2}w^-_{j+3/2} \phi_{j+1/2} d\xi =\int_{0}^{1} (\xi)(\xi)(\xi - 1 ) d\xi = - \frac{1}{12} \]
+
+\begin{multline}
+\frac{1}{2\Delta x}\int_{-1}^{1} {(h')^2}b'_{\xi} u'_{\xi} \phi_{j+1/2} d\xi =  \frac{1}{24\Delta x} \times\\ \bigg(\bigg[b'_{j-1/2}u'_{j-1/2} h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j-1/2}u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} +3 b'_{j-1/2}u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg] \\- \bigg[ b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2} + 3b'_{j-1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg] \\- \bigg[ b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^+_{j-1/2}  - 2b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} +3 b'_{j+1/2} u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg]\\+ \bigg[ b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2}+ 3b'_{j+1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg] \\
++ \bigg[-3b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^+_{j+1/2}+ 2b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^-_{j+3/2} - b'_{j+1/2}u'_{j+1/2} h^-_{j+3/2}h^-_{j+3/2} \bigg] \\- \bigg[-3b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} + 2b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2}  - b'_{j+1/2}u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2}\bigg] \\- \bigg[-3b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^+_{j+1/2} + 2b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^-_{j+3/2}- b'_{j+3/2} u'_{j+1/2}h^-_{j+3/2}h^-_{j+3/2}\bigg] \\+ \bigg[-3b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} + 2b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2} - b'_{j+3/2} u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2}\bigg] \bigg)
+\end{multline}
+
+\begin{multline}
+\frac{1}{2\Delta x}\int_{-1}^{1} {(h')^2}b'_{\xi} u'_{\xi} \phi_{j+1/2} d\xi =  \frac{1}{24\Delta x} \times\\ \bigg(\bigg[b'_{j-1/2}u'_{j-1/2} h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j-1/2}u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} +3 b'_{j-1/2}u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg] \\- \bigg[ b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2} + 3b'_{j-1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg] \\- \bigg[ b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^+_{j-1/2}  - 2b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} +3 b'_{j+1/2} u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg]\\+ \bigg[ b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2}+ 3b'_{j+1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg] \\
++ \bigg[-3b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^+_{j+1/2}+ 2b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^-_{j+3/2} - b'_{j+1/2}u'_{j+1/2} h^-_{j+3/2}h^-_{j+3/2} \bigg] \\- \bigg[-3b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} + 2b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2}  - b'_{j+1/2}u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2}\bigg] \\- \bigg[-3b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^+_{j+1/2} + 2b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^-_{j+3/2}- b'_{j+3/2} u'_{j+1/2}h^-_{j+3/2}h^-_{j+3/2}\bigg] \\+ \bigg[-3b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} + 2b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2} - b'_{j+3/2} u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2}\bigg] \bigg)
+\end{multline}
+
+\begin{multline}
+=  \frac{1}{24\Delta x} \times\\ \bigg(\bigg[b'_{j-1/2}u'_{j-1/2} h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j-1/2}u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} +3 b'_{j-1/2}u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg] \\+\bigg[- b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} + 2b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2} - 3b'_{j-1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg] \\+\bigg[ -b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^+_{j-1/2}  + 2b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} -3 b'_{j+1/2} u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg]\\+ \bigg[ b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2}+ 3b'_{j+1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} \bigg] \\
++ \bigg[-3b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^+_{j+1/2}+ 2b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^-_{j+3/2} - b'_{j+1/2}u'_{j+1/2} h^-_{j+3/2}h^-_{j+3/2} \bigg] \\ + \bigg[3b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} -2b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2}  + b'_{j+1/2}u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2}\bigg] \\+ \bigg[3b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^+_{j+1/2} - 2b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^-_{j+3/2} + b'_{j+3/2} u'_{j+1/2}h^-_{j+3/2}h^-_{j+3/2}\bigg] \\+ \bigg[-3b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} + 2b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2} - b'_{j+3/2} u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2}\bigg] \bigg)
+\end{multline}
+
+\begin{multline}
+=  \frac{1}{24\Delta x} \times \bigg(\\b'_{j-1/2}u'_{j-1/2} h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j-1/2}u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} +3 b'_{j-1/2}u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2}  \\- b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} + 2b'_{j-1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2} - 3b'_{j-1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2}  \\ -b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^+_{j-1/2}  + 2b'_{j+1/2} u'_{j-1/2}h^+_{j-1/2}h^-_{j+1/2} -3 b'_{j+1/2} u'_{j-1/2}h^-_{j+1/2}h^-_{j+1/2} \\+  b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^+_{j-1/2} - 2b'_{j+1/2}u'_{j+1/2}h^+_{j-1/2}h^-_{j+1/2}+ 3b'_{j+1/2}u'_{j+1/2}h^-_{j+1/2}h^-_{j+1/2} \\
+-3b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^+_{j+1/2}+ 2b'_{j+1/2}u'_{j+1/2} h^+_{j+1/2}h^-_{j+3/2} - b'_{j+1/2}u'_{j+1/2} h^-_{j+3/2}h^-_{j+3/2}  \\ + 3b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} -2b'_{j+1/2}u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2}  + b'_{j+1/2}u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2} \\+ 3b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^+_{j+1/2} - 2b'_{j+3/2} u'_{j+1/2}h^+_{j+1/2}h^-_{j+3/2} + b'_{j+3/2} u'_{j+1/2}h^-_{j+3/2}h^-_{j+3/2} \\-3b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^+_{j+1/2} + 2b'_{j+3/2} u'_{j+3/2}h^+_{j+1/2}h^-_{j+3/2} - b'_{j+3/2} u'_{j+3/2}h^-_{j+3/2}h^-_{j+3/2} \bigg)
+\end{multline}
+
+Working our way across 
+first we change variable from $x$ to $\xi$
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{(h'(x))^2}{2}b_x(x) u(x) {\phi_{j+1/2}}_x(x)dx = \int_{-1}^{1} \frac{(h'(\xi))^2}{2}b'(\xi)_{\xi}\frac{d\xi}{dx}  u'(\xi) {\phi_{j+1/2}}_{\xi}(\xi)\frac{d\xi}{dx}  \frac{dx}{d\xi} dx\]
+
+\[ =\frac{1}{2 \Delta x} \int_{-1}^{1} (h'(\xi))^2b'(\xi)_{\xi} u'(\xi) {\phi_{j+1/2}}_{\xi}(\xi)dx\]
+
+Replacing with our approximations, switching $'$to mean derivatives then
+
+\[h' = h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} + h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}   \]
+
+\[b_{\xi}' = b'_{j-1/2} \phi'_{j-1/2} +  b'_{j+1/2} \phi'_{j+1/2} +  b'_{j+3/2} \phi'_{j+3/2}   \]
+
+\[u' = u_{j-1/2} \phi_{j-1/2} +  u_{j+1/2} \phi_{j+1/2} + u_{j+3/2} \phi_{j+3/2}   \]
+
+\begin{multline*}
+=\frac{1}{2 \Delta x} \int_{-1}^{1} \left(h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} + h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}\right)^2\\ \times \left(b'_{j-1/2} \phi'_{j-1/2} +  b'_{j+1/2} \phi'_{j+1/2} +  b'_{j+3/2} \phi'_{j+3/2}\right)\\ \times\left(u_{j-1/2} \phi_{j-1/2} +  u_{j+1/2} \phi_{j+1/2} + u_{j+3/2} \phi_{j+3/2} \right) \phi'_{j+1/2} d\xi
+\end{multline*}
+
+This is very similar to before but derivatives on u and v switched So we have
+
+\begin{multline}
+= \frac{1}{2\Delta x}\int_{-1}^{1} \\
+\bigg(\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} + h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \times \\\big[b'_{j-1/2}u_{j-1/2} \phi'_{j-1/2} \phi_{j-1/2} + b'_{j-1/2}u_{j+1/2} \phi'_{j-1/2} \phi_{j+1/2}  + b'_{j+1/2} u_{j-1/2}\phi'_{j+1/2} \phi_{j-1/2} \\+ b'_{j+1/2}u_{j+1/2} \phi'_{j+1/2} \phi_{j+1/2}  \big]  \\ +  \bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} + h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \times\\\big[ b'_{j+1/2}u_{j+1/2} \phi'_{j+1/2} \phi_{j+1/2} \\ +   b'_{j+1/2}u_{j+3/2} \phi'_{j+1/2} \phi_{j+3/2} +   b'_{j+3/2} u_{j+1/2} \phi'_{j+3/2} \phi_{j+1/2} +  b'_{j+3/2}u_{j+3/2} \phi'_{j+3/2}  \phi_{j+3/2}  \big]  \bigg) \phi'_{j+1/2} d\xi
+\end{multline}
+
+where again we have that the two terms here are only nonzero on each half of our domain, so we can use the gradient properties again and we have 
+
+\begin{multline}
+= \frac{1}{2\Delta x} \bigg\lbrace \int_{-1}^{0} \\
+\bigg(\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} + h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \times \\\big[b'_{j-1/2}u_{j-1/2} \phi'_{j-1/2} \phi_{j-1/2} + b'_{j-1/2}u_{j+1/2} \phi'_{j-1/2} \phi_{j+1/2}  + b'_{j+1/2} u_{j-1/2}\phi'_{j+1/2} \phi_{j-1/2} \\+ b'_{j+1/2}u_{j+1/2} \phi'_{j+1/2} \phi_{j+1/2}  \big]\phi'_{j+1/2}  d\xi \bigg) \\ +  \int_{0}^{1}\bigg(\bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} + h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \times\\\big[ b'_{j+1/2}u_{j+1/2} \phi'_{j+1/2} \phi_{j+1/2} \\ +   b'_{j+1/2}u_{j+3/2} \phi'_{j+1/2} \phi_{j+3/2} +   b'_{j+3/2} u_{j+1/2} \phi'_{j+3/2} \phi_{j+1/2} +  b'_{j+3/2}u_{j+3/2} \phi'_{j+3/2}  \phi_{j+3/2}  \big]  \bigg) \phi'_{j+1/2} d\xi \bigg\rbrace 
+\end{multline}
+
+
+\begin{multline}
+= \frac{1}{2\Delta x} \bigg\lbrace \int_{-1}^{0} \\
+\bigg(\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} + h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \times \\\big[-b'_{j-1/2}u_{j-1/2}\phi_{j-1/2} - b'_{j-1/2}u_{j+1/2} \phi_{j+1/2}  + b'_{j+1/2} u_{j-1/2} \phi_{j-1/2} \\+ b'_{j+1/2}u_{j+1/2} \phi_{j+1/2}  \big] d\xi \bigg) \\ +  \int_{0}^{1}\bigg(\bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} + h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \times\\\big[ b'_{j+1/2}u_{j+1/2} \phi_{j+1/2} \\ +   b'_{j+1/2}u_{j+3/2} \phi_{j+3/2} -  b'_{j+3/2} u_{j+1/2}\phi_{j+1/2} -  b'_{j+3/2}u_{j+3/2}\phi_{j+3/2}  \big]  \bigg) d\xi \bigg\rbrace 
+\end{multline}
+
+lets split this, so the first term is
+
+\begin{multline}
+\int_{-1}^{0}
+\bigg(\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} + h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \times \\\big[-b'_{j-1/2}u_{j-1/2}\phi_{j-1/2} - b'_{j-1/2}u_{j+1/2} \phi_{j+1/2}  + b'_{j+1/2} u_{j-1/2} \phi_{j-1/2} \\+ b'_{j+1/2}u_{j+1/2} \phi_{j+1/2}  \big] d\xi \bigg)
+\end{multline}
+
+
+
+
+\begin{multline}
+=\int_{-1}^{0}\\
+-b'_{j-1/2}u_{j-1/2}\phi_{j-1/2}\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2}\\ + h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \\- b'_{j-1/2}u_{j+1/2} \phi_{j+1/2}\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\+ h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \\+ b'_{j+1/2} u_{j-1/2} \phi_{j-1/2}\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\+ h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] \\+ b'_{j+1/2}u_{j+1/2} \phi_{j+1/2} \bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2} \\+ h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\bigg] d\xi
+\end{multline}
+
+\begin{multline}
+=\int_{-1}^{0}\\
+-b'_{j-1/2}u_{j-1/2}\bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}\phi_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2}\phi_{j-1/2}\\ + h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\phi_{j-1/2}\bigg] \\- b'_{j-1/2}u_{j+1/2} \bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}\phi_{j+1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2}\phi_{j+1/2} \\+ h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\phi_{j+1/2}\bigg] \\+ b'_{j+1/2} u_{j-1/2} \bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}\phi_{j-1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2}\phi_{j-1/2} \\+ h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\phi_{j-1/2}\bigg] \\+ b'_{j+1/2}u_{j+1/2}  \bigg[ h^+_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}w^+_{j-1/2}\phi_{j+1/2}  + 2h^+_{j-1/2}h^-_{j+1/2} w^+_{j-1/2} w^-_{j+1/2}\phi_{j+1/2} \\+ h^-_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}w^-_{j+1/2}\phi_{j+1/2}\bigg] d\xi
+\end{multline}
+
+\[\int_{-1}^{0} w^+_{j-1/2}w^+_{j-1/2} \phi_{j-1/2} = \int_{-1}^{0} (\xi)(\xi) (-\xi) = \frac{1}{4}\]
+\[\int_{-1}^{0} w^+_{j-1/2}w^-_{j+1/2} \phi_{j-1/2} = \int_{-1}^{0} (\xi)(\xi + 1) (-\xi ) = -\frac{1}{12}\]
+\[\int_{-1}^{0} w^-_{j+1/2}w^-_{j+1/2} \phi_{j-1/2} = \int_{-1}^{0} (\xi + 1)(\xi + 1) (-\xi) = \frac{1}{12}\]
+
+\[\int_{-1}^{0} w^+_{j-1/2}w^+_{j-1/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi)(\xi) (\xi + 1) = \frac{1}{12}\]
+\[\int_{-1}^{0} w^+_{j-1/2}w^-_{j+1/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi)(\xi + 1) (\xi + 1) = -\frac{1}{12}\]
+\[\int_{-1}^{0} w^-_{j+1/2}w^-_{j+1/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi + 1)(\xi + 1) (\xi + 1) = \frac{1}{4}\]
+
+
+
+So 
+
+\begin{multline}
+=
+ \frac{1}{12}\bigg(-b'_{j-1/2}u_{j-1/2}\bigg[ 3h^+_{j-1/2}h^+_{j-1/2} - 2h^+_{j-1/2}h^-_{j+1/2}  + h^-_{j+1/2}h^-_{j+1/2} \bigg] \\- b'_{j-1/2}u_{j+1/2} \bigg[ h^+_{j-1/2}h^+_{j-1/2}  - 2h^+_{j-1/2}h^-_{j+1/2}  + 3h^-_{j+1/2}h^-_{j+1/2} \bigg] \\+ b'_{j+1/2} u_{j-1/2} \bigg[ 3h^+_{j-1/2}h^+_{j-1/2} - 2h^+_{j-1/2}h^-_{j+1/2}  + h^-_{j+1/2}h^-_{j+1/2} \bigg] \\+ b'_{j+1/2}u_{j+1/2}  \bigg[ h^+_{j-1/2}h^+_{j-1/2}  - 2h^+_{j-1/2}h^-_{j+1/2}  + 3h^-_{j+1/2}h^-_{j+1/2} \bigg] \bigg)
+\end{multline}
+
+The second term is 
+
+\begin{multline} \int_{0}^{1}\bigg(\bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} + h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \times\\\big[ b'_{j+1/2}u_{j+1/2} \phi_{j+1/2} \\ +   b'_{j+1/2}u_{j+3/2} \phi_{j+3/2} -  b'_{j+3/2} u_{j+1/2}\phi_{j+1/2} -  b'_{j+3/2}u_{j+3/2}\phi_{j+3/2}  \big]  \bigg) d\xi
+\end{multline}
+
+\begin{multline} 
+\int_{0}^{1}b'_{j+1/2}u_{j+1/2} \phi_{j+1/2} \bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg]\\ + b'_{j+1/2}u_{j+3/2} \phi_{j+3/2}\bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \\
+-  b'_{j+3/2} u_{j+1/2}\phi_{j+1/2}\bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg] \\
+-  b'_{j+3/2}u_{j+3/2}\phi_{j+3/2} \bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \\+ h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\bigg]    d\xi
+\end{multline}
+
+\begin{multline} 
+\int_{0}^{1}b'_{j+1/2}u_{j+1/2} \bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2} \phi_{j+1/2} + 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2} \phi_{j+1/2}  \\+ h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2} \phi_{j+1/2} \bigg]\\ + b'_{j+1/2}u_{j+3/2}\bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}\phi_{j+3/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2}\phi_{j+3/2} \\+ h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\phi_{j+3/2}\bigg] \\
+-  b'_{j+3/2} u_{j+1/2}\bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}\phi_{j+1/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2}\phi_{j+1/2} \\+ h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\phi_{j+1/2}\bigg] \\
+-  b'_{j+3/2}u_{j+3/2} \bigg[h^+_{j+1/2}h^+_{j+1/2} w^+_{j+1/2}w^+_{j+1/2}\phi_{j+3/2}+ 2h^+_{j+1/2}h^-_{j+3/2} w^+_{j+1/2} w^-_{j+3/2}\phi_{j+3/2} \\+ h^-_{j+3/2}h^-_{j+3/2} w^-_{j+3/2}w^-_{j+3/2}\phi_{j+3/2}\bigg]    d\xi
+\end{multline}
+
+
+\[\int_{0}^{1} w^+_{j+1/2}w^+_{j+1/2} \phi_{j+1/2} d\xi =\int_{0}^{1} (\xi -1)(\xi -1)(\xi - 1 ) d\xi =  - \frac{1}{4}\]
+\[\int_{0}^{1} w^-_{j+3/2}w^+_{j+1/2} \phi_{j+1/2} d\xi =\int_{0}^{1} (\xi)(\xi -1)(\xi - 1 ) d\xi = \frac{1}{12}\]
+
+\[\int_{0}^{1} w^-_{j+3/2}w^-_{j+3/2} \phi_{j+1/2} d\xi =\int_{0}^{1} (\xi)(\xi)(\xi - 1 ) d\xi = - \frac{1}{12} \]
+
+\[\int_{0}^{1} w^+_{j+1/2}w^+_{j+1/2} \phi_{j+3/2} d\xi =\int_{0}^{1} (\xi -1)(\xi -1)(\xi ) d\xi =   \frac{1}{12}\]
+\[\int_{0}^{1} w^-_{j+3/2}w^+_{j+1/2} \phi_{j+3/2} d\xi =\int_{0}^{1} (\xi)(\xi -1)(\xi) d\xi = -\frac{1}{12}\]
+
+\[\int_{0}^{1} w^-_{j+3/2}w^-_{j+3/2} \phi_{j+3/2} d\xi =\int_{0}^{1} (\xi)(\xi)(\xi ) d\xi = \frac{1}{4} \]
+
+
+\begin{multline} 
+ = \frac{1}{12} \bigg(b'_{j+1/2}u_{j+1/2} \bigg[-3h^+_{j+1/2}h^+_{j+1/2} + 2h^+_{j+1/2}h^-_{j+3/2}  - h^-_{j+3/2}h^-_{j+3/2} \bigg]\\ + b'_{j+1/2}u_{j+3/2}\bigg[h^+_{j+1/2}h^+_{j+1/2} - 2h^+_{j+1/2}h^-_{j+3/2} + 3h^-_{j+3/2}h^-_{j+3/2}\bigg] \\
+-  b'_{j+3/2} u_{j+1/2}\bigg[-3h^+_{j+1/2}h^+_{j+1/2} + 2h^+_{j+1/2}h^-_{j+3/2}  - h^-_{j+3/2}h^-_{j+3/2} \bigg] \\
+-  b'_{j+3/2}u_{j+3/2} \bigg[h^+_{j+1/2}h^+_{j+1/2} - 2h^+_{j+1/2}h^-_{j+3/2} + 3h^-_{j+3/2}h^-_{j+3/2}\bigg] \bigg)
+\end{multline}
+
+So we have
+
+\begin{multline} 
+\frac{1}{2 \Delta x} \int_{-1}^{1} (h'(\xi))^2b'(\xi)_{\xi} u'(\xi) {\phi_{j+1/2}}_{\xi}(\xi)dx =\\  \frac{1}{24\Delta x}  \bigg( -b'_{j-1/2}u_{j-1/2}\bigg[ 3h^+_{j-1/2}h^+_{j-1/2} - 2h^+_{j-1/2}h^-_{j+1/2}  + h^-_{j+1/2}h^-_{j+1/2} \bigg] \\- b'_{j-1/2}u_{j+1/2} \bigg[ h^+_{j-1/2}h^+_{j-1/2}  - 2h^+_{j-1/2}h^-_{j+1/2}  + 3h^-_{j+1/2}h^-_{j+1/2} \bigg] \\+ b'_{j+1/2} u_{j-1/2} \bigg[ 3h^+_{j-1/2}h^+_{j-1/2} - 2h^+_{j-1/2}h^-_{j+1/2}  + h^-_{j+1/2}h^-_{j+1/2} \bigg] \\+ b'_{j+1/2}u_{j+1/2}  \bigg[ h^+_{j-1/2}h^+_{j-1/2}  - 2h^+_{j-1/2}h^-_{j+1/2}  + 3h^-_{j+1/2}h^-_{j+1/2} \bigg] \\ + b'_{j+1/2}u_{j+1/2} \bigg[-3h^+_{j+1/2}h^+_{j+1/2} + 2h^+_{j+1/2}h^-_{j+3/2}  - h^-_{j+3/2}h^-_{j+3/2} \bigg]\\ + b'_{j+1/2}u_{j+3/2}\bigg[h^+_{j+1/2}h^+_{j+1/2} - 2h^+_{j+1/2}h^-_{j+3/2} + 3h^-_{j+3/2}h^-_{j+3/2}\bigg] \\
+-  b'_{j+3/2} u_{j+1/2}\bigg[-3h^+_{j+1/2}h^+_{j+1/2} + 2h^+_{j+1/2}h^-_{j+3/2}  - h^-_{j+3/2}h^-_{j+3/2} \bigg] \\
+-  b'_{j+3/2}u_{j+3/2} \bigg[h^+_{j+1/2}h^+_{j+1/2} - 2h^+_{j+1/2}h^-_{j+3/2} + 3h^-_{j+3/2}h^-_{j+3/2}\bigg]\bigg)
+\end{multline}
+
+Now for the last term
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}} u h b_x^2 \phi_{j +1/2}dx  = \int_{-1}^{1} u' h' (b'_\xi)^2 \left(\frac{d\xi}{dx} \right)^2 \phi_{j +1/2} \frac{dx}{d\xi} d \xi =\frac{1}{\Delta x} \int_{-1}^{1} u' h' (b'_\xi)^2 \phi_{j +1/2} d \xi \]
+
+\[h' = h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} + h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}   \]
+
+\[b_{\xi}' = b'_{j-1/2} \phi'_{j-1/2} +  b'_{j+1/2} \phi'_{j+1/2} +  b'_{j+3/2} \phi'_{j+3/2}   \]
+
+\[u = u_{j-1/2} \phi_{j-1/2} +  u_{j+1/2} \phi_{j+1/2} + u_{j+3/2} \phi_{j+3/2}   \]
+
+\begin{multline*}
+\frac{1}{\Delta x} \int_{-1}^{1} \left(u_{j-1/2} \phi_{j-1/2} +  u_{j+1/2} \phi_{j+1/2} + u_{j+3/2} \phi_{j+3/2} \right)\\\times \left(h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} + h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}\right)\\\times\left(b'_{j-1/2} \phi'_{j-1/2} +  b'_{j+1/2} \phi'_{j+1/2} +  b'_{j+3/2} \phi'_{j+3/2} \right)^2 \phi_{j +1/2} d \xi 
+\end{multline*}
+
+\begin{multline*}
+\frac{1}{\Delta x} \int_{-1}^{1}\left(h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} + h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}\right)\\\times \left(u_{j-1/2} \phi_{j-1/2} +  u_{j+1/2} \phi_{j+1/2} + u_{j+3/2} \phi_{j+3/2} \right)\\\times \big(b'_{j-1/2}b'_{j-1/2} \phi'_{j-1/2} \phi'_{j-1/2} +  2b'_{j+1/2}b'_{j-1/2} \phi'_{j+1/2}\phi'_{j-1/2} + b'_{j+1/2}b'_{j+1/2} \phi'_{j+1/2}\phi'_{j+1/2} \\ + 2b'_{j+3/2}b'_{j+1/2} \phi'_{j+3/2} \phi'_{j+1/2} +  b'_{j+3/2}b'_{j+3/2} \phi'_{j+3/2} \phi'_{j+3/2} \big)\phi_{j +1/2} d \xi 
+\end{multline*}
+using when $w$'s are zero
+\begin{multline*}
+\frac{1}{\Delta x} \int_{-1}^{1} \bigg(\left(h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} \right)\left(u_{j-1/2} \phi_{j-1/2} +  u_{j+1/2} \phi_{j+1/2} \right) \\+ \left( h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}\right)\left(u_{j+1/2} \phi_{j+1/2} + u_{j+3/2} \phi_{j+3/2} \right) \bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} \phi'_{j-1/2} \phi'_{j-1/2} +  2b'_{j+1/2}b'_{j-1/2} \phi'_{j+1/2}\phi'_{j-1/2} + b'_{j+1/2}b'_{j+1/2} \phi'_{j+1/2}\phi'_{j+1/2} \\ + 2b'_{j+3/2}b'_{j+1/2} \phi'_{j+3/2} \phi'_{j+1/2} +  b'_{j+3/2}b'_{j+3/2} \phi'_{j+3/2} \phi'_{j+3/2} \big)\phi_{j +1/2} d \xi 
+\end{multline*}
+
+Again this lends itself to partitioning the interval
+
+\begin{multline*}
+\frac{1}{\Delta x} \bigg\lbrace \int_{-1}^{0} \bigg(\left(h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} \right)\left(u_{j-1/2} \phi_{j-1/2} +  u_{j+1/2} \phi_{j+1/2} \right)\bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} \phi'_{j-1/2} \phi'_{j-1/2} +  2b'_{j+1/2}b'_{j-1/2} \phi'_{j+1/2}\phi'_{j-1/2} + b'_{j+1/2}b'_{j+1/2} \phi'_{j+1/2}\phi'_{j+1/2} \\ + 2b'_{j+3/2}b'_{j+1/2} \phi'_{j+3/2} \phi'_{j+1/2} +  b'_{j+3/2}b'_{j+3/2} \phi'_{j+3/2} \phi'_{j+3/2} \big)\phi_{j +1/2} d \xi
+\\+ \int_{0}^{1} \bigg(\left( h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}\right)\left(u_{j+1/2} \phi_{j+1/2} + u_{j+3/2} \phi_{j+3/2} \right) \bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} \phi'_{j-1/2} \phi'_{j-1/2} +  2b'_{j+1/2}b'_{j-1/2} \phi'_{j+1/2}\phi'_{j-1/2} + b'_{j+1/2}b'_{j+1/2} \phi'_{j+1/2}\phi'_{j+1/2} \\ + 2b'_{j+3/2}b'_{j+1/2} \phi'_{j+3/2} \phi'_{j+1/2} +  b'_{j+3/2}b'_{j+3/2} \phi'_{j+3/2} \phi'_{j+3/2} \big)\phi_{j +1/2} d \xi \bigg\rbrace
+\end{multline*}
+
+using our gradient properties
+
+\begin{multline*}
+\frac{1}{\Delta x} \bigg\lbrace \int_{-1}^{0} \bigg(\left(h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} \right)\left(u_{j-1/2} \phi_{j-1/2} +  u_{j+1/2} \phi_{j+1/2} \right)\bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} - 2b'_{j+1/2}b'_{j-1/2}+ b'_{j+1/2}b'_{j+1/2}  - 2b'_{j+3/2}b'_{j+1/2}  +  b'_{j+3/2}b'_{j+3/2} \big)\phi_{j +1/2} d \xi
+\\+ \int_{0}^{1} \bigg(\left( h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}\right)\left(u_{j+1/2} \phi_{j+1/2} + u_{j+3/2} \phi_{j+3/2} \right) \bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} -  2b'_{j+1/2}b'_{j-1/2} + b'_{j+1/2}b'_{j+1/2} - 2b'_{j+3/2}b'_{j+1/2}  +  b'_{j+3/2}b'_{j+3/2} \big)\phi_{j +1/2} d \xi \bigg\rbrace
+\end{multline*}
+
+The first term is 
+
+\begin{multline*}
+\int_{-1}^{0} \bigg(\left(h^+_{j-1/2} w^+_{j-1/2} + h^-_{j+1/2} w^-_{j+1/2} \right)\left(u_{j-1/2} \phi_{j-1/2} +  u_{j+1/2} \phi_{j+1/2} \right)\bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} - 2b'_{j+1/2}b'_{j-1/2}+ b'_{j+1/2}b'_{j+1/2}  - 2b'_{j+3/2}b'_{j+1/2}  +  b'_{j+3/2}b'_{j+3/2} \big)\phi_{j +1/2} d \xi
+\end{multline*}
+
+\begin{multline*}
+=\int_{-1}^{0} \bigg(\left(u_{j-1/2}h^+_{j-1/2} \phi_{j-1/2} w^+_{j-1/2} + u_{j-1/2}h^-_{j+1/2} \phi_{j-1/2} w^-_{j+1/2} \right) \\+ \left(u_{j+1/2}h^+_{j-1/2} \phi_{j+1/2} w^+_{j-1/2} + u_{j+1/2}h^-_{j+1/2} \phi_{j+1/2} w^-_{j+1/2} \right)\bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} - 2b'_{j+1/2}b'_{j-1/2}+ b'_{j+1/2}b'_{j+1/2}  - 2b'_{j+3/2}b'_{j+1/2}  +  b'_{j+3/2}b'_{j+3/2} \big)\phi_{j +1/2} d \xi
+\end{multline*}
+
+
+\[\int_{-1}^{0} w^+_{j-1/2}\phi_{j-1/2} \phi_{j+1/2} = \int_{-1}^{0} (-\xi)(-\xi)(\xi+1) = \frac{1}{12}\]
+\[\int_{-1}^{0} w^-_{j+1/2}\phi_{j-1/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi+ 1)(-\xi)(\xi+1)  = \frac{1}{12} \]
+\[\int_{-1}^{0} w^+_{j-1/2}\phi_{j+1/2} \phi_{j+1/2} = \int_{-1}^{0} (-\xi)(\xi+1)(\xi+1)  = \frac{1}{12}\]
+\[\int_{-1}^{0} w^-_{j+1/2}\phi_{j+1/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi+1)(\xi+1)(\xi+1) = \frac{1}{4}\]
+
+So we have
+
+\begin{multline*}
+= \frac{1}{12}\bigg(\left(u_{j-1/2}h^+_{j-1/2} + u_{j-1/2}h^-_{j+1/2} \right) + \left(u_{j+1/2}h^+_{j-1/2} + 3u_{j+1/2}h^-_{j+1/2}\right)\bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} - 2b'_{j+1/2}b'_{j-1/2}+ b'_{j+1/2}b'_{j+1/2}  - 2b'_{j+3/2}b'_{j+1/2}  +  b'_{j+3/2}b'_{j+3/2} \big)
+\end{multline*}
+
+The second term is
+
+\begin{multline*}
+\int_{0}^{1} \bigg(\left( h^+_{j+1/2} w^+_{j+1/2} + h^-_{j+3/2} w^-_{j+3/2}\right)\left(u_{j+1/2} \phi_{j+1/2} + u_{j+3/2} \phi_{j+3/2} \right) \bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} -  2b'_{j+1/2}b'_{j-1/2} + b'_{j+1/2}b'_{j+1/2} - 2b'_{j+3/2}b'_{j+1/2}  +  b'_{j+3/2}b'_{j+3/2} \big)\phi_{j +1/2} d \xi
+\end{multline*}
+
+\begin{multline*}
+\int_{0}^{1} \bigg(\left( u_{j+1/2} h^+_{j+1/2} \phi_{j+1/2}w^+_{j+1/2} + u_{j+1/2} h^-_{j+3/2} \phi_{j+1/2}w^-_{j+3/2}\right) \\+ \left( u_{j+3/2} h^+_{j+1/2} \phi_{j+3/2}w^+_{j+1/2} + u_{j+3/2}h^-_{j+3/2} \phi_{j+3/2}w^-_{j+3/2}\right)\bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} -  2b'_{j+1/2}b'_{j-1/2} + b'_{j+1/2}b'_{j+1/2} - 2b'_{j+3/2}b'_{j+1/2}  +  b'_{j+3/2}b'_{j+3/2} \big)\phi_{j +1/2} d \xi
+\end{multline*}
+\[\int_{-1}^{0} w^+_{j+1/2}\phi_{j+1/2} \phi_{j+1/2} = \int_{-1}^{0} (1-\xi)(1-\xi)(1-\xi) = \frac{1}{4}\]
+\[\int_{-1}^{0} w^-_{j+3/2}\phi_{j+1/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi)(1-\xi)(1-\xi)  = \frac{1}{12} \]
+\[\int_{-1}^{0} w^+_{j+1/2}\phi_{j+3/2} \phi_{j+1/2} = \int_{-1}^{0} (1-\xi)(\xi)(1-\xi)  = \frac{1}{12}\]
+\[\int_{-1}^{0} w^-_{j+3/2}\phi_{j+3/2} \phi_{j+1/2} = \int_{-1}^{0} (\xi)(\xi)(1-\xi) = \frac{1}{12}\]
+
+\begin{multline*}
+\frac{1}{12} \bigg(\left( 3u_{j+1/2} h^+_{j+1/2}  + u_{j+1/2} h^-_{j+3/2} +  u_{j+3/2} h^+_{j+1/2}  + u_{j+3/2}h^-_{j+3/2}\right)\bigg)\\\times \big(b'_{j-1/2}b'_{j-1/2} -  2b'_{j+1/2}b'_{j-1/2} + b'_{j+1/2}b'_{j+1/2} - 2b'_{j+3/2}b'_{j+1/2}  +  b'_{j+3/2}b'_{j+3/2} \big)
+\end{multline*}
+
+So
+
+\begin{multline*}
+\frac{1}{\Delta x} \int_{-1}^{1} u' h' (b'_\xi)^2 \phi_{j +1/2} d \xi = \\
+\frac{1}{12\Delta x} 
+\bigg\lbrace\bigg(b'_{j-1/2}b'_{j-1/2} - 2b'_{j+1/2}b'_{j-1/2}+ b'_{j+1/2}b'_{j+1/2}  - 2b'_{j+3/2}b'_{j+1/2}  +  b'_{j+3/2}b'_{j+3/2} \bigg)\\ \times\bigg( u_{j-1/2}h^+_{j-1/2} + u_{j-1/2}h^-_{j+1/2} + u_{j+1/2}h^+_{j-1/2} + 3u_{j+1/2}h^-_{j+1/2} \\+ 3u_{j+1/2} h^+_{j+1/2}  + u_{j+1/2} h^-_{j+3/2} +  u_{j+3/2} h^+_{j+1/2}  + u_{j+3/2}h^-_{j+3/2} \bigg) \bigg\rbrace
+\end{multline*}
+
+\end{document}
+

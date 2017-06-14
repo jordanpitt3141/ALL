@@ -1,0 +1,140 @@
+In[1]:=                                                                      
+        hxt = 
+              h[x,t]
+
+
+Out[1]= h[x, t]
+
+In[2]:=                                                                      
+        bxt  
+        uxt =
+              u[x,t]
+
+
+Out[2]= u[x, t]
+
+In[3]:=                                                                      
+        bx = b[x]
+
+Out[3]= b[x]
+
+
+In[9]:=                                                                 
+        Gamman[x_,t_] = D[uxt,x]^2 - uxt*D[uxt,{x,2}] - D[uxt,x,t]      
+
+         (1,0)      2    (1,1)                  (2,0)
+Out[9]= u     [x, t]  - u     [x, t] - u[x, t] u     [x, t]
+
+In[10]:= Phin[x_,t_] = D[bx,x]*(D[uxt,t]+ uxt*D[uxt,x]) + uxt^2*D[bx,{x,2}]
+
+                2                  (0,1)                  (1,0)
+Out[10]= u[x, t]  b''[x] + b'[x] (u     [x, t] + u[x, t] u     [x, t])
+
+
+In[11]:= conh[x_,t_] = D[hxt,t] + uxt*D[hxt,x] + hxt*D[uxt,x]
+
+          (0,1)                  (1,0)                  (1,0)
+Out[11]= h     [x, t] + u[x, t] h     [x, t] + h[x, t] u     [x, t]
+
+
+In[61]:= conu[x_,t_] = D[uxt,t] +  uxt*D[uxt,x] + g*D[hxt,x] + hxt*D[hxt,x]*Gamma
+n[x,t] + (hxt^2)/3*D[Gamman[x,t],x] + D[hxt,x]*Phin[x,t] + hxt*0.5*D[Phin[x,t],x
+] + hxt*D[bx,x]*(g + hxt/2*Gamman[x,t] + Phin[x,t])                             
+
+          (0,1)            (1,0)                  (1,0)
+Out[61]= u     [x, t] + g h     [x, t] + u[x, t] u     [x, t] + 
+ 
+      (1,0)               2
+>    h     [x, t] (u[x, t]  b''[x] + 
+ 
+                (0,1)                  (1,0)
+>       b'[x] (u     [x, t] + u[x, t] u     [x, t])) + 
+ 
+              (1,0)         (1,0)      2    (1,1)
+>    h[x, t] h     [x, t] (u     [x, t]  - u     [x, t] - 
+ 
+                 (2,0)
+>       u[x, t] u     [x, t]) + h[x, t] b'[x] 
+ 
+                  2                  (0,1)                  (1,0)
+>     (g + u[x, t]  b''[x] + b'[x] (u     [x, t] + u[x, t] u     [x, t]) + 
+ 
+                  (1,0)      2    (1,1)                  (2,0)
+        h[x, t] (u     [x, t]  - u     [x, t] - u[x, t] u     [x, t])
+>       -------------------------------------------------------------) + 
+                                      2
+ 
+                         2  (3)                        (1,0)
+>    0.5 h[x, t] (u[x, t]  b   [x] + 2 u[x, t] b''[x] u     [x, t] + 
+ 
+                 (0,1)                  (1,0)
+>       b''[x] (u     [x, t] + u[x, t] u     [x, t]) + 
+ 
+                (1,0)      2    (1,1)                  (2,0)
+>       b'[x] (u     [x, t]  + u     [x, t] + u[x, t] u     [x, t])) + 
+ 
+            2   (1,0)        (2,0)          (2,1)                  (3,0)
+     h[x, t]  (u     [x, t] u     [x, t] - u     [x, t] - u[x, t] u     [x, t])
+>    --------------------------------------------------------------------------
+                                         3
+
+Conh after substitutions and FullSimplify
+
+         FullSimplify[%%, {l != 0, c != 0, hz != 0}]
+
+           (0,1)                      (1,0)                      (1,0)
+Out[70]= hp     [x, t] + e up[x, t] hp     [x, t] + e hp[x, t] up     [x, t] ==   0
+
+
+In[79]:= FullSimplify[%,{l != 0, c!= 0, s!= 0, e!=0} ]                          
+
+           2           2           2           (1,0)
+Out[79]= (c  (s (gp + e  l up[x, t]  b''[x]) hp     [x, t] + 
+ 
+            (0,1)                        (1,0)
+>         up     [x, t] (e + e s b'[x] hp     [x, t]) + 
+ 
+           2                         (1,0)          (1,0)
+>         e  up[x, t] (1 + s b'[x] hp     [x, t]) up     [x, t] + 
+ 
+                               2    (0,1)                      (1,0)
+>         s hp[x, t] (e l b'[x]  (up     [x, t] + e up[x, t] up     [x, t]) + 
+ 
+                                 2         2                  (1,0)      2
+>            b'[x] (gp l + e (e l  up[x, t]  b''[x] + 0.5 e up     [x, t]  + 
+ 
+                         (1,1)                          (2,0)
+>                  0.5 up     [x, t] + 0.5 e up[x, t] up     [x, t])) + 
+ 
+                       2         2  (3)                     (0,1)
+>            e (0.5 e l  up[x, t]  b   [x] + 0.5 l b''[x] up     [x, t] + 
+ 
+                    (1,0)            (1,0)      2        (1,1)
+>               s hp     [x, t] (e up     [x, t]  - 1. up     [x, t]) + 
+ 
+                                           (1,0)
+>               e up[x, t] (1.5 l b''[x] up     [x, t] - 
+ 
+                          (1,0)         (2,0)
+>                  1. s hp     [x, t] up     [x, t]))) + 
+ 
+             2         2               (1,0)         (2,0)
+>         e s  hp[x, t]  (0.333333 e up     [x, t] up     [x, t] + 
+ 
+                              (1,0)      2         (1,1)
+>            l b'[x] (0.5 e up     [x, t]  - 0.5 up     [x, t] - 
+ 
+                                 (2,0)                     (2,1)
+>               0.5 e up[x, t] up     [x, t]) - 0.333333 up     [x, t] - 
+ 
+                                   (3,0)
+>            0.333333 e up[x, t] up     [x, t]))) / l == 0
+
+
+
+
+
+
+
+
+

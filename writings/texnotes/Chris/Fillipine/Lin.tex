@@ -1,0 +1,93 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+
+
+\section{Linearisation}
+
+So we do a linearisation for a pertubation on still water so (keep $O(\epsilon)$ terms)
+
+\[h(x,t) = H + \epsilon\eta(x,t)\]
+\[h = H + \epsilon\eta\]
+
+\[u(x,t) = 0 + \epsilon v(x,t)\]
+
+\[u =  \epsilon v\]
+
+We start with $G$
+
+\[G = uh - \left(\frac{h^3}{3} u_x\right)_x\]
+
+\[G = \left(\epsilon v\right)\left(H + \epsilon\eta\right) - h^2h_x u_x  - \left(\frac{h^3}{3} u_{xx}\right)\]
+
+\[G = \epsilon v H + \epsilon^2 v \eta  - \left(H + \epsilon\eta\right)^2 \epsilon\eta_x \epsilon v_x  - \left( \frac{H + \epsilon\eta^3}{3} \right) \epsilon v_{xx}\]
+
+\[G = \epsilon v H   - \left( \frac{H + \epsilon\eta}{3} \right)^3 \epsilon v_{xx}\]
+
+\[G = \epsilon v H   -  \frac{H^3}{3} \epsilon v_{xx}\]
+
+Mass equation
+
+\[h_t + uh_x + u_xh = 0\]
+ 
+
+\[\left(H + \epsilon\eta\right)_t + \epsilon v\left(H + \epsilon\eta\right)_x + \epsilon v_x\left(H + \epsilon\eta\right) = 0\]
+
+\[\epsilon\eta_t + \epsilon H v_x = 0\]
+
+Momentum equation:
+
+\[G_t + \left(Gu + \frac{gh^2}{2} - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[\left(uh - \left(\frac{h^3}{3} u_x\right)_x\right)_t + \left(\left(uh - \left(\frac{h^3}{3} u_x\right)_x\right)u + \frac{gh^2}{2} - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[\left(uh\right)_t - \left(\frac{h^3}{3} u_x\right)_{xt} + \left(u^2h - u\left(\frac{h^3}{3} u_x\right)_x + \frac{gh^2}{2} - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[u_th + uh_t- \left(\frac{h^3}{3} u_x\right)_{xt} + \left(u^2h\right)_x + \left(- u\left(\frac{h^3}{3} u_x\right)_x \right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \left(h^2h_x u_x +\frac{h^3}{3} u_{xx} \right)_{t} + \left(u^2h\right)_x + \left(- u\left(\frac{h^3}{3} u_x\right)_x \right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt} + \left(u^2h\right)_x + \left(- u\left(\frac{h^3}{3} u_x\right)_x \right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt} + 2uu_xh + u^2h_x + \left(- u\left(\frac{h^3}{3} u_x\right)_x \right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt} + \left(- u\left(\frac{h^3}{3} u_x\right)_x \right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt} + \left(- u\left(h^2h_xu_x + \frac{h^3}{3} u_{xx}\right)\right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt} + \left(- uh^2h_xu_x -u \frac{h^3}{3} u_{xx}\right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt} + \left(- uh^2h_xu_x \right)_x + \left(-u \frac{h^3}{3} u_{xx}\right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt} + \left(- u_xh^2h_xu_x \right)  + \left(- uhh_xh_xu_x \right)_x + \left(- uh^2h_{xx}u_x \right) + \left(- uh^2h_xu_{xx} \right) + \left(-u \frac{h^3}{3} u_{xx}\right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt}  + \left(-u \frac{h^3}{3} u_{xx}\right)_x + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt}  - \epsilon v \frac{(h + \epsilon \eta)^3}{3} \epsilon v_{xxx} + \left(\frac{gh^2}{2} \right)_x + \left( - \frac{2h^3}{3} u_x u_x\right)_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt}  + \left(\frac{gh^2}{2} \right)_x  = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt}  + gH\epsilon \eta_x  = 0\]
+
+So we have
+
+\[G = \epsilon v H   -  \frac{H^3}{3} \epsilon v_{xx}\]
+
+\[\epsilon\eta_t + \epsilon H v_x = 0\]
+
+\[H\epsilon v_t - \frac{H^3}{3}\epsilon v_{xxt}  + gH\epsilon \eta_x  = 0\]
+
+using u's instead of v's, incorporating epsilon into its relevant term and using h instead of H we get. 
+
+
+\[G = uh  -  \frac{h^3}{3} u_{xx}\]
+
+\[\eta_t + h u_x = 0\]
+
+\[h u_t - \frac{h^3}{3} u_{xxt}  + gh \eta_x  = 0\]
+
+
+\end{document}

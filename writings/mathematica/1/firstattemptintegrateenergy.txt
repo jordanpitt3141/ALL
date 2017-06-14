@@ -1,0 +1,1635 @@
+Script started on Tue 29 Mar 2016 11:29:03 AEDT
+]0;jap251@raijin4:~[?1034h[jap251@raijin4 ~]$ math
+Mathematica 9.0 for Linux x86 (64-bit)
+Copyright 1988-2013 Wolfram Research, Inc.
+
+[1GIn[1]:=                                                                         [1G[8C[9GP[9G[1C[10Gh[10G[1C[11Gi[11G[1C[12G[[12G[1C[13G][13G[1C[1D[13Gx][13G[1C[14G_][14G[1C[15G,][15G[1C[16Gz][16G[1C[17G_][17G[1C[18G,][18G[1C[19Gt][19G[1C[20G_][20G[1C[1C[1C[23G=[23G[1C[1C[25GD[25G[1C[26G[[26G[1C[27G][27G[1C[1D[27Gb][27G[1C[28G[][28G[1C[30G][29G[1C[1D[29Gx[29G[31G][29G[1C[30G,[30G[32G][30G[1C[31Gt[31G[33G][31G[1C[1C[1D[1D[31G][31G[33G [31G[1D[30G][30G[32G [30G[1C[31G,][31G[1C[32Gx][32G[1C[1C[34G*[34G[1C[35Gu[35G[1C[36G[[36G[1C[37G][37G[1C[1D[37Gx][37G[1C[38G,][38G[1C[39Gz][39G[1C[40G,][40G[1C[41Gt][41G[1C[1C[43G*[43G[1C[44GD[44G[1C[45G[[45G[1C[46G][46G[1C[1D[46Gu][46G[1C[47G,][47G[1C[1D[47G] [47G[47G[][47G[1C[49G][48G[1C[1D[48Gx[48G[50G][48G[1C[49G,[49G[51G][49G[1C[50Gz[50G[52G][50G[1C[51G,[51G[53G][51G[1C[52Gt[52G[54G][52G[1C[1C[54G,][54G[1C[55Gx][55G[1C[1C[1C[58G+[58G[1C[1C[60Gu[60G[1C[61G[[61G[1C[62G][62G[1C[1D[62Gx][62G[1C[63G,][63G[1C[64Gz][64G[1C[65G,][65G[1C[66Gt][66G[1C[1C[68G^[68G[1C[69G2[69G[1C[70GD[70G[1C[71G[[71G[1C[72G][72G[1C[1D[72Gb][72G[1C[73G[][73G[1C[75G][74G[1C[1D[1D[1D[1D[1D[70G*D[b[[70G[76G][70G[1C[1C[1C[1C[1C[75Gx[75G[77G][75G[1C[1C[77G,][77G[1C[78G{][78G[1C[79G}][79G
+[1G                                                                                [79G[1A[1C[1D[79Gx}[79G
+[1G][79G[1A[1C[80G,[80G
+[1G}][80G[79D[1G2}][1G[1C[1C[1C[1C[5G+[5G[1C[1C[7GD[7G[1C[8G[[8G[1C[9G][9G[1C[1D[9Gb][9G[1C[10G[][10G[1C[12G][11G[1C[1D[11Gx[11G[13G][11G[1C[1C[13G,][13G[1C[14Gx][14G[1C[1C[16G*[16G[1C[17GD[17G[1C[18G[[18G[1C[19G][19G[1C[1D[19Gu][19G[1C[20G[][20G[1C[22G][21G[1C[1D[21Gx[21G[23G][21G[1C[22G,[22G[24G][22G[1C[23Gz[23G[25G][23G[1C[24G,[24G[26G][24G[1C[25Gt[25G[27G][25G[1C[1C[27G,][27G[1C[28Gt][28G[1C[1C
+
+                  2                 (0,0,1)
+Out[1]= u[x, z, t]  b''[x] + b'[x] u       [x, z, t] + 
+ 
+                       (1,0,0)
+>    u[x, z, t] b'[x] u       [x, z, t]
+
+[1GIn[2]:=                                                                         [1G[8C[9GP[9G[1C[10Gh[10G[1C[11Gi[11G[1C[12G[[12G[1C[13G][13G[1C[1D[13Gx][13G[1C[14G,][14G[1C[15Gz][15G[1C[16G,][16G[1C[17Gt][17G[1C[1C
+
+                  2                 (0,0,1)
+Out[2]= u[x, z, t]  b''[x] + b'[x] u       [x, z, t] + 
+ 
+                       (1,0,0)
+>    u[x, z, t] b'[x] u       [x, z, t]
+
+[1GIn[3]:=                                                                         [1G[8C[9GG[9G[1C[10Ga[10G[1C[11Gm[11G[1C[12Gm[12G[1C[13Ga[13G[1C[14G[[14G[1C[15G][15G[1C[1D[15Gx][15G[1C[16G_][16G[1C[17G,][17G[1C[18Gz][18G[1C[19G_][19G[1C[20G,][20G[1C[21Gt][21G[1C[22G_][22G[1C[1C[1C[25G=[25G[1C[1C[27GD[27G[1C[28G[[28G[1C[29G][29G[1C[1D[29Gu][29G[1C[30G[][30G[1C[32G][31G[1C[1D[31Gx[31G[33G][31G[1C[32G,[32G[34G][32G[1C[33Gz[33G[35G][33G[1C[34G,[34G[36G][34G[1C[35Gt[35G[37G][35G[1C[1C[37G,][37G[1C[38Gx][38G[1C[1C[40G^[40G[1C[41G2[41G[1C[1C[43G-[43G[1C[1C[45Gu[45G[1C[46G[[46G[1C[47G][47G[1C[1D[47Gx][47G[1C[48G,][48G[1C[49Gz][49G[1C[50G,][50G[1C[51Gt][51G[1C[1C[1D[52G [52G[1D[51G [51G[1D[50G [50G[1D[49G [49G[1D[48G [48G[1D[47G [47G[1D[46G [46G[1D[45G [45G[1D[1D[43G [43G[1D[1D[41G [41G[1D[40G [40G[1D[39G [39G[1D[38G [38G[1D[37G [37G[1D[36G [36G[1D[35G [35G[1D[34G [34G[1D[33G [33G[1D[32G [32G[1D[31G [31G[1D[30G [30G[1D[29G [29G[1D[28G [28G[1D[27G [27G[1D[1D[25G [25G[1D[1D[23G [23G[1D[22G [22G[1D[21G [21G[1D[20G [20G[1D[19G [19G[1D[18G [18G[1D[17G [17G[1D[16G [16G[1D[15G [15G[1D[14G [14G[1D[13G [13G[1D[12G [12G[1D[11G [11G[1D[10G [10G[1D[9G [9G[9Gu[9G[1C[1C[11G=[11G[1C[1C[13Gu[13G[1C[14G[[14G[1C[15G][15G[1C[1D[15Gx][15G[1C[16G,][16G[1C[17Gz][17G[1C[18G,][18G[1C[19Gt][19G[1C[1C
+
+$RecursionLimit::reclim: Recursion depth of 1024 exceeded.
+
+Out[3]= Hold[u[x, z, t]][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                       z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                 z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>          x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t]
+
+[1GIn[4]:=                                                                         [1G[8C[9Gu[9G[1C[10Gx[10G[1C[11Gz[11G[1C[12Gt[12G[1C[1C[14G=[14G[1C[1C[16Gu[16G[1C[17G[[17G[1C[18G][18G[1C[1D[1D[1C[18Gx][18G[1C[19G,][19G[1C[20Gz][20G[1C[21G,][21G[1C[22Gt][22G[1C[1C
+
+$RecursionLimit::reclim: Recursion depth of 1024 exceeded.
+
+Out[4]= Hold[u[x, z, t]][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                        z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                  z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>           x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>    z, t]
+
+[1GIn[5]:=                                                                         [1G[8C[9GP[9G[1C[10Gh[10G[1C[11Gi[11G[1C
+
+Out[5]= Phi
+
+[1GIn[6]:=                                                                         [1G[8C[9GG[9G[1C[10Ga[10G[1C[11Gm[11G[1C[12Gm[12G[1C[13Ga[13G[1C
+
+Out[6]= Gamma
+
+[1GIn[7]:=                                                                         [1G[8C[9GP[9G[1C[10Gh[10G[1C[11Gi[11G[1C[12G[[12G[1C[13G][13G[1C[1D[13Gx][13G[1C[14G,][14G[1C[15Gz][15G[1C[16G,][16G[1C[17Gt][17G[1C[1C
+
+$RecursionLimit::reclim: Recursion depth of 1024 exceeded.
+
+Out[7]= b''[x] Power[Hold[u[x, z, t]][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                            x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                            t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, 
+ 
+>                            z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>                           x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, 
+ 
+>                      t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+>               x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][x, z, t][
+ 
+                                        (0,0,1)
+>        x, z, t][x, z, t], 2] + b'[x] u       [x, z, t] + 
+ 
+                       (1,0,0)
+>    u[x, z, t] b'[x] u       [x, z, t]
+
+[1GIn[8]:=                                                                         [1G[8C[9GC[9G[1C[10Gl[10G[1C[11Ge[11G[1C[12Ga[12G[1C[13Gr[13G[1C[14G[[14G[1C[15G][15G[1C[1D[15Gu][15G[1C[1C
+
+[1GIn[9]:=                                                                         [1G[8C[1GIn[9]:=                                                                         [9G[8D[1GIn[9]:=                                                                         [1G[8C[9GClear[u][9G[8C[8D[1GIn[9]:=                                                                         [9G[8D[1GIn[9]:=                                                                         [1G[8C[9GPhi[x,z,t][9G[10C
+
+                  2                 (0,0,1)
+Out[9]= u[x, z, t]  b''[x] + b'[x] u       [x, z, t] + 
+ 
+                       (1,0,0)
+>    u[x, z, t] b'[x] u       [x, z, t]
+
+[1GIn[10]:=                                                                        [1G[9C[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[10D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GClear[u][10G[8C[8D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[10D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GGamma[10G[5C[5D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GPhi[10G[3C[3D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10Guxzt[10G[15G=[10G[17Gu[x,z,t][10G[15C[15D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GPhi[10G[3C[3D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GGamma[10G[5C[5D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[10D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GGamma[10G[5C[15G[[15G[1C[16G][16G[1C[7D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[1D[1D[8D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GClear[u][10G[8C[8D[1GIn[10]:=                                                                        [10G[9D[1GIn[10]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[1D[19G [19G[1D[18G [18G[1D[17G [17G[1D[16G [16G[1D[15G [15G[1D[14G [14G[1D[13G [13G[1D[12G [12G[1D[11G [11G[1D[10G [10G[10Gu[10G[1C[11Gx[11G[1C[12Gz[12G[1C[13Gt[13G[1C[1C[15G=[15G[1C[1C[17Gu[17G[1C[18G[[18G[1C[19G][19G[1C[1D[19Gx][19G[1C[20G,][20G[1C[21Gz][21G[1C[22G,][22G[1C[23Gt][23G[1C[1C
+
+Out[10]= u[x, z, t]
+
+[1GIn[11]:=                                                                        [1G[9C[10Gb[10G[1C[11Gx[11G[1C[12Gt[12G[1C[1C[14G=[14G[1C[1C[16Gu[16G[1C[1D[16G [16G[16Gb[16G[1C[17G[[17G[1C[18G][18G[1C[1D[18Gx][18G[1C[19G,][19G[1C[20Gt][20G[1C[1C
+
+Out[11]= b[x, t]
+
+[1GIn[12]:=                                                                        [1G[9C[10GG[10G[1C[11Ga[11G[1C[12Gm[12G[1C[13Gm[13G[1C[14Ga[14G[1C[15G[[15G[1C[16G][16G[1C[1D[16Gx][16G[1C[17G_][17G[1C[18G,][18G[1C[19Gz][19G[1C[20G_][20G[1C[21G,][21G[1C[22Gt][22G[1C[23G_][23G[1C[1C[1C[26G=[26G[1C[1C[28GD[28G[1C[29G[[29G[1C[30G][30G[1C[1D[30Gu][30G[1C[31Gx][31G[1C[32Gz][32G[1C[33Gt][33G[1C[34G,][34G[1C[35Gx][35G[1C[1C[37G^[37G[1C[38G2[38G[1C[1C[40G-[40G[1C[1C[42Gu[42G[1C[43Gx[43G[1C[44Gz[44G[1C[45Gt[45G[1C[46G*[46G[1C[47G([47G[1C[48G)[48G[1C[1D[48GD)[48G[1C[49G[)[49G[1C[50G])[50G[1C[1D[50Gu])[50G[1C[51Gx])[51G[1C[52Gz])[52G[1C[53Gt])[53G[1C[54G,])[54G[1C[55G{])[55G[1C[56G}])[56G[1C[1D[56Gx}])[56G[1C[57G,}])[57G[1C[58G2}])[58G[1C[1C[1C[1C[1C[63G-[63G[1C[1C[65GD[65G[1C[66G[[66G[1C[67G][67G[1C[1D[67Gu][67G[1C[68Gx][68G[1C[69Gz][69G[1C[70Gt][70G[1C[71G,][71G[1C[72G{][72G[1C[73G}][73G[1C[1D[73Gx}][73G[1C[74G,}][74G[1C[75G1}][75G[1C[1C[77G,][77G[1C[78G{][78G[1C[79G}][79G
+[1G                                                                                [79G[1A[1C[1D[79Gt}[79G
+[1G][79G[1A[1C[80G,[80G
+[1G}][80G[79D[1G1}][1G[1C[1C[1C
+
+Set::write: Tag Gamma in Gamma[x_, z_, t_] is Protected.
+
+          (1,0,0)         2    (1,0,1)                        (2,0,0)
+Out[12]= u       [x, z, t]  - u       [x, z, t] - u[x, z, t] u       [x, z, t]
+
+[1GIn[13]:=                                                                        [1G[9C[1GIn[13]:=                                                                        [10G[9D[1GIn[13]:=                                                                        [1G[9C[10GGamma[x_,z_,t_][10G[26G=[10G[28GD[uxzt,x]^2[10G[40G-[10G[42Guxzt*(D[uxzt,{x,2}])[10G[63G-[10G[65GD[uxzt,{x,1},{t,[10G
+[1G1}]                                                                             [10G[6D[1D[1D[1D[1A[79C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1C[15Gn[x_,z_,t_] = D[uxzt,x]^2 - uxzt*(D[uxzt,{x,2}]) - D[uxzt,{x,1},{t[15G
+[1G,1}][15G[1A[1C
+[11D
+
+          (1,0,0)         2    (1,0,1)                        (2,0,0)
+Out[13]= u       [x, z, t]  - u       [x, z, t] - u[x, z, t] u       [x, z, t]
+
+[1GIn[14]:=                                                                        [1G[9C[10Gp[10G[1C[11Ge[11G[1C[12Gp[12G[1C[13Gs[13G[1C[14G[[14G[1C[15G][15G[1C[1D[15Ge][15G[1C[16G_][16G[1C[1C[1D[1D[16Gp_][16G[1C[1C[1C[1C[20G=[20G[1C[1C[22Gp[22G[1C[23G*[23G[1C[24Gg[24G[1C[25G*[25G[1C[26Ge[26G[1C[27Gp[27G[1C[28G*[28G[1C[1D[28G [28G[1C[29G+[29G[1C[1C[31G0[31G[1C[32G.[32G[1C[33G5[33G[1C[34G*[34G[1C[35Gp[35G[1C[36G*[36G[1C[37Ge[37G[1C[38Gp[38G[1C[39G*[39G[1C[40G([40G[1C[41G)[41G[1C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1C[1D[16G_] = p*g*ep + 0.5*p*ep*() [16G[1D[15G_] = p*g*ep + 0.5*p*ep*() [15G[15Gh_] = p*g*ep + 0.5*p*ep*()[15G[1C[1C[17G,] = p*g*ep + 0.5*p*ep*()[17G[1C[1D[1D[1D[15G_,] = p*g*ep + 0.5*p*ep*() [15G[15Gh_,] = p*g*ep + 0.5*p*ep*()[15G[1C[1C[1C[18Gb] = p*g*ep + 0.5*p*ep*()[18G[1C[19G_] = p*g*ep + 0.5*p*ep*()[19G[1C[20G,] = p*g*ep + 0.5*p*ep*()[20G[1C[21Gz] = p*g*ep + 0.5*p*ep*()[21G[1C[22G_] = p*g*ep + 0.5*p*ep*()[22G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1D[32G + 0.5*p*ep*() [32G[1D[31G + 0.5*p*ep*() [31G[31G( + 0.5*p*ep*()[31G[1C[32G) + 0.5*p*ep*()[32G[1C[1D[32Gh) + 0.5*p*ep*()[32G[1C[33G ) + 0.5*p*ep*()[33G[1C[34G+) + 0.5*p*ep*()[34G[1C[35G ) + 0.5*p*ep*()[35G[1C[36Gb) + 0.5*p*ep*()[36G[1C[37G ) + 0.5*p*ep*()[37G[1C[38G+) + 0.5*p*ep*()[38G[1C[39G ) + 0.5*p*ep*()[39G[1C[40Gz) + 0.5*p*ep*()[40G[1C[1D[1D[1D[38G z) + 0.5*p*ep*() [38G[38G- z) + 0.5*p*ep*()[38G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1D[51Gp*() [51G[51G*() [51G[51G(*()[51G[1C[52G)*()[52G[1C[1D[52Gh)*()[52G[1C[53G+)*()[53G[1C[54Gb)*()[54G[1C[55G )*()[55G[1C[56G-)*()[56G[1C[57Gz)*()[57G[1C[1C[1C[1C[61G2)[61G[1C[62G*)[62G[1C[63Gh)[63G[1C[64G )[64G[1C[65G-)[65G[1C[66G )[66G[1C[67Gh)[67G[1C[68G )[68G[1C[69G-)[69G[1C[70Gh)[70G[1C[1D[70G) [70G[70Gb)[70G[1C[71G )[71G[1C[72G+)[72G[1C[73G )[73G[1C[74Gz)[74G[1C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[15G_,b_,z_] = p*g*(h + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z) [15G[15Gx_,b_,z_] = p*g*(h + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z)[15G[1C[1C[1C[1C[1D[18G_,z_] = p*g*(h + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z) [18G[18Gz_,z_] = p*g*(h + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z)[18G[1C[1C[1C[1C[1D[21G_] = p*g*(h + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z) [21G[21Gt_] = p*g*(h + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z)[21G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1D[1D[1C[33G[ + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z)[33G[1C[34G] + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z)[34G[1C[1D[34Gx] + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z)[34G[1C[35G,] + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z)[35G[1C[36Gz] + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z)[36G
+[1G                                                                                [36G[1A[1C[37G,] + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + z[37G
+[1G)[37G[1A[1C[38Gt] + b - z) + 0.5*p*(h+b -z)*(2*h - h -b + [38G
+[1Gz)[38G[1A[1C[1C[1C[1C[1C[1C[44Gx - z) + 0.5*p*(h+b -z)*(2*h - h -b +[44G
+[1G z)[44G[1A[1C[45Gt - z) + 0.5*p*(h+b -z)*(2*h - h -b [45G
+[1G+ z)[45G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[62G[+b -z)*(2*h - h -b[62G
+[1G + z)[62G[1A[1C[63G]+b -z)*(2*h - h -[63G
+[1Gb + z)[63G[1A[1C[1D[63Gx]+b -z)*(2*h - h [63G
+[1G-b + z)[63G[1A[1C[64G,]+b -z)*(2*h - h[64G
+[1G -b + z)[64G[1A[1C[65Gz]+b -z)*(2*h - [65G
+[1Gh -b + z)[65G[1A[1C[66G,]+b -z)*(2*h -[66G
+[1G h -b + z)[66G[1A[1C[67Gt]+b -z)*(2*h [67G
+[1G- h -b + z)[67G[1A[1C[1C[1C[1C[71Gx -z)*(2*h[71G
+[1G - h -b + z)[71G[1A[1C[72Gt -z)*(2*[72G
+[1Gh - h -b + z)[72G[1A[1C[1C[1C[1C[1C[1C[1C[1C
+[79D[1C[1C[1C[1D[1D[2G[ - h -b + z)[2G[1C[3G] - h -b + z)[3G[1C[1D[3Gx] - h -b + z)[3G[1C[4G,] - h -b + z)[4G[1C[5Gz] - h -b + z)[5G[1C[6G,] - h -b + z)[6G[1C[7Gt] - h -b + z)[7G[1C[1C[1C[1C[1C[1C[13G[ -b + z)[13G[1C[14G] -b + z)[14G[1C[1D[14Gx] -b + z)[14G[1C[15G,] -b + z)[15G[1C[16Gz] -b + z)[16G[1C[17G,] -b + z)[17G[1C[18Gt] -b + z)[18G[1C[1C[1C[1C[1C[23Gx + z)[23G[1C[24Gt + z)[24G[1C[1C[1C[1C[1C[1C[30G*[30G[1C[31GG[31G[1C[32Ga[32G[1C[33Gm[33G[1C[34Gm[34G[1C[35Ga[35G[1C[36G[[36G[1C[37G][37G[1C[1D[37Gx][37G[1C[38G,][38G[1C[39Gz][39G[1C[40G,][40G[1C[41Gt][41G[1C[1C[1C[44G+[44G[1C[1C[46Gp[46G[1C[47G*[47G[1C[48G([48G[1C[49G)[49G[1C[1D[49Gh)[49G[1C[50G[)[50G[1C[51G])[51G[1C[1D[51Gx])[51G[1C[52G,])[52G[1C[53Gz])[53G[1C[54G,])[54G[1C[55Gt])[55G[1C[1C[57G )[57G[1C[58G+)[58G[1C[59G )[59G[1C[60Gb)[60G[1C[61Gx)[61G[1C[62Gt)[62G[1C[63G )[63G[1C[64G-)[64G[1C[65Gz)[65G[1C[1C[67G*[67G[1C[68GP[68G[1C[69Gh[69G[1C[70Gi[70G[1C[71G[[71G[1C[72G][72G[1C[1D[72Gx][72G[1C[73G,][73G[1C[74Gz][74G[1C[75G,][75G[1C[76Gt][76G[1C[1C
+
+Out[14]= g p (-z + b[x, t] + h[x, z, t]) + 
+ 
+>    0.5 p Gamma[x, z, t] (z - b[x, t] + h[x, z, t]) 
+ 
+>     (-z + b[x, t] + h[x, z, t]) + 
+ 
+>    p (-z + b[x, t] + h[x, z, t]) 
+ 
+                 2                 (0,0,1)
+>     (u[x, z, t]  b''[x] + b'[x] u       [x, z, t] + 
+ 
+                          (1,0,0)
+>       u[x, z, t] b'[x] u       [x, z, t])
+
+[1GIn[15]:=                                                                        [1G[9C[10Gi[10G[1C[11Gn[11G[1C[1D[11G [11G[1D[10G [10G[10GI[10G[1C[11Gn[11G[1C[12Gt[12G[1C[13Ge[13G[1C[14Gg[14G[1C[15Gr[15G[1C[16Ga[16G[1C[17Gt[17G[1C[18Ge[18G[1C[19G[[19G[1C[20G][20G[1C[1D[20Gp][20G[1C[21Ge][21G[1C[22Gp][22G[1C[23Gs][23G[1C[24G[][24G[1C[26G][25G[1C[1D[25Gx[25G[27G][25G[1C[26G,[26G[28G][26G[1C[27Gz[27G[29G][27G[1C[28G,[28G[30G][28G[1C[29Gt[29G[31G][29G[1C[1C[31G,][31G[1C[32G{][32G[1C[33G}][33G[1C[1D[33Gz}][33G[1C[34G,}][34G[1C[35Gb}][35G[1C[36G[}][36G[1C[37G]}][37G[1C[1D[1C[1D[37Gx]}][37G[1C[38G,]}][38G[1C[39Gt]}][39G[1C[1C[41G,}][41G[1C[42Gh}][42G[1C[43G[}][43G[1C[44G]}][44G[1C[1D[44Gx]}][44G[1C[45G,]}][45G[1C[46Gz]}][46G[1C[47G,]}][47G[1C[48Gt]}][48G[1C[1C[50G }][50G[1C[51G+}][51G[1C[52G }][52G[1C[53Gb}][53G[1C[54G[}][54G[1C[55G]}][55G[1C[1D[55Gx]}][55G[1C[56G,]}][56G[1C[57Gt]}][57G[1C[1C[1C[1C
+
+Out[15]= Integrate[g p (-z + b[x, t] + h[x, z, t]) + 
+ 
+>     0.5 p Gamma[x, z, t] (z - b[x, t] + h[x, z, t]) 
+ 
+>      (-z + b[x, t] + h[x, z, t]) + 
+ 
+>     p (-z + b[x, t] + h[x, z, t]) 
+ 
+                  2                 (0,0,1)
+>      (u[x, z, t]  b''[x] + b'[x] u       [x, z, t] + 
+ 
+                           (1,0,0)
+>        u[x, z, t] b'[x] u       [x, z, t]), 
+ 
+>    {z, b[x, t], b[x, t] + h[x, z, t]}]
+
+[1GIn[16]:=                                                                        [1G[9C[1GIn[16]:=                                                                        [10G[9D[1GIn[16]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[10GEIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t] + b[x,t]}][10G[1C[11GxIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t] + b[x,t]}][11G[1C[12GpIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t] + b[x,t]}][12G[1C[13GaIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t] + b[x,t]}][13G[1C[14GnIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t] + b[x,t]}][14G[1C[15GdIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t] + b[x,t]}][15G[1C[16G[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t] + b[x,t]}][16G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[68G][68G[1C
+
+Out[16]= Integrate[g p (-z + b[x, t] + h[x, z, t]) + 
+ 
+>     0.5 p Gamma[x, z, t] (z - b[x, t] + h[x, z, t]) 
+ 
+>      (-z + b[x, t] + h[x, z, t]) + 
+ 
+>     p (-z + b[x, t] + h[x, z, t]) 
+ 
+                  2                 (0,0,1)
+>      (u[x, z, t]  b''[x] + b'[x] u       [x, z, t] + 
+ 
+                           (1,0,0)
+>        u[x, z, t] b'[x] u       [x, z, t]), 
+ 
+>    {z, b[x, t], b[x, t] + h[x, z, t]}]
+
+[1GIn[17]:=                                                                        [1G[9C[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GExpand[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[58G+[10G[60Gb[x,t]}]][10G[59C[59D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[51D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,z,t][10G[41G+[10G[43Gbxt[10G[47G-[10G[49Gz)[10G[52G+[10G[54G0.5*p*(h[x,z,t]+bxt[10G[74G-z)*(2*[10G
+[1Gh[x,z,t] - h[x,z,t] -bxt + z)*Gamma[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t]   [10G[68C[1A[68D[1GIn[17]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[17]:=                                                                        [1G[9C[10GGamman[x_,z_,t_][10G[27G=[10G[29GD[uxzt,x]^2[10G[41G-[10G[43Guxzt*(D[uxzt,{x,2}])[10G[64G-[10G[66GD[uxzt,{x,1},{t[10G
+[1G,1}]                                                                            [10G[5D[1A[5C[1GIn[17]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[17]:=                                                                        [1G[9C[10GGamma[x_,z_,t_][10G[26G=[10G[28GD[uxzt,x]^2[10G[40G-[10G[42Guxzt*(D[uxzt,{x,2}])[10G[63G-[10G[65GD[uxzt,{x,1},{t,[10G
+[1G1}]                                                                             [10G[6D[1D[1D[1D[1A[79C[1D[1D[1D[1D[1D[1D[1D[1D[1D[61D[1GIn[17]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[17]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10Guxzt[10G[15G=[10G[17Gu[x,z,t][10G[15C[15D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[10D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GClear[u][10G[8C[8D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[1D[1D[1D[1D[16G,t] [16G[1D[16Gt] [15G[5D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GClear[u][10G[8C[8D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[10D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GGamma[10G[5C[5D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GPhi[10G[3C[3D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10Guxzt[10G[15G=[10G[17Gu[x,z,t][10G[15C[15D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10Gu[10G[12G=[10G[14Gu[x,z,t][10G[12C[12D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[10D[1GIn[17]:=                                                                        [10G[9D[1GIn[17]:=                                                                        [1G[9C[10GPhi[x_,z_,t_][10G[24G=[10G[26GD[b[x],x]*u[x,z,t]*D[u[x,z,t],x][10G[59G+[10G[61Gu[x,z,t]^2*D[b[x],{x[10G
+[1G,2}] + D[b[x],x]*D[u[x,z,t],t]                                                  [10G[21C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1A[79C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1C[1D[18G,t_] = D[b[x],x]*u[x,z,t]*D[u[x,z,t],x] + u[x,z,t]^2*D[b[x],{x,[18G
+[1G2}] + D[b[x],x]*D[u[x,z,t],t] [18G[1A[1D[17G,t_] = D[b[x],x]*u[x,z,t]*D[u[x,z,t],x] + u[x,z,t]^2*D[b[x],{x,2[17G
+[1G}] + D[b[x],x]*D[u[x,z,t],t] [17G[1A[1D[17Gt_] = D[b[x],x]*u[x,z,t]*D[u[x,z,t],x] + u[x,z,t]^2*D[b[x],{x,2}[16G
+[1G] + D[b[x],x]*D[u[x,z,t],t] [16G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1D[37G,t]*D[u[x,z,t],x] + u[x,z,t]^2*D[b[x],{x,2}][37G
+[1G + D[b[x],x]*D[u[x,z,t],t] [37G[1A[1D[37Gt]*D[u[x,z,t],x] + u[x,z,t]^2*D[b[x],{x,2}] [36G
+[1G+ D[b[x],x]*D[u[x,z,t],t] [36G[1A[1D[1D[1D[1C[34Gb[x,t]*D[u[x,z,t],x] + u[x,z,t]^2*D[b[x],{x,2}][34G
+[1G + D[b[x],x]*D[u[x,z,t],t][34G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[44Gb[x,z,t],x] + u[x,z,t]^2*D[b[x],{x,2}[44G
+[1G] + D[b[x],x]*D[u[x,z,t],t][44G[1A[1C[1C[1C[1C[48G,t],x] + u[x,z,t]^2*D[b[x],{x,2}][48G
+[1G + D[b[x],x]*D[u[x,z,t],t] [48G[1A[48Gt],x] + u[x,z,t]^2*D[b[x],{x,2}] [48G
+[1G+ D[b[x],x]*D[u[x,z,t],t] [48G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[60G,t]^2*D[b[x],{x,2}] +[60G
+[1G D[b[x],x]*D[u[x,z,t],t] [60G[1A[60Gt]^2*D[b[x],{x,2}] + [60G
+[1GD[b[x],x]*D[u[x,z,t],t] [60G[1A[1C[1C[1C[1D[1D[1D[1D[1D[1D[1D[1C[57Gb[x,t]^2*D[b[x],{x,2}] +[57G
+[1G D[b[x],x]*D[u[x,z,t],t][57G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C
+[79D[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[15Gb[x,z,t],t][15G[1C[1C[1C[1C[1D[18Gz,t],t] [18G[18G,t],t] [18G[6C
+
+                 2                  (0,1)                          (1,0)
+Out[17]= ub[x, t]  b''[x] + b'[x] ub     [x, t] + ub[x, t] b'[x] ub     [x, t]
+
+[1GIn[18]:=                                                                        [1G[9C[1GIn[18]:=                                                                        [10G[9D[1GIn[18]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[b[x],x]*ub[x,t]*D[ub[x,t],x][10G[54G+[10G[56Gub[x,t]^2*D[b[x],{x,2}][10G[80G+[10G
+[1G D[b[x],x]*D[ub[x,t],t]                                                         [10G[14C[1A[14D[1GIn[18]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[18]:=                                                                        [1G[9C[10GExpand[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[58G+[10G[60Gb[x,t]}]][10G[59C[59D[1GIn[18]:=                                                                        [10G[9D[1GIn[18]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[51D[1GIn[18]:=                                                                        [10G[9D[1GIn[18]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,z,t][10G[41G+[10G[43Gbxt[10G[47G-[10G[49Gz)[10G[52G+[10G[54G0.5*p*(h[x,z,t]+bxt[10G[74G-z)*(2*[10G
+[1Gh[x,z,t] - h[x,z,t] -bxt + z)*Gamma[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t]   [10G[68C[1A[68D[1GIn[18]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[18]:=                                                                        [1G[9C[10GGamman[x_,z_,t_][10G[27G=[10G[29GD[uxzt,x]^2[10G[41G-[10G[43Guxzt*(D[uxzt,{x,2}])[10G[64G-[10G[66GD[uxzt,{x,1},{t[10G
+[1G,1}]                                                                            [10G[5D[1A[5C[1GIn[18]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[18]:=                                                                        [1G[9C[10GGamma[x_,z_,t_][10G[26G=[10G[28GD[uxzt,x]^2[10G[40G-[10G[42Guxzt*(D[uxzt,{x,2}])[10G[63G-[10G[65GD[uxzt,{x,1},{t,[10G
+[1G1}]                                                                             [10G[6D[1A[6C[1GIn[18]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[18]:=                                                                        [1G[9C[10GGamman[x_,z_,t_][10G[27G=[10G[29GD[uxzt,x]^2[10G[41G-[10G[43Guxzt*(D[uxzt,{x,2}])[10G[64G-[10G[66GD[uxzt,{x,1},{t[10G
+[1G,1}]                                                                            [10G[5D[1D[1D[1D[1D[1A[79C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[14D[1GIn[18]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[18]:=                                                                        [1G[9C[10GGamma[x_,z_,t_][10G[26G=[10G[28GD[uxzt,x]^2[10G[40G-[10G[42Guxzt*(D[uxzt,{x,2}])[10G[63G-[10G[65GD[uxzt,{x,1},{t,[10G
+[1G1}]                                                                             [10G[6D[1A[6C[1GIn[18]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[18]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C
+
+Out[18]= b[x, t]
+
+[1GIn[19]:=                                                                        [1G[9C[1GIn[19]:=                                                                        [10G[9D[1GIn[19]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[19]:=                                                                        [10G[9D[1GIn[19]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[b[x],x]*ub[x,t]*D[ub[x,t],x][10G[54G+[10G[56Gub[x,t]^2*D[b[x],{x,2}][10G[80G+[10G
+[1G D[b[x],x]*D[ub[x,t],t]                                                         [10G[14C[1A[14D[1GIn[19]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[19]:=                                                                        [1G[9C[10GExpand[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[58G+[10G[60Gb[x,t]}]][10G[59C[59D[1GIn[19]:=                                                                        [10G[9D[1GIn[19]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[51D[1GIn[19]:=                                                                        [10G[9D[1GIn[19]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,z,t][10G[41G+[10G[43Gbxt[10G[47G-[10G[49Gz)[10G[52G+[10G[54G0.5*p*(h[x,z,t]+bxt[10G[74G-z)*(2*[10G
+[1Gh[x,z,t] - h[x,z,t] -bxt + z)*Gamma[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t]   [10G[68C[1A[68D[1GIn[19]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[19]:=                                                                        [1G[9C[10GGamman[x_,z_,t_][10G[27G=[10G[29GD[uxzt,x]^2[10G[41G-[10G[43Guxzt*(D[uxzt,{x,2}])[10G[64G-[10G[66GD[uxzt,{x,1},{t[10G
+[1G,1}]                                                                            [10G[5D[1A[5C[1GIn[19]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[19]:=                                                                        [1G[9C[10GGamma[x_,z_,t_][10G[26G=[10G[28GD[uxzt,x]^2[10G[40G-[10G[42Guxzt*(D[uxzt,{x,2}])[10G[63G-[10G[65GD[uxzt,{x,1},{t,[10G
+[1G1}]                                                                             [10G[6D[1A[6C[1GIn[19]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[19]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[19]:=                                                                        [10G[9D[1GIn[19]:=                                                                        [1G[9C[10Guxzt[10G[15G=[10G[17Gu[x,z,t][10G[15C[1D[1D[1D[1D[21G,t] [21G[1D[21Gt] [20G[1D[1D[1D[1D[1D[1D[1D[1D[1C[1D[12Gt = u[x,t] [12G[10C
+
+Out[19]= u[x, t]
+
+[1GIn[20]:=                                                                        [1G[9C[1GIn[20]:=                                                                        [10G[9D[1GIn[20]:=                                                                        [1G[9C[10Guxt[10G[14G=[10G[16Gu[x,t][10G[12C[1D[1D[1D[1D[1D[17Gb[x,t][17G[1C[1D[1D[1D[1D[1D[1D[1D[11Gbxt = ub[x,t][11G[1C[12C
+
+Out[20]= ub[x, t]
+
+[1GIn[21]:=                                                                        [1G[9C[1GIn[21]:=                                                                        [10G[9D[1GIn[21]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[21]:=                                                                        [10G[9D[1GIn[21]:=                                                                        [1G[9C[10Guxt[10G[14G=[10G[16Gu[x,t][10G[12C[12D[1GIn[21]:=                                                                        [10G[9D[1GIn[21]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[21]:=                                                                        [10G[9D[1GIn[21]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[b[x],x]*ub[x,t]*D[ub[x,t],x][10G[54G+[10G[56Gub[x,t]^2*D[b[x],{x,2}][10G[80G+[10G
+[1G D[b[x],x]*D[ub[x,t],t]                                                         [10G[14C[1A[14D[1GIn[21]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[21]:=                                                                        [1G[9C[10GExpand[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[58G+[10G[60Gb[x,t]}]][10G[59C[59D[1GIn[21]:=                                                                        [10G[9D[1GIn[21]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[51D[1GIn[21]:=                                                                        [10G[9D[1GIn[21]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,z,t][10G[41G+[10G[43Gbxt[10G[47G-[10G[49Gz)[10G[52G+[10G[54G0.5*p*(h[x,z,t]+bxt[10G[74G-z)*(2*[10G
+[1Gh[x,z,t] - h[x,z,t] -bxt + z)*Gamma[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t]   [10G[68C[1A[68D[1GIn[21]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[21]:=                                                                        [1G[9C[10GGamman[x_,z_,t_][10G[27G=[10G[29GD[uxzt,x]^2[10G[41G-[10G[43Guxzt*(D[uxzt,{x,2}])[10G[64G-[10G[66GD[uxzt,{x,1},{t[10G
+[1G,1}]                                                                            [10G[5D[1D[1D[1D[1D[1A[79C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1C[1D[21G,t_] = D[uxzt,x]^2 - uxzt*(D[uxzt,{x,2}]) - D[uxzt,{x,1},{t,[21G
+[1G1}] [21G[1A[1D[20G,t_] = D[uxzt,x]^2 - uxzt*(D[uxzt,{x,2}]) - D[uxzt,{x,1},{t,1[20G
+[1G}] [20G[1A[1D[20Gt_] = D[uxzt,x]^2 - uxzt*(D[uxzt,{x,2}]) - D[uxzt,{x,1},{t,1}[19G
+[1G] [19G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[29Gbxzt,x]^2 - uxzt*(D[uxzt,{x,2}]) - D[uxzt,{x,1},{t,1[29G
+[1G}][29G[1A[1C[1C[31Gt,x]^2 - uxzt*(D[uxzt,{x,2}]) - D[uxzt,{x,1},{t,1}[31G
+[1G] [31G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1D[1D[41Gbxzt*(D[uxzt,{x,2}]) - D[uxzt,{x,1},{t,1[41G
+[1G}][41G[1A[1C[1C[43Gt*(D[uxzt,{x,2}]) - D[uxzt,{x,1},{t,1}[43G
+[1G] [43G[1A[1C[1C[1C[1C[1C[1C[49Gbxzt,{x,2}]) - D[uxzt,{x,1},{t,1[49G
+[1G}][49G[1A[1C[1C[51Gt,{x,2}]) - D[uxzt,{x,1},{t,1}[51G
+[1G] [51G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[66Gbxzt,{x,1},{t,1[66G
+[1G}][66G[1A[1C[1C[68Gt,{x,1},{t,1}[68G
+[1G] [68G[1A
+[66D
+
+           (1,0)      2     (1,1)                    (2,0)
+Out[21]= ub     [x, t]  - ub     [x, t] - ub[x, t] ub     [x, t]
+
+[1GIn[22]:=                                                                        [1G[9C[1GIn[22]:=                                                                        [10G[9D[1GIn[22]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1A[8C[1GIn[22]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[22]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[22]:=                                                                        [10G[9D[1GIn[22]:=                                                                        [1G[9C[10Guxt[10G[14G=[10G[16Gu[x,t][10G[12C[12D[1GIn[22]:=                                                                        [10G[9D[1GIn[22]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[22]:=                                                                        [10G[9D[1GIn[22]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[b[x],x]*ub[x,t]*D[ub[x,t],x][10G[54G+[10G[56Gub[x,t]^2*D[b[x],{x,2}][10G[80G+[10G
+[1G D[b[x],x]*D[ub[x,t],t]                                                         [10G[14C[1A[14D[1GIn[22]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[22]:=                                                                        [1G[9C[10GExpand[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[58G+[10G[60Gb[x,t]}]][10G[59C[59D[1GIn[22]:=                                                                        [10G[9D[1GIn[22]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[51D[1GIn[22]:=                                                                        [10G[9D[1GIn[22]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,z,t][10G[41G+[10G[43Gbxt[10G[47G-[10G[49Gz)[10G[52G+[10G[54G0.5*p*(h[x,z,t]+bxt[10G[74G-z)*(2*[10G
+[1Gh[x,z,t] - h[x,z,t] -bxt + z)*Gamma[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t]   [10G[68C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1A[79C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[35Gz,t] + bxt - z) + 0.5*p*(h[x,z,t]+bxt -z)*(2*h[35G
+[1G[x,z,t] - h[x,z,t] -bxt + z)*Gam[35G[34Ga[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [35G[1A[35G,t] + bxt - z) + 0.5*p*(h[x,z,t]+bxt -z)*(2*h[[35G
+[1Gx,z,t] - h[x,z,t] -bxt + z)*Gam[35G[33Ga[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [35G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[63G,t]+bxt -z)*(2*h[x[63G
+[1G,z,t] - h[x,z,t] -bxt + z)*Gam[63G[32Ga[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [63G[1A[63Gt]+bxt -z)*(2*h[x,[63G
+[1Gz,t] - h[x,z,t] -bxt + z)*Gam[63G[31Ga[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [63G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C
+[79D[1C[1C[1C[1C[1C[1C[1C[1C[1D[1D[1D[1D[1D[1D[1D[2Gt] - h[x,z,t] -bxt + z)*Gam[2G[30Ga[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [2G[1D[1Gt] - h[x,z,t] -bxt + z)*Gam[1G[29Ga[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [1G[1C[1C[1C[1C[1C[1C[1C[1C[9Gz,t] -bxt + z)*Gam[9G[28Ga[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [9G[9G,t] -bxt + z)*Gam[9G[27Ga[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [9G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[30Gz,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [30G[30G,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t] [30G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[42Gz,t] + bxt -z)*Phi[x,z,t] [42G[42G,t] + bxt -z)*Phi[x,z,t] [42G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[61Gz,t] [61G[61G,t] [61G[3C
+
+Out[22]= g p (-z + b[x, t] + h[x, t]) + 
+ 
+>    0.5 p Gamma[x, t] (z - b[x, t] + h[x, t]) (-z + b[x, t] + h[x, t]) + 
+ 
+                                         2                  (0,1)
+>    p (-z + b[x, t] + h[x, t]) (ub[x, t]  b''[x] + b'[x] ub     [x, t] + 
+ 
+                         (1,0)
+>       ub[x, t] b'[x] ub     [x, t])
+
+[1GIn[23]:=                                                                        [1G[9C[1GIn[23]:=                                                                        [10G[9D[1GIn[23]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,t][10G[39G+[10G[41Gbxt[10G[45G-[10G[47Gz)[10G[50G+[10G[52G0.5*p*(h[x,t]+bxt[10G[70G-z)*(2*h[x,[10G
+[1Gt] - h[x,t] -bxt + z)*Gamma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t]                 [10G[54C[1A[54D[1GIn[23]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[23]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1A[8C[1GIn[23]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[23]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[23]:=                                                                        [10G[9D[1GIn[23]:=                                                                        [1G[9C[10Guxt[10G[14G=[10G[16Gu[x,t][10G[12C[12D[1GIn[23]:=                                                                        [10G[9D[1GIn[23]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[23]:=                                                                        [10G[9D[1GIn[23]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[b[x],x]*ub[x,t]*D[ub[x,t],x][10G[54G+[10G[56Gub[x,t]^2*D[b[x],{x,2}][10G[80G+[10G
+[1G D[b[x],x]*D[ub[x,t],t]                                                         [10G[14C[1A[14D[1GIn[23]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[23]:=                                                                        [1G[9C[10GExpand[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[58G+[10G[60Gb[x,t]}]][10G[59C[59D[1GIn[23]:=                                                                        [10G[9D[1GIn[23]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[45Gz,t] + b[x,t]}] [45G[45G,t] + b[x,t]}] [45G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C
+
+                    2
+         g p h[x, t]                                  3
+Out[23]= ------------ + 0.333333 p Gamma[x, t] h[x, t]  + 
+              2
+ 
+              2         2                   2         (0,1)
+     p h[x, t]  ub[x, t]  b''[x]   p h[x, t]  b'[x] ub     [x, t]
+>    --------------------------- + ------------------------------ + 
+                  2                              2
+ 
+              2                  (1,0)
+     p h[x, t]  ub[x, t] b'[x] ub     [x, t]
+>    ---------------------------------------
+                        2
+
+[1GIn[24]:=                                                                        [1G[9C[1GIn[24]:=                                                                        [10G[9D[1GIn[24]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,t][10G[49G+[10G[51Gb[x,t]}][10G[49C[1D[1D[1D[1D[55G]}] [55G[1D[54G]}] [54G[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[39G],h[x,t] + b[x]}] [39G[1D[38G],h[x,t] + b[x]}] [38G[17C
+
+                                                      2
+Out[24]= (p h[x, t] (-2 g b[x] + 2 g b[x, t] - 1. b[x]  Gamma[x, t] + 
+ 
+                                                 2
+>        2. b[x] b[x, t] Gamma[x, t] - 1. b[x, t]  Gamma[x, t] + g h[x, t] - 
+ 
+>        1. b[x] Gamma[x, t] h[x, t] + 1. b[x, t] Gamma[x, t] h[x, t] + 
+ 
+                                     2
+>        0.666667 Gamma[x, t] h[x, t]  - 
+ 
+>        (2 b[x] - 2 b[x, t] - h[x, t]) 
+ 
+                   2                  (0,1)
+>         (ub[x, t]  b''[x] + b'[x] ub     [x, t] + 
+ 
+                             (1,0)
+>           ub[x, t] b'[x] ub     [x, t]))) / 2
+
+[1GIn[25]:=                                                                        [1G[9C[1GIn[25]:=                                                                        [10G[9D[1GIn[25]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x],h[x,t][10G[47G+[10G[49Gb[x]}][10G[45C[45D[1GIn[25]:=                                                                        [10G[9D[1GIn[25]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,t][10G[49G+[10G[51Gb[x,t]}][10G[49C[49D[1GIn[25]:=                                                                        [10G[9D[1GIn[25]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,t][10G[39G+[10G[41Gbxt[10G[45G-[10G[47Gz)[10G[50G+[10G[52G0.5*p*(h[x,t]+bxt[10G[70G-z)*(2*h[x,[10G
+[1Gt] - h[x,t] -bxt + z)*Gamma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t]                 [10G[54C[1A[54D[1GIn[25]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[25]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1A[8C[1GIn[25]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[25]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[25]:=                                                                        [10G[9D[1GIn[25]:=                                                                        [1G[9C[10Guxt[10G[14G=[10G[16Gu[x,t][10G[12C[12D[1GIn[25]:=                                                                        [10G[9D[1GIn[25]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[25]:=                                                                        [10G[9D[1GIn[25]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[b[x],x]*ub[x,t]*D[ub[x,t],x][10G[54G+[10G[56Gub[x,t]^2*D[b[x],{x,2}][10G[80G+[10G
+[1G D[b[x],x]*D[ub[x,t],t]                                                         [10G[14C[1A[14D[1GIn[25]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[25]:=                                                                        [1G[9C[10GExpand[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[58G+[10G[60Gb[x,t]}]][10G[59C[59D[1GIn[25]:=                                                                        [10G[9D[1GIn[25]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[51D[1GIn[25]:=                                                                        [10G[9D[1GIn[25]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,z,t][10G[41G+[10G[43Gbxt[10G[47G-[10G[49Gz)[10G[52G+[10G[54G0.5*p*(h[x,z,t]+bxt[10G[74G-z)*(2*[10G
+[1Gh[x,z,t] - h[x,z,t] -bxt + z)*Gamma[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t]   [10G[68C[1A[68D[1GIn[25]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[25]:=                                                                        [1G[9C[10GGamman[x_,z_,t_][10G[27G=[10G[29GD[uxzt,x]^2[10G[41G-[10G[43Guxzt*(D[uxzt,{x,2}])[10G[64G-[10G[66GD[uxzt,{x,1},{t[10G
+[1G,1}]                                                                            [10G[5D[1A[5C[1GIn[25]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[25]:=                                                                        [1G[9C[10GGamma[x_,z_,t_][10G[26G=[10G[28GD[uxzt,x]^2[10G[40G-[10G[42Guxzt*(D[uxzt,{x,2}])[10G[63G-[10G[65GD[uxzt,{x,1},{t,[10G
+[1G1}]                                                                             [10G[6D[1A[6C[1GIn[25]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[25]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[25]:=                                                                        [10G[9D[1GIn[25]:=                                                                        [1G[9C[10Guxzt[10G[15G=[10G[17Gu[x,z,t][10G[15C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[11Gbxzt = u[x,z,t][11G[1C[1C[13Gt = u[x,z,t] [13G[1C[1C[1C[1C[1C[1C[1C[20Gz,t] [20G[20G,t] [20G[1D[1D[18Gb[x,t][18G[1C[1C[1C[1C[1C[1C
+
+Out[25]= ub[x, t]
+
+[1GIn[26]:=                                                                        [1G[9C[10Gb[10G[1C[11G[[11G[1C[12G][12G[1C[1D[12Gx][12G[1C[1C[1C[15G=[15G[1C[1C[1D[1D[1D[1D[1C[1D[13G = [13G[1D[12G = [12G[1D[11G = [11G[11Gx =[11G[1C[1C[1C[1C[15Gb[15G[1C[16G[[16G[1C[17G][17G[1C[1D[17Gx][17G[1C[1C[1C
+
+Out[26]= b[x]
+
+[1GIn[27]:=                                                                        [1G[9C[10Gh[10G[1C[11Gx[11G[1C[12Gt[12G[1C[1C[14G=[14G[1C[1C[16Gh[16G[1C[17G[[17G[1C[18G][18G[1C[1D[18Gx][18G[1C[19G,][19G[1C[20Gt][20G[1C[1C
+
+Out[27]= h[x, t]
+
+[1GIn[28]:=                                                                        [1G[9C[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Ghxt[10G[14G=[10G[16Gh[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gbx[10G[13G=[10G[15Gb[x][10G[10C[10D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x],h[x,t][10G[47G+[10G[49Gb[x]}][10G[45C[45D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,t][10G[49G+[10G[51Gb[x,t]}][10G[49C[49D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,t][10G[39G+[10G[41Gbxt[10G[45G-[10G[47Gz)[10G[50G+[10G[52G0.5*p*(h[x,t]+bxt[10G[70G-z)*(2*h[x,[10G
+[1Gt] - h[x,t] -bxt + z)*Gamma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t]                 [10G[54C[1A[54D[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1A[8C[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Guxt[10G[14G=[10G[16Gu[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[b[x],x]*ub[x,t]*D[ub[x,t],x][10G[54G+[10G[56Gub[x,t]^2*D[b[x],{x,2}][10G[80G+[10G
+[1G D[b[x],x]*D[ub[x,t],t]                                                         [10G[14C[1A[14D[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10GExpand[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[58G+[10G[60Gb[x,t]}]][10G[59C[59D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[51D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,z,t][10G[41G+[10G[43Gbxt[10G[47G-[10G[49Gz)[10G[52G+[10G[54G0.5*p*(h[x,z,t]+bxt[10G[74G-z)*(2*[10G
+[1Gh[x,z,t] - h[x,z,t] -bxt + z)*Gamma[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t]   [10G[68C[1A[68D[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10GGamman[x_,z_,t_][10G[27G=[10G[29GD[uxzt,x]^2[10G[41G-[10G[43Guxzt*(D[uxzt,{x,2}])[10G[64G-[10G[66GD[uxzt,{x,1},{t[10G
+[1G,1}]                                                                            [10G[5D[1A[5C[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10GGamma[x_,z_,t_][10G[26G=[10G[28GD[uxzt,x]^2[10G[40G-[10G[42Guxzt*(D[uxzt,{x,2}])[10G[63G-[10G[65GD[uxzt,{x,1},{t,[10G
+[1G1}]                                                                             [10G[6D[1A[6C[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GGamma[x_,z_,t_][10G[26G=[10G[28GD[uxzt,x]^2[10G[40G-[10G[42Guxzt*(D[uxzt,{x,2}])[10G[63G-[10G[65GD[uxzt,{x,1},{t,[10G
+[1G1}]                                                                             [10G[6D[1A[6C[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Guxzt[10G[15G=[10G[17Gu[x,z,t][10G[15C[15D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[10D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GClear[u][10G[8C[8D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[10D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GClear[u][10G[8C[8D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GPhi[x,z,t][10G[10C[10D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Guxzt[10G[15G=[10G[17Gu[x,z,t][10G[15C[15D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GGamma[x_,z_,t_][10G[26G=[10G[28GD[uxzt,x]^2[10G[40G-[10G[42Guxzt*(D[uxzt,{x,2}])[10G[63G-[10G[65GD[uxzt,{x,1},{t,[10G
+[1G1}]                                                                             [10G[6D[1A[6C[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10GGamman[x_,z_,t_][10G[27G=[10G[29GD[uxzt,x]^2[10G[41G-[10G[43Guxzt*(D[uxzt,{x,2}])[10G[64G-[10G[66GD[uxzt,{x,1},{t[10G
+[1G,1}]                                                                            [10G[5D[1A[5C[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,z,t][10G[41G+[10G[43Gbxt[10G[47G-[10G[49Gz)[10G[52G+[10G[54G0.5*p*(h[x,z,t]+bxt[10G[74G-z)*(2*[10G
+[1Gh[x,z,t] - h[x,z,t] -bxt + z)*Gamma[x,z,t] + p*(h[x,z,t] + bxt -z)*Phi[x,z,t]   [10G[68C[1A[68D[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[51G+[10G[53Gb[x,t]}][10G[51C[51D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GExpand[Integrate[peps[x,z,t],{z,b[x,t],h[x,z,t][10G[58G+[10G[60Gb[x,t]}]][10G[59C[59D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[b[x],x]*ub[x,t]*D[ub[x,t],x][10G[54G+[10G[56Gub[x,t]^2*D[b[x],{x,2}][10G[80G+[10G
+[1G D[b[x],x]*D[ub[x,t],t]                                                         [10G[14C[1A[14D[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Guxt[10G[14G=[10G[16Gu[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1A[8C[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,t][10G[39G+[10G[41Gbxt[10G[45G-[10G[47Gz)[10G[50G+[10G[52G0.5*p*(h[x,t]+bxt[10G[70G-z)*(2*h[x,[10G
+[1Gt] - h[x,t] -bxt + z)*Gamma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t]                 [10G[54C[1A[54D[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,t][10G[49G+[10G[51Gb[x,t]}][10G[49C[49D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x],h[x,t][10G[47G+[10G[49Gb[x]}][10G[45C[45D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gbx[10G[13G=[10G[15Gb[x][10G[10C[10D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Ghxt[10G[14G=[10G[16Gh[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Ghxt[10G[14G=[10G[16Gh[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gbx[10G[13G=[10G[15Gb[x][10G[10C[10D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x],h[x,t][10G[47G+[10G[49Gb[x]}][10G[45C[45D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,t][10G[49G+[10G[51Gb[x,t]}][10G[49C[49D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,t][10G[39G+[10G[41Gbxt[10G[45G-[10G[47Gz)[10G[50G+[10G[52G0.5*p*(h[x,t]+bxt[10G[70G-z)*(2*h[x,[10G
+[1Gt] - h[x,t] -bxt + z)*Gamma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t]                 [10G[54C[1A[54D[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1A[8C[1GIn[28]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[28]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Guxt[10G[14G=[10G[16Gu[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10Gbxt[10G[14G=[10G[16Gb[x,t][10G[12C[12D[1GIn[28]:=                                                                        [10G[9D[1GIn[28]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[b[x],x]*ub[x,t]*D[ub[x,t],x][10G[54G+[10G[56Gub[x,t]^2*D[b[x],{x,2}][10G[80G+[10G
+[1G D[b[x],x]*D[ub[x,t],t]                                                         [10G[14C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1A[79C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1C[1D[28G,x]*ub[x,t]*D[ub[x,t],x] + ub[x,t]^2*D[b[x],{x,2}] + [28G
+[1GD[b[x],x]*D[ub[x,t],t] [28G[1A[1D[27G,x]*ub[x,t]*D[ub[x,t],x] + ub[x,t]^2*D[b[x],{x,2}] + D[27G
+[1G[b[x],x]*D[ub[x,t],t] [27G[1A[1D[26G,x]*ub[x,t]*D[ub[x,t],x] + ub[x,t]^2*D[b[x],{x,2}] + D[[26G
+[1Gb[x],x]*D[ub[x,t],t] [26G[1A[26Gx,x]*ub[x,t]*D[ub[x,t],x] + ub[x,t]^2*D[b[x],{x,2}] + D[26G
+[1G[b[x],x]*D[ub[x,t],t][26G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[67Gx],{x,2}] + D[[67G
+[1Gb[x],x]*D[ub[x,t],t] [67G[1A[67G],{x,2}] + D[b[67G
+[1G[x],x]*D[ub[x,t],t] [67G[1A[67G,{x,2}] + D[b[[67G
+[1Gx],x]*D[ub[x,t],t] [67G[1A[67Gx,{x,2}] + D[b[67G
+[1G[x],x]*D[ub[x,t],t][67G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C
+[79D[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C
+
+                 2                  (0,1)                          (1,0)
+Out[28]= ub[x, t]  b''[x] + b'[x] ub     [x, t] + ub[x, t] b'[x] ub     [x, t]
+
+[1GIn[29]:=                                                                        [1G[9C[1GIn[29]:=                                                                        [10G[9D[1GIn[29]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[bx,x]*ub[x,t]*D[ub[x,t],x][10G[52G+[10G[54Gub[x,t]^2*D[bx,{x,2}][10G[76G+[10G[78GD[b[10G
+[1G[x],x]*D[ub[x,t],t]                                                             [10G[10C[1A[10D[1GIn[29]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[29]:=                                                                        [1G[9C[10Ghxt[10G[14G=[10G[16Gh[x,t][10G[12C[12D[1GIn[29]:=                                                                        [10G[9D[1GIn[29]:=                                                                        [1G[9C[10Gbx[10G[13G=[10G[15Gb[x][10G[10C[10D[1GIn[29]:=                                                                        [10G[9D[1GIn[29]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[29]:=                                                                        [10G[9D[1GIn[29]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x],h[x,t][10G[47G+[10G[49Gb[x]}][10G[45C[45D[1GIn[29]:=                                                                        [10G[9D[1GIn[29]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,t][10G[49G+[10G[51Gb[x,t]}][10G[49C[49D[1GIn[29]:=                                                                        [10G[9D[1GIn[29]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,t][10G[39G+[10G[41Gbxt[10G[45G-[10G[47Gz)[10G[50G+[10G[52G0.5*p*(h[x,t]+bxt[10G[70G-z)*(2*h[x,[10G
+[1Gt] - h[x,t] -bxt + z)*Gamma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t]                 [10G[54C[1A[54D[1GIn[29]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[29]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1A[8C[1GIn[29]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[29]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[29]:=                                                                        [10G[9D[1GIn[29]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1D[1A[79C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D
+[54D
+
+           (1,0)      2     (1,1)                    (2,0)
+Out[29]= ub     [x, t]  - ub     [x, t] - ub[x, t] ub     [x, t]
+
+[1GIn[30]:=                                                                        [1G[9C[1GIn[30]:=                                                                        [10G[9D[1GIn[30]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1A[8C[1GIn[30]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[30]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[bx,x]*ub[x,t]*D[ub[x,t],x][10G[52G+[10G[54Gub[x,t]^2*D[bx,{x,2}][10G[76G+[10G[78GD[b[10G
+[1G[x],x]*D[ub[x,t],t]                                                             [10G[10C[1A[10D[1GIn[30]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[30]:=                                                                        [1G[9C[10Ghxt[10G[14G=[10G[16Gh[x,t][10G[12C[12D[1GIn[30]:=                                                                        [10G[9D[1GIn[30]:=                                                                        [1G[9C[10Gbx[10G[13G=[10G[15Gb[x][10G[10C[10D[1GIn[30]:=                                                                        [10G[9D[1GIn[30]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[30]:=                                                                        [10G[9D[1GIn[30]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x],h[x,t][10G[47G+[10G[49Gb[x]}][10G[45C[45D[1GIn[30]:=                                                                        [10G[9D[1GIn[30]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,t][10G[49G+[10G[51Gb[x,t]}][10G[49C[49D[1GIn[30]:=                                                                        [10G[9D[1GIn[30]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(h[x,t][10G[39G+[10G[41Gbxt[10G[45G-[10G[47Gz)[10G[50G+[10G[52G0.5*p*(h[x,t]+bxt[10G[70G-z)*(2*h[x,[10G
+[1Gt] - h[x,t] -bxt + z)*Gamma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t]                 [10G[54C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1A[79C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[33Gx,t] + bxt - z) + 0.5*p*(h[x,t]+bxt -z)*(2*h[x,t[33G
+[1G] - h[x,t] -bxt + z)*Gam[33G[26Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [33G[1A[33G,t] + bxt - z) + 0.5*p*(h[x,t]+bxt -z)*(2*h[x,t][33G
+[1G - h[x,t] -bxt + z)*Gam[33G[25Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [33G[1A[33Gt] + bxt - z) + 0.5*p*(h[x,t]+bxt -z)*(2*h[x,t] [33G
+[1G- h[x,t] -bxt + z)*Gam[33G[24Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [33G[1A[33G] + bxt - z) + 0.5*p*(h[x,t]+bxt -z)*(2*h[x,t] -[33G
+[1G h[x,t] -bxt + z)*Gam[33G[23Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [33G[1A[33G + bxt - z) + 0.5*p*(h[x,t]+bxt -z)*(2*h[x,t] - [33G
+[1Gh[x,t] -bxt + z)*Gam[33G[22Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [33G[1A[33Gx + bxt - z) + 0.5*p*(h[x,t]+bxt -z)*(2*h[x,t] -[33G
+[1G h[x,t] -bxt + z)*Ga[33G[22Gma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t][33G[1A[1C[34Gt + bxt - z) + 0.5*p*(h[x,t]+bxt -z)*(2*h[x,t] [34G
+[1G- h[x,t] -bxt + z)*Ga[34G[23Gma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t][34G[1A[1C[1C[1C[1C[1C[1C[40G - z) + 0.5*p*(h[x,t]+bxt -z)*(2*h[x,t] -[40G
+[1G h[x,t] -bxt + z)*Gam[40G[23Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [40G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[56Gx,t]+bxt -z)*(2*h[x,t] - [56G
+[1Gh[x,t] -bxt + z)*Gam[56G[22Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [56G[1A[56G,t]+bxt -z)*(2*h[x,t] - h[56G
+[1G[x,t] -bxt + z)*Gam[56G[21Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [56G[1A[56Gt]+bxt -z)*(2*h[x,t] - h[[56G
+[1Gx,t] -bxt + z)*Gam[56G[20Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [56G[1A[56G]+bxt -z)*(2*h[x,t] - h[x[56G
+[1G,t] -bxt + z)*Gam[56G[19Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [56G[1A[56G+bxt -z)*(2*h[x,t] - h[x,[56G
+[1Gt] -bxt + z)*Gam[56G[18Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [56G[1A[56Gx+bxt -z)*(2*h[x,t] - h[x[56G
+[1G,t] -bxt + z)*Ga[56G[18Gma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t][56G[1A[1C[57Gt+bxt -z)*(2*h[x,t] - h[[57G
+[1Gx,t] -bxt + z)*Ga[57G[19Gma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t][57G[1A[1C[58G +bxt -z)*(2*h[x,t] - h[58G
+[1G[x,t] -bxt + z)*Ga[58G[20Gma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t][58G[1A[1C[1C[1C[1C[62G -z)*(2*h[x,t] - h[[62G
+[1Gx,t] -bxt + z)*Gam[62G[20Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [62G[1A[1C[1C[1C[1C[1C[1C[1C[1C[1C[71Gx,t] - h[x[71G
+[1G,t] -bxt + z)*Gam[71G[19Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [71G[1A[1C[72Gt] - h[x,[72G
+[1Gt] -bxt + z)*Gam[72G[18Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [72G[1A[1C[73G - h[x,t[73G
+[1G] -bxt + z)*Gam[73G[17Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [73G[1A[1C[1C[1C[1C[77Gx,t][77G
+[1G -bxt + z)*Gam[77G[16Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [77G[1A[1C[78Gt] [78G
+[1G-bxt + z)*Gam[78G[15Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [78G[1A[1C[79G -[79G
+[1Gbxt + z)*Gam[79G[14Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [79G[1A[1C
+[79D[1C[1C[1C[1C[1C[1D[1D[1D[1D[2Gt + z)*Gam[2G[13Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [2G[2G + z)*Gam[2G[12Ga[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t] [2G[2Gx + z)*Ga[2G[12Gma[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t][2G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[14Gn[x,t] + p*(h[x,t] + bxt -z)*Phi[x,t][14G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[27Gx,t] + bxt -z)*Phi[x,t] [27G[27G,t] + bxt -z)*Phi[x,t] [27G[27Gt] + bxt -z)*Phi[x,t] [27G[27G] + bxt -z)*Phi[x,t] [27G[27G + bxt -z)*Phi[x,t] [27G[27Gx + bxt -z)*Phi[x,t][27G[1C[28Gt + bxt -z)*Phi[x,t][28G[1C[1C[1C[1C[1C[1C[34G -z)*Phi[x,t] [34G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C
+
+Out[30]= g p (-z + b[x] + h[x, t]) + 
+ 
+                                      2                  (0,1)
+>    p (-z + b[x] + h[x, t]) (ub[x, t]  b''[x] + b'[x] ub     [x, t] + 
+ 
+                         (1,0)
+>       ub[x, t] b'[x] ub     [x, t]) + 
+ 
+>    0.5 p (z - b[x] + h[x, t]) (-z + b[x] + h[x, t]) 
+ 
+         (1,0)      2     (1,1)                    (2,0)
+>     (ub     [x, t]  - ub     [x, t] - ub[x, t] ub     [x, t])
+
+[1GIn[31]:=                                                                        [1G[9C[1GIn[31]:=                                                                        [10G[9D[1GIn[31]:=                                                                        [1G[9C[10Gpeps[x_,z_,t_][10G[25G=[10G[27Gp*g*(hxt[10G[36G+[10G[38Gbx[10G[41G-[10G[43Gz)[10G[46G+[10G[48G0.5*p*(hxt[10G[59G+bx[10G[63G-z)*(2*hxt[10G[74G-[10G[76Ghxt[10G[80G-[10G
+[1Gbx + z)*Gamman[x,t] + p*(hxt + bx -z)*Phi[x,t]                                  [10G[37C[1A[37D[1GIn[31]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[31]:=                                                                        [1G[9C[10GGamman[x_,t_][10G[24G=[10G[26GD[ubxt,x]^2[10G[38G-[10G[40Gubxt*(D[ubxt,{x,2}])[10G[61G-[10G[63GD[ubxt,{x,1},{t,1}[10G
+[1G]                                                                               [10G[8D[1A[8C[1GIn[31]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[31]:=                                                                        [1G[9C[10GPhi[x_,t_][10G[21G=[10G[23GD[bx,x]*ub[x,t]*D[ub[x,t],x][10G[52G+[10G[54Gub[x,t]^2*D[bx,{x,2}][10G[76G+[10G[78GD[b[10G
+[1G[x],x]*D[ub[x,t],t]                                                             [10G[10C[1A[10D[1GIn[31]:=                                                                        [10G
+[1G                                                                                [10G[1A[9D[1GIn[31]:=                                                                        [1G[9C[10Ghxt[10G[14G=[10G[16Gh[x,t][10G[12C[12D[1GIn[31]:=                                                                        [10G[9D[1GIn[31]:=                                                                        [1G[9C[10Gbx[10G[13G=[10G[15Gb[x][10G[10C[10D[1GIn[31]:=                                                                        [10G[9D[1GIn[31]:=                                                                        [1G[9C[10Gubxt[10G[15G=[10G[17Gub[x,t][10G[14C[14D[1GIn[31]:=                                                                        [10G[9D[1GIn[31]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x],h[x,t][10G[47G+[10G[49Gb[x]}][10G[45C[45D[1GIn[31]:=                                                                        [10G[9D[1GIn[31]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x,t],h[x,t][10G[49G+[10G[51Gb[x,t]}][10G[49C[49D[1GIn[31]:=                                                                        [10G[9D[1GIn[31]:=                                                                        [1G[9C[10GIntegrate[peps[x,z,t],{z,b[x],h[x,t][10G[47G+[10G[49Gb[x]}][10G[45C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[36Gx],h[x,t] + b[x]}] [36G[36G],h[x,t] + b[x]}] [36G[36G,h[x,t] + b[x]}] [36G[36Gx,h[x,t] + b[x]}][36G[1C[1C[1C[1C[1D[39Gx,t] + b[x]}] [39G[39G,t] + b[x]}] [39G[39Gt] + b[x]}] [39G[39G] + b[x]}] [39G[39G + b[x]}] [39G[39Gx + b[x]}][39G[1C[40Gt + b[x]}][40G[1C[1C[1C[1C[1C[45Gx]}] [45G[45G]}] [45G[45G}] [45G[45Gx}][45G[1C[1C[1C
+
+                    2            2         2
+         g p h[x, t]    p h[x, t]  ub[x, t]  b''[x]
+Out[31]= ------------ + --------------------------- + 
+              2                      2
+ 
+              2         (0,1)                  2                  (1,0)
+     p h[x, t]  b'[x] ub     [x, t]   p h[x, t]  ub[x, t] b'[x] ub     [x, t]
+>    ------------------------------ + --------------------------------------- + 
+                   2                                     2
+ 
+                       3   (1,0)      2                     3   (1,1)
+>    0.333333 p h[x, t]  ub     [x, t]  - 0.333333 p h[x, t]  ub     [x, t] - 
+ 
+                       3            (2,0)
+>    0.333333 p h[x, t]  ub[x, t] ub     [x, t]
+
+[1GIn[32]:=                                                                        [1G[9C[10GD[10G[1C[11G[[11G[1C[12G][12G[1C[1D[12Gh][12G[1C[13G[][13G[1C[15G][14G[1C[1D[1C[1D[15G [14G[1D[13G] [13G[13Gx][13G[1C[14Gt][14G[1C[15G,][15G[1C[16Gt][16G[1C[1C[1C[19G+[19G[1C[1C[21GD[21G[1C[22G[[22G[1C[23G][23G[1C[1D[23Gu][23G[1C[24Gx][24G[1C[25Gt][25G[1C[26G*][26G[1C[27Gh][27G[1C[28Gx][28G[1C[29Gt][29G[1C[30G,][30G[1C[31Gt][31G[1C[1D[31G] [31G[31Gx][31G[1C[1C[1C[34G=[34G[1C[1C[36G0[36G[1C
+
+                         (0,1)
+Set::write: Tag Plus in h     [x, t] + 
+               (1,0)                  (1,0)
+     (u[x, t] h     [x, t] + h[x, t] u     [x, t]) is Protected.
+
+Out[32]= 0
+
+[1GIn[33]:=                                                                        [1G[9C[1GIn[33]:=                                                                        [10G[9D[1GIn[33]:=                                                                        [1G[9C[10GD[hxt,t][10G[19G+[10G[21GD[uxt*hxt,x][10G[34G=[10G[36G0[10G[27C[1D[36G [36G[1D[1D[34G [34G
+
+          (0,1)                  (1,0)                  (1,0)
+Out[33]= h     [x, t] + u[x, t] h     [x, t] + h[x, t] u     [x, t]
+
+[1GIn[34]:=                                                                        [1G[9C[1GIn[34]:=                                                                        [10G[9D[1GIn[34]:=                                                                        [1G[9C[10GD[hxt,t][10G[19G+[10G[21GD[uxt*hxt,x][10G[24C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[19G D[uxt*hxt,x] [19G[19G= D[uxt*hxt,x][19G[1C[21G D[uxt*hxt,x][20G[1C[14C
+
+Set::write: Tag D in D[h[x, t], t] is Protected.
+
+                  (1,0)                  (1,0)
+Out[34]= u[x, t] h     [x, t] + h[x, t] u     [x, t]
+
+[1GIn[35]:=                                                                        [1G[9C
+[1GIn[35]:=                                                                        [1G[9C[10Gw[10G[1C[11G[[11G[1C[12G][12G[1C[1D[12Gx][12G[1C[13G,][13G[1C[14Gz][14G[1C[15G,][15G[1C[16Gr][16G[1C[1D[16G] [16G[16Gt][16G[1C[1D[1D[1D[1D[1D[1C[13G_,z,t][13G[1C[1C[1C[16G_,t][16G[1C[17G_,t][17G[1C[1C[1D[1D[17G,t] [17G[1C[1C[19G_][19G[1C[1C[1C[22G=[22G[1C[1C[24G([24G[1C[25G)[25G[1C[1D[25Gz)[25G[1C[26G )[26G[1C[27G-)[27G[1C[28G )[28G[1C[29Gb)[29G[1C[30G[)[30G[1C[31G])[31G[1C[1D[31G) [31G[1D[30G) [30G[30Gx)[30G[1C[1C[32G*[32G[1C[33G([33G[1C[34G)[34G[1C[1D[34G1)[34G[1C[35G/)[35G[1C[36Gh)[36G[1C[37Gx)[37G[1C[38Gt)[38G[1C[1C[40G*[40G[1C[41GD[41G[1C[42G[[42G[1C[43G][43G[1C[1D[43Gh][43G[1C[44Gx][44G[1C[45Gt][45G[1C[46G,][46G[1C[47Gt][47G[1C[1C[1C[50G+[50G[1C[1C[52Gd[52G[1C
+
+                         (0,1)
+             (z - b[x]) h     [x, t]
+Out[35]= d + -----------------------
+                     h[x, t]
+
+[1GIn[36]:=                                                                        [1G[9C[10Gu[10G[1C[11Gx[11G[1C[12Gt[12G[1C
+
+Out[36]= u[x, t]
+
+[1GIn[37]:=                                                                        [1G[9C[1GIn[37]:=                                                                        [10G[9D[1GIn[37]:=                                                                        [1G[9C[10Guxt[10G[3C[3D[1GIn[37]:=                                                                        [10G[9D[1GIn[37]:=                                                                        [1G[9C[10Gw[x_,z_,t_][10G[22G=[10G[24G(z[10G[27G-[10G[29Gbx)*(1/hxt)*D[hxt,t][10G[50G+[10G[52Gd[10G[43C[1D[52G [52G[52Gu[52G[1C[53G[[53G[1C[54G][54G[1C[1D[54Gx][54G[1C[55G,][55G[1C[56Gt][56G[1C[1C[1D[57G [57G[1D[56G [56G[1D[55G [55G[1D[54G [54G[1D[53G [53G[53Gx[53G[1C[54Gt[54G[1C[55G*[55G[1C[56GD[56G[1C[57G[[57G[1C[58G][58G[1C[1D[58Gb][58G[1C[59Gx][59G[1C[60G,][60G[1C[61Gx][61G[1C[1C
+
+                                     (0,1)
+                         (z - b[x]) h     [x, t]
+Out[37]= u[x, t] b'[x] + -----------------------
+                                 h[x, t]
+
+[1GIn[38]:=                                                                        [1G[9C[10GE[10G[1C[11Gn[11G[1C[12Ge[12G[1C[13Gr[13G[1C[4D[1GIn[38]:=                                                                        [10G[9D[1GIn[38]:=                                                                        [1G[9C[10Gw[x_,z_,t_][10G[22G=[10G[24G(z[10G[27G-[10G[29Gbx)*(1/hxt)*D[hxt,t][10G[50G+[10G[52Guxt*D[bx,x][10G[53C[53D[1GIn[38]:=                                                                        [10G[9D[1GIn[38]:=                                                                        [1G[9C[10Guxt[10G[3C[3D[1GIn[38]:=                                                                        [10G[9D[1GIn[38]:=                                                                        [1G[9C[10Gw[x_,z_,t_][10G[22G=[10G[24G(z[10G[27G-[10G[29Gbx)*(1/hxt)*D[hxt,t][10G[50G+[10G[52Gd[10G[43C[43D[1GIn[38]:=                                                                        [10G[9D[1GIn[38]:=                                                                        [1G[9C[10Guxt[10G[3C[1D[12Gzt[12G[1C[1C
+
+Out[38]= u[x, z, t]
+
+[1GIn[39]:=                                                                        [1G[9C[1GIn[39]:=                                                                        [10G[9D[1GIn[39]:=                                                                        [1G[9C[10Guxzt[10G[4C[4D[1GIn[39]:=                                                                        [10G[9D[1GIn[39]:=                                                                        [1G[9C[10Gw[x_,z_,t_][10G[22G=[10G[24G(z[10G[27G-[10G[29Gbx)*(1/hxt)*D[hxt,t][10G[50G+[10G[52Guxt*D[bx,x][10G[53C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1D[1C[53Gbxt*D[bx,x][53G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C
+
+                                      (0,1)
+                          (z - b[x]) h     [x, t]
+Out[39]= ub[x, t] b'[x] + -----------------------
+                                  h[x, t]
+
+[1GIn[40]:=                                                                        [1G[9C[10GE[10G[1C[11Gn[11G[1C[12Ge[12G[1C[13Gr[13G[1C[14Gg[14G[1C[15G[[15G[1C[16G][16G[1C[1D[16Gx][16G[1C[17G_][17G[1C[18G,][18G[1C[19Gz][19G[1C[20G_][20G[1C[21G,][21G[1C[22Gt][22G[1C[23G_][23G[1C[1C[1C[26G=[26G[1C[1C[28G0[28G[1C[29G.[29G[1C[30G5[30G[1C[31G&[31G[1C[1D[31G [31G[31G*[31G[1C[32G([32G[1C[33G)[33G[1C[1D[33Gu)[33G[1C[34G[)[34G[1C[35G])[35G[1C[1D[35Gx])[35G[1C[36G,])[36G[1C[37Gz])[37G[1C[38G,])[38G[1C[39Gt])[39G[1C[1C[1D[40G) [40G[1D[39G) [39G[1D[38G) [38G[1D[37G) [37G[1D[36G) [36G[1D[35G) [35G[1D[34G) [34G[34Gx)[34G[1C[35Gz)[35G[1C[36Gt)[36G[1C[37G )[37G[1C[38G+)[38G[1C[39G )[39G[1C[40Gw)[40G[1C[41G[)[41G[1C[42G])[42G[1C[1D[42Gx])[42G[1C[43G,])[43G[1C[44Gz])[44G[1C[45G,])[45G[1C[46Gt])[46G[1C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1C[1C[1C[1C[1C[1C[1C[37G^ + w[x,z,t])[37G[1C[38G2 + w[x,z,t])[38G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[50G^)[50G[1C[51G2)[51G[1C[1C[1C[54G+[54G[1C[1C[56Gg[56G[1C[57G*[57G[1C[58G([58G[1C[59G)[59G[1C[1D[59Gz)[59G[1C[60G )[60G[1C[61G-)[61G[1C[62G )[62G[1C[63Gb)[63G[1C[64Gx)[64G[1C[1C
+
+                                       2
+Out[40]= g (z - b[x]) + 0.5 (u[x, z, t]  + 
+ 
+                                      (0,1)
+                          (z - b[x]) h     [x, t] 2
+>       (ub[x, t] b'[x] + -----------------------) )
+                                  h[x, t]
+
+[1GIn[41]:=                                                                        [1G[9C[10GI[10G[1C[11Gn[11G[1C[12Gt[12G[1C[13Ge[13G[1C[14Gg[14G[1C[15Gr[15G[1C[16Ga[16G[1C[17Gt[17G[1C[18Ge[18G[1C[19G[[19G[1C[20G][20G[1C[1D[20GE][20G[1C[21Gn][21G[1C[22Ge][22G[1C[23Gr][23G[1C[24Gg][24G[1C[25G,][25G[1C[1D[25G[,][25G[1C[26G],][26G[1C[1D[26Gx],][26G[1C[27G,],][27G[1C[28Gz],][28G[1C[29G,],][29G[1C[30Gt],][30G[1C[1C[1C[33G{][33G[1C[34G}][34G[1C[1D[34Gx}][34G[1C[35G,}][35G[1C[36Gb}][36G[1C[37G[}][37G[1C[38G]}][38G[1C[1D[38G}] [38G[1D[37G}] [37G[37Gx}][37G[1C[38G,}][38G[1C[39Gh}][39G[1C[40Gx}][40G[1C[41Gt}][41G[1C[42G }][42G[1C[43G+}][43G[1C[44G }][44G[1C[45Gb}][45G[1C[46Gx}][46G[1C[1C[1C
+
+Out[41]= Integrate[g (z - b[x]) + 
+ 
+                                                       (0,1)
+                     2                     (z - b[x]) h     [x, t] 2
+>     0.5 (u[x, z, t]  + (ub[x, t] b'[x] + -----------------------) ), 
+                                                   h[x, t]
+ 
+>    {x, b[x], b[x] + h[x, t]}]
+
+[1GIn[42]:=                                                                        [1G[9C[1GIn[42]:=                                                                        [10G[9D[1GIn[42]:=                                                                        [1G[9C[10GIntegrate[Energ[x,z,t],{x,bx,hxt[10G[43G+[10G[45Gbx}][10G[39C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1C[1C[1C[34G,bx,hxt + bx}] [34G[34Gz,bx,hxt + bx}][34G[1C[14C
+
+Out[42]= Integrate[g (z - b[x]) + 
+ 
+                                                       (0,1)
+                     2                     (z - b[x]) h     [x, t] 2
+>     0.5 (u[x, z, t]  + (ub[x, t] b'[x] + -----------------------) ), 
+                                                   h[x, t]
+ 
+>    {z, b[x], b[x] + h[x, t]}]
+
+[1GIn[43]:=                                                                        [1G[9C[1GIn[43]:=                                                                        [10G[9D[1GIn[43]:=                                                                        [1G[9C[10GIntegrate[Energ[x,z,t],{z,bx,hxt[10G[43G+[10G[45Gbx}][10G[39C[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[10GEIntegrate[Energ[x,z,t],{z,bx,hxt + bx}][10G[1C[11GxIntegrate[Energ[x,z,t],{z,bx,hxt + bx}][11G[1C[12GpIntegrate[Energ[x,z,t],{z,bx,hxt + bx}][12G[1C[13GaIntegrate[Energ[x,z,t],{z,bx,hxt + bx}][13G[1C[14GnIntegrate[Energ[x,z,t],{z,bx,hxt + bx}][14G[1C[15GdIntegrate[Energ[x,z,t],{z,bx,hxt + bx}][15G[1C[16G[Integrate[Energ[x,z,t],{z,bx,hxt + bx}][16G[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[1C[56G][56G[1C
+
+Out[43]= Integrate[g (z - b[x]) + 
+ 
+                                                       (0,1)
+                     2                     (z - b[x]) h     [x, t] 2
+>     0.5 (u[x, z, t]  + (ub[x, t] b'[x] + -----------------------) ), 
+                                                   h[x, t]
+ 
+>    {z, b[x], b[x] + h[x, t]}]
+
+[1GIn[44]:=                                                                        [1G[9C[10Gq[10G[1C[11Gu[11G[1C[12Gi[12G[1C[13Gt[13G[1C
+
+Out[44]= quit
+
+[1GIn[45]:=                                                                        [1G[9C[10GQ[10G[1C[11Gu[11G[1C[12Gi[12G[1C[13Gt[13G[1C
+
+]0;jap251@raijin4:~[jap251@raijin4 ~]$ 
+]0;jap251@raijin4:~[jap251@raijin4 ~]$ exit
+exit
+
+Script done on Tue 29 Mar 2016 13:54:00 AEDT
