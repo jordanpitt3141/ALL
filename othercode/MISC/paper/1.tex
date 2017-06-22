@@ -6,20 +6,23 @@
  \usepackage{amsmath} 
   \usepackage{pgfplots} 
  \usetikzlibrary{calc} 
-\pgfplotsset{compat = newest,every x tick label/.append style={font=\scriptsize},every y tick label/.append style={font=\scriptsize}, every axis plot post/.style={line join=round}}
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}}
 \begin{document} 
  \begin{tikzpicture} 
  \begin{axis}[ 
+ width = 0.7\textwidth,
  ylabel near ticks,
  xlabel near ticks, 
 yticklabel style={/pgf/number format/fixed,/pgf/number format/precision=5,}, 
 xtick={300,500,700}, 
 ytick={0.8,1.2,1.6,2.0}, 
 extra y ticks = {1,1.4,1.8},
-extra y tick style={yticklabel style={font=\scriptsize,color=white}},
+extra y tick style={yticklabel={}},
 extra x ticks = {400,600},
-extra x tick style={xticklabel style={font=\scriptsize,color=white}},
+extra x tick style={xticklabel={}},
 scaled y ticks=false, 
+xticklabel shift={.1cm},
+xlabel style={yshift=0.3cm,},
  clip mode=individual,
   xmin=300, 
  xmax=700, 
@@ -37,7 +40,7 @@ xlabel=$x$ ($m$),
 \addplot [black, dotted] coordinates {(532.2492588586647,0.8 ) (532.2492588586647,2 )};
 \addplot [black, dotted] coordinates {(422.30961896476663,0.8 ) (422.30961896476663,2 )};
 
-\node[below] at (axis cs:532.24925,0.8) {$x_{u_2}$};
+\node[below] at (axis cs:540,0.8) {$x_{u_2}$};
 %\node[below] at (axis cs:619.65036151643676,0.8) {$x_{S_2}$};
 %\node[below] at (axis cs:373.93573067676948,0.8) {$x_{R}$};
 % \node[label] {$h_1$}

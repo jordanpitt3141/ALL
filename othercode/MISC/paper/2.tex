@@ -10,6 +10,7 @@
 \begin{document} 
  \begin{tikzpicture} 
  \begin{axis}[ 
+ width = 0.7\textwidth,
 axis lines=left, xtick=\empty,
 ytick={1.0,1.3707},
  clip mode=individual,
@@ -23,7 +24,7 @@ xlabel=$x$ ($m$),
 \addplot [black, dotted] coordinates {(570,1.6825 ) (630,1.6825)};
 \node[left] at (axis cs:570,1.6825 ) {$A^+$};
 extra y ticks = {1,1.36},
-extra y tick style={yticklabel style={font=\scriptsize,color=white}},
+extra y tick style={yticklabel style={font=\tiny,color=white}},
 \node[left] at (axis cs:570,1 ) {$h_0$};
 \node[left] at (axis cs:570,1.36898 ) {$h_b$};
 
