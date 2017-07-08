@@ -1,0 +1,245 @@
+%%%% MODSIM 2011 Stylesheet based on iEMSs 2008 Stylesheet.
+%%%%
+%%%% Copy the modsim.sty file in the main latex file directory
+%%%% The source of the LaTeX file should start with
+%%%%
+%%%% 1/ LaTeX2e:
+%%%%      \documentclass[a4paper, fleqn]{article}
+%%%%      \usepackage{times}
+%%%%      \usepackage{modsim}
+%%%%	\usepackage{natbib}
+%%%%
+
+\renewcommand{\abstractname}{Abstract:}
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+\newif\if@haskeywords             % If keywords: do not omit rules
+
+% SIDE MARGINS:
+\oddsidemargin  0mm              % Left margin on odd-numbered pages.
+\evensidemargin  0mm              % Left margin on even-numbered pages.
+
+% VERTICAL SPACING:
+\topmargin      0cm              % Nominal distance from top of page to top
+                                  % of box containing running head.
+\headheight     8pt              % No running headline, and no
+\headsep        6mm              % space between running headline and text.
+\footskip       36pt              % Baseline-baseline distance between
+
+% DIMENSION OF TEXT:
+%\textheight 24.2cm                 % Height of text part of page
+\textheight 24cm
+\textwidth 15.4cm                  % Width of text part of page, i.e of line
+\hoffset 0.5cm
+\voffset -12mm
+
+%\columnsep 1cm                   % Horizontal space between columns
+%\columnseprule 0pt                % No vertical rule between columns
+
+% PARAGRAPHING
+%\parskip 1pc %\@plus 1\p@          % Extra vertical space between paragraphs.
+\parskip 1ex                      % No extra vertical space between paragraphs.
+\parindent 0mm                     % Width of paragraph indentation.
+
+% SECTIONAL UNITS:
+\newdimen\@bls                    % \@b(ase)l(ine)s(kip)
+\@bls=\baselineskip               % \@bls ~= \baselineskip for \normalsize
+\advance\@bls -1ex                % (fudge term)
+\newdimen\@eps                    %
+\@eps=0.0001pt                    % \eps = very small positive quantity
+\newdimen\@blsAdd                 % \@b(ase)l(ine)s(kip) Address
+\@blsAdd=2mm
+
+\floatsep 10mm plus 4pt minus 4pt % Space between adjacent floats moved
+                                  % to top or bottom of text page.
+\textfloatsep=\floatsep           % Space between main text and floats
+                                  % at top or bottom of page.
+\intextsep=\floatsep              % Space between in-text figures and
+                                  % text.
+
+% FOOTNOTE
+\long\def\@makefntext#1{\parindent 1em\noindent\hbox{${}^{\@thefnmark}$}#1}
+
+% EQUATION
+\mathindent=0em
+
+% TITLE
+\def\maketitle{\begingroup        % Initialize generation of front-matter
+%   \let\thanks\@gobble
+    \def\thefootnote{\fnsymbol{footnote}}%
+    \newpage \global\@topnum\z@
+    \@maketitle \@thanks
+  \endgroup
+  \let\maketitle\relax \let\@maketitle\relax
+  \gdef\@thanks{}\let\thanks\relax
+  \gdef\@address{}\gdef\@author{}\gdef\@title{}\let\address\relax}
+
+\def\justify@on{\let\\=\@normalcr
+  \leftskip\z@ \@rightskip\z@ \rightskip\@rightskip}
+\def\email#1{\gdef\@email{#1}}
+% This defines the header of the first page
+\def\@MODSIMfirstHeader{
+%\begin{flushleft}{\footnotesize \sl
+\begin{flushleft}{
+\vskip 16mm
+%19$^{th}$ International Congress on Modelling and Simulation, Perth, Australia 12-16 December 2011
+%http:/www.mssanz.org.au/modsim2011 %This was commented out as requested by the contractor who will create the book of abstracts. Leaving space to add the header by the constractor when compiling the CD proceedings and the book of abstracts.
+}
+\end{flushleft}
+}
+
+\newbox\fm@box                    % Box to capture front-matter in
+\def\@maketitle{%                 % Actual formatting of \maketitle
+  \global\setbox\fm@box=\vbox\bgroup
+\vspace*{-3cm}
+\thispagestyle{empty}
+\@MODSIMfirstHeader
+    \vskip 8mm                    % 930715: 8mm white space above title
+    \raggedright                  % Front-matter text is ragged right
+    \hyphenpenalty\@M             % and is not hyphenated.
+    {\centering\rmfamily\fontsize{18pt}{20}\bfseries\selectfont\@title\par} % Title set in larger font. CENTERED
+    \vskip\@bls                   % One line of vertical space after title.
+    {\centering{\bf\normalsize        % each author set in the normal CENTERED
+    \@author} \par                 % typeface size
+    \vskip\@bls                   % One line of vertical space after author(s).
+    \@address                     % all addresses
+	\sl Email: {\underline{\@email}}
+    \vskip 4mm}
+  \egroup
+ % \twocolumn[%                    % Front-matter text is over 2 columns.
+    \unvbox\fm@box                % Unwrap contents of front-matter box
+    \vskip\@bls                   % add 1 line of vertical space,
+    \unvbox\abstract@box          % unwrap contents of abstract boxes,
+  \if@haskeywords                 % IF keywords THEN
+    \vskip \@overkeywordskip
+    \unvbox\t@keyword             % Keyword, if any
+  \fi                             % FI
+    \vskip 2pc
+	\vfill
+\pagebreak
+%]
+}                  % and add 2pc of vertical space
+
+% ADDRESS:
+\newcounter{address}
+\def\theaddress{\alph{address}}
+\def\@makeadmark#1{\hbox{$^{\rm #1}$}}
+
+\def\address{%
+    \stepcounter{address}\addressmark
+  \@ifnextchar[\@markaddress\@addtoaddress}
+\def\@markaddress[#1]{%
+  \expandafter\xdef\csname mkad@#1\endcsname{\theaddress}%
+  \@addtoaddress}
+\def\@addtoaddress#1{\begingroup
+  \xdef\@tempa{\theaddress}\let\\=\relax
+  \def\protect{\noexpand\protect\noexpand}\xdef\@address{\@address
+  \protect\addresstext{\@tempa}{#1}}\endgroup}
+\def\@address{}
+
+\def\addressmark{\@ifnextchar[\@markedaddressmark
+  {\xdef\@tempb{\theaddress}\@makeadmark{\@tempb}}}
+\def\@markedaddressmark[#1]{\xdef\@tempb{\csname mkad@#1\endcsname}%
+  \@makeadmark{\@tempb}}
+
+\def\addresstext#1#2{\leavevmode \begingroup
+  \raggedright \centering \hyphenpenalty\@M \@makeadmark{#1}#2 \vskip -5mm\par
+\endgroup
+%make addresses CENTERED
+  \vskip\@bls}
+% ABSTRACT:
+\newbox\abstract@box              % Box to capture abstract in
+
+\def\abstract{%
+  \global\setbox\abstract@box=\vbox\bgroup
+  \normalsize\rm
+  \ignorespaces{\bf{\abstractname}}}
+\def\endabstract{\par \egroup}
+
+% KEYWORDS
+\def\@overkeywordskip{10\p@}      % Keyword skip.
+\def\@keywordsize{\normalsize\rm}         % Keyword size.
+\def\@keywordemph{\it}         % Keyword italics.
+\def\@keywordheading{{\bf{\emph{Keywords:}}}}
+\def\@keywordwidth{.11\textwidth} %%JP changed from \def\@keywordwidth{.8\textwidth} 
+\newbox\t@keyword                 % Box for keyword abstract
+
+
+\def\keyword{%
+  \global\@haskeywordstrue             % Implies rules are to be printed
+  %\hyphenpenalty\sv@hyphenpenalty      % restore \hyphenpenalty
+  \def\sep{\unskip; }                  % separator for multiple keywords
+  %\def\MSC{\par\leavevmode\hbox {\it 1991 MSC:\ }}%
+  %\def\PACS{\par\leavevmode\hbox {\it PACS:\ }}%
+  \global\setbox\t@keyword=\vbox\bgroup
+  \@keywordsize
+  \@keywordemph
+  \parskip\z@
+  \vskip 10\p@ \@plus 2\p@ \@minus 2\p@       % One line of space above keywords.
+  \noindent\@keywordheading
+  \hangindent=\@keywordwidth\hangafter=1 \noindent %% JP inserted
+  %\justify@off                         % Keywords are not justified.
+  %\ignorespaces
+  }
+\def\endkeyword{\par \egroup}
+
+% BIBLIOGRAPHY
+% Collapse citation numbers to ranges.
+\newcount\@tempcntc
+% PAGE STYLES
+%\def\ps@crcplain{\let\@mkboth\@gobbletwo
+%     \def\@oddhead{\reset@font{\sl\rightmark}\hfil \rm\thepage}%
+%     \def\@evenhead{\reset@font\rm \thepage\hfil\sl\leftmark}%
+%     \let\@oddfoot\@empty
+%     \let\@evenfoot\@oddfoot}
+
+
+\newcommand{\MODSIMhead}[1]{\def\@defheading{#1}}
+
+\def\ps@MODSIMheadings{%
+    \let\@oddfoot\@empty\let\@evenfoot\@empty
+%    \def\@evenhead{ZZ \hfil\slshape\leftmark}%
+    \def\@evenhead{ZZ \slshape\leftmark}%
+%    \def\@oddhead{{\@defheading} }%
+    %\def\@oddhead{{\hfil\footnotesize\slshape\@defheading\hfil}}%
+%\def\@oddhead{{\hfil\@defheading\hfil}}%
+\def\@oddhead{{\@defheading\hfil}}%
+    \let\@mkboth\@gobbletwo
+    \let\sectionmark\@gobble
+    \let\subsectionmark\@gobble
+    }
+
+% INITIALIZATION
+% \twocolumn                    % Formatting is in 2 columns given by maketitle, with
+\sloppy                         % paragraphs that can be loosely set,
+\emergencystretch=1pc           % (with 1 pc extra for emergencies),
+\flushbottom                    % and pages of equal length
+%\oddsidemargin 5.9mm
+%\evensidemargin 0.9mm
+%\topmargin      -10mm
+%\headheight     0mm
+%\headsep        1cm
+
+\pagestyle{empty}
+%\makeatletter
+\def\@normalsize{\@setsize\normalsize{10pt}\xpt\@xpt
+\abovedisplayskip 10pt plus2pt minus5pt\belowdisplayskip
+\abovedisplayskip \abovedisplayshortskip \z@
+plus3pt\belowdisplayshortskip 6pt plus3pt
+minus3pt\let\@listi\@listI}
+\def\section{\@startsection {section}{1}{\z@}
+        {-1ex plus -.2ex minus -.2ex}{1ex plus .2ex}
+        {\bf\textsc}}
+\def\subsection{\@startsection {subsection}{2}{\z@}
+        {-1ex plus -.2ex minus -.2ex}{1ex plus .2ex}
+        {\bf}}
+\renewcommand{\subsubsection}[1]{\paragraph*{\bf #1.}}
+\def\paragraph{\@startsection {paragraph}{4}{\z@}
+        {-1ex plus -.2ex minus -.2ex}{-1em}
+        {\normalsize\bf}}
+\def\subparagraph{\@startsection {subparagraph}{4}{\parindent}
+        {-1ex plus -.2ex minus -.2ex}{-1em}
+        {\normalsize\bf}}
+\makeatother
+
+

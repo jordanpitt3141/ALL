@@ -1,0 +1,174 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+\section{Finite Element}
+
+\[G = uh - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)\]
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+\[Gv = uhv  - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)v\]
+
+and then we integrate over the entire domain to get 
+\[\int_\Omega Gv dx = \int_\Omega uhv dx - \int_\Omega \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)vdx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega uhv dx + \int_\Omega\frac{h^3}{3}u_{x}v_xdx\]
+
+For $u$ we are going to use $x_{j - 1/2}$, $x_{j}$ and $x_{j + 1/2}$ as the nodes, which generate the basis functions $\phi_{j \pm 1/2}$ and $\phi_{j}$ , which for us will be the space of continuous quadratic elements. 
+
+While for $G$  and $h$ we will choose basis functions $w$ that are linear from $[x_{j-1/2}, x_{j+1/2}]$ but discontinuous at the edges.
+
+There are two types of basis functions in this set up the $\phi_{j}$ which are non-zero on
+$[x_{j-1/2}, x_{j+1/2}]$ and the $\phi_{j \pm 1/2}$, which we can reduce to just doing it once, but with a translation, so we focus on the $\phi_{j + 1/2}$  which is non-zero on  $[x_{j-1/2}, x_{j+3/2}]$
+\section{$\phi_{j}$}
+In this section we focus on the test function $v =\phi_{j}$ and thus we focus on the integrals on $[x_{j-1/2}, x_{j+1/2}]$ as 
+
+\[\int_\Omega Gv dx = \int_\Omega uhv dx + \int_\Omega\frac{h^3}{3}u_{x}v_xdx\]
+
+is 
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} G\phi_{j} dx = \sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}}  uh \phi_{j} dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} \frac{h^3}{3}u_{x}{(\phi_{j})}_{x}dx\]
+
+$$x = \frac{1}{2}\xi\Delta x + x_{j}$$
+
+Taking the derivatives we see
+
+
+$dx = d\frac{\xi}{2}\Delta x$ , $\frac{dx}{d\xi} = \frac{\Delta x}{2}$ , $\frac{d\xi}{dx} = \frac{2}{\Delta x}$ . \\ \\ We can describe the basis functions in the $\xi$ space, where they are non-zero
+
+\begin{equation}
+\phi_{j} = 1 - \xi^2
+\end{equation}
+
+\begin{equation}
+\phi_{j - 1/2} = \frac{1}{2}\left(\xi^2 - \xi\right)
+\end{equation}
+
+\begin{equation}
+\phi_{j + 1/2} = \frac{1}{2}\left(\xi^2 + \xi\right)
+\end{equation}
+
+\begin{equation}
+w^+_{j - 1/2} = \frac{1}{2}\left(1 - \xi\right)
+\end{equation}
+
+\begin{equation}
+w^-_{j - 1/2} = \frac{1}{2}\left(1 + \xi\right)
+\end{equation}
+
+\[G \approx G' = \sum_{j}G_{j+1/2}w_{j+1/2}\]
+\[u \approx u' = \sum_{j} \left[u_{j-1/2}\phi_{j-1/2} + u_{j}\phi_{j} + u_{j+1/2}\phi_{j+1/2}\right] \]
+\[h \approx h' = \sum_{j}h_{j+1/2}w_{j+1/2}\]
+
+\subsection{First Integral}
+So now we do the substitution for all integrals firstly we do
+
+\[\int_{x_{j-1/2}}^{x_{j+1/2}} G\phi_{j} dx = \int_{-1}^{1} G'(\xi)\phi_{j}(\xi) \frac{d x}{d\xi}d\xi\]
+
+\[ = \frac{\Delta x}{2} \int_{-1}^{1} G'(\xi)\phi_{j}(\xi)d\xi\]
+
+So we focus in on the integral
+
+\[\int_{-1}^{1} G'(\xi)\phi_{j}(\xi)d\xi = \int_{-1}^{1} \left( G^+_{j-1/2} w^+_{j-1/2} +  G^-_{j+1/2} w^-_{j+1/2}  \right)\phi_{j}d\xi \]
+
+\[= G^+_{j-1/2}\int_{-1}^{1}  w^+_{j-1/2}\phi_{j}d\xi  + G^-_{j+1/2}  \int_{-1}^{1}  w^-_{j+1/2} \phi_{j}d\xi\]
+
+we have 
+\[\int_{-1}^{1}  w^+_{j-1/2}\phi_{j}d\xi = \int_{-1}^{1} \frac{1}{2}\left(1 - \xi\right)\left(1 - \xi^2\right)d\xi = \frac{1}{2} \frac{4}{3} = \frac{2}{3}\]
+
+\[\int_{-1}^{1}  w^-_{j+1/2} \phi_{j}d\xi = \int_{-1}^{1} \frac{1}{2}\left(1 + \xi\right)\left(1 - \xi^2\right)d\xi = \frac{1}{2} \frac{4}{3} = \frac{2}{3} \]
+
+so then 
+
+\[\int_{-1}^{1} G'(\xi)\phi_{j}(\xi)d\xi = \frac{2}{3} G^+_{j-1/2}  + \frac{2}{3}G^-_{j+1/2}  \]
+
+so we have 
+
+\[\int_{x_{j-1/2}}^{x_{j+1/2}} G\phi_{j} dx = \frac{\Delta x}{2} \left[\frac{2}{3} G^+_{j-1/2}  + \frac{2}{3}G^-_{j+1/2}\right]  =  \frac{\Delta x}{3} \left[ G^+_{j-1/2}  + G^-_{j+1/2}\right]\]
+
+\subsection{Second Integral}
+
+\[\int_{x_{j-1/2}}^{x_{j+1/2}}  uh \phi_{j} dx =  \int_{-1}^{1}  u(\xi)h(\xi) \phi_{j}(\xi) \frac{d x}{d\xi}d\xi = \frac{\Delta x}{2}\int_{-1}^{1}  u'h' \phi_{j} d\xi\]
+
+focusing on the integral 
+\[\int_{-1}^{1}  u'h' \phi_{j} d\xi = \int_{-1}^{1} \left(u_{j-1/2}\phi_{j-1/2} + u_{j}\phi_{j} + u_{j+1/2}\phi_{j+1/2}\right) \left(h^+_{j-1/2} w^+_{j-1/2} +  h^-_{j+1/2} w^-_{j+1/2} \right) \phi_{j} d\xi\]
+
+\begin{multline*}
+= \int_{-1}^{1}  \Bigg(u_{j-1/2}h^+_{j-1/2} w^+_{j-1/2}\phi_{j-1/2} + u_{j}h^+_{j-1/2} w^+_{j-1/2}\phi_{j} + u_{j+1/2}h^+_{j-1/2} w^+_{j-1/2}\phi_{j+1/2}  \\ + u_{j-1/2}h^-_{j+1/2} w^-_{j+1/2}\phi_{j-1/2} + u_{j}h^-_{j+1/2} w^-_{j+1/2}\phi_{j} + u_{j+1/2}h^-_{j+1/2} w^-_{j+1/2}\phi_{j+1/2}\Bigg) \phi_{j} d\xi
+\end{multline*}
+
+\begin{multline*}
+= u_{j-1/2}h^+_{j-1/2}  \int_{-1}^{1}w^+_{j-1/2}\phi_{j-1/2} \phi_{j} d\xi + 
+ u_{j}h^+_{j-1/2} \int_{-1}^{1} w^+_{j-1/2}\phi_{j} \phi_{j} d\xi  \\+
+ u_{j+1/2}h^+_{j-1/2} \int_{-1}^{1} w^+_{j-1/2}\phi_{j+1/2} \phi_{j} d\xi \\+
+ u_{j-1/2}h^-_{j+1/2}  \int_{-1}^{1}w^-_{j+1/2}\phi_{j-1/2} \phi_{j} d\xi + 
+  u_{j}h^-_{j+1/2} \int_{-1}^{1} w^-_{j+1/2}\phi_{j} \phi_{j} d\xi  \\+
+  u_{j+1/2}h^-_{j+1/2} \int_{-1}^{1} w^-_{j+1/2}\phi_{j+1/2} \phi_{j} d\xi
+\end{multline*}
+
+
+Now we calculate the integrals
+
+\[\int_{-1}^{1}w^+_{j-1/2}\phi_{j-1/2} \phi_{j} d\xi = \int_{-1}^{1}\frac{1}{2}\left(1 - \xi \right) \frac{1}{2}\left(\xi^2 - \xi\right) \left(1 - \xi^2\right) d\xi  = \frac{1}{4}\left[\frac{8}{15}\right] = \frac{2}{15}\]
+
+\[\int_{-1}^{1} w^+_{j-1/2}\phi_{j} \phi_{j} d\xi =   \int_{-1}^{1}\frac{1}{2}\left(1 - \xi \right) \left(1 - \xi^2\right) \left(1 - \xi^2\right) d\xi = \frac{1}{2}\left[\frac{16}{15}\right] = \frac{8}{15}\]
+
+\[\int_{-1}^{1} w^+_{j-1/2}\phi_{j+1/2} \phi_{j} d\xi = \int_{-1}^{1}\frac{1}{2}\left(1 - \xi \right) \frac{1}{2}\left(\xi^2 + \xi\right) \left(1 - \xi^2\right) = \frac{1}{4} \times  0 = 0\]
+
+\[\int_{-1}^{1}w^-_{j+1/2}\phi_{j-1/2} \phi_{j} d\xi = \int_{-1}^{1}\frac{1}{2}\left(\xi  + 1 \right) \frac{1}{2}\left(\xi^2 - \xi\right) \left(1 - \xi^2\right) d\xi  = \frac{1}{4} \times  0 = 0 \]
+
+\[\int_{-1}^{1} w^-_{j+1/2}\phi_{j} \phi_{j} d\xi =  \int_{-1}^{1}\frac{1}{2}\left(\xi + 1 \right) \left(1 - \xi^2\right) \left(1 - \xi^2\right) d\xi  = \frac{1}{2}\left[\frac{16}{15}\right] = \frac{8}{15}\]
+
+\[\int_{-1}^{1} w^-_{j+1/2}\phi_{j+1/2} \phi_{j} d\xi =  \int_{-1}^{1}\frac{1}{2}\left(\xi  + 1 \right) \frac{1}{2}\left(\xi^2 + \xi\right) \left(1 - \xi^2\right) = \frac{1}{4}\left[\frac{8}{15}\right] = \frac{2}{15}\]
+
+So we have 
+
+\begin{multline*}
+u_{j-1/2}h^+_{j-1/2}  \int_{-1}^{1}w^+_{j-1/2}\phi_{j-1/2} \phi_{j} d\xi + 
+ u_{j}h^+_{j-1/2} \int_{-1}^{1} w^+_{j-1/2}\phi_{j} \phi_{j} d\xi  \\+
+ u_{j+1/2}h^+_{j-1/2} \int_{-1}^{1} w^+_{j-1/2}\phi_{j+1/2} \phi_{j} d\xi \\+
+ u_{j-1/2}h^-_{j+1/2}  \int_{-1}^{1}w^-_{j+1/2}\phi_{j-1/2} \phi_{j} d\xi + 
+  u_{j}h^-_{j+1/2} \int_{-1}^{1} w^-_{j+1/2}\phi_{j} \phi_{j} d\xi  \\+
+  u_{j+1/2}h^-_{j+1/2} \int_{-1}^{1} w^-_{j+1/2}\phi_{j+1/2} \phi_{j} d\xi
+\end{multline*}
+
+
+\begin{multline*}
+ = \frac{2}{15} h^+_{j-1/2} u_{j-1/2}  +  \frac{8}{15}h^+_{j-1/2}u_{j}  +
+  \frac{8}{15} h^-_{j+1/2} u_{j}  + \frac{2}{15}h^-_{j+1/2} u_{j+1/2} 
+\end{multline*}
+
+So 
+\begin{multline*}
+\int_{x_{j-1/2}}^{x_{j+1/2}}  uh \phi_{j} dx =  \\
+\frac{\Delta x}{2} \left[\frac{2}{15} h^+_{j-1/2} u_{j-1/2}  +  \frac{8}{15}h^+_{j-1/2}u_{j}  +
+  \frac{8}{15} h^-_{j+1/2} u_{j}  + \frac{2}{15}h^-_{j+1/2} u_{j+1/2}\right] \\ =
+\frac{\Delta x}{15} \left[ h^+_{j-1/2} u_{j-1/2}  +  4h^+_{j-1/2}u_{j}  +
+  4 h^-_{j+1/2} u_{j}  + h^-_{j+1/2} u_{j+1/2}\right]  
+\end{multline*}
+
+Lastly we have 
+
+
+
+\section{$\phi_{j+ 1/2} $}
+
+In this section we focus on the test function $v =\phi_{j + 1/2}$ and thus we focus on the integrals on $[x_{j-1/2}, x_{j+3/2}]$ as 
+
+\[\int_\Omega Gv dx = \int_\Omega uhv dx + \int_\Omega\frac{h^3}{3}u_{x}v_xdx\]
+
+is 
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} G\phi_{j+ 1/2} dx = \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}}  uh \phi_{j + 1/2} dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{h^3}{3}u_{x}{(\phi_{j+ 1/2})}_{x}dx\]
+
+
+\section{Combination}
+
+
+\end{document}

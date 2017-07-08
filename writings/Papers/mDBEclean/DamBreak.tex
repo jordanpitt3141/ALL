@@ -1,6 +1,5 @@
 \documentclass[times]{elsarticle}
 
-
 \usepackage[dvipsnames]{xcolor}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -18,7 +17,7 @@
 \newcommand\dashedrule{\mbox{%
   \solidrule[2mm]\hspace{2mm}\solidrule[2mm]}}
 
-\newcommand{\dotrule}[1]{%
+\newcommand{\dotrule}[1][4mm]{%
 	\parbox{#1}{\dotfill}} 
 
 \makeatletter
@@ -42,7 +41,7 @@
 \cortext[cor1]{Corresponding author}
 \address[ANU]{Mathematical Sciences Institute, Australian National University, Canberra, ACT 0200, Australia}
  \begin{abstract}
- We use various numerical methods to study the behaviour of the Serre equations in the presence of steep gradients, due to the lack of known analytical solutions for these problems. In keeping with the literature we study a class of initial condition problems that are a smooth approximation to the initial conditions of the dam-break problem. This class of initial condition problems allow us to observe the effect of varying steepness of the initial conditions on the solution of the Serre equations. To approximate the solution of the Serre equations we use numerical solutions from various methods. These numerical solutions are justified by demonstrating that as the resolution increases they converge to a numerical solution with little error in conservation, independent of the numerical method. We find four different structures of the converged numerical solutions depending on the steepness of the initial conditions. Two of these structures were observed in the literature, with the other two not being commonly found in the literature for these equations. The numerical solutions are then used to assess how well the analytical solution of the shallow water wave equations captures the mean behaviour of the solution of the Serre equations for the dam-break problem. Lastly the numerical solutions are used to evaluate the usefulness of asymptotic results in the literature to approximate the depth and location of the front of an undular bore.
+ We use numerical methods to study the behaviour of the Serre equations in the presence of steep gradients because there are no known analytical solutions for these problems. In keeping with the literature we study a class of initial condition problems that are a smooth approximation to the initial conditions of the dam-break problem. This class of initial condition problems allow us to observe the behaviour of the Serre equations with varying steepness of the initial conditions. The numerical solutions of the Serre equations are justified by demonstrating that as the resolution increases they converge to a solution with little error in conservation of mass, momentum and energy independent of the numerical method. We observe four different structures of the converged numerical solutions depending on the steepness of the initial conditions. Two of these structures were observed in the literature, with the other two not being commonly found in the literature. The numerical solutions are then used to assess how well the analytical solution of the shallow water wave equations captures the mean behaviour of the solution of the Serre equations for the dam-break problem. Lastly the numerical solutions are used to evaluate the usefulness of asymptotic results in the literature to approximate the depth and location of the front of an undular bore.
  \end{abstract}	
  
   \begin{keyword}
@@ -55,24 +54,24 @@
 \section{Introduction} \label{intro} 
 The behaviour of flows containing steep gradients are important to a range of problems in shallow water such as the propagation of a bore, the dam-break problem and shoaling waves on a beach.
 
-The Serre equations are used as a compromise between the non-dispersive shallow water wave equations and the incompressible inviscid Euler equations for modelling this behaviour. The Serre equations produce dispersive waves in the presence of steep gradients as they do in the Euler equations \cite{Mitsotakis-etal-2017}. However, unlike the Euler equations there are efficient methods for solving the Serre equations \cite{Hank-etal-2010-2034,Zoppou-etal-2016,Zoppou-etal-2017}, as there are for the shallow water wave equations. The Serre equations are considered the most appropriate approximate model of dispersive waves up to the shore line \cite{Bonneton-etal-2011-589,Bonneton-etal-2011-1479}. Therefore, understanding the behaviour of the Serre equations in the presence of steep gradients offers some insight into the behaviour of steep gradients for fluids more generally.
+The Serre equations are used as a compromise between the non-dispersive shallow water wave equations and the incompressible inviscid Euler equations for modelling dispersive waves of the free surface in the presence of steep gradients, which are present for the Euler equations \cite{Mitsotakis-etal-2017} but not for the shallow water wave equations. The Serre equations like the shallow water wave equations produce methods \cite{Hank-etal-2010-2034,Zoppou-etal-2016,Zoppou-etal-2017} that are computationally easier and quicker to solve than the best methods for the Euler equations. The Serre equations are considered the most appropriate approximation to the Euler equations for modelling dispersive waves up to the shore line \cite{Bonneton-etal-2011-589,Bonneton-etal-2011-1479}. Therefore, understanding the behaviour of the Serre equations in the presence of steep gradients offers some insight into the behaviour of steep gradients for fluids more generally.
 
 There are no known analytical solutions to problems containing steep gradients for the Serre equations. To infer the structure of solutions to problems containing steep gradients we have to resort to investigating numerical solutions of the Serre equations for these problems. 
 
-Unfortunately, there are few examples in the literature which depict the behaviour of numerical solutions to the Serre equations in the presence of steep gradients \cite{El-etal-2006,Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017,Zoppou-etal-2016,Zoppou-etal-2017}. These papers all present problems with discontinuous initial conditions \cite{Hank-etal-2010-2034,Zoppou-etal-2016,Zoppou-etal-2017} or a smooth approximation to them \cite{El-etal-2006,Mitsotakis-etal-2014,Mitsotakis-etal-2017}. Among these papers there are differences in the structures of the numerical solutions, with some demonstrating undulations in depth and velocity throughout the bore \cite{El-etal-2006,Zoppou-etal-2016,Zoppou-etal-2017} and others showing a constant depth and velocity state in the middle of the bore \cite{Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017}.
+There are few examples in the literature which depict the behaviour of numerical solutions to the Serre equations in the presence of steep gradients \cite{El-etal-2006,Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017,Zoppou-etal-2016,Zoppou-etal-2017}. These papers all present problems with discontinuous initial conditions \cite{Hank-etal-2010-2034,Zoppou-etal-2016,Zoppou-etal-2017} or a smooth approximation to them when the numerical method requires some smoothness of the solutions \cite{El-etal-2006,Mitsotakis-etal-2014,Mitsotakis-etal-2017}. Among these papers there are differences in the structures of the numerical solutions, with some demonstrating undulations in depth and velocity throughout the bore \cite{El-etal-2006,Zoppou-etal-2016,Zoppou-etal-2017} and others showing a constant depth and velocity state in the middle of the bore \cite{Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017}.
 
-The mean behaviour of numerical solutions to the dam-break problem for the Serre equations is consistent across the literature \cite{El-etal-2006,Zoppou-etal-2016,Zoppou-etal-2017,Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017} and was demonstrated to be well approximated by the analytical solution to the dam-break problem for the shallow water wave equations \cite{Hank-etal-2010-2034,Mitsotakis-etal-2014}. Expressions for the leading wave amplitude and speed of an undular bore for the Serre equations were derived and verified for a range of undular bores by \citet{El-etal-2006}. These expressions were also shown to be valid for all the different structures found in the literature \cite{El-etal-2006,Mitsotakis-etal-2014}.
+The mean behaviour of numerical solutions to the dam-break problem for the Serre equations is consistent across the literature \cite{El-etal-2006,Zoppou-etal-2016,Zoppou-etal-2017,Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017} and was demonstrated to be well approximated by the analytical solution to the dam-break problem by the shallow water wave equations \cite{Hank-etal-2010-2034,Mitsotakis-etal-2014}. Expressions for the leading wave amplitude and speed of an undular bore for the Serre equations were derived and verified for a range of undular bores by \citet{El-etal-2006}. These expressions were also shown to be valid for all the different structures found in the literature \cite{El-etal-2006,Mitsotakis-etal-2014}.
 
 %Aim
-The first aim of this paper is to investigate and determine the cause of the different behaviour that has been published in the literature for numerical solutions of the Serre equations for problems containing steep gradients. We find that the undulations of a bore can be damped to a constant depth and velocity state by the numerical diffusion introduced by the method, as is the case for \citet{Hank-etal-2010-2034}. Oscillation damping can also occur due to the particular smoothing of the initial conditions, as is the case for \citet{Mitsotakis-etal-2017}, \citet{El-etal-2006} and \citet{Mitsotakis-etal-2014}. We do find that over long time periods the Serre equations damp these oscillations as they propagate, but this natural decay is dominated by other factors in the literature.
+The first aim of this paper is to investigate and explain why different behaviour has been published in the literature for numerical solutions of the Serre equations for problems containing steep gradients. We find that the undulations of a bore can be damped to a constant depth and velocity state by the numerical diffusion introduced by the method, as is the case for \citet{Hank-etal-2010-2034}. Oscillation damping can also occur due to the particular smoothing of the initial conditions, as is the case for \citet{Mitsotakis-etal-2017}, \citet{El-etal-2006} and \citet{Mitsotakis-etal-2014}. We do find that over long time periods the Serre equations damp these oscillations as they propagate, but this natural decay is dominated by other factors in the literature.
 
-The second aim of this paper is to assess the utility of the shallow water wave equations and the results of \citet{El-etal-2006} as guides for the evolution of an undular bore. We find that for a range of dam-break problems the analytical solution of the shallow water wave equations is a good approximation for the mean depth and velocity of the Serre equations, extending the findings of \citet{Hank-etal-2010-2034} and \citet{Mitsotakis-etal-2014} to a larger range of dam-break problems. It was also found that the results of \citet{El-etal-2006} are a good approximation to our numerical solutions and are only a slight underestimation.
+The second aim of this paper is to assess the utility of the shallow water wave equations and the results of \citet{El-etal-2006} as guides for the evolution of an undular bore. We find that for a range of dam-break problems the analytical solution of the shallow water wave equations is a good approximation for the mean depth and velocity of the Serre equations, extending the findings of \citet{Hank-etal-2010-2034} and \citet{Mitsotakis-etal-2014} to a larger range of dam-break problems. It was also found that the results of \citet{El-etal-2006} are a good approximation to our numerical solutions.
 
-The first aim of this paper is achieved by demonstrating that our numerical solutions are good approximations to the true solutions of the Serre equations. This is accomplished by demonstrating that as the resolution of a particular method is increased, the numerical solutions converge to a numerical solution with little error in conservation, and that this numerical solution is the same across the five different numerical methods. Three of the methods are the first, second and third-order methods presented by \citet{Zoppou-etal-2017}. The first-order method is equivalent to the method of \citet{Hank-etal-2010-2034}. The fourth method is a recreation of the second-order method used by \citet{El-etal-2006}. Lastly, the fifth method is a second-order finite difference approximation to the Serre equations. 
+The first aim of this paper is achieved by demonstrating that our numerical solutions are good approximations to the true solutions of the Serre equations. This is accomplished by demonstrating that as the resolution of a particular method is increased, the numerical solutions converge to a numerical solution with little error in the conservation of mass, momentum and energy. The numerical solution is also consistent across the five different numerical methods. Three of the methods are the first, second and third-order methods presented by \citet{Zoppou-etal-2017}. The first-order method is equivalent to the method of \citet{Hank-etal-2010-2034}. The fourth method is a recreation of the second-order method used by \citet{El-etal-2006}. Lastly, the fifth method is a second-order finite difference approximation to the Serre equations. 
 
-The second aim is accomplished by comparing our verified numerical solutions to the analytical solutions of the shallow water wave equations and the Whitham modulation results. 
+The second aim is accomplished by comparing our verified numerical solutions to the analytical solutions of the shallow water wave equations and the Whitham modulation results presented by \citet{El-etal-2006}. 
  
-The paper is organised as follows, in Section \ref{section:Serre Equations} the Serre equations and the quantities they conserve are presented. In Section \ref{section:smootheddambreak} the smoothed dam-break problem is defined, the measures of the relative difference between numerical solutions and the relative error in conservation are given. The analytical solution of the shallow water wave equations and the expressions for the amplitude and speed of the leading wave of an undular bore are given. In Section \ref{sec:nummeth} the numerical methods and their important properties are presented. In Section \ref{section:NumRes} the four different structures in the solutions of smoothed dam-break problem for the Serre equations are determined using verified numerical solutions. The verified numerical solutions are also used to evaluate how well the analytical solution of the shallow water wave equations captures the mean behaviour of the solution of the Serre equations for the dam-break problem. The Whitham modulations results are also compared to the verified numerical solutions to test their veracity. Lastly, the Appendix presents the two finite difference methods in replicable detail. 
+The paper is organised as follows, in Section \ref{section:Serre Equations} the Serre equations and the quantities they conserve are presented. In Section \ref{section:smootheddambreak} the smoothed dam-break problem is defined, the measures of the relative difference between numerical solutions and the relative error in the conserved quantities are presented. The analytical solution of the shallow water wave equations and the expressions for the amplitude and speed of the leading wave of an undular bore are presented. In Section \ref{sec:nummeth} the numerical methods and their important properties are presented. In Section \ref{section:NumRes} the four different structures in the solutions of smoothed dam-break problem for the Serre equations are determined using verified numerical solutions. The verified numerical solutions are also used to evaluate how well the analytical solution of the shallow water wave equations captures the mean behaviour of the solution of the Serre equations for the dam-break problem. The Whitham modulations results are also compared to the verified numerical solutions to test their veracity.
 
 %--------------------------------------------------------------------------------
 \section{Serre Equations}
@@ -116,7 +115,7 @@ Conservation of a quantity $q$ implies that $\mathcal{C}_{q}(0) = \mathcal{C}_{q
 \section{Smoothed Dam Break Problem}
 \label{section:smootheddambreak}
 %--------------------------------------------------------------------------------
-In this section we define a class of initial condition problems, called the smoothed dam-break problem that we use throughout our numerical investigation. This class of initial conditions are used in the literature \cite{Mitsotakis-etal-2014,Mitsotakis-etal-2017} to smoothly approximate the discontinuous initial conditions of the dam-break problem. There is, no analytical solutions of the Serre equations for the dam-break problem or an arbitrary smoothed dam-break problem. Therefore, to demonstrate that our numerical solutions converge we use the relative difference between numerical solutions. To demonstrate that our numerical solutions have small errors in conservation we use the relative error in conservation. Both of these measures are defined in this section.
+In this section we define a class of initial condition problems, called the smoothed dam-break problem that we use throughout our numerical investigation. This class of initial conditions are used in the literature \cite{Mitsotakis-etal-2014,Mitsotakis-etal-2017} to smoothly approximate the discontinuous initial conditions of the dam-break problem, as some numerical methods require smoothness of the solutions.
 
 The smoothed dam-break problem has the following initial conditions
 \begin{linenomath*}
@@ -131,7 +130,9 @@ u(x,0) = 0.0 \;m/s.
 \label{eq:sdbi}
 \end{subequations}
 \end{linenomath*}
-This represents a smooth transition centred around $x_0$ between a water depth of $h_0$ on the right and a water depth of $h_1$ on the left. Here $\alpha$ measures the distance over which approximately $46\%$ of that smooth transition between the two heights occurs. Decreasing $\alpha$ increases the steepness of the initial conditions as can be seen in Figure \ref{fig:dbsmoothinit} where $h_0=1m$ and $h_1=1.8m$. These are the same $h_0$ and $h_1$ values as those of the smoothed dam-break problem of \citet{El-etal-2006} and the dam-break problem of \citet{Hank-etal-2010-2034}.
+This represents a smooth transition centred around $x_0$ between a water depth of $h_0$ on the right which is smaller than the water depth of $h_1$ on the left. Here $\alpha$ measures the distance over which approximately $46\%$ of that smooth transition between the two heights occurs. Decreasing $\alpha$ increases the steepness of the initial conditions as can be seen in Figure \ref{fig:dbsmoothinit} where $h_0=1m$ and $h_1=1.8m$. These are the same $h_0$ and $h_1$ values as those of the smoothed dam-break problem of \citet{El-etal-2006} and the dam-break problem of \citet{Hank-etal-2010-2034}.
+
+There are no known analytical solutions of the Serre equations for the dam-break problem or an arbitrary smoothed dam-break problem. Therefore, to demonstrate that our numerical solutions converge we use the relative difference between numerical solutions. To demonstrate that our numerical solutions also have small errors in the conserved quantities we use the relative error of their conservation. Both of these measures are defined in this section.
 \begin{figure}
 \centering
 \includegraphics[width=0.6\textwidth]{Figure-1.pdf}
@@ -140,12 +141,12 @@ This represents a smooth transition centred around $x_0$ between a water depth o
 \end{figure}
 %
 \subsection{Assessing validity of Numerical Solutions}
-To demonstrate that our numerical solutions converge to a solution with little error in conservation as the spatial resolution is increased we use two measures; the relative difference between numerical solutions of different resolutions and the error in conservation. The relative difference between numerical solutions measures their convergence, while the error in conservation measures how well the numerical solutions conserve the quantities $h$, $uh$ and $\mathcal{H}$.
+To demonstrate that our numerical solutions converge to a solution with little error in the conserved quantities as the spatial resolution is increased we use two measures; the relative difference between numerical solutions of different resolutions and the error in the conservation of a quantity. The relative difference between numerical solutions measures their convergence, while the error in conservation measures how well the numerical solutions conserve the quantities $h$, $uh$ and $\mathcal{H}$.
 
 We introduce the following notation for the spatial grids defined by $x_i$ and the temporal grids defined by $t^n$ upon which the numerical solutions are calculated. These grids are uniform so that $\Delta x = x_{i} - x_{i-1}$ for all $ i$ and $\Delta t = t^{n} - t^{n-1}$ for all $n$. We use subscripts and superscripts to denote where a quantity $q$ is evaluated in the following way $q_i^n = q(x_i,t^n)$. Finally, the $i$th cell is the interval [$x_i -\Delta x/2$,$x_i +\Delta x/2$] centred around $x_{i}$. 
 
 \subsubsection{Convergence of Numerical Results}
-To measure the convergence of the numerical solutions we ensured all grids had common locations to compare them by dividing $\Delta x$ by $2$ to create finer grids, thus the finest grid with the smallest $\Delta x$ contains all the locations $x_i$ in any coarser grid. To measure the relative difference between quantities on these grids we compare them only on the coarser grid points $x_i$. For some quantity $q$ we have our numerical approximation to it on the finest grid $q^*$ and on the coarser grid $q'$, with the relative difference between the two being
+To measure the convergence of the numerical solutions we ensured all grids had common locations to compare them by dividing $\Delta x$ by $2$ to create finer grids. Therefore, the finest grid with the smallest $\Delta x$ contains all the locations $x_i$ in any coarser grid. To measure the relative difference between quantities on these grids we compare them only on the coarser grid points $x_i$. For some quantity $q$ we have our numerical approximation to it on the finest grid $q^*$ and on the coarser grid $q'$, with the relative difference between the two being
 \begin{linenomath*}
 	\begin{gather}
 	L_1^{q} = \dfrac{\sum_{i} \left| q'(x_i)  - q^*(x_i)\right|}{\sum_{i} \left| q^*(x_i)\right|}.
@@ -154,7 +155,7 @@ To measure the convergence of the numerical solutions we ensured all grids had c
 \end{linenomath*}
 
 \subsubsection{Conserved Quantities}
-To calculate the error in conservation, we must first calculate the totals of the conserved quantities for the initial conditions. For the smoothed dam-break problem the initial conditions \eqref{eq:sdbi} were integrated to get expressions for the total mass $C_{h}(0)$, the total momentum $C_{uh}(0)$ and the total Hamiltonian $C_{\mathcal{H}}(0)$. Provided $x_0$ is the midpoint of the spatial domain $\left[a,b \right]$ the totals for the conserved quantities are
+To calculate the error in conservation of a quantity, we must first calculate the total amount of the conserved quantities for the initial conditions. For the smoothed dam-break problem the initial conditions \eqref{eq:sdbi} were integrated to obtain expressions for the total mass $C_{h}(0)$, the total momentum $C_{uh}(0)$ and the total Hamiltonian $C_{\mathcal{H}}(0)$. Provided $x_0$ is the midpoint of the spatial domain $\left[a,b \right]$ the total amounts for the conserved quantities are
 \begin{linenomath*}
 	\begin{subequations}
 		\begin{gather*}
@@ -180,7 +181,7 @@ To calculate how well we approximate the total amount of a quantity $q$ in our n
 	C_1^q = \frac{\left| \mathcal{C}_{q}(0) - \mathcal{C}^*_{q}(t) \right| }{\left|\mathcal{C}_{q}(0)\right|}.
 	\end{gather}
 \end{linenomath*}
-Note that for $uh$ the denominator is $0$ and that there is a flux of momentum due to the unequal heights at both ends of the domain. To resolve these issues for $uh$ the error in the conservation of $uh$ is measured by
+Note that for $uh$ the denominator is $0$ and that there is a flux of momentum due to the unequal heights at both ends of the domain. To resolve this issue for $uh$ the error in the conservation of $uh$ is measured by
 \begin{linenomath*}
 	\begin{gather}
 	C_1^{uh} = \left| \mathcal{C}_{uh}(0) - \mathcal{C}^*_{uh}(t) - \frac{gt}{2}\left(h(b)^2 - h(a)^2\right)\right|  .
@@ -192,14 +193,14 @@ Note that for $uh$ the denominator is $0$ and that there is a flux of momentum d
 \subsection{Background for derived and observed comparisons}
 It was demonstrated by \citet{Hank-etal-2010-2034} and \citet{Mitsotakis-etal-2014} that the analytical solution of the shallow water wave equations for the dam-break problem captures the mean behaviour of the numerical solutions of the Serre equations to the dam-break problem \cite{Hank-etal-2010-2034} and the smoothed dam-break problem \cite{Mitsotakis-etal-2014}. 
 
-\citet{El-etal-2006} derived an expression for the long term amplitude of the leading wave of an undular bore $A^+$ for the Serre equations. Since the front of an undular bore decomposes into solitons, the speed of the leading wave can be calculated from its amplitude.
+\citet{El-etal-2006} derived an expression for the long term amplitude of the leading wave of an undular bore $A^+$ for the Serre equations. Since the front of an undular bore decomposes into solitons, the speed of the leading wave $S^+$ can be calculated from its amplitude.
 
 To be self contained we present the analytical solution of the shallow water wave equations to the dam-break problem and the expressions derived by \citet{El-etal-2006}.
 
 \subsubsection{Shallow Water Wave Equation Analytical Solution}
 For the dam-break problem the shallow water wave equations, which are the Serre equations with dispersive terms neglected, can be solved analytically. 
 
-An example of the analytical solution of the shallow water wave equations for the dam-break problem is presented in Figure \ref{fig:SWWEanadiagram}. Region I is the undisturbed water upstream of the dam-break at constant height ($h_1$) and velocity ($0m/s$). Region II is the rarefaction fan connecting regions I and III. Regions III and IV are the constant height ($h_2$) and constant velocity ($u_2$) states which are separated by $x_{u_2} = x_0 + u_2t$. Region V is the undisturbed water downstream at constant height ($h_0$) and velocity ($0m/s$) separated from Region IV by a shock which travels at velocity $S_2$. Expressions for the unknown quantities $h_2$, $u_2$ and $S_2$ in terms of $h_0$ and $h_1$ were given by \citet{Wu-etal-1999-1210} as
+An example of the analytical solution of the shallow water wave equations for the dam-break problem is presented in Figure \ref{fig:SWWEanadiagram}. Region I is the undisturbed water upstream of the dam-break at constant height ($h_1$) and velocity ($0m/s$). Region II is the rarefaction fan connecting regions I and III. Regions III and IV represent the shock with constant height ($h_2$) and constant velocity ($u_2$), these regions are separated by $x_{u_2} = x_0 + u_2t$. Region V is the undisturbed water downstream at constant height ($h_0$) and velocity ($0m/s$) separated from Region IV by a shock which travels at velocity $S_2$. Expressions for the unknown quantities $h_2$, $u_2$ and $S_2$ in terms of $h_0$ and $h_1$ were given by \citet{Wu-etal-1999-1210} as
 \begin{linenomath*}
 \begin{subequations}
 \begin{gather}
@@ -215,7 +216,7 @@ and
 \label{eq:WuSWWE}	
 \end{subequations}
 \end{linenomath*}
-Applying \eqref{eq:WuSWWE} to our dam-break heights of interest; $h_0 =1m$ and $h_1 = 1.8m$ results in $h_2 = 1.36898m$ , $u_2 = 1.074975$ $m/s$ and $S_2 = 3.98835$ $m/s$ which are shown in Figure \ref{fig:SWWEanadiagram} for $t=30s$. The location of the front of the bore for the shallow water wave equations at time $t$ is thus $x_{S_2}(t) = x_0 + S_2 t$.
+Applying \eqref{eq:WuSWWE} to our dam-break heights of interest; $h_0 =1m$ and $h_1 = 1.8m$ results in $h_2 = 1.36898m$ , $u_2 = 1.074975$ $m/s$ and $S_2 = 3.98835$ $m/s$ which are shown in Figure \ref{fig:SWWEanadiagram} for $t=30s$. The location of the front of the bore for the shallow water wave equations at time $t$ is thus $x_{S_2}(t) = x_0 + S_2 t$ so that $x_{S_2}(30s) = 619.6505m$.
 
 \begin{figure}
 	\centering
@@ -246,7 +247,7 @@ where $\Delta = h_b / h_0$, and $h_b$ is the height of the bore. The height of t
 \label{eqn:hrdef}
 h_b = \frac{1}{4}\left(\sqrt{\frac{h_1}{h_0}} + 1\right)^2.
 \end{gather*} 
-For our dam-break heights of interest $h_0 = 1m$ and $h_1 = 1.8m$ we obtain $h_b = 1.37082m$, $\Delta = 1.37082$, $A^+ = 1.73998m$ and $S^+ = 4.13148m/s$. The location of the leading wave of an undular bore at time $t$ is then $x_{S^+}(t) = x_0 + S^+ t$.
+For our dam-break heights of interest $h_0 = 1m$ and $h_1 = 1.8m$ we obtain $h_b = 1.37082m$, $\Delta = 1.37082$, $A^+ = 1.73998m$ and $S^+ = 4.13148m/s$. The location of the leading wave of an undular bore at time $t$ is then $x_{S^+}(t) = x_0 + S^+ t$ so that $x_{S^+}(30s) = 623.9444m$.
 
 
 \begin{figure}
@@ -261,9 +262,9 @@ For our dam-break heights of interest $h_0 = 1m$ and $h_1 = 1.8m$ we obtain $h_b
 \label{sec:nummeth}
 %where methods come from
 %grid and cells definition
-Five numerical schemes are used to investigate the behaviour of the Serre equations in the presence of steep gradients. The first ($\mathcal{V}_1$), second ($\mathcal{V}_2$) and third-order ($\mathcal{V}_3$) finite difference finite volume methods of  \citet{Zoppou-etal-2017}. The second-order finite difference method of \citet{El-etal-2006} ($\mathcal{E}$) and a second-order finite difference method ($\mathcal{D}$) that can be found in the Appendix.
+Five numerical schemes were used to investigate the behaviour of the Serre equations in the presence of steep gradients, the first ($\mathcal{V}_1$), second ($\mathcal{V}_2$) and third-order ($\mathcal{V}_3$) finite difference finite volume methods of  \citet{Zoppou-etal-2017}, the second-order finite difference method of \citet{El-etal-2006} ($\mathcal{E}$) and a second-order finite difference method ($\mathcal{D}$) that can be found in the Appendix.
 
-The $\mathcal{V}_i$ methods are stable under a Courant-Friederichs-Lewy (CFL) condition such as the one presented by \citet{Harten-etal-1983-357}. The $\mathcal{V}_i$ methods have demonstrated the appropriate order of convergence for smooth problems \cite{Zoppou-etal-2017}. Furthermore, $\mathcal{V}_2$ and $\mathcal{V}_3$ have been validated against experimental data containing steep gradients \cite{Zoppou-etal-2017}. The two methods $\mathcal{D}$ and $\mathcal{E}$ were found to be stable under the CFL condition as well.
+The $\mathcal{V}_i$ methods are stable under a Courant-Friederichs-Lewy (CFL) condition  presented by \citet{Harten-etal-1983-357}. The $\mathcal{V}_i$ methods have demonstrated the appropriate order of convergence for smooth problems \cite{Zoppou-etal-2017}. Furthermore, $\mathcal{V}_2$ and $\mathcal{V}_3$ have been validated against experimental data containing steep gradients \cite{Zoppou-etal-2017}. The two methods $\mathcal{D}$ and $\mathcal{E}$ were found to be stable under the same CFL condition.
 
 Generally, we found that $\mathcal{V}_1$ is the worst performing method due to its numerical diffusion \cite{Zoppou-etal-2017}. Of the high-order methods $\mathcal{E}$ is the worst performing, introducing dispersive errors.
 
@@ -271,9 +272,9 @@ Generally, we found that $\mathcal{V}_1$ is the worst performing method due to i
 \section{Numerical Results}
 \label{section:NumRes}
 %--------------------------------------------------------------------------------
-We investigate the behaviour of the Serre equations in the presence of steep gradients by numerically solving the smoothed dam-break problem while varying the steepness of the initial conditions. As $\Delta x \rightarrow 0$ our numerical solutions should better approximate the true solution of the Serre equations. If our numerical solutions to a smoothed dam-break problem converge to the same numerical solution with little error in conservation as $\Delta x \rightarrow 0$ for each method, then this numerical solution is considered an accurate approximate solution to that smoothed dam-break problem for the Serre equations.
+We investigate the behaviour of the Serre equations in the presence of steep gradients by numerically solving the smoothed dam-break problem while varying the steepness of the initial conditions. As $\Delta x \rightarrow 0$ our numerical solutions should represent a good approximation of the true solution of the Serre equations. If our numerical solutions to a smoothed dam-break problem converge to the same numerical solution with little error in conservation of mass, momentum and energy as $\Delta x \rightarrow 0$ for each method, then this numerical solution is considered an accurate approximate solution to that smoothed dam-break problem for the Serre equations.
 
-This process validates our numerical solutions for the smoothed dam-break problem, and thus validates our numerical methods to approximate the solution of the Serre equations in the presence of steep gradients. With a validated model we can compare the numerical solution to the analytical solution of the shallow water wave equations for the dam-break problem and the results of \citet{El-etal-2006}.
+This process validates our numerical solutions for the smoothed dam-break problem, and thus validates our numerical methods to approximate the solution of the Serre equations in the presence of steep gradients, if it exists. With a validated model we can compare the numerical solution to the analytical solution of the shallow water wave equations for the dam-break problem and the results of \citet{El-etal-2006}.
 
 Throughout most of this section we are interested in the numerical solution at $t=30s$ to the smoothed dam-break problem with $h_0 = 1m$, $h_1 = 1.8m$ and $x_0 = 500m$ while allowing for different $\alpha$ values. All numerical methods used $\Delta t = 0.01 \Delta x$ which is smaller than required by the CFL condition, ensuring stability of our schemes. The method $\mathcal{V}_2$ requires an input parameter to its slope limiter and this was chosen to be $\theta = 1.2$ \cite{Zoppou-etal-2017}. The spatial domain was $[0m,1000m]$ with the following Dirichlet boundary conditions, $u = 0m/s$ at both boundaries, $h =1.8m$ on the left and $h =1m$ on the right.
 
@@ -299,13 +300,13 @@ We observe that there are four different structures for the converged to numeric
 		\includegraphics[width=\textwidth]{Figure-7.pdf}
 		\subcaption*{\hspace{10 mm}$\mathcal{S}_4$ ($\alpha = 0.1m$)}
 	\end{subfigure}	
-	\caption{Numerical results of $\mathcal{V}_3$ with $\Delta x = 10/2^{11}m$ ({\color{blue} \solidrule}) at $t= 30s$ for various smooth dam-break problems demonstrating the different observed structures.}
+	\caption{Numerical results of $\mathcal{V}_3$ with $\Delta x = 10/2^{11}m$ ({\color{blue} \solidrule}) at $t= 30s$ for various smooth dam-break problems demonstrating the different observed structures particularly around $x_{u_2}$ ({\color{black} \dotrule}).}
 	\label{fig:allstructs}
 \end{figure}
 
-The four structures are identified by the dominant features of the numerical solutions in regions III and IV. They correspond to different structures in the numerical solutions that have been presented in the literature. From Figure \ref{fig:allstructs} it can be seen that as $\alpha$ is decreased, steepening the initial conditions, the numerical solutions demonstrate an increase in the size and number of oscillations particularly around $x_{u_2}$. We observe that the difference between $\mathcal{S}_2$, $\mathcal{S}_3$ and $\mathcal{S}_4$ is the amplitude of the oscillations in regions III and IV.
+The four structures are identified by the dominant features of the numerical solutions in regions III and IV. They also correspond to different structures in the numerical solutions that have been presented in the literature. From Figure \ref{fig:allstructs} it can be seen that as $\alpha$ is decreased, steepening the initial conditions, the numerical solutions demonstrate an increase in the size and number of oscillations particularly around $x_{u_2}$. We observe that the difference between $\mathcal{S}_2$, $\mathcal{S}_3$ and $\mathcal{S}_4$ is the amplitude of the oscillations in regions III and IV.
 
-For the non-oscillatory and flat structures there is excellent agreement between all higher-order numerical methods at our highest resolution $\Delta x = 10/2^{11}m$. An illustration of this agreement is given in Figure \ref{fig:allmodels2struct} for $\mathcal{S}_2$ which is the most difficult to resolve of the two structures. However, the first-order method $\mathcal{V}_1$ suppresses oscillations present in the numerical solutions of other methods due to its diffusive errors \cite{Zoppou-etal-2017}, requiring lower $\Delta x$ to resolve these oscillations.
+For the non-oscillatory and flat structures there is excellent agreement between all higher-order numerical methods at our highest resolution $\Delta x = 10/2^{11}m$. An illustration of this agreement is given in Figure \ref{fig:allmodels2struct} for $\mathcal{S}_2$ which is the most difficult to resolve of the two structures. However, the first-order method $\mathcal{V}_1$ suppresses oscillations present in the numerical solutions of other methods due to its diffusive errors \cite{Zoppou-etal-2017}. To resolve these oscillations with $\mathcal{V}_1$ much lower of values of $\Delta x$ are required.
 
 \begin{figure}
 	\centering
@@ -316,7 +317,7 @@ For the non-oscillatory and flat structures there is excellent agreement between
 		\includegraphics[width=\textwidth]{Figure-9.pdf}
 	\end{subfigure}
 	
-	\caption{Numerical solutions of $\mathcal{D}$ ({\color{blue} \solidrule}), $\mathcal{E}$ ({\color{red} \solidrule}), $\mathcal{V}_3$ ({\color{green!60!black} \solidrule}), $\mathcal{V}_2$ ({\color{black} \solidrule}) and $\mathcal{V}_1$ ({\color{violet!60!white} \solidrule}) with $\Delta x = 10/2^{11}m$ at $t= 30s$ for the smooth dam-break problem with $\alpha =2m$.}
+	\caption{Numerical solutions of $\mathcal{D}$ ({\color{blue} \solidrule}), $\mathcal{E}$ ({\color{red} \solidrule}), $\mathcal{V}_3$ ({\color{green!60!black} \solidrule}), $\mathcal{V}_2$ ({\color{black} \solidrule}) and $\mathcal{V}_1$ ({\color{violet!60!white} \solidrule}) with $\Delta x = 10/2^{11}m$ at $t= 30s$ for the smooth dam-break problem with $\alpha =2m$. The Whitham modulation result for the leading wave height $A^+$ ({\color{black} \dashedrule}) and $x_{u_2}$ ({\color{black} \dotrule}) are presented for comparison.}
 	\label{fig:allmodels2struct}
 \end{figure}
 
@@ -338,7 +339,7 @@ The convergence of the numerical solutions as $\Delta x \rightarrow 0$ to a nume
 		\includegraphics[width=\textwidth]{Figure-10.pdf}
 	\end{subfigure}%
 	
-	\caption{Numerical solutions of $\mathcal{V}_3$ at $t= 30s$ for smooth dam-break problem with $\alpha = 40m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}).}
+	\caption{Numerical solutions of $\mathcal{V}_3$ at $t= 30s$ for smooth dam-break problem with $\alpha = 40m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}). The important quantities $A^+$ ({\color{black} \dashedrule}), $h_2$ ({\color{black} \dashedrule}) and $x_{u_2}$ ({\color{black} \dotrule}) are also presented.}
 	\label{fig:o3a1dxlimnonexp}
 \end{figure}
 
@@ -371,16 +372,16 @@ $0.1$ &$10/2^{10}$&\pgfutilensuremath {3.92\cdot 10^{-12}}&\pgfutilensuremath {4
 \end{table}
 
 \subsubsection{Flat Structure}
-The most common structure observed in the literature \cite{Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017} is the ``flat structure'', $\mathcal{S}_2$. It is observed when the initial conditions are steep enough such that the bore that develops has undulations. This structure consists of oscillations in regions III and IV which are separated by a constant height state around $x_{u_2}$. An example of the $\mathcal{S}_2$ structure can be seen in the numerical solutions presented in Figure \ref{fig:o3a6dxlimflatexp} where $\alpha = 2m$.
+The most common structure observed in the literature \cite{Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017} is the ``flat structure'' $\mathcal{S}_2$. It is observed when the initial conditions are steep enough such that the bore that develops has undulations. This structure consists of oscillations in regions III and IV which are separated by a constant height state around $x_{u_2}$. An example of the $\mathcal{S}_2$ structure can be seen in the numerical solutions presented in Figure \ref{fig:o3a6dxlimflatexp} where $\alpha = 2m$.
 
-As $\Delta x$ decreases the numerical solutions converge so that by $\Delta x = 10 / 2^8m$ the solutions for higher $\Delta x$ are visually identical. Table \ref{tab:L1C1} demonstrates that although we have convergence visually, the $L_1$ measures are still decreasing and are larger than round-off error. Likewise the $C_1$ measures are still decreasing and have only reached round-off error for $h$. This indicates that to attain full convergence of the numerical solutions of this smoothed dam-break problem down to round-off error using $\mathcal{V}_3$ would require an even smaller $\Delta x$. The relative difference between numerical solutions is small and the numerical solutions exhibit good conservation. Therefore, our highest resolution numerical solution is a good approximation to any numerical solutions with lower $\Delta x$ values. Furthermore, Figure \ref{fig:allmodels2struct} demonstrates that the highest resolution numerical solution of all higher-order methods are the same.
+As $\Delta x$ decreases the numerical solutions converge so that by $\Delta x = 10 / 2^8m$ the solutions for higher $\Delta x$ are visually identical. Table \ref{tab:L1C1} demonstrates that although we have convergence visually, the $L_1$ measures are still decreasing and are larger than round-off error. Likewise the $C_1$ measures are still decreasing and have only reached round-off error for $h$. This indicates that to attain full convergence of the numerical solutions of this smoothed dam-break problem down to round-off error using $\mathcal{V}_3$ would require an even smaller $\Delta x$. The relative difference between numerical solutions is small and the numerical solutions exhibit good conservation. Therefore, our highest resolution numerical solution is a good approximation to any numerical solutions with lower $\Delta x$ values. Figure \ref{fig:allmodels2struct} demonstrates that at $\Delta x = 10 / 2^{11}m$ the numerical solutions of all higher order methods are the same.
 
 %include something about the method independence
-Using $\mathcal{V}_3$ with $\Delta x = 10 / 2^{11}m$ we have not attained the desired full convergence of the numerical solutions to one with little conservation error, independent of the particular method. However, we have demonstrated that we have obtained a very good approximation to such a numerical solution. Therefore, our highest resolution numerical solution is an accurate approximate solution of the Serre equations for the smoothed dam-break problem with $\alpha = 2m$. Implying that the $\mathcal{S}_2$ structure should be observed in solutions of the Serre equations for smooth dam-break problems with similar $\alpha$ values.
+These results demonstrate that our highest resolution numerical solution is an accurate approximate solution of the Serre equations for the smoothed dam-break problem with $\alpha = 2m$. This implies that the $\mathcal{S}_2$ structure should be observed in solutions of the Serre equations for smooth dam-break problems with similar $\alpha$ values.
 
 These numerical solutions compare well with those of \citet{Mitsotakis-etal-2014} who use the same $\alpha$ but different $h_0$ and $h_1$ values and observe the $\mathcal{S}_2$ structure. We found that we observed this structure for all numerical method's numerical solutions to the smoothed dam-break problem with $\alpha$ values as low as $1m$ and $\Delta x = 10/2^{11}m$. The numerical solutions of \citet{Mitsotakis-etal-2017} use $\alpha=1m$ but different heights and observe the structure $\mathcal{S}_2$. Therefore \citet{Mitsotakis-etal-2017} and \citet{Mitsotakis-etal-2014} observe the $\mathcal{S}_2$ structure in their numerical results due to their choice of $\alpha$ for the smoothed dam-break problem. 
 
-The first-order method $\mathcal{V}_1$ is diffusive \cite{Zoppou-etal-2017} and damps oscillations that are present in the numerical solutions of higher-order methods as in Figure \ref{fig:allmodels2struct}. We find that for any smoothed dam-break problem with $\alpha \le 4m$ and the dam-break problem our numerical solutions with $\mathcal{V}_1$ at $t=30s$ using $\Delta x = 10/2 ^{11}m$ only observe the $\mathcal{S}_2$ structure. This is evident in Figure \ref{fig:o1highdchigha} with the numerical solutions of $\mathcal{V}_1$ using our finest grid where $\Delta x = 10/2^{11}m$ for our steepest initial conditions where $\alpha = 0.001m$. Therefore, \citet{Hank-etal-2010-2034} using the diffusive $\mathcal{V}_1$ with their chosen $\Delta x$ and $\Delta t$, which are larger than our $\Delta x$ and $\Delta t$ could only observe the $\mathcal{S}_2$ structure. 
+The first-order method $\mathcal{V}_1$ is diffusive \cite{Zoppou-etal-2017} and damps oscillations that are present in the numerical solutions of higher-order methods as in Figure \ref{fig:allmodels2struct}. We find that for any smoothed dam-break problem with $\alpha \le 4m$ and the dam-break problem only the $\mathcal{S}_2$ structure is observed for the numerical solutions of $\mathcal{V}_1$ at $t=30s$ with $\Delta x = 10/2 ^{11}m$. This is evident in Figure \ref{fig:o1highdchigha} with the numerical solutions of $\mathcal{V}_1$ using our finest grid where $\Delta x = 10/2^{11}m$ on our steepest initial conditions where $\alpha = 0.001m$. Therefore, \citet{Hank-etal-2010-2034} using the diffusive $\mathcal{V}_1$ with their chosen $\Delta x$ and $\Delta t$, which are larger than our $\Delta x$ and $\Delta t$ could only observe the $\mathcal{S}_2$ structure. 
 
 \begin{figure}
 		\begin{subfigure}{0.49\textwidth}
@@ -389,7 +390,7 @@ The first-order method $\mathcal{V}_1$ is diffusive \cite{Zoppou-etal-2017} and 
 		\begin{subfigure}{0.5\textwidth}
 			\includegraphics[width=\textwidth]{Figure-12.pdf}
 		\end{subfigure}
-\caption{Numerical solutions of $\mathcal{V}_3$ at $t= 30s$ for the smooth dam-break problem with $\alpha = 2m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}).}
+\caption{Numerical solutions of $\mathcal{V}_3$ at $t= 30s$ for the smooth dam-break problem with $\alpha = 2m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}). The important quantities $A^+$ ({\color{black} \dashedrule}), $h_2$ ({\color{black} \dashedrule}) and $x_{u_2}$ ({\color{black} \dotrule}) are also presented.}
 \label{fig:o3a6dxlimflatexp}
 \end{figure}
 
@@ -426,7 +427,7 @@ These numerical solutions support the findings of \citet{El-etal-2006} who also 
 	\includegraphics[width=0.5\textwidth]{Figure-15.pdf}
 	\includegraphics[width=0.5\textwidth]{Figure-16.pdf}
 \end{subfigure}
-\caption{Numerical solutions of $\mathcal{V}_3$ at $t= 30s$ for the smooth dam-break problem with $\alpha = 0.4m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}).}
+\caption{Numerical solutions of $\mathcal{V}_3$ at $t= 30s$ for the smooth dam-break problem with $\alpha = 0.4m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}). The important quantities $A^+$ ({\color{black} \dashedrule}), $h_2$ ({\color{black} \dashedrule}) and $x_{u_2}$ ({\color{black} \dotrule}) are also presented.}
 \label{fig:o3a9dxlimcdexp}
 \end{figure}
 
@@ -442,7 +443,7 @@ These numerical solutions support the findings of \citet{El-etal-2006} who also 
 		\includegraphics[width=0.5\textwidth]{Figure-19.pdf}
 		\includegraphics[width=0.49\textwidth]{Figure-20.pdf}
 	\end{subfigure}
-	\caption{Numerical solutions of $\mathcal{D}$ ({\color{blue} \solidrule}), $\mathcal{E}$ ({\color{red} \solidrule}), $\mathcal{V}_3$ ({\color{green!60!black} \solidrule}) and $\mathcal{V}_2$ ({\color{black} \solidrule}) at $t=30s$ with $\Delta x = 10/2^{11}m$ for the smoothed dam-break problem with $\alpha = 0.4m$.}
+	\caption{Numerical solutions of $\mathcal{D}$ ({\color{blue} \solidrule}), $\mathcal{E}$ ({\color{red} \solidrule}), $\mathcal{V}_3$ ({\color{green!60!black} \solidrule}) and $\mathcal{V}_2$ ({\color{black} \solidrule}) at $t=30s$ with $\Delta x = 10/2^{11}m$ for the smoothed dam-break problem with $\alpha = 0.4m$. The important quantities $A^+$ ({\color{black} \dashedrule}) and $x_{u_2}$ ({\color{black} \dotrule}) are also presented.}
 	\label{fig:o3a9allmodels}
 \end{figure}
 
@@ -472,7 +473,7 @@ By changing the interval and desired time for the numerical solution, $\Delta x$
 	\includegraphics[width=0.5\textwidth]{Figure-22.pdf}
 	\includegraphics[width=0.5\textwidth]{Figure-23.pdf}
 \end{subfigure}
-\caption{Numerical solutions of $\mathcal{V}_3$ at $t= 30s$ for the smooth dam-break problem with $\alpha = 0.1m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}).}
+\caption{Numerical solutions of $\mathcal{V}_3$ at $t= 30s$ for the smooth dam-break problem with $\alpha = 0.1m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}). The important quantities $A^+$ ({\color{black} \dashedrule}), $h_2$ ({\color{black} \dashedrule}) and $x_{u_2}$ ({\color{black} \dotrule}) are also presented.}
 \label{fig:o3a20dxlimcdexp}
 \end{figure}
 %[] include another zoomed plot []
@@ -486,7 +487,7 @@ By changing the interval and desired time for the numerical solution, $\Delta x$
 		\includegraphics[width=0.5\textwidth]{Figure-26.pdf}
 		\includegraphics[width=0.5\textwidth]{Figure-27.pdf}
 	\end{subfigure}
-	\caption{Numerical solutions of $\mathcal{D}$ ({\color{blue} \solidrule}), $\mathcal{E}$ ({\color{red} \solidrule}), $\mathcal{V}_3$ ({\color{green!60!black} \solidrule}) and $\mathcal{V}_2$ ({\color{black} \solidrule}) at $t=30s$ with $\Delta x = 10/2^{11}m$ for the smoothed dam-break problem with $\alpha = 0.1m$.}
+	\caption{Numerical solutions of $\mathcal{D}$ ({\color{blue} \solidrule}), $\mathcal{E}$ ({\color{red} \solidrule}), $\mathcal{V}_3$ ({\color{green!60!black} \solidrule}) and $\mathcal{V}_2$ ({\color{black} \solidrule}) at $t=30s$ with $\Delta x = 10/2^{11}m$ for the smoothed dam-break problem with $\alpha = 0.1m$. The important quantities $A^+$ ({\color{black} \dashedrule}) and $x_{u_2}$ ({\color{black} \dotrule}) are also presented.}
 	\label{fig:o3a12allmodels}
 \end{figure}
 
@@ -511,19 +512,19 @@ By changing the interval and desired time for the numerical solution, $\Delta x$
 \end{figure}
 
 \subsection{Shallow water wave equation comparison}
-The analytical solutions of shallow water wave equations have been used as a guide for the mean behaviour of the solution of the Serre equations for the dam-break problem in the literature \cite{Hank-etal-2010-2034,Mitsotakis-etal-2014}.
+The analytical solutions of the shallow water wave equations have been used as a guide for the mean behaviour of the solution of the Serre equations for the dam-break problem in the literature \cite{Hank-etal-2010-2034,Mitsotakis-etal-2014}.
 
 To assess the applicability of this the mean bore depth and mean fluid velocity in the interval [$x_{u_2}-50m$,$x_{u_2}+50m$] were calculated from our numerical solution to the smoothed dam-break problem with various height ratios. These means were compared to their approximations from the analytical solution of the dam-break problem for the shallow water wave equations $h_2$ and $u_2$. The results of this can be seen in Figure \ref{fig:ratiotest} for numerical solutions of $\mathcal{V}_3$ with $\Delta x = 10/2^{9}m$ to the smoothed dam-break problem at $t=100s$ with $\alpha = 0.1m$ where $h_0$ is fixed and $h_1$ is varied.
 
-We use a final time of $t=100s$ as it allows the internal structure of the bore to develop more fully giving a more reliable mean estimate, as a consequence we resort to a coarser grid to keep the run-times reasonable. We find that decreasing $\Delta x$ does not significantly alter the mean of $h$ and $u$. We also find that increasing $\alpha$ also does not significantly alter the mean of $h$ and $u$. Therefore, the mean behaviour of the true solution of the Serre equations to the dam-break problem is captured by these numerical solutions.
+We use a final time of $t=100s$ as it allows the internal structure of the bore to develop more fully giving a more reliable mean estimate, as a consequence we resort to a coarser grid to keep the run-times reasonable. We find that decreasing $\Delta x$ does not significantly alter the mean of $h$ and $u$. We also find that increasing $\alpha$ also does not significantly alter the mean of $h$ and $u$. Therefore, the mean behaviour of the true solution of the Serre equations to the dam-break problem is captured by these numerical solutions, if it exists.
 
-It can be seen that $h_2$ and $u_2$ are good approximations to the mean behaviour of the fluid inside the bore for a range of different aspect ratios. Although, as $h_1/h_0$ increases this approximation becomes worse, so that $h_2$ becomes an underestimate and $u_2$ becomes an overestimate.
+It can be seen that $h_2$ and $u_2$ are good approximations to the mean behaviour of the fluid inside the bore for a range of different aspect ratios. Although, as $h_1/h_0$ increases this approximation becomes worse, so that $h_2$ becomes an underestimate and consequently $u_2$ is an overestimate.
 
-We find that for $h_1/h_0 = 1.8$ the mean values of $h$ and $u$ inside the bore for the Serre equations are not equal to $h_2$ and $u_2$. This can be seen in Figure \ref{fig:uhSWWcomp} for the numerical solutions of $\mathcal{V}_3$ with $\Delta x = 10/2^{9}m$ to the smoothed dam-break problem with $\alpha = 0.1m$ at $t=300s$. It can be seen that $u_2$ is an overestimate of $u$ and $h_2$ is an underestimate of $h$, although the difference between these values and the mean behaviour of the Serre equations is small and only noticeable over long time periods.
+We find that for $h_1/h_0 = 1.8$ the mean values of $h$ and $u$ inside the bore for the Serre equations are not equal to $h_2$ and $u_2$. This can be seen in Figure \ref{fig:uhSWWcomp} for the numerical solutions of $\mathcal{V}_3$ with $\Delta x = 10/2^{9}m$ to the smoothed dam-break problem with $\alpha = 0.1m$ at $t=300s$. It can be seen that $h_2$ is an underestimate of $h$ and $u_2$ is an overestimate of $u$ although the difference between these values and the mean behaviour of the Serre equations is small and only noticeable over long time periods.
 
-The location of the leading wave of the Serre equations is poorly approximated by the location of the front of a bore in the shallow water wave equations. This is evident in $\mathcal{V}_3$'s numerical solution to the smoothed dam-break problem with $\alpha =0.1m$ at $t=300s$ using $\Delta x = 10/2^{9}m$, which is shown in Figure \ref{fig:frontcomp}.
+The location of the leading wave of the Serre equations slowly diverges from the location of the front of a bore in the shallow water wave equations over long periods of time. This divergence causes the small difference evident in $\mathcal{V}_3$'s numerical solution to the smoothed dam-break problem with $\alpha =0.1m$ at $t=300s$ using $\Delta x = 10/2^{9}m$, which is shown in Figure \ref{fig:frontcomp}.
 
-We note that the $\mathcal{S}_4$ structure present in the numerical solutions using this method and parameters at $t=30s$ in Figure \ref{fig:o3a20dxlimcdexp} has decayed away by $t=300s$ in Figure \ref{fig:uhSWWcomp}. This is a trend throughout our numerical solutions where oscillation amplitude decreases over time around $x_{u_2}$, changing the structure of the solution. This can be seen by obtaining full convergence of the numerical solutions to the smoothed dam-break problem at $t=3s$. The converged to numerical solutions for $\mathcal{V}_3$ are shown in Figure \ref{fig:structsearlier}. From this figure it can be seen that the oscillation amplitudes for the numerical solutions for the smoothed dam-break problems with $\alpha = 0.4m$ and $\alpha = 0.1m$ are much larger at $t=3s$ than they are at $t=30s$ in Figure \ref{fig:allstructs}. Since we have demonstrated that our numerical solutions are good approximations to the true solution of the Serre equations at $t=30s$ and $t=3s$, decreasing oscillation amplitude around $x_{u_2}$ over time must be a property of the Serre equations. This implies that bounding the oscillation amplitudes at time $t=3s$ as was done above, bounds the oscillation amplitudes at all later times.
+We note that the $\mathcal{S}_4$ structure present in the numerical solutions using this method and parameters at $t=30s$ in Figure \ref{fig:o3a20dxlimcdexp} has decayed away by $t=300s$ in Figure \ref{fig:uhSWWcomp}. This is a trend throughout our numerical solutions where oscillation amplitude decreases over time around $x_{u_2}$, changing the structure of the solution. This can be seen by obtaining full convergence of the numerical solutions to the smoothed dam-break problem at $t=3s$. The converged to numerical solutions for $\mathcal{V}_3$ are shown in Figure \ref{fig:structsearlier}. From this figure it can be seen that the oscillation amplitudes for the numerical solutions for the smoothed dam-break problems with $\alpha = 0.4m$ and $\alpha = 0.1m$ are much larger at $t=3s$ than they are at $t=30s$ in Figure \ref{fig:allstructs}. Since we have demonstrated that our numerical solutions are good approximations to the true solution of the Serre equations at $t=30s$ and $t=3s$, decreasing oscillation amplitude around $x_{u_2}$ over time is probably a property of the Serre equations. This implies that bounding the oscillation amplitudes at time $t=3s$ as was done above, bounds the oscillation amplitudes at all later times.
  
 \begin{figure}
 	\centering
@@ -535,7 +536,7 @@ We note that the $\mathcal{S}_4$ structure present in the numerical solutions us
 		\includegraphics[width=\textwidth]{Figure-31.pdf}
 		\subcaption*{\hspace{10 mm}u ({\color{red} $\triangle$}) and $u_2$({\color{black} \dashedrule})}
 	\end{subfigure}
-	\caption{Comparison between mean behaviour inside the bore of the Serre equations and the analytic solution of the shallow water wave equations for a range of different aspect ratios.}
+	\caption{Comparison between mean behaviour inside the bore of the Serre equations and the analytical solution of the shallow water wave equations for a range of different aspect ratios.}
 	\label{fig:ratiotest}
 \end{figure}
 
@@ -545,7 +546,7 @@ We note that the $\mathcal{S}_4$ structure present in the numerical solutions us
 	\begin{subfigure}{0.7\textwidth}
 		\includegraphics[width=\textwidth]{Figure-32.pdf}
 	\end{subfigure}%
-	\caption{The relative difference between $h$ and $u$ and their comparisons $h_2$ and $u_2$ plotted around $x_{u_2}$ for $\mathcal{V}_3$'s solutions with $\Delta x = 10/2^{9}m$ for the smoothed dam-break problem with $\alpha = 0.1m$ at $t=300s$.}
+	\caption{The relative difference between $h$ and $u$ and their comparisons $h_2$ and $u_2$ plotted around $x_{u_2}$ ({\color{black} \dotrule}) for $\mathcal{V}_3$'s solutions with $\Delta x = 10/2^{9}m$ for the smoothed dam-break problem with $\alpha = 0.1m$ at $t=300s$.}
 	\label{fig:uhSWWcomp}
 \end{figure}
 
@@ -554,7 +555,7 @@ We note that the $\mathcal{S}_4$ structure present in the numerical solutions us
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{Figure-33.pdf}
 	\end{subfigure}%
-	\caption{Numerical solution of $\mathcal{V}_3$ with $\Delta x = 10/2^{9}m$ for the smoothed dam-break problem with $\alpha = 0.1m$ at $t=300s$ around the front of the undular bore.}
+	\caption{Numerical solution of $\mathcal{V}_3$ with $\Delta x = 10/2^{9}m$ for the smoothed dam-break problem with $\alpha = 0.1m$ at $t=300s$ around the front of the undular bore. The important quantities $A^+$ ({\color{black} \dashedrule}), $x_{S_2}$ ({\color{black} \dashedrule}) and $x_{S^+}$ ({\color{black} \dashedrule}) are also presented.}
 	\label{fig:frontcomp}
 \end{figure}
 
@@ -565,7 +566,7 @@ We note that the $\mathcal{S}_4$ structure present in the numerical solutions us
 		\centering
 		\includegraphics[width=0.5\textwidth]{Figure-34.pdf}
 	\end{subfigure}
-	\caption{Numerical solution of $\mathcal{V}_3$ with $\Delta x = 10/2^{13}m$ for the smoothed dam-break problem with $\alpha = 0.001m$ ({\color{blue} \solidrule}), $0.1m$ ({\color{red} \solidrule}) and $0.4$ ({\color{black} \solidrule}) at $t=3s$.}
+	\caption{Numerical solution of $\mathcal{V}_3$ with $\Delta x = 10/2^{13}m$ for the smoothed dam-break problem with $\alpha = 0.001m$ ({\color{blue} \solidrule}), $0.1m$ ({\color{red} \solidrule}) and $0.4$ ({\color{black} \solidrule}) at $t=3s$. For comparison $x_{u_2}$ ({\color{black} \dotrule}) is also plotted.}
 	\label{fig:structsearlier}
 \end{figure}
 
@@ -586,10 +587,10 @@ These different phase velocities have two different behaviours for $h$ and $u$. 
 
 \begin{figure}
 	\centering
-	\begin{subfigure}{0.5\textwidth}\centering
+	\begin{subfigure}{0.55\textwidth}\centering
 		\includegraphics[width=\textwidth]{Figure-35.pdf}
 	\end{subfigure}%
-	\caption{Numerical solution of $\mathcal{V}_3$'s with $\Delta x = 10/2^{9}m$ for the smoothed dam-break problem with $\alpha = 0.1m$ at $t=30s$ around the contact discontinuity.}
+	\caption{Numerical solution of $\mathcal{V}_3$'s with $\Delta x = 10/2^{9}m$ for the smoothed dam-break problem with $\alpha = 0.1m$ at $t=30s$ around the contact discontinuity close to $x_{u_2}$ ({\color{black} \dotrule}).}
 	\label{fig:uhcomp}
 \end{figure}
 
@@ -612,16 +613,147 @@ The Whitham modulation results for the location of the leading wave $x_{S^+}$ is
 \section{Conclusions}
 \label{section:Conclusions}
 %--------------------------------------------------------------------------------
-Utilising two finite difference methods of second-order and three finite difference finite volume methods of various orders to solve the nonlinear weakly dispersive Serre equations an investigation into the smoothed dam-break problem with varying steepness was performed. Four different structures of the numerical solutions were observed and demonstrated to be valid, the general trend of these structures is that an increase in steepness increases the size and number of oscillations in the solution. This study explains the different structures exhibited by the numerical results in the literature for the smoothed dam-break problem for the Serre equations and uncovers a new result. These results demonstrate that other methods in the literature could replicate our results if their simulations are extended. Furthermore, these results suggest that this new result and its associated structure is to be expected for the solution of the Serre equation to the dam-break problem at least for short enough time spans.
+Utilising two finite difference methods of second-order and three finite difference finite volume methods of various orders to solve the nonlinear weakly dispersive Serre equations an investigation into the smoothed dam-break problem with varying steepness was performed. Four different structures of the numerical solutions were observed and demonstrated to be valid, the general trend of these structures is that an increase in steepness increases the size and number of oscillations in the solution. This study explains the different structures exhibited by the numerical results in the literature for the smoothed dam-break problem for the Serre equations and uncovers a new result. These results demonstrate that other methods in the literature could replicate our results if their simulations are extended. Furthermore, these results suggest that this new result and its associated structure is to be expected for the solution of the Serre equation to the dam-break problem at least for short enough time spans, if it exists.
 
-We find that the analytical solution of the shallow water wave equations for the dam-break problem provides a reasonable approximation to the mean height and velocity inside the bore formed by the smoothed dam-break problem for the Serre equations. Finally, we observe that the Whitham modulations results for the leading wave of an undular bore do not correspond with our validated numerical results, and are only an approximation. However, the Whitham modulation results do provide a more accurate approximation to the location and depth of the front of an undular bore than the shallow water wave equations.
+We find that the analytical solution of the shallow water wave equations for the dam-break problem provides a reasonable approximation to the mean height and velocity inside the bore formed by the smoothed dam-break problem for the Serre equations. Finally, we observe that the Whitham modulations results for the leading wave of an undular bore provide a more accurate approximation to the location and depth of the front of an undular bore than the shallow water wave equations.
 
 %more research\cite{Mitsotakis-etal-2016}
 
-
-%--------------------------------------------------------------------------------
-\bibliography{DamBreak}
 \bibliographystyle{elsarticle-num-names}
+%--------------------------------------------------------------------------------
+\begin{thebibliography}{16}
+	\providecommand{\natexlab}[1]{#1}
+	\providecommand{\url}[1]{\texttt{#1}}
+	\providecommand{\urlprefix}{URL }
+	\expandafter\ifx\csname urlstyle\endcsname\relax
+	\providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+	\providecommand{\doi}[1]{doi:\discretionary{}{}{}\begingroup
+		\urlstyle{rm}\url{#1}\endgroup}\fi
+	\providecommand{\bibinfo}[2]{#2}
+	
+	\bibitem[{Mitsotakis et~al.(2017)Mitsotakis, Dutykh, and
+		Carter}]{Mitsotakis-etal-2017}
+	\bibinfo{author}{D.~Mitsotakis}, \bibinfo{author}{D.~Dutykh},
+	\bibinfo{author}{J.~Carter}, \bibinfo{title}{On the nonlinear dynamics of the
+		traveling-wave solutions of the Serre system}, \bibinfo{journal}{Wave Motion}
+	\bibinfo{volume}{70}~(\bibinfo{number}{1}) (\bibinfo{year}{2017})
+	\bibinfo{pages}{166--182}.
+	
+	\bibitem[{Le~M\'{e}tayer et~al.(2010)Le~M\'{e}tayer, Gavrilyuk, and
+		Hank}]{Hank-etal-2010-2034}
+	\bibinfo{author}{O.~Le~M\'{e}tayer}, \bibinfo{author}{S.~Gavrilyuk},
+	\bibinfo{author}{S.~Hank}, \bibinfo{title}{A numerical scheme for the
+		{G}reen-{N}aghdi model}, \bibinfo{journal}{Journal of Computational Physics}
+	\bibinfo{volume}{229}~(\bibinfo{number}{6}) (\bibinfo{year}{2010})
+	\bibinfo{pages}{2034--2045}.
+	
+	\bibitem[{Zoppou et~al.(2017{\natexlab{a}})Zoppou, Roberts, and
+		Pitt}]{Zoppou-etal-2016}
+	\bibinfo{author}{C.~Zoppou}, \bibinfo{author}{S.~Roberts},
+	\bibinfo{author}{J.~Pitt}, \bibinfo{title}{A Solution of the Conservation Law
+		Form of the Serre Equations}, \bibinfo{journal}{The ANZIAM Journal}
+	\bibinfo{volume}{57}~(\bibinfo{number}{4})
+	(\bibinfo{year}{2017}{\natexlab{a}}) \bibinfo{pages}{385--394}.
+	
+	\bibitem[{Zoppou et~al.(2017{\natexlab{b}})Zoppou, Pitt, and
+		Roberts}]{Zoppou-etal-2017}
+	\bibinfo{author}{C.~Zoppou}, \bibinfo{author}{J.~Pitt},
+	\bibinfo{author}{S.~Roberts}, \bibinfo{title}{Numerical Solution of the Fully
+		Non-Linear Weakly Dispersive Serre Equations for Steep Gradient Flows},
+	\bibinfo{journal}{Applied Mathematical Modelling} \bibinfo{volume}{48}
+	(\bibinfo{year}{2017}{\natexlab{b}}) \bibinfo{pages}{70--95}.
+	
+	\bibitem[{Bonneton et~al.(2011{\natexlab{a}})Bonneton, Barth\'{e}lemy, Chazel,
+		Cienfuegos, Lannes, Marche, and Tissier}]{Bonneton-etal-2011-589}
+	\bibinfo{author}{P.~Bonneton}, \bibinfo{author}{E.~Barth\'{e}lemy},
+	\bibinfo{author}{F.~Chazel}, \bibinfo{author}{R.~Cienfuegos},
+	\bibinfo{author}{D.~Lannes}, \bibinfo{author}{F.~Marche},
+	\bibinfo{author}{M.~Tissier}, \bibinfo{title}{Recent advances in
+		{S}erre-{G}reen {N}aghdi modelling for wave transformation, breaking and
+		runup processes}, \bibinfo{journal}{European Journal of Mechanics B/Fluids}
+	\bibinfo{volume}{30}~(\bibinfo{number}{6})
+	(\bibinfo{year}{2011}{\natexlab{a}}) \bibinfo{pages}{589--597}.
+	
+	\bibitem[{Bonneton et~al.(2011{\natexlab{b}})Bonneton, Chazel, Lannes, Marche,
+		and Tissier}]{Bonneton-etal-2011-1479}
+	\bibinfo{author}{P.~Bonneton}, \bibinfo{author}{F.~Chazel},
+	\bibinfo{author}{D.~Lannes}, \bibinfo{author}{F.~Marche},
+	\bibinfo{author}{M.~Tissier}, \bibinfo{title}{A splitting approach for the
+		fully nonlinear and weakly dispersive {G}reen-{N}aghdi model},
+	\bibinfo{journal}{Journal of Compuational Physics}
+	\bibinfo{volume}{230}~(\bibinfo{number}{4})
+	(\bibinfo{year}{2011}{\natexlab{b}}) \bibinfo{pages}{1479--1498}.
+	
+	\bibitem[{El et~al.(2006)El, Grimshaw, and Smyth}]{El-etal-2006}
+	\bibinfo{author}{G.~El}, \bibinfo{author}{R.~H.~J. Grimshaw},
+	\bibinfo{author}{N.~F. Smyth}, \bibinfo{title}{Unsteady undular bores in
+		fully nonlinear shallow-water theory}, \bibinfo{journal}{Physics of Fluids}
+	\bibinfo{volume}{18}~(\bibinfo{number}{2}) (\bibinfo{year}{2006})
+	\bibinfo{pages}{027104}.
+	
+	\bibitem[{Mitsotakis et~al.(2014)Mitsotakis, Ilan, and
+		Dutykh}]{Mitsotakis-etal-2014}
+	\bibinfo{author}{D.~Mitsotakis}, \bibinfo{author}{B.~Ilan},
+	\bibinfo{author}{D.~Dutykh}, \bibinfo{title}{On the Galerkin/Finite-Element
+		Method for the Serre Equations}, \bibinfo{journal}{Journal of Scientific
+		Computing} \bibinfo{volume}{61}~(\bibinfo{number}{1}) (\bibinfo{year}{2014})
+	\bibinfo{pages}{166--195}.
+	
+	\bibitem[{Su and Gardner(1969)}]{Su-Gardener-1969-536}
+	\bibinfo{author}{C.~H. Su}, \bibinfo{author}{C.~S. Gardner},
+	\bibinfo{title}{Korteweg-de {V}ries equation and generalisations. {III}.
+		{D}erivation of the {K}orteweg-de {V}ries equation and {B}urgers equation},
+	\bibinfo{journal}{Journal of Mathematical Physics}
+	\bibinfo{volume}{10}~(\bibinfo{number}{3}) (\bibinfo{year}{1969})
+	\bibinfo{pages}{536--539}.
+	
+	\bibitem[{Lannes and Bonneton(2009)}]{Bonneton-Lannes-2009-16601}
+	\bibinfo{author}{D.~Lannes}, \bibinfo{author}{P.~Bonneton},
+	\bibinfo{title}{Derivation of asymptotic two-dimensional time-dependent
+		equations for surface water wave propagation}, \bibinfo{journal}{Physics of
+		Fluids} \bibinfo{volume}{21}~(\bibinfo{number}{1}) (\bibinfo{year}{2009})
+	\bibinfo{pages}{16601--16610}.
+	
+	\bibitem[{Li et~al.(2014)Li, Guyenne, Li, and Xu}]{Guyenne-etal-2014-169}
+	\bibinfo{author}{M.~Li}, \bibinfo{author}{P.~Guyenne}, \bibinfo{author}{F.~Li},
+	\bibinfo{author}{L.~Xu}, \bibinfo{title}{High order well-balanced {CDG-FE}
+		methods for shallow water waves by a {G}reen-{N}aghdi model},
+	\bibinfo{journal}{Journal of Computational Physics} \bibinfo{volume}{257}
+	(\bibinfo{year}{2014}) \bibinfo{pages}{169--192}.
+	
+	\bibitem[{Li(2002)}]{Li-Y-2002}
+	\bibinfo{author}{Y.~A. Li}, \bibinfo{title}{{H}amiltonian {S}tructure and
+		{L}inear {S}tability of {S}olitary {W}aves of the {G}reen-{N}aghdi
+		{E}quations}, \bibinfo{journal}{Journal of Nonlinear Mathematical Physics}
+	\bibinfo{volume}{9} (\bibinfo{year}{2002}) \bibinfo{pages}{99--105}.
+	
+	\bibitem[{Green and Naghdi(1976)}]{Green-Naghdi-1976-237}
+	\bibinfo{author}{A.~E. Green}, \bibinfo{author}{P.~M. Naghdi},
+	\bibinfo{title}{A derivation of equations for wave propagation in water of
+		variable depth}, \bibinfo{journal}{Journal of Fluid Mechanics}
+	\bibinfo{volume}{78}~(\bibinfo{number}{2}) (\bibinfo{year}{1976})
+	\bibinfo{pages}{237--246}.
+	
+	\bibitem[{Wu et~al.(1999)Wu, Huang, and Zheng}]{Wu-etal-1999-1210}
+	\bibinfo{author}{C.~Wu}, \bibinfo{author}{G.~Huang},
+	\bibinfo{author}{Y.~Zheng}, \bibinfo{title}{Theoretical solution of dam-break
+		shock wave}, \bibinfo{journal}{Journal of Hydraulic Engineering}
+	\bibinfo{volume}{125}~(\bibinfo{number}{11}) (\bibinfo{year}{1999})
+	\bibinfo{pages}{1210--1215}.
+	
+	\bibitem[{A.~Harten(1983)}]{Harten-etal-1983-357}
+	\bibinfo{author}{A.~A.~Harten}, \bibinfo{title}{{H}igh resolution schemes for
+		hyperbolic conservation laws}, \bibinfo{journal}{Journal of Computational
+		Physics} \bibinfo{volume}{49}~(\bibinfo{number}{3}) (\bibinfo{year}{1983})
+	\bibinfo{pages}{357--393}.
+	
+	\bibitem[{El and Hoefer(2016)}]{El-Hoefer-2016-11}
+	\bibinfo{author}{G.~El}, \bibinfo{author}{M.~Hoefer},
+	\bibinfo{title}{Dispersive shock waves and modulation theory},
+	\bibinfo{journal}{Physica D: Nonlinear Phenomena} \bibinfo{volume}{333}
+	(\bibinfo{year}{2016}) \bibinfo{pages}{11--65}.
+	
+\end{thebibliography}
 %--------------------------------------------------------------------------------
 \newpage
 \appendix{}

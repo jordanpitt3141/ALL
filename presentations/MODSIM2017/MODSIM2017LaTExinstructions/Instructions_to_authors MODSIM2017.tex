@@ -1,0 +1,128 @@
+\documentclass[a4paper,fleqn]{article} %Make sure you have a4paper and fleqn in defining documentclass.
+\usepackage{modsim}
+\usepackage{times}
+\usepackage{natbib} %The three packages modsim, times and natbib are required.
+
+\bibpunct{[}{]}{;}{a}{,}{,~}
+\pagestyle{MODSIMheadings}
+
+\usepackage[dvips]{graphicx}
+
+% Text to appear in the header of the pages
+\MODSIMhead{F. Chan {\it et al.}, MODSIM 2017 Instructions for Authors and Presenters}
+
+\title{MODSIM 2017 Instructions for Authors and Presenters} %title of your paper
+
+\author{\underline{F. Chan} %underline the presenter of the paper
+\address[A1]{\it{Curtin University, GPO BOX U1987, Perth, Western Australia, 6845 }}, B. Author \address[B1]{\it{B affiliation, GPO Box 987, Somewhere else, SomeCountry}}, C. Author \addressmark[A1] and D. Author \addressmark[B1]
+}
+
+%The command \address[address.mark]{the.actual.address.with.italic.style} is used to create a new address immediately after the name of the author. Use the command \addressmark[address.mark] for subsequent authors who share the same address.
+
+\email{F.Chan@curtin.edu.au} %only the email address of the corresponding author should be included.
+
+\begin{document}
+
+\begin{abstract}
+For MODSIM we will be requesting Extended Abstracts which will allow us to provide a more detailed synopsis of the paper in the Volume of Abstracts. The Extended Abstract should be self-contained and explicit, setting out the ground covered and the principal conclusions reached. The Extended Abstract can also contain results. The Extended Abstract MUST NOT extend beyond the first page (including the list of Keywords) and the main text of the paper MUST start in the next page, i.e. the first page should only contain the title, list of authors and their affiliations, abstract and keywords. Figures and tables can also be included. Figure and table numbering should continue from the Extended Abstract to the body of the paper.
+\end{abstract}
+
+\begin{keyword}
+Start keywords one space below the abstract and provide 3 to 5 keywords separated by commas. Keywords should be listed in Sentence case (first keyword with capital first letter and remaining keywords in lower case).
+\end{keyword}
+
+\maketitle
+
+\section{Content of Paper}
+
+The main text MUST start in the second page of the paper. The first page MUST only contain title, list of authors and their affiliations, abstract and list of keywords.
+
+\subsection{Introduction}
+
+The main purpose of an introduction is to enable the paper to be understood without undue reference to other sources.  It should therefore have sufficient background material for this purpose.  Generally, highly specialised papers will not need an extensive introduction as interested readers may be expected to be familiar with current literature on the subject.  On the other hand, when a paper is likely to interest people working in fields outside the immediate area of the paper, the introduction should contain background material which could otherwise be scattered throughout the literature.
+
+\subsection{Conclusions and Recommendations}
+
+The real value of a paper is reflected in the nature, soundness and clarity of the conclusions, so particular care should be taken with this section.
+
+\section*{Acknowledgments}
+Any particular assistance out of the ordinary may be acknowledged.  Please, do not use the numeral for the acknowledgements section. It is not necessary from the organisers' point of view to record the permission of the author's organisation to publish the paper or the information contained therein.
+
+\section*{References}
+Do not use the numeral for the references section.
+
+\subsection*{Style}
+References follows the style setup up by the ``chicago" bst file. An example of a reference in a conference paper is given below.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{chicago}
+\bibliography{modsim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent Further examples can be found in the example tex file, ``MODSIM2017\_example.tex", available for download on MODSIM 2017 website.
+
+\section*{Appendices}
+If more than one, appendices should be lettered A, B, etc., e.g.  APPENDIX A.
+
+\section{Additional Style and Formatting Requirements}
+
+Although the ``modsim.sty" file will handle most of the style and formatting issues, there are further formatting and style requirements that cannot be controlled automatically. It is then the authors' responsibilities to make sure their papers comply with these requirements.
+
+\subsection{Headers and Footers}
+Header of the first page should be the same as this document as this is handled by ``modsim.sty" file. Headers of following pages will follow the argument in ``MODSIMhead" appears in the preamble of the \LaTeX{} source file. The header should contain: the name of the authors (initial(s) and name) / title of the paper. If there are more than two authors write first author et al. If the title is too long, cut the title where needed and put three dots (). No footer should appear. \textbf{DO NOT} number the pages. Numbering of the pages will be done by the editors of the Proceedings.
+
+\subsection{Headings}
+Only 3 levels of heading are permitted: Main section headings (Level 1); secondary headings (Level 2), and Level 3. \par
+Main section headings (Heading 1) are uppercase, bold (10 pt), and numbered.\par
+Secondary headings (Heading 2) are Upper and Lower Case, Bold (Title Case), and numbered. \par
+Third level headings (Heading 3) are Upper and Lower Case, Bold italic (Title Case), not numbered. \par
+
+\subsection{Equations}
+Equations should be numbered consecutively as they appear in the text with Arabic numerals and should be referred to by their numbers only, e.g. (3).  Equations must be typed not hand printed.  About 5 mm should be left clear above and below each equation.
+
+\subsection{Figures and Photographs}
+Figures must be of high quality and may be in colour. Figure numbers and captions appear at the foot of the figures. Figures should be numbered consecutively with Arabic numerals, in the order in which reference is made to them in the text, e.g. {\bfseries Figure 1}, {\bfseries Figure 2}, etc. Figure Captions. 10 pt Times Roman, centred. See ``MODSIM2017\_example.pdf" for an example.  \par
+\noindent Photographs can also be used in the body of the paper. \par
+
+\subsection{Tables}
+Table numbers and captions appear at the top of the tables. To save space, you can allocate tables and captions only in the right/left hand side of the page, so that the text will be limited to the other hand side of the page. Tables should be numbered consecutively with Arabic numerals, in the order in which reference is made to them in the text, e.g. {\bfseries Table 1}, {\bfseries Table 2}, etc. See ``MODSIM2017\_example.pdf" for an example.\par
+
+
+\section{NOTATION AND UNITS}
+
+If the paper makes extensive use of symbols or other special nomenclature they should be listed and defined under this heading.  Otherwise, all symbols are to be defined when first used.  All units are to be SI (metric).
+
+\section{CRITERIA FOR ACCEPTANCE}
+
+\subsection{Length and Other Details}
+Full papers {\bfseries must not exceed seven A4} camera-ready pages. This includes all diagrams and figures, and the Extended Abstract. All papers will be independently refereed.
+
+\subsection{Permission to Publish}
+Unless informed by the author to the contrary, the Society will assume that a paper submitted has not been published or offered elsewhere and is not the property of any other person or body. \par
+
+It is the author's responsibility to obtain any necessary permission from his/her organisation or from any other person or body for the publication of a paper or any material in it; such permission need not be mentioned in the acknowledgments. \par
+
+\section{PRESENTATION OF PAPER AT THE CONGRESS}
+
+\subsection{Electronic Presentations}
+All presenters will have access to Microsoft PowerPoint and PDF reader to assist with their presentations. Instructions for uploading PowerPoint Presentations will be provided closer to the congress date.
+
+
+\section{REGISTRATION}
+
+At least one of the authors should be registered for final acceptance of the paper and its inclusion in the Congress Proceedings.
+
+\section{ENQUIRIES AND CORRESPONDENCE}
+All enquires concerning papers, at any stage of the process of preparation, review and publication should be addressed to: \par
+
+Professor Geoff Syme, Edith Cowan University, AU\\
+Associate Professor Darla Hatton MacDonald, University of Tasmania, AU\\
+Dr Beth Fulton, CSIRO, AU\\ 
+Email: modsim2017@mssanz.org.au\\
+	
+
+
+
+
+
+\end{document}
