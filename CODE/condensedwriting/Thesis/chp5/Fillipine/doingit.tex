@@ -1,0 +1,366 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\[\mathcal{C}_2 = \frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\]
+
+\[\mathcal{C}_4 = \frac{-2\cos\left(2k\Delta x\right) + 32\cos\left(k\Delta x\right)  - 30 }{12\Delta x^2}\]
+
+\[\mathcal{G} = \left[H -\frac{H^3}{3} \mathcal{C}\right]\]
+
+\[\mathcal{M}_3= \frac{26  -2\cos\left(k\Delta x\right)}{24}\]
+$\mathcal{M}_1 = \mathcal{M}_2 = 1$.
+$\mathcal{R}^+_1 =  e^{ik\Delta x}$ and $\mathcal{R}^-_1 =  1$. 
+
+\[\mathcal{R}_2^- = 1  + \frac{i\sin\left(k\Delta x\right)}{2}\]
+\[\mathcal{R}_2^+ = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+\[R_3^-= \frac{\mathcal{M}_3}{6}\left[5 +  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\]
+
+\[R_3^+= \frac{\mathcal{M}_3 e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\] 
+
+\[R^u_2 = \frac{e^{ik\Delta x } + 1}{2} \]
+
+\[R^u_3 = \frac{-3e^{2ik\Delta x } + 27e^{ik\Delta x } + 27 - 3e^{-ik\Delta x }}{48}\]
+
+
+\[\mathcal{F}^{h,u} = H\mathcal{R}^u\]
+
+\[\mathcal{F}^{h,h} = -\dfrac{ \sqrt{gH}}{ 2} \left [ \mathcal{R}^+- \mathcal{R}^- \right ]\]
+
+\[\mathcal{F}^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \mathcal{G} \left [ \mathcal{R}^+ \ -  \mathcal{R}^-  \right ]\]
+
+\[\mathcal{F}^{u,h} = \dfrac{ gH \mathcal{R}^- + gH \mathcal{R}^+}{ 2}\]
+
+
+$\mathcal{D} = 1 -e^{-ik\Delta x}$
+
+\section{Taylor Expansions}
+Around $0$ we have
+
+\[\cos\left(x\right) = 1 - \frac{1}{2!} x^2 + \frac{1}{4!} x^4 - \frac{1}{6!} x^6 + \frac{1}{8!} x^8 - \frac{1}{10!} x^{10} + O(x^{12})\]
+
+\[\sin\left(x\right) = \frac{1}{1!} x^1 - \frac{1}{3!} x^3 + \frac{1}{5!} x^5 - \frac{1}{7!} x^7 + \frac{1}{9!} x^{9} + O(x^{11})\]
+
+\[e^{ix} = \cos(x) + i \sin(x)\]
+
+\[e^{ix} = 1 + i x  - \frac{1}{2} x^2 - \frac{i}{3!} x^3 + \frac{1}{4!} x^4 + \frac{i}{5!} x^5 - \frac{1}{6!} x^6 - \frac{i}{7!} x^7 + \frac{1}{8!} x^8 + \frac{i}{9!} x^{9} - \frac{1}{10!} x^{10}+ O(x^{11}) \]
+
+\section{Going Down List}
+
+So 
+\[\mathcal{G}_a =  \left[H + \frac{H^3}{3} k^2\right]\]
+
+\[\mathcal{C}_2 = \frac{ 2\left(- \frac{1}{2!} (k\Delta x)^2 + \frac{1}{4!} (k\Delta x)^4 - \frac{1}{6!} (k\Delta x)^6 + \frac{1}{8!} (k\Delta x)^8 - \frac{1}{10!} (k\Delta x)^{10} + O(x^{12})\right) }{\Delta x^2}\]
+
+\[\mathcal{C}_2 = \frac{- (k\Delta x)^2 + \frac{2}{4!} (k\Delta x)^4 - \frac{2}{6!} (k\Delta x)^6 + \frac{2}{8!} (k\Delta x)^8 - \frac{2}{10!} (k\Delta x)^{10} + O(x^{12}) }{\Delta x^2}\]
+
+\[\mathcal{C}_2 = - k^2+ \frac{2}{4!} k^4(\Delta x)^2 - \frac{2}{6!} k^6(\Delta x)^4 + \frac{2}{8!} k^8(\Delta x)^6 - \frac{2}{10!} k^{10}(\Delta x)^{8} + O(x^{10}) \]
+
+\[\mathcal{C}_2 = - k^2+ \frac{1}{12} k^4(\Delta x)^2 + O(x^{4}) \]
+
+\[\mathcal{C}_4 = \frac{-2\cos\left(2k\Delta x\right) + 32\cos\left(k\Delta x\right)  - 30 }{12\Delta x^2}\]
+
+\[-2\cos\left(2 k \Delta x\right) = -2\left[1 - \frac{1}{2} 2^2 k^2 \Delta x ^2 + \frac{1}{24} 2^4 k^4 \Delta x ^4 - \frac{1}{720} 2^6 k^6 \Delta x ^6 + \frac{1}{40320} 2^8 k^8 \Delta x^8 + O(\Delta x ^{10})\right]\]
+
+\[= -2 + \frac{1}{2} 2^3 k^2 \Delta x ^2 - \frac{1}{24} 2^5 k^4 \Delta x ^4 + \frac{1}{720} 2^7 k^6 \Delta x ^6 - \frac{1}{40320} 2^9 k^8 \Delta x^8 + O(\Delta x ^{10})\]
+
+\[= -2 + \frac{8}{2} k^2 \Delta x^2 - \frac{32}{24} k^4 \Delta x ^4 + \frac{128}{720} k^6 \Delta x ^6 - \frac{512}{40320} k^8 \Delta x^8 + O(\Delta x ^{10})\]
+
+\[32\cos\left(k \Delta x\right) = 32 - 16 (k \Delta x)^2 + \frac{32}{24} (k \Delta x)^4 - \frac{32}{720} (k \Delta x)^6 + \frac{32}{40320} (k \Delta x)^8+ O((k \Delta x)^{10})\]
+
+\[32\cos\left(k \Delta x\right) -2\cos\left(2 k \Delta x\right) = 30 - 12 (k \Delta x)^2  + \frac{96}{720} (k \Delta x)^6 - \frac{480}{40320} (k \Delta x)^8 + O((k \Delta x)^{10})     \]
+
+\[\mathcal{C}_4 = \frac{1 }{12\Delta x^2} \left[- 12 (k \Delta x)^2  + \frac{96}{720} (k \Delta x)^6 - \frac{480}{40320} (k \Delta x)^8 + O((k \Delta x)^{10}) \right]\]
+
+\[\mathcal{C}_4 = \left[- (k)^2  + \frac{96}{8640} k^6(\Delta x)^4 - \frac{480}{483840}k^8 (\Delta x)^6 + O((k \Delta x)^{8}) \right]\]
+
+\[\mathcal{C}_4 = \left[- (k)^2  + \frac{1}{90} k^6(\Delta x)^4 + O(\Delta x^{6}) \right]\]
+
+Analytically 
+\[G = uh - h^3/3 (u_{xx})\]
+
+For the fourier nodes we have
+\[G = uH - (-1) (k^2) H^3/3 (u)\]
+
+\[G = uH + (k^2) H^3/3 u\]
+
+Using above derivative approximations
+
+\[\mathcal{G}_2 = H -\frac{H^3}{3}\left[- k^2+ \frac{1}{12} k^4(\Delta x)^2 + O(x^{4}) \right] \]
+
+\[\mathcal{G}_2 = H +\frac{H^3}{3} k^2 -\frac{H^3 k^4(\Delta x)^2}{36} + O(x^{4})\]
+
+\[\mathcal{G}_4 = H -\frac{H^3}{3}\left[- (k)^2  + \frac{1}{90} k^6(\Delta x)^4 + O(\Delta x^{6}) \right] \]
+
+\[\mathcal{G}_4 = H + \frac{H^3k^2}{3} -\frac{H^3 k^6 (\Delta x)^4}{270} + O(\Delta x^{6}) \]
+
+
+Analtyically we have
+
+\[\bar{u}_j = \frac{1}{\Delta x} \int_{x_{j - 1/2}}^{x_{j+ 1/2}} u_j dx\]
+
+\[\bar{u}_j = \frac{1}{\Delta x}  \frac{-i}{k} u_j \left[e^{ik \Delta x/ 2} -e^{-ik \Delta x/ 2}\right] dx\]
+
+\[\bar{u}_j = \frac{1}{\Delta x}  \frac{-i}{k} u_j \left[2i \sin\left(ik \Delta x/ 2\right)\right]\]
+
+\[\bar{u}_j = \frac{1}{\Delta x}  \frac{2}{k} \left[\sin\left(ik \Delta x/ 2\right)\right] u_j\]
+
+So 
+\[u_j =  k\frac{\Delta x}{2} \left[\csc\left(ik \Delta x/ 2\right)\right] \bar{u}_j\]
+
+\[\mathcal{M}_a = k\frac{\Delta x}{2} \left[\csc\left(ik \Delta x/ 2\right)\right] \]
+
+The taylor expansion of this is
+
+\[\mathcal{M}_a = 1 + \frac{1}{24} (k\Delta x)^2 + \frac{7}{5760} (k\Delta x)^4 + O(x^{6}) \]
+
+\[\mathcal{M}_3= \frac{26  -2\left(1 - \frac{1}{2!} (k\Delta x)^2 + \frac{1}{4!} (k\Delta x)^4 - \frac{1}{6!} (k\Delta x)^6 + \frac{1}{8!} (k\Delta x)^8 - \frac{1}{10!} (k\Delta x)^{10} + O(x^{12})\right)}{24}\]
+
+\[\mathcal{M}_3= \frac{12 -\left(- \frac{1}{2!} (k\Delta x)^2 + \frac{1}{4!} (k\Delta x)^4 - \frac{1}{6!} (k\Delta x)^6 + \frac{1}{8!} (k\Delta x)^8 - \frac{1}{10!} (k\Delta x)^{10} + O(x^{12})\right)}{12}\]
+
+\[\mathcal{M}_3= \frac{12  + \frac{1}{2!} (k\Delta x)^2 - \frac{1}{4!} (k\Delta x)^4 + \frac{1}{6!} (k\Delta x)^6 - \frac{1}{8!} (k\Delta x)^8 + \frac{1}{10!} (k\Delta x)^{10} + O(x^{12})}{12}\]
+
+\[\mathcal{M}_3= 1 + \frac{1}{24} (k\Delta x)^2 - \frac{1}{288} (k\Delta x)^4 + \frac{1}{8640} (k\Delta x)^6 + O(x^{8})\]
+
+\[\mathcal{M}_3= 1 + \frac{1}{24} (k\Delta x)^2 - \frac{1}{288} (k\Delta x)^4 + O(x^{6})\]
+
+
+So we see that $\mathcal{M}_3$ has a fourth order error compared to the analytic solution. 
+
+Reconstruction, analytically we have
+\[u_{j + 1/2} = u_j e^{ik\Delta x/2}\]
+
+So
+\[\mathcal{R}_a = \mathcal{R}^+_a = \mathcal{R}^-_a =e^{ik\Delta x/2} \]
+
+So we have the Taylor expansion
+
+\[\mathcal{R}_a = 1 + i (k\Delta x/2)  - \frac{1}{2} (k\Delta x/2)^2 - \frac{i}{3!} (k\Delta x/2)^3 + \frac{1}{4!} (k\Delta x/2)^4 + \frac{i}{5!} (k\Delta x/2)^5 - \frac{1}{6!} (k\Delta x/2)^6 + O(x^{7})\]
+
+\[\mathcal{R}_a = 1 + i \frac{1}{2}(k\Delta x)  - \frac{1}{2}\frac{1}{4} (k\Delta x)^2 - \frac{i}{3!} \frac{1}{8}(k\Delta x)^3 + \frac{1}{4!} \frac{1}{16} (k\Delta x)^4 + \frac{i}{5!} \frac{1}{32} (k\Delta x)^5 - \frac{1}{6!}\frac{1}{64} (k\Delta x)^6 + O(x^{7})\]
+
+\[\mathcal{R}_a = 1 + \frac{i}{2}k\Delta x   - \frac{1}{8}k^2\Delta x^2 - \frac{i}{48}k^3\Delta x^3 + O(x^{4})\]
+
+
+
+
+$\mathcal{R}^+_1 =  e^{ik\Delta x}$ and $\mathcal{R}^-_1 =  1$. 
+
+\[\mathcal{R}^+_1 = 1 + i k\Delta x  - \frac{1}{2} (k\Delta x)^2 - \frac{i}{3!} (k\Delta x)^3 + \frac{1}{4!} (k\Delta x)^4 +  O((k\Delta x)^5)\]
+
+So both have first order errors. 
+
+
+\[\mathcal{R}_2^- = 1  + \frac{i\sin\left(k\Delta x\right)}{2}\]
+
+\[\mathcal{R}_2^- = 1  + \frac{i}{2} \left[\frac{1}{1!} (k \Delta x)^1 - \frac{1}{3!} (k \Delta x)^3 + \frac{1}{5!} (k \Delta x)^5 - \frac{1}{7!} (k \Delta x)^7 + \frac{1}{9!} (k \Delta x)^{9} + O(x^{11})\right]\]
+
+\[\mathcal{R}_2^- = 1  + \frac{i}{2} (k \Delta x) - \frac{i}{2}\frac{1}{3!} (k \Delta x)^3 + \frac{i}{2}\frac{1}{5!} (k \Delta x)^5 - \frac{i}{2}\frac{1}{7!} (k \Delta x)^7 + \frac{i}{2}\frac{1}{9!} (k \Delta x)^{9} + O(x^{11})\]
+
+
+
+
+\[\mathcal{R}_2^+ = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+\[\mathcal{R}_2^+ = e^{ik\Delta x}\left(1  - \frac{i}{2} (k \Delta x) + \frac{i}{2}\frac{1}{3!} (k \Delta x)^3 - \frac{i}{2}\frac{1}{5!} (k \Delta x)^5 + \frac{i}{2}\frac{1}{7!} (k \Delta x)^7 - \frac{i}{2}\frac{1}{9!} (k \Delta x)^{9} + O(x^{11}) \right)\]
+
+\begin{multline}
+\mathcal{R}_2^+ = \left(1 + i (k\Delta x)  - \frac{1}{2} (k\Delta x)^2 - \frac{i}{3!} (k\Delta x)^3 + \frac{1}{4!} (k\Delta x)^4 + \frac{i}{5!} (k\Delta x)^5 + O(\left(\Delta x^2\right))\right) \\ \times\left(1  - \frac{i}{2} (k \Delta x) + \frac{i}{2}\frac{1}{3!} (k \Delta x)^3 - \frac{i}{2}\frac{1}{5!} (k \Delta x)^5 + O(x^{7}) \right)
+\end{multline}
+
+\[\mathcal{R}_2^+ =1 + \frac{ik\Delta x}{2} + \frac{i}{6} k^3 \Delta x^3 + O\left(\Delta x ^4\right)\]
+
+So for both second order reconstructions we have a second order error.
+
+\[R_3^-= \frac{\mathcal{M}_3}{6}\left[5 +  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\]
+
+\begin{multline}
+R_3^-= \frac{1 + \frac{1}{24} (k\Delta x)^2 - \frac{1}{288} (k\Delta x)^4 + O(x^{6})}{6} \\ \Bigg[5  - \left[1 - i k\Delta x  - \frac{1}{2} (k\Delta x)^2 + \frac{i}{3!} (k\Delta x)^3 + \frac{1}{4!} (k\Delta x)^4 - \frac{i}{5!} (k\Delta x)^5 - O( \Delta x^6)\right] \\ + 2 \left[1 + i (k\Delta x)  - \frac{1}{2} (k\Delta x) ^2 - \frac{i}{3!} (k\Delta x) ^3 + \frac{1}{4!} (k\Delta x) ^4 + \frac{i}{5!} (k\Delta x) ^5 + O(\Delta x ^6)\right] \Bigg] 
+\end{multline}
+
+\begin{multline}
+R_3^-= \frac{1 + \frac{1}{24} (k\Delta x)^2 - \frac{1}{288} (k\Delta x)^4 + O(x^{6})}{6} \\ \Bigg[6 + 3i k\Delta x - \frac{1}{2} (k\Delta x)^2 -\frac{3i}{3!} (k\Delta x)^3 +  \frac{1}{4!} (k\Delta x)^4   O( \Delta x^5) \Bigg] 
+\end{multline}
+
+\begin{multline}
+R_3^-= \frac{1}{6}\Bigg[6 + 3i k\Delta x - \frac{1}{2} (k\Delta x)^2 -\frac{3i}{3!} (k\Delta x)^3 +  \frac{1}{4!} (k\Delta x)^4   O( \Delta x^5) \Bigg] \\ + \frac{\frac{1}{24} (k \Delta x)^2}{6} \Bigg[6 + 3i k\Delta x - \frac{1}{2} (k\Delta x)^2 -\frac{3i}{3!} (k\Delta x)^3 +  \frac{1}{4!} (k\Delta x)^4   O( \Delta x^5) \Bigg]  \\+ \frac{- \frac{1}{288} (k\Delta x)^4}{6} \Bigg[6 + 3i k\Delta x - \frac{1}{2} (k\Delta x)^2 -\frac{3i}{3!} (k\Delta x)^3 +  \frac{1}{4!} (k\Delta x)^4   O( \Delta x^5) \Bigg] \\  + O(x^{6})
+\end{multline}
+
+\begin{multline}
+R_3^-= 1 + \frac{i}{2}k\Delta x \\ +
+\frac{1}{6}\Bigg[ - \frac{1}{2} (k\Delta x)^2 -\frac{3i}{3!} (k\Delta x)^3 +  \frac{1}{4!} (k\Delta x)^4   O( \Delta x^5) \Bigg] \\ + \frac{\frac{1}{24} (k \Delta x)^2}{6} \Bigg[6 + 3i k\Delta x - \frac{1}{2} (k\Delta x)^2 -\frac{3i}{3!} (k\Delta x)^3 +  \frac{1}{4!} (k\Delta x)^4   O( \Delta x^5) \Bigg]  \\+ \frac{- \frac{1}{288} (k\Delta x)^4}{6} \Bigg[6 + 3i k\Delta x - \frac{1}{2} (k\Delta x)^2 -\frac{3i}{3!} (k\Delta x)^3 +  \frac{1}{4!} (k\Delta x)^4   O( \Delta x^5) \Bigg] \\  + O(x^{6})
+\end{multline}
+
+\begin{multline}
+R_3^-= 1 + \frac{i}{2}k\Delta x - \frac{1}{24} (k \Delta x)^2 - \frac{1}{16} (k \Delta x)^3 +  O( \Delta x^4) 
+\end{multline}
+
+So our reconstruction is under order...
+
+\[R_3^+= \frac{\mathcal{M}_3 e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\] 
+
+from wolfram
+
+\[R_3^+= 1 + \frac{i}{2}k\Delta x - \frac{1}{24} (k \Delta x)^2 - \frac{5}{48} (k \Delta x)^3 +  O( \Delta x^4)\] 
+
+Again we have second order errors. But they are the same... Hopefully some cancellation works out.
+
+\[R^u_2 = \frac{e^{ik\Delta x } + 1}{2} \]
+
+\[R^u_2 = 1 + \frac{i}{2}k\Delta x - \frac{1}{4} (k \Delta x)^2 - \frac{i}{12} (k \Delta x)^3 +  O( \Delta x^4)\]
+
+\[R^u_3 = \frac{-3e^{2ik\Delta x } + 27e^{ik\Delta x } + 27 - 3e^{-ik\Delta x }}{48}\]
+\[R^u_3 = 1 + \frac{i}{2}k\Delta x - \frac{1}{8} (k \Delta x)^2 - \frac{i}{48} (k \Delta x)^3 +  O( \Delta x^4) \]
+
+So here we get correct order of errors. In fact the reconstruction is higher than 3rd.
+
+Ok so for flux we have to get the analytic result. 
+Is
+\[F^h_1(u_j,h_j) = kiHu_j\]
+\[F^h_a(u_j,h_j) = kigHh_j\]
+
+$\mathcal{D} = 1 -e^{-ik\Delta x}$
+\[\mathcal{D} = ik\Delta x +\frac{(k\Delta x)^2}{2} - \frac{i(k\Delta x)^3}{6} +  O( \Delta x^4) \]
+%
+
+\[\mathcal{F}^{h,u}_1 = H\mathcal{R}_2^u\]
+
+\[\mathcal{F}^{h,u}_1 = H \left[1 + \frac{i}{2}k\Delta x - \frac{1}{4} (k \Delta x)^2 - \frac{i}{12} (k \Delta x)^3 +  O( \Delta x^4) \right]\]
+\[\mathcal{D}\mathcal{F}^{h,u}_1 = H \left[ik\Delta x  - \frac{i}{6} (k \Delta x)^3 +  O( \Delta x^4) \right]\]
+
+\[\mathcal{F}_1^{h,h} = -\dfrac{ \sqrt{gH}}{ 2} \left [ \mathcal{R}_1^+- \mathcal{R}_1^- \right ]\]
+
+\[\mathcal{F}_1^{h,h} = -\dfrac{ \sqrt{gH}}{ 2} \left [ ik\Delta x - \frac{(k\Delta x)^2}{2} - \frac{i(k\Delta x)^3}{6} +  O( \Delta x^4) \right ]\]
+
+\[\mathcal{D}\mathcal{F}_1^{h,h} = -\dfrac{ \sqrt{gH}}{ 2} \left [ (k\Delta x)^2 +  O( \Delta x^4) \right ]\]
+
+\[F^h_1 = \frac{1}{\Delta x} \left[\mathcal{D}\mathcal{F}^{h,u}_1 u_j + \mathcal{D}\mathcal{F}^{h,h}_1 h_j \right]\]
+\begin{multline}
+F^h_1 =H \left[ik  - \frac{i}{6} k^3( \Delta x)^2 +  O( \Delta x^3) \right]u_j\\ + -\dfrac{ \sqrt{gH}}{ 2} \left [ k^2(\Delta x) +  O( \Delta x^3) \right ]h_j
+\end{multline}
+So first order error is completely on $h$ interesting. 
+
+
+\[\mathcal{F}_1^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \mathcal{G}_1 \left [ \mathcal{R}^+_1 \ -  \mathcal{R}^-_1  \right ]\]
+
+\[\mathcal{F}_1^{u,u} = - \dfrac{ \sqrt{gH}}{ 2}  \left [\frac{1}{3}iH(H^2 + 3)(k \Delta x) - \frac{1}{6}iH(H^2 + 3)(k \Delta x)^2 - \frac{1}{12}iH(H^2 + 3)(k \Delta x)^3  +  O( \Delta x^4)  \right ]\]
+
+\[\mathcal{D}\mathcal{F}_1^{u,u} = - \dfrac{ \sqrt{gH}}{ 2}  \left [-\frac{1}{3}iH(H^2 + 3)(k \Delta x)^2 + \frac{1}{36}H(2H^2 + 3)(k \Delta x)^4 + O( \Delta x^6)  \right ]\]
+
+\[\mathcal{F}_1^{u,h} = \dfrac{ gH}{ 2} [\mathcal{R}^-_1 + \mathcal{R}^+_1]\]
+
+\[\mathcal{F}_1^{u,h} = \dfrac{ gH}{ 2} \left[2 + ik\Delta x - \frac{(k\Delta x)^2}{2} - \frac{i(k\Delta x)^3}{6} +  O( \Delta x^4) \right]\]
+
+\[\mathcal{D}\mathcal{F}_1^{u,h} = \dfrac{ gH}{ 2} \left[2ik\Delta x -\frac{i(k\Delta x)^3}{3} +  O( \Delta x^4) \right]\]
+
+So
+
+\begin{multline}
+F^u_1 =- \dfrac{ \sqrt{gH}}{ 2}  \left [-\frac{1}{3}iH(H^2 + 3) k^2( \Delta x) + \frac{1}{36}H(2H^2 + 3)k^4( \Delta x)^3 + O( \Delta x^5)  \right ]u_j\\ + \dfrac{ gH}{ 2} \left[2ik -\frac{i k^3(\Delta x)^2}{3} +  O( \Delta x^3) \right]h_j
+\end{multline}
+
+\begin{multline}
+F^u_1 =- \dfrac{ \sqrt{gH}}{ 2}  \left [-\frac{1}{3}iH(H^2 + 3) k^2( \Delta x) + \frac{1}{36}H(2H^2 + 3)k^4(\Delta x)^3 + O( \Delta x^5)  \right ]u_j\\ + gH \left[ik -\frac{i k^3(\Delta x)^2}{6} +  O( \Delta x^3) \right]h_j
+\end{multline}
+
+OK Seeing a pattern, but we have to make sure this holds as we go, anyway we now claculate just the D F together always to make it simpler. 
+
+\[\mathcal{D}\mathcal{F}_2^{h,u} = H\mathcal{D}\mathcal{R}_2^u\]
+
+\[\mathcal{D}\mathcal{F}_2^{h,u} = H\left[i(k \Delta x) - \frac{i}{6}(k \Delta x)^3 + \frac{i}{120} (k \Delta x)^5 + O(\Delta x ^6) \right]\]
+
+\[\mathcal{D}\mathcal{F}^{h,h} = -\dfrac{ \sqrt{gH}}{ 2}  \mathcal{D}\left [ \mathcal{R}^+- \mathcal{R}^- \right ]\]
+\[\mathcal{D}\mathcal{F}^{h,h} = -\dfrac{ \sqrt{gH}}{ 2}  \left [ -\frac{1}{4} (k\Delta x)^4  + \frac{1}{24} (k\Delta x)^6 + O(\Delta x^8) \right ]\]
+
+\begin{multline}
+F^h_2 =H\left[2ik - \frac{i}{3} k^3(\Delta x)^2 + \frac{i}{60} k^5(\Delta x)^4 + O(\Delta x ^5) \right] u_j\\ + -\dfrac{ \sqrt{gH}}{ 2} \left [ -\frac{1}{4} k^4(\Delta x)^3  + \frac{1}{24}k^6 (\Delta x)^5 + O(\Delta x^7)\right ]h_j
+\end{multline}
+
+\[\mathcal{D}\mathcal{F}^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \mathcal{D}\mathcal{G} \left [ \mathcal{R}^+ \ -  \mathcal{R}^-  \right ]\]
+\[\mathcal{D}\mathcal{F}^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \left[ -\frac{1}{12}H(H^2 +3)k^4 \Delta x^4 + \frac{1}{48}H(H^2 +2)k^6 \Delta x^6 + O(\Delta x ^7) \right ]\]
+
+\[\mathcal{D}\mathcal{F}^{u,h} = \dfrac{ gH}{ 2}\mathcal{D} [\mathcal{R}^- + \mathcal{R}^+] \]
+ 
+\[\mathcal{D}\mathcal{F}^{u,h} = \dfrac{ gH}{ 2}\left[2 i k \Delta x + \frac{i}{6}  k^3 \Delta x^3 - \frac{13i}{120}  k^5 \Delta x^5 + O(\Delta x ^7) \right] \]
+
+\begin{multline}
+F^u_2 = - \dfrac{ \sqrt{gH}}{ 2} \left[ -\frac{1}{12}H(H^2 +3)k^4 \Delta x^3 + \frac{1}{48}H(H^2 +2)k^6 \Delta x^5 + O(\Delta x ^6) \right ]u_j\\+ \dfrac{ gH}{ 2}\left[2 i k + \frac{i}{6}  k^3 \Delta x^2 - \frac{13i}{120}  k^5 \Delta x^4 + O(\Delta x ^6) \right]h_j
+\end{multline}
+
+So everyhting is the correct order for the second order scheme as well. 
+
+
+\[\mathcal{D}\mathcal{F}_3^{h,u} = H\mathcal{D}\mathcal{R}_3^u\]
+
+\[\mathcal{D}\mathcal{F}_3^{h,u} = H\left[i k \Delta x - \frac{i}{24} k^3 \Delta x ^3 - \frac{11i}{480 }k^5 \Delta x ^5 + O(\Delta x ^7) \right]\]
+
+\[\mathcal{D}\mathcal{F}_3^{h,h} = -\dfrac{ \sqrt{gH}}{ 2}  \mathcal{D}\left [ \mathcal{R}_3^+- \mathcal{R}_3^- \right ]\]
+
+\[\mathcal{D}\mathcal{F}_3^{h,h} = -\dfrac{ \sqrt{gH}}{ 2}  \left [ -\frac{1}{6} k^4 \Delta x^4 + \frac{1}{48}k^6 \Delta x^6 - \frac{1}{2880}k^8 \Delta x^8 + O(\Delta x ^9) \right]\]
+
+\begin{multline}
+F^h_3 = H\left[i k - \frac{i}{24} k^3 \Delta x ^2 - \frac{11i}{480 }k^5 \Delta x ^4 + O(\Delta x ^6) \right]u_j\\+ -\dfrac{ \sqrt{gH}}{ 2}  \left [ -\frac{1}{6} k^4 \Delta x^3 + \frac{1}{48}k^6 \Delta x^5 - \frac{1}{2880}k^8 \Delta x^7 + O(\Delta x ^8) \right]h_j
+\end{multline}
+
+\[\mathcal{D}\mathcal{F}_3^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \mathcal{D}\mathcal{G}_3 \left [ \mathcal{R}_3^+ \ -  \mathcal{R}_3^-  \right]\]
+
+\begin{multline}
+\mathcal{D}\mathcal{F}_3^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \left [-\frac{1}{6} k^4 \Delta x^4 + \frac{1}{48}k^6 \Delta x^6 - \frac{1}{2880}k^8 \Delta x^8 + O(\Delta x ^9)  \right] \\ 
+\left[(\frac{H^3}{3} + H) - \frac{H^3 k^4 \Delta x^4}{270} + \frac{H^3 k^6 \Delta x^6}{3024} - \frac{H^3 k^8 \Delta x^8}{64800} + O(\Delta x ^9)\right]
+\end{multline}
+
+\begin{multline}
+\mathcal{D}\mathcal{F}_3^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \left [-(\frac{H^3}{3} + H)\frac{1}{6} k^4 \Delta x^4 + \frac{1}{48}(\frac{H^3}{3} + H)k^6 \Delta x^6  + O(\Delta x ^8)\right]
+\end{multline}
+
+
+\[\mathcal{D}\mathcal{F}_3^{u,h} = \dfrac{ gH}{ 2}\mathcal{D} [\mathcal{R}_3^- + \mathcal{R}_3^+] \]
+
+\[\mathcal{D}\mathcal{F}_3^{u,h} = \dfrac{ gH}{ 2} \left[2i k \Delta x + \frac{i}{12} k^3 \Delta x^3 - \frac{-53 i \Delta x ^5}{720} + O(\Delta x ^7)\right] \]
+
+\begin{multline}
+F^u_3 =  \dfrac{ \sqrt{gH}}{ 2} \left [-(\frac{H^3}{3} + H)\frac{1}{6} k^4 \Delta x^3 + \frac{1}{48}(\frac{H^3}{3} + H)k^6 \Delta x^5  + O(\Delta x ^7)\right]u_j\\ +\dfrac{ gH}{ 2}\left[2i k + \frac{i}{12} k^3 \Delta x^2 - \frac{-53 i k^5 \Delta x ^4}{720} + O(\Delta x ^6)\right]h_j
+\end{multline}
+
+So yes our second order error in the flux continues over, it does however occur only in the imaginary direction, does that matter?
+
+
+\section{3rd}
+M was defined wrong, so we have an error throughout, only effects third order. 
+
+\[R_3^-= 1 + \frac{i}{2}k\Delta x - \frac{1}{8} (k \Delta x)^2 - \frac{5}{48} (k \Delta x)^3 +  O( \Delta x^4) \]
+
+\[R_3^+= 1 + \frac{i}{2}k\Delta x - \frac{1}{8} (k \Delta x)^2 + \frac{1}{16} (k \Delta x)^3 +  O( \Delta x^4)\] 
+
+\[\mathcal{D}\mathcal{F}_3^{h,u} = H\mathcal{D}\mathcal{R}_3^u\]
+
+\[\mathcal{D}\mathcal{F}_3^{h,u} = H\left[i k \Delta x - \frac{i}{24} k^3 \Delta x ^3 - \frac{11i}{480 }k^5 \Delta x ^5 + O(\Delta x ^7) \right]\]
+
+\[\mathcal{D}\mathcal{F}_3^{h,h} = -\dfrac{ \sqrt{gH}}{ 2}  \mathcal{D}\left [ \mathcal{R}_3^+- \mathcal{R}_3^- \right ]\]
+
+\[\mathcal{D}\mathcal{F}_3^{h,h} = -\dfrac{ \sqrt{gH}}{ 2}  \left[ -\frac{1}{6} k^4 \Delta x^4 + \frac{5}{144}k^6 \Delta x^6 - \frac{71}{17280}k^8 \Delta x^8 + O(\Delta x ^9) \right]\]
+
+
+\[\mathcal{D}\mathcal{F}_3^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \mathcal{D}\mathcal{G}_3 \left [ \mathcal{R}_3^+ \ -  \mathcal{R}_3^-  \right]\]
+
+\begin{multline}
+\mathcal{D}\mathcal{F}_3^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \left[ -\frac{1}{6} k^4 \Delta x^4 + \frac{5}{144}k^6 \Delta x^6 - \frac{71}{17280}k^8 \Delta x^8 + O(\Delta x ^9) \right] \\ 
+\left[(\frac{H^3}{3} + H) - \frac{H^3 k^4 \Delta x^4}{270} + \frac{H^3 k^6 \Delta x^6}{3024} - \frac{H^3 k^8 \Delta x^8}{64800} + O(\Delta x ^9)\right]
+\end{multline}
+
+\begin{multline}
+\mathcal{D}\mathcal{F}_3^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \left [-(\frac{H^3}{3} + H)\frac{1}{6} k^4 \Delta x^4 + \frac{5}{144}(\frac{H^3}{3} + H)k^6 \Delta x^6  + O(\Delta x ^8)\right]
+\end{multline}
+
+
+\[\mathcal{D}\mathcal{F}_3^{u,h} = \dfrac{ gH}{ 2}\mathcal{D} [\mathcal{R}_3^- + \mathcal{R}_3^+] \]
+
+\[\mathcal{D}\mathcal{F}_3^{u,h} = \dfrac{ gH}{ 2} \left[2i k \Delta x - \frac{i}{12} k^3 \Delta x^3 - \frac{9 i \Delta x ^5}{160} + O(\Delta x ^7)\right] \]
+
+
+\end{document}
+
+

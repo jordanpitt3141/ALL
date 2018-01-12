@@ -1,0 +1,137 @@
+
+\chapter{Finite Difference Methods}
+\label{chp:NumMethod}
+%%Rename these because E already taken
+
+
+The methods $\mathcal{W}$ and $\mathcal{D}$ use the centred second-order finite difference approximation to the momentum equation \eqref{eqn:FullSerreNonConMome}, denoted as $\mathcal{D}_u$. For the mass equation \eqref{eqn:FullSerreNonConMass} $\mathcal{W}$ uses the two step Lax-Wendroff method, denoted as $\mathcal{W}_h$ while $\mathcal{D}$ uses a centred second-order finite difference approximation, denoted as $\mathcal{D}_h$.
+
+\section{Naive Second Order Finite Difference Approximation to the Momentum Equation}
+First \eqref{eqn:FullSerreNonConMome} is expanded to get
+\begin{equation*}
+h\dfrac{\partial u}{\partial t} - h^2\frac{\partial^2 u}{\partial x \partial t} - \frac{h^3}{3}\frac{\partial^3 u}{\partial x^2 \partial t}  = -X 
+\label{eq:expandedu}
+\end{equation*}
+where $X$ contains only spatial derivatives and is
+\begin{equation*}
+X = uh\frac{\partial u}{\partial x} + gh\frac{\partial h}{\partial x} + h^2\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} + \frac{h^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2} - h^2u\frac{\partial^2 u}{\partial x^2}- \frac{h^3}{3}u\frac{\partial^3 u}{\partial x^3} .
+\end{equation*}
+All derivatives are approximated by second-order centred finite difference approximations on a uniform grid in space and time, which after rearranging into an update formula becomes
+
+\begin{equation}
+h^{n}_ju^{n+1}_j - \left(h^{n}_j\right)^2 \left(\frac{u^{n+1}_{j+1} -u^{n+1}_{j-1} }{2 \Delta x}\right) - \frac{\left(h^{n}_j\right)^3}{3}\left(\frac{u^{n+1}_{j+1} - 2u^{n+1}_{j} + u^{n+1}_{j-1} }{\Delta x^2}\right) = - Y^n_j
+\label{eq:expandedutdisc3}
+\end{equation}
+
+where
+
+\begin{equation*}
+Y_j^n = 2\Delta tX_j^{n} - h_j^{n}u_j^{n-1} + \left(h_j^{n}\right)^2\left(\frac{u^{n-1}_{j+1} -u^{n-1}_{j-1} }{2 \Delta x}\right) + \frac{\left(h_j^{n}\right)^3}{3}\left(\frac{u^{n-1}_{j+1} - 2u^{n-1}_{j} + u^{n-1}_{j-1} }{\Delta x^2}\right)
+\label{eq:expandfactor Xp}
+\end{equation*}
+
+and
+
+\begin{multline*}
+X_j^n = u_j^nh_j^n\frac{u^{n}_{j+1} -u^{n}_{j-1} }{2 \Delta x} + gh^n_j\frac{h^{n}_{j+1} -h^{n}_{j-1} }{2 \Delta x} + \left(h^n_j\right)^2\left(\frac{u^{n}_{j+1} -u^{n}_{j-1} }{2 \Delta x} \right)^2  \\ + \frac{\left(h^n_j\right)^3}{3}\frac{u^{n}_{j+1} -u^{n}_{j-1} }{2 \Delta x}\frac{u^{n}_{j+1} - 2u^{n}_{j} + u^{n}_{j-1} }{\Delta x^2} - \left(h^n_j\right)^2u_j^n\frac{u^{n}_{j+1} - 2u^{n}_{j} + u^{n}_{j-1} }{\Delta x^2} \\- \frac{\left(h^n_j\right)^3}{3}u^n_j \frac{u^{n}_{j+2} - 2u^{n}_{j+1} + 2u^{n}_{j-1} - u^{n}_{j-2} }{2\Delta x^3}.
+\end{multline*}
+
+Equation \eqref{eq:expandedutdisc3} can be rearranged into an explicit update scheme $\mathcal{D}_u$ for $u$ given its current and previous values, so that
+
+\begin{equation}
+\boldsymbol{u}^{n+ 1}
+= A^{-1} \left[\begin{array}{c}
+-Y^n_0 \\
+\vdots \\
+-Y^n_m \end{array}\right] =: \mathcal{D}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1}, \Delta x, \Delta t \right)
+\label{eq:FDcentforu}
+\end{equation}
+
+[]
+%Give A explicitly
+where $A$ is a tri-diagonal matrix.
+
+with
+\begin{align}
+	&A_{j,j-1} = \frac{\left(h^n_j\right)^2}{2\Delta x}\frac{h^n_{j+1} - h^n_{j-1}}{2\Delta x} - \frac{\left(h^n_j\right)^3}{3 \Delta x^2}  ,\\
+	&A_{j,j} = h^n_j + \frac{2 h^n_j}{3 \Delta x^2}, \\
+	&A_{j,j+1} = -\frac{\left(h^n_j\right)^2}{2\Delta x}\frac{h^n_{j+1} - h^n_{j-1}}{2\Delta x} - \frac{\left(h^n_j\right)^3}{3 \Delta x^2}.
+\end{align}
+
+
+\section{Numerical Methods for the Mass Equation}
+
+\subsection{Lax-Wendroff Method}
+The two step Lax-Wendroff update $\mathcal{W}_h$ for $h$ is
+
+	\begin{equation*}
+	h^{n + 1/2}_{j+ 1/2} = \frac{1}{2}\left(h^{n}_{j+1} + h^{n}_j\right) - \frac{\Delta t}{2\Delta x}\left(u^n_{j+1}h^n_{j+1} - h^n_{j}u^n_{j}\right),
+	\end{equation*}
+	\begin{equation*}
+	h^{n + 1/2}_{j- 1/2} = \frac{1}{2}\left(h^{n}_{j} + h^{n}_{j-1}\right) - \frac{\Delta t}{2\Delta x}\left(u^n_{j}h^n_{j} - h^n_{j-1}u^n_{j-1}\right)
+	\end{equation*}
+	and
+	\begin{equation*}
+	h^{n+1}_j = h^{n}_j - \frac{\Delta t}{\Delta x}\left(u^{n + 1/2}_{j+ 1/2}h^{n + 1/2}_{j+ 1/2} - u^{n + 1/2}_{j- 1/2}h^{n + 1/2}_{j- 1/2}\right).
+	\label{eq:LW4h}
+	\end{equation*}
+
+The quantities $u^{n + 1/2}_{j \pm 1/2}$ are calculated using $\boldsymbol{u}^{n+1}$ obtained by applying $\mathcal{D}_u$ \eqref{eq:FDcentforu} to $\boldsymbol{u}^{n}$  then linearly interpolating in space and time to give
+
+	\begin{equation*}
+	u^{n + 1/2}_{j+ 1/2} = \frac{u^{n+1}_{j+1} + u^{n}_{j+1} + u^{n+1}_{j} + u^{n}_{j} }{4}
+	\end{equation*}
+	and
+	\begin{equation*}
+	u^{n + 1/2}_{j- 1/2} = \frac{u^{n+1}_{j} + u^{n}_{j} + u^{n+1}_{j-1}+ u^{n}_{j-1} }{4}.
+	\end{equation*}
+
+Thus we have the following update scheme $\mathcal{W}_h$ for \eqref{eqn:FullSerreNonConMass}
+
+	\begin{equation}
+	\boldsymbol{h}^{n+1} = \mathcal{W}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n,\boldsymbol{u}^{n+1}, \Delta x, \Delta t \right). 
+	\label{eq:LWupdateh}
+	\end{equation}
+
+\subsection{Second Order Finite Difference Approximation}
+
+The second order centered finite difference approximation to the conservation of mass equation \eqref{eqn:FullSerreNonConMass} is
+
+	\begin{equation*}
+	h^{n+1}_j = h^{n-1}_j - \Delta t \left(u^{n}_{j}\frac{h^{n}_{j+1} - h^{n}_{j-1}}{\Delta x} + h^{n}_{j}\frac{u^{n}_{j+1} - u^{n}_{j-1}}{\Delta x}\right).
+	\end{equation*}
+
+Thus we have an update scheme $\mathcal{D}_h$ for all $i$
+
+	\begin{equation}
+	\label{eq:secondFDappformass}
+	\boldsymbol{h}^{n+1} = \mathcal{D}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n,\boldsymbol{h}^{n-1} ,\Delta x, \Delta t \right).
+	\end{equation}
+
+
+
+\section{Complete Method}
+The method $\mathcal{W}$ is the combination of \eqref{eq:LWupdateh} for \eqref{eqn:FullSerreNonConMass} and \eqref{eq:FDcentforu} for \eqref{eqn:FullSerreNonConMome} in the following way
+
+	\begin{equation}
+	\left.
+	\begin{array}{l l}
+	\boldsymbol{u}^{n+1}&=\mathcal{D}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1}, \Delta x, \Delta t \right) \\
+	\boldsymbol{h}^{n+1}&=\mathcal{W}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n,\boldsymbol{u}^{n+1}, \Delta x, \Delta t \right)
+	\end{array} \right\rbrace \mathcal{W}\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1},\boldsymbol{h}^{n-1}, \Delta x, \Delta t \right).	 
+	\label{eq:Wnumdef}
+	\end{equation}
+
+
+The method $\mathcal{D}$ is the combination of \eqref{eq:secondFDappformass} for \eqref{eqn:FullSerreNonConMass} and \eqref{eq:FDcentforu} for \eqref{eqn:FullSerreNonConMome} in the following way
+
+	\begin{equation}
+	\left.
+	\begin{array}{l l}
+	\boldsymbol{h}^{n+1}&=\mathcal{D}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n,\boldsymbol{h}^{n-1} \Delta x, \Delta t \right) \\
+	\boldsymbol{u}^{n+1}&=\mathcal{D}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1}, \Delta x, \Delta t \right)
+	\end{array} \right\rbrace \mathcal{D}\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1},\boldsymbol{h}^{n-1}, \Delta x, \Delta t \right).
+	\label{eq:Dnumdef}
+	\end{equation}
+
+

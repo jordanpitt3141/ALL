@@ -1,0 +1,201 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{All Definitions for Numerical Versions}
+\[\mathcal{C}_2 = \frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\]
+
+\[\mathcal{C}_4 = \frac{-2\cos\left(2k\Delta x\right) + 32\cos\left(k\Delta x\right)  - 30 }{12\Delta x^2}\]
+
+\[\mathcal{G} = \left[H -\frac{H^3}{3} \mathcal{C}\right]\]
+
+\[\mathcal{M}_3= \frac{24}{26  -2\cos\left(k\Delta x\right)}\]
+\[\mathcal{M}_1 = \mathcal{M}_2 = 1\]
+
+\[\mathcal{R}^+_1 =  e^{ik\Delta x} \quad , \quad\mathcal{R}^-_1 =  1\]
+
+\[\mathcal{R}_2^- = 1  + \frac{i\sin\left(k\Delta x\right)}{2}\]
+\[\mathcal{R}_2^+ = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+\[\mathcal{R}_3^-= \frac{\mathcal{M}_3}{6}\left[5 +  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\]
+
+\[\mathcal{R}_3^+= \frac{\mathcal{M}_3 e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\] 
+
+\[\mathcal{R}^u_2 = \frac{e^{ik\Delta x } + 1}{2} \]
+
+\[\mathcal{R}^u_3 = \frac{-3e^{2ik\Delta x } + 27e^{ik\Delta x } + 27 - 3e^{-ik\Delta x }}{48}\]
+
+
+\[\mathcal{F}^{h,u} = H\mathcal{R}^u\]
+
+\[\mathcal{F}^{h,h} = -\dfrac{ \sqrt{gH}}{ 2} \left [ \mathcal{R}^+- \mathcal{R}^- \right ]\]
+
+\[\mathcal{F}^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \mathcal{G} \left [ \mathcal{R}^+ \ -  \mathcal{R}^-  \right ]\]
+
+\[\mathcal{F}^{u,h} = \dfrac{ gH}{ 2} \left(\mathcal{R}^+ + \mathcal{R}^-\right)\]
+
+
+$\mathcal{D} = 1 -e^{-ik\Delta x}$
+
+\section{Taylor Expansions Of Analytic Values }
+We denote exact/analytic version with a subscript $a$
+
+\[\mathcal{G}_a = H + \frac{H^3}{3}k^2\]
+
+\[\mathcal{M}_a = \frac{2}{k\Delta x} \sin\left(\frac{k \Delta x}{2}\right) \]
+\[\mathcal{M}_a = 1 - \frac{k^2}{24} (\Delta x)^2 + \frac{k^4}{1920} (\Delta x)^4 - \frac{k^6}{322560} (\Delta x)^6 + O(x^{8}) \]
+
+\[\mathcal{R}_a = e^{i \frac{k\Delta x}{2}}\]
+\[\mathcal{R}_a^+ = \mathcal{R}_a^-=\mathcal{R}_a = 1 + \frac{ik}{2}\Delta x   - \frac{k^2}{8}\Delta x^2 - \frac{ik^3}{48}\Delta x^3 + \frac{k^4}{384}\Delta x^4 + \frac{ik^5}{3840}\Delta x^5 + O(x^{6})\]
+
+
+For the fluxes I think its best to report the elements of our matrix $\boldsymbol{F}$, which now encapsulates all space approximations and is the update matrix for our system
+\[\frac{\mathcal{D}_a}{\Delta x\mathcal{M}_a}\mathcal{F}^{h,u}_a = ikH\]
+\[\frac{\mathcal{D}_a}{\Delta x\mathcal{M}_a}\mathcal{F}^{h,h}_a = 0\]
+\[\frac{\mathcal{D}_a}{\mathcal{G}_a\Delta x\mathcal{M}_a}\mathcal{F}^{u,h}_a = \frac{ikgH}{H + \frac{H^3}{3}k^2} = igk\frac{3}{3 + H^2k^2} = i\frac{\omega^2}{kH} \]
+\[\frac{\mathcal{D}_a}{\mathcal{G}_a\Delta x\mathcal{M}_a}\mathcal{F}^{u,u}_a = 0\]
+
+
+\section{First Order Values }
+\[\mathcal{G}_1 = H - \frac{H^3}{3}\left(\frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\right)\]
+\[\mathcal{G}_1 = H +\frac{H^3 k^2}{3}  -\frac{H^3 k^4}{36}(\Delta x)^2 + \frac{H^3 k^6}{1080}(\Delta x)^4 + O(x^{6})\]
+\[\mathcal{M}_1 = 1\]
+
+\[\mathcal{R}^-_1 =  1\]
+
+\[\mathcal{R}^+_1 = e^{ik\Delta x}\]
+\[\mathcal{R}^+_1 = 1 + i k\Delta x  - \frac{k^2}{2} (\Delta x)^2 - \frac{ik^3}{6} (\Delta x)^3 + \frac{k^4}{24} (\Delta x)^4 +  O(\Delta x^5)\]
+
+\[\mathcal{R}^u_1 = \frac{e^{ik\Delta x } + 1}{2} \]
+\[\mathcal{R}^u_1 = 1 + \frac{ik}{2}\Delta x - \frac{k^2}{4} (\Delta x)^2 - \frac{i k^3}{12} ( \Delta x)^3 + \frac{k^4}{48} ( \Delta x)^4+  O( \Delta x^5)\]
+
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_1}\mathcal{F}^{h,u}_1 = \frac{1 -e^{-ik\Delta x}}{\Delta x} H \frac{e^{ik\Delta x } + 1}{2}\]
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_1}\mathcal{F}^{h,u}_1 = iHk  - \frac{iHk^3}{6}( \Delta x)^2 + \frac{iHk^5}{120}( \Delta x)^4 +  O( \Delta x^6)\]
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_1}\mathcal{F}^{h,h}_1 = -\dfrac{ \sqrt{gH}}{ 2} \frac{1 -e^{-ik\Delta x}}{\Delta x} \left [ e^{ik\Delta x}- 1 \right ]\]
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_1}\mathcal{F}^{h,h}_1 = \frac{k^2\sqrt{gH} }{ 2}  \Delta x - \frac{k^4\sqrt{gH}}{ 24}  \Delta x^3 + \frac{k^6\sqrt{gH}}{ 720}  \Delta x^5 + O( \Delta x^7) \]
+
+\[\frac{\mathcal{D}}{\mathcal{G}_1\Delta x\mathcal{M}_1}\mathcal{F}^{u,h}_1 = \dfrac{ gH}{ 2}\frac{1 -e^{-ik\Delta x}}{\Delta x} \left(1 + e^{ik\Delta x}\right)\left[H - \frac{H^3}{3}\left(\frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\right) \right]^{-1}\]
+
+\[\frac{\mathcal{D}}{\mathcal{G}_1\Delta x\mathcal{M}_1}\mathcal{F}^{u,h}_1 = igk\frac{3}{3 + H^3k^3} - \frac{igk^3\left(H^2k^2 + 6\right)}{4\left(3 + H^2k^2\right)^2}\Delta x ^2 - \frac{igk^5\left(H^4k^4 - 54\right)}{240\left(3 + H^2k^2\right)^3}\Delta x ^4 + O(\Delta x^6)\]
+
+
+
+\[\frac{\mathcal{D}}{\mathcal{G}_1\Delta x\mathcal{M}_1}\mathcal{F}^{u,u}_1 = - \dfrac{ \sqrt{gH}}{ 2}\frac{1 -e^{-ik\Delta x}}{\Delta x} \left [ e^{ik\Delta x}  -  1  \right ]\]
+
+
+\[\frac{\mathcal{D}}{\mathcal{G}_1\Delta x\mathcal{M}_1}\mathcal{F}^{u,u}_1 = \frac{k^2\sqrt{gH} }{ 2}  \Delta x - \frac{k^4\sqrt{gH}}{ 24}  \Delta x^3 + \frac{k^6\sqrt{gH}}{ 720}  \Delta x^5 + O( \Delta x^7)\]
+
+
+\section{Second Order Values }
+\[\mathcal{G}_2 = H - \frac{H^3}{3}\left(\frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\right)\]
+\[\mathcal{G}_2 = H +\frac{H^3 k^2}{3}  -\frac{H^3 k^4}{36}(\Delta x)^2 + \frac{H^3 k^6}{1080}(\Delta x)^4 + O(x^{6})\]
+
+\[\mathcal{M}_2 = 1\]
+
+
+\[\mathcal{R}_2^- = 1  + \frac{i\sin\left(k\Delta x\right)}{2}\]
+
+\[\mathcal{R}_2^- = 1  + \frac{ik}{2} (\Delta x) - \frac{ik^3}{12}(\Delta x)^3 + \frac{ik^5}{240}(\Delta x)^5  +  O(x^{7})\]
+
+
+\[\mathcal{R}_2^+ = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+\[\mathcal{R}_2^+ =1 + \frac{ik}{2}\Delta x + \frac{i k^3}{6} \Delta x^3 - \frac{k^4}{8} \Delta x^4  - \frac{7ik^5}{120} \Delta x^5 + O\left(\Delta x ^6\right)\]
+
+
+\[\mathcal{R}^u_2 = \frac{e^{ik\Delta x } + 1}{2} \]
+\[\mathcal{R}^u_2 = 1 + \frac{ik}{2}\Delta x - \frac{k^2}{4} (\Delta x)^2 - \frac{i k^3}{12} ( \Delta x)^3 + \frac{k^4}{48} ( \Delta x)^4+  O( \Delta x^5)\]
+
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_2}\mathcal{F}^{h,u}_2 = \frac{1 -e^{-ik\Delta x}}{\Delta x}H\frac{e^{ik\Delta x } + 1}{2}\]
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_2}\mathcal{F}^{h,u}_2 = iHk  - \frac{iHk^3}{6}( \Delta x)^2 + \frac{iHk^5}{120}( \Delta x)^4 +  O( \Delta x^6)\]
+
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_2} \mathcal{F}^{h,h}_2 = -\dfrac{ \sqrt{gH}}{ 2} \frac{1 -e^{-ik\Delta x}}{\Delta x} \left [ e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)-  \left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right) \right ]\]
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_2} \mathcal{F}^{h,h}_2 = \frac{k^4\sqrt{gH} }{8} (\Delta x)^3  - \frac{k^6\sqrt{gH}}{48} (\Delta x)^5 + O(\Delta x^7) \]
+
+\[
+\frac{\mathcal{D}}{\mathcal{G}_2\Delta x\mathcal{M}_2}\mathcal{F}^{u,u}_2 =  - \dfrac{ \sqrt{gH}}{ 2}\frac{1 -e^{-ik\Delta x}}{\Delta x} \left[ e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)-  \left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right) \right]
+\]
+
+\[
+\frac{\mathcal{D}}{\mathcal{G}_2\Delta x\mathcal{M}_2}\mathcal{F}^{u,u}_2 =  \frac{k^4\sqrt{gH} }{8} (\Delta x)^3  - \frac{k^6\sqrt{gH}}{48} (\Delta x)^5 + O(\Delta x^7) 
+\]
+
+
+\begin{multline*}
+\frac{\mathcal{D}}{\mathcal{G}_2\Delta x\mathcal{M}_2}\mathcal{F}^{u,h}_2 =  \frac{1 -e^{-ik\Delta x}}{\Delta x} \dfrac{ gH}{ 2} \left[ e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right) +   \left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right) \right] \\ \times \left[H - \frac{H^3}{3}\left(\frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\right)\right]^{-1}
+\end{multline*}
+
+\begin{multline*}
+\frac{\mathcal{D}}{\mathcal{G}_2\Delta x\mathcal{M}_2}\mathcal{F}^{u,h}_2 = \\ igk\frac{3}{3 + H^3k^3} + \frac{igk^3\left(2H^2k^2 + 3\right)}{4\left(3 + H^2k^2\right)^2}\Delta x ^2 - \frac{igk^5\left(31H^4k^4 + 225H^2k^2  +351\right)}{240\left(3 + H^2k^2\right)^3}\Delta x ^4 + O(\Delta x^6)
+\end{multline*}
+
+
+\section{Taylor Expansions Of Third Order Values }
+
+\[\mathcal{G}_3 = H -\frac{H^3}{3} \frac{-2\cos\left(2k\Delta x\right) + 32\cos\left(k\Delta x\right)  - 30 }{12\Delta x^2}\]
+
+\[\mathcal{G}_3 = H + \frac{ k^2H^3}{3} -\frac{ k^6 H^3}{270} (\Delta x)^4 + O(\Delta x^{6}) \]
+
+\[\mathcal{M}_3= \frac{24}{26  -2\cos\left(k\Delta x\right)}\]
+
+\[\mathcal{M}_3= 1 - \frac{k^2}{24} (\Delta x)^2 + \frac{k^4}{192} (\Delta x)^4 + O(x^{6})\]
+
+
+\[\mathcal{R}_3^-= \frac{\mathcal{M}_3}{6}\left[5  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\]
+
+\[R_3^-= 1 + \frac{ik}{2}\Delta x - \frac{k^2}{8} (\Delta x)^2 - \frac{5ik^3}{48} (\Delta x)^3 + \frac{k^4}{64} (\Delta x)^4 + O( \Delta x^5) \]
+
+\[\mathcal{R}_3^+= \frac{\mathcal{M}_3 e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\] 
+
+\[R_3^+= 1 + \frac{ik}{2}\Delta x - \frac{k^2}{8} (\Delta x)^2 + \frac{ik^3}{16} (\Delta x)^3 - \frac{13k^4}{192} (\Delta x)^4 +  O( \Delta x^5)\] 
+
+\[\mathcal{R}^u_3 = \frac{-3e^{2ik\Delta x } + 27e^{ik\Delta x } + 27 - 3e^{-ik\Delta x }}{48}\]
+
+\[R^u_3 = 1 + \frac{ik}{2}\Delta x - \frac{k^2}{8} (\Delta x)^2 - \frac{i k^3}{48} (\Delta x)^3 - \frac{k^4}{48} (\Delta x)^4 +  O( \Delta x^5) \]
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_3}\mathcal{F}^{h,u} = \frac{1 -e^{-ik\Delta x}}{\Delta x} \frac{26 - 2\cos\left(k \Delta x\right)}{24}H\mathcal{R}^u\]
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_3}\mathcal{F}_3^{h,u} = ikH - \frac{9i k^5 H}{320} \Delta x^4 - \frac{i k^7 H}{448 } \Delta x ^6 + O(\Delta x ^9) \]
+
+\begin{multline*}
+\frac{\mathcal{D}}{\Delta x\mathcal{M}_3} \mathcal{F}^{h,h} = - \frac{1 -e^{-ik\Delta x}}{\Delta x \mathcal{M}_3} \dfrac{ \sqrt{gH}}{ 2}  \\ \times \left [ \left(\frac{\mathcal{M}_3 e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\right)- \left(\frac{\mathcal{M}_3}{6}\left[5  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\right) \right ]
+\end{multline*}
+
+\begin{multline*}
+\frac{\mathcal{D}}{\Delta x\mathcal{M}_3} \mathcal{F}^{h,h} = - \frac{1 -e^{-ik\Delta x}}{\Delta x} \dfrac{ \sqrt{gH}}{ 2}  \\ \times \left [ \left(\frac{e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\right)- \left(\frac{1}{6}\left[5  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\right) \right ]
+\end{multline*}
+
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_3}\mathcal{F}_3^{h,h} = \frac{ k^4 \sqrt{gH}}{12} \Delta x^3 - \frac{k^6 \sqrt{gH}}{72}\Delta x^5 + \frac{k^8 \sqrt{gH}}{960}\Delta x^7 + O(\Delta x ^{9})\]
+
+\begin{multline*}
+\frac{\mathcal{D}}{\mathcal{G}_3\Delta x\mathcal{M}_3}\mathcal{F}^{u,u} = - \frac{1 -e^{-ik\Delta x}}{\Delta x \mathcal{M}_3} \dfrac{ \sqrt{gH}}{ 2}  \\ \times \left [ \left(\frac{\mathcal{M}_3 e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\right)- \left(\frac{\mathcal{M}_3}{6}\left[5  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\right) \right ]
+\end{multline*}
+
+\begin{multline*}
+\frac{\mathcal{D}}{\mathcal{G}_3\Delta x\mathcal{M}_3}\mathcal{F}^{u,u} = - \frac{1 -e^{-ik\Delta x}}{\Delta x } \dfrac{ \sqrt{gH}}{ 2}  \\ \times \left [ \left(\frac{e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\right)- \left(\frac{1}{6}\left[5  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\right) \right ]
+\end{multline*}
+
+\[\frac{\mathcal{D}}{\mathcal{G}_3\Delta x\mathcal{M}_3}\mathcal{F}^{u,u} = \frac{ k^4 \sqrt{gH}}{12} \Delta x^3 - \frac{k^6 \sqrt{gH}}{72}\Delta x^5 + \frac{k^8 \sqrt{gH}}{960}\Delta x^7 + O(\Delta x ^{9})\]
+
+\begin{multline*}
+\frac{\mathcal{D}}{\mathcal{G}_3\Delta x\mathcal{M}_3}\mathcal{F}^{u,h} = \dfrac{ gH}{ 2} \frac{1 -e^{-ik\Delta x}}{\Delta x \mathcal{M}_3} \left[H -\frac{H^3}{3} \frac{-2\cos\left(2k\Delta x\right) + 32\cos\left(k\Delta x\right)  - 30 }{12\Delta x^2}\right]^{-1} \\ \times \left [ \left(\frac{e^{ik\Delta x } \mathcal{M}_3}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\right) +  \left(\frac{\mathcal{M}_3}{6}\left[5  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\right) \right ]
+\end{multline*}
+
+\begin{multline*}
+\frac{\mathcal{D}}{\mathcal{G}_3\Delta x\mathcal{M}_3}\mathcal{F}^{u,h} = \dfrac{ gH}{ 2} \frac{1 -e^{-ik\Delta x}}{\Delta x} \left[H -\frac{H^3}{3} \frac{-2\cos\left(2k\Delta x\right) + 32\cos\left(k\Delta x\right)  - 30 }{12\Delta x^2}\right]^{-1} \\ \times \left [ \left(\frac{e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\right) +  \left(\frac{1}{6}\left[5  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\right) \right ]
+\end{multline*}
+
+\begin{multline*}
+\frac{\mathcal{D}}{\mathcal{G}_3\Delta x\mathcal{M}_3}\mathcal{F}^{u,h} = igk\frac{3}{3 + H^2k^2} - \frac{igk^5\left(2H^2k^2 + 9\right)}{30\left(H^2k^2 + 3\right)^2}\Delta x^4 + \frac{igk^7\left(H^2k^2 + 4\right)}{112\left(H^2k^2 + 3\right)^2}\Delta x^6 + O(\Delta x ^8)
+\end{multline*}
+\end{document}

@@ -1,0 +1,131 @@
+
+\chapter{The Serre Equations}
+\label{chp:Serreeqns}
+
+The Serre equations are partial differential equations that describe the behaviour of waves of free surface flows of fluids for a wide array of wave properties. 
+
+%spectrum of wave models%
+
+
+
+In fact they are considered to be one of the best models for free surface flows up to wave breaking []. For  this reason we are interested in using the Serre equations to model wave hazards such as tsunamis and storm surges. 
+
+The Serre equations can be derived asymptotically [] or via depth integration [] of the full Navier-Stokes equations. They are evolution type equations, however they are not strictly parabolic or hyperbolic and naively are not in conservation law form.  
+
+
+% Introduce Serre Equations/ Conservative/ Non-conservative, Non-dimensionalised
+% Properties : Conservation of Mass, Energy and Momentum, Dispersion relation, wave speed bounds, Analytic solutions
+
+\section{The Serre Equations}
+
+\begin{subequations}
+	\label{eqn:FullSerreNonCon}
+	\begin{equation}
+	\label{eqn:FullSerreNonConMass}
+	\frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+	\end{equation}
+	
+	and
+	
+	\begin{multline}
+	\label{eqn:FullSerreNonConMome}
+    	\dfrac{\partial (uh)}{\partial t} + \dfrac{\partial}{\partial x} \left ( u^2h + \dfrac{gh^2}{2} + \dfrac{h^2}{2}{\Psi} + \dfrac{h^3}{3}{ \Phi }  \right )  \\+  \dfrac{\partial b}{\partial x} \left (gh +   h \Psi + \dfrac{h^2}{2}{ \Phi }  \right ) = 0
+   	\end{multline}
+\end{subequations}	
+
+where $\Phi$ and $\Psi$ are defined as
+\begin{defn}
+	\label{eqn:FullSerreNonConVarDef}
+	\begin{equation*}
+	%\label{eqn:FullSerreNonConVarDefPsi}
+	{ \Psi }  = \dfrac{\partial b}{\partial x}\left(\dfrac{\partial u}{\partial t} + u\dfrac{\partial u}{\partial x} \right)  + u^2\dfrac{\partial b}{\partial x}
+	\end{equation*}
+	
+	and
+	
+	\begin{equation*}
+	%\label{eqn:FullSerreNonConVarDefPhi}
+	 { \Phi }  = \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} -u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t} .
+	\end{equation*}
+
+\end{defn}	
+
+
+\subsection{Alternative form of the Serre Equations}
+
+
+\begin{subequations}
+	\label{eqn:FullSerreCon}
+	\begin{equation}
+	\label{eqn:FullSerreConMass}
+	\frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+	\end{equation}
+	
+	and
+	
+	\begin{multline}
+	\label{eqn:Serreconsconmom}
+	\frac{\partial}{\partial t} \left( G \right)  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} - \frac{2}{3}h^3 \frac{\partial {u}}{\partial x}^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right) \\ + \frac{1}{2}h^2 {u} \frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  - h {u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2} + gh\frac{\partial b}{\partial x} = 0
+	\end{multline}
+	
+\end{subequations}
+
+%
+With $G$ defined as
+\begin{defn}
+	\label{defn:SerreEqnConservedQuantity1}
+	\[ G =  h {u} \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right)\]
+\end{defn}
+
+\section{Properties of the Serre Equations}
+
+
+\subsection{Conservation Properties}
+
+The total amount of a quantity $q$ in a system occurring on the interval $[a,b]$ at time $t$ is measured by
+\begin{defn}
+	\label{defn:TotalAmmountab}
+	\begin{equation*}
+	\mathcal{C}_q(t) = \int_{a}^{b} q(x,t)\, dx
+	\end{equation*}
+\end{defn}
+Conservation of a quantity $q$ implies that $\mathcal{C}_{q}(0) = \mathcal{C}_{q}(t)$ $\forall t$ provided the interval is fixed and the system is closed
+
+
+
+For any bed profile the Serre equations has two quantities that must be conserved the mass $h$, and the Hamiltonian $\mathcal{H}$. Where the Hamiltonian is
+
+\begin{defn}
+	\label{eqn:Hamildef}
+	\begin{equation*}
+		\mathcal{H}(x,t) = \frac{1}{2} \left(hu^2 + \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2 + gh^2 + 2ghb + u^2h\frac{\partial b}{\partial x} - uh^2 \frac{\partial u}{\partial x} \frac{\partial b}{\partial x}  \right)
+	\end{equation*}
+
+\end{defn}
+
+For horizontal bed profiles where $b(x) = 0$  $\forall x$, the source terms in [] are $0$ and the Serre equations also conserve momentum and $G$ in the same way provided that boundary conditions for the water depths are equal at both ends.
+
+
+\subsection{Dispersion Relation}
+It was demonstrated in [] that the dispersion relation for the linearised Serre equations is
+
+\begin{equation}
+\label{eqn:DispersionRelation}
+\omega = Uk \pm k \sqrt{gH} \sqrt{\frac{3}{\left(kH\right)^2 + 3}}
+\end{equation}
+
+From this we get the phase velocity $v_p = \omega / k$ and the group velocity $v_g = d \omega / d k$.
+\begin{subequations}
+	\label{eqn:WaveVelocities}
+	\begin{equation}
+	\label{eqn:WaveVelocitiesPhase}
+	v_p = U \pm \sqrt{gH}\sqrt{\frac{3}{\left(kH\right)^2 + 3}}
+	\end{equation}
+	\begin{equation}
+	\label{eqn:WaveVelocitiesGroup}
+	v_g = U \pm \sqrt{gH} \left(\sqrt{\frac{3}{\left(kH\right)^2 + 3}} \mp \left(kH\right)^2 \sqrt{\frac{3}{\left(\left(kH\right)^2 + 3 \right)^3}}\right)
+	\end{equation}
+\end{subequations}
+
+
+

@@ -1,0 +1,171 @@
+84d83
+<     
+86,89d84
+< def sech2(x):
+<   a = 2./(exp(x) + exp(-x))
+<   return a*a
+<   
+92c87,91
+<   return a
+---
+>   return a    
+> 
+> def sech2 (x):
+>   a = 2./(exp(x) + exp(-x))
+>   return a*a
+187,253d185
+<     
+< def SolitonEnerg(a0,a1,g,sx,ex):
+<     
+<     c = sqrt(g*(a0 + a1))
+<     k = sqrt(3*a1) / (2*a0 * sqrt(a0 + a1))
+<     
+<     FIsx = sqrt(a1)*(c**2)*(sqrt(a1)*tanh(k*sx) - (a0*arctanh( (sqrt(a1) *tanh(k*sx))/ sqrt(a0 + a1) )) / sqrt(a0 + a1) ) / k
+<     FIex = sqrt(a1)*(c**2)*(sqrt(a1)*tanh(k*ex) - (a0*arctanh( (sqrt(a1) *tanh(k*ex))/ sqrt(a0 + a1) )) / sqrt(a0 + a1) ) / k
+<     
+<     FI  = FIex- FIsx
+<     
+<     SIp1sx = sx
+<     SIp1ex = ex
+<     
+<     SIp1 = SIp1ex - SIp1sx
+<     
+<     SIp2sx = tanh(k*sx)/k 
+<     SIp2ex = tanh(k*ex)/k 
+<     
+<     SIp2 = SIp2ex - SIp2sx
+<     
+<     SIp3sx = (tanh(k*sx) * (sech2(k*sx) +2))/(3*k) 
+<     SIp3ex = (tanh(k*ex) * (sech2(k*ex) +2))/(3*k) 
+<     
+<     SIp3 = SIp3ex - SIp3sx
+<     
+<     SI = g*a0**2*SIp1 + 2*a0*a1*g*SIp2 + g*a1**2 *SIp3
+<     
+<     TIp1sx =  sech2(k*sx)*(a0*cosh(2*k*sx) + a0 + 2*a1)  \
+<     *(sqrt(a1)*tanh(k*sx)*(3*a0 - a1*sech2(k*sx) + a1) - 3*a0*sqrt(a0 + a1)*arctanh(sqrt(a1)*tanh(k*sx) / sqrt(a0 + a1)) ) \
+<     * (6* a1**(5.0/2)*k*(a0 + a1*sech2(k*sx)))**(-1)
+<     
+<     TIp1ex =  sech2(k*ex)*(a0*cosh(2*k*ex) + a0 + 2*a1)  \
+<     *(sqrt(a1)*tanh(k*ex)*(3*a0 - a1*sech2(k*ex) + a1) - 3*a0*sqrt(a0 + a1)*arctanh(sqrt(a1)*tanh(k*ex) / sqrt(a0 + a1)) ) \
+<     * (6* a1**(5.0/2)*k*(a0 + a1*sech2(k*ex)))**(-1)
+<     
+<     TIp1 = TIp1ex - TIp1sx
+<     
+<     TI = 4*a0*a0*a1*a1*k*k*c*c*TIp1/3.0
+<     
+<     I = 0.5*(FI + SI + TI)
+<     print(FI, SI,TI)
+< 
+<     return I
+<     
+< def SolitonMass(a0,a1,g,sx,ex):
+< 
+<     k = sqrt(3*a1) / (2*a0 * sqrt(a0 + a1))
+<     
+<     FIsx = sx
+<     FIex = ex
+<     
+<     FI = FIex - FIsx
+<     
+<     SIsx = tanh(k*sx)/k
+<     SIex = tanh(k*ex)/k
+<     
+<     SI = SIex - SIsx
+<     
+<     I = a0 *FI + a1*SI
+< 
+<     return I
+<     
+< def SolitonMom(a0,a1,g,sx,ex):
+< 
+<     c = sqrt(g*(a0 + a1))
+<     k = sqrt(3*a1) / (2*a0 * sqrt(a0 + a1))
+255,260d186
+<     SIsx = tanh(k*sx)/k
+<     SIex = tanh(k*ex)/k
+<     
+<     SI = SIex - SIsx
+<     
+<     I = c*a1*SI
+262d187
+<     return I
+264c189
+< wdir = "../../../../data/raw/solcon0p1/o2FEM/"
+---
+> wdir = "../../../../data/raw/Solnon0p1TAN/o2FEM/"
+276,277c201,202
+<     writefile.writerow(['dx',"theta",'Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity', "C(h)", "C(uh)", "C(H)"])
+< for k in range(5,20):    
+---
+>     writefile.writerow(['dx',"theta",'Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity'])
+> for k in range(6,21):    
+281c206
+<     a1 = 0.7
+---
+>     a1 = 0.1
+290c215
+<     endt = 1 + 0.9*dt
+---
+>     endt = 1 + dt
+298,299d222
+<     nBCs = 2
+<     
+309,311d231
+<     xbc,t1h = makevar(startx - nBCs*dx,endx+ nBCs*dx,dx,startt,endt,dt)  
+<     
+<     
+316c236
+< 
+---
+>     nBCs = 2
+341,344c261
+<      
+<     G = copyarrayfromC(G_c,n)
+<     h = copyarrayfromC(h_c,n) 
+<      
+---
+>        
+345a263,264
+>     G = copyarrayfromC(G_c,n)
+>     h = copyarrayfromC(h_c,n)
+350c269
+<    
+---
+>     xbc,t1h = makevar(startx - nBCs*dx,endx+ nBCs*dx,dx,startt,endt,dt)  
+362,363c281,287
+<     
+<     htrue,utrue, Gtrue = solitoninit(n,a0,a1,g,x,t[-1],dx)
+---
+>     c = sqrt(g*(a0 + a1))
+>     htrue = zeros(n)
+>     utrue = zeros(n)
+>     for j in range(n):             
+>         he = soliton(x[j],t[-1],g,a0,a1)
+>         htrue[j] = he
+>         utrue[j] = c* ((he - a0) / he) 
+376,377c300,306
+<     
+<   
+---
+> 
+>     s = wdir + "savenorms.txt"
+>     with open(s,'a') as file1:
+>         writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+> 
+>         writefile.writerow([str(dx),str(theta),str(normhdiffi), str(normudiffi)])  
+>         
+382c311
+<     s = wdir + "savenorms.txt"
+---
+>     s = wdir + "savenormsN.txt"
+412d340
+<   
+423,425c351,353
+<     deallocPy(hhbc_c)
+<     deallocPy(Ghbc_c)
+< 
+---
+>     deallocPy(ubc_c)   
+>     deallocPy(hbc_c)
+>     deallocPy(xbc_c)

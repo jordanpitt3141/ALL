@@ -1,0 +1,335 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+
+
+\section{Linearised Equations}
+
+
+
+\[G = uh  -  \frac{h^3}{3} u_{xx}\]
+
+\[\eta_t + h u_x = 0\]
+
+\[h u_t - \frac{h^3}{3} u_{xxt}  + gh \eta_x  = 0\]
+
+\[ \left(G\right)_t  + gh \eta_x  = 0\]
+
+\section{Numerical Approximation}
+
+We investigate our numerical technique by adding in a fourier mode so $W_j = W_0 e^{ i\left(vt + kx_j\right)}$, and rewriting the equations using our spatial discretisation
+
+\subsection{G}
+
+Analytic:
+
+\[G_j = u_jh _j  -  (\frac{h_j^3}{3} {u_{xx}})_j\]
+
+Numerical approximation, we used second order central differences so we replace the second derivative of u with this approximation to it
+So we get
+
+\[G_j = u_jh _j  -  \frac{h_j^3}{3} \left(\dfrac{u_{j+1} - 2 u_{j} + u_{j-1}}{\Delta x^2}\right)\]
+
+\[G_j = u_0 e^{ i\left(vt + kx_j\right)} h_0 -  \frac{h_0}{3} u_0 \left(\dfrac{e^{ i\left(vt + kx_{j+ 1}\right)} - 2e^{ i\left(vt + kx_j\right)} +e^{ i\left(vt + kx_{j-1}\right)}}{\Delta x^2}\right)\]
+
+\[G_j = u_0 e^{ i\left(vt + kx_j\right)} h_0 -  \frac{h_0}{3} u_0 \left(\dfrac{e^{ i\left(vt + kx_{j}\right) + ik\Delta x} - 2e^{ i\left(vt + kx_j\right)} +e^{ i\left(vt + kx_{j}\right) + ik\Delta x}}{\Delta x^2}\right)\]
+
+
+\[G_j = u_j h_0 -  \frac{h_0}{3} u_j \left(\dfrac{e^{ ik\Delta x} - 2 +e^{ -ik\Delta x}}{\Delta x^2}\right)\]
+
+
+\[G_j = u_j \left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)\]
+
+
+We are dealing with time continuous  variables so, we first take the derivative in time exactly for the Fourier nodes so that:
+
+\[iv\eta_j +  \left(h_j u_x \right)_j = 0\]
+
+\[ \left(G_t\right)_j  + \left(gh \eta_x \right)_j  = 0\]
+
+
+%UNSURE!!!
+\[ \left(u_j \left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)\right)_t  + \left(gh \eta_x \right)_j  = 0\]
+
+\[iv G_j + \left(gh \eta_x \right)_j  = 0\]
+
+So we have 
+
+\[iv\eta_j +  \left(h u_x \right)_j = 0\]
+
+\[iv G_j + \left(gh \eta_x \right)_j  = 0\]
+
+Four our first step we need to preform the reconstruction to obtain the flux values at the edges., the only values we need to reconstruct are $u$ and $\eta$ ($h$ fixed), we will just use centered differencing so that
+
+\[u^+_{j + 1/2} = u_{j+1} - \frac{u_{j+2} - u_{j}}{4} \]
+
+\[u^-_{j + 1/2} = u_{j} + \frac{u_{j+1} - u_{j-1}}{4} \]
+
+
+We use our shift operators to get it in terms of $j+1$ so that
+
+\[u^+_{j + 1/2} = u_{j+1} - \frac{u_{j+1}e^{ik\Delta x}  - u_{j+1}e^{-ik\Delta x}  }{4} \]
+
+\[u^+_{j + 1/2} = u_{j+1} \left(1 -\frac{e^{ik\Delta x}  - e^{-ik\Delta x}  }{4} \right) \]
+
+\[u^+_{j + 1/2} = u_{j} e^{ik\Delta x}   \left(1 -\frac{2i \sin\left(ik\Delta x\right)  }{4} \right) \]
+
+\[u^+_{j + 1/2} = u_{j} e^{ik\Delta x}   \left(1 -\frac{i \sin\left(ik\Delta x\right)  }{2} \right) \]
+
+Now for the other side
+
+\[u^-_{j + 1/2} = u_{j} + \frac{u_{j}e^{ik\Delta x} - u_{j}e^{-ik\Delta x}}{4} \]
+
+\[u^-_{j + 1/2} = u_{j}\left( 1 + \frac{e^{ik\Delta x} - e^{-ik\Delta x}}{4}\right) \]
+
+\[u^-_{j + 1/2} = u_{j}\left( 1 + \frac{2i\sin\left({ik\Delta x}\right) }{4}\right) \]
+
+\[u^-_{j + 1/2} = u_{j}\left( 1 + \frac{i\sin\left({ik\Delta x}\right) }{2}\right) \]
+
+So we have:
+
+\[u^+_{j + 1/2} = u_{j} e^{ik\Delta x}   \left(1 -\frac{i \sin\left(ik\Delta x\right)  }{2} \right) \]
+
+\[u^-_{j + 1/2} = u_{j}\left( 1 + \frac{i\sin\left({ik\Delta x}\right) }{2}\right) \]
+Similarly
+\[\eta^+_{j + 1/2} = \eta_{j} e^{ik\Delta x}   \left(1 -\frac{i \sin\left(ik\Delta x\right)  }{2} \right) \]
+
+\[\eta^-_{j + 1/2} = \eta_{j}\left( 1 + \frac{i\sin\left({ik\Delta x}\right) }{2}\right) \]
+For G we pick up the factor for u but then it becomes the same process:
+\[G^+_{j + 1/2} = u^+_{j + 1/2} \left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)\]
+\[G^-_{j + 1/2} = u^+_{j + 1/2} \left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)\]
+Thus
+\[G^+_{j + 1/2} = u_{j} e^{ik\Delta x}  \left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)  \left(1 -\frac{i \sin\left(ik\Delta x\right)  }{2} \right) \]
+
+\[G^-_{j + 1/2} = u_{j}\left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)\left( 1 + \frac{i\sin\left({ik\Delta x}\right) }{2}\right) \]
+\newline
+\newline
+\newline
+\newline
+\newline
+\newline
+
+We will use the follow to denote this recontructioin part:
+
+\[\mathcal{S^+} =  e^{ik\Delta x}   \left(1 -\frac{i \sin\left(ik\Delta x\right)  }{2} \right)\]
+
+\[\mathcal{S^-} =  \left( 1 + \frac{i\sin\left({ik\Delta x}\right) }{2}\right)\]
+
+From these  we calculate $F^+_{j + 1/2}$ , $F^-_{j + 1/2}$, $a_{j + 1/2}^+$ and $a_{j + 1/2}^{-}$. 
+
+Firstly we need to calculate the wave speeds in the system, we use the wavespeeds from the linearisation assuming the water is still then, the wavespeed is just (approximately as well)
+
+\begin{multline*}
+a^-_{j + 1/2} = \min [0, u_j\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) - \sqrt{g\left(h_0 + \eta_j\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) \right) } \\,
+u_j\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right)  - \sqrt{g\left(h_0 + \eta_j\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) \right) }
+ ]
+\end{multline*}
+
+\begin{multline*}
+a^+_{j + 1/2} = \max [0, u_j\left(e^{ik\Delta x} +  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) - \sqrt{g\left(h_0 + \eta_j\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) \right) } \\,
+u_j\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right)  + \sqrt{g\left(h_0 + \eta_j\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) \right) }
+]
+\end{multline*}
+
+
+We'll just use the placeholders to make writing a formula for the matrix determinant easier.
+
+Our flux approximations are claculated like so
+\begin{gather}
+F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
+\end{gather}
+
+For mass
+
+\begin{gather}
+F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} h_0u^-_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}} h_0u^+_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left [ \eta^+_{j+\frac{1}{2}} - \eta^-_{j+\frac{1}{2}} \right ]
+\end{gather}
+
+\begin{gather}
+F_{j+\frac{1}{2}} = \dfrac{1}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left(a^+_{j+\frac{1}{2}} h_0u^-_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}} h_0u^+_{j+\frac{1}{2}} + a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \eta^+_{j+\frac{1}{2}} - \eta^-_{j+\frac{1}{2}} \right ]\right) 
+\end{gather}
+
+\begin{gather}
+F_{j+\frac{1}{2}} = \dfrac{1}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left(a^+_{j+\frac{1}{2}} h_0u_{j} \mathcal{S^-} - a^-_{j+\frac{1}{2}} h_0u_{j} \mathcal{S^+} + a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \eta_{j}\mathcal{S^+} - \eta_{j}\mathcal{S^-} \right ]\right) 
+\end{gather}
+
+\begin{gather}
+F_{j+\frac{1}{2}} = \dfrac{1}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left(h_0 u_j \left(a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} \right) + \eta_{j} a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ]\right) 
+\end{gather}
+
+\begin{gather}
+F_{j+\frac{1}{2}} = h_0u_j \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right)   + \eta_{j}  \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) 
+\end{gather}
+
+We can just apply the shift operator to do this but for $j-1$ to get $F_{j-\frac{1}{2}}$
+
+\begin{gather}
+F_{j-\frac{1}{2}} = h_0u_{j-1} \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)   + \eta_{j-1}  \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right) 
+\end{gather}
+
+\begin{gather}
+F_{j-\frac{1}{2}} = h_0u_{j}e^{-ik\Delta x} \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)   + \eta_{j}e^{-ik\Delta x}  \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right) 
+\end{gather}
+
+\begin{gather}
+F_{j-\frac{1}{2}} = e^{-ik\Delta x}\left(h_0u_{j} \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)   + \eta_{j} \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)\right) 
+\end{gather}
+
+So our approximation for momentum becomes:
+
+\[iv\eta_j + \frac{1}{\Delta x} \left( F_{j+\frac{1}{2}} - F_{j-\frac{1}{2}} \right) = 0\]
+
+\begin{multline}
+iv\eta_j + \frac{1}{\Delta x} [ h_0u_j \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right)   + \eta_{j}  \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) \\- e^{-ik\Delta x}\left(h_0u_{j} \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)   + \eta_{j} \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)\right) ] = 0
+\end{multline}
+
+\begin{multline}
+iv\eta_j + \frac{1}{\Delta x} [ h_0u_j \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right)  - e^{-ik\Delta x}\left(h_0u_{j} \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right) \right)   ] \\
++ \frac{1}{\Delta x} [\eta_{j}  \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) - e^{-ik\Delta x}\left( \eta_{j} \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)\right) ] = 0
+\end{multline}
+
+\begin{multline}
+iv\eta_j + \frac{h_0u_j}{\Delta x} \left[  \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right)  - e^{-ik\Delta x} \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)  \right] \\
++ \frac{\eta_{j}}{\Delta x} \left[  \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) - e^{-ik\Delta x} \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right) \right] = 0
+\end{multline}
+
+I will now introduce $\mathcal{F}$ like so
+
+\[\mathcal{F}= \left[  \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right)  - e^{-ik\Delta x} \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)  \right]\]
+
+thus
+
+\[
+iv\eta_j + \frac{h_0u_j}{\Delta x} \mathcal{F}
++ \frac{\eta_{j}}{\Delta x} \mathcal{F} = 0
+\]
+
+
+\[
+\eta_j\left(iv + \frac{\mathcal{F}}{\Delta x}  \right) + \frac{h_0\mathcal{F}}{\Delta x} u_j  = 0
+\]
+
+
+Now for momentum we pick up that factor
+
+\[\mathcal{G} = \left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)\]
+ on u
+ 
+ thus
+
+
+\[iv u_j\mathcal{G} + \frac{1}{\Delta x} \left( F_{j+\frac{1}{2}} - F_{j-\frac{1}{2}} \right)  = 0\]
+
+where
+
+\begin{gather}
+F_{j+\frac{1}{2}} = gh_0\eta_j \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right)   + u_j\mathcal{G} \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) 
+\end{gather}
+
+\begin{gather}
+F_{j-\frac{1}{2}} = e^{-ik\Delta x}\left(gh_0\eta_j \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)   + u_{j} \mathcal{G} \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)\right) 
+\end{gather}
+
+so
+
+\begin{multline}
+iv u_j\mathcal{G} + \frac{1}{\Delta x}\left(gh_0\eta_j \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right)   + u_j\mathcal{G} \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) \right)  \\
+- \frac{1}{\Delta x}\left(e^{-ik\Delta x}\left(gh_0\eta_j \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)   + u_{j} \mathcal{G} \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)\right)  \right)  = 0
+\end{multline}
+
+\begin{multline}
+iv u_j\mathcal{G} + \frac{1}{\Delta x}\left(gh_0\eta_j \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) \right)  \\
+- \frac{1}{\Delta x}\left(e^{-ik\Delta x}\left(gh_0\eta_j \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)  \right) \right) \\
++ \frac{1}{\Delta x}\left(u_j\mathcal{G} \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) \right)  \\
+- \frac{1}{\Delta x}\left(e^{-ik\Delta x}\left(u_{j} \mathcal{G} \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)\right)  \right)  = 0
+\end{multline}
+
+\begin{multline}
+iv u_j\mathcal{G} + \frac{1}{\Delta x}\left(gh_0\eta_j \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) \right)  
+- \frac{1}{\Delta x}\left(e^{-ik\Delta x}\left(gh_0\eta_j \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)  \right) \right) \\
++ \frac{1}{\Delta x}\left(u_j\mathcal{G} \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) \right) 
+- \frac{1}{\Delta x}\left(e^{-ik\Delta x}\left(u_{j} \mathcal{G} \left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)\right)  \right)  = 0
+\end{multline}
+
+\begin{multline}
+iv u_j\mathcal{G} + gh_0\eta_j \frac{1}{\Delta x} \left(  \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) 
+- e^{-ik\Delta x} \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)  \right)\\
++ u_j\mathcal{G} \frac{1}{\Delta x}\left( \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) \right) 
+- e^{-ik\Delta x}\left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right) = 0
+\end{multline}
+
+\begin{multline}
+iv u_j\mathcal{G} + gh_0\eta_j \frac{1}{\Delta x} \left(  \left(\dfrac{a^+_{j+\frac{1}{2}} \mathcal{S^-} - a^-_{j+\frac{1}{2}} \mathcal{S^+} }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) 
+- e^{-ik\Delta x} \left(\dfrac{a^+_{j-\frac{1}{2}} \mathcal{S^-} - a^-_{j-\frac{1}{2}} \mathcal{S^+} }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right)  \right)\\
++ u_j\mathcal{G} \frac{1}{\Delta x}\left( \left(\dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}\right) \right) 
+- e^{-ik\Delta x}\left(\dfrac{a^+_{j-\frac{1}{2}} \, a^-_{j-\frac{1}{2}}\left [ \mathcal{S^+} -\mathcal{S^-} \right ] }{a^+_{j-\frac{1}{2}} - a^-_{j-\frac{1}{2}}}\right) = 0
+\end{multline}
+
+\[
+iv u_j\mathcal{G} + gh_0 \eta_j \frac{1}{\Delta x} \left(  \mathcal{F}  \right) + u_j\mathcal{G} \frac{1}{\Delta x}\left( \mathcal{F} \right) = 0
+\]
+
+
+\[ u_j\left(iv\mathcal{G} \frac{1}{\Delta x} \mathcal{F}\right)
+ + \eta_j \left( gh_0 \frac{1}{\Delta x}  \mathcal{F}  \right) = 0
+\]
+
+So we have
+
+
+\[
+\eta_j\left(iv + \frac{\mathcal{F}}{\Delta x}  \right) + \frac{h_0\mathcal{F}}{\Delta x} u_j  = 0
+\]
+
+\[ u_j\left(iv\mathcal{G} \frac{1}{\Delta x} \mathcal{F}\right)
++ \eta_j \left( gh_0 \frac{1}{\Delta x}  \mathcal{F}  \right) = 0
+\]
+
+In matrix form we have
+
+\[ 
+\left[\begin{array}{c c}
+iv + \dfrac{1}{\Delta x} \mathcal{F}  &  h_0\dfrac{1}{\Delta x} \mathcal{F} \\
+gh_0 \dfrac{1}{\Delta x}  \mathcal{F} & iv\mathcal{G} \dfrac{1}{\Delta x} \mathcal{F}
+\end{array}\right]
+ \left[\begin{array}{c}
+\eta_j \\
+u_j
+\end{array}\right] = 0
+\]
+
+This admits a nontrivial solution when
+
+\[\left(iv + \dfrac{1}{\Delta x} \mathcal{F}\right)\left(iv\mathcal{G} \dfrac{1}{\Delta x} \mathcal{F}\right) - \left(h_0\dfrac{1}{\Delta x} \mathcal{F}\right)\left(gh_0 \dfrac{1}{\Delta x}  \mathcal{F}\right)  =0\]
+
+\[\left(-v^2\mathcal{G}\dfrac{1}{\Delta x} \mathcal{F} \right) + \left(iv \mathcal{G}\dfrac{1}{\Delta x^2} \mathcal{F}^2\right) -  \dfrac{gh_0^2}{\Delta x^2} \mathcal{F}^2  =0\]
+
+This is a quadratic in v with the following solutions
+
+\[v = - \frac{  i\mathcal{G}\dfrac{1}{\Delta x^2} \mathcal{F}^2\pm \sqrt{\left(i \mathcal{G}\dfrac{1}{\Delta x^2} \mathcal{F}^2\right)^2 - 4 \left(\mathcal{G}\dfrac{1}{\Delta x} \mathcal{F} \dfrac{gh_0^2}{\Delta x^2} \mathcal{F}^2\right)}}{-2\mathcal{G}\dfrac{1}{\Delta x} \mathcal{F}  }\]
+
+\[v = - \frac{  i\mathcal{G}\dfrac{1}{\Delta x^2} \mathcal{F}^2\pm \sqrt{\left(-\mathcal{G}^2\dfrac{1}{\Delta x^4} \mathcal{F}^4\right) - 4 \left(\mathcal{G} \mathcal{F}^3 \dfrac{gh_0^2}{\Delta x^3}\right)}}{-2\mathcal{G}\dfrac{1}{\Delta x} \mathcal{F}  }\]
+
+\[v = - \frac{  i\mathcal{G}\dfrac{1}{\Delta x^2} \mathcal{F}^2\pm  \dfrac{1}{\Delta x} \mathcal{F}\sqrt{\left(-\mathcal{G}^2\dfrac{1}{\Delta x^2} \mathcal{F}^2\right) - 4 \left(\mathcal{G} \mathcal{F} \dfrac{gh_0^2}{\Delta x}\right)}}{-2\mathcal{G}\dfrac{1}{\Delta x} \mathcal{F}  }\]
+
+\[v = - \frac{  i\mathcal{G}\dfrac{1}{\Delta x} \mathcal{F}\pm  \sqrt{\left(-\mathcal{G}^2\dfrac{1}{\Delta x^2} \mathcal{F}^2\right) - 4 \left(\mathcal{G} \mathcal{F} \dfrac{gh_0^2}{\Delta x}\right)}}{-2\mathcal{G} }\]
+
+\[v = \frac{  i\mathcal{G}\dfrac{1}{\Delta x} \mathcal{F}\pm i  \sqrt{\mathcal{G}^2\dfrac{1}{\Delta x^2} \mathcal{F}^2 + 4 \mathcal{G} \mathcal{F} \dfrac{gh_0^2}{\Delta x}}}{2\mathcal{G} }\]
+
+method fix k, then vary Delta x to produce plots for different schemes, only difference should be $\mathcal{G}$ and $\mathcal{F}$, and the only difference there should be $\mathcal{G}$ and $\mathcal{S}^\pm$, and $a$'s should be different as well. Could do these numerically as well. Write up code to calculate v. 
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,367 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+
+
+\section{Linearised Equations}
+
+
+
+\[G = uh  -  \frac{h^3}{3} u_{xx}\]
+
+\[\eta_t + h u_x = 0\]
+
+\[h u_t - \frac{h^3}{3} u_{xxt}  + gh \eta_x  = 0\]
+
+\[ \left(G\right)_t  + gh \eta_x  = 0\]
+
+\section{Numerical Approximation}
+
+We investigate our numerical technique by adding in a fourier mode so $W_j = W_0 e^{ i\left(vt + kx_j\right)}$, and rewriting the equations using our spatial discretisation
+
+\subsection{G}
+
+Analytic:
+
+\[G_j = u_jh _j  -  (\frac{h_j^3}{3} {u_{xx}})_j\]
+
+Numerical approximation, we used second order central differences so we replace the second derivative of u with this approximation to it
+So we get
+
+\[G_j = u_jh _j  -  \frac{h_j^3}{3} \left(\dfrac{u_{j+1} - 2 u_{j} + u_{j-1}}{\Delta x^2}\right)\]
+
+\[G_j = u_0 e^{ i\left(vt + kx_j\right)} h_0 -  \frac{h_0}{3} u_0 \left(\dfrac{e^{ i\left(vt + kx_{j+ 1}\right)} - 2e^{ i\left(vt + kx_j\right)} +e^{ i\left(vt + kx_{j-1}\right)}}{\Delta x^2}\right)\]
+
+\[G_j = u_0 e^{ i\left(vt + kx_j\right)} h_0 -  \frac{h_0}{3} u_0 \left(\dfrac{e^{ i\left(vt + kx_{j}\right) + ik\Delta x} - 2e^{ i\left(vt + kx_j\right)} +e^{ i\left(vt + kx_{j}\right) + ik\Delta x}}{\Delta x^2}\right)\]
+
+
+\[G_j = u_j h_0 -  \frac{h_0}{3} u_j \left(\dfrac{e^{ ik\Delta x} - 2 +e^{ -ik\Delta x}}{\Delta x^2}\right)\]
+
+
+\[G_j = u_j \left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)\]
+
+
+
+We are dealing with time continuous  variables so, we first take the derivative in time exactly for the Fourier nodes so that:
+
+So what we have is something that depends on the order used to approximate $u_xx$, lets call it $\mathcal{C}_2$ Thus:
+
+\[\mathcal{C}_2 = \dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2} \]
+
+\[G_j = u_j \left( h_0 -  \frac{h_0^3}{3} \mathcal{C}_2 \right)\]
+
+Furthermore we will call this whole thing $\mathcal{G}_2$ So we have
+
+\[\mathcal{G}_2 = \left( h_0 -  \frac{h_0^3}{3} \mathcal{C}_2 \right)\]
+
+then
+\[G_j = u_j \mathcal{G}_2\]
+
+Now we move on to 
+
+\[\eta_t + h u_x = 0\]
+
+our equations are time continuous so that:
+
+\[\eta_t + h u_x = 0\]
+\[iv\eta + h u_x = 0\]
+
+next we approximate
+
+our conservation equations of the form
+
+\[q_t + \left[f(q)\right]_x = 0\]
+
+by 
+\[q_t + \frac{1}{\Delta x} \left[F_{j + 1/2} - F_{j - 1/2}\right]= 0\]
+
+where $F_{j \pm 1/2}$ given by Kurganovs method. In this equation $h$ is constant so $f(\eta,u) = hu$. We start Kurganovs method by doing a reconstruction, we start by doing a central differencing approximation to obtain that
+
+we note that the result is something like
+
+
+\[q^-_{j + 1/2} = q_j + \frac{q_{j+1} - q_{j-1}}{4}\]
+\[q^+_{j + 1/2} = q_{j+1} + \frac{q_{j+2} - q_{j}}{4}\]
+
+Applying our fourier mode
+
+\[q^-_{j + 1/2} = q_j + \frac{q_{j}e^{ik\Delta x} - q_{j}e^{-ik\Delta x}}{4}\]
+
+\[q^-_{j + 1/2} = q_j\left(1  + \frac{e^{ik\Delta x} - e^{-ik\Delta x}}{4} \right)\]
+
+\[q^-_{j + 1/2} = q_j\left(1  + \frac{2i\sin\left(k\Delta x\right)}{4} \right)\]
+
+\[q^-_{j + 1/2} = q_j\left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+for the plus we get the same result with a shift so that (because its around j+1) and a minus
+
+\[q^+_{j + 1/2} = q_j e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+So we have that
+\[\mathcal{R}_2^- = 1  + \frac{i\sin\left(k\Delta x\right)}{2}\]
+\[\mathcal{R}_2^+ = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+\[q^-_{j + 1/2} = \mathcal{R}_2^- q_j\]
+\[q^+_{j + 1/2} = \mathcal{R}_2^+ q_j\]
+
+for $u$ and $\eta$, this happens to $G$ aswell just because $G$ and $u$ are related by a factor. Next we have to use the wavespeeds:
+
+\[a^+_{j+ 1/2} = \max\left(0,u^+_{j+ 1/2} + \sqrt{gh_0}\sqrt{1 + \eta^+_{j+ 1/2}  / h_0} ,u^-_{j+ 1/2} + \sqrt{gh_0}\sqrt{1 + \eta^-_{j+ 1/2}  / h_0} \right)\]
+
+\[a^-_{j+ 1/2} = \min\left(0,u^+_{j+ 1/2} - \sqrt{gh_0}\sqrt{1 + \eta^+_{j+ 1/2} / h_0} ,u^-_{j+ 1/2} - \sqrt{gh_0}\sqrt{1 + \eta^-_{j+ 1/2} / h_0} \right)\]
+
+Up to order $\epsilon$ $\sqrt{1 + \eta / h_0} =  1 + \eta / h_0$, we will also simplify our method by only choosing the minus subscript wavespeeds so that
+
+\[a^+_{j+ 1/2} = u^-_{j+ 1/2} + \sqrt{gh_0}\left( 1 + \eta^-_{j+ 1/2} / h_0 \right)\]
+
+\[a^-_{j+ 1/2} = u^-_{j+ 1/2} - \sqrt{gh_0}\left( 1 + \eta^-_{j+ 1/2} / h_0 \right)\]
+
+So we have that
+
+\[a^+_{j+ 1/2} = u_{j}\mathcal{R}_2^- + \sqrt{gh_0}\left( 1 + \eta_{j}\mathcal{R}_2^- / h_0 \right)\]
+
+\[a^+_{j+ 1/2} = u_{j}\mathcal{R}_2^- + \sqrt{gh_0} \eta_{j}\mathcal{R}_2^- / h_0+ \sqrt{gh_0}\]
+
+\[a^+_{j+ 1/2} = u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\]
+
+Similarly
+
+\[a^-_{j+ 1/2} = u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\]
+
+\begin{gather}
+F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
+\end{gather}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \dfrac{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right]  h\mathcal{R}_2^- u_j - \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right] h\mathcal{R}_2^+ u_j}{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] - \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right]}  \\
++ \dfrac{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right]}{{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] - \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right]} } \left [ \mathcal{R}_2^+\eta_j - \mathcal{R}_2^-\eta_j\right ]
+\end{multline}
+
+
+First lets work on the denominator
+
+\begin{multline}
+\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] - \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right] = \\
+\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} \right] - \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j}\right] + 2\sqrt{gh_0}
+\end{multline}
+
+\begin{multline}
+\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} \right] - \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j}\right] + 2\sqrt{gh_0} = \\
+2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0}
+\end{multline}
+
+So we have
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \dfrac{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right]  h\mathcal{R}_2^- u_j - \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right] h\mathcal{R}_2^+ u_j}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0}}  \\
++ \dfrac{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right]}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0} } \left [ \mathcal{R}_2^+\eta_j - \mathcal{R}_2^-\eta_j\right ]
+\end{multline}
+
+The numerator on the first is
+\begin{multline}
+\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right]  h\mathcal{R}_2^- u_j - \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right] h\mathcal{R}_2^+ u_j = \\
+u_{j}\mathcal{R}_2^- h\mathcal{R}_2^- u_j + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} h\mathcal{R}_2^- u_j + \sqrt{gh_0} h\mathcal{R}_2^- u_j - u_{j}\mathcal{R}_2^-h\mathcal{R}_2^+ u_j - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j}h\mathcal{R}_2^+ u_j - \sqrt{gh_0}h\mathcal{R}_2^+ u_j
+\end{multline}
+
+
+\begin{multline}
+hu_{j}^2\left[\mathcal{R}_2^-\right]^2 + \sqrt{gh_0} \left[\mathcal{R}_2^-\right]^2 \eta_{j} u_j + h_0\sqrt{gh_0}\mathcal{R}_2^- u_j - hu_{j}^2\mathcal{R}_2^-\mathcal{R}_2^+ - \sqrt{gh_0} \mathcal{R}_2^- \mathcal{R}_2^+ u_j \eta_{j} - h_0\sqrt{gh_0}\mathcal{R}_2^+ u_j\\
+= h_0 \mathcal{R}_2^- \left(\mathcal{R}_2^- - \mathcal{R}_2^+ \right)u_{j}^2 + \sqrt{gh_0} \mathcal{R}_2^-\left(\mathcal{R}_2^- - \mathcal{R}_2^+ \right) \eta_{j} u_j + h_0\sqrt{gh_0}\left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right)u_j
+\end{multline}
+
+So we have that
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right)\dfrac{h_0 \mathcal{R}_2^- u_{j}^2 + \sqrt{gh_0} \mathcal{R}_2^-\eta_{j} u_j + h_0\sqrt{gh_0}u_j}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0}}  \\
++ \dfrac{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right]}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0} } \left [ \mathcal{R}_2^+\eta_j - \mathcal{R}_2^-\eta_j\right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right)\dfrac{h_0 \mathcal{R}_2^- u_{j}^2 + \frac{h_0}{2}u_j\left(2\sqrt{g/h_0} \mathcal{R}_2^-\eta_{j} + 2\sqrt{gh_0}\right)}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0}}  \\
++ \dfrac{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right]}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0} } \left [ \mathcal{R}_2^+\eta_j - \mathcal{R}_2^-\eta_j\right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j + \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right)\dfrac{h_0 \mathcal{R}_2^- u_{j}^2}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0}}  \\
++ \dfrac{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right]}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0} } \left [ \mathcal{R}_2^+\eta_j - \mathcal{R}_2^-\eta_j\right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j + \sqrt{h_0^3}\frac{\mathcal{R}_2^-  - \mathcal{R}_2^+}{2 \sqrt{g}} \dfrac{\mathcal{R}_2^- u_{j}^2}{\mathcal{R}_2^-\eta_{j}  + h_0}  \\
++ \dfrac{\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right]}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0} } \left [ \mathcal{R}_2^+\eta_j - \mathcal{R}_2^-\eta_j\right ]
+\end{multline}
+
+Next we look at the final numerator:
+\begin{multline}
+\left[u_{j}\mathcal{R}_2^- + \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right] \left[u_{j}\mathcal{R}_2^- - \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} - \sqrt{gh_0}\right]= \\
+\left[u_{j}\mathcal{R}_2^-\right]^2 - \left[ \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right]^2
+\end{multline}
+
+\begin{multline}
+\left[u_{j}\mathcal{R}_2^-\right]^2 - \left[ \sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} + \sqrt{gh_0}\right]^2 = \\
+u_{j}^2 \left[\mathcal{R}_2^-\right]^2 - \frac{g}{h_0} \mathcal{R}_2^-  \mathcal{R}_2^- \eta_{j}^2 - 2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} \sqrt{gh_0} - gh_0
+\end{multline}
+
+\begin{multline}
+u_{j}^2 \left[\mathcal{R}_2^-\right]^2 - \frac{g}{h_0} \mathcal{R}_2^-  \mathcal{R}_2^- \eta_{j}^2 - 2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^- \eta_{j} \sqrt{gh_0} - gh_0 = \\
+u_{j}^2 \left[\mathcal{R}_2^-\right]^2 - \frac{g}{h_0} \left[\mathcal{R}_2^-\right]^2 \eta_{j}^2 - 2 g \mathcal{R}_2^- \eta_{j} - gh_0
+\end{multline}
+
+So we have that
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j + \sqrt{h_0^3}\frac{\mathcal{R}_2^-  - \mathcal{R}_2^+}{2 \sqrt{g}} \dfrac{\mathcal{R}_2^- u_{j}^2}{\mathcal{R}_2^-\eta_{j}  + h_0}  \\
++ \dfrac{u_{j}^2 \left[\mathcal{R}_2^-\right]^2 - \frac{g}{h_0} \left[\mathcal{R}_2^-\right]^2 \eta_{j}^2 - 2 g \mathcal{R}_2^- \eta_{j} - gh_0}{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0} } \left [ \mathcal{R}_2^+\eta_j - \mathcal{R}_2^-\eta_j\right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j + \sqrt{h_0^3}\frac{\mathcal{R}_2^-  - \mathcal{R}_2^+}{2 \sqrt{g}} \dfrac{\mathcal{R}_2^- u_{j}^2}{\mathcal{R}_2^-\eta_{j}  + h_0}  \\
++ \dfrac{u_{j}^2 \left[\mathcal{R}_2^-\right]^2 - gh_0 - \frac{g}{h_0} \left[\mathcal{R}_2^-\right]^2 \eta_{j}^2 - 2 g \mathcal{R}_2^- \eta_{j} }{2\sqrt{\frac{g}{h_0}} \mathcal{R}_2^-\eta_{j}  + 2\sqrt{gh_0} } \left [ \mathcal{R}_2^+\eta_j - \mathcal{R}_2^-\eta_j\right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j + \sqrt{h_0^3}\frac{\mathcal{R}_2^-  - \mathcal{R}_2^+}{2 \sqrt{g}} \dfrac{\mathcal{R}_2^- u_{j}^2}{\mathcal{R}_2^-\eta_{j}  + h_0}  \\
++ \dfrac{\sqrt{h_0}}{2\sqrt{g}} \dfrac{u_{j}^2 \left[\mathcal{R}_2^-\right]^2 - gh_0 - \frac{g}{h_0} \left[\mathcal{R}_2^-\right]^2 \eta_{j}^2 - 2 g \mathcal{R}_2^- \eta_{j} }{ \mathcal{R}_2^-\eta_{j}  + h_0 } \left [ \mathcal{R}_2^+\eta_j - \mathcal{R}_2^-\eta_j\right ]
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j + \sqrt{h_0^3}\frac{\mathcal{R}_2^-  - \mathcal{R}_2^+}{2 \sqrt{g}} \dfrac{\mathcal{R}_2^- u_{j}^2}{\mathcal{R}_2^-\eta_{j}  + h_0}  \\
++ \left [ \mathcal{R}_2^+ - \mathcal{R}_2^-\right ] \dfrac{\sqrt{h_0}}{2\sqrt{g}} \dfrac{u_{j}^2 \left[\mathcal{R}_2^-\right]^2 - gh_0 - \frac{g}{h_0} \left[\mathcal{R}_2^-\right]^2 \eta_{j}^2 - 2 g \mathcal{R}_2^- \eta_{j} }{ \mathcal{R}_2^-\eta_{j}  + h_0 }  \eta_j
+\end{multline}
+
+Up to order $\epsilon$ we have
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j + \sqrt{h_0^3}\frac{\mathcal{R}_2^-  - \mathcal{R}_2^+}{2 \sqrt{g}} \dfrac{\mathcal{R}_2^- u_{j}^2}{\mathcal{R}_2^-\eta_{j}  + h_0}  \\
++ \left [ \mathcal{R}_2^+ - \mathcal{R}_2^-\right ] \dfrac{\sqrt{h_0}}{2\sqrt{g}} \dfrac{ - gh_0 - 2 g \mathcal{R}_2^- \eta_{j} }{ \mathcal{R}_2^-\eta_{j}  + h_0 }  \eta_j
+\end{multline}
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j + \sqrt{h_0^3}\frac{\mathcal{R}_2^-  - \mathcal{R}_2^+}{2 \sqrt{g}} \dfrac{\mathcal{R}_2^- u_{j}^2}{\mathcal{R}_2^-\eta_{j}  + h_0}  \\
+- \left [ \mathcal{R}_2^+ - \mathcal{R}_2^-\right ] \dfrac{\sqrt{gh_0}}{2} \dfrac{2\mathcal{R}_2^- \eta_{j} + h_0 }{ \mathcal{R}_2^-\eta_{j}  + h_0 }  \eta_j
+\end{multline}
+
+So whats left as two probelms are 
+\[\dfrac{\mathcal{R}_2^- u_{j}^2}{\mathcal{R}_2^-\eta_{j}  + h_0}\]
+and
+\[\dfrac{2\mathcal{R}_2^- \eta_{j} + h_0 }{ \mathcal{R}_2^-\eta_{j}  + h_0 }\]
+
+We can again make use of Taylor expansions to get terms up to order $\epsilon$
+
+\[\dfrac{2\mathcal{R}_2^- \eta_{j} + h_0 }{ \mathcal{R}_2^-\eta_{j}  + h_0 } = 1 + \frac{\mathcal{R}_2^- \eta_{j}}{h_0}\]
+
+\[\dfrac{\mathcal{R}_2^- u_{j}^2}{\mathcal{R}_2^-\eta_{j}  + h_0} = \mathcal{R}_2^- u_{j}^2\dfrac{1}{\mathcal{R}_2^-\eta_{j}  + h_0}\]
+
+none of the terms in the taylor expansion of this are of order $\epsilon$ so we have that
+
+\begin{multline}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j  \\
+- \left [ \mathcal{R}_2^+ - \mathcal{R}_2^-\right ]\left[1 + \frac{\mathcal{R}_2^- \eta_{j}}{h_0}\right] \eta_j
+\end{multline}
+
+retaining only $\epsilon$ terms
+
+\begin{gather}
+F_{j+\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_j 
+- \left [ \mathcal{R}_2^+ - \mathcal{R}_2^-\right ] \eta_j
+\end{gather}
+
+We will use the following notation
+\begin{gather}
+\mathcal{F}_2^{(\eta,u)} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}
+\end{gather}
+
+\begin{gather}
+\mathcal{F}_2^{(\eta,\eta)} = 
+- \left [ \mathcal{R}_2^+ - \mathcal{R}_2^-\right ]
+\end{gather}
+
+So
+\begin{gather}
+F_{j+\frac{1}{2}} = \mathcal{F}_2^{(\eta,u)}u_j 
+- \mathcal{F}_2^{(\eta,\eta)} \eta_j
+\end{gather}
+
+
+We can do a shift to get that 
+
+\begin{gather}
+F_{j-\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2}u_{j-1} 
+- \left [ \mathcal{R}_2^+ - \mathcal{R}_2^-\right ] \eta_{j-1}
+\end{gather}
+\begin{gather}
+F_{j-\frac{1}{2}} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{h_0}{2} e^{-ik\Delta x}u_{j} 
+- \left [ \mathcal{R}_2^+ - \mathcal{R}_2^-\right ] e^{-ik\Delta x}\eta_{j}
+\end{gather}
+
+\begin{gather}
+F_{j-\frac{1}{2}} = e^{-ik\Delta x} F_{j+\frac{1}{2}}
+\end{gather}
+
+So we have that
+\[iv\eta_j + \frac{1}{\Delta x}\left[\left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(\eta,u)}u_j 
++  \left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(\eta,\eta)} \eta_j\right] = 0\]
+
+Now we to deal with, since G is just a coefficient times u
+
+\[ \left(G\right)_t  + gh \eta_x  = 0\]
+
+\[ ivG_j  + gh \eta_x  = 0\]
+
+Similar to the above process we get
+\begin{gather}
+\mathcal{F}_2^{(G,\eta)} = \left( \mathcal{R}_2^-  - \mathcal{R}_2^+ \right) \frac{gh_0}{2}
+\end{gather}
+
+\begin{gather}
+\mathcal{F}_2^{(G,u)} = 
+- \left [ \mathcal{R}_2^+ - \mathcal{R}_2^-\right ] \mathcal{G}_2
+\end{gather}
+
+So we get that
+\[iv\mathcal{G}_2u_j + \frac{1}{\Delta x}\left[\left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(G,u)}u_j 
++  \left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(G,\eta)} \eta_j\right] = 0\]
+
+and 
+
+\[iv\eta_j + \frac{1}{\Delta x}\left[\left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(\eta,u)}u_j 
++  \left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(\eta,\eta)} \eta_j\right] = 0\]
+
+So we get
+
+\[ \left[\begin{array}{c c}
+iv + \frac{1}{\Delta x} \left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(\eta,\eta)}  & \frac{1}{\Delta x} \left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(\eta,u)}\\
+\frac{1}{\Delta x} \left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(G,\eta)} &
+iv\mathcal{G} + \frac{1}{\Delta x} \left(1 - e^{-ik\Delta x} \right)\mathcal{F}_2^{(G,u)} 
+\end{array} \right] 
+\left[\begin{array}{c}
+\eta_j \\
+u_j
+\end{array} \right] = 0\]
+
+lets use $\mathcal{D} = \left(1 - e^{-ik\Delta x} \right)$ so we have
+
+\[ \left[\begin{array}{c c}
+iv + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(\eta,\eta)}  & \frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(\eta,u)}\\
+\frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(G,\eta)} &
+iv\mathcal{G} + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(G,u)} 
+\end{array} \right] 
+\left[\begin{array}{c}
+\eta_j \\
+u_j
+\end{array} \right] = 0\]
+
+we get a nontrivial solution if 
+\[\left[iv + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(\eta,\eta)}\right]\left[iv\mathcal{G} + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(G,u)}\right] - \left[\frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(\eta,u)}\right]\left[\frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(G,\eta)} \right] = 0\]
+
+\[\left[iv + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(\eta,\eta)}\right]\left[iv\mathcal{G} + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(G,u)}\right] - \frac{1}{\Delta x^2} \mathcal{D}^2\mathcal{F}_2^{(\eta,u)}\mathcal{F}_2^{(G,\eta)} = 0\]
+
+\[-v^2\mathcal{G} +iv\frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(G,u)} + iv\mathcal{G}\frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(\eta,\eta)} + \frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(\eta,\eta)}\frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(G,u)} - \frac{1}{\Delta x^2} \mathcal{D}^2\mathcal{F}_2^{(\eta,u)}\mathcal{F}_2^{(G,\eta)} = 0\]
+
+\[- \mathcal{G}v^2 +\left(i\frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(G,u)} + i\mathcal{G}\frac{1}{\Delta x} \mathcal{D}\mathcal{F}_2^{(\eta,\eta)}\right)v + \frac{1}{\Delta x^2} \mathcal{D} ^2 \left(\mathcal{F}_2^{(\eta,\eta)}\mathcal{F}_2^{(G,u)} - \mathcal{F}_2^{(\eta,u)}\mathcal{F}_2^{(G,\eta)}\right) = 0\]
+
+
+\end{document}

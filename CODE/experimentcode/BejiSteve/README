@@ -1,0 +1,45 @@
+Directories:
+
+    . : Contains the folder "94 Paper CSV" and the files "Initial and Boundary Conditions.py", and "Benji 94 Explanation.pdf" "README"
+        94 Paper CSV : contains files "sh.csv" and "sl.csv"
+
+    
+Files:
+    
+    Benji 94 Explanation.pdf:
+
+                Description:
+                            File that Benji provided along side his data to explain it, I followed the bed definition from this file
+
+    
+    Initial and Boundary Conditions.py : 
+        
+                Description:
+                            Python files that has the functions I use to define the initial conditions and calculate boundary conditions.
+
+                Possible Issue:
+                            These definitions are very cell centric, for instance I defined the boundary conditions to be at some ghost cell centre
+                            and I chose dx so that the cell centres give the proper bed profile and water depth. Also the wave gauges are at cell centres in this set up.
+                            Moving to for instance having the boundary conditions at a cell edge might require more thought to make sure the other things line up properly.
+
+
+    README: This one
+
+
+
+----
+
+
+    sh.csv:
+
+                Description:
+                            Wave gauage data for the high frequency sinusoidal wave experiment from Benji 94 experiment
+
+
+    sl.csv:
+
+                Description:
+                            Wave gauage data for the low frequency sinusoidal wave experiment from Benji 94 experiment
+
+    
+         
