@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Energy in DB}
+
+\[\mathcal{H} (t) = \frac{1}{2}\int_{-\infty}^{\infty} hu^2 + gh^2 + \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2\, dx \]
+
+We split it so that 
+
+\[\mathcal{H}_1 (t) = \int_{-\infty}^{\infty} hu^2 \, dx\]
+
+
+\[\mathcal{H}_2 (t) = \int_{-\infty}^{\infty} gh^2 \, dx\]
+
+\[\mathcal{H}_3 (t) = \int_{-\infty}^{\infty}\frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2\, dx\]
+
+For the Soliton at $t = 0 $
+
+\[h(x,0) = a_0 + a_1 sech^2\left(\kappa x\right)\]
+\[u(x,0) = c\left(1 - \frac{a_0}{a_0 + a_1 sech^2\left(\kappa x\right)}\right)\]
+\[u(x,0) = c\left(1 - \frac{a_0}{h}\right)\]
+\[u_x(x,0) = c\left(1 - \frac{a_0}{h}\right) = ac \frac{h_x}{h^2}\]
+
+
+\begin{gather}
+\kappa = \dfrac{\sqrt{3a_1}}{2a_0 \sqrt{ a_0 + a_1}}
+\end{gather}
+and
+\begin{gather}
+c = \sqrt{g \left(a_0 + a_1\right)}
+\end{gather}
+
+Integrating from $x_0$ to $x_1$
+Potential
+\[\mathcal{H}_2 (t) = g\int_{x_0}^{x_1} \left(a_0 + a_1 sech^2\left(\kappa x\right) \right)^2 \, dx\]
+
+\[\mathcal{H}_2 (t) = g\int_{x_0}^{x_1} a_0^2 + 2a_0a_1 sech^2\left(\kappa x\right) + a_1^2 sech^4\left(\kappa x\right)\, dx\]
+
+\[\mathcal{H}_2 (t) = g\left( a_0^2 \left(x_1 - x_0\right) +2a_0a_1 \left[\frac{\tanh\left(\kappa x\right)}{\kappa}\right]_{x_0}^{x_1} + a_1^2\int_{x_0}^{x_1} sech^4\left(\kappa x\right)\, dx \right)\]
+
+\[\mathcal{H}_2 (t) = g\left( a_0^2 \left(x_1 - x_0\right) +2a_0a_1 \left[\frac{\tanh\left(\kappa x\right)}{\kappa}\right]_{x_0}^{x_1} + a_1^2\left[\frac{\tanh\left(\kappa x\right) \left(sech^2\left(\kappa x\right) + 2\right)}{3\kappa}\right]_{x_0}^{x_1} \right)\]
+
+ Momentum
+\[\mathcal{H}_1 (t) = \int_{x_0}^{x_1} hc^2\left(1 - \frac{a_0}{h}\right)^2 \, dx\]
+
+\[\mathcal{H}_1 (t) = \int_{x_0}^{x_1} hc^2\left(1 -\frac{2a_0}{h}  + \frac{a_0^2}{h^2}\right) \, dx\]
+
+\[\mathcal{H}_1 (t) = \int_{x_0}^{x_1} c^2\left(h -2a_0 + \frac{a_0^2}{h}\right) \, dx\]
+
+\[\mathcal{H}_1 (t) = \int_{x_0}^{x_1} c^2\left(a_0 + a_1 sech^2\left(\kappa x\right) - 2a_0  + \frac{a_0^2}{a_0 + a_1 sech^2\left(\kappa x\right)}\right) \, dx\]
+
+\[\mathcal{H}_1 (t) = \int_{x_0}^{x_1} c^2\left(a_1 sech^2\left(\kappa x\right) - a_0  + \frac{a_0^2}{a_0 + a_1 sech^2\left(\kappa x\right)}\right) \, dx\]
+
+\[\mathcal{H}_1 (t) = c^2\left(a_1 \left[\frac{\tanh\left(\kappa x\right)}{\kappa}\right]_{x_0}^{x_1} - a_0(x_1 - x_0)  + a_0^2\int_{x_0}^{x_1}\frac{1}{a_0 + a_1 sech^2\left(\kappa x\right)}\right) \, dx\]
+
+Momentum Vertical
+
+\[\mathcal{H}_3 (t) = \int_{-\infty}^{\infty}\frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2\, dx\]
+
+
+
+\end{document}

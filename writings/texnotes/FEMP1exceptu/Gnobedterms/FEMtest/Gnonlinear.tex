@@ -55,6 +55,18 @@ $dx = d\frac{\xi}{2}\Delta x$ , $\frac{dx}{d\xi} = \frac{\Delta x}{2}$ , $\frac{
 \end{equation}
 
 \begin{equation}
+\phi'_{j} =  - 2\xi
+\end{equation}
+
+\begin{equation}
+\phi'_{j - 1/2} = \frac{1}{2}\left(2\xi - 1\right)
+\end{equation}
+
+\begin{equation}
+\phi'_{j + 1/2} = \frac{1}{2}\left(2\xi + 1\right)
+\end{equation}
+
+\begin{equation}
 w^+_{j - 1/2} = \frac{1}{2}\left(1 - \xi\right)
 \end{equation}
 
@@ -153,7 +165,46 @@ So
   4 h^-_{j+1/2} u_{j}  + h^-_{j+1/2} u_{j+1/2}\right]  
 \end{multline*}
 
-Lastly we have 
+\subsection{Third Integral}
+Lastly we have
+
+\begin{multline}
+\int_{x_{j-1/2}}^{x_{j+1/2}} \frac{h^3}{3}u_{x}{(\phi_{j})}_{x}dx = \frac{1}{3\Delta x}\int_{-1}^{1} {h^3}u_{\xi}{(\phi_{j})}_{\xi}  d\xi = \frac{1}{3\Delta x}\int_{-1}^{1} h^3u_{\xi}{(\phi_{j})}_{\xi}  d\xi 
+\end{multline}
+
+\begin{multline}
+\int_{-1}^{1} h^3u_{\xi}{(\phi_{j})}_{\xi}  d\xi  = \int_{-1}^{1} \left(h^+_{j-1/2} w^+_{j-1/2} +  h^-_{j+1/2} w^-_{j+1/2} \right)^3 \times\\ \left(u_{j-1/2}\phi'_{j-1/2} + u_{j}\phi'_{j} + u_{j+1/2}\phi'_{j+1/2}\right)(\phi'_{j}) d\xi 
+\end{multline}
+
+\begin{multline}
+\int_{-1}^{1} \bigg[\left(h^+_{j-1/2} w^+_{j-1/2}\right)^3 + 3\left(h^+_{j-1/2} w^+_{j-1/2}\right)^2\left(h^-_{j+1/2} w^-_{j+1/2}\right) + 3\left(h^+_{j-1/2} w^+_{j-1/2}\right)\left(h^-_{j+1/2} w^-_{j+1/2}\right)^2  \\+  \left(h^-_{j+1/2} w^-_{j+1/2}\right)^3 \bigg] \times\\ \left(u_{j-1/2}\phi'_{j-1/2}\phi'_{j} + u_{j}\phi'_{j}\phi'_{j} + u_{j+1/2}\phi'_{j+1/2}\phi'_{j}\right) d\xi 
+\end{multline}
+
+\begin{multline}
+\int_{-1}^{1} \bigg[\left(h^+_{j-1/2} w^+_{j-1/2}\right)^3 + 3\left(h^+_{j-1/2} w^+_{j-1/2}\right)^2\left(h^-_{j+1/2} w^-_{j+1/2}\right) + 3\left(h^+_{j-1/2} w^+_{j-1/2}\right)\left(h^-_{j+1/2} w^-_{j+1/2}\right)^2  \\+  \left(h^-_{j+1/2} w^-_{j+1/2}\right)^3 \bigg]u_{j-1/2}\phi'_{j-1/2}\phi'_{j} \\ +
+\bigg[\left(h^+_{j-1/2} w^+_{j-1/2}\right)^3 + 3\left(h^+_{j-1/2} w^+_{j-1/2}\right)^2\left(h^-_{j+1/2} w^-_{j+1/2}\right) + 3\left(h^+_{j-1/2} w^+_{j-1/2}\right)\left(h^-_{j+1/2} w^-_{j+1/2}\right)^2  \\+  \left(h^-_{j+1/2} w^-_{j+1/2}\right)^3 \bigg]u_{j}\phi'_{j}\phi'_{j} \\ +
+\bigg[\left(h^+_{j-1/2} w^+_{j-1/2}\right)^3 + 3\left(h^+_{j-1/2} w^+_{j-1/2}\right)^2\left(h^-_{j+1/2} w^-_{j+1/2}\right) + 3\left(h^+_{j-1/2} w^+_{j-1/2}\right)\left(h^-_{j+1/2} w^-_{j+1/2}\right)^2  \\+  \left(h^-_{j+1/2} w^-_{j+1/2}\right)^3 \bigg]u_{j+1/2}\phi'_{j+1/2}\phi'_{j} d\xi
+\end{multline}
+
+\begin{multline}
+\int_{-1}^{1} u_{j-1/2}\left(h^+_{j-1/2}\right)^3 \left(w^+_{j-1/2}\right)^3 \phi'_{j-1/2}\phi'_{j} \\
++ 3u_{j-1/2}\left(h^+_{j-1/2}\right)^2 h^-_{j+1/2} \left(w^+_{j-1/2}\right)^2\left( w^-_{j+1/2}\right)\phi'_{j-1/2}\phi'_{j} \\
++ 3u_{j-1/2} h^+_{j-1/2}\left(h^-_{j+1/2}\right)^2  w^+_{j-1/2}\left(w^-_{j+1/2}\right)^2\phi'_{j-1/2}\phi'_{j}  \\
++  u_{j-1/2}\left(h^-_{j+1/2}\right)^3 \left(w^-_{j+1/2}\right)^3 \phi'_{j-1/2}\phi'_{j} \\ +
+u_{j}\left(h^+_{j-1/2}\right)^3 \left(w^+_{j-1/2}\right)^3 \phi'_{j}\phi'_{j} \\
++ 3u_{j}\left(h^+_{j-1/2}\right)^2 h^-_{j+1/2} \left(w^+_{j-1/2}\right)^2\left( w^-_{j+1/2}\right)\phi'_{j}\phi'_{j} \\
++ 3u_{j} h^+_{j-1/2}\left(h^-_{j+1/2}\right)^2  w^+_{j-1/2}\left(w^-_{j+1/2}\right)^2\phi'_{j}\phi'_{j}  \\
++  u_{j}\left(h^-_{j+1/2}\right)^3 \left(w^-_{j+1/2}\right)^3 \phi'_{j}\phi'_{j} \\ +
+u_{j+1/2}\left(h^+_{j-1/2}\right)^3 \left(w^+_{j-1/2}\right)^3 \phi'_{j+1/2}\phi'_{j} \\
++ 3u_{j+1/2}\left(h^+_{j-1/2}\right)^2 h^-_{j+1/2} \left(w^+_{j-1/2}\right)^2\left( w^-_{j+1/2}\right)\phi'_{j+1/2}\phi'_{j} \\
++ 3u_{j+1/2} h^+_{j-1/2}\left(h^-_{j+1/2}\right)^2  w^+_{j-1/2}\left(w^-_{j+1/2}\right)^2\phi'_{j+1/2}\phi'_{j}  \\
++  u_{j+1/2}\left(h^-_{j+1/2}\right)^3 \left(w^-_{j+1/2}\right)^3 \phi'_{j+1/2}\phi'_{j}  d\xi
+\end{multline}
+
+\[\int_{-1}^{1} \left(w^+_{j-1/2}\right)^3 \phi'_{j-1/2}\phi'_{j} d\xi\]
+
+etc (print out reference for this)
+ 
 
 
 
@@ -166,6 +217,10 @@ In this section we focus on the test function $v =\phi_{j + 1/2}$ and thus we fo
 is 
 
 \[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} G\phi_{j+ 1/2} dx = \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}}  uh \phi_{j + 1/2} dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{h^3}{3}u_{x}{(\phi_{j+ 1/2})}_{x}dx\]
+
+For our interval
+
+\section{$\phi_{j -  1/2} $}
 
 
 \section{Combination}

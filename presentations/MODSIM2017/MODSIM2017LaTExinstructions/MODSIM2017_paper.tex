@@ -2,17 +2,25 @@
 \usepackage{modsim}
 \usepackage{times}
 \usepackage{psfrag}
+\usepackage{pgfplots}
  \usepackage{pstricks}
+ \usepackage{tikz}
  %\usepackage{auto-pst-pdf}
 \usepackage{pstool}
 \usepackage{natbib} %The three packages modsim, times and natbib are required.
 \usepackage{amsmath, amssymb, amsthm} %Also recommend the standard AMS LaTeX maths packages.
+\usepackage{changes}
+
+\setlength{\intextsep}{5pt} % Vertical space above & below [h] floats
+\setlength{\textfloatsep}{5pt} % Vertical space below (above) [t] ([b]) floats
+\setlength{\abovecaptionskip}{5pt}
+\setlength{\belowcaptionskip}{5pt}
 
 \newcommand\solidrule[1][0.25cm]{\rule[0.5ex]{#1}{1pt}}
 \newcommand\dashedrule{\mbox{%
 		\solidrule[2mm]\hspace{2mm}\solidrule[2mm]}}
 \pagestyle{MODSIMheadings} %Calling the MODSIM Headings format
-\MODSIMhead{J. Pitt {\it et al.}, Importance of Dispersion for Shoaling Waves} %This is the content of the headings in all pages (except the first page). The format should be author, title of paper. If the title is too long, then use ... at the end. If more than two authors, then please use the "et al." format with et al. in italic, for example A. Author {\it et al.}, Title of the paper.
+\MODSIMhead{J. Pitt {\it et al.}, Dispersion and Shoaling Waves} %This is the content of the headings in all pages (except the first page). The format should be author, title of paper. If the title is too long, then use ... at the end. If more than two authors, then please use the "et al." format with et al. in italic, for example A. Author {\it et al.}, Title of the paper.
 
 % Define any other command or required packages below:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -55,6 +63,9 @@
 \renewcommand{\fnum@table}[1]{\textbf{\tablename~\thetable}. }
 \makeatother
 
+\definechangesauthor[color=orange]{CZ}
+\setremarkmarkup{(#2)}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -70,15 +81,19 @@
 
 %Keywords should be separated by commas and listed in Sentence case (first keyword with capital first letter and remaining keywords in lower case).
 \begin{keyword}
-	Tsunamis, shoaling waves, dispersion, models
+	Tsunamis, shoaling waves, dispersion, models, shallow water wave equations
 
 \end{keyword}
 
 \begin{abstract}
-	Flooding has been responsible for some of the deadliest natural disasters in human history because, our densest areas of population occur along rivers and/or close to the coast. The worst of these in living memory was the 2004 Indian Ocean tsunami, which sparked much of the current research we do into inundation at the ANU via the ANUGA software,which was developed in collaboration with Geoscience Australia. The interaction of waves with bathymetry and particularly the shoaling of waves plays a central role in modelling the inundation caused by a tsunami. Current industrial models for tsunami inundation such as ANUGA utilize the non-dispersive shallow water wave equations. Current research into tsunami inundation includes building numerical models based on dispersive equations, such as the Serre equations. Dispersive equations allow waves of different frequencies to travel at different speeds thereby capturing
-	more fluid behaviour. They are theoretically a better choice as the basis for inundation models. However, these methods are computationally expensive and the detailed behaviour is not always significant. When the water depth is large compared to the wave height, the propagation of a wave is not strongly
-	influenced by different frequency speeds associated with dispersion waves. In this case the numerical results for the non-dispersive and dispersive equations are similar. The behaviour of the waves in deep water is well understood, this is not the case for the behaviour of waves in the nearshore. We investigate these waves by numerically modelling experimental data of the propagation of waves over a submerged trapezoidal bar using both the non-dispersive 
-	shallow water wave equations and the dispersive Serre equations. Comparing the results from these simulations provides an opportunity to assess the importance of dispersion for the propagation of waves over a submerged bar and shoaling waves on a linear beach.
+A tsunami has four main stages of its evolution; in the first stage the tsunami is generated, most commonly by seismic activity near subduction zones. The second stage is the tsunamis propagation through the ocean far from the coast, where variation in bathymetry is slight and gradual. The third stage is the shoaling and interaction of the tsunami with bathymetry as it approaches the coastline. Finally the tsunami reaches and inundates the shore. For our purposes the hydrodynamic models we are interested in deal with the final three stages of the evolution of a tsunami.
+
+The propagation of a tsunami with wavelength $\lambda$ through water that is $H$ deep is well understood when $\lambda / H \le 1/ 20$, which we call shallow water as noted by \cite{Sorenson-2006}. The wavelengths for tsunamis range from a few to hundreds of kilometres, while the maximum water depth is $11km$ at the Marianas trench, so that most tsunamis occur in shallow water. This stage of tsunami behaviour is adequately modelled using the shallow water wave equations. Current research into tsunamis focuses around more complex approximations to the Euler equations for the third and fourth stages. In this paper we focused on the Serre equations as they are considered a very good model for fluid behaviour up to the shoreline, and they reduce to the shallow water wave equations for large wavelengths. 
+
+Although more complicated, the Serre equations provide a better description of the fluid behaviour than the shallow water wave equations and are therefore more computationally expensive to solve numerically. In particular for the methods of this work, we find that the Serre equations have a run-time $50\%$ longer than our equivalent finite volume method for the shallow water wave equations in the one dimensional case. To simulate tsunamis as efficiently as possible it is important to know when using the more complicated Serre equations leads to more accurate predictions of the evolution of a tsunami than the shallow water wave equations. To investigate this we have numerically simulated a laboratory experiment of periodic waves propagating over a submerged bar, and the propagation of a small amplitude wave up a gradual linear slope using both the Serre and the shallow water wave equations.
+
+The results of these simulations demonstrated that the Serre and shallow water wave equations produce similar results for shoaling waves when the wavelength is large compared to the water depth. This is not surprising as this is the regime under which the shallow water wave equations are derived. However, outside this regime the shallow water wave equations are a poor model for wave shoaling and propagation, poorly approximating the shape and maximum height of waves. Furthermore we demonstrate that for steep waves generated by shoaling, the shallow water wave equations can underestimate the arrival time and amplitude of an incoming wave. These results suggest that for a tsunami it is sufficient to use the shallow water wave equations in stages two and some of stage three, even for large changes in bathymetry. Although dispersive equations such as the Serre equations are required to accurately capture fluid behaviour in stages three and four nearer to the coastline, particularly when wavelengths are short or waves are steep. Since the Serre equations represent only a moderate increase in run-times this suggests that our inundation models should be based on them.
+
 
 \end{abstract} %Abstract should NOT extend beyond the first page.
 
@@ -89,191 +104,110 @@
 %Serre equations
 %numerical methods
 
+The interaction of waves with bathymetry and particularly the shoaling of waves plays a central role in modelling the inundation caused by a tsunami. Current models for tsunami inundation such as ANUGA utilise the non-dispersive shallow water wave equations. Current research into tsunami inundation includes building numerical models based on dispersive equations, such as the Serre equations. The Serre equations allow for more detailed fluid behaviour such as dispersion, which is the process by which waves of different frequencies travel at different speeds. The Serre equations are considered by \cite{Bonneton-etal-2011-589} to be the most appropriate approximation to the Euler equations near the shoreline. The one-dimensional Serre equations for a depth of water $h(x,t)$ over a bed profile defined by $b(x)$ travelling at velocity $u(x,t)$ are given by \cite{Zoppou-etal-2017} as 
+
+\begin{subequations}\label{eq:Serre_nonconservative_form}
+	\begin{gather}
+	\dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+	\label{eq:Serre_continuity}
+	\end{gather}
+	and
+	\begin{gather}
+\frac{\partial{u} h }{\partial t} + \frac{\partial}{\partial x} \left({u}^2 h + \frac{gh^2}{2} + \frac{h^3}{3}  \Phi + \frac{h^2}{2}\Psi \right)   + \left(gh + \frac{h^2}{2}\Phi + h \Psi \right) \frac{\partial b}{\partial x} = 0
+	\label{eq:Serre_momentum}
+	\end{gather}
+	where
+	\begin{gather*}
+	\Phi = \left(\frac{\partial {u}}{\partial x} \right)^2 - {u}\frac{\partial^2 {u}}{\partial x^2} - \frac{\partial^2 {u}}{\partial x \partial t} \quad , \quad
+	\Psi = \frac{\partial {u}}{\partial t} \frac{\partial b}{\partial x} + {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} + {u}^2\frac{\partial^2 b}{\partial x^2}.
+	\end{gather*}	
+\end{subequations}
+
+Setting $\Phi = \Psi = 0$, corresponding to long wavelengths transforms the Serre equations into the shallow water wave equations. The additional $\Phi$ and $\Psi$ terms make the Serre equations more complex and therefore more computationally difficult to solve. However, the additional behaviour they allow for is not always significant, in particular when wavelengths $\lambda$ are long compared to the water depth $H$ such that $H / \lambda \le {1}/{20}$. In this paper we will investigate the impact of these extra terms by comparing the numerical solution of the Serre equations with the solution of the shallow water wave equations. To do this we will use a well-validated numerical method for the Serre equations by \cite{Zoppou-etal-2017} and the ANUGA software for the shallow water wave equations. We begin by simulating an experiment of \cite{Beji-Battjes-1994} where periodic waves travelled over a submerged bar, and then move to a more appropriate scenario for tsunamis, the propagation of a long wavelength, small amplitude solitary wave up a uniformly sloping beach.
 
 %--------------------------------------------------------------------------------
 \section{Periodic Wave Over a Submerged Bar}
 \label{Oscillatory Wave Over a Submerged Bar}
 %--------------------------------------------------------------------------------
-\cite{Beji-Battjes-1994} conducted a series of experiments where waves travel over a submerged trapezoidal bar. Their wave tank was $37.7$m in length, $0.8$m wide and $0.75$m high with a constant water stage of $0.4$m. The bed had the following profile; $(x,z_b) = [$($0$m,$0$m), ($6$m,$0$m), ($12$m,$0.3$m), ($14$m,$0.3$m), ($17$m,$0$m), ($18.95$m,$0$m), ($28.95$m,$0.4$m)$]$. Waves were generated by a wave maker located at $x=0$m, and were absorbed downstream by a $3$m long gravel beach, with a slope of $1:25$. There were seven wave gauges that recorded the depth of water over time at the following locations; WG1: $5.7$m, WG2: $10.5$m, WG3: $12.5$m, WG4: $13.5$m, WG5: $14.5$m, WG6: $15.7$m and WG7: $17.3$m. 
+In the series of experiments undertaken by \cite{Beji-Battjes-1994} periodic waves travel over a submerged trapezoidal bar. Their wave tank was $37.7$m in length, $0.8$m wide with walls $0.75$m high with a constant water surface sitting at $0.4$m. A diagram of this wave tank displaying the bed profile, water surface and locations of wave gauges is presented in Figure \ref{fig:WT}. Waves were generated by a wave maker located at $x=0$m, and were absorbed downstream by a gravel beach that extends to the edge of the wave tank. There were seven wave gauges that recorded the depth of water over time at the following locations; WG1: $5.7$m, WG2: $10.5$m, WG3: $12.5$m, WG4: $13.5$m, WG5: $14.5$m, WG6: $15.7$m and WG7: $17.3$m.
+%[how do you do this, B.C]
 
-In this paper we focus on one of these experiments that investigated periodic non-breaking sinusoidal waves with low frequency propagating over the bar. These waves had a period of $T = 2$s, a wavelength of $\lambda \approx 3.69$m and an amplitude of $A = 0.01$m. These waves travel without deformation towards the bar. The waves then steepen as they travel up the front slope of the bar due to shoaling. On the horizontal top of the bar higher harmonic waves are slowly released. This release of waves is then accelerated as the waves travel down slope. After the bar the waves reach an equilibrium and again begin to travel without deformation. Although bars do occur throughout the worlds oceans, in the context of tsunami modelling we are more interested in the behaviour of waves on the front slope region and the horizontal top of the bar and so we focus on wave gauges $1$ through $4$. 
+In this paper we focus on the propagation of periodic non-breaking sinusoidal waves with high frequency over the bar. These waves had a period of $T = 1.25$s, a wavelength of $\lambda = 2.05m$ and an amplitude of $A = 0.0125$m. These waves travelled without deformation towards the bar. The waves steepened as they travelled up the front slope of the bar due to shoaling. On the horizontal top of the bar higher frequency waves are slowly released. The release of these waves is accelerated as the waves travel leeward. 
 
-We have numerically simulated this experiment using a numerical method for the Serre equations by \cite{Zoppou-etal-2017} and the numerical modelling software ANUGA for the shallow water wave equations []. The results for the Serre equations are presented in Figure \ref{fig:Baji_1994-SL_simulation} and the results for the shallow water wave equations are presented in Figure []. 
+The numerical results for the Serre equations and the shallow water wave equations are presented in Figure \ref{fig:WG}. We present only wave gauges $2$ through $4$, as the deficiencies of the shallow water wave equations in simulating this experiment are already apparent by the $4^{th}$ wave gauge.
 
-\begin{figure}[htb]
+In these experiments the time series data from wave gauge $1$ for the water depth is used as the left boundary condition to simulate the incoming wave. Both models reproduce it precisely and we include it here as a reference for the incoming wave profile. It can be seen that the Serre equations reproduce the experiment results well. The shallow water wave equations results are poor for both the shape and speed of the waves. This is because the shallow water wave equations are appropriate when $H / \lambda \le 1 / 20$, which is not the case in these experiments as $0.4m / 2.05m \approx 1 / 5$ . Therefore an increase in the wavelength of the experiment should result in a better reproduction of the results by the shallow water wave equations. 
+
+In another experiment of \cite{Beji-Battjes-1994} the propagation of longer wavelength sinusoidal waves with a period of $T = 1.25$s, a wavelength of $\lambda = 3.69m$ and an amplitude of $A = 0.01$m over the same submerged bar was observed. The results for using the Serre equations and the shallow water wave equations to model this experiment are displayed in Figure \ref{fig:SLWG}. The shallow water wave equations model these waves better than the waves of the previous experiment because they are longer. Unfortunately $0.4m / 3.69m \approx 1 / 9$, so these waves were still too short to be appropriate for the shallow water wave equations, and so the results are inaccurate.
+
+This experiment is specifically designed to study dispersive effects, and so the failure of the shallow water wave equations is not surprising. However, the inaccuracy of the shallow water wave equations was larger than anticipated. This demonstrates that dispersion can be a significant factor in the shoaling of waves, with large differences between the simulations using the Serre and shallow water wave equations.
+%
+\begin{figure}[]
+	\centering
+	\includegraphics{WT.pdf}
+	\caption{Wave tank diagram with wave gauges marked by number showing the water surface ({\color{blue} \solidrule}) and the bed profile ({\color{green!60!black} \solidrule}) .}
+	\label{fig:WT}
+\end{figure}
+%
+\begin{figure}
 	\centering
 	\begin{tabular}{ccc}
-		\begin{psfrags}%
-			\psfragscanon%
-			%
-			% text strings:
-			\psfrag{s03}[t][t][2.0]{\color[rgb]{0,0,0}\setlength{\tabcolsep}{0pt}\begin{tabular}{c}$t$(s)\end{tabular}}%
-			\psfrag{s04}[b][b][2.0]{\color[rgb]{0,0,0}\setlength{\tabcolsep}{0pt}\begin{tabular}{c}$h$(cm)\end{tabular}}%
-			%
-			% xticklabels:
-			\psfrag{x01}[t][t][1.5]{50}%
-			\psfrag{x02}[t][t][1.5]{51}%
-			\psfrag{x03}[t][t][1.5]{52}%
-			\psfrag{x04}[t][t][1.5]{53}%
-			\psfrag{x05}[t][t][1.5]{54}%
-			\psfrag{x06}[t][t][1.5]{55}%
-			\psfrag{x07}[t][t][1.5]{56}%
-			\psfrag{x08}[t][t][1.5]{57}%
-			\psfrag{x09}[t][t][1.5]{58}%
-			%
-			% yticklabels:
-			\psfrag{v01}[r][r][1.5]{-2}%
-			\psfrag{v02}[r][r][1.5]{-1}%
-			\psfrag{v03}[r][r][1.5]{ 0}%
-			\psfrag{v04}[r][r][1.5]{ 1}%
-			\psfrag{v05}[r][r][1.5]{ 2}%
-			\psfrag{v06}[r][r][1.5]{ 3}%
-			%
-			% Figure:
-			\resizebox{5cm}{!}{\includegraphics{Beji-1994-SL-WG1.eps}}%
-		\end{psfrags}%
-		& &
-		\begin{psfrags}%
-			\psfragscanon%
-			%
-			% text strings:
-			\psfrag{s03}[t][t][2.0]{\color[rgb]{0,0,0}\setlength{\tabcolsep}{0pt}\begin{tabular}{c}$t$(s)\end{tabular}}%
-			\psfrag{s04}[b][b][2.0]{\color[rgb]{0,0,0}\setlength{\tabcolsep}{0pt}\begin{tabular}{c}$h$(cm)\end{tabular}}%
-			%
-			% xticklabels:
-			\psfrag{x01}[t][t][1.5]{50}%
-			\psfrag{x02}[t][t][1.5]{51}%
-			\psfrag{x03}[t][t][1.5]{52}%
-			\psfrag{x04}[t][t][1.5]{53}%
-			\psfrag{x05}[t][t][1.5]{54}%
-			\psfrag{x06}[t][t][1.5]{55}%
-			\psfrag{x07}[t][t][1.5]{56}%
-			\psfrag{x08}[t][t][1.5]{57}%
-			\psfrag{x09}[t][t][1.5]{58}%
-			%
-			% yticklabels:
-			\psfrag{v01}[r][r][1.5]{-2}%
-			\psfrag{v02}[r][r][1.5]{-1}%
-			\psfrag{v03}[r][r][1.5]{ 0}%
-			\psfrag{v04}[r][r][1.5]{ 1}%
-			\psfrag{v05}[r][r][1.5]{ 2}%
-			\psfrag{v06}[r][r][1.5]{ 3}%
-			%
-			%
-			% Figure:
-			\resizebox{5cm}{!}{\includegraphics{Beji-1994-SL-WG2.eps}}%
-		\end{psfrags}%
-		\\
-		WG1 & & WG2  \\ \\
-		\begin{psfrags}%
-			\psfragscanon%
-			%
-			% text strings:
-			\psfrag{s03}[t][t][2.0]{\color[rgb]{0,0,0}\setlength{\tabcolsep}{0pt}\begin{tabular}{c}$t$(s)\end{tabular}}%
-			\psfrag{s04}[b][b][2.0]{\color[rgb]{0,0,0}\setlength{\tabcolsep}{0pt}\begin{tabular}{c}$h$(cm)\end{tabular}}%
-			%
-			% xticklabels:
-			\psfrag{x01}[t][t][1.5]{50}%
-			\psfrag{x02}[t][t][1.5]{51}%
-			\psfrag{x03}[t][t][1.5]{52}%
-			\psfrag{x04}[t][t][1.5]{53}%
-			\psfrag{x05}[t][t][1.5]{54}%
-			\psfrag{x06}[t][t][1.5]{55}%
-			\psfrag{x07}[t][t][1.5]{56}%
-			\psfrag{x08}[t][t][1.5]{57}%
-			\psfrag{x09}[t][t][1.5]{58}%
-			%
-			% yticklabels:
-			\psfrag{v01}[r][r][1.5]{-2}%
-			\psfrag{v02}[r][r][1.5]{-1}%
-			\psfrag{v03}[r][r][1.5]{ 0}%
-			\psfrag{v04}[r][r][1.5]{ 1}%
-			\psfrag{v05}[r][r][1.5]{ 2}%
-			\psfrag{v06}[r][r][1.5]{ 3}%
-			%
-			%
-			% Figure:
-			\resizebox{5cm}{!}{\includegraphics{Beji-1994-SL-WG3.eps}}%
-		\end{psfrags}%
-		& &
-		\begin{psfrags}%
-			\psfragscanon%
-			%
-			% text strings:
-			\psfrag{s03}[t][t][2.0]{\color[rgb]{0,0,0}\setlength{\tabcolsep}{0pt}\begin{tabular}{c}$t$(s)\end{tabular}}%
-			\psfrag{s04}[b][b][2.0]{\color[rgb]{0,0,0}\setlength{\tabcolsep}{0pt}\begin{tabular}{c}$h$(cm)\end{tabular}}%
-			%
-			\psfrag{x01}[t][t][1.5]{50}%
-			\psfrag{x02}[t][t][1.5]{51}%
-			\psfrag{x03}[t][t][1.5]{52}%
-			\psfrag{x04}[t][t][1.5]{53}%
-			\psfrag{x05}[t][t][1.5]{54}%
-			\psfrag{x06}[t][t][1.5]{55}%
-			\psfrag{x07}[t][t][1.5]{56}%
-			\psfrag{x08}[t][t][1.5]{57}%
-			\psfrag{x09}[t][t][1.5]{58}%
-			%
-			% yticklabels:
-			\psfrag{v01}[r][r][1.5]{-2}%
-			\psfrag{v02}[r][r][1.5]{-1}%
-			\psfrag{v03}[r][r][1.5]{ 0}%
-			\psfrag{v04}[r][r][1.5]{ 1}%
-			\psfrag{v05}[r][r][1.5]{ 2}%
-			\psfrag{v06}[r][r][1.5]{ 3}%
-			%
-			%
-			% Figure:
-			\resizebox{5cm}{!}{\includegraphics{Beji-1994-SL-WG4.eps}}%
-		\end{psfrags}%
-		\\
-		WG3 & & WG4 \\ \\
-
-		\end{tabular}
-		\caption{Simulated and observed water surface at several gauges for a sinusoidal wave with period, $T = 2$s traveling over a submerged reef conducted by \cite{Beji-Battjes-1994}.}
-		\label{fig:Baji_1994-SL_simulation}
-	\end{figure}
-	
-
+		\resizebox{5cm}{!}{\includegraphics{WG1.pdf}} & & \resizebox{5cm}{!}{\includegraphics{WG2.pdf}}  \\
+		\hspace{5 mm} WG1 & & \hspace{5 mm}WG2 \\
+		\resizebox{5cm}{!}{\includegraphics{WG3.pdf}} && 
+		\resizebox{5cm}{!}{\includegraphics{WG4.pdf}}  \\
+		\hspace{5 mm} WG3 & & \hspace{5 mm} WG4 		
+	\end{tabular}
+	\caption{Wave height readings from various wave gauges from the experiment of \cite{Beji-Battjes-1994} ({\color{blue} \solidrule}) compared to a simulation of the experiment using the Serre equations ({\color{red} $\circ$}) and shallow water wave equations ({\color{green!60!black} $+$}).}
+	\label{fig:WG}
+\end{figure}
+%
+\begin{figure}
+	\centering
+	\begin{tabular}{ccc}
+		\resizebox{5cm}{!}{\includegraphics{SLWG1.pdf}} & & \resizebox{5cm}{!}{\includegraphics{SLWG2.pdf}}  \\
+		\hspace{5 mm} WG1 & & \hspace{5 mm}WG2 \\
+		\resizebox{5cm}{!}{\includegraphics{SLWG3.pdf}} && 
+		\resizebox{5cm}{!}{\includegraphics{SLWG4.pdf}}  \\
+		\hspace{5 mm} WG3 & & \hspace{5 mm} WG4 		
+	\end{tabular}
+	\caption{Wave height readings from various wave gauges from the experiment of \cite{Beji-Battjes-1994} ({\color{blue} \solidrule}) compared to a simulation of the experiment using the Serre equations ({\color{red} $\circ$}) and shallow water wave equations ({\color{green!60!black} $+$}).}
+	\label{fig:SLWG}
+\end{figure}
+%	
 %--------------------------------------------------------------------------------
 \section{Propagation of a Soliton over a Slope.}
 \label{Soliton up a Slope}
 %--------------------------------------------------------------------------------
-The propagation of periodic waves over a submerged bar found significant differences between the numerical solution of the Serre equations and the shallow water wave equations. These differences are pronounced due to the fact that the experimental set-up had a rather large ratio of wave amplitude to water depth, making the shallow water wave equations an inappropriate model for the experiment. To rectify this another numerical experiment was performed simulating the propagation of a small amplitude wave over a linear slope.
+The numerical results for the propagation of periodic waves over a submerged bar demonstrated large differences between the Serre and shallow water wave equations. These differences are pronounced due to the fact that the experimental set-up had waves with a wavelength that is smaller than $20$ times the water depth, which is not appropriate for the shallow water wave equations. To rectify this another numerical experiment was performed simulating the propagation of a long wavelength, small amplitude wave over a gradual uniformly sloped bed. This scenario is analogous to a tsunami propagating from a continental shelf to the shoreline.
 
-In this simulation the initial conditions are a soliton of the Serre equations [] with an amplitude $0.01m$ on top of quiescent water $1m$ deep. The stage is kept at a fixed $1m$ throughout the scenario but the bed profile changes and can be defined in the following way; $(x,z_b) = [$($-100$m,$0$m), ($100$m,$0$m), ($149.5$m,$0.99$m), ($250$m,$0.99$m)$]$. The initial conditions and the numerical solutions for both the Serre equations and the shallow water wave equations are plotted in Figure \ref{fig:allstructs}.
+In this simulation the initial conditions are the soliton of the Serre equations from \cite{El-etal-2006} with an amplitude of $0.01m$ on top of quiescent water $1m$ deep. A soliton of the Serre equations was used because it has an appropriate wavelength for the shallow water wave equation and it is a solitary wave like a tsunami. The water depth is kept at a fixed $1m$ throughout the scenario. The bed profile is defined in the following way; $(x,b) = [$($-100$m,$0$m), ($100$m,$0$m), ($149.5$m,$0.99$m), ($250$m,$0.99$m)$]$. The initial conditions and the numerical solutions for both the Serre equations and the shallow water wave equations are plotted in Figure \ref{fig:allstructs}.
 
-It can be seen that the behaviour of the numerical solutions of the Serre equations and the shallow water wave equations are very similar when the ratio of wave amplitude to water depth is small, with the soliton travelling over a large distance compared to the water depth with very little deformation for both equations after $t=20s$. For the Serre equations the soliton travels without deformation due to a balance between non-linearity and dispersion, for the shallow water wave equations it travels with little deformation because the effects of non-linearity are small as the wave amplitude is small. As the soliton progresses up the slope there is also very little difference between the numerical solutions throughout the shoaling process as can be seen at $t=40s$. It is only when the bed becomes flat after the slope that differences begin to arise although both numerical solutions are quite similar at $t=60s$ and $100s$. The main difference between the Serre equations and the shallow water wave equations is the emergence of undulations on top of the bore that has formed with these being physical oscillations that can be seen in well validated numerical solutions of the Serre equations[] and even the Euler equations []. These undulations have the effect of increasing the amplitude of the incoming bore while keeping the mean amplitude of the bore the same as the shallow water wave equations. We have also found that undular bores of the Serre equations travel slightly quicker than the bores of the shallow water wave equations []. This suggests for innundation problems that the Serre equations will produce slightly faster and higher incoming tsunami waves than the shallow water wave equations. 
+It can be seen that the behaviour of the numerical solutions of the Serre equations and the shallow water wave equations are very similar when the wavelength is large compared to the depth. There is very little wave deformation for both equations after $t=20s$. For the Serre equations the soliton travels without deformation due to a balance between non-linearity and dispersion. For the shallow water wave equations the soliton travels with little deformation because the effect of non-linearity is small, as the wave amplitude is small. This demonstrates the negligible effect of dispersion for long wavelength and small amplitude waves far from the coast. 
 
-
-  
-
-
-
+As the soliton progresses up the slope there is also very little difference between the numerical solutions throughout the shoaling process as can be seen at $t=40s$. It is only when the waves become steep after the slope ends that differences begin to arise although both numerical solutions are quite similar at $t=60s$ and at $100s$. This demonstrates that dispersive effects are negligible for shoaling in this case, but play a role for the steep waves generated by shoaling. The main difference between the Serre equations and the shallow water wave equations is the emergence of undulations trailing the bore that has formed. These oscillations have been observed experimentally by \cite{Chanson-H-2009-104} and numerically by \cite{Mitsotakis-etal-2014} for the Serre equations and even for the Euler equations by \cite{Mitsotakis-etal-2017}. These undulations oscillate around the bore of the shallow water wave equations, significantly increasing its maximum amplitude. These undulations cause an undular bore to travel slightly quicker than the bores of shallow water wave equations as demonstrated by \cite{Pitt-2017}. These results suggest that the shallow water wave equations will slightly underestimate the arrival time as well as the maximum amplitude of a steep advancing wave.
+%
 \begin{figure}
 	\centering
-	\resizebox{6cm}{!}{\includegraphics{solitonslopeSerre1.pdf}}
-	\\
-	\hspace{10 mm}$t= 0s$
-	\\ 
 	\begin{tabular}{ccc}
-		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre2.pdf}} & & \resizebox{5cm}{!}{\includegraphics{solitonslopeSerre3.pdf}}  \\
-		\hspace{5 mm} $t= 20s$ & & \hspace{5 mm}$t= 40s$ \\
-		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre4.pdf}} && 
-		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre5.pdf}}  \\
-		\hspace{5 mm} $t= 60s$ & & \hspace{5 mm} $t= 100s$ \\
-		
-		
+		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre1.pdf}} & & \resizebox{5cm}{!}{\includegraphics{solitonslopeSerre2.pdf}}  \\
+		\hspace{5 mm} $t= 0s$ & & \hspace{5 mm}$t= 20s$ \\
+		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre3.pdf}} && 
+		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre4.pdf}}  \\
+		\hspace{5 mm} $t= 40s$ & & \hspace{5 mm} $t= 60s$ \\
+		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre5.pdf}} && 
+		\resizebox{5cm}{!}{\includegraphics{SerreBore.pdf}}  \\
+		\hspace{5 mm} $t= 100s$ & & \hspace{5 mm} front of bore at $t= 100s$
 	\end{tabular}
-	\caption{The stage from the numerical solution for the Serre equations ({\color{blue} \solidrule}) and the shallow water wave equations ({\color{red} \solidrule}) for the soliton travelling over a slope, at different times. The initial conditions for both numerical models are also presented in terms of stage ({\color{black} \solidrule}) and bed profile ({\color{green!60!black} \solidrule}).}
+	\caption{The water profile from the numerical solution for the Serre equations ({\color{blue} \solidrule}) and the shallow water wave equations ({\color{red} \solidrule}) for the soliton travelling over a slope, at different times. The initial conditions for both numerical models are also presented in terms of stage ({\color{black} \solidrule}) and bed profile ({\color{green!60!black} \solidrule}).}
 	\label{fig:allstructs}
 \end{figure}
-
-
+%
 %--------------------------------------------------------------------------------
 \section{Conclusions}
 \label{Conclusions}
-%--------------------------------------------------------------------------------
-	
+Well-validated numerical methods for the Serre and shallow water wave equations were used to investigate the effect of dispersion on shoaling waves. It was demonstrated that when the water is shallow, dispersion is negligible during shoaling. Conversely it was demonstrated that when the water is not shallow dispersion play a significant role in the waves interaction with bathymetry. It was also demonstrated that dispersion plays a significant role when steep gradients in the water surface are present, increasing the maximum amplitude and the speed of an incoming wave, compared to the non-dispersive equations. For tsunamis this is important as shoaling waves steepen as they approach the coast line. These results demonstrate the need for the Serre equations to accurately capture fluid behaviour in the near shore and the adequacy of the shallow water wave equations for modelling long waves. Due to the Serre equations being only a moderate increase in computational expense we believe inundation models should be based on them.
+%--------------------------------------------------------------------------------	
 \bibliographystyle{chicago} %use chicago style of referencing.
 \bibliography{DamBreak}
 \end{document}

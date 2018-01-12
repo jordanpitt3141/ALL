@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\usepackage{lscape}
+\begin{document}
+
+\section{Basis Functions}
+
+\subsection{P2}
+
+\[\phi_{j-3/2} =  \left\lbrace \begin{array}{c c}
+\frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + \frac{1}{3}\right) & -1 \le \xi \le -\frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j-1} =  \left\lbrace \begin{array}{c c}
+-9\left(\xi + 1\right)\left(\xi + \frac{1}{3}\right) & -1 \le \xi \le -\frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j-1/2} =  \left\lbrace \begin{array}{c c}
+\frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) & -1 \le \xi \le -\frac{1}{3} \\
+\frac{9}{2}\xi\left(\xi - \frac{1}{3}\right)  & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j} =  \left\lbrace \begin{array}{c c}
+-9\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j+1/2} =  \left\lbrace \begin{array}{c c}
+\frac{9}{2}\xi\left(\xi + \frac{1}{3}\right)  & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+\frac{9}{2}\left(\xi -1 \right)\left(\xi -\frac{2}{3}\right) & \frac{1}{3} \le \xi \le 1 \\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j+3/2} =  \left\lbrace \begin{array}{c c}
+\frac{9}{2}\left(\xi - \frac{1}{3}\right)\left(\xi - \frac{2}{3}\right) & \frac{1}{3} \le \xi \le 1\\
+0 & else
+\end{array} \right. \]
+
+\subsection{P1}
+
+\[w_{j-3/2}^+ =  \left\lbrace \begin{array}{c c}
+-\frac{3}{2}\left(\xi + \frac{1}{3}\right) & -1 \le \xi \le -\frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j-1/2}^- =  \left\lbrace \begin{array}{c c}
+\frac{3}{2}\left(\xi + 1\right) & -1 \le \xi \le -\frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j-1/2}^+ =  \left\lbrace \begin{array}{c c}
+-\frac{3}{2}\left(\xi -  \frac{1}{3}\right) & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j+1/2}^- =  \left\lbrace \begin{array}{c c}
+\frac{3}{2}\left(\xi +  \frac{1}{3}\right) & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j+1/2}^+ =  \left\lbrace \begin{array}{c c}
+-\frac{3}{2}\left(\xi -1\right) & \frac{1}{3} \le \xi \le 1\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j+3/2}^- =  \left\lbrace \begin{array}{c c}
+\frac{3}{2}\left(\xi -\frac{1}{3}\right) & \frac{1}{3} \le \xi \le 1\\
+0 & else
+\end{array} \right. \]
+
+
+
+  
+ 
+
+\end{document}
+

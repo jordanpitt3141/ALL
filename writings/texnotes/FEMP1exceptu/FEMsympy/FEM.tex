@@ -1,0 +1,378 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\usepackage{pdflscape}
+\begin{document}
+\section{Finite Element}
+
+\[G  uh - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)\]
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+\[Gv = uhv  - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)v\]
+
+and then we integrate over the entire domain to get 
+\[\int_\Omega Gv dx = \int_\Omega uhv dx - \int_\Omega \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)vdx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega uhv dx + \int_\Omega\frac{h^3}{3}u_{x}v_xdx\]
+
+For $u$ we are going to use $x_{j - 1/2}$, $x_{j}$ and $x_{j + 1/2}$ as the nodes, which generate the basis functions $\phi_{j \pm 1/2}$ and $\phi_{j}$ , which for us will be the space of continuous quadratic elements. 
+
+While for $G$  and $h$ we will choose basis functions $w$ that are linear from $[x_{j-1/2}, x_{j+1/2}]$ but discontinuous at the edges.
+
+We are going to look at the entire area where the basis functions are non-zero for $\phi_{j-1/2}$ , $\phi_{j}$ and $\phi_{j+1/2}$. Which is the interval from $x_{j-3/2}$ to $x_{j+3/2}$. So we focus on the integrals on $[x_{j-3/2}, x_{j+3/2}]$ as 
+
+\[\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]\]
+
+\[\int_\Omega G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  dx = \int_\Omega uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] dx + \int_\Omega\frac{h^3}{3}u_{x}\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]_xdx\]
+
+is 
+
+\[\sum_{j}\int_{x_{j-3/2}}^{x_{j+3/2}}G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  dx = \sum_{j}\int_{x_{j-3/2}}^{x_{j+3/2}} uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] dx + \sum_{j}\int_{x_{j-3/2}}^{x_{j+3/2}}\frac{h^3}{3}u_{x}\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]_xdx\]
+
+
+$$x = \frac{3}{2}\xi\Delta x + x_{j}$$
+
+Taking the derivatives we see
+
+
+$dx = d\frac{3\xi}{2}\Delta x$ , $\frac{dx}{d\xi} = \frac{3\Delta x}{2}$ , $\frac{d\xi}{dx} = \frac{2}{3\Delta x}$ . \\ \\ We can describe the basis functions in the $\xi$ space, where they are non-zero
+
+\section{Integrals}
+
+\subsection{G}
+
+\begin{multline}
+\int_{x_{j-3/2}}^{x_{j+3/2}}G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  dx =  \frac{3 \Delta x}{2}\int_{-1}^{1} G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  d \xi
+\end{multline}
+
+We have 
+
+\[\int_{-1}^{1} G \phi_{j-1/2}d \xi = 0G^+ _{j - 3/2} + \frac{1}{9}G^- _{j - 1/2} + \frac{1}{9}G^+ _{j - 1/2} + 0 G^- _{j + 1/2} = \frac{1}{9}G^- _{j - 1/2} + \frac{1}{9}G^+ _{j - 1/2}\]
+
+\[\int_{-1}^{1} G \phi_{j}d \xi = \frac{2}{9}G^+ _{j - 1/2} +  \frac{2}{9}G^- _{j + 1/2} \]
+
+\[\int_{-1}^{1} G \phi_{j+1/2}d \xi = 0G^+ _{j - 1/2} + \frac{1}{9}G^- _{j + 1/2} + \frac{1}{9}G^+ _{j + 1/2} + 0G^- _{j + 3/2} = \frac{1}{9}G^- _{j + 1/2} + \frac{1}{9}G^+ _{j + 1/2} \]
+
+So 
+\begin{multline*}
+\int_{-1}^{1} G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  d \xi = \left[\begin{array}{c}  \frac{1}{9}G^- _{j - 1/2} + \frac{1}{9}G^+ _{j - 1/2} \\\frac{2}{9}G^+ _{j - 1/2} +  \frac{2}{9}G^- _{j + 1/2} \\\frac{1}{9}G^- _{j + 1/2} + \frac{1}{9}G^+ _{j + 1/2} \end{array}\right] 
+\end{multline*}
+
+So 
+\begin{multline}
+\int_{x_{j-3/2}}^{x_{j+3/2}}G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  dx =  \frac{3 \Delta x}{2} \left[\begin{array}{c}  \frac{1}{9}G^- _{j - 1/2} + \frac{1}{9}G^+ _{j - 1/2} \\\frac{2}{9}G^+ _{j - 1/2} +  \frac{2}{9}G^- _{j + 1/2} \\\frac{1}{9}G^- _{j + 1/2} + \frac{1}{9}G^+ _{j + 1/2} \end{array}\right] =  \frac{\Delta x}{6} \left[\begin{array}{c}  G^- _{j - 1/2} + G^+ _{j - 1/2} \\2G^+ _{j - 1/2} +  2G^- _{j + 1/2} \\G^- _{j + 1/2} + G^+ _{j + 1/2} \end{array}\right]
+\end{multline}
+
+\subsection{uh}
+
+\begin{multline}
+\int_{x_{j-3/2}}^{x_{j+3/2}} uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] dx = \frac{3 \Delta x}{2} \int_{-1}^{1} uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d \xi
+\end{multline}
+
+We have
+\begin{multline*}
+\int_{-1}^{1} uh \phi_{j-1/2}d \xi = \\
+\left(-\frac{1}{90}h^+ _{j - 3/2} - \frac{1}{90}h^- _{j - 1/2}  \right) u_{j - 3/2}\\
++ \left(0h^+ _{j - 3/2} + \frac{4}{90}h^- _{j - 1/2}  \right) u_{j - 1} \\
++ \left(\frac{1}{90}h^+ _{j - 3/2} + \frac{7}{90}h^- _{j - 1/2} + \frac{7}{90} h^+ _{j - 1/2} +   \frac{1}{90}h^- _{j + 1/2} \right) u_{j - 1/2} \\
++\left( \frac{4}{90} h^+ _{j - 1/2} + 0h^- _{j + 1/2}  \right) u_{j} \\ 
++\left( -\frac{1}{90}h^+ _{j - 1/2} -  \frac{1}{90}h^- _{j + 1/2} \right) u_{j + 1/2}
+\end{multline*}
+
+
+\begin{multline*}
+\int_{-1}^{1} uh \phi_{j}d \xi = \\
+\left( \frac{4}{90}h^+ _{j - 1/2} +  0h^- _{j + 1/2} \right) u_{j - 1/2} \\
++ \left(\frac{16}{90}h^+ _{j - 1/2} +  \frac{16}{90} h^- _{j + 1/2} \right) u_{j} \\
++ \left(0h^+ _{j - 1/2} +   \frac{4}{90}h^- _{j + 1/2} \right) u_{j + 1/2} \\= \\
+\left( \frac{4}{90}h^+ _{j - 1/2} \right) u_{j - 1/2} \\
++ \left(\frac{16}{90}h^+ _{j - 1/2} +  \frac{16}{90} h^- _{j + 1/2} \right) u_{j} \\
++ \left( \frac{4}{90}h^- _{j + 1/2} \right) u_{j + 1/2} 
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1} uh \phi_{j+1/2}d \xi =\\  \left(-\frac{1}{90}h^+ _{j - 1/2} -\frac{1}{90} h^- _{j + 1/2} \right) u_{j - 1/2}\\
++  \left(0h^+ _{j - 1/2} + \frac{4}{90}h^- _{j + 1/2} \right) u_{j}\\
++ \left(\frac{1}{90}h^+ _{j - 1/2} + \frac{7}{90}h^- _{j + 1/2} + \frac{7}{90}h^+ _{j + 1/2} + \frac{1}{90}h^- _{j + 3/2} \right) u_{j + 1/2} \\
++ \left(\frac{4}{90}h^+ _{j + 1/2} + 0h^- _{j + 3/2} \right) u_{j + 1}\\
++ \left( -\frac{1}{90}h^+ _{j + 1/2} -\frac{1}{90} h^- _{j + 3/2} \right) u_{j + 3/2} = \\ \left(-\frac{1}{90}h^+ _{j - 1/2} -\frac{1}{90} h^- _{j + 1/2} \right) u_{j - 1/2}\\
++  \left( \frac{4}{90}h^- _{j + 1/2} \right) u_{j}\\
++ \left(\frac{1}{90}h^+ _{j - 1/2} + \frac{7}{90}h^- _{j + 1/2} + \frac{7}{90}h^+ _{j + 1/2} + \frac{1}{90}h^- _{j + 3/2} \right) u_{j + 1/2} \\
++ \left(\frac{4}{90}h^+ _{j + 1/2} \right) u_{j + 1}\\
++ \left( -\frac{1}{90}h^+ _{j + 1/2} -\frac{1}{90} h^- _{j + 3/2} \right) u_{j + 3/2}
+\end{multline*}
+\newpage
+
+\begin{landscape}
+	\begin{multline*}
+	\int_{-1}^{1} uh \phi_{j-1/2}d \xi = \\
+	\left(-\frac{1}{90}h^+ _{j - 3/2} - \frac{1}{90}h^- _{j - 1/2}  \right) u_{j - 3/2}\\
+	+ \left(\frac{4}{90}h^- _{j - 1/2}  \right) u_{j - 1} \\
+	+ \left(\frac{1}{90}h^+ _{j - 3/2} + \frac{7}{90}h^- _{j - 1/2} + \frac{7}{90} h^+ _{j - 1/2} +   \frac{1}{90}h^- _{j + 1/2} \right) u_{j - 1/2} \\
+	+\left( \frac{4}{90} h^+ _{j - 1/2}   \right) u_{j} \\ 
+	+\left( -\frac{1}{90}h^+ _{j - 1/2} -  \frac{1}{90}h^- _{j + 1/2} \right) u_{j + 1/2} \\
+	= \frac{1}{90} \left[\begin{array}{c c c c c}
+	- h^+ _{j - 3/2} - h^- _{j - 1/2} & 0 & 0 &0 &0  \\
+	0 &4h^- _{j - 1/2} & 0 & 0 &0\\
+	0 & 0 &h^+ _{j - 3/2} + 7h^- _{j - 1/2} + 7 h^+ _{j - 1/2} +   h^- _{j + 1/2} & 0 & 0 \\ 
+	0 & 0 & 0 & 4 h^+ _{j - 1/2} & 0 \\ 
+	0 & 0 & 0 & 0 & -h^+ _{j - 1/2} -  h^- _{j + 1/2} \end{array}\right] 
+	\left[\begin{array}{c}u_{j-3/2} \\u_{j-1}\\u_{j-1/2} \\ u_{j} \\ u_{j+1/2} \end{array}\right]
+	\end{multline*}
+\end{landscape}
+
+\newpage
+
+\begin{landscape}
+	\begin{multline*}
+\int_{-1}^{1} uh \phi_{j}d \xi =  \\
+\left( \frac{4}{90}h^+ _{j - 1/2} \right) u_{j - 1/2} \\
++ \left(\frac{16}{90}h^+ _{j - 1/2} +  \frac{16}{90} h^- _{j + 1/2} \right) u_{j} \\
++ \left( \frac{4}{90}h^- _{j + 1/2} \right) u_{j + 1/2}  \\
+	= \frac{1}{90} \left[\begin{array}{c c c}
+	4 h^+ _{j - 1/2} & 0 & 0\\
+	0 &  16h^+ _{j - 1/2} +  16 h^- _{j + 1/2} & 0 \\
+	0 & 0 & 4h^- _{j + 1/2}\\
+	 \end{array}\right] 
+	\left[\begin{array}{c}u_{j-1/2} \\ u_{j} \\ u_{j+1/2} \end{array}\right]
+	\end{multline*}
+\end{landscape}
+ 
+ \newpage
+\begin{landscape}
+	\begin{multline*}
+	\int_{-1}^{1} uh \phi_{j+1/2}d \xi = \\
+	\left(-\frac{1}{90}h^+ _{j - 1/2} -\frac{1}{90} h^- _{j + 1/2} \right) u_{j - 1/2}\\
+	+  \left( \frac{4}{90}h^- _{j + 1/2} \right) u_{j}\\
+	+ \left(\frac{1}{90}h^+ _{j - 1/2} + \frac{7}{90}h^- _{j + 1/2} + \frac{7}{90}h^+ _{j + 1/2} + \frac{1}{90}h^- _{j + 3/2} \right) u_{j + 1/2} \\
+	+ \left(\frac{4}{90}h^+ _{j + 1/2} \right) u_{j + 1}\\
+	+ \left( -\frac{1}{90}h^+ _{j + 1/2} -\frac{1}{90} h^- _{j + 3/2} \right) u_{j + 3/2} \\
+	= \frac{1}{90} \left[\begin{array}{c c c c c}
+	-h^+ _{j - 1/2} -h^- _{j + 1/2}  & 0 & 0 &0 &0  \\
+	0 &4h^- _{j + 1/2} & 0 & 0 &0\\
+	0 & 0 &h^+ _{j - 1/2} + 7h^- _{j + 1/2} + 7h^+ _{j + 1/2} +h^- _{j + 3/2} & 0 & 0 \\ 
+	0 & 0 & 0 & 4 h^+ _{j + 1/2} & 0 \\ 
+	0 & 0 & 0 & 0 &-h^+ _{j + 1/2} - h^- _{j + 3/2}  \end{array}\right] 
+	\left[\begin{array}{c}u_{j-1/2} \\u_{j}\\u_{j+1/2} \\ u_{j+1} \\ u_{j+3/2} \end{array}\right]
+	\end{multline*}
+	 
+\end{landscape}
+
+\newpage
+
+\begin{landscape}
+	\begin{multline*}
+	\int_{-1}^{1} uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d \xi = \\
+	\frac{1}{90} \left[\begin{array}{c c c c c c c}
+	- h^+ _{j - 3/2} - h^- _{j - 1/2}  & 0 & 0 &0 &0 & 0 & 0  \\
+	0 &4h^- _{j - 1/2} & 0 & 0 &0 & 0 &0  \\
+	0 & 0 &h^+ _{j - 3/2} + 7h^- _{j - 1/2} + 10 h^+ _{j - 1/2}  & 0 & 0 & 0 &0  \\ 
+	0 & 0 & 0 & 20h^+ _{j - 1/2} +  20 h^- _{j + 1/2}& 0 & 0 &0  \\ 
+	0 & 0 & 0 & 0 & 10h^- _{j + 1/2} + 7h^+ _{j + 1/2} +h^- _{j + 3/2} & 0 &0  \\
+	0 & 0 & 0 & 0 &0 & 4 h^+ _{j + 1/2}  &0\\
+	0 & 0 & 0 & 0 &0 & 0 &-h^+ _{j + 1/2} - h^- _{j + 3/2} \end{array}\right]\\ 
+	\left[\begin{array}{c}u_{j-3/2} \\ u_{j-1} \\u_{j-1/2} \\u_{j}\\u_{j+1/2} \\ u_{j+1} \\ u_{j+3/2} \end{array}\right]
+	\end{multline*}
+	
+\end{landscape}
+
+\newpage
+
+\begin{landscape}
+	\begin{multline*}
+	\int_{-1}^{1} uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d \xi = \\
+	\frac{1}{90} \left[\begin{array}{c c c c c c c}
+	- h^+ _{j - 3/2} - h^- _{j - 1/2}  & 0 & 0 &0 &0 & 0 & 0  \\
+	0 &4h^- _{j - 1/2} & 0 & 0 &0 & 0 &0  \\
+	0 & 0 &h^+ _{j - 3/2} + 7h^- _{j - 1/2} + 10 h^+ _{j - 1/2}  & 0 & 0 & 0 &0  \\ 
+	0 & 0 & 0 & 20h^+ _{j - 1/2} +  20 h^- _{j + 1/2}& 0 & 0 &0 \end{array} \right. \\ 
+	\left. \begin{array}{c c c c c c c}
+	0 & 0 & 0 & 0 & 10h^- _{j + 1/2} + 7h^+ _{j + 1/2} +h^- _{j + 3/2} & 0 &0  \\
+	0 & 0 & 0 & 0 &0 & 4 h^+ _{j + 1/2}  &0\\
+	0 & 0 & 0 & 0 &0 & 0 &-h^+ _{j + 1/2} - h^- _{j + 3/2} \end{array}\right]\\ 
+	\left[\begin{array}{c}u_{j-3/2} \\ u_{j-1} \\u_{j-1/2} \\u_{j}\\u_{j+1/2} \\ u_{j+1} \\ u_{j+3/2} \end{array}\right]
+	\end{multline*}
+	
+\end{landscape}
+
+\newpage
+
+\begin{landscape}
+	\begin{multline*}
+	\int_{x_{j-3/2}}^{x_{j+3/2}} uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] dx = \\
+	\frac{\Delta x}{60} \left[\begin{array}{c c c c c c c}
+	- h^+ _{j - 3/2} - h^- _{j - 1/2}  & 0 & 0 &0 &0 & 0 & 0  \\
+	0 &4h^- _{j - 1/2} & 0 & 0 &0 & 0 &0  \\
+	0 & 0 &h^+ _{j - 3/2} + 7h^- _{j - 1/2} + 10 h^+ _{j - 1/2}  & 0 & 0 & 0 &0  \\ 
+	0 & 0 & 0 & 20h^+ _{j - 1/2} +  20 h^- _{j + 1/2}& 0 & 0 &0 \end{array} \right. \\ 
+	\left. \begin{array}{c c c c c c c}
+	0 & 0 & 0 & 0 & 10h^- _{j + 1/2} + 7h^+ _{j + 1/2} +h^- _{j + 3/2} & 0 &0  \\
+	0 & 0 & 0 & 0 &0 & 4 h^+ _{j + 1/2}  &0\\
+	0 & 0 & 0 & 0 &0 & 0 &-h^+ _{j + 1/2} - h^- _{j + 3/2} \end{array}\right]\\ 
+	\left[\begin{array}{c}u_{j-3/2} \\ u_{j-1} \\u_{j-1/2} \\u_{j}\\u_{j+1/2} \\ u_{j+1} \\ u_{j+3/2} \end{array}\right]
+	\end{multline*}
+\end{landscape}
+
+\subsection{h3 u}
+
+First
+
+\[\left(a + b + c+ d\right)^3 \]
+
+where $ad = ac = bd = bc = 0$
+
+is
+\[\left(a + b + c+ d\right)^3 =  a^3 + 3 a^2b + 3ab^2 + b^3 + c^3 + 3c^2d + 3cd^2 + d^3\]
+
+So that
+\begin{multline*}
+\left(h^+_{j - 3/2} + h^-_{j - 1/2} + h^+_{j - 1/2} + h^-_{j + 1/2}\right)^3 = \\
+\left(h^+_{j - 3/2}\right)^3 + 3 \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \left(h^-_{j - 1/2}\right)^3 \\ + \left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \left(h^-_{j + 1/2}\right)^3
+\end{multline*}
+
+
+
+\[\int_{x_{j-3/2}}^{x_{j+3/2}}\frac{h^3}{3}u_{x}\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]_xdx = \frac{2}{9 \Delta x}\int_{-1}^{1}h^3u_{\xi}\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]_\xi d\xi\]
+
+\begin{multline*}
+\int_{-1}^{1}h^3u_{\xi}{\phi_{j-1/2}}_\xi d\xi  = \\
+\bigg[\left(h^+_{j - 3/2}\right)^3 + 3 \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \left(h^-_{j - 1/2}\right)^3 \\ + \left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j - 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j - 1/2}\right)^2 + \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j - 3/2} \\
++ \bigg[\left(h^+_{j - 3/2}\right)^3 + 3 \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \left(h^-_{j - 1/2}\right)^3 \\ + \left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j - 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j - 1/2}\right)^2 + \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j - 1} \\
++ \bigg[\left(h^+_{j - 3/2}\right)^3 + 3 \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \left(h^-_{j - 1/2}\right)^3 \\ + \left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j - 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j - 1/2}\right)^2 + \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j - 1/2} \\
+\bigg[\left(h^+_{j - 3/2}\right)^3 + 3 \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \left(h^-_{j - 1/2}\right)^3 \\ + \left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j - 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j - 1/2}\right)^2 + \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j}\\
+\bigg[\left(h^+_{j - 3/2}\right)^3 + 3 \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \left(h^-_{j - 1/2}\right)^3 \\ + \left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j - 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j - 1/2}\right)^2 + \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j + 1/2}
+\end{multline*}
+
+Using where these values are not zero (messed up the subscripts for $h^-_{j + 1/2}$)
+
+\begin{multline*}
+=\bigg[\left(h^+_{j - 3/2}\right)^3 + 3 \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \left(h^-_{j - 1/2}\right)^3  \bigg] u_{j - 3/2} \\
++ \bigg[\left(h^+_{j - 3/2}\right)^3 + 3 \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j - 1} \\
++ \bigg[\left(h^+_{j - 3/2}\right)^3 + 3 \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \left(h^-_{j - 1/2}\right)^3 \\ + \left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j - 1/2} \\
+\bigg[\left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j}\\
+\bigg[\left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j + 1/2}
+\end{multline*}
+
+\begin{multline*}
+=\bigg[\frac{17}{420}\left(h^+_{j - 3/2}\right)^3 +  \frac{3}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ \frac{3}{140} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \frac{8}{105}\left(h^-_{j - 1/2}\right)^3  \bigg] u_{j - 3/2} \\
++ \bigg[-\frac{1}{21}\left(h^+_{j - 3/2}\right)^3 - \frac{6}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
+-  \frac{3}{21} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 - \frac{44}{105}  \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j - 1} \\
++ \bigg[\frac{1}{140}\left(h^+_{j - 3/2}\right)^3 + 3 \frac{1}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ 3 \frac{17}{420} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \frac{12}{35} \left(h^-_{j - 1/2}\right)^3 \\ - \frac{12}{35} \left(h^+_{j - 1/2} \right)^3 - 3\frac{17}{420}  \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) - 3\frac{1}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 - \frac{1}{140} \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j - 1/2} \\
+\bigg[\frac{44}{105}\left(h^+_{j - 1/2} \right)^3 + 3 \frac{1}{21}\left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + 3 \frac{2}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \frac{1}{21}\left(h^-_{j + 1/2}\right)^3 \bigg] u_{j}\\
+\bigg[ - \frac{8}{105}\left(h^+_{j - 1/2} \right)^3 - \frac{3}{140}  \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) - \frac{3}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2  - \frac{17}{420} \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j + 1/2}
+\end{multline*}
+
+\begin{multline*}
+=\bigg[\frac{17}{420}\left(h^+_{j - 3/2}\right)^3 +  \frac{3}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ \frac{3}{140} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \frac{8}{105}\left(h^-_{j - 1/2}\right)^3  \bigg] u_{j - 3/2} \\
++ \bigg[-\frac{1}{21}\left(h^+_{j - 3/2}\right)^3 - \frac{6}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
+-  \frac{3}{21} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 - \frac{44}{105}  \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j - 1} \\
++ \bigg[\frac{1}{140}\left(h^+_{j - 3/2}\right)^3 +  \frac{3}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++  \frac{51}{420} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \frac{12}{35} \left(h^-_{j - 1/2}\right)^3 \\ - \frac{12}{35} \left(h^+_{j - 1/2} \right)^3 - \frac{51}{420}  \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) - \frac{3}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 - \frac{1}{140} \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j - 1/2} \\
+\bigg[\frac{44}{105}\left(h^+_{j - 1/2} \right)^3 +  \frac{3}{21}\left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) +  \frac{6}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \frac{1}{21}\left(h^-_{j + 1/2}\right)^3 \bigg] u_{j}\\
+\bigg[ - \frac{8}{105}\left(h^+_{j - 1/2} \right)^3 - \frac{3}{140}  \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) - \frac{3}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2  - \frac{17}{420} \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j + 1/2}
+\end{multline*}
+
+
+\begin{multline*}
+\int_{-1}^{1}h^3u_{\xi}{\phi_{j}}_\xi d\xi  =  \\\left(\left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \left(h^-_{j + 1/2}\right)^3\right)u_{j- 1/2}\\
++ \left(\left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \left(h^-_{j + 1/2}\right)^3\right)u_{j}\\
+\left(\left(h^+_{j - 1/2} \right)^3 + 3 \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + 3 \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \left(h^-_{j + 1/2}\right)^3\right)u_{j+ 1/2}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}h^3u_{\xi}{\phi_{j}}_\xi d\xi  = \\ \left(-\frac{26}{105}\left(h^+_{j - 1/2} \right)^3  -\frac{9}{35} \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) -\frac{3}{21} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 -\frac{2}{105} \left(h^-_{j + 1/2}\right)^3\right)u_{j- 1/2}\\
++ \left( \frac{8}{35}\left(h^+_{j - 1/2} \right)^3 + \frac{12}{105} \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) - \frac{12}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2  - \frac{8}{35}\left(h^-_{j + 1/2}\right)^3\right)u_{j}\\
+\left(\frac{2}{105}\left(h^+_{j - 1/2} \right)^3 + \frac{3}{21} \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + \frac{9}{35} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 +  \frac{26}{105}\left(h^-_{j + 1/2}\right)^3\right)u_{j+ 1/2}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}h^3u_{\xi}{\phi_{j+1/2}}_\xi d\xi  = \\
+\bigg[\left(h^+_{j - 1/2}\right)^3 + 3 \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
++ 3 \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 +  \left(h^-_{j + 1/2}\right)^3 \\ + \left(h^+_{j + 1/2} \right)^3 + 3 \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) + 3 \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 + \left(h^-_{j + 3/2}\right)^3 \bigg] u_{j - 1/2} \\
++ \bigg[\left(h^+_{j - 1/2}\right)^3 + 3 \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
++ 3 \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 +  \left(h^-_{j + 1/2}\right)^3 \\ + \left(h^+_{j + 1/2} \right)^3 + 3 \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) + 3 \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 + \left(h^-_{j + 3/2}\right)^3 \bigg] u_{j} \\
++
+\bigg[\left(h^+_{j - 1/2}\right)^3 + 3 \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
++ 3 \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 +  \left(h^-_{j + 1/2}\right)^3 \\ + \left(h^+_{j + 1/2} \right)^3 + 3 \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) + 3 \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 + \left(h^-_{j + 3/2}\right)^3 \bigg] u_{j + 1/2} \\
++\bigg[\left(h^+_{j - 1/2}\right)^3 + 3 \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
++ 3 \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 +  \left(h^-_{j + 1/2}\right)^3 \\ + \left(h^+_{j + 1/2} \right)^3 + 3 \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) + 3 \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 + \left(h^-_{j + 3/2}\right)^3 \bigg] u_{j +1} \\
++ \bigg[\left(h^+_{j - 1/2}\right)^3 + 3 \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
++ 3 \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 +  \left(h^-_{j + 1/2}\right)^3 \\ + \left(h^+_{j + 1/2} \right)^3 + 3 \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) + 3 \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 + \left(h^-_{j + 3/2}\right)^3 \bigg] u_{j + 3/2} 
+\end{multline*}
+
+
+
+\begin{multline*}
+\int_{-1}^{1}h^3u_{\xi}{\phi_{j+1/2}}_\xi d\xi  = \\
+\bigg[\frac{17}{420}\left(h^+_{j - 1/2}\right)^3 + \frac{3}{105} \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
++  \frac{3}{140} \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 +  \frac{8}{105}\left(h^-_{j + 1/2}\right)^3 \bigg] u_{j - 1/2} \\
++ \bigg[-\frac{1}{21}\left(h^+_{j - 1/2}\right)^3 - \frac{6}{105} \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
+- \frac{3}{21} \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 - \frac{44}{105}  \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j} \\
++
+\bigg[ \frac{1}{140} \left(h^+_{j - 1/2}\right)^3 + \frac{3}{105} \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
++ \frac{51}{420} \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 +   \frac{12}{35}\left(h^-_{j + 1/2}\right)^3 \\ - \frac{12}{35} \left(h^+_{j + 1/2} \right)^3  - \frac{51}{420}  \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right)   - \frac{3}{105}\left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2  - \frac{1}{140}\left(h^-_{j + 3/2}\right)^3 \bigg] u_{j + 1/2} \\
++\bigg[\frac{44}{105}\left(h^+_{j + 1/2} \right)^3 + \frac{3}{21} \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) + \frac{6}{105} \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 + \frac{1}{21}\left(h^-_{j + 3/2}\right)^3 \bigg] u_{j +1} \\
++ \bigg[- \frac{8}{105}\left(h^+_{j + 1/2} \right)^3 - \frac{3}{140} \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) - \frac{3}{105} \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 - \frac{17}{420} \left(h^-_{j + 3/2}\right)^3 \bigg] u_{j + 3/2} 
+\end{multline*}
+
+So we have
+
+\begin{multline*}
+\int_{-1}^{1}h^3u_{\xi}\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]_\xi d\xi = \\
+\bigg[\frac{17}{420}\left(h^+_{j - 3/2}\right)^3 +  \frac{3}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ \frac{3}{140} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \frac{8}{105}\left(h^-_{j - 1/2}\right)^3  \bigg] u_{j - 3/2} \\
++ \bigg[-\frac{1}{21}\left(h^+_{j - 3/2}\right)^3 - \frac{6}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
+-  \frac{3}{21} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 - \frac{44}{105}  \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j - 1} \\
++ \bigg[\frac{1}{140}\left(h^+_{j - 3/2}\right)^3 +  \frac{3}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++  \frac{51}{420} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \frac{12}{35} \left(h^-_{j - 1/2}\right)^3 \\ - \frac{12}{35} \left(h^+_{j - 1/2} \right)^3 - \frac{51}{420}  \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) - \frac{3}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 - \frac{1}{140} \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j - 1/2} \\
+\bigg[\frac{44}{105}\left(h^+_{j - 1/2} \right)^3 +  \frac{3}{21}\left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) +  \frac{6}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \frac{1}{21}\left(h^-_{j + 1/2}\right)^3 \bigg] u_{j}\\
+\bigg[ - \frac{8}{105}\left(h^+_{j - 1/2} \right)^3 - \frac{3}{140}  \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) - \frac{3}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2  - \frac{17}{420} \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j + 1/2}\\\\
++\left(-\frac{26}{105}\left(h^+_{j - 1/2} \right)^3  -\frac{9}{35} \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) -\frac{3}{21} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 -\frac{2}{105} \left(h^-_{j + 1/2}\right)^3\right)u_{j- 1/2}\\
++ \left( \frac{8}{35}\left(h^+_{j - 1/2} \right)^3 + \frac{12}{105} \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) - \frac{12}{105} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2  - \frac{8}{35}\left(h^-_{j + 1/2}\right)^3\right)u_{j}\\
+\left(\frac{2}{105}\left(h^+_{j - 1/2} \right)^3 + \frac{3}{21} \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + \frac{9}{35} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 +  \frac{26}{105}\left(h^-_{j + 1/2}\right)^3\right)u_{j+ 1/2}\\ \\
++\bigg[\frac{17}{420}\left(h^+_{j - 1/2}\right)^3 + \frac{3}{105} \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
++  \frac{3}{140} \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 +  \frac{8}{105}\left(h^-_{j + 1/2}\right)^3 \bigg] u_{j - 1/2} \\
++ \bigg[-\frac{1}{21}\left(h^+_{j - 1/2}\right)^3 - \frac{6}{105} \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
+- \frac{3}{21} \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 - \frac{44}{105}  \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j} \\
++
+\bigg[ \frac{1}{140} \left(h^+_{j - 1/2}\right)^3 + \frac{3}{105} \left(h^+_{j - 1/2}\right)^2 \left(h^-_{j + 1/2}\right)
++ \frac{51}{420} \left(h^+_{j - 1/2}\right) \left(h^-_{j + 1/2}\right)^2 +   \frac{12}{35}\left(h^-_{j + 1/2}\right)^3 \\ - \frac{12}{35} \left(h^+_{j + 1/2} \right)^3  - \frac{51}{420}  \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right)   - \frac{3}{105}\left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2  - \frac{1}{140}\left(h^-_{j + 3/2}\right)^3 \bigg] u_{j + 1/2} \\
++\bigg[\frac{44}{105}\left(h^+_{j + 1/2} \right)^3 + \frac{3}{21} \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) + \frac{6}{105} \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 + \frac{1}{21}\left(h^-_{j + 3/2}\right)^3 \bigg] u_{j +1} \\
++ \bigg[- \frac{8}{105}\left(h^+_{j + 1/2} \right)^3 - \frac{3}{140} \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) - \frac{3}{105} \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 - \frac{17}{420} \left(h^-_{j + 3/2}\right)^3 \bigg] u_{j + 3/2} 
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}h^3u_{\xi}\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]_\xi d\xi = \\
+\bigg[\frac{17}{420}\left(h^+_{j - 3/2}\right)^3 +  \frac{3}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++ \frac{3}{140} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \frac{8}{105}\left(h^-_{j - 1/2}\right)^3  \bigg] u_{j - 3/2} \\
++ \bigg[-\frac{1}{21}\left(h^+_{j - 3/2}\right)^3 - \frac{6}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
+-  \frac{3}{21} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 - \frac{44}{105}  \left(h^-_{j - 1/2}\right)^3 \bigg] u_{j - 1} \\
++ \bigg[\frac{1}{140}\left(h^+_{j - 3/2}\right)^3 +  \frac{3}{105} \left(h^+_{j - 3/2}\right)^2 \left(h^-_{j - 1/2}\right)
++  \frac{51}{420} \left(h^+_{j - 3/2}\right) \left(h^-_{j - 1/2}\right)^2 +  \frac{12}{35} \left(h^-_{j - 1/2}\right)^3 \\ - \frac{11}{20} \left(h^+_{j - 1/2}  \right)^3  - \frac{7}{20}  \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) - \frac{3}{20} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 + \frac{1}{20} \left(h^-_{j + 1/2}\right)^3 \bigg] u_{j - 1/2} \\ 
+\bigg[\frac{3}{5}\left(h^+_{j - 1/2} \right)^3 +  \frac{1}{5}\left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) -  \frac{1}{5} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2 - \frac{3}{5}\left(h^-_{j + 1/2}\right)^3 \bigg] u_{j}\\
++\bigg[ - \frac{1}{20}\left(h^+_{j - 1/2} \right)^3 + \frac{3}{20}  \left(h^+_{j - 1/2} \right)^2\left(h^-_{j + 1/2}\right) + \frac{7}{20} \left(h^+_{j - 1/2} \right)\left(h^-_{j + 1/2}\right)^2  + \frac{11}{20} \left(h^-_{j + 1/2}\right)^3 \\- \frac{12}{35} \left(h^+_{j + 1/2} \right)^3  - \frac{51}{420}  \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right)   - \frac{3}{105}\left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2  - \frac{1}{140}\left(h^-_{j + 3/2}\right)^3 \bigg] u_{j + 1/2} \\
++\bigg[\frac{44}{105}\left(h^+_{j + 1/2} \right)^3 + \frac{3}{21} \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) + \frac{6}{105} \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 + \frac{1}{21}\left(h^-_{j + 3/2}\right)^3 \bigg] u_{j +1} \\
++ \bigg[- \frac{8}{105}\left(h^+_{j + 1/2} \right)^3 - \frac{3}{140} \left(h^+_{j + 1/2} \right)^2\left(h^-_{j + 3/2}\right) - \frac{3}{105} \left(h^+_{j + 1/2} \right)\left(h^-_{j + 3/2}\right)^2 - \frac{17}{420} \left(h^-_{j + 3/2}\right)^3 \bigg] u_{j + 3/2} 
+\end{multline*}
+
+
+
+\end{document}

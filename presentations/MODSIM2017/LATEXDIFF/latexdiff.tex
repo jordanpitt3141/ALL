@@ -1,0 +1,324 @@
+\documentclass[a4paper,fleqn]{article} %Options in documentclass should be set to a4paper and fleqn.
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL ../OLDSIM/MODSIM2017/MODSIM2017LaTExinstructions/MODSIM2017_paper.tex   Sat Jul 29 17:40:10 2017
+%DIF ADD ../MODSIM2017LaTExinstructions/MODSIM2017_paper.tex                     Wed Sep 13 15:23:31 2017
+\usepackage{modsim}
+\usepackage{times}
+\usepackage{psfrag}
+%DIF 5a5
+\usepackage{pgfplots} %DIF > 
+%DIF -------
+ \usepackage{pstricks}
+%DIF 6a7
+ \usepackage{tikz} %DIF > 
+%DIF -------
+ %\usepackage{auto-pst-pdf}
+\usepackage{pstool}
+\usepackage{natbib} %The three packages modsim, times and natbib are required.
+\usepackage{amsmath, amssymb, amsthm} %Also recommend the standard AMS LaTeX maths packages.
+\usepackage{changes}
+%DIF 11a13-17
+ %DIF > 
+\setlength{\intextsep}{5pt} % Vertical space above & below [h] floats %DIF > 
+\setlength{\textfloatsep}{5pt} % Vertical space below (above) [t] ([b]) floats %DIF > 
+\setlength{\abovecaptionskip}{5pt} %DIF > 
+\setlength{\belowcaptionskip}{5pt} %DIF > 
+%DIF -------
+
+\newcommand\solidrule[1][0.25cm]{\rule[0.5ex]{#1}{1pt}}
+\newcommand\dashedrule{\mbox{%
+		\solidrule[2mm]\hspace{2mm}\solidrule[2mm]}}
+\pagestyle{MODSIMheadings} %Calling the MODSIM Headings format
+\MODSIMhead{J. Pitt {\it et al.}, Dispersion and Shoaling Waves} %This is the content of the headings in all pages (except the first page). The format should be author, title of paper. If the title is too long, then use ... at the end. If more than two authors, then please use the "et al." format with et al. in italic, for example A. Author {\it et al.}, Title of the paper.
+
+% Define any other command or required packages below:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{rotating}
+\usepackage{amsbsy,enumerate}
+\usepackage{graphicx}
+\usepackage{ccaption}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\sigmah}{\hat{\sigma}}
+\newcommand{\sigmab}{\bar{\sigma}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Tbar}{\bar{T}}
+\newcommand{\Thetabf}{\mathbf{\Theta}}
+\newcommand{\Xbf}{\mathbf{X}}
+\newcommand{\xbf}{\mathbf{x}}
+\newcommand{\Ybf}{\mathbf{Y}}
+\newcommand{\ybf}{\mathbf{y}}
+\newcommand{\Ubf}{\mathbf{U}}
+\newcommand{\Fbf}{\mathbf{F}}
+\newcommand{\fbf}{\mathbf{f}}
+\newcommand{\Pbf}{\mathbf{P}}
+\newcommand{\Pbfbar}{\bar{\mathbf{P}}}
+\newcommand{\Sb}{\bar{S}^{\nu}}
+\newcommand{\Snuib}{\tilde{S}^\nu _i}
+\newcommand{\Snui}{S^\nu _i}
+\newcommand{\sigmanui}{\sigma ^\nu_i}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{cce}{Assumption CCE}
+\newtheorem{proposition}{Proposition}
+%% The next four lines create the correct format for Figure and Table captions. They require the package "ccaption".
+\makeatletter
+\renewcommand{\fnum@figure}[1]{\textbf{\figurename~\thefigure}. }
+\renewcommand{\fnum@table}[1]{\textbf{\tablename~\thetable}. }
+\makeatother
+
+\definechangesauthor[color=orange]{CZ}
+\setremarkmarkup{(#2)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+% Defining Front matter.
+
+\title{Importance of Dispersion for Shoaling Waves}
+\author{\underline{J. Pitt} \address[ANU]{\it{Mathematical Sciences Institute, Australian National University, Canberra, ACT 0200, Australia}}, C. Zoppou \addressmark[ANU], S.G Roberts \addressmark[ANU]}
+
+
+\email{jordan.pitt@anu.edu.au} %Email address of the presenting author only.
+
+\date{June 2017}
+
+%Keywords should be separated by commas and listed in Sentence case (first keyword with capital first letter and remaining keywords in lower case).
+\begin{keyword}
+	Tsunamis, shoaling waves, dispersion, models, shallow water wave equations
+
+\end{keyword}
+
+\begin{abstract}
+A tsunami has four main stages of its evolution; in the first stage the tsunami is generated, most commonly by seismic activity near subduction zones. The second stage is the tsunamis propagation through \DIFdelbegin \DIFdel{relatively shallow water compared to its wavelength with little }\DIFdelend \DIFaddbegin \DIFadd{the ocean far from the coast, where }\DIFaddend variation in bathymetry \DIFaddbegin \DIFadd{is slight and gradual}\DIFaddend . The third stage is the shoaling and interaction of the tsunami with bathymetry as it approaches the coastline. Finally the tsunami reaches and inundates the shore. For our purposes the hydrodynamic models we are interested in deal with the final three stages of the evolution of a tsunami.
+
+The propagation of a tsunami \DIFdelbegin \DIFdel{through relatively shallow water with little variation in bathymetry }\DIFdelend \DIFaddbegin \DIFadd{with wavelength $\lambda$ through water that is $H$ deep }\DIFaddend is well understood \DIFdelbegin \DIFdel{, waves travel with little deformation and with relatively constant speed}\DIFdelend \DIFaddbegin \DIFadd{when $\lambda / H \le 1/ 20$, which we call shallow water as noted by \mbox{%DIFAUXCMD
+\cite{Sorenson-2006}}%DIFAUXCMD
+. The wavelengths for tsunamis range from a few to hundreds of kilometres, while the maximum water depth is $11km$ at the Marianas trench, so that most tsunamis occur in shallow water}\DIFaddend . This stage of \DIFdelbegin \DIFdel{a }\DIFdelend tsunami behaviour is adequately modelled using the shallow water wave equations. Current research into tsunamis focuses around more complex approximations to the Euler equations for the third and fourth stages. In this paper we focused on the Serre equations as they are considered a very good model for fluid behaviour up to the shoreline\DIFaddbegin \DIFadd{, and they reduce to the shallow water wave equations for large wavelengths}\DIFaddend . 
+
+Although more complicated, the Serre equations provide a better description of the fluid behaviour than the shallow water wave equations and are therefore more computationally expensive to solve numerically. \DIFaddbegin \DIFadd{In particular for the methods of this work, we find that the Serre equations have a run-time $50\%$ longer than our equivalent finite volume method for the shallow water wave equations in the one dimensional case. }\DIFaddend To simulate tsunamis as efficiently as possible it is important to know when using the more complicated Serre equations leads to more accurate predictions of the evolution of a tsunami than the shallow water wave equations. To investigate this we have numerically simulated a laboratory experiment of \DIFaddbegin \DIFadd{periodic }\DIFaddend waves propagating over a submerged bar, and the propagation of a small amplitude wave up a gradual linear slope using both the Serre and the shallow water wave equations.
+
+The results of these simulations demonstrated that the Serre and shallow water wave equations produce similar results for shoaling waves when the \DIFdelbegin \DIFdel{wave height is small compared to water depth and the }\DIFdelend wavelength is large compared to the water depth. This is not surprising as this is the regime under which the shallow water wave equations are derived. However, outside this regime the shallow water wave equations are a poor model for wave shoaling and propagation, poorly approximating the shape and maximum height of waves. \DIFaddbegin \DIFadd{Furthermore we demonstrate that for steep waves generated by shoaling, the shallow water wave equations can underestimate the arrival time and amplitude of an incoming wave. }\DIFaddend These results suggest that for a tsunami it is sufficient to use the shallow water wave equations in stages two and some of stage three, even for large changes in bathymetry. Although \DIFdelbegin \DIFdel{a switch to }\DIFdelend dispersive equations such as the Serre equations \DIFdelbegin \DIFdel{is }\DIFdelend \DIFaddbegin \DIFadd{are }\DIFaddend required to accurately capture fluid behaviour in stages three and four nearer to the coastline\DIFaddbegin \DIFadd{, particularly when wavelengths are short or waves are steep. Since the Serre equations represent only a moderate increase in run-times this suggests that our inundation models should be based on them}\DIFaddend .
+
+
+\end{abstract} %Abstract should NOT extend beyond the first page.
+
+\maketitle
+
+\section{INTRODUCTION}
+%Problem
+%Serre equations
+%numerical methods
+
+The interaction of waves with bathymetry and particularly the shoaling of waves plays a central role in modelling the inundation caused by a tsunami. Current models for tsunami inundation such as ANUGA \DIFdelbegin \DIFdel{utilize }\DIFdelend \DIFaddbegin \DIFadd{utilise }\DIFaddend the non-dispersive shallow water wave equations. Current research into tsunami inundation includes building numerical models based on dispersive equations, such as the Serre equations. The Serre equations allow for more detailed fluid behaviour such as dispersion, which is the process by which waves of different frequencies travel at different speeds. The Serre equations are considered by \cite{Bonneton-etal-2011-589} to be the most appropriate approximation to the Euler equations near the shoreline. The one-dimensional Serre equations for a depth of water $h(x,t)$ over a bed profile defined by $b(x)$ travelling at velocity $u(x,t)$ are given by \cite{Zoppou-etal-2017} as 
+
+\begin{subequations}\label{eq:Serre_nonconservative_form}
+	\begin{gather}
+	\dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+	\label{eq:Serre_continuity}
+	\end{gather}
+	and
+	\begin{gather}
+\frac{\partial{u} h }{\partial t} + \frac{\partial}{\partial x} \left({u}^2 h + \frac{gh^2}{2} + \frac{h^3}{3}  \Phi + \frac{h^2}{2}\Psi \right)   + \left(gh + \frac{h^2}{2}\Phi + h \Psi \right) \frac{\partial b}{\partial x} = 0
+	\label{eq:Serre_momentum}
+	\end{gather}
+	where
+	\begin{gather*}
+	\Phi = \left(\frac{\partial {u}}{\partial x} \right)^2 - {u}\frac{\partial^2 {u}}{\partial x^2} - \frac{\partial^2 {u}}{\partial x \partial t} \quad , \quad
+	\Psi = \frac{\partial {u}}{\partial t} \frac{\partial b}{\partial x} + {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} + {u}^2\frac{\partial^2 b}{\partial x^2}.
+	\end{gather*}	
+\end{subequations}
+
+Setting $\Phi = \Psi = 0$\DIFdelbegin \DIFdel{in }\DIFdelend \DIFaddbegin \DIFadd{, corresponding to long wavelengths transforms }\DIFaddend the Serre equations \DIFdelbegin \DIFdel{transforms them }\DIFdelend into the shallow water wave equations. The additional $\Phi$ and $\Psi$ terms make the Serre equations more complex and therefore more computationally difficult to solve. However, the additional behaviour they allow for is not always significant\DIFaddbegin \DIFadd{, in particular when wavelengths $\lambda$ are long compared to the water depth $H$ such that $H / \lambda \le {1}/{20}$}\DIFaddend . In this paper we will investigate the impact of these extra terms by comparing the numerical solution of the Serre equations with the solution of the shallow water wave equations. To do this we will use a well-validated numerical method for the Serre equations by \cite{Zoppou-etal-2017} and the ANUGA software for the shallow water wave equations. We begin by simulating an experiment of \cite{Beji-Battjes-1994} where periodic waves travelled over a submerged bar, and then move to a more appropriate scenario for tsunamis, the propagation of a long wavelength, small amplitude solitary wave up a uniformly sloping beach.
+
+%--------------------------------------------------------------------------------
+\section{Periodic Wave Over a Submerged Bar}
+\label{Oscillatory Wave Over a Submerged Bar}
+%--------------------------------------------------------------------------------
+In the series of experiments undertaken by \cite{Beji-Battjes-1994} periodic waves travel over a submerged trapezoidal bar. Their wave tank was $37.7$m in length, $0.8$m wide with walls $0.75$m high with a constant water \DIFdelbegin \DIFdel{depth of }\DIFdelend \DIFaddbegin \DIFadd{surface sitting at }\DIFaddend $0.4$m. \DIFdelbegin \DIFdel{The bed had the following profile; $(x,b) = [$($0$m,$0$m), ($6$m,$0$m), ($12$m,$0.3$m), ($14$m,$0.3$m), ($17$m, $0$m), ($18.95$m,$0$m), ($37.70$m,$0.75$m)$]$}\DIFdelend \DIFaddbegin \DIFadd{A diagram of this wave tank displaying the bed profile, water surface and locations of wave gauges is presented in Figure \ref{fig:WT}}\DIFaddend . Waves were generated by a wave maker located at $x=0$m, and were absorbed downstream by a gravel beach that extends to the edge of the wave tank. There were seven wave gauges that recorded the depth of water over time at the following locations; WG1: $5.7$m, WG2: $10.5$m, WG3: $12.5$m, WG4: $13.5$m, WG5: $14.5$m, WG6: $15.7$m and WG7: $17.3$m.
+%[how do you do this, B.C]
+
+In this paper we focus on the propagation of periodic non-breaking sinusoidal waves with high frequency over the bar. These waves had a period of $T = 1.25$s\DIFaddbegin \DIFadd{, a wavelength of $\lambda = 2.05m$ }\DIFaddend and an amplitude of $A = 0.0125$m. These waves travelled without deformation towards the bar. The waves steepened as they travelled up the front slope of the bar due to shoaling. On the horizontal top of the bar higher frequency waves are slowly released. The release of these waves is accelerated as the waves travel \DIFdelbegin \DIFdel{down slope}\DIFdelend \DIFaddbegin \DIFadd{leeward}\DIFaddend . 
+
+The numerical results for the Serre equations \DIFdelbegin \DIFdel{are presented in Figure \ref{fig:WGSerre} and the numerical results for the }\DIFdelend \DIFaddbegin \DIFadd{and the }\DIFaddend shallow water wave equations are presented in Figure \DIFdelbegin \DIFdel{\ref{fig:WGSWW}}\DIFdelend \DIFaddbegin \DIFadd{\ref{fig:WG}}\DIFaddend . We present only wave gauges $2$ through $4$, as the deficiencies of the shallow water wave equations in simulating this experiment are already apparent by the $4^{th}$ wave gauge.
+
+In these experiments \DIFaddbegin \DIFadd{the time series data from }\DIFaddend wave gauge $1$ \DIFaddbegin \DIFadd{for the water depth }\DIFaddend is used as the left boundary condition to simulate the incoming wave. Both models reproduce it precisely and we include it here as a reference for the incoming wave profile. It can be seen that the Serre equations reproduce the experiment results well. \DIFdelbegin \DIFdel{Enhancing the dispersion relation of the Serre equations results in an even more accurate reproduction of the experiment as shown by \mbox{%DIFAUXCMD
+\cite{Lannes-2013}}%DIFAUXCMD
+. }\DIFdelend The shallow water wave equations results are poor for both the shape and speed of the waves. This is because the shallow water wave equations are appropriate when \DIFdelbegin \DIFdel{the wavelength of the waves are far larger than the depth of water}\DIFdelend \DIFaddbegin \DIFadd{$H / \lambda \le 1 / 20$}\DIFaddend , which is not the case in these experiments \DIFaddbegin \DIFadd{as $0.4m / 2.05m \approx 1 / 5$ }\DIFaddend . Therefore an increase in the wavelength of the experiment should result in a better reproduction of the results by the shallow water wave equations. 
+
+In another experiment of \cite{Beji-Battjes-1994} the propagation of longer wavelength sinusoidal waves with a period of $T = 1.25$s\DIFaddbegin \DIFadd{, a wavelength of $\lambda = 3.69m$ }\DIFaddend and an amplitude of $A = 0.01$m over the same submerged bar was observed. The results for using the \DIFaddbegin \DIFadd{Serre equations and the }\DIFaddend shallow water wave equations to model this experiment are displayed in Figure \DIFdelbegin \DIFdel{\ref{fig:SLWGSWW}}\DIFdelend \DIFaddbegin \DIFadd{\ref{fig:SLWG}}\DIFaddend . The shallow water wave equations model these waves better than the waves of the previous experiment because they are longer. Unfortunately \DIFdelbegin \DIFdel{, }\DIFdelend \DIFaddbegin \DIFadd{$0.4m / 3.69m \approx 1 / 9$, so }\DIFaddend these waves were still too short to be appropriate for the shallow water wave equations, and so the results are inaccurate.
+
+This experiment is specifically designed to study dispersive effects, and so the failure of the shallow water wave equations is not surprising. However, the inaccuracy of the shallow water wave equations was larger than anticipated. This demonstrates that dispersion can be a significant factor in the shoaling of waves, with large differences between the simulations using the Serre and shallow water wave equations.
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < \begin{figure}
+%DIFDELCMD < 	%%%
+\DIFdelendFL %DIF > 
+\DIFaddbeginFL \begin{figure}[]
+	\DIFaddendFL \centering
+	\DIFdelbeginFL %DIFDELCMD < \begin{tabular}{ccc}
+%DIFDELCMD < 		\resizebox{5cm}{!}{\includegraphics{WG1.pdf}} & & \resizebox{5cm}{!}{\includegraphics{WG2Serre.pdf}}  \\
+%DIFDELCMD < 		%%%
+\DIFdelFL{\hspace{5 mm} WG1 }%DIFDELCMD < & & %%%
+\DIFdelFL{\hspace{5 mm}WG2 }%DIFDELCMD < \\
+%DIFDELCMD < 		\resizebox{5cm}{!}{\includegraphics{WG3Serre.pdf}} && 
+%DIFDELCMD < 		\resizebox{5cm}{!}{\includegraphics{WG4Serre.pdf}}  \\
+%DIFDELCMD < 		%%%
+\DIFdelFL{\hspace{5 mm} WG3 }%DIFDELCMD < & & %%%
+\DIFdelFL{\hspace{5 mm} WG4 }%DIFDELCMD < \\
+%DIFDELCMD < 		
+
+%DIFDELCMD < 		
+%DIFDELCMD < 	\end{tabular}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics{WT.pdf}
+	\DIFaddendFL \caption{Wave \DIFdelbeginFL \DIFdelFL{height readings from various }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{tank diagram with }\DIFaddendFL wave gauges \DIFdelbeginFL \DIFdelFL{from }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{marked by number showing }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{experiment of \mbox{%DIFAUXCMD
+\cite{Beji-Battjes-1994} }%DIFAUXCMD
+}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{water surface }\DIFaddendFL ({\color{blue} \solidrule}) \DIFdelbeginFL \DIFdelFL{compared to a simulation of the experiment using }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{and }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{Serre equations }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{bed profile }\DIFaddendFL ({\DIFdelbeginFL %DIFDELCMD < \color{red} %%%
+\DIFdelFL{$\circ$}\DIFdelendFL \DIFaddbeginFL \color{green!60!black} \solidrule\DIFaddendFL }) .}
+	\DIFdelbeginFL %DIFDELCMD < %DIFDELCMD < \label{fig:WGSerre}%%%
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:WT}
+\DIFaddendFL \end{figure}
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend %DIF > 
+\begin{figure}
+	\centering
+	\begin{tabular}{ccc}
+		\resizebox{5cm}{!}{\includegraphics{WG1.pdf}} & & \DIFdelbeginFL %DIFDELCMD < \resizebox{5cm}{!}{\includegraphics{WG2SWW.pdf}}  %%%
+\DIFdelendFL \DIFaddbeginFL \resizebox{5cm}{!}{\includegraphics{WG2.pdf}}  \DIFaddendFL \\
+		\hspace{5 mm} WG1 & & \hspace{5 mm}WG2 \\
+		\DIFdelbeginFL %DIFDELCMD < \resizebox{5cm}{!}{\includegraphics{WG3SWW.pdf}} %%%
+\DIFdelendFL \DIFaddbeginFL \resizebox{5cm}{!}{\includegraphics{WG3.pdf}} \DIFaddendFL && 
+		\DIFdelbeginFL %DIFDELCMD < \resizebox{5cm}{!}{\includegraphics{WG4SWW.pdf}}  %%%
+\DIFdelendFL \DIFaddbeginFL \resizebox{5cm}{!}{\includegraphics{WG4.pdf}}  \DIFaddendFL \\
+		\hspace{5 mm} WG3 & & \hspace{5 mm} WG4 		
+	\DIFdelbeginFL %DIFDELCMD < \\
+%DIFDELCMD < 		
+
+%DIFDELCMD < 		
+%DIFDELCMD < 	%%%
+\DIFdelendFL \end{tabular}
+	\caption{Wave height readings from various wave gauges from the experiment of \cite{Beji-Battjes-1994} ({\color{blue} \solidrule}) compared to a simulation of the experiment using the \DIFaddbeginFL \DIFaddFL{Serre equations (}{\color{red} \DIFaddFL{$\circ$}}\DIFaddFL{) and }\DIFaddendFL shallow water wave equations ({\color{green!60!black} \DIFdelbeginFL \DIFdelFL{$\square$}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{$+$}\DIFaddendFL }).}
+	\DIFdelbeginFL %DIFDELCMD < %DIFDELCMD < \label{fig:WGSWW}%%%
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:WG}
+\DIFaddendFL \end{figure}
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend %DIF > 
+\begin{figure}
+	\centering
+	\begin{tabular}{ccc}
+		\resizebox{5cm}{!}{\includegraphics{SLWG1.pdf}} & & \DIFdelbeginFL %DIFDELCMD < \resizebox{5cm}{!}{\includegraphics{SLWG2SWWE.pdf}}  %%%
+\DIFdelendFL \DIFaddbeginFL \resizebox{5cm}{!}{\includegraphics{SLWG2.pdf}}  \DIFaddendFL \\
+		\hspace{5 mm} WG1 & & \hspace{5 mm}WG2 \\
+		\DIFdelbeginFL %DIFDELCMD < \resizebox{5cm}{!}{\includegraphics{SLWG3SWWE.pdf}} %%%
+\DIFdelendFL \DIFaddbeginFL \resizebox{5cm}{!}{\includegraphics{SLWG3.pdf}} \DIFaddendFL && 
+		\DIFdelbeginFL %DIFDELCMD < \resizebox{5cm}{!}{\includegraphics{SLWG4SWWE.pdf}}  %%%
+\DIFdelendFL \DIFaddbeginFL \resizebox{5cm}{!}{\includegraphics{SLWG4.pdf}}  \DIFaddendFL \\
+		\hspace{5 mm} WG3 & & \hspace{5 mm} WG4 		
+	\DIFdelbeginFL %DIFDELCMD < \\
+%DIFDELCMD < 		
+
+%DIFDELCMD < 		
+%DIFDELCMD < 	%%%
+\DIFdelendFL \end{tabular}
+	\caption{Wave height readings from various wave gauges from \DIFdelbeginFL \DIFdelFL{longer wavelength }\DIFdelendFL the experiment of \cite{Beji-Battjes-1994} ({\color{blue} \solidrule}) compared to a simulation of the experiment using the \DIFaddbeginFL \DIFaddFL{Serre equations (}{\color{red} \DIFaddFL{$\circ$}}\DIFaddFL{) and }\DIFaddendFL shallow water wave equations ({\color{green!60!black} \DIFdelbeginFL \DIFdelFL{$\square$}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{$+$}\DIFaddendFL }).}
+	\DIFdelbeginFL %DIFDELCMD < %DIFDELCMD < \label{fig:SLWGSWW}%%%
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:SLWG}
+\DIFaddendFL \end{figure}
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < 	
+%DIFDELCMD < %%%
+\DIFdelend %DIF > 	
+%--------------------------------------------------------------------------------
+\section{Propagation of a Soliton over a Slope.}
+\label{Soliton up a Slope}
+%--------------------------------------------------------------------------------
+The numerical results for the propagation of periodic waves over a submerged bar demonstrated large differences between the Serre and shallow water wave equations. These differences are pronounced due to the fact that the experimental set-up had waves with a wavelength that is \DIFdelbegin \DIFdel{comparable to }\DIFdelend \DIFaddbegin \DIFadd{smaller than $20$ times }\DIFaddend the water depth, which is not appropriate for the shallow water wave equations. To rectify this another numerical experiment was performed simulating the propagation of a long wavelength, small amplitude wave over a \DIFdelbegin \DIFdel{uniformly sloping beach}\DIFdelend \DIFaddbegin \DIFadd{gradual uniformly sloped bed. This scenario is analogous to a tsunami propagating from a continental shelf to the shoreline}\DIFaddend .
+
+In this simulation the initial conditions are the soliton of the Serre equations from \cite{El-etal-2006} with an amplitude of $0.01m$ on top of quiescent water $1m$ deep. \DIFaddbegin \DIFadd{A soliton of the Serre equations was used because it has an appropriate wavelength for the shallow water wave equation and it is a solitary wave like a tsunami. }\DIFaddend The water depth is kept at a fixed $1m$ throughout the scenario. The bed profile is defined in the following way; $(x,b) = [$($-100$m,$0$m), ($100$m,$0$m), ($149.5$m,$0.99$m), ($250$m,$0.99$m)$]$. \DIFdelbegin \DIFdel{This scenario simulates the propagation of a relatively small amplitude wave over large horizontal distances, over a relatively shallow slope much like a tsunami propagating up a beach. }\DIFdelend The initial conditions and the numerical solutions for both the Serre equations and the shallow water wave equations are plotted in Figure \ref{fig:allstructs}.
+
+It can be seen that the behaviour of the numerical solutions of the Serre equations and the shallow water wave equations are very similar when the wavelength is large compared to the depth. There is very little wave deformation for both equations after $t=20s$. For the Serre equations the soliton travels without deformation due to a balance between non-linearity and dispersion. For the shallow water wave equations the soliton travels with little deformation because the effect of non-linearity is small, as the wave amplitude is small. \DIFaddbegin \DIFadd{This demonstrates the negligible effect of dispersion for long wavelength and small amplitude waves far from the coast. 
+}
+
+\DIFaddend As the soliton progresses up the slope there is also very little difference between the numerical solutions throughout the shoaling process as can be seen at $t=40s$. It is only when the \DIFdelbegin \DIFdel{bed becomes flat }\DIFdelend \DIFaddbegin \DIFadd{waves become steep }\DIFaddend after the slope \DIFaddbegin \DIFadd{ends }\DIFaddend that differences begin to arise although both numerical solutions are quite similar at $t=60s$ and at $100s$. \DIFaddbegin \DIFadd{This demonstrates that dispersive effects are negligible for shoaling in this case, but play a role for the steep waves generated by shoaling. }\DIFaddend The main difference between the Serre equations and the shallow water wave equations is the emergence of undulations trailing the bore that has formed. These oscillations have been observed \DIFdelbegin \DIFdel{in well validated numerical solutions of }\DIFdelend \DIFaddbegin \DIFadd{experimentally by \mbox{%DIFAUXCMD
+\cite{Chanson-H-2009-104} }%DIFAUXCMD
+and numerically by \mbox{%DIFAUXCMD
+\cite{Mitsotakis-etal-2014} }%DIFAUXCMD
+for }\DIFaddend the Serre equations \DIFdelbegin \DIFdel{such as those of \mbox{%DIFAUXCMD
+\cite{Mitsotakis-etal-2014} }%DIFAUXCMD
+and even }\DIFdelend \DIFaddbegin \DIFadd{and even for }\DIFaddend the Euler equations \DIFdelbegin \DIFdel{as shown }\DIFdelend by \cite{Mitsotakis-etal-2017}. These undulations oscillate around the bore of the shallow water wave equations, significantly increasing its maximum amplitude. \DIFdelbegin \DIFdel{It was demonstrated by \mbox{%DIFAUXCMD
+\cite{Pitt-2017} }%DIFAUXCMD
+that undular bores of the Serre equations }\DIFdelend \DIFaddbegin \DIFadd{These undulations cause an undular bore to }\DIFaddend travel slightly quicker than the bores of \DIFdelbegin \DIFdel{the }\DIFdelend shallow water wave equations \DIFdelbegin \DIFdel{. This suggests }\DIFdelend \DIFaddbegin \DIFadd{as demonstrated by \mbox{%DIFAUXCMD
+\cite{Pitt-2017}}%DIFAUXCMD
+. These results suggest }\DIFaddend that the shallow water wave equations will slightly underestimate the arrival time as well as the maximum amplitude of \DIFdelbegin \DIFdel{an }\DIFdelend \DIFaddbegin \DIFadd{a steep }\DIFaddend advancing wave.
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend %DIF > 
+\begin{figure}
+	\centering
+	\begin{tabular}{ccc}
+		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre1.pdf}} & & \resizebox{5cm}{!}{\includegraphics{solitonslopeSerre2.pdf}}  \\
+		\hspace{5 mm} $t= 0s$ & & \hspace{5 mm}$t= 20s$ \\
+		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre3.pdf}} && 
+		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre4.pdf}}  \\
+		\hspace{5 mm} $t= 40s$ & & \hspace{5 mm} $t= 60s$ \\
+		\resizebox{5cm}{!}{\includegraphics{solitonslopeSerre5.pdf}} && 
+		\resizebox{5cm}{!}{\includegraphics{SerreBore.pdf}}  \\
+		\hspace{5 mm} $t= 100s$ & & \hspace{5 mm} front of bore at $t= 100s$
+	\DIFdelbeginFL %DIFDELCMD < \\
+%DIFDELCMD < 		
+
+%DIFDELCMD < 		
+%DIFDELCMD < 	%%%
+\DIFdelendFL \end{tabular}
+	\caption{The water profile from the numerical solution for the Serre equations ({\color{blue} \solidrule}) and the shallow water wave equations ({\color{red} \solidrule}) for the soliton travelling over a slope, at different times. The initial conditions for both numerical models are also presented in terms of stage ({\color{black} \solidrule}) and bed profile ({\color{green!60!black} \solidrule}).}
+	\label{fig:allstructs}
+\end{figure}
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend %DIF > 
+%--------------------------------------------------------------------------------
+\section{Conclusions}
+\label{Conclusions}
+Well-validated numerical methods for the Serre and shallow water wave equations were used to investigate the effect of dispersion on shoaling waves. It was demonstrated that when the \DIFdelbegin \DIFdel{wavelength is far larger than the water depth}\DIFdelend \DIFaddbegin \DIFadd{water is shallow}\DIFaddend , dispersion is negligible during shoaling. \DIFdelbegin \DIFdel{However, dispersion is significant during the propagation of these shoaled waves over relatively thin water. As the wavelength becomes smaller compared to the water depth }\DIFdelend \DIFaddbegin \DIFadd{Conversely it was demonstrated that when the water is not shallow dispersion play a significant role in the waves interaction with bathymetry. It was also demonstrated that }\DIFaddend dispersion plays a \DIFdelbegin \DIFdel{larger role in the shoaling and the propagation of waves over flat bathymetry}\DIFdelend \DIFaddbegin \DIFadd{significant role when steep gradients in the water surface are present, increasing the maximum amplitude and the speed of an incoming wave, compared to the non-dispersive equations. For tsunamis this is important as shoaling waves steepen as they approach the coast line}\DIFaddend . These results demonstrate the need for the Serre equations to accurately capture fluid behaviour in the near shore \DIFdelbegin \DIFdel{where waves are shorter }\DIFdelend and the adequacy of the shallow water wave equations for modelling long waves. \DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{Due to the Serre equations being only a moderate increase in computational expense we believe inundation models should be based on them.
+}\DIFaddend %--------------------------------------------------------------------------------	
+\bibliographystyle{chicago} %use chicago style of referencing.
+\bibliography{DamBreak}
+\end{document}

@@ -1,0 +1,43 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Energy}
+\author{Jordan Pitt / u5013521}
+
+\section{Momentum in Soliton}
+
+\[Momentum (t) = \int_{-\infty}^{\infty} uh dx \]
+
+For the Soliton at $t = 0 $
+
+\[h(x,0) = a_0 + a_1 sech^2\left(\kappa x\right)\]
+\[u(x,0) = c\left(1 - \frac{a_0}{a_0 + a_1 sech^2\left(\kappa x\right)}\right)\]
+
+
+\begin{gather}
+\kappa = \dfrac{\sqrt{3a_1}}{2a_0 \sqrt{ a_0 + a_1}}
+\end{gather}
+and
+\begin{gather}
+c = \sqrt{g \left(a_0 + a_1\right)}
+\end{gather}
+
+Integrate from $x_0$ to $x_1$
+
+\[Momentum (0) = \int_{x_0}^{x_1}  \left(c\left(1 - \frac{a_0}{a_0 + a_1 sech^2\left(\kappa x\right)}\right) \left(a_0 + a_1 sech^2\left(\kappa x\right)\right) \right) dx \]
+
+\[Momentum (0) = \int_{x_0}^{x_1}  c\left(a_0 + a_1 sech^2\left(\kappa x\right) - a_0\right)  dx \]
+
+\[Momentum (0) = \int_{x_0}^{x_1}  c\left(a_1 sech^2\left(\kappa x\right)\right)  dx \]
+
+\[Momentum (0) = c a_1 \left[\frac{\tanh\left(\kappa x\right)}{\kappa}\right]_{x_0}^{x_1}\]
+
+
+
+
+
+
+\end{document}

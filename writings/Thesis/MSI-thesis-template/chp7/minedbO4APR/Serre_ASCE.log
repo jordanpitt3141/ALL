@@ -1,0 +1,984 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.10.4)  28 MAR 2017 10:22
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Serre_ASCE.tex
+(./Serre_ASCE.tex
+LaTeX2e <2016/02/01>
+Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
+(./Serre_ASCE.cls
+
+
+LaTeX Warning: You have requested document class `Serre_ASCE',
+               but the document class provides `ascelike'.
+
+Document Class: ascelike 2013/2/14 Version 2.3 ASCE-like manuscripts (Am. Soc. 
+Civ. Engr.)
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+
+(1) A "Journal" style manuscript will be produced
+(2) Figures and Tables will be placed together at the end of the manuscript (ch
+ange with the 'InsideFigs' option)
+(3) Text will be single spaced (change with the 'DoubleSpace' option)
+(4) Text will be 12pt (change with the '10pt', '11pt', & '12pt' options)
+(5) Line numbers will be placed alonside the text (change with the 'NoLineNumbe
+rs' option)
+
+\c@enumnoo=\count87
+\TempBoxb=\box26
+\TempBoxl=\skip43
+\Abovecaptionrule=\skip44
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvips.def on input line 95.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 2015/12/30 v3.0k Driver-dependent file (DPC,SPQR)
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count88
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2015/12/30 v3.0k Driver-dependent file (DPC,SPQR)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2016/03/03 v2.15a AMS math features
+\@mathmargin=\skip45
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks15
+\ex@=\dimen105
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen106
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count89
+LaTeX Info: Redefining \frac on input line 199.
+\uproot@=\count90
+\leftroot@=\count91
+LaTeX Info: Redefining \overline on input line 297.
+\classnum@=\count92
+\DOTSCASE@=\count93
+LaTeX Info: Redefining \ldots on input line 394.
+LaTeX Info: Redefining \dots on input line 397.
+LaTeX Info: Redefining \cdots on input line 518.
+\Mathstrutbox@=\box27
+\strutbox@=\box28
+\big@size=\dimen107
+LaTeX Font Info:    Redeclaring font encoding OML on input line 630.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
+\macc@depth=\count94
+\c@MaxMatrixCols=\count95
+\dotsspace@=\muskip10
+\c@parentequation=\count96
+\dspbrk@lvl=\count97
+\tag@help=\toks16
+\row@=\count98
+\column@=\count99
+\maxfields@=\count100
+\andhelp@=\toks17
+\eqnshift@=\dimen108
+\alignsep@=\dimen109
+\tagshift@=\dimen110
+\tagwidth@=\dimen111
+\totwidth@=\dimen112
+\lineht@=\dimen113
+\@envbody=\toks18
+\multlinegap=\skip46
+\multlinetaggap=\skip47
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2735.
+LaTeX Info: Redefining \] on input line 2736.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count101
+\output=\toks20
+\linenoprevgraf=\count102
+\linenumbersep=\dimen114
+\linenumberwidth=\dimen115
+\c@linenumber=\count103
+\c@pagewiselinenumber=\count104
+\c@LN@truepage=\count105
+\c@internallinenumber=\count106
+\c@internallinenumbers=\count107
+\quotelinenumbersep=\dimen116
+\bframerule=\dimen117
+\bframesep=\dimen118
+\bframebox=\box29
+LaTeX Info: Redefining \\ on input line 3056.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
+\@enLab=\toks21
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen119
+\captionmargin@=\dimen120
+\captionwidth=\dimen121
+\caption@tempdima=\dimen122
+\caption@indent=\dimen123
+\caption@parindent=\dimen124
+\caption@hangindent=\dimen125
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+)
+
+Package caption Warning: Unsupported document class (or package) detected,
+(caption)                usage of the caption package is not recommended.
+See the caption package documentation for explanation.
+
+Package caption Info: \@makecaption = \long macro:#1#2->\vspace {\Abovecaptionr
+ule } \savebox {\TempBoxb }{\rule {0em}{3ex}\ifthenelse {\boolean {NewProceedin
+gs}}{\rmfamily }{\sffamily }\bfseries \normalsize #1.\makebox [1ex]{}\ifthenels
+e {\boolean {NewProceedings}}{\rmfamily }{\sffamily }\bfseries \normalsize #2}\
+settowidth {\TempBoxl }{\usebox {\TempBoxb }} \ifthenelse {\lengthtest {\TempBo
+xl > \textwidth }} {\ifthenelse {\boolean {NewProceedings}}{\rmfamily }{\sffami
+ly }\bfseries \normalsize #1.\makebox [1ex]{}\ifthenelse {\boolean {NewProceedi
+ngs}}{\rmfamily }{\sffamily }\bfseries \normalsize #2\par }{\centering \usebox 
+{\TempBoxb }} \vskip \belowcaptionskip .
+\c@ContinuedFloat=\count108
+)
+\c@subfigure=\count109
+\c@subtable=\count110
+) (/usr/share/texlive/texmf-dist/tex/latex/psfrag/psfrag.sty
+Package: psfrag 1998/04/11 v3.04 PSfrag (MCG)
+\pfg@pcount=\count111
+\pfg@scount=\count112
+\pfg@temp=\write3
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip48
+\f@ncyO@elh=\skip49
+\f@ncyO@erh=\skip50
+\f@ncyO@olh=\skip51
+\f@ncyO@orh=\skip52
+\f@ncyO@elf=\skip53
+\f@ncyO@erf=\skip54
+\f@ncyO@olf=\skip55
+\f@ncyO@orf=\skip56
+)
+(/usr/share/texlive/texmf-dist/tex/latex/currfile/currfile.sty
+Package: currfile 2013/02/01 v0.7b Provides the file path elements of the curre
+nt input file
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/filehook/filehook.sty
+Package: filehook 2011/10/12 v0.5d Hooks for input files
+)
+\c@currfiledepth=\count113
+)
+(/usr/share/texlive/texmf-dist/tex/latex/datetime/datetime.sty
+Package: datetime 2015/03/20 v2.60 Date Time Package
+
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count114
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fmtcount/fmtcount.sty
+Package: fmtcount 2015/05/05 v3.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks22
+\XKV@tempa@toks=\toks23
+)
+\XKV@depth=\count115
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/fmtcount/fcprefix.sty
+Package: fcprefix 2012/09/28
+
+(/usr/share/texlive/texmf-dist/tex/latex/fmtcount/fcnumparser.sty
+Package: fcnumparser 2012/09/28
+\fc@digit@counter=\count116
+))
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\c@padzeroesN=\count117
+\fc@tmpcatcode=\count118
+\@DT@modctr=\count119
+\@ordinalctr=\count120
+\@orgargctr=\count121
+\@strctr=\count122
+\@tmpstrctr=\count123
+\@DT@loopN=\count124
+\@DT@X=\count125
+
+(/usr/share/texlive/texmf-dist/tex/latex/fmtcount/fc-english.def
+File: fc-english.def 2013/08/17
+))
+(/usr/share/texlive/texmf-dist/tex/latex/datetime/datetime-defaults.sty
+Package: datetime-defaults 2013/09/10
+)
+\@day=\count126
+\@month=\count127
+\@year=\count128
+\c@HOUR=\count129
+\c@HOURXII=\count130
+\c@MINUTE=\count131
+\c@TOHOUR=\count132
+\c@TOMINUTE=\count133
+\c@SECOND=\count134
+\currenthour=\count135
+\currentminute=\count136
+\currentsecond=\count137
+Package datetime Info: No datetime.cfg file found, using default settings on in
+put line 308.
+\@dtctr=\count138
+\dayofyear=\count139
+\dayofweek=\count140
+LaTeX Info: Redefining \today on input line 736.
+\dt@a=\toks24
+\dt@b=\toks25
+)
+(./Serre_ASCE.aux)
+\openout1 = `Serre_ASCE.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 40.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/endfloat/endfloat.sty
+Package: endfloat 2011/12/25 v2.5d LaTeX2e package puts figures and tables at e
+nd (jdm)
+\c@posttable=\count141
+\efloat@postttt=\write4
+\@ef@tttopen=\count142
+\c@postfigure=\count143
+\efloat@postfff=\write5
+\@ef@fffopen=\count144
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+34.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count145
+\scratchdimen=\dimen126
+\scratchbox=\box30
+\nofMPsegments=\count146
+\nofMParguments=\count147
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count148
+\MPscratchDim=\dimen127
+\MPnumerator=\count149
+\makeMPintoPDFobject=\count150
+\everyMPtoPDFconversion=\toks27
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 55.
+LaTeX Font Info:    Try loading font information for U+msa on input line 55.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 55.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 57.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 57.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 57.
+ [1
+Non-PDF special ignored!
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+[2] [3] [4] [5]
+\openout5 = `Serre_ASCE.fff'.
+
+ (Serre_ASCE.fff) [6] [7] [8] [9] [10] [11] [12] [13]
+(./Serre_ASCE.bbl
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no “ in font ptmr7t!
+) AED endfloat: Processing end Figures and Tables [14]
+(./Serre_ASCE.lof
+Overfull \hbox (5.24828pt too wide) in paragraph at lines 19--19
+ [][] []$\OML/cmm/m/it/12 u[]$ \OT1/ptm/m/n/12 ([][][]) and speed of the con-ta
+ct dis-con-ti-nu-ity ([]$\OMS/cmsy/m/n/12 ^^N$[]\OT1/ptm/m/n/12 ) for nu-mer-i-
+cal so-lu-tions of smoothed 
+ []
+
+[15
+
+
+])
+\tf@lof=\write6
+\openout6 = `Serre_ASCE.lof'.
+
+ [16] (./Serre_ASCE.fff
+<pics/results/soliton/ex/FDc.pdf, id=69, 242.37552pt x 195.8246pt>
+File: pics/results/soliton/ex/FDc.pdf Graphic file (type pdf)
+
+<use pics/results/soliton/ex/FDc.pdf>
+Package pdftex.def Info: pics/results/soliton/ex/FDc.pdf used on input line 3.
+(pdftex.def)             Requested size: 234.87749pt x 189.7763pt.
+
+<pics/results/soliton/ex/grim.pdf, id=70, 242.37552pt x 195.8246pt>
+File: pics/results/soliton/ex/grim.pdf Graphic file (type pdf)
+
+<use pics/results/soliton/ex/grim.pdf>
+Package pdftex.def Info: pics/results/soliton/ex/grim.pdf used on input line 7.
+
+(pdftex.def)             Requested size: 234.87749pt x 189.7763pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 2--10
+[]$[]$ $[]$ 
+ []
+
+[17 <./pics/results/soliton/ex/FDc.pdf> <./pics/results/soliton/ex/grim.pdf>]
+<pics/results/soliton/L1/FDc.pdf, id=108, 243.62819pt x 198.53473pt>
+File: pics/results/soliton/L1/FDc.pdf Graphic file (type pdf)
+
+<use pics/results/soliton/L1/FDc.pdf>
+Package pdftex.def Info: pics/results/soliton/L1/FDc.pdf used on input line 18.
+
+(pdftex.def)             Requested size: 234.87749pt x 191.40303pt.
+
+<pics/results/soliton/C1/FDc.pdf, id=109, 247.0319pt x 198.59195pt>
+File: pics/results/soliton/C1/FDc.pdf Graphic file (type pdf)
+
+<use pics/results/soliton/C1/FDc.pdf>
+Package pdftex.def Info: pics/results/soliton/C1/FDc.pdf used on input line 19.
+
+(pdftex.def)             Requested size: 234.87749pt x 188.81883pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 18--20
+[][] [] 
+ []
+
+<pics/results/soliton/L1/grim.pdf, id=110, 243.62819pt x 198.53473pt>
+File: pics/results/soliton/L1/grim.pdf Graphic file (type pdf)
+
+<use pics/results/soliton/L1/grim.pdf>
+Package pdftex.def Info: pics/results/soliton/L1/grim.pdf used on input line 23
+.
+(pdftex.def)             Requested size: 234.87749pt x 191.40303pt.
+
+<pics/results/soliton/C1/grim.pdf, id=111, 247.0319pt x 198.59195pt>
+File: pics/results/soliton/C1/grim.pdf Graphic file (type pdf)
+
+<use pics/results/soliton/C1/grim.pdf>
+Package pdftex.def Info: pics/results/soliton/C1/grim.pdf used on input line 24
+.
+(pdftex.def)             Requested size: 234.87749pt x 188.81883pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 23--25
+[][] [] 
+ []
+
+[18 <./pics/results/soliton/L1/FDc.pdf> <./pics/results/soliton/C1/FDc.pdf> <./
+pics/results/soliton/L1/grim.pdf> <./pics/results/soliton/C1/grim.pdf>]
+<pics/explainers/dbs.pdf, id=184, 419.5675pt x 298.11375pt>
+File: pics/explainers/dbs.pdf Graphic file (type pdf)
+
+<use pics/explainers/dbs.pdf>
+Package pdftex.def Info: pics/explainers/dbs.pdf used on input line 34.
+(pdftex.def)             Requested size: 281.85585pt x 200.26738pt.
+ [19 <./pics/explainers/dbs.pdf>]
+<pics/explainers/SWWEana.pdf, id=195, 238.38661pt x 195.83063pt>
+File: pics/explainers/SWWEana.pdf Graphic file (type pdf)
+
+<use pics/explainers/SWWEana.pdf>
+Package pdftex.def Info: pics/explainers/SWWEana.pdf used on input line 42.
+(pdftex.def)             Requested size: 234.87749pt x 192.95555pt.
+ [20 <./pics/explainers/SWWEana.pdf>]
+<pics/explainers/SERREex.pdf, id=215, 235.39946pt x 181.19896pt>
+File: pics/explainers/SERREex.pdf Graphic file (type pdf)
+
+<use pics/explainers/SERREex.pdf>
+Package pdftex.def Info: pics/explainers/SERREex.pdf used on input line 50.
+(pdftex.def)             Requested size: 234.87749pt x 180.80312pt.
+ [21 <./pics/explainers/SERREex.pdf>]
+<pics/results/SDB/numsols/alpha0.025/1-figure0.pdf, id=232, 238.38661pt x 195.8
+3063pt>
+File: pics/results/SDB/numsols/alpha0.025/1-figure0.pdf Graphic file (type pdf)
+
+ <use pics/results/SDB/numsols/alpha0.025/1-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/alpha0.025/1-figure0.pdf used
+ on input line 58.
+(pdftex.def)             Requested size: 328.82706pt x 270.13599pt.
+ [22 <./pics/results/SDB/numsols/alpha0.025/1-figure0.pdf>]
+<pics/results/SDB/Lcon/alpha0.025/1.pdf, id=252, 247.03091pt x 198.53673pt>
+File: pics/results/SDB/Lcon/alpha0.025/1.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/Lcon/alpha0.025/1.pdf>
+Package pdftex.def Info: pics/results/SDB/Lcon/alpha0.025/1.pdf used on input l
+ine 67.
+(pdftex.def)             Requested size: 234.87749pt x 188.77844pt.
+
+<pics/results/SDB/Con/1.pdf, id=253, 247.03091pt x 198.53673pt>
+File: pics/results/SDB/Con/1.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/Con/1.pdf>
+Package pdftex.def Info: pics/results/SDB/Con/1.pdf used on input line 68.
+(pdftex.def)             Requested size: 234.87749pt x 188.77844pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 67--69
+[][] [] 
+ []
+
+[23 <./pics/results/SDB/Lcon/alpha0.025/1.pdf> <./pics/results/SDB/Con/1.pdf>]
+<pics/results/SDB/numsols/alpha0.5/1-figure0.pdf, id=290, 238.38661pt x 195.830
+63pt>
+File: pics/results/SDB/numsols/alpha0.5/1-figure0.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/alpha0.5/1-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/alpha0.5/1-figure0.pdf used o
+n input line 79.
+(pdftex.def)             Requested size: 328.82706pt x 270.13599pt.
+
+<pics/results/SDB/numsols/alpha0.5/2-figure0.pdf, id=291, 250.3493pt x 195.8306
+3pt>
+File: pics/results/SDB/numsols/alpha0.5/2-figure0.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/alpha0.5/2-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/alpha0.5/2-figure0.pdf used o
+n input line 83.
+(pdftex.def)             Requested size: 234.87749pt x 183.73119pt.
+ [24 <./pics/results/SDB/numsols/alpha0.5/1-figure0.pdf> <./pics/results/SDB/nu
+msols/alpha0.5/2-figure0.pdf>]
+<pics/results/SDB/Lcon/alpha0.5/1.pdf, id=324, 247.03091pt x 198.53673pt>
+File: pics/results/SDB/Lcon/alpha0.5/1.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/Lcon/alpha0.5/1.pdf>
+Package pdftex.def Info: pics/results/SDB/Lcon/alpha0.5/1.pdf used on input lin
+e 93.
+(pdftex.def)             Requested size: 234.87749pt x 188.77844pt.
+
+<pics/results/SDB/Con/6.pdf, id=325, 247.03091pt x 198.53673pt>
+File: pics/results/SDB/Con/6.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/Con/6.pdf>
+Package pdftex.def Info: pics/results/SDB/Con/6.pdf used on input line 94.
+(pdftex.def)             Requested size: 234.87749pt x 188.77844pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 93--95
+[][] [] 
+ []
+
+[25 <./pics/results/SDB/Lcon/alpha0.5/1.pdf> <./pics/results/SDB/Con/6.pdf>]
+<pics/results/SDB/numsols/alpha2.5/1-figure0.pdf, id=362, 238.38661pt x 195.830
+63pt>
+File: pics/results/SDB/numsols/alpha2.5/1-figure0.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/alpha2.5/1-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/alpha2.5/1-figure0.pdf used o
+n input line 105.
+(pdftex.def)             Requested size: 328.82706pt x 270.13599pt.
+
+<pics/results/SDB/numsols/alpha2.5/2-figure0.pdf, id=363, 250.3493pt x 195.8306
+3pt>
+File: pics/results/SDB/numsols/alpha2.5/2-figure0.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/alpha2.5/2-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/alpha2.5/2-figure0.pdf used o
+n input line 108.
+(pdftex.def)             Requested size: 234.87749pt x 183.73119pt.
+
+<pics/results/SDB/numsols/alpha2.5/3-figure0.pdf, id=364, 250.34128pt x 195.830
+63pt>
+File: pics/results/SDB/numsols/alpha2.5/3-figure0.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/alpha2.5/3-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/alpha2.5/3-figure0.pdf used o
+n input line 109.
+(pdftex.def)             Requested size: 234.87749pt x 183.74315pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 108--110
+[][] [] 
+ []
+
+[26 <./pics/results/SDB/numsols/alpha2.5/1-figure0.pdf> <./pics/results/SDB/num
+sols/alpha2.5/2-figure0.pdf> <./pics/results/SDB/numsols/alpha2.5/3-figure0.pdf
+>] <pics/results/SDB/Lcon/alpha2.5/1.pdf, id=411, 248.06578pt x 198.53673pt>
+File: pics/results/SDB/Lcon/alpha2.5/1.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/Lcon/alpha2.5/1.pdf>
+Package pdftex.def Info: pics/results/SDB/Lcon/alpha2.5/1.pdf used on input lin
+e 119.
+(pdftex.def)             Requested size: 234.87749pt x 187.9817pt.
+
+<pics/results/SDB/Con/9.pdf, id=412, 247.03091pt x 198.53673pt>
+File: pics/results/SDB/Con/9.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/Con/9.pdf>
+Package pdftex.def Info: pics/results/SDB/Con/9.pdf used on input line 120.
+(pdftex.def)             Requested size: 234.87749pt x 188.77844pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 119--121
+[][] [] 
+ []
+
+[27 <./pics/results/SDB/Lcon/alpha2.5/1.pdf> <./pics/results/SDB/Con/9.pdf>]
+<pics/results/SDB/numsols/alpha10/1-figure0.pdf, id=453, 238.38661pt x 195.8306
+3pt>
+File: pics/results/SDB/numsols/alpha10/1-figure0.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/alpha10/1-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/alpha10/1-figure0.pdf used on
+ input line 131.
+(pdftex.def)             Requested size: 328.82706pt x 270.13599pt.
+
+<pics/results/SDB/numsols/alpha10/2-figure0.pdf, id=454, 250.3493pt x 195.83063
+pt>
+File: pics/results/SDB/numsols/alpha10/2-figure0.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/alpha10/2-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/alpha10/2-figure0.pdf used on
+ input line 134.
+(pdftex.def)             Requested size: 234.87749pt x 183.73119pt.
+
+<pics/results/SDB/numsols/alpha10/3-figure0.pdf, id=455, 250.34128pt x 195.8306
+3pt>
+File: pics/results/SDB/numsols/alpha10/3-figure0.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/alpha10/3-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/alpha10/3-figure0.pdf used on
+ input line 135.
+(pdftex.def)             Requested size: 234.87749pt x 183.74315pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 134--136
+[][] [] 
+ []
+
+[28 <./pics/results/SDB/numsols/alpha10/1-figure0.pdf> <./pics/results/SDB/nums
+ols/alpha10/2-figure0.pdf> <./pics/results/SDB/numsols/alpha10/3-figure0.pdf>]
+<pics/results/SDB/Lcon/alpha10/1.pdf, id=502, 248.06578pt x 198.53673pt>
+File: pics/results/SDB/Lcon/alpha10/1.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/Lcon/alpha10/1.pdf>
+Package pdftex.def Info: pics/results/SDB/Lcon/alpha10/1.pdf used on input line
+ 145.
+(pdftex.def)             Requested size: 234.87749pt x 187.9817pt.
+
+<pics/results/SDB/Con/12.pdf, id=503, 247.03091pt x 198.53673pt>
+File: pics/results/SDB/Con/12.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/Con/12.pdf>
+Package pdftex.def Info: pics/results/SDB/Con/12.pdf used on input line 146.
+(pdftex.def)             Requested size: 234.87749pt x 188.77844pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 145--147
+[][] [] 
+ []
+
+[29 <./pics/results/SDB/Lcon/alpha10/1.pdf> <./pics/results/SDB/Con/12.pdf>]
+<pics/results/SDB/numsols/modelcomppalpha10dx10/1-figure0.pdf, id=542, 238.3866
+1pt x 195.83063pt>
+File: pics/results/SDB/numsols/modelcomppalpha10dx10/1-figure0.pdf Graphic file
+ (type pdf)
+
+<use pics/results/SDB/numsols/modelcomppalpha10dx10/1-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/modelcomppalpha10dx10/1-figur
+e0.pdf used on input line 157.
+(pdftex.def)             Requested size: 328.82706pt x 270.13599pt.
+
+<pics/results/SDB/numsols/modelcomppalpha10dx10/2-figure0.pdf, id=543, 250.3493
+pt x 195.83063pt>
+File: pics/results/SDB/numsols/modelcomppalpha10dx10/2-figure0.pdf Graphic file
+ (type pdf)
+
+<use pics/results/SDB/numsols/modelcomppalpha10dx10/2-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/modelcomppalpha10dx10/2-figur
+e0.pdf used on input line 160.
+(pdftex.def)             Requested size: 234.87749pt x 183.73119pt.
+
+<pics/results/SDB/numsols/modelcomppalpha10dx10/4-figure0.pdf, id=544, 250.3412
+8pt x 195.83063pt>
+File: pics/results/SDB/numsols/modelcomppalpha10dx10/4-figure0.pdf Graphic file
+ (type pdf)
+
+<use pics/results/SDB/numsols/modelcomppalpha10dx10/4-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/modelcomppalpha10dx10/4-figur
+e0.pdf used on input line 161.
+(pdftex.def)             Requested size: 234.87749pt x 183.74315pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 160--162
+[][] [] 
+ []
+
+[30 <./pics/results/SDB/numsols/modelcomppalpha10dx10/1-figure0.pdf> <./pics/re
+sults/SDB/numsols/modelcomppalpha10dx10/2-figure0.pdf> <./pics/results/SDB/nums
+ols/modelcomppalpha10dx10/4-figure0.pdf>]
+<pics/results/SDB/numsols/300s/CF0t300s.pdf, id=590, 241.57251pt x 197.19171pt>
+File: pics/results/SDB/numsols/300s/CF0t300s.pdf Graphic file (type pdf)
+<use pics/results/SDB/numsols/300s/CF0t300s.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/300s/CF0t300s.pdf used on inp
+ut line 173.
+(pdftex.def)             Requested size: 328.82706pt x 268.4239pt.
+
+<pics/results/SDB/numsols/300s/CF1t300s.pdf, id=591, 241.5695pt x 197.19171pt>
+File: pics/results/SDB/numsols/300s/CF1t300s.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/numsols/300s/CF1t300s.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/300s/CF1t300s.pdf used on inp
+ut line 176.
+(pdftex.def)             Requested size: 234.87749pt x 191.73308pt.
+
+<pics/results/SDB/numsols/300s/CF2t300s.pdf, id=592, 246.3634pt x 195.83163pt>
+File: pics/results/SDB/numsols/300s/CF2t300s.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/numsols/300s/CF2t300s.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/300s/CF2t300s.pdf used on inp
+ut line 177.
+(pdftex.def)             Requested size: 234.87749pt x 186.70235pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 176--178
+[][] [] 
+ []
+
+[31 <./pics/results/SDB/numsols/300s/CF0t300s.pdf> <./pics/results/SDB/numsols/
+300s/CF1t300s.pdf> <./pics/results/SDB/numsols/300s/CF2t300s.pdf>]
+<pics/results/SDB/numsols/300s/evolve30s.pdf, id=646, 246.3634pt x 195.82962pt>
+File: pics/results/SDB/numsols/300s/evolve30s.pdf Graphic file (type pdf)
+<use pics/results/SDB/numsols/300s/evolve30s.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/300s/evolve30s.pdf used on in
+put line 187.
+(pdftex.def)             Requested size: 234.87749pt x 186.70044pt.
+
+<pics/results/SDB/numsols/300s/evolve100s.pdf, id=647, 246.3634pt x 195.82962pt
+>
+File: pics/results/SDB/numsols/300s/evolve100s.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/300s/evolve100s.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/300s/evolve100s.pdf used on i
+nput line 191.
+(pdftex.def)             Requested size: 234.87749pt x 186.70044pt.
+
+<pics/results/SDB/numsols/300s/evolve200s.pdf, id=648, 246.3634pt x 195.82962pt
+>
+File: pics/results/SDB/numsols/300s/evolve200s.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/300s/evolve200s.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/300s/evolve200s.pdf used on i
+nput line 195.
+(pdftex.def)             Requested size: 234.87749pt x 186.70044pt.
+
+<pics/results/SDB/numsols/300s/evolve300s.pdf, id=649, 246.3634pt x 195.82962pt
+>
+File: pics/results/SDB/numsols/300s/evolve300s.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/300s/evolve300s.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/300s/evolve300s.pdf used on i
+nput line 199.
+(pdftex.def)             Requested size: 234.87749pt x 186.70044pt.
+ [32 <./pics/results/SDB/numsols/300s/evolve30s.pdf> <./pics/results/SDB/numsol
+s/300s/evolve100s.pdf> <./pics/results/SDB/numsols/300s/evolve200s.pdf> <./pics
+/results/SDB/numsols/300s/evolve300s.pdf>]
+<pics/results/SDB/numsols/SWWCOMP/30s/0.pdf, id=720, 283.62863pt x 195.83063pt>
+File: pics/results/SDB/numsols/SWWCOMP/30s/0.pdf Graphic file (type pdf)
+<use pics/results/SDB/numsols/SWWCOMP/30s/0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/SWWCOMP/30s/0.pdf used on inp
+ut line 211.
+(pdftex.def)             Requested size: 234.87749pt x 162.17183pt.
+
+<pics/results/SDB/numsols/SWWCOMP/30s/2.pdf, id=721, 283.63066pt x 195.83063pt>
+File: pics/results/SDB/numsols/SWWCOMP/30s/2.pdf Graphic file (type pdf)
+<use pics/results/SDB/numsols/SWWCOMP/30s/2.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/SWWCOMP/30s/2.pdf used on inp
+ut line 212.
+(pdftex.def)             Requested size: 234.87749pt x 162.17183pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 211--213
+[][] [] 
+ []
+
+
+<pics/results/SDB/numsols/SWWCOMP/30s/1.pdf, id=722, 283.63066pt x 195.83063pt>
+File: pics/results/SDB/numsols/SWWCOMP/30s/1.pdf Graphic file (type pdf)
+<use pics/results/SDB/numsols/SWWCOMP/30s/1.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/SWWCOMP/30s/1.pdf used on inp
+ut line 215.
+(pdftex.def)             Requested size: 234.87749pt x 162.17183pt.
+
+<pics/results/SDB/numsols/SWWCOMP/30s/3.pdf, id=723, 291.60242pt x 195.83063pt>
+File: pics/results/SDB/numsols/SWWCOMP/30s/3.pdf Graphic file (type pdf)
+<use pics/results/SDB/numsols/SWWCOMP/30s/3.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/SWWCOMP/30s/3.pdf used on inp
+ut line 216.
+(pdftex.def)             Requested size: 234.87749pt x 157.73744pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 215--217
+[][] [] 
+ []
+
+[33 <./pics/results/SDB/numsols/SWWCOMP/30s/0.pdf> <./pics/results/SDB/numsols/
+SWWCOMP/30s/2.pdf> <./pics/results/SDB/numsols/SWWCOMP/30s/1.pdf> <./pics/resul
+ts/SDB/numsols/SWWCOMP/30s/3.pdf>]
+<pics/results/SDB/numsols/SWWCOMP/300s/0.pdf, id=808, 283.63066pt x 197.19171pt
+>
+File: pics/results/SDB/numsols/SWWCOMP/300s/0.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/SWWCOMP/300s/0.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/SWWCOMP/300s/0.pdf used on in
+put line 226.
+(pdftex.def)             Requested size: 234.87749pt x 163.29898pt.
+
+<pics/results/SDB/numsols/SWWCOMP/300s/2.pdf, id=809, 283.62863pt x 197.19171pt
+>
+File: pics/results/SDB/numsols/SWWCOMP/300s/2.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/SWWCOMP/300s/2.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/SWWCOMP/300s/2.pdf used on in
+put line 227.
+(pdftex.def)             Requested size: 234.87749pt x 163.29898pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 226--228
+[][] [] 
+ []
+
+
+<pics/results/SDB/numsols/SWWCOMP/300s/1.pdf, id=810, 299.57321pt x 196.66774pt
+>
+File: pics/results/SDB/numsols/SWWCOMP/300s/1.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/SWWCOMP/300s/1.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/SWWCOMP/300s/1.pdf used on in
+put line 230.
+(pdftex.def)             Requested size: 234.87749pt x 154.19846pt.
+
+<pics/results/SDB/numsols/SWWCOMP/300s/3.pdf, id=811, 307.54599pt x 195.83363pt
+>
+File: pics/results/SDB/numsols/SWWCOMP/300s/3.pdf Graphic file (type pdf)
+ <use pics/results/SDB/numsols/SWWCOMP/300s/3.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/SWWCOMP/300s/3.pdf used on in
+put line 231.
+(pdftex.def)             Requested size: 234.87749pt x 149.5672pt.
+
+Overfull \hbox (2.28001pt too wide) in paragraph at lines 230--232
+[][] [] 
+ []
+
+[34 <./pics/results/SDB/numsols/SWWCOMP/300s/0.pdf> <./pics/results/SDB/numsols
+/SWWCOMP/300s/2.pdf> <./pics/results/SDB/numsols/SWWCOMP/300s/1.pdf> <./pics/re
+sults/SDB/numsols/SWWCOMP/300s/3.pdf>]
+<pics/results/SDB/CDspeed/speed.pdf, id=895, 238.38661pt x 199.23434pt>
+File: pics/results/SDB/CDspeed/speed.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/CDspeed/speed.pdf>
+Package pdftex.def Info: pics/results/SDB/CDspeed/speed.pdf used on input line 
+240.
+(pdftex.def)             Requested size: 234.87749pt x 196.3093pt.
+ [35 <./pics/results/SDB/CDspeed/speed.pdf>] <pics/results/SDB/numsols/300s/a.p
+df, id=915, 250.3493pt x 195.83063pt>
+File: pics/results/SDB/numsols/300s/a.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/numsols/300s/a.pdf>
+Package pdftex.def Info: pics/results/SDB/numsols/300s/a.pdf used on input line
+ 248.
+(pdftex.def)             Requested size: 234.87749pt x 183.73119pt.
+ [36 <./pics/results/SDB/numsols/300s/a.pdf>]
+<pics/results/SDB/H/Time/HFT-figure0.pdf, id=933, 245.25026pt x 195.83063pt>
+File: pics/results/SDB/H/Time/HFT-figure0.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/H/Time/HFT-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/H/Time/HFT-figure0.pdf used on input 
+line 257.
+(pdftex.def)             Requested size: 234.87749pt x 187.55899pt.
+
+<pics/results/SDB/H/Time/TT-figure0.pdf, id=934, 253.22304pt x 202.48648pt>
+File: pics/results/SDB/H/Time/TT-figure0.pdf Graphic file (type pdf)
+
+<use pics/results/SDB/H/Time/TT-figure0.pdf>
+Package pdftex.def Info: pics/results/SDB/H/Time/TT-figure0.pdf used on input l
+ine 258.
+(pdftex.def)             Requested size: 244.03806pt x 195.14177pt.
+
+Overfull \hbox (11.44058pt too wide) in paragraph at lines 257--259
+[][] [] 
+ []
+
+[37 <./pics/results/SDB/H/Time/HFT-figure0.pdf> <./pics/results/SDB/H/Time/TT-f
+igure0.pdf>]) (./Serre_ASCE.aux) ) 
+Here is how much of TeX's memory you used:
+ 6683 strings out of 494953
+ 101735 string characters out of 6180977
+ 182910 words of memory out of 5000000
+ 9761 multiletter control sequences out of 15000+600000
+ 32175 words of font info for 78 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 43i,25n,78p,1660b,633s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvip
+s/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cme
+x10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
+mes/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Serre_ASCE.pdf (37 pages, 5375032 bytes).
+PDF statistics:
+ 1043 PDF objects out of 1200 (max. 8388607)
+ 923 compressed objects within 10 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 241 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Second Order Finite Difference Method for u}
+\begin{gather}
+	h^{n}_iu^{n+1}_i - \left(h^{n}_i\right)^2 \left(\frac{u^{n+1}_{i+1} -u^{n+1}_{i-1} }{2 \Delta x}\right) - \frac{\left(h^{n}_i\right)^3}{3}\left(\frac{u^{n+1}_{i+1} - 2u^{n+1}_{i} + u^{n+1}_{i-1} }{\Delta x^2}\right) = - Y^n_i 
+	\label{eq:expandedutdisc3}
+	\end{gather}
+
+	\begin{gather}
+	\begin{split}
+	Y^n_i &= 2\Delta t \Bigg[u^n_ih^n_i \frac{u^{n}_{i+1} - u^{n}_{i-1}}{2\Delta x} + gh^n_i\frac{h^{n-1}_{i+1} - h^{n-1}_{i-1}}{2\Delta x} + \left(h^n_i\right)^2 \left(\frac{u^{n-1}_{i+1} - u^{n-1}_{i-1}}{2\Delta x} \right)^2 \\ &+ \frac{\left(h^n_i\right)^3}{3}\frac{u^{n}_{i+1} - u^{n}_{i-1}}{2\Delta x}\frac{u^{n}_{i+1} -2u^{n}_{i}   + u^{n}_{i-1}}{\Delta x^2} - \left(h^n_i\right)^2u^n_i\frac{u^{n}_{i+1} -2u^{n}_{i} + u^{n}_{i-1}}{\Delta x^2}  \\  &- \frac{\left(h^n_i\right)^3}{3}u^n_i\frac{ u^n_{j+2} - 2u^n_{j+1} + 2 u^n_{j-1} - u^n_{j-2}}{2 \Delta x^3} \Bigg] \\ &- h_i^{n}u_i^{n-1} + \left(h_i^{n}\right)^2\frac{u^{n-1}_{i+1} - u^{n-1}_{i-1}}{2\Delta x} + \frac{\left(h_i^{n}\right)^3}{3}\frac{u^{n-1}_{i+1} -2 u^{n-1}_{i} + u^{n-1}_{i-1}}{\Delta x^2}
+	\end{split}
+	\end{gather}
+
+%--------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
+\section{Second Order Finite Difference Method for h}
+%--------------------------------------------------------------------------------
+
+	\begin{gather}
+	h^{n+1}_i = h^{n-1}_i - \Delta t \left(u^{n}_{i}\frac{h^{n}_{i+1} - h^{n}_{i-1}}{\Delta x} + h^{n}_{i}\frac{u^{n}_{i+1} - u^{n}_{i-1}}{\Delta x}\right) 
+	\end{gather}
+
+
+\section{Lax Wendroff Method for h}
+
+	\[
+	h^{n + 1/2}_{i+ 1/2} = \frac{1}{2}\left(h^{n}_{i+1} + h^{n}_i\right) - \frac{\Delta t}{2\Delta x}\left(u^n_{i+1}h^n_{i+1} - h^n_{i}u^n_{i}\right),
+	\]
+	\[
+	h^{n + 1/2}_{i- 1/2} = \frac{1}{2}\left(h^{n}_{i} + h^{n}_{i-1}\right) - \frac{\Delta t}{2\Delta x}\left(u^n_{i}h^n_{i} - h^n_{i-1}u^n_{i-1}\right)
+	\]
+	and
+	$$
+	h^{n+1}_i = h^{n}_i - \frac{\Delta t}{\Delta x}\left(u^{n + 1/2}_{i+ 1/2}h^{n + 1/2}_{i+ 1/2} - u^{n + 1/2}_{i- 1/2}h^{n + 1/2}_{i- 1/2}\right).
+	$$
+\begin{gather}
+u^{n + 1/2}_{i+ 1/2} = \frac{u^{n+1}_{i+1} + u^{n}_{i+1} + u^{n+1}_{i} + u^{n}_{i} }{4}
+\end{gather}
+and
+\begin{gather}
+u^{n + 1/2}_{i- 1/2} = \frac{u^{n}_{i} + u^{n}_{i} + u^{n+1}_{i-1}+ u^{n}_{i-1} }{4}.
+\end{gather}
+
+
+\section{Actual Work}
+We do a Von Neumann stability analysis, we assume two different errors for $h$ and $u$ otherwise everything else is the same. We jsut run the errrors of known structure through the method, for convenience we know use $h$ and $u$ to refer to their respective errors, and we use q top refer to a general quantity (k, a different for $u$ and l and b for $h$)
+
+$$q^n_j = e^{at} e^{ikx}$$
+$$q^{n+1}_j = e^{a\Delta t}q^n_j $$
+$$q^{n-1}_j = e^{-a\Delta t}q^n_j $$
+$$q^{n}_{j+1} = e^{ik\Delta x}q^n_j $$
+$$q^{n}_{j+2} = e^{2ik\Delta x}q^n_j $$
+$$q^{n}_{j-1} = e^{-ik\Delta x}q^n_j $$
+$$q^{n}_{j-2} = e^{-ik\Delta x}q^n_j $$
+
+
+\[\frac{\partial q}{\partial x} = \frac{q^{n}_{j+1} - q^{n}_{j-1}}{2\Delta x} =\frac{e^{ik\Delta x} - e^{-ik\Delta x}}{2\Delta x} q^{n}_{j+1} = \frac{i \sin\left(k \Delta x\right)}{\Delta x}q^{n}_{j+1} \]
+
+So we define
+\[a_q = \frac{i \sin\left(k \Delta x\right)}{\Delta x}\]
+
+\[\frac{\partial^2 q}{\partial x^2} = \frac{q^{n}_{j+1} -2q^{n}_{j} +q^{n}_{j-1}}{\Delta x^2} =\frac{e^{ik\Delta x} + e^{-ik\Delta x} - 2}{\Delta x^2} q^{n}_{j} = \frac{2 \cos\left(k\Delta x\right) - 2}{\Delta x^2} q^{n}_{j} \]
+\[= -\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) q^{n}_{j} \]
+
+So we define 
+\[b_q = -\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) \]
+
+\[\frac{\partial^3 q}{\partial x^2} = \frac{-q^{n}_{j-2} +2q^{n}_{j-1} -2q^{n}_{j+1} +q^{n}_{j+2}}{2\Delta x^3} =\frac{2e^{ik\Delta x} - 2e^{-ik\Delta x} + e^{2ik\Delta x} - e^{-2ik\Delta x} }{2\Delta x^3} q^{n}_{j}  \]
+\[=\frac{4i \sin\left(k\Delta x\right) + 2i\sin\left(2k\Delta x\right)}{2\Delta x^3} q^{n}_{j}\]
+\[=i\frac{2 \sin\left(k\Delta x\right) + \sin\left(2k\Delta x\right)}{\Delta x^3} q^{n}_{j}\]
+\[=i\frac{2 \sin\left(k\Delta x\right) + 2\sin\left(k\Delta x\right)\cos\left(k\Delta x\right)}{\Delta x^3} q^{n}_{j}\]
+
+\[=2i\sin\left(k\Delta x\right)\frac{1 + \cos\left(k\Delta x\right)}{\Delta x^3} q^{n}_{j}\]
+
+\[=2i\sin\left(k\Delta x\right) 2\cos^2\left(\frac{k\Delta x}{2}\right) \frac{1}{\Delta x^3} q^{n}_{j}\]
+
+\[= \frac{4i}{\Delta x^3}\sin\left(k\Delta x\right) 2\cos^2\left(\frac{k\Delta x}{2}\right) q^{n}_{j}\]
+
+So we define 
+\[c_q = \frac{4i}{\Delta x^3}\sin\left(k\Delta x\right) 2\cos^2\left(\frac{k\Delta x}{2}\right) \]
+
+\section{2nd FD h}
+	\begin{gather}
+	e^{b \Delta t}h^{n}_i = e^{-b \Delta t}h^{n}_i - \Delta t \left(u^{n}_{i}h^{n}_{i}2a_h  + h^{n}_{i}u^{n}_{i}2a_u\right) 
+	\end{gather}
+	
+	\begin{gather}
+	e^{b \Delta t} = e^{-b \Delta t} - \Delta t \left(u^{n}_{i}2a_h  + u^{n}_{i}2a_u\right) 
+	\end{gather}
+	
+	\begin{gather}
+	e^{b \Delta t} = e^{-b \Delta t} - 2\Delta t \left(a_h  + a_u\right) u^{n}_{i}
+	\end{gather}
+	
+\section{Lax Wendroff Method for h}
+
+\[
+h^{n + 1/2}_{i+ 1/2} = \frac{1}{2}\left(e^{il\Delta x}h^{n}_{i} + h^{n}_i\right) - \frac{\Delta t}{2\Delta x}\left(e^{ik\Delta x}u^n_{i}e^{il\Delta x}h^n_{i} - h^n_{i}u^n_{i}\right),
+\]
+
+\[
+h^{n + 1/2}_{i+ 1/2} = \left[\frac{1}{2}\left(e^{il\Delta x} + 1\right) - \frac{\Delta t}{2\Delta x}\left(e^{ik\Delta x}e^{il\Delta x} - 1\right)u^n_{i} \right] h^n_i
+\]
+
+\[
+h^{n + 1/2}_{i- 1/2} = \left[\frac{1}{2}\left(1 + e^{-il\Delta x}\right) - \frac{\Delta t}{2\Delta x}\left(1  - e^{-ik\Delta x}e^{-il\Delta x}\right)u^n_{i} \right] h^n_i
+\]
+
+\begin{gather}
+u^{n + 1/2}_{i+ 1/2} = \frac{e^{ik\Delta x}e^{a\Delta t} + e^{ik\Delta x} + e^{a\Delta t} + 1 }{4}u^{n}_{i}
+\end{gather}
+and
+\begin{gather}
+u^{n + 1/2}_{i- 1/2} = \frac{e^{a\Delta t}e^{-ik\Delta x} +  e^{-ik\Delta x} + e^{a\Delta t} + 1 }{4}u^{n}_{i}
+\end{gather}
+
+
+and
+$$
+h^{n+1}_i = h^{n}_i - \frac{\Delta t}{\Delta x}\left(u^{n + 1/2}_{i+ 1/2}h^{n + 1/2}_{i+ 1/2} - u^{n + 1/2}_{i- 1/2}h^{n + 1/2}_{i- 1/2}\right).
+$$
+
+\end{document}

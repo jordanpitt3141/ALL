@@ -1,0 +1,488 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+\section{Finite Element}
+
+\[G  uh - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)\]
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+\[Gv = uhv  - \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)v\]
+
+and then we integrate over the entire domain to get 
+\[\int_\Omega Gv dx = \int_\Omega uhv dx - \int_\Omega \frac{\partial}{\partial x}\left(\frac{h^3}{3}u_x\right)vdx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega uhv dx + \int_\Omega\frac{h^3}{3}u_{x}v_xdx\]
+
+For $u$ we are going to use $x_{j - 1/2}$, $x_{j}$ and $x_{j + 1/2}$ as the nodes, which generate the basis functions $\phi_{j \pm 1/2}$ and $\phi_{j}$ , which for us will be the space of continuous quadratic elements. 
+
+While for $G$  and $h$ we will choose basis functions $w$ that are linear from $[x_{j-1/2}, x_{j+1/2}]$ but discontinuous at the edges.
+
+We are going to look at the entire area where the basis functions are non-zero for $\phi_{j-1/2}$ , $\phi_{j}$ and $\phi_{j+1/2}$. Which is the interval from $x_{j-3/2}$ to $x_{j+3/2}$. So we focus on the integrals on $[x_{j-3/2}, x_{j+3/2}]$ as 
+
+\[\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]\]
+
+\[\int_\Omega G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  dx = \int_\Omega uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] dx + \int_\Omega\frac{h^3}{3}u_{x}\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]_xdx\]
+
+is 
+
+\[\sum_{j}\int_{x_{j-3/2}}^{x_{j+3/2}}G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  dx = \sum_{j}\int_{x_{j-3/2}}^{x_{j+3/2}} uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] dx + \sum_{j}\int_{x_{j-3/2}}^{x_{j+3/2}}\frac{h^3}{3}u_{x}\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]_xdx\]
+
+
+$$x = \frac{3}{2}\xi\Delta x + x_{j}$$
+
+Taking the derivatives we see
+
+
+$dx = d\frac{3\xi}{2}\Delta x$ , $\frac{dx}{d\xi} = \frac{3\Delta x}{2}$ , $\frac{d\xi}{dx} = \frac{2}{3\Delta x}$ . \\ \\ We can describe the basis functions in the $\xi$ space, where they are non-zero
+
+\subsection{P2}
+
+\[\phi_{j-3/2} =  \left\lbrace \begin{array}{c c}
+\frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + \frac{1}{3}\right) & -1 \le \xi \le -\frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j-1} =  \left\lbrace \begin{array}{c c}
+-9\left(\xi + 1\right)\left(\xi + \frac{1}{3}\right) & -1 \le \xi \le -\frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j-1/2} =  \left\lbrace \begin{array}{c c}
+\frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) & -1 \le \xi \le -\frac{1}{3} \\
+\frac{9}{2}\xi\left(\xi - \frac{1}{3}\right)  & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j} =  \left\lbrace \begin{array}{c c}
+-9\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j+1/2} =  \left\lbrace \begin{array}{c c}
+\frac{9}{2}\xi\left(\xi + \frac{1}{3}\right)  & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+\frac{9}{2}\left(\xi -1 \right)\left(\xi -\frac{2}{3}\right) & \frac{1}{3} \le \xi \le 1 \\
+0 & else
+\end{array} \right. \]
+
+\[\phi_{j+3/2} =  \left\lbrace \begin{array}{c c}
+\frac{9}{2}\left(\xi - \frac{1}{3}\right)\left(\xi - \frac{2}{3}\right) & \frac{1}{3} \le \xi \le 1\\
+0 & else
+\end{array} \right. \]
+
+\subsection{P1}
+
+\[w_{j-3/2}^+ =  \left\lbrace \begin{array}{c c}
+-\frac{3}{2}\left(\xi + \frac{1}{3}\right) & -1 \le \xi \le -\frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j-1/2}^- =  \left\lbrace \begin{array}{c c}
+\frac{3}{2}\left(\xi + 1\right) & -1 \le \xi \le -\frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j-1/2}^+ =  \left\lbrace \begin{array}{c c}
+-\frac{3}{2}\left(\xi -  \frac{1}{3}\right) & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j+1/2}^- =  \left\lbrace \begin{array}{c c}
+\frac{3}{2}\left(\xi +  \frac{1}{3}\right) & -\frac{1}{3} \le \xi \le \frac{1}{3}\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j+1/2}^+ =  \left\lbrace \begin{array}{c c}
+-\frac{3}{2}\left(\xi -1\right) & \frac{1}{3} \le \xi \le 1\\
+0 & else
+\end{array} \right. \]
+
+\[w_{j+3/2}^- =  \left\lbrace \begin{array}{c c}
+\frac{3}{2}\left(\xi -\frac{1}{3}\right) & \frac{1}{3} \le \xi \le 1\\
+0 & else
+\end{array} \right. \]
+
+
+
+\section{Integrals}
+So now we can use this to move the integral into the P2/P1 space
+
+\[\sum_{j}\int_{x_{j-3/2}}^{x_{j+3/2}}G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  dx = \sum_{j}\int_{x_{j-3/2}}^{x_{j+3/2}} uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] dx + \sum_{j}\int_{x_{j-3/2}}^{x_{j+3/2}}\frac{h^3}{3}u_{x}\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]_xdx\]
+
+
+\subsection{First Integral}
+We have
+\[\int_{x_{j-3/2}}^{x_{j+3/2}}G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  dx  = \int_{-1}^{1}G'(\xi)\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] \frac{dx}{d\xi} d\xi = \frac{3 \Delta x}{2}\int_{-1}^{1}G'(\xi)\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi\]
+
+\begin{multline*}
+\int_{-1}^{1}G'(\xi)\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi = \\
+\int_{-1}^{1}\bigg[G^+_{j - 3/2}w^+_{j - 3/2} + G^-_{j - 1/2}w^-_{j - 1/2} + G^+_{j - 1/2}w^+_{j - 1/2} \\+ G^-_{j + 1/2}w^-_{j + 1/2} + G^+_{j + 1/2}w^+_{j + 1/2} + G^-_{j + 3/2}w^-_{j + 3/2} \bigg]\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi
+\end{multline*}
+
+$\phi_{j - 1/2}$ means that anything only non-zero on the last cell is neglected (equal to 0 on the domain) gives:
+
+\begin{multline*}
+\int_{-1}^{1}\bigg[G^+_{j - 3/2}w^+_{j - 3/2} + G^-_{j - 1/2}w^-_{j - 1/2} + G^+_{j - 1/2}w^+_{j - 1/2} \\+ G^-_{j + 1/2}w^-_{j + 1/2} + G^+_{j + 1/2}w^+_{j + 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\bigg] \phi_{j-1/2} d\xi =
+\\
+\int_{-1}^{1}\bigg[G^+_{j - 3/2}w^+_{j - 3/2} + G^-_{j - 1/2}w^-_{j - 1/2} + G^+_{j - 1/2}w^+_{j - 1/2} \\+ G^-_{j + 1/2}w^-_{j + 1/2}\bigg] \phi_{j-1/2} d\xi
+\end{multline*}
+
+\begin{multline*}
+=
+\int_{-1}^{1}G^+_{j - 3/2}w^+_{j - 3/2}\phi_{j-1/2} + G^-_{j - 1/2}w^-_{j - 1/2}\phi_{j-1/2} + G^+_{j - 1/2}w^+_{j - 1/2}\phi_{j-1/2} \\+ G^-_{j + 1/2}w^-_{j + 1/2} \phi_{j-1/2} d\xi
+\end{multline*}
+
+\begin{multline*}
+=
+G^+_{j - 3/2}\int_{-1}^{1}w^+_{j - 3/2}\phi_{j-1/2}  d\xi + G^-_{j - 1/2} \int_{-1}^{1}w^-_{j - 1/2}\phi_{j-1/2}  d\xi + G^+_{j - 1/2} \int_{-1}^{1}w^+_{j - 1/2}\phi_{j-1/2}  d\xi \\+ G^-_{j + 1/2} \int_{-1}^{1}w^-_{j + 1/2} \phi_{j-1/2} d\xi
+\end{multline*}
+
+These integrals are
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 3/2}\phi_{j-1/2}  d\xi = \int_{-1}^{-\frac{1}{3}} -\frac{3}{2}\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi + \frac{2}{3}\right)  \left(\xi + 1\right) d\xi \\= \int_{-1}^{-\frac{1}{3}} -\frac{27}{4}\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{2}{3}\right)  \left(\xi + 1\right) d\xi = 0  
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^-_{j - 1/2}\phi_{j-1/2}  d\xi = \int_{-1}^{-\frac{1}{3}} \frac{3}{2}\left(\xi + 1\right) \frac{9}{2}\left(\xi + \frac{2}{3}\right)  \left(\xi + 1\right) d\xi \\= \int_{-1}^{-\frac{1}{3}} \frac{27}{4}\left(\xi + 1\right)\left(\xi + \frac{2}{3}\right)  \left(\xi + 1\right) d\xi = \frac{1}{9} 
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 1/2}\phi_{j-1/2}  d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}} -\frac{3}{2}\left(\xi - \frac{1}{3}\right) \frac{9}{2}\xi\left(\xi - \frac{1}{3}\right)  d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}} -\frac{27}{4}\left(\xi - \frac{1}{3}\right)\xi\left(\xi - \frac{1}{3}\right)  d\xi\\ = \frac{1}{9} 
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 1/2}\phi_{j-1/2}  d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}} \frac{3}{2}\left(\xi + \frac{1}{3}\right) \frac{9}{2}\xi\left(\xi - \frac{1}{3}\right)  d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}} \frac{27}{4}\left(\xi + \frac{1}{3}\right)\xi\left(\xi - \frac{1}{3}\right)  d\xi\\ = 0
+\end{multline*}
+
+So we have
+
+\begin{multline*}
+\int_{-1}^{1}\bigg[G^+_{j - 3/2}w^+_{j - 3/2} + G^-_{j - 1/2}w^-_{j - 1/2} + G^+_{j - 1/2}w^+_{j - 1/2} \\+ G^-_{j + 1/2}w^-_{j + 1/2} + G^+_{j + 1/2}w^+_{j + 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\bigg] \phi_{j-1/2} d\xi \\=  \frac{1}{9}G^-_{j - 1/2}  + \frac{1}{9}G^+_{j - 1/2} 
+\end{multline*}
+
+$\phi_{j}$ means that anything only non-zero on the first and last cell is neglected (equal to 0 on the domain) gives:
+
+\begin{multline*}
+\int_{-1}^{1}\bigg[G^+_{j - 3/2}w^+_{j - 3/2} + G^-_{j - 1/2}w^-_{j - 1/2} + G^+_{j - 1/2}w^+_{j - 1/2} \\+ G^-_{j + 1/2}w^-_{j + 1/2} + G^+_{j + 1/2}w^+_{j + 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\bigg] \phi_{j} d\xi \\= \int_{-1}^{1}\bigg[G^+_{j - 1/2}w^+_{j - 1/2} + G^-_{j + 1/2}w^-_{j + 1/2} \bigg] \phi_{j} d\xi
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}\bigg[G^+_{j - 1/2}w^+_{j - 1/2} + G^-_{j + 1/2}w^-_{j + 1/2} \bigg] \phi_{j} d\xi = \\ G^+_{j - 1/2} \int_{-1}^{1}w^+_{j - 1/2} \phi_{j}d\xi + G^-_{j + 1/2}\int_{-1}^{1}w^-_{j + 1/2}  \phi_{j} d\xi
+\end{multline*}
+
+These integrals are
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 1/2} \phi_{j}d\xi =\int_{-\frac{1}{3}}^{\frac{1}{3}}w^+_{j - 1/2} \phi_{j}d\xi  = \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{3}{2}\left(\xi - \frac{1}{3}\right) (-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{27}{2}\left(\xi - \frac{1}{3}\right) \left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)d\xi = \frac{2}{9}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 1/2} \phi_{j}d\xi =\int_{-\frac{1}{3}}^{\frac{1}{3}}w^-_{j + 1/2} \phi_{j}d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{3}{2}\left(\xi + \frac{1}{3}\right) (-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)d\xi
+\\= \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{27}{2}\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)d\xi  = \frac{2}{9} 
+\end{multline*}
+
+So we have 
+
+\begin{multline*}
+\int_{-1}^{1}\bigg[G^+_{j - 3/2}w^+_{j - 3/2} + G^-_{j - 1/2}w^-_{j - 1/2} + G^+_{j - 1/2}w^+_{j - 1/2} \\+ G^-_{j + 1/2}w^-_{j + 1/2} + G^+_{j + 1/2}w^+_{j + 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\bigg] \phi_{j} d\xi \\=  \frac{2}{9} \left[G^+_{j - 1/2} + G^-_{j + 1/2}\right]
+\end{multline*}
+
+$\phi_{j + 1/2}$ means that anything only non-zero on the first cell is neglected (equal to 0 on the domain) gives:
+
+\begin{multline*}
+\int_{-1}^{1}\bigg[G^+_{j - 3/2}w^+_{j - 3/2} + G^-_{j - 1/2}w^-_{j - 1/2} + G^+_{j - 1/2}w^+_{j - 1/2} \\+ G^-_{j + 1/2}w^-_{j + 1/2} + G^+_{j + 1/2}w^+_{j + 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\bigg] \phi_{j+ 1/2} d\xi \\ = \int_{-1}^{1}\bigg[G^+_{j - 1/2}w^+_{j - 1/2} + G^-_{j + 1/2}w^-_{j + 1/2} + G^+_{j + 1/2}w^+_{j + 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\bigg] \phi_{j+ 1/2} d\xi
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}\bigg[G^+_{j - 1/2}w^+_{j - 1/2} + G^-_{j + 1/2}w^-_{j + 1/2} + G^+_{j + 1/2}w^+_{j + 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\bigg] \phi_{j+ 1/2} d\xi \\ =
+\int_{-1}^{1}G^+_{j - 1/2}w^+_{j - 1/2}\phi_{j+ 1/2} + G^-_{j + 1/2}w^-_{j + 1/2}\phi_{j+ 1/2} + G^+_{j + 1/2}w^+_{j + 1/2}\phi_{j+ 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\phi_{j+ 1/2}  d\xi
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}G^+_{j - 1/2}w^+_{j - 1/2}\phi_{j+ 1/2} + G^-_{j + 1/2}w^-_{j + 1/2}\phi_{j+ 1/2} + G^+_{j + 1/2}w^+_{j + 1/2}\phi_{j+ 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\phi_{j+ 1/2}  d\xi \\ = G^+_{j - 1/2} \int_{-1}^{1}w^+_{j - 1/2}\phi_{j+ 1/2} d\xi + G^-_{j + 1/2} \int_{-1}^{1}w^-_{j + 1/2}\phi_{j+ 1/2}  d\xi \\+ G^+_{j + 1/2} \int_{-1}^{1}w^+_{j + 1/2}\phi_{j+ 1/2} d\xi + G^-_{j + 3/2} \int_{-1}^{1}w^-_{j + 3/2}\phi_{j+ 1/2}  d\xi
+\end{multline*}
+
+These integrals are
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 1/2}\phi_{j+ 1/2} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^+_{j - 1/2}\phi_{j+ 1/2} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}} -\frac{3}{2}\left(\xi - \frac{1}{3}\right)\frac{9}{2}\xi \left(\xi + \frac{1}{3}\right) d\xi \\ =
+\int_{-\frac{1}{3}}^{\frac{1}{3}} -\frac{27}{4}\left(\xi - \frac{1}{3}\right)\xi \left(\xi + \frac{1}{3}\right) d\xi = 0
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 1/2}\phi_{j+ 1/2} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^-_{j + 1/2}\phi_{j+ 1/2} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}} \frac{3}{2}\left(\xi + \frac{1}{3}\right)\frac{9}{2}\xi \left(\xi + \frac{1}{3}\right) d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}} \frac{27}{4}\left(\xi + \frac{1}{3}\right)\xi \left(\xi + \frac{1}{3}\right) d\xi = \frac{1}{9}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j + 1/2}\phi_{j+ 1/2} d\xi = \int_{\frac{1}{3}}^{1}w^+_{j + 1/2}\phi_{j+ 1/2} d\xi = \int_{\frac{1}{3}}^{1} -\frac{3}{2}\left(\xi - 1\right)\frac{9}{2}\left(\xi -1\right) \left(\xi - \frac{2}{3}\right) d\xi \\= \int_{\frac{1}{3}}^{1} -\frac{27}{4}\left(\xi - 1\right)\left(\xi -1\right) \left(\xi - \frac{2}{3}\right) d\xi = \frac{1}{9} 
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 3/2}\phi_{j+ 1/2} d\xi = \int_{\frac{1}{3}}^{1}w^-_{j + 3/2}\phi_{j+ 1/2} d\xi = \int_{\frac{1}{3}}^{1} \frac{3}{2}\left(\xi - \frac{1}{3}\right)\frac{9}{2}\left(\xi -1\right) \left(\xi - \frac{2}{3}\right) d\xi \\= \int_{\frac{1}{3}}^{1} \frac{27}{4}\left(\xi - \frac{1}{3}\right)\left(\xi -1\right) \left(\xi - \frac{2}{3}\right) d\xi = 0 
+\end{multline*}
+
+Thus we have
+
+\begin{multline*}
+\int_{-1}^{1}G^+_{j - 1/2}w^+_{j - 1/2}\phi_{j+ 1/2} + G^-_{j + 1/2}w^-_{j + 1/2}\phi_{j+ 1/2} + G^+_{j + 1/2}w^+_{j + 1/2}\phi_{j+ 1/2} + G^-_{j + 3/2}w^-_{j + 3/2}\phi_{j+ 1/2}  d\xi \\ = \frac{1}{9}G^-_{j + 1/2} + \frac{1}{9}G^+_{j + 1/2} 
+\end{multline*}
+
+Therefore
+
+\begin{multline*}
+\int_{-1}^{1}G'(\xi)\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi =  \left[\begin{array}{c}\frac{1}{9}G^-_{j - 1/2}  + \frac{1}{9}G^+_{j - 1/2}  \\ \frac{2}{9} G^+_{j - 1/2} + \frac{2}{9} G^-_{j + 1/2}\\ \frac{1}{9}G^-_{j + 1/2} + \frac{1}{9}G^+_{j + 1/2} \end{array}\right]^T \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]\\
+\end{multline*}
+
+So
+
+\[\int_{x_{j-3/2}}^{x_{j+3/2}}G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  = \frac{3 \Delta x}{2}\left[\begin{array}{c}\frac{1}{9}G^-_{j - 1/2}  + \frac{1}{9}G^+_{j - 1/2}  \\ \frac{2}{9} G^+_{j - 1/2} + \frac{2}{9} G^-_{j + 1/2}\\ \frac{1}{9}G^-_{j + 1/2} + \frac{1}{9}G^+_{j + 1/2} \end{array}\right]^T\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] \]
+
+\[\int_{x_{j-3/2}}^{x_{j+3/2}}G\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]  = \frac{\Delta x}{6}\left[\begin{array}{c}G^-_{j - 1/2}  + G^+_{j - 1/2}  \\ 2 G^+_{j - 1/2} + 2 G^-_{j + 1/2}\\ G^-_{j + 1/2} + G^+_{j + 1/2} \end{array}\right]^T\left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right]\]
+
+%This doesnt add to 1.....
+
+\subsection{First Integral}
+\begin{multline*}
+\int_{x_{j-3/2}}^{x_{j+3/2}} uh \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] dx = \frac{3 \Delta x}{2}\int_{-1}^{1} u(\xi)h(\xi) \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi \\= \frac{3 \Delta x}{2}\int_{-1}^{1} \bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j }\\ + u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)\\\bigg[h^+_{j - 3/2}w^+_{j - 3/2} + h^-_{j - 1/2}w^-_{j - 1/2} + h^+_{j - 1/2}w^+_{j - 1/2} \\+ h^-_{j + 1/2}w^-_{j + 1/2} + h^+_{j + 1/2}w^+_{j + 1/2} + h^-_{j + 3/2}w^-_{j + 3/2} \bigg] \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi\\ 
+\end{multline*}
+
+
+\begin{multline*}
+\int_{-1}^{1} \bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j }\\ + u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)\\\bigg[h^+_{j - 3/2}w^+_{j - 3/2} + h^-_{j - 1/2}w^-_{j - 1/2} + h^+_{j - 1/2}w^+_{j - 1/2} \\+ h^-_{j + 1/2}w^-_{j + 1/2} + h^+_{j + 1/2}w^+_{j + 1/2} + h^-_{j + 3/2}w^-_{j + 3/2} \bigg] \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi\\ 
+\end{multline*}
+
+\begin{multline*}
+= \int_{-1}^{1}  \bigg\lbrace \bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j }\\ + u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)h^+_{j - 3/2}w^+_{j - 3/2}
+\\ +\bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j }\\ + u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)h^-_{j - 1/2}w^-_{j - 1/2}
+\\ +\bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j }\\ + u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)h^+_{j - 1/2}w^+_{j - 1/2}
+\\ +\bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j }\\ + u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)h^-_{j + 1/2}w^-_{j + 1/2} 
+\\ +\bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j }\\ + u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)h^+_{j + 1/2}w^+_{j + 1/2} 
+\\ +\bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j }\\ + u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)h^-_{j + 3/2}w^-_{j + 3/2}\bigg\rbrace \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi\\ 
+\end{multline*}
+
+We can reduce based on the non-zero region of the P1 basis functions
+
+\begin{multline*}
+= \int_{-1}^{1}  \bigg\lbrace \bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2}\bigg)h^+_{j - 3/2}w^+_{j - 3/2}
+\\ +\bigg(u_{j - 3/2}\phi_{j - 3/2} + u_{j - 1}\phi_{j - 1} + u_{j - 1/2}\phi_{j - 1/2} \bigg)h^-_{j - 1/2}w^-_{j - 1/2}
+\\ +\bigg(u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j } + u_{j + 1/2}\phi_{j + 1/2} \bigg)h^+_{j - 1/2}w^+_{j - 1/2}
+\\ +\bigg(u_{j - 1/2}\phi_{j - 1/2} + u_{j}\phi_{j } + u_{j + 1/2}\phi_{j + 1/2} \bigg)h^-_{j + 1/2}w^-_{j + 1/2} 
+\\ +\bigg( u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)h^+_{j + 1/2}w^+_{j + 1/2} 
+\\ +\bigg(u_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}\phi_{j + 1} + u_{j + 3/2}\phi_{j + 3/2}\bigg)h^-_{j + 3/2}w^-_{j + 3/2}\bigg\rbrace \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi\\ 
+\end{multline*}
+
+\begin{multline*}
+= \int_{-1}^{1}  \bigg\lbrace u_{j - 3/2} h^+_{j - 3/2}w^+_{j - 3/2} \phi_{j - 3/2} + u_{j - 1} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1} + u_{j - 1/2} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1/2}
+\\ +u_{j - 3/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 3/2} + u_{j - 1}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1} + u_{j - 1/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1/2} 
+\\ +u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j } + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} 
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j } + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} 
+\\ + u_{j + 1/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1} + u_{j + 3/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 3/2} 
+\\ +u_{j + 1/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1/2} + u_{j + 1}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1} + u_{j + 3/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 3/2}\bigg\rbrace\\ \left[\begin{array}{c}\phi_{j-1/2} \\\phi_{j}\\\phi_{j+1/2} \end{array}\right] d\xi\\ 
+\end{multline*}
+
+We now focus on $\phi_{j-1/2} $, so any terms that have there basis on the last cell are 0, and dont effect the integral, so
+
+\begin{multline*}
+ \int_{-1}^{1}  \bigg\lbrace u_{j - 3/2} h^+_{j - 3/2}w^+_{j - 3/2} \phi_{j - 3/2} + u_{j - 1} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1} + u_{j - 1/2} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1/2}
+\\ +u_{j - 3/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 3/2} + u_{j - 1}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1} + u_{j - 1/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1/2} 
+\\ +u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j } + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} 
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j } + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} 
+\\ + u_{j + 1/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1} + u_{j + 3/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 3/2} 
+\\ +u_{j + 1/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1/2} + u_{j + 1}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1} + u_{j + 3/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 3/2}\bigg\rbrace\phi_{j-1/2}
+\end{multline*}
+
+\begin{multline*}
+ = \int_{-1}^{1}  \bigg\lbrace u_{j - 3/2} h^+_{j - 3/2}w^+_{j - 3/2} \phi_{j - 3/2} + u_{j - 1} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1} + u_{j - 1/2} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1/2}
+\\ +u_{j - 3/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 3/2} + u_{j - 1}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1} + u_{j - 1/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1/2} 
+\\ +u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j } + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} 
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j } + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} 
+\bigg\rbrace\phi_{j-1/2}
+\end{multline*}
+
+\begin{multline*}
+= \int_{-1}^{1}  u_{j - 3/2} h^+_{j - 3/2}w^+_{j - 3/2} \phi_{j - 3/2} \phi_{j-1/2} + u_{j - 1} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1} \phi_{j-1/2}\\ + u_{j - 1/2} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1/2}\phi_{j-1/2}
+\\ +u_{j - 3/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 3/2}\phi_{j-1/2} + u_{j - 1}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1}\phi_{j-1/2} \\ + u_{j - 1/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1/2}\phi_{j-1/2} 
+\\ +u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j-1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j }\phi_{j-1/2} \\+ u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2}\phi_{j-1/2} 
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2}\phi_{j-1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j }\phi_{j-1/2}\\ + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} \phi_{j-1/2}
+ d\xi
+\end{multline*}
+
+\begin{multline*}
+=  u_{j - 3/2} h^+_{j - 3/2} \int_{-1}^{1} w^+_{j - 3/2} \phi_{j - 3/2} \phi_{j-1/2}d\xi + u_{j - 1} h^+_{j - 3/2} \int_{-1}^{1}w^+_{j - 3/2}\phi_{j - 1} \phi_{j-1/2}d\xi\\ + u_{j - 1/2} h^+_{j - 3/2} \int_{-1}^{1} w^+_{j - 3/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi
+\\ +u_{j - 3/2}h^-_{j - 1/2}\int_{-1}^{1}w^-_{j - 1/2}\phi_{j - 3/2}\phi_{j-1/2}d\xi + u_{j - 1}h^-_{j - 1/2}\int_{-1}^{1}w^-_{j - 1/2}\phi_{j - 1}\phi_{j-1/2}d\xi \\ + u_{j - 1/2}h^-_{j - 1/2}\int_{-1}^{1}w^-_{j - 1/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi 
+\\ +u_{j - 1/2}h^+_{j - 1/2}\int_{-1}^{1}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi + u_{j}h^+_{j - 1/2}\int_{-1}^{1}w^+_{j - 1/2}\phi_{j }\phi_{j-1/2}d\xi \\+ u_{j + 1/2}h^+_{j - 1/2}\int_{-1}^{1}w^+_{j - 1/2}\phi_{j + 1/2}\phi_{j-1/2}d\xi 
+\\ +u_{j - 1/2}h^-_{j + 1/2}\int_{-1}^{1}w^-_{j + 1/2} \phi_{j - 1/2}\phi_{j-1/2}d\xi + u_{j}h^-_{j + 1/2}\int_{-1}^{1}w^-_{j + 1/2} \phi_{j }\phi_{j-1/2}d\xi\\ + u_{j + 1/2}h^-_{j + 1/2}\int_{-1}^{1}w^-_{j + 1/2} \phi_{j + 1/2} \phi_{j-1/2}
+d\xi
+\end{multline*}
+
+These integrals are 
+
+\begin{multline*}
+\int_{-1}^{1} w^+_{j - 3/2} \phi_{j - 3/2} \phi_{j-1/2}d\xi  = \int_{-1}^{-\frac{1}{3}} w^+_{j - 3/2} \phi_{j - 3/2} \phi_{j-1/2}d\xi \\= \int_{-1}^{-\frac{1}{3}} - \frac{3}{2}\left(\xi + \frac{1}{3}\right)\frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi \\= \int_{-1}^{-\frac{1}{3}} - \frac{243}{8}\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{2}{3}\right)\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi = -\frac{1}{90} 
+\end{multline*}
+
+
+\begin{multline*}
+\int_{-1}^{1} w^+_{j - 3/2} \phi_{j - 1} \phi_{j-1/2}d\xi  = \int_{-1}^{-\frac{1}{3}} w^+_{j - 3/2} \phi_{j - 1} \phi_{j-1/2}d\xi \\= \int_{-1}^{-\frac{1}{3}} - \frac{3}{2}\left(\xi + \frac{1}{3}\right)(-9)\left(\xi + 1\right)\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi \\= \int_{-1}^{-\frac{1}{3}} \frac{243}{4}\left(\xi + \frac{1}{3}\right)\left(\xi + 1\right)\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi  = 0 
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1} w^+_{j - 3/2} \phi_{j - 1/2} \phi_{j-1/2}d\xi  = \int_{-1}^{-\frac{1}{3}} w^+_{j - 3/2} \phi_{j - 1/2} \phi_{j-1/2}d\xi \\= \int_{-1}^{-\frac{1}{3}} - \frac{3}{2}\left(\xi + \frac{1}{3}\right)\frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) \frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi \\= \int_{-1}^{-\frac{1}{3}} -\frac{243}{8}\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right)\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi  = \frac{1}{90} 
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1} w^-_{j - 1/2} \phi_{j - 3/2} \phi_{j-1/2}d\xi  = \int_{-1}^{-\frac{1}{3}} w^+_{j - 1/2} \phi_{j - 3/2} \phi_{j-1/2}d\xi \\= \int_{-1}^{-\frac{1}{3}}  \frac{3}{2}\left(\xi + 1\right)\frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi \\= \int_{-1}^{-\frac{1}{3}} \frac{243}{8}\left(\xi + 1\right)\left(\xi + \frac{2}{3}\right)\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi = -\frac{1}{90} 
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1} w^-_{j - 1/2} \phi_{j - 1} \phi_{j-1/2}d\xi  = \int_{-1}^{-\frac{1}{3}} w^-_{j - 1/2} \phi_{j - 1} \phi_{j-1/2}d\xi \\= \int_{-1}^{-\frac{1}{3}}  \frac{3}{2}\left(\xi + 1\right)(-9)\left(\xi + 1\right)\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi \\= \int_{-1}^{-\frac{1}{3}} -\frac{243}{4}\left(\xi + 1\right)\left(\xi + 1\right)\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi  = \frac{2}{45}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1} w^-_{j - 1/2} \phi_{j - 1/2} \phi_{j-1/2}d\xi  = \int_{-1}^{-\frac{1}{3}} w^-_{j - 1/2} \phi_{j - 1/2} \phi_{j-1/2}d\xi \\= \int_{-1}^{-\frac{1}{3}}  \frac{3}{2}\left(\xi + 1\right)\frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) \frac{9}{2}\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi \\= \int_{-1}^{-\frac{1}{3}} \frac{243}{8}\left(\xi + 1\right)\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right)\left(\xi + \frac{2}{3}\right)\left(\xi + 1\right) d\xi  = \frac{7}{90} 
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{3}{2}\left(\xi - \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{243}{8}\left(\xi - \frac{1}{3}\right) \left(\xi\right)\left(\xi - \frac{1}{3}\right)\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi = \frac{7}{90}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 1/2}\phi_{j}\phi_{j-1/2}d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^+_{j - 1/2}\phi_{j}\phi_{j-1/2}d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{3}{2}\left(\xi - \frac{1}{3}\right) (-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{243}{4}\left(\xi - \frac{1}{3}\right) \left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi = \frac{2}{45}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 1/2}\phi_{j + 1/2}\phi_{j-1/2}d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^+_{j - 1/2}\phi_{j + 1/2}\phi_{j-1/2}d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{3}{2}\left(\xi - \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{243}{8}\left(\xi - \frac{1}{3}\right) \left(\xi\right)\left(\xi + \frac{1}{3}\right)\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi = -\frac{1}{90}
+\end{multline*}
+
+%
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 1/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^-_{j + 1/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{3}{2}\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{243}{8}\left(\xi + \frac{1}{3}\right) \left(\xi\right)\left(\xi - \frac{1}{3}\right)\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi = \frac{1}{90}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 1/2}\phi_{j}\phi_{j-1/2}d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^-_{j + 1/2}\phi_{j}\phi_{j-1/2}d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{3}{2}\left(\xi + \frac{1}{3}\right) (-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{243}{4}\left(\xi + \frac{1}{3}\right) \left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi = 0
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 1/2}\phi_{j + 1/2}\phi_{j-1/2}d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^-_{j + 1/2}\phi_{j + 1/2}\phi_{j-1/2}d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{3}{2}\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi \\ = \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{243}{8}\left(\xi + \frac{1}{3}\right) \left(\xi\right)\left(\xi + \frac{1}{3}\right)\left(\xi\right)\left(\xi - \frac{1}{3}\right)d\xi = -\frac{1}{90}
+\end{multline*}
+
+So we have
+
+\begin{multline*}
+ u_{j - 3/2} h^+_{j - 3/2} \int_{-1}^{1} w^+_{j - 3/2} \phi_{j - 3/2} \phi_{j-1/2}d\xi + u_{j - 1} h^+_{j - 3/2} \int_{-1}^{1}w^+_{j - 3/2}\phi_{j - 1} \phi_{j-1/2}d\xi\\ + u_{j - 1/2} h^+_{j - 3/2} \int_{-1}^{1} w^+_{j - 3/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi
+\\ +u_{j - 3/2}h^-_{j - 1/2}\int_{-1}^{1}w^-_{j - 1/2}\phi_{j - 3/2}\phi_{j-1/2}d\xi + u_{j - 1}h^-_{j - 1/2}\int_{-1}^{1}w^-_{j - 1/2}\phi_{j - 1}\phi_{j-1/2}d\xi \\ + u_{j - 1/2}h^-_{j - 1/2}\int_{-1}^{1}w^-_{j - 1/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi 
+\\ +u_{j - 1/2}h^+_{j - 1/2}\int_{-1}^{1}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j-1/2}d\xi + u_{j}h^+_{j - 1/2}\int_{-1}^{1}w^+_{j - 1/2}\phi_{j }\phi_{j-1/2}d\xi \\+ u_{j + 1/2}h^+_{j - 1/2}\int_{-1}^{1}w^+_{j - 1/2}\phi_{j + 1/2}\phi_{j-1/2}d\xi 
+\\ +u_{j - 1/2}h^-_{j + 1/2}\int_{-1}^{1}w^-_{j + 1/2} \phi_{j - 1/2}\phi_{j-1/2}d\xi + u_{j}h^-_{j + 1/2}\int_{-1}^{1}w^-_{j + 1/2} \phi_{j }\phi_{j-1/2}d\xi\\ + u_{j + 1/2}h^-_{j + 1/2}\int_{-1}^{1}w^-_{j + 1/2} \phi_{j + 1/2} \phi_{j-1/2}
+d\xi  \\ =  -\frac{1}{90}u_{j - 3/2} h^+_{j - 3/2}  + \frac{1}{90}u_{j - 1/2} h^+_{j - 3/2}\\
+ -\frac{1}{90}u_{j - 3/2}h^-_{j - 1/2} + \frac{4}{90}u_{j - 1}h^-_{j - 1/2}  + \frac{7}{90}u_{j - 1/2}h^-_{j - 1/2} \\
+ + \frac{7}{90}u_{j - 1/2}h^+_{j - 1/2} + \frac{4}{90}u_{j}h^+_{j - 1/2}  -\frac{1}{90}u_{j + 1/2}h^+_{j - 1/2}\\
+ + \frac{1}{90}u_{j - 1/2}h^-_{j + 1/2}  -\frac{1}{90} u_{j + 1/2}h^-_{j + 1/2}
+\end{multline*}
+
+
+We now focus on $\phi_{j} $, so any terms that have there basis on the first and last cell are 0, and dont effect the integral, so
+
+\begin{multline*}
+\int_{-1}^{1}  \bigg\lbrace u_{j - 3/2} h^+_{j - 3/2}w^+_{j - 3/2} \phi_{j - 3/2} + u_{j - 1} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1} + u_{j - 1/2} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1/2}
+\\ +u_{j - 3/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 3/2} + u_{j - 1}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1} + u_{j - 1/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1/2} 
+\\ +u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j } + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} 
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j } + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} 
+\\ + u_{j + 1/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1} + u_{j + 3/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 3/2} 
+\\ +u_{j + 1/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1/2} + u_{j + 1}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1} + u_{j + 3/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 3/2}\bigg\rbrace\phi_{j}
+\end{multline*}
+
+\begin{multline*}
+=\int_{-1}^{1}  \bigg\lbrace u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j } + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} 
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j } + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} 
+\bigg\rbrace\phi_{j}
+\end{multline*}
+
+\begin{multline*}
+=\int_{-1}^{1}   u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j }\phi_{j} + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} \phi_{j}
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2}\phi_{j} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j } \phi_{j} + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} \phi_{j} d\xi
+\end{multline*}
+
+\begin{multline*}
+=   u_{j - 1/2}h^+_{j - 1/2} \int_{-1}^{1}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j} d\xi + u_{j}h^+_{j - 1/2} \int_{-1}^{1}w^+_{j - 1/2}\phi_{j }\phi_{j}d\xi \\+ u_{j + 1/2}h^+_{j - 1/2} \int_{-1}^{1}w^+_{j - 1/2}\phi_{j + 1/2} \phi_{j} d\xi
+\\ +u_{j - 1/2}h^-_{j + 1/2} \int_{-1}^{1}w^-_{j + 1/2} \phi_{j - 1/2}\phi_{j} d\xi + u_{j}h^-_{j + 1/2} \int_{-1}^{1}w^-_{j + 1/2} \phi_{j } \phi_{j} d\xi \\+ u_{j + 1/2}h^-_{j + 1/2} \int_{-1}^{1}w^-_{j + 1/2} \phi_{j + 1/2} \phi_{j} d\xi
+\end{multline*}
+
+These integrals are
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j} d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{3}{2}\left(\xi - \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right)(-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{243}{4}\left(\xi - \frac{1}{3}\right) \left(\xi\right)\left(\xi - \frac{1}{3}\right)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi = \frac{2}{45}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 1/2}\phi_{j}\phi_{j} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^+_{j - 1/2}\phi_{j}\phi_{j} d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{3}{2}\left(\xi - \frac{1}{3}\right) (-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)(-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{243}{2}\left(\xi - \frac{1}{3}\right) \left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi = \frac{8}{45}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^+_{j - 1/2}\phi_{j + 1/2}\phi_{j} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^+_{j - 1/2}\phi_{j + 1/2}\phi_{j} d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{3}{2}\left(\xi - \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi + \frac{1}{3}\right)(-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{243}{4}\left(\xi - \frac{1}{3}\right) \left(\xi\right)\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi = 0
+\end{multline*}
+
+%
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 1/2}\phi_{j - 1/2}\phi_{j} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^-_{j + 1/2}\phi_{j - 1/2}\phi_{j} d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{3}{2}\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi - \frac{1}{3}\right)(-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}} -\frac{243}{4}\left(\xi + \frac{1}{3}\right) \left(\xi\right)\left(\xi - \frac{1}{3}\right)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi = 0
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 1/2}\phi_{j}\phi_{j} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^-_{j + 1/2}\phi_{j}\phi_{j} d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{3}{2}\left(\xi + \frac{1}{3}\right) (-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)(-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{243}{2}\left(\xi + \frac{1}{3}\right) \left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi = \frac{8}{45}
+\end{multline*}
+
+\begin{multline*}
+\int_{-1}^{1}w^-_{j + 1/2}\phi_{j + 1/2}\phi_{j} d\xi = \int_{-\frac{1}{3}}^{\frac{1}{3}}w^-_{j + 1/2}\phi_{j + 1/2}\phi_{j} d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}\frac{3}{2}\left(\xi + \frac{1}{3}\right) \frac{9}{2}\left(\xi\right)\left(\xi + \frac{1}{3}\right)(-9)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi \\= \int_{-\frac{1}{3}}^{\frac{1}{3}}-\frac{243}{4}\left(\xi + \frac{1}{3}\right) \left(\xi\right)\left(\xi + \frac{1}{3}\right)\left(\xi + \frac{1}{3}\right)\left(\xi - \frac{1}{3}\right) d\xi = \frac{2}{45}
+\end{multline*}
+
+So we have
+
+\begin{multline*}
+\int_{-1}^{1}  \bigg\lbrace u_{j - 3/2} h^+_{j - 3/2}w^+_{j - 3/2} \phi_{j - 3/2} + u_{j - 1} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1} + u_{j - 1/2} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1/2}
+\\ +u_{j - 3/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 3/2} + u_{j - 1}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1} + u_{j - 1/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1/2} 
+\\ +u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j } + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} 
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j } + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} 
+\\ + u_{j + 1/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1} + u_{j + 3/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 3/2} 
+\\ +u_{j + 1/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1/2} + u_{j + 1}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1} + u_{j + 3/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 3/2}\bigg\rbrace\phi_{j} \\= \frac{2}{45}u_{j - 1/2}h^+_{j - 1/2}  + \frac{8}{45}u_{j}h^+_{j - 1/2}  \\
+ + \frac{8}{45}u_{j}h^-_{j + 1/2} +  \frac{2}{45}u_{j + 1/2}h^-_{j + 1/2}
+\end{multline*}
+
+We now focus on $\phi_{j+ 1/2} $, so any terms that have there basis on the first  cell are 0, and dont effect the integral, so
+
+\begin{multline*}
+\int_{-1}^{1}  \bigg\lbrace u_{j - 3/2} h^+_{j - 3/2}w^+_{j - 3/2} \phi_{j - 3/2} + u_{j - 1} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1} + u_{j - 1/2} h^+_{j - 3/2}w^+_{j - 3/2}\phi_{j - 1/2}
+\\ +u_{j - 3/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 3/2} + u_{j - 1}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1} + u_{j - 1/2}h^-_{j - 1/2}w^-_{j - 1/2}\phi_{j - 1/2} 
+\\ +u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j } + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} 
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j } + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} 
+\\ + u_{j + 1/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1} + u_{j + 3/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 3/2} 
+\\ +u_{j + 1/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1/2} + u_{j + 1}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1} + u_{j + 3/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 3/2}\bigg\rbrace\phi_{j+1/2}
+\end{multline*}
+
+\begin{multline*}
+ = \int_{-1}^{1}  \bigg\lbrace  u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j } + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} 
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j } + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2} 
+\\ + u_{j + 1/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1/2} + u_{j + 1}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1} + u_{j + 3/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 3/2} 
+\\ +u_{j + 1/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1/2} + u_{j + 1}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1} + u_{j + 3/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 3/2}\bigg\rbrace\phi_{j+1/2}
+\end{multline*}
+
+\begin{multline*}
+= \int_{-1}^{1}   \\u_{j - 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j+1/2} + u_{j}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j }\phi_{j+1/2} + u_{j + 1/2}h^+_{j - 1/2}w^+_{j - 1/2}\phi_{j + 1/2} \phi_{j+1/2}
+\\ +u_{j - 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j - 1/2}\phi_{j+1/2} + u_{j}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j }\phi_{j+1/2} + u_{j + 1/2}h^-_{j + 1/2}w^-_{j + 1/2} \phi_{j + 1/2}\phi_{j+1/2} 
+\\ + u_{j + 1/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1/2}\phi_{j+1/2} + u_{j + 1}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 1}\phi_{j+1/2} + u_{j + 3/2}h^+_{j + 1/2}w^+_{j + 1/2}\phi_{j + 3/2}\phi_{j+1/2} 
+\\ +u_{j + 1/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1/2}\phi_{j+1/2} + u_{j + 1}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 1}\phi_{j+1/2} + u_{j + 3/2}h^-_{j + 3/2}w^-_{j + 3/2}\phi_{j + 3/2}\phi_{j+1/2} d\xi
+\end{multline*}
+
+\begin{multline*}
+= u_{j - 1/2}h^+_{j - 1/2} \int_{-1}^{1}w^+_{j - 1/2}\phi_{j - 1/2}\phi_{j+1/2}d\xi + u_{j}h^+_{j - 1/2}\int_{-1}^{1}w^+_{j - 1/2}\phi_{j }\phi_{j+1/2}d\xi \\+ u_{j + 1/2}h^+_{j - 1/2} \int_{-1}^{1}w^+_{j - 1/2}\phi_{j + 1/2} \phi_{j+1/2}d\xi
+\\ +u_{j - 1/2}h^-_{j + 1/2}\int_{-1}^{1}w^-_{j + 1/2} \phi_{j - 1/2}\phi_{j+1/2}d\xi + u_{j}h^-_{j + 1/2} \int_{-1}^{1}w^-_{j + 1/2} \phi_{j }\phi_{j+1/2}d\xi \\+ u_{j + 1/2}h^-_{j + 1/2}\int_{-1}^{1}w^-_{j + 1/2} \phi_{j + 1/2}\phi_{j+1/2} d\xi
+\\ + u_{j + 1/2}h^+_{j + 1/2}\int_{-1}^{1}w^+_{j + 1/2}\phi_{j + 1/2}\phi_{j+1/2}d\xi + u_{j + 1}h^+_{j + 1/2}\int_{-1}^{1}w^+_{j + 1/2}\phi_{j + 1}\phi_{j+1/2}d\xi \\+ u_{j + 3/2}h^+_{j + 1/2}\int_{-1}^{1}w^+_{j + 1/2}\phi_{j + 3/2}\phi_{j+1/2} d\xi
+\\ +u_{j + 1/2}h^-_{j + 3/2}\int_{-1}^{1}w^-_{j + 3/2}\phi_{j + 1/2}\phi_{j+1/2}d\xi + u_{j + 1}h^-_{j + 3/2}\int_{-1}^{1}w^-_{j + 3/2}\phi_{j + 1}\phi_{j+1/2}d\xi \\+ u_{j + 3/2}h^-_{j + 3/2}\int_{-1}^{1}w^-_{j + 3/2}\phi_{j + 3/2}\phi_{j+1/2} d\xi
+\end{multline*}
+
+\end{document}

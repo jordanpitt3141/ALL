@@ -1,0 +1,662 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+\section{Linearised Equations}
+From Chris's paper we have, where $h_0$ is constant and we let $h_1 = h$ (same with velocity)
+
+For mass:
+
+\[\frac{\partial h}{\partial t} + h_0 \frac{\partial u}{\partial x} + u_0 \frac{\partial h}{\partial x} = 0\]
+
+\[\frac{\partial h}{\partial t} + \frac{\partial}{\partial x} \left(h_0 u + u_0 h\right)= 0\]
+
+For momentum:
+\[ \frac{\partial u}{\partial t} + g\frac{\partial h}{\partial x}  + u_0\frac{\partial u}{\partial x} - \frac{h_0^2}{3}\left(u_0 \frac{\partial^3 u}{\partial x^3} + \frac{\partial^3 u}{\partial x^2 \partial t} \right)  = 0\]
+
+\section{Actual Work}
+We do a Von Neumann stability analysis, we assume two different errors for $h$ and $u$ otherwise everything else is the same. We jsut run the errrors of known structure through the method, for convenience we know use $h$ and $u$ to refer to their respective errors, and we use q top refer to a general quantity (k, a different for $u$ and l and b for $h$)
+
+$$q^{n}_{j+1} = e^{ik\Delta x}q^n_j $$
+$$q^{n}_{j+2} = e^{2ik\Delta x}q^n_j $$
+$$q^{n}_{j-1} = e^{-ik\Delta x}q^n_j $$
+$$q^{n}_{j-2} = e^{-ik\Delta x}q^n_j $$
+
+
+\[\frac{\partial q}{\partial x} = \frac{q^{n}_{j+1} - q^{n}_{j-1}}{2\Delta x} =\frac{e^{ik\Delta x} - e^{-ik\Delta x}}{2\Delta x} q^{n}_{j+1} = \frac{i \sin\left(k \Delta x\right)}{\Delta x}q^{n}_{j} \]
+
+S
+
+\[\frac{\partial^2 q}{\partial x^2} = \frac{q^{n}_{j+1} -2q^{n}_{j} +q^{n}_{j-1}}{\Delta x^2} =\frac{e^{ik\Delta x} + e^{-ik\Delta x} - 2}{\Delta x^2} q^{n}_{j} = \frac{2 \cos\left(k\Delta x\right) - 2}{\Delta x^2} q^{n}_{j} \]
+\[= -\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) q^{n}_{j} \]
+S
+
+\[\frac{\partial^3 q}{\partial x^3} = \frac{-q^{n}_{j-2} +2q^{n}_{j-1} -2q^{n}_{j+1} +q^{n}_{j+2}}{2\Delta x^3} = \frac{- e^{-2ik\Delta x} +2e^{-ik\Delta x} -2e^{ik\Delta x} + e^{2ik\Delta x}}{2\Delta x^3}q^{n}_{j} \]
+\[= \frac{e^{2ik\Delta x} - e^{-2ik\Delta x} -2e^{ik\Delta x} + 2e^{-ik\Delta x}}{2\Delta x^3}q^{n}_{j} \]
+
+\[= \frac{i\sin\left(2k\Delta x\right) -2i\sin\left(k\Delta x\right)}{\Delta x^3}q^{n}_{j} \]
+\[= i\frac{2\sin\left(k\Delta x\right)\cos\left(k\Delta x\right) -2\sin\left(k\Delta x\right)}{\Delta x^3}q^{n}_{j} \]
+
+\[= 2i\sin\left(k\Delta x\right)\frac{\cos\left(k\Delta x\right) -1}{\Delta x^3}q^{n}_{j} \]
+
+\[= 2i\sin\left(k\Delta x\right)\frac{-2\sin^2\left(\frac{k\Delta x}{2}\right)}{\Delta x^3}q^{n}_{j} \]
+
+\[= -4i\sin\left(k\Delta x\right)\frac{\sin^2\left(\frac{k\Delta x}{2}\right)}{\Delta x^3}q^{n}_{j} \]
+\subsection{FD for u}
+\begin{multline}
+ \frac{u^{n+1}_j - u^{n-1}_j}{2\Delta t} + g\frac{h^n_{j+1} -h^n_{j-1} }{2\Delta x}   + u_0\frac{u^n_{j+1} -u^n_{j-1} }{2\Delta x} \\- \frac{h_0^2}{3}\left(u_0 \frac{-u^{n}_{j-2} +2u^{n}_{j-1} -2u^{n}_{j+1} +u^{n}_{j+2}}{2\Delta x^3}  \right)  \\
+ - \frac{h_0^2}{3}\frac{\partial \frac{u^{n}_{j+1} -2u^{n}_{j} +u^{n}_{j-1}}{\Delta x^2}}{\partial t} 
+ \\ = 0
+\end{multline}
+
+\begin{multline}
+\frac{u^{n+1}_j - u^{n-1}_j}{2\Delta t} + g\frac{h^n_{j+1} -h^n_{j-1} }{2\Delta x}   + u_0\frac{u^n_{j+1} -u^n_{j-1} }{2\Delta x} \\- \frac{h_0^2}{3}\left(u_0 \frac{-u^{n}_{j-2} +2u^{n}_{j-1} -2u^{n}_{j+1} +u^{n}_{j+2}}{2\Delta x^3}  \right)  \\
+- \frac{h_0^2}{3}\frac{\frac{u^{n+1}_{j+1} -2u^{n+1}_{j} +u^{n+1}_{j-1}}{\Delta x^2} - \frac{u^{n-1}_{j+1} -2u^{n-1}_{j} +u^{n-1}_{j-1}}{\Delta x^2}}{2\Delta t} 
+\\ = 0
+\end{multline}
+
+\begin{multline}
+\frac{u^{n+1}_j - u^{n-1}_j}{2\Delta t} + g\frac{h^n_{j+1} -h^n_{j-1} }{2\Delta x}   + u_0\frac{u^n_{j+1} -u^n_{j-1} }{2\Delta x} \\- \frac{h_0^2}{3}\left(u_0 \frac{-u^{n}_{j-2} +2u^{n}_{j-1} -2u^{n}_{j+1} +u^{n}_{j+2}}{2\Delta x^3}  \right)  \\
+- \frac{h_0^2}{3}\frac{u^{n+1}_{j+1} -2u^{n+1}_{j} +u^{n+1}_{j-1} - u^{n-1}_{j+1} +2u^{n-1}_{j} -u^{n-1}_{j-1}}{2\Delta x^2\Delta t} 
+\\ = 0
+\end{multline}
+
+\begin{multline}
+\frac{u^{n+1}_j - u^{n-1}_j}{2\Delta t} + g\frac{i \sin\left(l \Delta x\right)}{\Delta x} h^n_j + u_0\frac{i \sin\left(k \Delta x\right)}{\Delta x} u^n_j \\+ \frac{h_0^2}{3}\left(4iu_0\sin\left(k\Delta x\right)\frac{\sin^2\left(\frac{k\Delta x}{2}\right)}{\Delta x^3}\right) u^{n}_{j} \\
+- \frac{h_0^2}{6 \Delta t} \left(\frac{u^{n+1}_{j+1} -2u^{n+1}_{j} +u^{n+1}_{j-1}}{\Delta x^2} -\frac{u^{n-1}_{j+1} -2u^{n-1}_{j} +u^{n-1}_{j-1}}{\Delta x^2}  \right)
+\\ = 0
+\end{multline}
+
+\begin{multline}
+\frac{u^{n+1}_j - u^{n-1}_j}{2\Delta t} + g\frac{i \sin\left(l \Delta x\right)}{\Delta x} h^n_j + u_0\frac{i \sin\left(k \Delta x\right)}{\Delta x} u^n_j \\+ \frac{h_0^2}{3}\left(4iu_0\sin\left(k\Delta x\right)\frac{\sin^2\left(\frac{k\Delta x}{2}\right)}{\Delta x^3}\right) u^{n}_{j}  \\
+- \frac{h_0^2}{6 \Delta t} \left(-\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) u^{n+1}_{j} - -\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) u^{n-1}_{j}  \right)
+\\ = 0
+\end{multline}
+
+\begin{multline}
+\frac{u^{n+1}_j - u^{n-1}_j}{2\Delta t} 
+- \frac{h_0^2}{6 \Delta t} \left(-\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) u^{n+1}_{j} - -\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) u^{n-1}_{j}  \right)
+\\ = + \frac{h_0^2}{3}\left(4iu_0\sin\left(k\Delta x\right)\frac{\sin^2\left(\frac{k\Delta x}{2}\right)}{\Delta x^3}\right) u^{n}_{j}  - g\frac{i \sin\left(l \Delta x\right)}{\Delta x} h^n_j + u_0\frac{i \sin\left(k \Delta x\right)}{\Delta x} u^n_j
+\end{multline}
+
+\begin{multline}
+\frac{u^{n+1}_j - u^{n-1}_j}{2\Delta t} 
+- \frac{h_0^2}{6 \Delta t} \left(-\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) u^{n+1}_{j} - -\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) u^{n-1}_{j}  \right)
+\\ =  \left[\frac{h_0^2}{3}\left(4iu_0\sin\left(k\Delta x\right)\frac{\sin^2\left(\frac{k\Delta x}{2}\right)}{\Delta x^3}\right) + u_0\frac{i \sin\left(k \Delta x\right)}{\Delta x} \right] u^n_j   - g\frac{i \sin\left(l \Delta x\right)}{\Delta x} h^n_j
+\end{multline}
+
+\begin{multline}
+u^{n+1}_j - u^{n-1}_j
++ \frac{h_0^2}{3} \left(\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) u^{n+1}_{j} -\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) u^{n-1}_{j}  \right)
+\\ =  2 \Delta t\left(u_0\frac{i \sin\left(k \Delta x\right)}{\Delta x}\left[\frac{4h_0^2}{3\Delta x^2}\left(\sin^2\left(\frac{k\Delta x}{2}\right)\right) + 1 \right] u^n_j   - g\frac{i \sin\left(l \Delta x\right)}{\Delta x} h^n_j\right)
+\end{multline}
+
+\begin{multline}
+u^{n+1}_j \left[1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) \right]
+\\ = u^{n-1}_j \left[1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) \right]  +  \\2 \Delta t\left(u_0\frac{i \sin\left(k \Delta x\right)}{\Delta x}\left[\frac{4h_0^2}{3\Delta x^2}\left(\sin^2\left(\frac{k\Delta x}{2}\right)\right) + 1 \right] u^n_j   - g\frac{i \sin\left(l \Delta x\right)}{\Delta x} h^n_j\right)
+\end{multline}
+
+\begin{multline}
+u^{n+1}_j 
+\\ = u^{n-1}_j   \\ + 2 \Delta t\left(u_0\frac{i \sin\left(k \Delta x\right)}{\Delta x} u^n_j   - g\frac{1}{\left[1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) \right]}\frac{i \sin\left(l \Delta x\right)}{\Delta x} h^n_j\right)
+\end{multline}
+
+
+
+
+
+
+\subsection{FD for h}
+\[\frac{h^{n+1}_j - h^{n-1}_j}{2\Delta t} + h_0\frac{u^n_{j+1} -u^n_{j-1} }{2\Delta x}  + u_0 \frac{h^n_{j+1} -h^n_{j-1} }{2\Delta x}  = 0\]
+
+
+\[\frac{h^{n+1}_j - h^{n-1}_j}{2\Delta t} + h_0\frac{i \sin\left(k \Delta x\right)}{\Delta x} u^n_j  + u_0 \frac{i \sin\left(l \Delta x\right)}{\Delta x}h^{n}_{j}  = 0\]
+
+\[h^{n+1}_j - h^{n-1}_j = -2\Delta t \left[ h_0\frac{i \sin\left(k \Delta x\right)}{\Delta x} u^n_j  +  u_0 \frac{i \sin\left(l \Delta x\right)}{\Delta x}h^{n}_{j} \right]  = 0\]
+
+\[h^{n+1}_j = h^{n-1}_j -\frac{2i\Delta t}{\Delta x} \left[ h_0\sin\left(k \Delta x\right) u^n_j  +  u_0 \sin\left(l \Delta x\right)h^{n}_{j} \right]  = 0\]
+
+\subsubsection{Together}
+
+We can formulate these schemes together to get
+
+\begin{multline}
+\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n+1}_j = \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n-1}_j +\left[\begin{array}{c c}
+-\frac{2i\Delta t}{\Delta x}u_0 \sin\left(l \Delta x\right) & -\frac{2i\Delta t}{\Delta x}h_0\sin\left(k \Delta x\right) \\
+-\frac{2 \Delta t}{1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) }g\frac{i \sin\left(l \Delta x\right)}{\Delta x} & \frac{2i\Delta t}{\Delta x}u_0\sin\left(k \Delta x\right)
+\end{array} \right]  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\end{multline}
+
+Also we now have $k = l$
+
+Let $A = \left[\begin{array}{c c}
+-\frac{2i\Delta t}{\Delta x}u_0 \sin\left(k \Delta x\right) & -\frac{2i\Delta t}{\Delta x}h_0\sin\left(k \Delta x\right) \\
+-\frac{2 \Delta t}{1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) }g\frac{i \sin\left(k \Delta x\right)}{\Delta x} & \frac{2i\Delta t}{\Delta x}u_0\sin\left(k \Delta x\right)
+\end{array} \right]$
+
+Then
+
+\[
+\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n+1}_j = \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n-1}_j +A  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\]
+
+Assume $\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n+1}_j = G \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j$ So $\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n-1}_j = \frac{1}{G} \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j$
+
+Then 
+
+
+\[
+G\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j = \frac{1}{G}\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j +A  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\]
+
+
+\[
+0 =\left[\frac{1}{G}I - G I + A\right]  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\]
+
+\[
+0 =\left[A  - \frac{G^2-1}{G}I\right]  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\]
+
+So we have that $\frac{G^2-1}{G} = \lambda_{A,1} , \lambda_{A,2}  $
+
+\[G^2-1 = \lambda_{A,1}G\] 
+
+\[G^2 - \lambda_{A,1}G -1 = 0\] 
+
+Thus
+
+\[G =\frac{1}{2}\left(\lambda_{A,1} \pm \sqrt{\lambda_{A,1}^2 + 4}\right)  \]
+
+Also 
+
+\[G =\frac{1}{2}\left(\lambda_{A,2} \pm \sqrt{\lambda_{A,2}^2 + 4}\right)  \]
+
+Want $\max\left\lbrace|G|\right\rbrace \le 1$
+
+This is the equivalent to writing it like so:
+
+\begin{multline}
+\left[\begin{array}{c}
+h^{n+1}_j \\
+u^{n+1}_j\\
+h^n_j \\
+u^n_j
+\end{array} \right] = \left[\begin{array}{c c c c}
+-\frac{2i\Delta t}{\Delta x}u_0 \sin\left(k \Delta x\right) & -\frac{2i\Delta t}{\Delta x}h_0\sin\left(k \Delta x\right) & 1 & 0 \\
+-\frac{2 \Delta t}{1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) }g\frac{i \sin\left(k \Delta x\right)}{\Delta x} & \frac{2i\Delta t}{\Delta x}u_0\sin\left(k \Delta x\right)&0 & 1 \\
+1&0&0&0\\
+0&1&0&0
+\end{array} \right]  \left[\begin{array}{c}
+h^{n}_j \\
+u^{n}_j\\
+h^{n-1}_j \\
+u^{n-1}_j
+\end{array} \right] 
+\end{multline}
+
+and having the eigenvalues of this less than 1 because if we let $$A = \left[\begin{array}{c c c c}
+-\frac{2i\Delta t}{\Delta x}u_0 \sin\left(k \Delta x\right) & -\frac{2i\Delta t}{\Delta x}h_0\sin\left(k \Delta x\right) & 1 & 0 \\
+-\frac{2 \Delta t}{1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) }g\frac{i \sin\left(k \Delta x\right)}{\Delta x} & \frac{2i\Delta t}{\Delta x}u_0\sin\left(k \Delta x\right)&0 & 1 \\
+1&0&0&0\\
+0&1&0&0
+\end{array} \right] $$
+and we have a grwoth factor $G$ then
+
+\[
+G\left[\begin{array}{c}
+h^{n}_j \\
+u^{n}_j\\
+h^{n-1}_j \\
+u^{n-1}_j
+\end{array} \right] = A  \left[\begin{array}{c}
+h^{n}_j \\
+u^{n}_j\\
+h^{n-1}_j \\
+u^{n-1}_j
+\end{array} \right] 
+\]
+
+Then
+\[\left(A - GI\right)\left[\begin{array}{c}
+h^{n}_j \\
+u^{n}_j\\
+h^{n-1}_j \\
+u^{n-1}_j
+\end{array} \right] = 0\]
+
+So $G$ are the eigenvalues of $A$ and so as long as $\rho(A) \le 1$ then $G \le 1$ as well. 
+
+
+\section{Lax Wendroff Nonlinear}
+
+We have 
+
+\begin{multline}
+u^{n+1}_j 
+\\ = u^{n-1}_j   \\ + 2 \Delta t\left(u_0\frac{i \sin\left(k \Delta x\right)}{\Delta x} u^n_j   - g\frac{1}{\left[1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) \right]}\frac{i \sin\left(k \Delta x\right)}{\Delta x} h^n_j\right)
+\end{multline}
+
+lets define
+\[c = - g\frac{2 \Delta t}{\left[1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) \right]}\frac{i \sin\left(k \Delta x\right)}{\Delta x}\]
+
+\[d =u_0\frac{2i  \Delta t \sin\left(k \Delta x\right)}{\Delta x}\]
+
+Then 
+\[u^{n+1}_j  = u^{n-1}_j   +du^n_j   +c h^n_j\]
+
+\[\frac{\partial h}{\partial t} + \frac{\partial}{\partial x} \left(h_0 u + u_0 h\right)= 0\]
+
+Using the two step richtemyer LW method
+
+\[
+h^{n+1/2}_{j+1/2} = \frac{1}{2}\left(h^n_{j+1} + h^n_j\right) - \frac{\Delta t}{2\Delta x}\left[H(u^n_{j+1} - u^n_{j}) + U(h^n_{j+1} - h^n_j)\right]
+\]
+
+\[
+h^{n+1/2}_{j-1/2} = \frac{1}{2}\left(h^n_{j} + h^n_{j-1}\right) - \frac{\Delta t}{2\Delta x}\left[H(u^n_{j} - u^n_{j-1}) + U(h^n_{j} - h^n_{j-1})\right] \]
+
+\[h^{n+1}_{j} = h^n_j - \frac{\Delta t}{\Delta x}\left[H(u^{n+1/2}_{j+1/2} -u^{n+1/2}_{j-1/2} ) + U(h^{n+1/2}_{j+1/2} -h^{n+1/2}_{j-1/2} )\right]\]
+
+We calculate $u^{n+1/2}_{j+1/2}$ by taking the average over the updated u and the current u. So we have
+
+\[u^{n+1/2}_{j+1/2} = \frac{u^{n+1}_{j+1} + u^{n+1}_{j}+u^{n}_{j+1} + u^{n}_{j}}{4}\]
+\[u^{n+1/2}_{j-1/2} = \frac{u^{n+1}_{j} + u^{n+1}_{j-1}+u^{n}_{j} + u^{n}_{j-1}}{4}\]
+
+Using Fourier Nodes
+
+\[u^{n+1/2}_{j+1/2} = \frac{e^{ik\Delta x}u^{n+1}_{j} + u^{n+1}_{j}+e^{ik\Delta x}u^{n}_{j} + u^{n}_{j}}{4}\]
+
+\[u^{n+1/2}_{j+1/2} = \frac{\left(e^{ik\Delta x} +1\right)\left(u^{n+1}_{j} + u^{n}_{j}\right)}{4}\]
+
+\[u^{n+1/2}_{j-1/2} = \frac{\left(e^{-ik\Delta x} +1\right)\left(u^{n+1}_{j} + u^{n}_{j}\right)}{4}\]
+
+\[u^{n+1/2}_{j-1/2} = e^{-ik\Delta x} \frac{\left(1 +e^{ik\Delta x}\right)\left(u^{n+1}_{j} + u^{n}_{j}\right)}{4}\]
+
+\[u^{n+1/2}_{j-1/2} = e^{-ik\Delta x} u^{n+1/2}_{j+1/2}\]
+
+\[
+h^{n+1/2}_{j+1/2} = \frac{1}{2}\left(e^{ik\Delta x} + 1\right)h^n_j - \frac{\Delta t}{2\Delta x}\left[H\left(e^{ik\Delta x} - 1\right)u^n_j + U\left(e^{ik\Delta x} - 1\right)h^n_j\right]
+\]
+
+\[
+h^{n+1/2}_{j-1/2} = \frac{1}{2}\left(1  + e^{-ik\Delta x}\right)h^n_j - \frac{\Delta t}{2\Delta x}\left[H\left(1 - e^{-ik\Delta x}\right)u^n_j + U\left(1 - e^{-ik\Delta x}\right)h^n_j\right]
+\]
+
+\[
+h^{n+1/2}_{j-1/2} = e^{-ik\Delta x}\left[\frac{1}{2}\left(e^{ik\Delta x}  +1\right)h^n_j - \frac{\Delta t}{2\Delta x}\left[H\left(e^{ik\Delta x} - 1\right)u^n_j + U\left(e^{ik\Delta x} - 1\right)h^n_j\right] \right]
+\]
+
+\[
+h^{n+1/2}_{j-1/2} = e^{-ik\Delta x}h^{n+1/2}_{j+1/2}
+\]
+
+\[
+h^{n+1/2}_{j+1/2} = \left(\frac{1}{2}\left(e^{ik\Delta x} + 1\right) - \frac{\Delta t}{2\Delta x}U\left(e^{ik\Delta x} - 1\right)\right)h^n_j   - \left(\frac{\Delta t}{2\Delta x}H\left(e^{ik\Delta x} - 1\right)\right)u^n_j
+\]
+
+
+\[u^{n+1/2}_{j+1/2} = \frac{\left(e^{ik\Delta x} +1\right)\left(u^{n+1}_{j} + u^{n}_{j}\right)}{4}\]
+
+\[u^{n+1/2}_{j+1/2} = \frac{\left(e^{ik\Delta x} +1\right)\left(u^{n-1}_j   +du^n_j   +c h^n_j + u^{n}_{j}\right)}{4}\]
+
+\[u^{n+1/2}_{j+1/2} = \frac{e^{ik\Delta x} +1}{4}\left(u^{n-1}_j   +(d+1)u^n_j   +c h^n_j\right)\]
+
+So we have 
+
+\[h^{n+1}_{j} = h^n_j - \frac{\Delta t}{\Delta x}\left[H(1 -e^{-ik\Delta x} )u^{n+1/2}_{j+1/2} + U(1 -e^{-ik\Delta x} )h^{n+1/2}_{j+1/2}\right]\]
+
+\begin{multline}
+h^{n+1}_{j} = h^n_j - \frac{\Delta t}{\Delta x}H(1 -e^{-ik\Delta x} )\frac{e^{ik\Delta x} +1}{4}\left(u^{n-1}_j   +(d+1)u^n_j   +c h^n_j\right) \\  - \frac{\Delta t}{\Delta x}U(1 -e^{-ik\Delta x} )\left[\left(\frac{1}{2}\left(e^{ik\Delta x} + 1\right) - \frac{\Delta t}{2\Delta x}U\left(e^{ik\Delta x} - 1\right)\right)h^n_j   - \left(\frac{\Delta t}{2\Delta x}H\left(e^{ik\Delta x} - 1\right)\right)u^n_j\right]
+\end{multline}
+
+\begin{multline}
+h^{n+1}_{j} = \\\left[1 - \frac{\Delta t}{\Delta x}cH\frac{2i\sin\left(k\Delta x\right)}{4} - \frac{\Delta t}{\Delta x}U(1 -e^{-ik\Delta x} )\left(\frac{1}{2}\left(e^{ik\Delta x} + 1\right) - \frac{\Delta t}{2\Delta x}U\left(e^{ik\Delta x} - 1\right)\right) \right]h^n_j \\ - \frac{\Delta t}{\Delta x}H(1 -e^{-ik\Delta x} )\frac{e^{ik\Delta x} +1}{4}\left(u^{n-1}_j   +(d+1)u^n_j \right) \\  - \frac{\Delta t}{\Delta x}U(1 -e^{-ik\Delta x} )\left[ - \left(\frac{\Delta t}{2\Delta x}H\left(e^{ik\Delta x} - 1\right)\right)u^n_j\right]
+\end{multline}
+
+\begin{multline}
+h^{n+1}_{j} = \\\left[1 - \frac{\Delta t}{\Delta x}cH\frac{i\sin\left(k\Delta x\right)}{2} - \frac{\Delta t}{\Delta x}U\left(\frac{1}{2}\left(2i\sin\left(k\Delta x\right)\right) - \frac{\Delta t}{2\Delta x}U\left(2\cos\left(ik\Delta x\right) - 2\right)\right) \right]h^n_j \\ - \frac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2}\left(u^{n-1}_j   +(d+1)u^n_j \right) \\  - \frac{\Delta t}{\Delta x}U\left[ - \left(\frac{\Delta t}{2\Delta x}H\left(2\cos\left(ik\Delta x\right) - 2\right)\right)u^n_j\right]
+\end{multline}
+
+\begin{multline}
+h^{n+1}_{j} = \\\left[1 - \frac{\Delta t}{\Delta x}cH\frac{i\sin\left(k\Delta x\right)}{2} - \frac{\Delta t}{\Delta x}U\left(\left(i\sin\left(k\Delta x\right)\right) - \frac{\Delta t}{\Delta x}U\left(\cos\left(ik\Delta x\right) - 1\right)\right) \right]h^n_j \\ - \frac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2}\left(u^{n-1}_j   +(d+1)u^n_j \right) \\  - \frac{\Delta t}{\Delta x}U\left[ - \left(\frac{\Delta t}{\Delta x}H\left(\cos\left(ik\Delta x\right) - 1\right)\right)u^n_j\right]
+\end{multline}
+
+\begin{multline}
+h^{n+1}_{j} = \\\left[1 - \frac{\Delta t}{\Delta x}cH\frac{i\sin\left(k\Delta x\right)}{2} - \frac{\Delta t}{\Delta x}U\left(\left(i\sin\left(k\Delta x\right)\right) - \frac{\Delta t}{\Delta x}U\left(\cos\left(ik\Delta x\right) - 1\right)\right) \right]h^n_j \\ - \frac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2}u^{n-1}_j \\ - \frac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2}(d+1)u^n_j - \frac{\Delta t}{\Delta x}U\left[ - \left(\frac{\Delta t}{\Delta x}H\left(\cos\left(ik\Delta x\right) - 1\right)\right)u^n_j\right]
+\end{multline}
+
+\begin{multline}
+h^{n+1}_{j} = \\\left[1 - \frac{\Delta t}{\Delta x}cH\frac{i\sin\left(k\Delta x\right)}{2} - \frac{\Delta t}{\Delta x}U\left(\left(i\sin\left(k\Delta x\right)\right) - \frac{\Delta t}{\Delta x}U\left(\cos\left(ik\Delta x\right) - 1\right)\right) \right]h^n_j \\ - \frac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2}u^{n-1}_j \\ - \frac{\Delta t}{\Delta x} \left[H\frac{i\sin\left(k\Delta x\right)}{2}(d+1)  +U\left[ - \left(\frac{\Delta t}{\Delta x}H\left(\cos\left(ik\Delta x\right) - 1\right)\right) \right]\right]u^n_j
+\end{multline}
+
+\begin{multline}
+h^{n+1}_{j} = \\\left[1 - \frac{\Delta t}{\Delta x}cH\frac{i\sin\left(k\Delta x\right)}{2} - \frac{\Delta t}{\Delta x}U\left(\left(i\sin\left(k\Delta x\right)\right) - \frac{\Delta t}{\Delta x}U\left(\cos\left(ik\Delta x\right) - 1\right)\right) \right]h^n_j \\ - \frac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2}u^{n-1}_j \\ - \frac{\Delta t}{\Delta x} \left[H\frac{i\sin\left(k\Delta x\right)}{2}(d+1)   -U\left(\frac{\Delta t}{\Delta x}H\left(\cos\left(ik\Delta x\right) - 1\right)\right) \right]u^n_j
+\end{multline}
+
+defining
+$a = \left[1 - \frac{\Delta t}{\Delta x}cH\frac{i\sin\left(k\Delta x\right)}{2} - \frac{\Delta t}{\Delta x}U\left(\left(i\sin\left(k\Delta x\right)\right) - \frac{\Delta t}{\Delta x}U\left(\cos\left(ik\Delta x\right) - 1\right)\right) \right]$
+
+$b = - \frac{\Delta t}{\Delta x} \left[H\frac{i\sin\left(k\Delta x\right)}{2}(d+1)   -U\left(\frac{\Delta t}{\Delta x}H\left(\cos\left(ik\Delta x\right) - 1\right)\right) \right]$
+
+$e = - \frac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2}$
+
+Then we have
+
+\[
+\left[\begin{array}{c}
+h^{n+1}_j \\
+u^{n+1}_j\\
+h^n_j \\
+u^n_j
+\end{array} \right] = \left[\begin{array}{c c c c}
+a & b & 0 & e \\
+c & d&0 & 1 \\
+1&0&0&0\\
+0&1&0&0
+\end{array} \right]  \left[\begin{array}{c}
+h^{n}_j \\
+u^{n}_j\\
+h^{n-1}_j \\
+u^{n-1}_j
+\end{array} \right] 
+\]
+
+equivalently we can write this as
+
+\[
+\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n+1}_j = \left[\begin{array}{c c}
+0 & e \\
+0 & 1
+\end{array} \right]\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n-1}_j  +\left[\begin{array}{c c}
+a & b \\
+c & d
+\end{array} \right]  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\]
+
+Taking out the growth factors we have 
+
+\[
+G\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j =  \frac{1}{G}\left[\begin{array}{c c}
+0 & e \\
+0 & 1
+\end{array} \right]\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j  +\left[\begin{array}{c c}
+a & b \\
+c & d
+\end{array} \right]  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\]
+
+\[
+ \left( \left[\begin{array}{c c}
+aG & bG + e \\
+cG & dG +1
+\end{array} \right] - G^2 I\right)  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j = 0 
+\]
+
+So $G^2$ is the eigenvalues of  $\left[\begin{array}{c c}
+aG & bG + e \\
+cG & dG +1
+\end{array} \right]$ we have that the eigenvalues of this matrix are
+
+\[\lambda = \frac{1}{2}\left(\pm\sqrt{\left(d-a\right)^2G^2 + 4bcG^2 + 2(d-a)G + 4ceG + 1} + (d+a)G + 1 \right)\]
+
+Therefore 
+
+\[G^2 = \frac{1}{2}\left(\pm\sqrt{\left(d-a\right)^2G^2 + 4bcG^2 + 2(d-a)G + 4ceG + 1} + (d+a)G + 1 \right)\]
+
+\[2G^2 - (d+a)G - 1 = \pm\sqrt{\left(d-a\right)^2G^2 + 4bcG^2 + 2(d-a)G + 4ceG + 1}\]
+
+\[\left(2G^2 - (d+a)G - 1\right)^2 = \left(d-a\right)^2G^2 + 4bcG^2 + 2(d-a)G + 4ceG + 1\]
+
+\[4G^4  - 4 (a+d)G^3 + (a+d)^2G^2 - 4G^2 + 2(a+d)G + 1 = \left(d-a\right)^2G^2 + 4bcG^2 + 2(d-a)G + 4ceG + 1\]
+
+\[4G^4  - 4 (a+d)G^3 + 4adG^2 - 4G^2 + 2(a)G = + 4bcG^2 + 2(-a)G + 4ceG\]
+
+\[4G^4  - 4 (a+d)G^3 + 4(ad - bc)G^2 - 4G^2 + 4(a -ce)G = 0 \]
+
+\[G^4  - (a+d)G^3 + (ad - bc)G^2 - G^2 + (a -ce)G = 0 \]
+\[G\left[G^3  - (a+d)G^2 + (ad - bc - 1)G + (a -ce) \right]= 0 \]
+
+\newpage
+\section{LWL}
+
+we have 
+
+\begin{multline}
+u^{n+1}_j 
+\\ = u^{n-1}_j   \\ + 2 \Delta t\left(u_0\frac{i \sin\left(k \Delta x\right)}{\Delta x} u^n_j   - g\frac{1}{\left[1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) \right]}\frac{i \sin\left(k \Delta x\right)}{\Delta x} h^n_j\right)
+\end{multline}
+
+\[\frac{\partial h}{\partial t} + \frac{\partial}{\partial x} \left(h_0 u + u_0 h\right)= 0\]
+
+Since $h$ equation is linear e can use the linear LW method
+
+\begin{multline*}
+h^{n+1}_{j} = h^{n}_{j} - \frac{\Delta t}{2\Delta x}\left[H\left(u^{n}_{j+1} - u^{n}_{j-1}  \right) + U\left(h^{n}_{j+1} - h^{n}_{j-1}  \right)\right]  \\+ \frac{\Delta t^2}{2\Delta x^2}\left[H^2\left(u^{n}_{j+1} -2u^n_j + u^{n}_{j-1}  \right) + U^2\left(h^{n}_{j+1} -2h^n_j + h^{n}_{j-1}  \right)\right]
+\end{multline*}
+
+\begin{multline*}
+h^{n+1}_{j} = h^{n}_{j} - \frac{\Delta t}{2\Delta x}\left[H\left(e^{ik\Delta x} - e^{-ik\Delta x}  \right)u^{n}_{j} + U\left(e^{ik\Delta x} - e^{-ik\Delta x}  \right)h^{n}_{j}\right]  \\+ \frac{\Delta t^2}{2\Delta x^2}\left[H^2\left(e^{ik\Delta x}  -2 + e^{-ik\Delta x}   \right)u^n_j + U^2\left(e^{ik\Delta x}  -2 + e^{-ik\Delta x}   \right)h^n_j\right]
+\end{multline*}
+
+\begin{multline*}
+h^{n+1}_{j} = h^{n}_{j} - \frac{\Delta t}{\Delta x}\left[Hi\sin\left(k\Delta x\right)u^{n}_{j} + Ui\sin\left(k\Delta x\right)h^{n}_{j}\right]  \\+ \frac{\Delta t^2}{\Delta x^2}\left[H^2\left(\cos\left(k\Delta x\right)  -1  \right)u^n_j + U^2\left(\cos\left(k\Delta x\right)  -1  \right)h^n_j\right]
+\end{multline*}
+
+\begin{multline*}
+h^{n+1}_{j} = h^{n}_{j} - \frac{\Delta t}{\Delta x}\left[Hi\sin\left(k\Delta x\right)u^{n}_{j} + Ui\sin\left(k\Delta x\right)h^{n}_{j}\right]  \\- \frac{\Delta t^2}{\Delta x^2}\left[2H^2\sin^2\left(\frac{k\Delta x}{2}\right)u^n_j + 2U^2\sin^2\left(\frac{k\Delta x}{2}\right)h^n_j\right]
+\end{multline*}
+
+\begin{multline*}
+h^{n+1}_{j} = \left[1 - \frac{\Delta t}{\Delta x}Ui\sin\left(k\Delta x\right)  + \frac{\Delta t^2}{\Delta x^2}2U^2\sin^2\left(\frac{k\Delta x}{2}\right)\right]h^{n}_{j} \\ - \left[- \frac{\Delta t}{\Delta x}Hi\sin\left(k\Delta x\right)  + \frac{\Delta t^2}{\Delta x^2}2H^2\sin^2\left(\frac{k\Delta x}{2}\right)\right]u^{n}_{j}
+\end{multline*}
+
+So we have
+
+\begin{multline}
+\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n+1}_j = \left[\begin{array}{c c}
+0 & 0 \\
+0 & 1
+\end{array} \right]\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n-1}_j  \\+\left[\begin{array}{c c}
+1 - \frac{\Delta t}{\Delta x}Ui\sin\left(k\Delta x\right)  - \frac{\Delta t^2}{\Delta x^2}2U^2\sin^2\left(\frac{k\Delta x}{2}\right) & - \frac{\Delta t}{\Delta x}Hi\sin\left(k\Delta x\right)  -\frac{\Delta t^2}{\Delta x^2}2H^2\sin^2\left(\frac{k\Delta x}{2}\right) \\
+-\frac{2 \Delta t}{1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) }g\frac{i \sin\left(l \Delta x\right)}{\Delta x} & \frac{2i\Delta t}{\Delta x}u_0\sin\left(k \Delta x\right)
+\end{array} \right]  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\end{multline}
+
+Lets define 
+$$a = 1 - \frac{\Delta t}{\Delta x}Ui\sin\left(k\Delta x\right)  - \frac{\Delta t^2}{\Delta x^2}2U^2\sin^2\left(\frac{k\Delta x}{2}\right)$$
+
+$$b = - \frac{\Delta t}{\Delta x}Hi\sin\left(k\Delta x\right)  - \frac{\Delta t^2}{\Delta x^2}2H^2\sin^2\left(\frac{k\Delta x}{2}\right)$$
+
+$$c = -\frac{2 \Delta t}{1 +\frac{h_0^2}{3}\frac{4}{\Delta x^2}\sin^2\left(\frac{k\Delta x}{2}\right) }g\frac{i \sin\left(l \Delta x\right)}{\Delta x}$$
+
+$$d = \frac{2i\Delta t}{\Delta x}u_0\sin\left(k \Delta x\right)$$
+
+
+\begin{multline}
+\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n+1}_j = \left[\begin{array}{c c}
+0 & 0 \\
+0 & 1
+\end{array} \right]\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n-1}_j  +\left[\begin{array}{c c}
+a & b \\
+c & d
+\end{array} \right]  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\end{multline}
+
+As before we have a growth factor $G$
+
+\begin{multline}
+G\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j = \frac{1}{G}\left[\begin{array}{c c}
+0 & 0 \\
+0 & 1
+\end{array} \right]\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j  +\left[\begin{array}{c c}
+a & b \\
+c & d
+\end{array} \right]  \left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j 
+\end{multline}
+
+\begin{multline}
+\left(-GI + \frac{1}{G}\left[\begin{array}{c c}
+0 & 0 \\
+0 & 1
+\end{array} \right] +\left[\begin{array}{c c}
+a & b \\
+c & d
+\end{array} \right]  \right)
+\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j  = 0
+\end{multline}
+
+\begin{multline}
+\left(-G^2I + \left[\begin{array}{c c}
+0 & 0 \\
+0 & 1
+\end{array} \right] +\left[\begin{array}{c c}
+aG & bG \\
+cG & dG
+\end{array} \right]  \right)
+\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j  = 0
+\end{multline}
+
+\begin{multline}
+\left(\left[\begin{array}{c c}
+aG & bG \\
+cG & dG + 1
+\end{array} \right] -G^2I   \right)
+\left[\begin{array}{c}
+h \\
+u
+\end{array} \right]^{n}_j  = 0
+\end{multline}
+
+So $G^2$ are the eigenvalues of $\left[\begin{array}{c c}
+aG & bG \\
+cG & dG + 1
+\end{array} \right]$
+
+We have
+
+\[\lambda_1 = \frac{1}{2}\left(-\sqrt{a^2G^2 - 2adG^2 - 2aG + 4bcG^2 + d^2G^2 + 2dG +1} + aG + dG + 1\right)\]
+
+\[\lambda_2 = \frac{1}{2}\left(\sqrt{a^2G^2 - 2adG^2 - 2aG + 4bcG^2 + d^2G^2 + 2dG +1} + aG + dG + 1\right)\]
+
+\[G^2 = \frac{1}{2}\left(\pm\sqrt{\left(a^2 - 2ad + d^2 + 4bc \right)G^2 + \left(2d - 2a\right) G +1} + aG + dG + 1\right)\]
+
+\[2G^2 = \pm\sqrt{\left(a^2 - 2ad + d^2 + 4bc \right)G^2 + \left(2d - 2a\right) G +1} + aG + dG + 1\]
+
+\[2G^2 - (a + d)G - 1 = \pm\sqrt{\left(a^2 - 2ad + d^2 + 4bc \right)G^2 + \left(2d - 2a\right) G +1}\]
+
+\[\left(2G^2 - (a + d)G - 1 \right)^2 = \left(a^2 - 2ad + d^2 + 4bc \right)G^2 + \left(2d - 2a\right) G +1\]
+
+\[4G^4 -4aG^3 - 4dG^3  + a^2 G^2 + 2adG^2 + d^2G^2 - 4G^2 + 2aG + 2dG + 1\] 
+\[  = \left(a^2 - 2ad + d^2 + 4bc \right)G^2 + \left(2d - 2a\right) G +1\]
+
+\[4G^4 -4\left(a+d\right)G^3 + 4adG^2 - 4G^2 + 2aG  = 4bcG^2 - 2a G\]
+
+\[4G^4 -4\left(a+d\right)G^3 + 4(ad - bc - 1)G^2  + 4aG  = 0 \]
+
+\[G^4 -\left(a+d\right)G^3 + (ad - bc - 1)G^2  + aG  = 0 \]
+
+\[G\left(G^3 -\left(a+d\right)G^2 + (ad - bc - 1)G  + a\right)  = 0 \]
+
+
+\end{document}

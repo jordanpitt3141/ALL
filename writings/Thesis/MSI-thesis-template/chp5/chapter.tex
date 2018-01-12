@@ -1,51 +1,540 @@
 
-\chapter{Numerical Method Comparison}
-\label{chp:NumMethodComp}
+\chapter{Analysis of Numerical Methods}
+\label{chp:AnalNumMethod}
+There are a variety of ways to analyse the numerical methods presented in this paper []. There are also a variety of properties that numerical methods can possess. Chief among these is convergence, which for linear partial differential equations can be broken up into consistency and stability using the Lax equivalence theorem []. 
 
 
+For dispersive equations such as the Serre equations other more specific properties may be of interest such as the error in the dispersion relation introduced by the numerical methods as investigated in []. 
 
-Blah blah blah...
+The main obstacle for analysing the numerical methods for the Serre equations is that the Serre equations are non-linear, which means the techniques employed to investigate the convergence and dispersion error of our numerical methods are no longer valid. However, some insights can still be gained by instead examining the linearised version of the Serre equations as has been done []. This is the approach we take in this section of the thesis.
 
-The environments below all use the same numbering sequence.  See
-the file \verb+definitions.tex+ if you want to change this.
+%linearise equations first
+Horizontal bed
 
-\begin{defn}
-A definition.
-\end{defn}
+We will use the following notation 
 
-\begin{notn}
-Some notation.
-\end{notn}
+$H$ base, $\eta$ perturbation
 
-\begin{lemma}
-A lemma.
-\end{lemma}
+$U$ base, $\upsilon$ perturbation
 
-\begin{theorem}
-A theorem.
-\end{theorem}
+\begin{subequations}
+	\begin{gather}
+		\label{eqn:LinCont}
+		\frac{\partial  \eta}{\partial  t} + H\frac{\partial  \upsilon}{\partial  x} + U\frac{\partial  \eta}{\partial  x} = 0
+	\end{gather}
+	
+	\begin{gather}
+	\label{eqn:LineMome}
+	H\frac{\partial  \upsilon}{\partial  t} + gH\frac{\partial  \eta}{\partial  x} + UH\frac{\partial  \upsilon}{\partial  x} - \frac{H^3}{3}\left(U\frac{\partial^3  \upsilon}{\partial  x^3} + \frac{\partial^3  \upsilon}{\partial  x^3 \partial  t}  \right)  = 0
+	\end{gather}
+\label{eqn:LinSerre}	
+\end{subequations}
 
-\begin{proof}
-A proof.
-\end{proof}
+Also G
+\begin{equation}
+	G = U\left(H + \eta\right) + H\upsilon -\frac{H^3}{3} \frac{\partial^2 \upsilon}{\partial x^2}
+	\label{eqn:LinConSerreG}	
+\end{equation}
 
-\begin{cor}
-A corollary.
-\end{cor}
+%Phillipine stuff in here%
+\section{Dispersion Error}
+To study the error in the dispersion relation caused by the numerical methods we will follow the example of [] who used different methods on a different reformulation of the Serre equations. This allows us to compare our methods to those of Phillipne [].
 
-\begin{prop}
-A proposition.
-\end{prop}
+In keeping with [], we will assume that $U = 0$ so that \eqref{eqn:LinSerre} and \eqref{eqn:LinConSerreG} reduce to
 
-\begin{ex}
-An example.
-\end{ex}
+\begin{subequations}
+	\begin{gather}
+	\label{eqn:LinContu0}
+	\frac{\partial  \eta}{\partial  t} + H\frac{\partial  \upsilon}{\partial  x} = 0
+	\end{gather}
+	
+	\begin{gather}
+	\label{eqn:LineMomeu0}
+	h_0\frac{\partial  \upsilon}{\partial  t} + g H \frac{\partial  \eta}{\partial  x} - \frac{H^3}{3}\left(\frac{\partial^3  \upsilon}{\partial  x^3 \partial  t}  \right)  = 0
+	\end{gather}
+	\label{eqn:LinSerreu0}	
+\end{subequations}
 
-\begin{question}
-A question.
-\end{question}
+Also G
+\begin{equation}
+G = H\upsilon -\frac{H^3}{3} \frac{\partial^2 \upsilon}{\partial x^2}
+\label{eqn:LinConSerreGu0}	
+\end{equation}
 
-\begin{remark}
-A remark.
-\end{remark}
+Combining \eqref{eqn:LinSerreu0} and \eqref{eqn:LinConSerreGu0} the linearised equations with $u_0=0$ can be written as
 
+\begin{subequations}
+	\begin{gather}
+	\label{eqn:LinContG}
+	\frac{\partial  \eta}{\partial  t} + H\frac{\partial  \upsilon}{\partial  x} = 0
+	\end{gather}
+	
+	\begin{gather}
+	\label{eqn:LineMomeG}
+	\frac{\partial  G}{\partial  t} + g H \frac{\partial  \eta}{\partial  x}  = 0.
+	\end{gather}
+	\label{eqn:LinSerreG}	
+\end{subequations}
+
+For brevity we will only demonstrate our analysis of the dispersion error for our hybrid finite volume methods, through singular examples for the steps required to finally attain the dispersion error. 
+
+To perform the dispersion error we replace both $\eta$ and $\upsilon$ by fourier modes, which for some quantity $q$ is given by so that
+\begin{equation}
+q(x,t) = q(0,0) e^{i\left(\omega t + kx\right)}
+\label{eqn:FourierNode}
+\end{equation}
+
+
+Therefore because we use uniform spatial grids so that $q^n_j = q(x_j,t^n)$  we have that
+\begin{align}
+q^{n}_{j \pm l} = q^n_j e^{\pm ik l\Delta x} & & \text{and} & & q^{n \pm l}_{j} = q^n_j e^{\pm i \omega l\Delta t}
+\label{eqn:fourierfactor}
+\end{align}
+
+%give an outline here of the general principles, each numerical process introduces some error factor
+
+%continous in time, discretisation in space
+
+For the hybrid finite volume methods we break this process up into the three parts of these methods, the elliptic equation which we use to solve for $u$, the evolution equation we use to update $h$ and $G$ and the runge-kutta steps we use to increase the order of accuracy of the method in time.   [Choose second-order method as our example, simplest method which highlights the RK steps]
+
+
+[need notation]
+
+\subsection{Elliptic Equation}
+The elliptic equation \eqref{eqn:LinConSerreGu0} at a particular grid point $x_j$ is
+
+\[G_j = H\upsilon_j -\frac{H^3}{3} \left(\frac{\partial^2 \upsilon}{\partial x^2}\right)_j\]
+
+For the finite difference method the derivative of $u_1$ is approximated by a finite difference, in particular the second order method uses the approximation  
+
+\[ \left(\frac{\partial^2 \upsilon}{\partial x^2}\right)_j = \frac{\upsilon_{j+1} - 2\upsilon_{j} + \upsilon_{j-1}}{\Delta x^2}\]
+
+Which making use of \eqref{eqn:spatialfactor} becomes
+
+\[ \left(\frac{\partial^2 \upsilon}{\partial x^2}\right)_j = \frac{\upsilon_{j} e^{ik\Delta x} - 2\upsilon_{j} + \upsilon_{j}e^{-ik\Delta x}}{\Delta x^2}\]
+
+Which reduces to
+
+\[ \left(\frac{\partial^2 \upsilon}{\partial x^2}\right)_j = \frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2} \upsilon_{j}\]
+
+Substituting this approximation into our ellitpic equation one obtains
+
+\[G_j = \left(H -\frac{H^3}{3} \frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\right) \upsilon_{j}\] 
+
+We then define 
+
+\[\mathcal{G}_{FD2} = \left(H -\frac{H^3}{3} \frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\right),\]
+
+where the $\mathcal{G}$ denotes that this is the error introduced by transforming from $\upsilon$ to $G$ and the subscript denotes that it is the factor for the second-order finite different approximation to this transformation. 
+
+
+\subsection{Conservation Equation}
+
+Finite volume methods have the following update scheme to approximate equations in conservation law form [] for some quantity $q$
+
+\[\bar{q}^{\,n + 1}_{j} = \bar{q}^{\,n}_{j} - \frac{\Delta t}{\Delta x} \left[F^{\,n} _{j+1/2} - F^{\,n} _{j-1/2} \right].\]
+
+Where the bar denotes that it is the cell average of the quantity $q$ and $F^{\,n} _{j+1/2}$ and $F^{\,n} _{j-1/2}$ are the approximations to the average fluxes across the cell boundary between the times $t^n$ and $t^{n+1}$. 
+
+In our methods there is some transformation between the nodal value $q_j$ and the cell average $\bar{q}_j$, which will introduce some error factor $\mathcal{M}$. For first and second order methods $\mathcal{M}_1 = \mathcal{M}_2 = 1$, however for higher-order methods $\mathcal{M} \neq 1$.
+
+To calculate the fluxes $F^{\,n} _{j+1/2}$ and $F^{\,n} _{j-1/2}$ we use Kurganovs method [superscript dropped][]
+
+\begin{equation*}
+F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
+\end{equation*}
+
+where $a^+_{j+\frac{1}{2}}$ and $a^-_{j+\frac{1}{2}}$ are given by the wave speed bounds [], so that 
+
+\[a^-_{j+ 1/2} =  - \sqrt{g H}\]
+
+\[a^+_{j+ 1/2} = \sqrt{g H}.\]
+
+Substituting these values into Kurganovs flux approximation we obtain 
+
+\begin{equation}\label{eqn:HLL_fluxred}
+F_{j+\frac{1}{2}} = \dfrac{ f\left(q^-_{j+\frac{1}{2}}\right) + f\left(q^+_{j+\frac{1}{2}}\right)}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
+\end{equation}
+
+For $\eta$ our Kurganov approximation to the flux of \eqref{eqn:LinContG} is then
+
+
+\begin{equation}
+\label{eqn:HLL_fluxeta}
+F^{\eta}_{j+\frac{1}{2}} = \dfrac{ H \upsilon ^-_{j+\frac{1}{2}}+ H \upsilon ^+_{j+\frac{1}{2}}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ \eta^+_{j+\frac{1}{2}} - \eta^-_{j+\frac{1}{2}} \right ]
+\end{equation}
+
+The missing piece here is the error introduced by reconstruction of the edge values $\upsilon ^-_{j+\frac{1}{2}}$, $\upsilon ^+_{j+\frac{1}{2}}$, $\eta ^-_{j+\frac{1}{2}}$ and $\eta ^+_{j+\frac{1}{2}}$ from the cell averages $\bar{\upsilon}_j$ and $\bar{\eta}_j$. Because our quantities are smooth the nonlinear limiters can be neglected so we have for the second-order reconstruction of $\eta$ 
+
+
+	\begin{equation*}
+	\eta^-_{j+\frac{1}{2}} = \bar{\eta}_j + \frac{\bar{\eta}_{j+ 1} - \bar{\eta}_{j - 1}}{4}
+	\end{equation*}
+	\begin{equation*}
+	\eta^+_{j+\frac{1}{2}} = \bar{\eta}_{j+1} + \frac{\bar{\eta}_{j+ 2} - \bar{\eta}_{j}}{4}.
+	\end{equation*}
+	
+
+Using \eqref{eqn:spatialfactor} these equations become
+
+
+	\begin{equation*}
+	\eta^-_{j+\frac{1}{2}} = \mathcal{M}_2{\eta}_j + \frac{\mathcal{M}_2{\eta}_{j} e^{ik\Delta x} - \mathcal{M}_2{\eta}_{j} e^{-ik\Delta x}}{4}
+	\end{equation*}
+	\begin{equation*}
+	\eta^+_{j+\frac{1}{2}} = \mathcal{M}_2{\eta}_{j}e^{ik\Delta x} + \frac{\mathcal{M}_2{\eta}_{j}e^{2ik\Delta x} - \mathcal{M}_2{\eta}_{j}}{4}.
+	\end{equation*}
+
+
+For the second order case $\mathcal{M}_2 = 1$ and these equations can be reduced to 
+
+\begin{subequations}
+	\label{eqn:2ndrecon}
+	\begin{equation}
+	\eta^-_{j+\frac{1}{2}} = \left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right){\eta}_j
+	\end{equation}
+	\begin{equation}
+	\eta^+_{j+\frac{1}{2}} = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right){\eta}_{j}.
+	\end{equation}
+\end{subequations}
+
+From these we introduce the second order reconstruction factors $\mathcal{R}^+_2 = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)$ and $\mathcal{R}^-_2 = 1  + \frac{i\sin\left(k\Delta x\right)}{2}$ for both $\eta$ and $G$. So that we have 
+
+\begin{equation*}
+\eta^-_{j+\frac{1}{2}} = \mathcal{R}^-_2 {\eta}_j
+\end{equation*}
+\begin{equation*}
+\eta^+_{j+\frac{1}{2}} = \mathcal{R}^+_2{\eta}_{j}.
+\end{equation*}
+
+In our numerical methods our reconstruction of $\upsilon$ is slightly different as $\upsilon ^-_{j+\frac{1}{2}}$ and $\upsilon ^+_{j+\frac{1}{2}}$ are equal as we assume $\upsilon$ is continuous. For the second order method we have
+
+\begin{equation*}
+u^-_{j + 1/2} = u^+_{j + 1/2} = \frac{u_{j+1} + u_{j}}{2}
+\end{equation*}
+
+Using \eqref{eqn:spatialfactor} and rearranging gives
+
+
+\begin{equation}
+\label{eqn:2ndreconu}
+u^-_{j + 1/2} = u^+_{j + 1/2} = \frac{e^{ik\Delta x } + 1}{2} u_{j}.
+\end{equation}
+
+We also introduce the second order reconstruction error factor $\mathcal{R}^u_2 = \frac{e^{ik\Delta x } + 1}{2}$
+
+We now have all the pieces to substitute into \eqref{eqn:HLL_fluxeta} which for the second order method results in
+
+\begin{equation*}
+F^{\eta}_{j+\frac{1}{2}} = \dfrac{ H  \mathcal{R}^u_2 \upsilon_{j}+ H\mathcal{R}^u_2 \upsilon_{j}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [  \mathcal{R}^+_2 {\eta}_j -  \mathcal{R}^-_2 {\eta}_j \right ]
+\end{equation*}
+
+Which becomes
+
+\begin{equation*}
+F^{\eta}_{j+\frac{1}{2}} = H \mathcal{R}^u_2 \upsilon_{j}   - \dfrac{ \sqrt{gH}}{ 2} \left [  \mathcal{R}^+_2 -  \mathcal{R}^-_2 \right ] {\eta}_j
+\end{equation*}
+
+We then introduce the factors $\mathcal{F}_2^{\eta,\upsilon}$ and $\mathcal{F}_2^{\eta,\eta}$ so that 
+
+\begin{equation}
+\label{eqn:etafluxapprox}
+F^{\eta}_{j+\frac{1}{2}} = \mathcal{F}_2^{\eta,\upsilon} \upsilon_{j}   +  \mathcal{F}_2^{\eta,\eta} {\eta}_j.
+\end{equation}
+
+Repeating this process for $G$ using [] and [] we get that
+
+\begin{equation}
+\label{eqn:HLL_fluxG}
+F^{G}_{j+\frac{1}{2}} = \dfrac{ gHh^-_{j+\frac{1}{2}} + gHh^+_{j+\frac{1}{2}}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ G^+_{j+\frac{1}{2}} - G^-_{j+\frac{1}{2}} \right ]
+\end{equation}
+
+Using our reconstruction factors this becomes:
+
+\begin{equation*}
+F^{G}_{j+\frac{1}{2}} = \dfrac{ gH \mathcal{R}^-_2h_{j} + gH \mathcal{R}^+_2 h_{j}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [  \mathcal{R}^+_2 G_{j} -  \mathcal{R}^-_2G_{j} \right ]
+\end{equation*}
+
+which by factoring and using the factor $\mathcal{G}_{FD2}$ becomes
+
+\begin{equation*}
+F^{G}_{j+\frac{1}{2}} =  gH \dfrac{\mathcal{R}^-_2 + \mathcal{R}^+_2 }{ 2} h_{j}  - \dfrac{ \sqrt{gH}}{ 2} \left [  \mathcal{R}^+_2 -  \mathcal{R}^-_2 \right ] \mathcal{G}_{FD2}\upsilon_j
+\end{equation*}
+
+We then introduce the factors $\mathcal{F}_2^{G,\upsilon}$ and $\mathcal{F}_2^{G,\eta}$ so that 
+
+\begin{equation}
+\label{eqn:Gfluxapprox}
+F^{G}_{j+\frac{1}{2}} =  \mathcal{F}_2^{G,\eta} \eta_{j}  + \mathcal{F}_2^{G,\upsilon} \upsilon_j
+\end{equation}
+
+By substituting \eqref{eqn:etafluxapprox}, \eqref{eqn:Gfluxapprox} and $\mathcal{M}_2$ into [] our finite volume method can be written as
+
+
+	\begin{equation*}
+\mathcal{M}_2 \eta^{\,n + 1}_{j} = \mathcal{M}_2 \eta^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{ik\Delta x}\right) \left(\mathcal{F}_2^{\eta,\eta} h_{j}  + \mathcal{F}_2^{\eta,\upsilon} \upsilon_j \right) \right]
+	\end{equation*}
+	\begin{equation*}
+\mathcal{M}_2 G^{\,n + 1}_{j} = \mathcal{M}_2 G^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{ik\Delta x}\right) \left(  \mathcal{F}_2^{G,\eta} \eta_{j}  + \mathcal{F}_2^{G,\upsilon} \upsilon_j \right) \right]
+	\end{equation*}
+	
+Furthermore by transforming the $G$'s into $\upsilon$'s using our second order finite volume factor $\mathcal{G}_{FD2}$ and using $\mathcal{M}_2 = 1$ we obtain
+	
+	
+\begin{equation*}
+\eta^{\,n + 1}_{j} = \eta^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{ik\Delta x}\right) \left(\mathcal{F}_2^{\eta,\eta} \eta_{j}  + \mathcal{F}_2^{\eta,\upsilon} \upsilon_j \right) \right]
+\end{equation*}
+\begin{equation*}
+\upsilon^{\,n + 1}_{j} = \upsilon^{\,n }_{j} -  \frac{1}{\mathcal{G}_{FD2}}\frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{ik\Delta x}\right) \left(  \mathcal{F}_2^{G,\eta} \eta_{j}  + \mathcal{F}_2^{G,\upsilon} \upsilon_j \right) \right]
+\end{equation*}
+
+This can be written in matrix form as
+
+\begin{equation*}
+\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n+1}_j = \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j - \frac{\left(1 - e^{ik\Delta x}\right) \Delta t}{\Delta x}\left[\begin{array}{c c}
+\mathcal{F}_2^{\eta,\eta} & \mathcal{F}_2^{\eta,\upsilon} \\ \frac{1}{\mathcal{G}}\mathcal{F}_2^{\upsilon,\eta} &  \frac{1}{\mathcal{G}}\mathcal{F}_2^{\upsilon,\upsilon} 
+\end{array}\right]\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j
+\end{equation*}
+
+Introducing 
+
+\[\boldsymbol{F}_2 = \frac{\left(1 - e^{ik\Delta x}\right)}{\Delta x}\left[\begin{array}{c c}
+\mathcal{F}_2^{\eta,\eta} & \mathcal{F}_2^{\eta,\upsilon} \\ \frac{1}{\mathcal{G}}\mathcal{F}_2^{\upsilon,\eta} &  \frac{1}{\mathcal{G}}\mathcal{F}_2^{\upsilon,\upsilon} 
+\end{array}\right] \]
+
+this becomes
+
+\begin{equation*}
+\label{eqn:matrixevolupdate}
+\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n+1}_j = \left(\boldsymbol{I}  - \Delta t \boldsymbol{F}_2 \right) \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j
+\end{equation*}
+
+\subsection{Runge-Kutta Time Stepping}
+The above analysis does not include the Runge-Kutta steps that make allow our schemes to be higher order in time. However, extending this analysis to Runge-Kutta steps is not difficult now that our method is in the form \eqref{eqn:matrixevolupdate}. For second order time stepping the Runge Kutta steps are then
+
+\begin{subequations}
+	\label{eqn:RKstepfull}
+	\begin{equation}
+	\label{eqn:RKstepfullp1}
+	\left[\begin{array}{c}
+	\eta \\ \upsilon
+	\end{array}\right]^{1}_j = \left(\boldsymbol{I} - \Delta t\boldsymbol{F}_2 \right)\left[\begin{array}{c}
+	\eta \\ \upsilon
+	\end{array}\right]^{n}_j
+	\end{equation}
+	
+	\begin{equation}
+	\label{eqn:RKstepfullp2}
+	\left[\begin{array}{c}
+	\eta \\ \upsilon
+	\end{array}\right]^{2}_j = \left(\boldsymbol{I} - \Delta t\boldsymbol{F}_2 \right)\left[\begin{array}{c}
+	\eta \\ \upsilon
+	\end{array}\right]^{1}_j
+	\end{equation}
+		
+	\begin{equation}
+	\label{eqn:RKstepfullp3}
+	\left[\begin{array}{c}
+	\eta \\ \upsilon
+	\end{array}\right]^{n+1}_j = \frac{1}{2} \left(\left[\begin{array}{c}
+	\eta \\ \upsilon
+	\end{array}\right]^{n}_j + \left[\begin{array}{c}
+	\eta \\ \upsilon
+	\end{array}\right]^{2}_j\right) 
+	\end{equation}
+\end{subequations}
+
+
+Substituting \eqref{eqn:RKstepfullp1} and \eqref{eqn:RKstepfullp2} into \eqref{eqn:RKstepfullp3} gives
+\begin{equation*}
+\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j + \left(\boldsymbol{I} - \Delta t\boldsymbol{F}_2 \right)^2 \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j\right)
+\end{equation*}
+
+Expanding this we get
+
+\begin{equation*}
+\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(2\boldsymbol{I}  -2\Delta t\boldsymbol{F}_2 + \Delta t^2\boldsymbol{F}^2_2 \right) \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j 
+\end{equation*}
+
+lets say we have an eigenvalue decomposition $\boldsymbol{F}_2 = \boldsymbol{P} \boldsymbol{\Lambda} \boldsymbol{P}^{-1} $ then this can be rewritten as 
+
+\begin{equation*}
+\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(2\boldsymbol{I}  -2\Delta t\boldsymbol{P} \boldsymbol{\Lambda} \boldsymbol{P}^{-1}  + \Delta t^2\boldsymbol{P} \boldsymbol{\Lambda}^2 \boldsymbol{P}^{-1} \right) \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j 
+\end{equation*}
+
+Multiplying by $\boldsymbol{P}^{-1}$ on the left and rearranging this get that
+
+\begin{equation*}
+\boldsymbol{P}^{-1} \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(2 -2\Delta t \boldsymbol{\Lambda}  + \Delta t^2 \boldsymbol{\Lambda}^2  \right)  \boldsymbol{P}^{-1} \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j 
+\end{equation*}
+
+Since $\eta$ and $\upsilon$ are Fourier modes we have
+
+\begin{equation*}
+e^{i\omega \Delta t} \left(\boldsymbol{P}^{-1} \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j  \right)= \left(1 -1\Delta t \boldsymbol{\Lambda}  + \frac{1}{2}\Delta t^2 \boldsymbol{\Lambda}^2  \right)  \left(\boldsymbol{P}^{-1} \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j  \right)
+\end{equation*}
+
+Since $\boldsymbol{\Lambda}$ is a diagonal matrix of the eigenvalues $\lambda_1$ and $\lambda_2$ we have that
+
+\begin{align*}
+e^{i\omega\Delta t} &= 1 + \frac{1}{2}\Delta t^2 \lambda_{1}^2  -\Delta t\lambda_{1}, \\
+e^{i\omega\Delta t} &= 1 + \frac{1}{2}\Delta t^2 \lambda_{2}^2  -\Delta t\lambda_{2}
+\end{align*}
+
+So that the dispersion relation for the second order finite difference finite volume method is
+
+\begin{align}
+\label{eqn:DispersionRelationSecondOrder}
+\omega &= \frac{1}{i \Delta t} \ln \left(1 + \frac{1}{2}\Delta t^2 \lambda_{1}^2  -\Delta t\lambda_{1}\right), \\
+\omega &= \frac{1}{i \Delta t} \ln \left(1 + \frac{1}{2}\Delta t^2 \lambda_{2}^2  -\Delta t\lambda_{2}\right),
+\end{align}
+
+Comparing this with the dispersion relation \eqref{eqn:DispersionRelation} of the Serre equations we can then determine the error in dispersion caused by the particular method. We perform this computationally by finding the eigenvalues of $\boldsymbol{F}$, substituting them into \eqref{eqn:DispersionRelationSecondOrder} and comparing that to the dispersion relation of the Serre equations for a particular $H$ and $k$ value. 
+
+
+\subsection{Results}
+
+
+\section{Neumann Stability}
+
+We again begin from the linearised Serre equations \eqref{eqn:LinSerre} and as for the hybrid finite volume methods we will only show the working for one example as the process is the same in both cases. For the Neumann Stability our example will be the naive second-order finite difference method $\mathcal{D}$ \eqref{eq:Dnumdef}. Again we being by replacing both $\eta$ and $\upsilon$ by Fourier nodes \eqref{eqn:FourierNode}.
+
+Because our approximations to derivatives is consistent for $\mathcal{D}$ we will provide all the factors for the second order centred finite difference approximations to derivatives of some quantity $q$ generated by making use of \eqref{eqn:fourierfactor}.
+
+\begin{align}
+ &\left(\frac{\partial q}{\partial x}\right)^n_j &=& \frac{q^n_{j+1} - q^n_{j-1}}{2 \Delta x} &=& \frac{i \sin\left(k \Delta x\right)}{\Delta x} q^n_j \\
+ &\left(\frac{\partial^2 q}{\partial x^2}\right)^n_j &=& \frac{q^n_{j+1} - 2q^n_j + q^n_{j-1}}{\Delta x^2} &=& \frac{2 \cos\left(k \Delta x\right) - 2}{\Delta x^2} q^n_j \\
+&\left(\frac{\partial^3 q}{\partial x^3}\right)^n_j &=& \frac{q^n_{j+2} - 2q^n_{j+1} + 2q^n_{j-1} - q^n_{j-2}}{2\Delta x^3} &=& -4i\sin\left(k \Delta x\right)\frac{\sin^2\left(\frac{k \Delta x}{2}\right) }{\Delta x^3} q^n_j
+\label{eqn:FDfactorlist}
+\end{align} 
+
+\begin{subequations}
+	\begin{gather}
+	\frac{\partial  \eta}{\partial  t} + H\frac{\partial  \upsilon}{\partial  x} + U\frac{\partial  \eta}{\partial  x} = 0
+	\end{gather}
+	
+	\begin{gather}
+	H\frac{\partial  \upsilon}{\partial  t} + gH\frac{\partial  \eta}{\partial  x} + UH\frac{\partial  \upsilon}{\partial  x} - \frac{H^3}{3}\left(U\frac{\partial^3  \upsilon}{\partial  x^3} + \frac{\partial^3  \upsilon}{\partial  x^3 \partial  t}  \right)  = 0
+	\end{gather}	
+\end{subequations}
+
+The factors we get for the temporal derivatives are very similar to this. The numerical method $\mathcal{D}$ is just attained from replacing all the derivatives in \eqref{eqn:LinSerre} with the approximations in \eqref{eqn:FDfactorlist}. For the linearised equations the update formulas of $\mathcal{D}$ become
+
+\begin{subequations}
+	\begin{equation}
+	\eta^{n+1}_j = \eta^{n-1}_j - \Delta t \left(U \frac{\eta^{n}_{j+1} - \eta^{n}_{j-1}}{\Delta x} + H \frac{\upsilon^{n}_{j+1} - \upsilon^{n}_{j-1}}{\Delta x}\right).
+	\end{equation}
+	\begin{multline}
+	\upsilon^{n+1}_j - \frac{H^2}{3}\frac{\upsilon^{n+1}_{j+1} -2\upsilon^{n+1}_{j} +\upsilon^{n+1}_{j-1} }{\Delta x^2} 
+	\\ =  \upsilon^{n-1}_j - \frac{H^2}{3}\frac{\upsilon^{n-1}_{j+1} -2\upsilon^{n-1}_{j} +\upsilon^{n-1}_{j-1}}{\Delta x^2}   \\+  \Delta t\left(- g\frac{\eta^n_{j+1} -\eta^n_{j-1} }{\Delta x}   - U\frac{\upsilon^n_{j+1} -\upsilon^n_{j-1} }{\Delta x} + \frac{H^2}{3}\left(U \frac{-\upsilon^{n}_{j-2} +2\upsilon^{n}_{j-1} -2\upsilon^{n}_{j+1} +\upsilon^{n}_{j+2}}{\Delta x^3}  \right)\right)  \\
+	\end{multline}
+\end{subequations}
+
+
+Since we have assumed that $\eta$ and $\upsilon$ are fourier nodes, we can just replace the finite difference approximations with the appropriate factors from \eqref{eqn:FDfactorlist}. After some rearranging we get that
+
+
+\begin{subequations}
+	\begin{equation}
+	\eta^{n+1}_j = \eta^{n-1}_j - \Delta t \left(U  \frac{i \sin\left(k \Delta x\right)}{\Delta x}\eta^n_j + H\frac{i \sin\left(k \Delta x\right)}{\Delta x} \upsilon^n_j \right),
+	\end{equation}
+	\begin{multline}
+	\upsilon^{n+1}_j  =  \upsilon^{n-1}_j  -  \frac{3 \Delta x^2\Delta t}{3 \Delta x^2 -2{H^2} \left( \cos\left(k \Delta x\right) - 1 \right)}\bigg( g \frac{i \sin\left(k \Delta x\right)}{\Delta x}     \bigg) \eta^n_j\\ + U\frac{i \Delta t \sin\left(k \Delta x\right)}{\Delta x} \upsilon^n_j  \\
+	\end{multline}
+\end{subequations}
+
+By setting
+
+\begin{align}
+&A_{0,0} = -  \frac{2 i\Delta t }{\Delta x} U\sin\left(k \Delta x\right)\\
+&A_{0,1} = -  \frac{2 i\Delta t}{\Delta x} H \sin\left(k \Delta x\right) \\
+&A_{1,0} = -\frac{6 gi \Delta x\Delta t}{3 \Delta x^2 -2{H^2} \left( \cos\left(k \Delta x\right) - 1 \right)}{ \sin\left(k \Delta x\right)} \\
+&A_{1,1} =\frac{2i \Delta t }{\Delta x} U \sin\left(k \Delta x\right)
+\end{align}
+
+
+\begin{equation}
+\begin{bmatrix}
+\eta^{n+1}_j \\
+\upsilon^{n+1}_j\\
+\eta^{n}_j \\
+\upsilon^{n}_j
+\end{bmatrix} = 
+\begin{bmatrix}
+A_{0,0}  & A_{0,1}  & 1 &0 \\
+A_{1,0}  & A_{1,1}  & 0 &1 \\
+1  & 0  &0 &0 \\
+0  & 1  &0 &0 
+\end{bmatrix} \begin{bmatrix}
+\eta^{n}_j \\
+\upsilon^{n}_j\\
+\eta^{n-1}_j \\
+\upsilon^{n-1}_j
+\end{bmatrix}
+\end{equation}
+
+This matrix is the growth matrix and if its spectral radius is less than $1$ then $\mathcal{D}$ is stable.
+
+
+For $\mathcal{W}$ after following through with same process we get that
+
+\begin{align*}
+&B_{0,0} = 1 - \frac{\Delta t}{\Delta x}A_{1,0}H\frac{i\sin\left(k\Delta x\right)}{2} \\ &- \frac{\Delta t}{\Delta x}U\left(\left(i\sin\left(k\Delta x\right)\right) - \frac{\Delta t}{\Delta x}U\left(\cos\left(ik\Delta x\right) - 1\right)\right) \\
+&B_{0,1} = - \frac{\Delta t}{\Delta x} \left[H\frac{i\sin\left(k\Delta x\right)}{2}A_{1,1}   -U\left(\frac{\Delta t}{\Delta x}H\left(\cos\left(ik\Delta x\right) - 1\right)\right) \right] \\
+&B_{0,4} = - \frac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2} \\
+&B_{1,0} = A_{1,0} \\
+&B_{1,1} =A_{1,1}
+\end{align*}
+
+\[
+\left[\begin{array}{c}
+h^{n+1}_j \\
+u^{n+1}_j\\
+h^n_j \\
+u^n_j
+\end{array} \right] = \left[\begin{array}{c c c c}
+B_{0,0} & B_{0,1} & 0 & B_{0,4} \\
+B_{1,0} & B_{1,1}&0 & 1 \\
+1&0&0&0\\
+0&1&0&0
+\end{array} \right]  \left[\begin{array}{c}
+h^{n}_j \\
+u^{n}_j\\
+h^{n-1}_j \\
+u^{n-1}_j
+\end{array} \right] 
+\]
+
+Again if this matrix has a spectral radius less than $1$ then $\mathcal{W}$ is stable.

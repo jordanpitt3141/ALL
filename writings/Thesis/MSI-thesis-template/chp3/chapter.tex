@@ -1,51 +1,316 @@
 
-\chapter{Numerical Methods}
-\label{chp:NumMethod}
+\chapter{Hybrid Finite Volume Methods}
+\label{chp:HFVMMethod}
+%Framework of methods
 
+%Elliptic Equations
+%	FD(3rd order)
+% 	FEM(3rd and 2nd order, mention matrix solvers)
 
+%Conservation Law
+% 	3rd order, 2nd order (modifications)
 
-Blah blah blah...
+%Cell average to Nodal vales
 
-The environments below all use the same numbering sequence.  See
-the file \verb+definitions.tex+ if you want to change this.
+%RK Steps
+
+%B.C/ Dry Solution / Well balancing (already in Hons thesis)
+
+%Grid Definition
+
+\section{Structure Overview}
+
+%Define how these arrays are constructed, also use u at the edges
+
+In this section we will give the general structure for how the hybrid finite volume methods take the array of cell average values at time $t^n$; $\bar{\boldsymbol{h}}^n$ and $\bar{\boldsymbol{G}}^n$ and evolve the system to the cell average values at time $t^{n+1}$; $\bar{\boldsymbol{h}}^{n+ 1}$ and $\bar{\boldsymbol{G}}^{n+ 1}$.
+
+\begin{itemize}
+	\item The cell average values are transformed into nodal values by $\mathcal{M}$
+		\newline  \centering $\bar{\boldsymbol{h}}^n, \bar{\boldsymbol{G}}^n  \xrightarrow{\mathcal{M}}  \boldsymbol{h}^n, \boldsymbol{G}^n  $ 
+    \item $\boldsymbol{u}^n$ is found by solving the elliptic equation in Def. \ref{defn:SerreEqnConservedQuantity1} by $\mathcal{A}$
+   		\newline   \centering ${\boldsymbol{h}}^n, {\boldsymbol{G}}^n , {\boldsymbol{b}}  \xrightarrow{\mathcal{\mathcal{G}}}  \boldsymbol{u}^n  $
+	\item The conservation equations \eqref{eqn:FullSerreCon} can now be solved by $\mathcal{F}$ 
+		\newline   \centering $\bar{\boldsymbol{h}}^n, \bar{\boldsymbol{G}}^n, {\boldsymbol{b}}, {\boldsymbol{u}}^n  \xrightarrow{\mathcal{\mathcal{F}}}  \bar{\boldsymbol{h}}^{n+ 1}, \bar{\boldsymbol{G}}^{n+ 1}  $
+\end{itemize}
 
 \begin{defn}
-A definition.
+	\label{defn:EulerStep}
+	$\mathcal{E}$ is the single Euler step given by the procedure above that transforms updates the array of cell average values at time $t^n$; $\bar{\boldsymbol{h}}^n$ and $\bar{\boldsymbol{G}}^n$ to the cell average values at time $t^{n+1}$; $\bar{\boldsymbol{h}}^{n+ 1}$.
+	$$\bar{\boldsymbol{h}}^n, \bar{\boldsymbol{G}}^n,  {\boldsymbol{b}} \xrightarrow{\mathcal{\mathcal{E}}}  \bar{\boldsymbol{h}}^{n+ 1}, \bar{\boldsymbol{G}}^{n+ 1}  $$
 \end{defn}
 
-\begin{notn}
-Some notation.
-\end{notn}
+\section{Transformation Between Nodal Values and Cell Averages}
+For first and second order methods $\mathcal{M}$ is just the identity map as the cell average values are equal to the nodal values.
 
-\begin{lemma}
-A lemma.
-\end{lemma}
+For higher order methods this is not the case, hence why there is a need to incorporate the process $\mathcal{M}$ into our methods, as assuming that $\mathcal{M}$ is the identity map will lead to a loss of accuracy in the method. 
 
-\begin{theorem}
-A theorem.
-\end{theorem}
+From quadratic interpolation we have the formula relating the cell averages and nodal values of a quantity  $q$ with third order accuracy
 
-\begin{proof}
-A proof.
-\end{proof}
+\begin{equation*}
+q_j = \frac{-\bar{q}_{j+ 1} + 26\bar{q}_{j} - \bar{q}_{j - 1}}{24}.
+\end{equation*}
 
-\begin{cor}
-A corollary.
-\end{cor}
+Therefore 
 
-\begin{prop}
-A proposition.
-\end{prop}
+\begin{equation*}
+\boldsymbol{q} = \frac{1}{24}
+\begin{bmatrix}
+26  & -1  & & & \\
+-1  & 26  & -1  &  & \\
+ & \ddots & \ddots &  \ddots & \\
+  &  & -1 & 26  &  -1\\
+ &   &  & -1 & 26  \\
+\end{bmatrix}
+ \bar{\boldsymbol{q}}.
+\end{equation*}
 
-\begin{ex}
-An example.
-\end{ex}
+Dirichlet boundary conditions at edges.
 
-\begin{question}
-A question.
-\end{question}
+So for the third-order method $\mathcal{M}$ is a multiplication by the above matrix. 
 
-\begin{remark}
-A remark.
-\end{remark}
+\section{Elliptic Equation}
+The elliptic equation that relates the conserved variables $h$ and $G$ to the primitive variable $u$ was given in Def \ref{defn:SerreEqnConservedQuantity1} and is presented here to remind the reader
 
+	\[ G =  uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right).\]
+\subsection{Finite Difference Methods}
+One way to approximate this ordinary differential equation is to replace all the derivatives with finite differences as has been done to second order accuracy in []. We have expanded this work by  building a fourth order accurate finite difference method, where all derivatives were replaced with their centred fourth order approximation. This results in the following equation for each row of a the matrix $\boldsymbol{A}$
+
+\begin{equation}
+G_j = A_{j,j-2} \;u_{j-2} + A_{j,j-1} \; u_{j-1} + A_{j,j} \; u_{j} +  A_{j,j + 1} \;u_{j+1} +  A_{j,j + 2} \;u_{j+2}
+\end{equation}
+
+where 
+\begin{align*}
+&A_{j,j-2} = -h^2_j \left(\frac{-h_{j+2} + 8 h_{j+1} - 8h_{j-1} + h_{j-2}}{144 \Delta x ^2}\right) + \frac{h_{j}^3}{36 \Delta x^2} , \\
+&A_{j,j-1} = h^2_j \left(\frac{-h_{j+2} + 8 h_{j+1} - 8h_{j-1} + h_{j-2}}{18 \Delta x ^2}\right) - \frac{4h_{j}^3}{9 \Delta x^2} , \\
+&A_{j,j} = h_j + \frac{5h_{j}^3}{6 \Delta x^2}   + h_j \left(\frac{ \left(-h_{j+2} + 8 h_{j+1} - 8h_{j-1} + h_{j-2} \right) \left(-b_{j+2} + 8 b_{j+1} - 8b_{j-1} + b_{j-2} \right) }{144 \Delta x ^2}\right)  \\
+& \hspace{1cm}+ h_j \left(\frac{-b_{j+2} + 16 b_{j+1} - 30b_{j-1} + 16b_{j-1} - b_{j-2}}{24 \Delta x ^2}\right)  + h_j \left(\frac{ -b_{j+2} + 8 b_{j+1} - 8b_{j-1} + b_{j-2}  }{144 \Delta x ^2}\right), \\ \\
+&A_{j,j+1} = -h^2_j \left(\frac{-h_{j+2} + 8 h_{j+1} - 8h_{j-1} + h_{j-2}}{18 \Delta x ^2}\right) - \frac{4h_{j}^3}{9 \Delta x^2} , \\
+&A_{j,j+2} = h^2_j \left(\frac{-h_{j+2} + 8 h_{j+1} - 8h_{j-1} + h_{j-2}}{144 \Delta x ^2}\right) + \frac{h_{j}^3}{36 \Delta x^2} , \\
+\end{align*}
+
+This can be written for the whole domain 
+
+\begin{equation*}
+\boldsymbol{G} = \boldsymbol{A}
+\boldsymbol{u}.
+\end{equation*}
+Dirichlet boundary conditions
+
+Therefore $\mathcal{G}$ is the solution of this matrix problem with $\boldsymbol{G}$ known and $\boldsymbol{u}$ unknown. 
+
+\subsection{Finite Element Methods}
+For a finite element method we take the weak form of the elliptic equation in Def \ref{defn:SerreEqnConservedQuantity1} which is 
+
+	\[ \int_{\Omega } G v \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) v \; dx.\]
+	
+Which after rearranging, using integration by parts and assuming Dirichlet boundary conditions becomes
+
+%\begin{multline}
+%\int_{\Omega } G v \; dx = + \int_{\Omega } uh \left(1 + \frac{\partial b}{\partial x}^2 \right) v \; dx +  %\int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial v}{\partial x} \; dx  \\ + 
+%\int_{\Omega }  \frac{\partial }{\partial x} \left(\frac{1}{2}h^2\frac{\partial b}{\partial x}\right) u v \; %dx.
+%\end{multline}
+
+%\begin{multline}
+%\int_{\Omega } G v \; dx = + \int_{\Omega } uh \left(1 + \frac{\partial b}{\partial x}^2 \right) v \; dx +  %\int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial v}{\partial x} \; dx  \\ - 
+%\int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial }{\partial x}\left(u v %\right)\; dx.
+%\end{multline}
+
+\begin{multline}
+\int_{\Omega } G v \; dx = \int_{\Omega } uh \left(1 + \frac{\partial b}{\partial x}^2 \right) v \; dx +  \int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial v}{\partial x} \; dx  \\ - 
+\int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x} u \frac{\partial v }{\partial x}\; dx. - 
+\int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}v \; dx.
+\end{multline}
+Should be able to handle non smooth $h$ and $G$ but requires first derivative of $b$.
+
+
+
+\subsubsection{Second Order}
+\subsubsection{Third Order}
+
+\section{Evolution Equations}
+The evolution equations in the alternative form of the Serre equations \eqref{eqn:FullSerreCon} are
+
+\begin{equation*}
+\frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+\end{equation*}
+
+and
+
+\begin{multline*}
+\frac{\partial}{\partial t} \left( G \right)  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} - \frac{2}{3}h^3 \frac{\partial {u}}{\partial x}^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right) \\ = -\frac{1}{2}h^2 {u} \frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  + h {u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2} - gh\frac{\partial b}{\partial x} 
+\end{multline*}
+
+Because these equations are in conservation law form and we have an estimate for the maximum and minimum wave speeds [], Kurganovs method [] can be employed to estimate the fluxes across the boundary. This leads to the following update scheme for a quantity $q$
+
+\begin{equation}
+\label{eqn:evolupdatescheme}
+\bar{q}^{\,n + 1}_{j} = \bar{q}^{\,n}_{j} - \frac{\Delta t}{\Delta x} \left[F^{\,n} _{j+1/2} - F^{\,n} _{j-1/2} \right] + \Delta t S_{j}^n.
+\end{equation}
+
+Where $F^{\,n} _{j+1/2}$ and $F^{\,n} _{j-1/2}$ are approximations to the average fluxes across the boundary of the cell with midpoint $x_i$ from time $t^n$ to $t^{n+1}$. While $S_{j}$ is an approximation to the average source term contribution in the cell from time $t^n$ to $t^{n+1}$, which since this time-stepping is first-order we can just take to be constant over the time step. 
+
+\subsection{Kurganovs Method}
+
+Kurganovs method is a finite volume method that can handle discontinuities across the boundary and only requires an estimate of the maximum and minimum wave speeds instead of the characteristics like other methods []. This makes it a good choice for the Serre equations as we do not have an expression for the characteristics but we do have estimates on the maximum and minimum wave speeds []. 
+
+The equation which approximates $F^{\,n} _{j+1/2}$ in \eqref{eqn:evolupdatescheme} for a quantity $q$ at a particular time $t^n$ is
+
+\begin{equation}\label{eqn:HLL_flux}
+F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
+\end{equation}
+
+where $a^+_{j+\frac{1}{2}}$ $a^-_{j+\frac{1}{2}}$ are given by the wave speed bounds [], for the Serre equations we have
+
+\begin{align*}
+a^-_{j+\frac{1}{2}} &= \min\left\lbrace 0\;,\;  u^-_{j + 1/2} - \sqrt{g h^-_{j + 1/2}}  \;,\;u^+_{j + 1/2} - \sqrt{g h^+_{j + 1/2}} \right\rbrace  ,\\
+a^+_{j+\frac{1}{2}} &= \max\left\lbrace 0 \;,\;  u^-_{j + 1/2} + \sqrt{g h^-_{j + 1/2}}  \;,\;u^+_{j + 1/2} + \sqrt{g h^+_{j + 1/2}} \right\rbrace  ,
+\end{align*}
+
+While $f(q^-_{j+\frac{1}{2}})$ and $f(q^+_{j+\frac{1}{2}})$ are the evaluations of the flux function on the left and right side of the cell interface respectively. For $h$ in the Serre equations we have
+
+\begin{align*}
+f\left(h^-_{j+\frac{1}{2}}\right) &= u^-_{j + 1/2}  h^-_{j + 1/2}   ,\\
+f\left(h^+_{j+\frac{1}{2}}\right) &= u^+_{j + 1/2}  h^+_{j + 1/2}  ,
+\end{align*}
+
+while for $G$ we have 
+\begin{align*}
+f\left(G^-_{j+\frac{1}{2}}\right) &=  u^-_{j + 1/2} G^-_{j + 1/2}  + \frac{g}{2}\left(h^-_{j + 1/2} \right)^2 - \frac{2}{3}\left(h^-_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^-_{j + 1/2} \right]^2 \\ &+ \left(h^-_{j + 1/2}\right)^2 u^-_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^-_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^-_{j + 1/2}  ,\\
+f\left(G^+_{j+\frac{1}{2}}\right) &= u^+_{j + 1/2} G^+_{j + 1/2}  + \frac{g}{2}\left(h^+_{j + 1/2} \right)^2 - \frac{2}{3}\left(h^+_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^+_{j + 1/2} \right]^2 \\ &+ \left(h^+_{j + 1/2}\right)^2 u^+_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^+_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^+_{j + 1/2}.
+\end{align*}
+
+We now only have to have some appropriate order of accuracy method to calculate the quantities we need at the boundaries from the cell averages of $h$, $G$ and $b$ and the nodal values of $u$.
+
+
+\subsubsection{Second Order}
+
+For the second order finite volume method we use the minmmod limiter to reconstruct $h$, $G$ and $b$ at the cell edges. For a general quantity $q$ the generalised minmod limiter produces the following reconstruction
+
+\cite{vanLeer-B-1979-101}
+\begin{subequations}
+	\begin{gather}
+	q^-_{j + 1/2} =  q_j + a_j \dfrac{\Delta x}{2}
+	\end{gather}
+	and
+	\begin{gather}
+	q^+_{j + 1/2} =  q_{j+1} - a_{j + 1} \dfrac{\Delta x}{2}
+	\end{gather}
+	where
+	\begin{gather}
+	a_j = \text{minmod}\left\lbrace\theta \dfrac{q_{j+1} - q_j}{\Delta x}, \dfrac{q_{j+1} - q_{j-1}}{2\Delta x} ,\theta \dfrac{q_j - q_{j-1}}{\Delta x}\right\rbrace \quad \text{for} \; \theta \in \left[1,2\right]
+	\end{gather}
+\end{subequations}
+
+While for $u$ the following reconstruction is used
+
+\begin{gather}
+u^+_{j + \frac{1}{2}} = u^-_{j + \frac{1}{2}} = \frac{u_{j+1} + u_j}{2}.
+\end{gather}
+
+We approximate the derivatives in the following way
+
+\begin{gather}
+\left( \dfrac{\partial b}{\partial x}\right)^+_{j+1/2} =\dfrac { {b}^+_{j+3/2} - {b}^+_{j+1/2} }{\Delta x},
+\end{gather}
+\begin{gather}
+\left( \dfrac{\partial b}{\partial x}\right)^-_{j+1/2} = \dfrac{{b}^-_{j+1/2} - {b}^-_{j-1/2} }{\Delta x},
+\end{gather}
+\begin{gather}
+\left( \dfrac{\partial u}{\partial x}\right)^+_{j+1/2} = \left( \dfrac{\partial u}{\partial x}\right)^-_{j+1/2} =\dfrac{ {u_{j+1} - u_{j}} }{\Delta x}
+\end{gather}
+
+\subsubsection{Third Order}
+For the third-order finite volume method we use the Koren limiter \cite{Koren-B-1993} to reconstruct the cell edges for $h$, $G$ and $b$. For a general quantity $q$ the reconstruction based on the Koren limiter is
+\begin{subequations}
+	\begin{gather}
+	q^-_{j + 1/2} = \bar{q}_j +  \phi^- \left( r_j \right)\left(\bar{q}_j -\bar{q}_{j-1} \right)/2
+	\end{gather}
+	and
+	\begin{gather}
+	q^+_{j + 1/2} = \bar{q}_{j+1} - \phi^+ \left(r_{j+1} \right) \left(\bar{q}_{j+1} -\bar{q}_j \right)/2
+	\end{gather}
+	where
+	\begin{gather}
+	\phi^-\left(r_j\right) = \max\left[0, \min\left[2 r_j, \dfrac{1 + 2r_j}{3},2\right]\right],
+	\end{gather}
+	\begin{gather}
+	\phi^+\left(r_j\right) = \max\left[0, \min\left[2 r_j, \dfrac{2 + r_j}{3},2\right]\right]
+	\end{gather}
+	with
+	\begin{equation}
+	r_j = (\bar{q}_{j+1} - \bar{q}_j )/(\bar{q}_j - \bar{q}_{j-1}).
+	\end{equation}
+\end{subequations}
+
+While for $u$ the following reconstruction is used
+
+\begin{gather}
+u_{j + \frac{1}{2}} = \frac{-3u_{j+2} + 27u_{j+1} + 27u_j - 3u_{j-1}}{48} .
+\end{gather}
+
+We approximate the derivatives in the following way
+
+\begin{gather}
+\left( \dfrac{\partial b}{\partial x}\right)^+_{j+1/2} = \dfrac{-{b}^+_{j+5/2} + 4 {b}^+_{j+3/2} + 3 {b}^+_{j+1/2} }{\Delta x},
+\end{gather}
+\begin{gather}
+\left( \dfrac{\partial b}{\partial x}\right)^-_{j+1/2} = \dfrac{3 {b}^-_{j+1/2} - 4 {b}^-_{j-1/2} + {b}^-_{j-3/2} }{\Delta x},
+\end{gather}
+\begin{gather}
+\left( \dfrac{\partial u}{\partial x}\right)^+_{j+1/2} = \left( \dfrac{\partial u}{\partial x}\right)^-_{j+1/2} =   \dfrac{{-u_{j + 2} + 27u_{j+1} - 27u_{j} + u_{j-1}} }{24 \Delta x},
+\end{gather}
+
+%Comment on upwind/downwin and having different derivative approximations to $u$
+
+\subsection{Source Terms and Well Balancing}
+
+
+\section{Runge-Kutta Time-Stepping}
+The method $\mathcal{E}$ is only first order in time, one strategy for increasing our order of accuracy in time is to use SSP Runge Kutta time stepping []. 
+
+For the first order method our current method is sufficient and so
+
+\begin{equation}
+\bar{\boldsymbol{h}}^{n+1} , \bar{\boldsymbol{G}}^{n + 1} = \mathcal{E} \left(\bar{\boldsymbol{h}}^{n} , \bar{\boldsymbol{G}}^{n} , \boldsymbol{b}\right)
+\end{equation}
+
+For the second order method we have
+
+\begin{subequations}
+\begin{equation}
+\bar{\boldsymbol{h}}' , \bar{\boldsymbol{G}}' = \mathcal{E} \left(\bar{\boldsymbol{h}}^{n} , \bar{\boldsymbol{G}}^{n} , \boldsymbol{b}\right)
+\end{equation}
+
+\begin{equation}
+\bar{\boldsymbol{h}}'' , \bar{\boldsymbol{G}}'' = \mathcal{E} \left(\bar{\boldsymbol{h}}' , \bar{\boldsymbol{G}}' , \boldsymbol{b}\right)
+\end{equation}
+
+\begin{equation}
+\bar{\boldsymbol{h}}^{n+1} , \bar{\boldsymbol{G}}^{n+1} =  \frac{1}{2} \left(\bar{\boldsymbol{h}}^{n} +\bar{\boldsymbol{h}}'' \right),  \frac{1}{2} \left(\bar{\boldsymbol{G}}^{n} +\bar{\boldsymbol{G}}'' \right)
+\end{equation}
+\end{subequations}
+
+For the third order method we have
+
+\begin{subequations}
+	\begin{equation}
+	\bar{\boldsymbol{h}}' , \bar{\boldsymbol{G}}' = \mathcal{E} \left(\bar{\boldsymbol{h}}^{n} , \bar{\boldsymbol{G}}^{n} , \boldsymbol{b}\right)
+	\end{equation}
+	
+	\begin{equation}
+	\bar{\boldsymbol{h}}'' , \bar{\boldsymbol{G}}'' = \mathcal{E} \left(\bar{\boldsymbol{h}}' , \bar{\boldsymbol{G}}' , \boldsymbol{b}\right)
+	\end{equation}
+	
+	\begin{equation}
+	\bar{\boldsymbol{h}}''' , \bar{\boldsymbol{G}}''' =  \frac{3}{4} \bar{\boldsymbol{h}}^{n} + \frac{1}{4}\bar{\boldsymbol{h}}'' ,  \frac{3}{4} \bar{\boldsymbol{G}}^{n} + \frac{1}{4}\bar{\boldsymbol{G}}''
+	\end{equation}
+	
+	\begin{equation}
+	\bar{\boldsymbol{h}}'''' , \bar{\boldsymbol{G}}'''' =  \mathcal{E} \left(\bar{\boldsymbol{h}}''' , \bar{\boldsymbol{G}}''' , \boldsymbol{b}\right)
+	\end{equation}
+	
+	\begin{equation}
+	\bar{\boldsymbol{h}}^{n+1}, \bar{\boldsymbol{G}}^{n+1} =  \frac{1}{3} \bar{\boldsymbol{h}}^{n} + \frac{2}{3}\bar{\boldsymbol{h}}'''' ,  \frac{1}{3} \bar{\boldsymbol{G}}^{n} + \frac{2}{3}\bar{\boldsymbol{G}}''''
+	\end{equation}
+\end{subequations}

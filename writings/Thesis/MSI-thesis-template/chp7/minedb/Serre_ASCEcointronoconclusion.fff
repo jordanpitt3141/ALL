@@ -1,0 +1,219 @@
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:FDsolh}\includegraphics[width=7cm]{pics/results/soliton/ex/FDc.pdf}}
+\subfigure[][]{\label{fig:FDsolhz} \includegraphics[width=7cm]{pics/results/soliton/ex/FDcz.pdf}}
+\subfigure[][]{\label{fig:GRsolh}\includegraphics[width=7cm]{pics/results/soliton/ex/grim.pdf}}
+\subfigure[][]{\label{fig:GRsolhz}\includegraphics[width=7cm]{pics/results/soliton/ex/grimz.pdf}}
+\caption{Water profile for the soliton problem \eqref{eq:sol} for $\mathcal{G}$ ((a),(b)) and $\mathcal{E}$ ((c),(d)) when $\Delta x = 10/2^{12}$ with the initial conditions ({\color{black} \solidrule}), analytic solution ({\color{blue} \solidrule}) and numerical result ({\color{red} $\bullet$}).}
+\label{fig:FDMsolexp}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:FDo2normL1}\includegraphics[width=7cm]{pics/results/soliton/L1/FDc.pdf}}
+\subfigure[][]{\label{fig:FDo2Enorm}\includegraphics[width=7cm]{pics/results/soliton/H1/FDc.pdf}}
+\subfigure[][]{\label{fig:grimo2normL1}\includegraphics[width=7cm]{pics/results/soliton/L1/grim.pdf}}
+\subfigure[][]{\label{fig:grimo2Enorm}\includegraphics[width=7cm]{pics/results/soliton/H1/grim.pdf}}
+\caption{On the left $L_1$ errors for $h$ ({\color{red} $\triangle$}) and $u$ ({\color{blue} $\square$}) and on the right $H_1$ ({\color{blue} $\circ$}) for the soliton problem with (a) and (b) for $\mathcal{G}$ and (c) and (d) for $\mathcal{E}$ .}
+\label{fig:FDMsolnorm}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:FDo2normC1}\includegraphics[width=7cm]{pics/results/soliton/C1/FDc.pdf}}
+\subfigure[][]{\label{fig:grimo2normC1}\includegraphics[width=7cm]{pics/results/soliton/C1/grim.pdf}}
+\caption{$C_1$ for $h$ ({\color{red} $\triangle$}) and $uh$ ({\color{black} $\diamond$}) for numerical solutions $\mathcal{G}$ (a) and $\mathcal{E}$ (b) of the soliton problem.}
+\label{fig:FDMsolnormC1}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\includegraphics[width=7cm]{pics/results/SDB/init/h-figure0.pdf}
+\caption{Initial conditions for the smooth dambreak problem with $\beta = 0.294$ ({\color{cyan!70!white} \solidrule}), $\beta = 1.17778$ ({\color{violet!70!white} \solidrule}), $\beta = 5.8888$ ({\color{yellow!70!black} \solidrule}) and  $\beta =117.778$ ({\color{black} \solidrule}) with reference $\beta$ interval({\color{black} \dashedrule}).}
+\label{fig:dbsmoothinit}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:o3a1dxlim}\includegraphics[width=7cm]{pics/results/SDB/numsols/alpha0.025/1-figure0.pdf}}
+\caption{Numerical results of $\mathcal{V}_3$  at $t= 30s$ for the smooth dam break problem with $\beta =117.778$ for $\Delta x = 10/2^{10}$ ({\color{blue} \solidrule}), $\Delta x = 10/2^9$ ({\color{green!80!black} \solidrule}), $\Delta x = 10/2^8$ ({\color{red} \solidrule}), $\Delta x = 10/2^7$ ({\color{cyan!70!white} \solidrule}), $\Delta x = 10/2^6$ ({\color{violet!70!white} \solidrule}), $\Delta x = 10/2^5$ ({\color{yellow!70!black} \solidrule}), $\Delta x = 10/2^{4}$ ({\color{black} \solidrule}) with reference value $a^+$ ({\color{black} \dashedrule}).}
+\label{fig:o3a1dxlimflatexp}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:o3a1dxlimL1}\includegraphics[width=7cm]{pics/results/SDB/Lcon/alpha0.025/1.pdf}}
+\subfigure[][]{\label{fig:o3a1dxlimH}\includegraphics[width=7cm]{pics/results/SDB/Hcon/alpha0.025/1.pdf}}
+\caption{$L_1$ for $h$ ({\color{red} $\triangle$}) and $u$ ({\color{blue} $\square$}) and $H_1$ ({\color{blue} $\circ$}) for $\mathcal{V}_3$'s solution for the smooth dambreak problem with $\beta =117.778$.}
+\label{fig:o3a1dxlimmeasure}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:o3a6dxlimz1}\includegraphics[width=7cm]{pics/results/SDB/numsols/alpha0.5/1-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a6dxlimz2}\includegraphics[width=7cm]{pics/results/SDB/numsols/alpha0.5/2-figure0.pdf}}
+\caption{Numerical results of $\mathcal{V}_3$  at $t= 30s$ for the smooth dam break problem with $\beta = 5.8888$ for $\Delta x = 10/2^{10}$ ({\color{blue} \solidrule}), $\Delta x = 10/2^9$ ({\color{green!80!black} \solidrule}), $\Delta x = 10/2^8$ ({\color{red} \solidrule}), $\Delta x = 10/2^7$ ({\color{cyan!70!white} \solidrule}), $\Delta x = 10/2^6$ ({\color{violet!70!white} \solidrule}), $\Delta x = 10/2^5$ ({\color{yellow!70!black} \solidrule}), $\Delta x = 10/2^{4}$ ({\color{black} \solidrule}) with reference value $a^+$ ({\color{black} \dashedrule}).}
+\label{fig:o3a6dxlimflatexp}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:o3a2dxlimL1}\includegraphics[width=7cm]{pics/results/SDB/Lcon/alpha0.5/1.pdf}}
+\subfigure[][]{\label{fig:o3a2dxlimH}\includegraphics[width=7cm]{pics/results/SDB/Hcon/alpha0.5/1.pdf}}
+\caption{$L_1$ for $h$ ({\color{red} $\triangle$}) and $u$ ({\color{blue} $\square$}) and $H_1$ ({\color{blue} $\circ$}) for $\mathcal{V}_3$'s solution for the smooth dambreak problem with $\beta = 5.8888$.}
+\label{fig:o3a2dxlimmeasure}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:o3a9dxlim}\includegraphics[width=7cm]{pics/results/SDB/numsols/alpha2.5/1-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a9dxlimz1}\includegraphics[width=7cm]{pics/results/SDB/numsols/alpha2.5/2-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a9dxlimz2}\includegraphics[width=7cm]{pics/results/SDB/numsols/alpha2.5/3-figure0.pdf}}
+\caption{Numerical results of $\mathcal{V}_3$  at $t= 30s$ for the smooth dam break problem with $\beta = 1.17778$ for $\Delta x = 10/2^{10}$ ({\color{blue} \solidrule}), $\Delta x = 10/2^9$ ({\color{green!80!black} \solidrule}), $\Delta x = 10/2^8$ ({\color{red} \solidrule}), $\Delta x = 10/2^7$ ({\color{cyan!70!white} \solidrule}), $\Delta x = 10/2^6$ ({\color{violet!70!white} \solidrule}), $\Delta x = 10/2^5$ ({\color{yellow!70!black} \solidrule}), $\Delta x = 10/2^{4}$ ({\color{black} \solidrule}) with reference value $a^+$ ({\color{black} \dashedrule}).}
+\label{fig:o3a9dxlimcdexp}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:o3a3dxlimL1}\includegraphics[width=7cm]{pics/results/SDB/Lcon/alpha2.5/1.pdf}}
+\subfigure[][]{\label{fig:o3a3dxlimH}\includegraphics[width=7cm]{pics/results/SDB/Hcon/alpha2.5/1.pdf}}
+\caption{$L^*_1$ for $h$ ({\color{red} $\triangle$}) and $u$ ({\color{blue} $\square$}) and $H_1$ ({\color{blue} $\circ$}) for $\mathcal{V}_3$'s solution for the smooth dambreak problem with $\beta = 1.17778$.}
+\label{fig:o3a3dxlimmeasure}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:o3a20dxlim}\includegraphics[width=7cm]{pics/results/SDB/numsols/alpha10/1-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a20dxlimz1}\includegraphics[width=7cm]{pics/results/SDB/numsols/alpha10/2-figure0.pdf}}
+\subfigure[][]{\label{fig:o3a20dxlimz2}\includegraphics[width=7cm]{pics/results/SDB/numsols/alpha10/3-figure0.pdf}}
+\caption{Numerical results of $\mathcal{V}_3$  at $t= 30s$ for the smooth dam break problem with $\beta = 0.294$ for $\Delta x = 10/2^{10}$ ({\color{blue} \solidrule}), $\Delta x = 10/2^9$ ({\color{green!80!black} \solidrule}), $\Delta x = 10/2^8$ ({\color{red} \solidrule}), $\Delta x = 10/2^7$ ({\color{cyan!70!white} \solidrule}), $\Delta x = 10/2^6$ ({\color{violet!70!white} \solidrule}), $\Delta x = 10/2^5$ ({\color{yellow!70!black} \solidrule}), $\Delta x = 10/2^{4}$ ({\color{black} \solidrule}) with reference value $a^+$ ({\color{black} \dashedrule}).}
+\label{fig:o3a20dxlimcdexp}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:o3a4dxlimL1}\includegraphics[width=7cm]{pics/results/SDB/Lcon/alpha10/1.pdf}}
+\subfigure[][]{\label{fig:o3a4dxlimH}\includegraphics[width=7cm]{pics/results/SDB/Hcon/alpha10/1.pdf}}
+\caption{$L^*_1$ for $h$ ({\color{red} $\triangle$}) and $u$ ({\color{blue} $\square$}) and $H_1$ ({\color{blue} $\circ$}) for $\mathcal{V}_3$'s solution for the smooth dambreak problem with $\beta = 0.294$.}
+\label{fig:o3a4dxlimmeasure}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:MODh}\includegraphics[width=7cm]{pics/results/SDB/numsols/modelcomppalpha10dx10/1-figure0.pdf}}
+\subfigure[][]{\label{fig:MODh1}\includegraphics[width=7cm]{pics/results/SDB/numsols/modelcomppalpha10dx10/2-figure0.pdf}}
+\subfigure[][]{\label{fig:MODh2}\includegraphics[width=7cm]{pics/results/SDB/numsols/modelcomppalpha10dx10/4-figure0.pdf}}
+\caption{Numerical results for the smooth dam break problem with $\beta = 0.294$ and $\Delta x = 10/2^{10}$
+for $\mathcal{G}$ ({\color{red} \solidrule}), $\mathcal{E}$ ({\color{cyan!70!white} \solidrule}), $\mathcal{V}_3$ ({\color{violet!70!white} \solidrule}), $\mathcal{V}_2$ ({\color{yellow!70!black} \solidrule}) and $\mathcal{V}_1$ ({\color{black} \solidrule}) with reference value $a^+$ ({\color{black} \dashedrule}).}
+\label{fig:MODlim}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:o3a4dxH1propFDVM}\includegraphics[width=7cm]{pics/results/SDB/Hcon/alpha10signs/o3.pdf}}
+\subfigure[][]{\label{fig:o3a4dxH1propFD}\includegraphics[width=7cm]{pics/results/SDB/Hcon/alpha10signs/FDc.pdf}}
+\caption{$H_1$ for $\mathcal{V}_3$ (a) and $\mathcal{G}$'s (b) solution for the smooth dambreak problem at $t = 30s$ with $\beta = 0.294$ demonstrating when $\mathcal{H}(0s) \ge \mathcal{H}(30s)$ ({\color{red} $\circ$}) and $\mathcal{H}(0s) < \mathcal{H}(30s)$ ({\color{blue} $\bullet$}).}
+\label{fig:o3a4dxHallsign}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:FDa6h}\includegraphics[width=7cm]{pics/results/SDB/numsols/FDcalpha0.5/1-figure0.pdf}}
+\subfigure[][]{\label{fig:FDa6hz}\includegraphics[width=7cm]{pics/results/SDB/numsols/FDcalpha0.5/2-figure0.pdf}}
+\caption{Numerical results of $\mathcal{G}$  at $t= 30s$ for the smooth dam break problem with $\beta = 5.8888$ for $\Delta x = 10/2^{4}$ ({\color{blue} \solidrule}), $\Delta x = 10/2^5$ ({\color{green!80!black} \solidrule}), $\Delta x = 10/2^6$ ({\color{red} \solidrule}), $\Delta x = 10/2^7$ ({\color{cyan!70!white} \solidrule}), $\Delta x = 10/2^8$ ({\color{violet!70!white} \solidrule}), $\Delta x = 10/2^9$ ({\color{yellow!70!black} \solidrule}), $\Delta x = 10/2^{10}$ ({\color{black} \solidrule}) with reference value $a^+$ ({\color{black} \dashedrule}).}
+\label{fig:FDa6lim}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:FVlonga20h}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/h0t300s.pdf}}
+\subfigure[][]{\label{fig:FVlonga20hf}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/h1t300s.pdf}}
+\subfigure[][]{\label{fig:FVlonga20hb}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/h2t300s.pdf}}
+\subfigure[][]{\label{fig:FVlonga20hz}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/h4t300s.pdf}}
+\subfigure[][]{\label{fig:FVlonga20hz}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/h3t300s.pdf}}
+\caption{Smooth dam break problem at $t=300s$ for $\mathcal{V}_3$ with $\beta = 0.294$ for $\Delta x = 10/2^{9}$ ({\color{blue} \solidrule}) with reference values  $a^+$ ({\color{black} \dashedrule}) ((a), (b), (d)), $S^+$ ({\color{black} \dotrule{0.04\textwidth}}) (d), $S_2$ ({\color{black} \Dotrule{0.04\textwidth}}) (d), $h_2$ ({\color{black} \dashedrule}) (e) and $x_2$ ({\color{black} \dotrule{0.04\textwidth}}) (e).}
+\label{fig:FVlonga20}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:FVlonga20a}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/difftimescenteredat500m.pdf}}
+\caption{Water profile shifted by $u_2 \times t$ for the numerical solution of the smoothed dam break with $\mathcal{V}_3$, $\beta = 0.294$ and $\Delta x = 10/2^{9}$ at $t=30s$ ({\color{blue} \solidrule}), $t=100s$ ({\color{green!80!black} \solidrule}), $t=200s$ ({\color{red} \solidrule}) and $t=300s$ ({\color{cyan!70!white} \solidrule}).}
+\label{fig:FVlongcemt500}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:FVcomplonga20h}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/CF0t300.pdf}}
+\subfigure[][]{\label{fig:FVcomplonga20hf}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/CF2t300.pdf}}
+\subfigure[][]{\label{fig:FVcomplonga20hb}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/CF2t300.pdf}}
+\subfigure[][]{\label{fig:FVcomplonga20hz}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/CF3t300.pdf}}
+\caption{Smooth dam break problem at $t=300s$ for $\mathcal{V}_3$ with $\beta = 0.294$ for $\Delta x = 10/2^{9}$ ({\color{blue} \solidrule}) and $\Delta x = 10/2^{8}$ ({\color{green!80!black} \solidrule})  with reference values $h_2$ ({\color{black} \dashedrule})(d) and $x_2$ ({\color{black} \dotrule{0.04\textwidth}}) (d).}
+\label{fig:FVcomplonga20}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:CDspeed1}\includegraphics[width=7cm]{pics/results/SDB/CDspeed/speed.pdf}}
+\caption{$u_2$ ({\color{blue} \solidrule}) and speed of the contact discontinuity ({\color{red} $\circ$})  for $\mathcal{V}_3$ solution of the various smooth dam break problems with $\beta = 0.2944$ and $\Delta x = 10/2^{9}$ at $t=100s$.}
+\label{fig:CDspeed}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:UHcomp1}\includegraphics[width=7cm]{pics/results/SDB/numsols/SWWCOMP/30s/0.pdf}}
+\subfigure[][]{\label{fig:UHcomp2}\includegraphics[width=7cm]{pics/results/SDB/numsols/SWWCOMP/30s/1.pdf}}
+\subfigure[][]{\label{fig:UHcomp3}\includegraphics[width=7cm]{pics/results/SDB/numsols/SWWCOMP/30s/2.pdf}}
+\subfigure[][]{\label{fig:UHcomp4}\includegraphics[width=7cm]{pics/results/SDB/numsols/SWWCOMP/30s/3.pdf}}
+\caption{$h - h_2$ ({\color{blue} \solidrule}) and $u - u_2$ ({\color{green!80!black} \solidrule}) for $\mathcal{V}_3$ solution of the smooth dam break with $\beta = 0.2944$ and $\Delta x = 10/2^{9}$ at $t=30s$.}
+\label{fig:UHSWWcomp30sall}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:UH300comp1}\includegraphics[width=7cm]{pics/results/SDB/numsols/SWWCOMP/300s/0.pdf}}
+\subfigure[][]{\label{fig:UH300comp2}\includegraphics[width=7cm]{pics/results/SDB/numsols/SWWCOMP/300s/1.pdf}}
+\subfigure[][]{\label{fig:UH300comp3}\includegraphics[width=7cm]{pics/results/SDB/numsols/SWWCOMP/300s/2.pdf}}
+\subfigure[][]{\label{fig:UH300comp4}\includegraphics[width=7cm]{pics/results/SDB/numsols/SWWCOMP/300s/3.pdf}}
+\caption{$h - h_2$ ({\color{blue} \solidrule}) and $u - u_2$ ({\color{green!80!black} \solidrule}) for $\mathcal{V}_3$ solution of the smooth dam break with $\beta = 0.2944$ and $\Delta x = 10/2^{9}$ at $t=300s$.}
+\label{fig:UHSWWcomp300sall}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:FVlonga20a}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/a.pdf}}
+\caption{Lead soliton height plotted over time for the smooth dam break problem at $t=300s$ for $\mathcal{V}_3$ with $\beta = 0.294$ for $\Delta x = 10/2^{9}$ ({\color{blue} \solidrule}) with reference value $a^+$ ({\color{black} \dashedrule}).}
+\label{fig:FVlonga20aplus}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\subfigure[][]{\label{fig:PHTa12}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/HFT-figure0.pdf}}
+\subfigure[][]{\label{fig:PHTa12z}\includegraphics[width=7cm]{pics/results/SDB/numsols/300s/TT-figure0.pdf}}
+\caption{Proportion of $\mathcal{H}$ made up by horizontal kinetic energy ({\color{blue} \solidrule}) , gravitational potential energy ({\color{green!80!black} \solidrule}) and vertical kinetic energy ({\color{red} \solidrule})  for $\mathcal{V}_3$ solution of the smooth dam break with $\beta = 0.2944$ and $\Delta x = 10/2^{9}$ over time.}
+\label{fig:PHTa12all}
+\end{figure}
+\efloatseparator
+ 
