@@ -14,46 +14,38 @@ A level-1 auxiliary file: chp4/chapter.aux
 A level-1 auxiliary file: chp5/chapter.aux
 A level-1 auxiliary file: chp6/chapter.aux
 A level-1 auxiliary file: chp7/chapter.aux
-I couldn't open database file references1.bib
----line 15 of file thesis.aux
- : \bibdata{references1
- :                     ,references2}
-I'm skipping whatever remains of this command
-The style file: abbrv.bst
-A level-1 auxiliary file: bibliography.aux
-I found no database files---while reading file thesis.aux
-Warning--I didn't find a database entry for "vanLeer-B-1979-101"
-Warning--I didn't find a database entry for "Koren-B-1993"
-You've used 0 entries,
-            2118 wiz_defined-function locations,
-            515 strings with 3986 characters,
-and the built_in function-call counts, 18 in all, are:
+I found no \bibdata command---while reading file thesis.aux
+I found no \bibstyle command---while reading file thesis.aux
+You've used 2 entries,
+            0 wiz_defined-function locations,
+            100 strings with 744 characters,
+and the built_in function-call counts, 0 in all, are:
 = -- 0
 > -- 0
 < -- 0
 + -- 0
 - -- 0
-* -- 2
-:= -- 7
+* -- 0
+:= -- 0
 add.period$ -- 0
 call.type$ -- 0
 change.case$ -- 0
 chr.to.int$ -- 0
 cite$ -- 0
 duplicate$ -- 0
-empty$ -- 1
+empty$ -- 0
 format.name$ -- 0
-if$ -- 1
+if$ -- 0
 int.to.chr$ -- 0
 int.to.str$ -- 0
 missing$ -- 0
-newline$ -- 3
+newline$ -- 0
 num.names$ -- 0
 pop$ -- 0
-preamble$ -- 1
+preamble$ -- 0
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1
+skip$ -- 0
 stack$ -- 0
 substring$ -- 0
 swap$ -- 0
@@ -64,5 +56,5 @@ type$ -- 0
 warning$ -- 0
 while$ -- 0
 width$ -- 0
-write$ -- 2
+write$ -- 0
 (There were 2 error messages)

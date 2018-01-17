@@ -614,7 +614,7 @@ for j in range(12):
 #Dry bed test
 st = time()
 h0 = 0.0
-h1 = 0.1
+h1 = 1.0
 x0 = 0
 g = 9.81
 
@@ -626,11 +626,11 @@ dt = l*dx
 startx = -100
 endx = 100 + 0.9*dx
 startt = t0
-endt = 100*dt + t0 
+endt =  15 + t0 
 szoomx = startx
 ezoomx = endx
 
-diffuse = 0.5
+diffuse = 100
         
 #x,t = makevar(startx,endx +0.1*dx,dx,startt,endt,dt)
 
@@ -658,9 +658,9 @@ idx = 1.0 / dx
 #h,u,G,b = Dambreak(h0,h1,x0,x)
 
 
-h,u,G,b = Dambreak(h0,h1,x0,x)
+#h,u,G,b = Dambreak(h0,h1,x0,x)
 
-#h,u,G,b = DambreakS(h0,h1,0,x,diffuse)
+h,u,G,b = DambreakS(h0,h1,0,x,diffuse)
 #h,u,G,G1 =DamNreakDRYANA(h1,x,t0,g)
 
 
