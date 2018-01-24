@@ -123,10 +123,34 @@ Which after rearranging, using integration by parts and assuming Dirichlet bound
 \end{multline}
 Should be able to handle non smooth $h$ and $G$ but requires first derivative of $b$.
 
-
+The next step is to replace the functions for the quantities $h$, $G$, $b$ and $u$ as well as the test function $v$ with the appropriate order of accuracy piece-wise polynomial function. This is typically done using basis functions and this process turns our integral equations into matrix equations.
 
 \subsubsection{Second Order}
-\subsubsection{Third Order}
+We desire a method for the elliptic equation [] that is at least second-order and that can locally reconstruct the necessary physical quantities to update the evolution equations [] within each cell individually. This allows the scheme to be simply scaled into situations where nearby cell data may not be quickly accessible such as when using this method on parrallel cpus. From our equations and smoothness conditions we know that if the bed is smooth enough, then we can allow discontinuous $h$ and $G$ and have $u$ have a well defined derivative. Since in the evolution equations we do not require derivatives of these quantities for $h$ and $G$ we will use linear reconstruction that is discontinuous at the edges for $h$ and $G$ in our finite element method. The basis functions for this reconstruction of $h$ and $G$ will be represented by $\psi$. This reconstruction will use cell values at the edges $x_{j-1/2}$ and $x_{j + 1/2}$ to represent the linear function over the cell.
+
+So we have the following representation for $h$ and $G$ in our finite element method
+
+\begin{align*}
+h &= \sum_j h^+_{j-1/2}\psi^+_{j-1/2}  + h^-_{j+1/2}\psi^-_{j+1/2} \\
+G &= \sum_j G^+_{j-1/2}\psi^+_{j-1/2}  + G^-_{j+1/2}\psi^-_{j+1/2}
+\end{align*}
+
+
+For the velocity term our FVM requires a local second-order approximation of the first derivative. To do this will require a quadratic representation of $u$ in each cell. Since $u$ is guaranteed to have continuous representation across the cells we use a quadratic reconstruction that is continuous at the cell edges. The basis functions for this reconstruction of $u$ will be represented by $\phi$. We will also use this reconstruction for our test function $v$.  This reconstruction will use cell values at $x_{j-1/2}$, $x_{j}$ and $x_{j + 1/2}$ to represent the cubic function over the cell. 
+
+\begin{equation}
+u = \sum_j u_{j-1/2}\phi_{j-1/2} + u_{j}\phi_{j} + u_{j+1/2}\phi_{j+1/2}
+\end{equation}
+
+
+
+For the bed term our FVM requires a second-order approximation of the second derivative of the bed terms that must be done locally. To do this we will require a cubic representation of the bed in each cell. Since by our smoothness conditions we do not allow for discontinuous beds, we will assume the bed is continuous. Therefore we will use a cubic reconstruction for the bed which is continuous across the cell edges. The basis functions for this reconstruction of $b$ will be represented by $\gamma$. This reconstruction will use cell values at $x_{j-1/2}$, $x_{j-1/6}$, $x_{j+1/6}$ and $x_{j + 1/2}$ to represent the cubic function over the cell. 
+
+\begin{equation}
+b = \sum_j b_{j-1/2}\gamma_{j-1/2} + b_{j-1/6}\gamma_{j-1/6}  + b_{j+1/6}\gamma_{j+1/6} + b_{j+1/2}\gamma_{j+1/2}
+\end{equation}
+ 
+
 
 \section{Evolution Equations}
 The evolution equations in the alternative form of the Serre equations \eqref{eqn:FullSerreCon} are

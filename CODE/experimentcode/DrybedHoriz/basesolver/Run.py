@@ -145,7 +145,7 @@ def DambreakS(h0,h1,x0,x,diffuse):
     b = zeros(n)
     for i in range(n):
         
-        h[i] = h0 + 0.5*(h1 - h0)*(1 + tanh(diffuse*(x0 - x[i])))
+        h[i] = h0 + 0.5*(h1 - h0)*(1 + tanh((x0 - x[i])/diffuse))
     
     return h,u,G,b
     
@@ -610,7 +610,7 @@ for j in range(12):
     deallocPy(Ghbc_c)
 """    
   
-
+"""
 #Dry bed test
 st = time()
 h0 = 0.0
@@ -737,3 +737,230 @@ deallocPy(GMend_c)
 deallocPy(uMend_c)
 et = time()
 tt = et - st
+"""
+
+from scipy.optimize import bisect, newton
+
+def CalcSAS(h0,h1,g):
+    delta = float(h1)/h0
+    hb = 0.25*(sqrt(delta) + 1)**2
+    print(delta,hb)
+    
+    A = newton(SerreAmp,float(h1)/h0-1, args=(float(hb),float(h1)/h0,1))
+    #A = bisect(SerreAmp,h1-1,hb-1,args=(hb,h1,h0))
+    S = sqrt(g*h0*(A+1))
+    
+    return A,S
+
+def SerreAmp(a,hb,h1,h0):
+    delta = float(hb)/h0
+    f = delta / (((a +1))**(1.0/4)) - (3.0/(4 - sqrt((a +1))))**(21.0/10)*(2.0/(1 + sqrt((a +1))))**(2.0/5)       
+    return f
+
+def CalcSWWA(h0,h1,g):    
+    h2F = newton(SWWbore,0.5*(h1 + h0),args=(h1,h0))    
+    return h2F
+
+def SWWbore(h2,h1,h0):
+    f = 0.5*h0*(sqrt(1 + 8*((2*h2/(h2 - h0))*((sqrt(g*h1) - sqrt(g*h2))/sqrt(g*h0)))**2) -1)
+    return f
+    
+def SDBtotalmassa(xb,xe,x0,h0,h1,alpha):
+    return 0.5*(h1 + h0)*(xe - xb)
+
+def SDBtotalmomentum(h1,h0,t,g):
+    return -0.5*g*t*(h0**2 - h1**2)
+
+def SDBHamilana(xb,xe,x0,h0,h1,alpha,g):
+    p1 = (g/8.0)*(xe - xb)*( ((h0+h1)**2) + ((h1 - h0)**2))
+    p2 = alpha*(g/4.0)*(h1 - h0)**2*(tanh(0.5*(xb - xe)/alpha))
+    
+    return p1 + p2
+
+#DB smaller test
+alphas = [40,4,2,1,0.4,0.2,0.1,0.01,0.001,0.0001]
+#h0s = [0.75,0.5,0.25,0.1,0.075,0.05,0.025,0.01,0.001,0.0001,0]
+h0s1 = [0.75,0.5,0.25]
+h0s2 = [0.1,0.075]
+h0s3 = [0.05]
+h0s4 = [0.025]
+h0s5 = [0.01]
+h0s6 = [0.001]
+h0s7 = [0.0001]
+h0s8 = [0]
+
+xpows = 5
+xpowe = 11
+xpowg = 2
+
+wdirM = "../../../../../data/raw/DBlimit/"
+
+for h0 in h0s:
+    for alpha in alphas: 
+        for xpow in range(xpows,xpowe + 1,xpowg):
+
+            wdir = wdirM + "h0e" +str(h0)+ "/alphae" +str(alpha)+ "/xpowe" +str(xpow) + "/" 
+            
+            if not os.path.exists(wdir):
+               os.makedirs(wdir)
+
+    
+
+            h1 = 1.0
+            
+            g = 9.81  
+            
+            Ap,Sp = CalcSAS(1,1.8,g)  
+            
+            tp = 30     
+            
+            dx = 10.0 / (2**xpow)
+            l = 0.01
+            dt = l*dx
+            theta = 1.2
+            startx = 300
+            endx = 700 
+            startt = 0.0
+            endt = 1000 + 0.9*dt 
+            
+            x0 = 500
+            
+            exceedpercent = 1.1
+            enddist = x0 + tp*Sp
+            g = 9.81
+            
+            
+            x = arange(startx,endx +0.1*dx, dx)
+            xG = concatenate((array([x[0] - dx]),x,array([x[-1] + dx])))
+            ts = []
+            
+            
+            n = len(x)  
+            
+            theta = 1.2
+            
+            gap = int(1.0/dt)
+            nBC = 2
+            
+            GhnBC = 3
+            unBC = 3
+            
+            nGhhbc = 3*n + 2*(GhnBC)
+            nubc =2*n -1 + 2*unBC
+            
+            idx = 1.0 / dx
+            
+            
+            h,u,G,b = DambreakS(h0,h1,x0,x,alpha)
+            
+            Massic = SDBtotalmassa(startx,endx,x0,h0,h1,alpha)
+            Momeic = SDBtotalmomentum(h1,h0,0,g)
+            Hamilic = SDBHamilana(startx,endx,x0,h0,h1,alpha,g)
+            
+            
+            hMbeg = h[0]*ones(GhnBC)
+            GMbeg = G[0]*ones(GhnBC)
+            hMend = h[-1]*ones(GhnBC)
+            GMend = G[-1]*ones(GhnBC)
+            uMbeg = u[0]*ones(unBC)
+            uMend = u[-1]*ones(unBC) 
+                
+            h_c = copyarraytoC(h)
+            G_c = copyarraytoC(G)
+            x_c = copyarraytoC(x)
+            u_c = mallocPy(n)
+            
+            hMbeg_c = copyarraytoC(hMbeg)
+            hMend_c = copyarraytoC(hMend)
+            GMbeg_c = copyarraytoC(GMbeg)
+            GMend_c = copyarraytoC(GMend) 
+            uMbeg_c = copyarraytoC(uMbeg)
+            uMend_c = copyarraytoC(uMend)
+            
+            ubc_c = mallocPy(nubc)
+            hhbc_c = mallocPy(nGhhbc)
+            Ghbc_c = mallocPy(nGhhbc)
+            
+            
+            hp_c = mallocPy(n)
+            Gp_c = mallocPy(n)
+            hpp_c = mallocPy(n)
+            Gpp_c = mallocPy(n)
+            
+            enddisti = int((enddist - startx)/dx)
+            henddist = readfrommem(h_c,enddisti)
+            
+            ct = startt
+            while ct < endt:
+                
+                #evolvewrapperconsistenttime(G_c, h_c,hMbeg_c , hMend_c,GMbeg_c ,GMend_c,uMbeg_c,uMend_c,g,dx, dt,n,GhnBC,unBC,nGhhbc,nubc,theta, hhbc_c,Ghbc_c,ubc_c,Gp_c,hp_c, Gpp_c,hpp_c)
+                dt = evolvewrapperADAP(G_c, h_c,hMbeg_c , hMend_c,GMbeg_c ,GMend_c,uMbeg_c,uMend_c,g,dx, dt,n,GhnBC,unBC,nGhhbc,nubc,theta, hhbc_c,Ghbc_c,ubc_c,Gp_c,hp_c, Gpp_c,hpp_c)
+                   
+                henddist = readfrommem(h_c,enddisti)
+                ct = ct + dt
+                
+                if(henddist  > h0*exceedpercent):
+                    break
+                
+                if(dt < 10**-8):
+                    break
+                print(ct)
+            
+            
+            
+            hC = copyarrayfromC(h_c,n)
+            GC = copyarrayfromC(G_c,n) 
+            
+            hF,uF,GF,G1F =DamNreakDRYANA(h1,x,ct,g)  
+            getufromG(h_c, G_c,hMbeg_c,hMend_c,GMbeg_c,GMend_c,uMbeg_c,uMend_c,theta,dx,n,2*n +1,GhnBC,unBC,nGhhbc,nubc,ubc_c,hhbc_c,Ghbc_c)
+            ubcC = copyarrayfromC(ubc_c,nubc)
+            uC = ubcC[unBC:-unBC:2]
+            
+            MassF = hALLW(hhbc_c,n,dx) 
+            MomeF = uhALLW(hhbc_c,ubc_c,n,dx)
+            HamilF = HamilW(hhbc_c,ubc_c,n,dx)
+            
+            MomeUP = SDBtotalmomentum(h1,h0,ct,g)
+            
+            Massrel = abs(MassF - Massic)/ Massic
+            Momerel = abs(MomeF - MomeUP)
+            Hamilrel = abs(HamilF - Hamilic)/ Hamilic
+            
+            s = wdir + "outlastSingle.txt"
+            with open(s,'a') as file2:
+                writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                writefile2.writerow(["dx","ct","idt", "cdt","theta", "alpha","h1","h0","startx","endx","x0","Mass IC", "Momentum IC", "Hamil IC", \
+                "Mass End", "Momentum End", "Hamil End", "Momentum update","Mass Rel", "Momentum Rel", "Hamil Rel" ])  
+                writefile2.writerow([str(dx),str(ct),str(l*dx), str(dt),str(theta), str(alpha),str(h1),str(h0),str(startx),str(endx),str(x0),\
+                str(Massic), str(Momeic),str(Hamilic),str(MassF), str(MomeF), str(HamilF), str(MomeUP),str(Massrel), str(Momerel), str(Hamilrel) ]) 
+
+
+            s = wdir + "outlastMultiple.txt"
+            with open(s,'a') as file2:
+                writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                writefile2.writerow(["h", "u" , "G"])  
+                for il in range(n):
+                    writefile2.writerow([str(hC[il]),str(uC[il]),str(GC[il])])  
+
+            
+            
+            
+            
+            deallocPy(h_c)
+            deallocPy(G_c)
+            deallocPy(hp_c)
+            deallocPy(Gp_c)
+            deallocPy(hpp_c)
+            deallocPy(Gpp_c)
+            deallocPy(u_c)
+            
+            deallocPy(ubc_c)
+            deallocPy(hhbc_c)
+            deallocPy(Ghbc_c)
+            
+            deallocPy(hMbeg_c)
+            deallocPy(GMbeg_c)
+            deallocPy(uMbeg_c)
+            deallocPy(hMend_c)
+            deallocPy(GMend_c)
+            deallocPy(uMend_c)
