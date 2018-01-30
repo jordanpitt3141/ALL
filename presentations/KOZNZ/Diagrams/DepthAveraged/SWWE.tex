@@ -1,11 +1,11 @@
-\documentclass[]{article} 
+\documentclass[pdf]{beamer}
+\usetheme{Dresden}
 \usepackage{pgfplots} 
 \usepgfplotslibrary{external} 
 \tikzexternalize 
 \usepgfplotslibrary{fillbetween}
 \usepackage{tikz} 
 \usepackage{amsmath} 
-\usepackage{pgfplots} 
 \usetikzlibrary{calc} 
 \pgfplotsset{compat = newest,every x tick label/.append style={font=\scriptsize,color = white},every y tick label/.append style={font=\scriptsize}, every axis plot post/.style={line join=round}}
 \begin{document} 
@@ -48,14 +48,14 @@
    	] fill between[of=h and b];
 
 
-	\addplot [<-,black] coordinates {(0.5,0.0) (0.5,0.35)};
+	\addplot [<-,black] coordinates {(0.5,0.0) (0.5,0.325)};
 	\node[] at (0.5,0.4) {$h$};
-	\addplot [->,black] coordinates {(0.5,0.45) (0.5,0.8)};
+	\addplot [->,black] coordinates {(0.5,0.475) (0.5,0.8)};
 	
 	
 	
-	\addplot [->] coordinates {(0.5,0.3) (0.8,0.5)};
-	\node[] at (0.75,0.35) {$(u,v)$};
+	\addplot [->] coordinates {(0.54,0.4) (0.8,0.4)};
+	\node[] at (0.65,0.35) {$u$};
 	
 
 

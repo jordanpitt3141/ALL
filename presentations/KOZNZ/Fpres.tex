@@ -29,26 +29,26 @@
 \subsection{Introduction}
 
 \begin{frame}{Introduction}
-	Summary of our paper ``Behaviour of the Serre equations in the presence of steep gradients revisited" (Wave Motion Volume 76, January 2018) \newline \newline
+	Summary of our paper ``Behaviour of the Serre equations in the presence of steep gradients revisited" (Wave Motion Volume 76, January 2018). \newline \newline
 	Outline of Presentation:
 	\begin{itemize}
-		\item Motivation
-		\item Serre Equations
-		\item Dispersive Shock Waves
-		\item Investigation
-		\item Results
+		\item Motivation.
+		\item Serre Equations.
+		\item Dispersive Shock Waves.
+		\item Investigation.
+		\item Results.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}<1>[label=BG]{Our Background}
 	\begin{tabular}{l l l l}
-		{ \color[RGB]{59,50,164} \usebeamertemplate{itemize item}{} } &Interest &:& Numerical methods for water waves. \\ &&&Focusing on ocean hazards. \\ \\
+		{ \color[RGB]{59,50,164} \usebeamertemplate{itemize item}{} } &Interest &:& Numerical methods for water waves \\ &&&focusing on ocean hazards. \\ \\
 		\pause
-		{ \color[RGB]{59,50,164} \usebeamertemplate{itemize item}{} } &Resulted In &:& Robust numerical method for the \\ &&& Shallow Water Wave Equations (ANUGA) \\\\
+		{ \color[RGB]{59,50,164} \usebeamertemplate{itemize item}{} } &Resulted In &:& Robust numerical method for the \\ &&& Shallow Water Wave Equations (ANUGA). \\\\
 		\pause
-		{ \color[RGB]{59,50,164} \usebeamertemplate{itemize item}{} } & Current Goal &:& Robust numerical method for the \\ &&& Serre equations\\\\
+		{ \color[RGB]{59,50,164} \usebeamertemplate{itemize item}{} } & Current Goal &:& Robust numerical method for the \\ &&& Serre equations.\\\\
 		\pause
-		{ \color[RGB]{59,50,164} \usebeamertemplate{itemize item}{} } &Problem &:& Handling discontinuous initial conditions \\ &&& (dam-break problem)
+		{ \color[RGB]{59,50,164} \usebeamertemplate{itemize item}{} } &Problem &:& Handling discontinuous initial conditions \\ &&& (dam-break problem).
 	\end{tabular}
 \end{frame}
 
@@ -83,7 +83,7 @@
 \end{frame}
 
 \begin{frame}{Serre equations}
-	
+
 	Conservation of mass
 	\[
 	\dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
@@ -101,7 +101,7 @@
 
 
 \section{Dispersive Shock Waves}
-\subsection{Introduction}
+\subsection{Dispersive Shock Waves}
 
 \begin{frame}{Model Problem : Dam Break Problem}
 	
@@ -127,31 +127,49 @@
 	
 \end{frame}
 
-\begin{frame}{Dispersive Shock Waves}
+\begin{frame}{Dambreak Problem Solutions}
 		
    \begin{figure}
     	\centering
     	\begin{minipage}{.5\textwidth}
     		\centering
     		\includegraphics[width=0.95\linewidth]{./Pictures/DSW/SW.pdf}
-    		\caption{Shock Wave (analytical solution of the shallow water wave equations).}
+    		\caption{Shock wave (analytical solution of the shallow water wave equations).}
     	\end{minipage}%
     	\pause
     	\begin{minipage}{.5\textwidth}
     		\centering
     		\includegraphics[width=0.95\linewidth]{./Pictures/DSW/DSW.pdf}
-    		\caption{Dispersive Shock Wave (numerical solution of the Serre equations).}
+    		\caption{Dispersive shock wave (common numerical solution of the Serre equations in the literature).}
     	\end{minipage}
    \end{figure}
 \end{frame}
 
-\begin{frame}{New Observed Behaviour}
+\begin{frame}<1>{New Observed Behaviour for Dispersive Shock Waves}
 	
 	\begin{figure}
 		\centering
 		\begin{minipage}{.5\textwidth}
 			\centering
-			\includegraphics[width=1\linewidth]{./Pictures/DSW/DSWN.pdf}
+			\includegraphics[width=1\linewidth]{./Pictures/DSW/DSWN1.pdf}
+			\caption{New observed structure.}
+		\end{minipage}%
+		\pause
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{./Pictures/DSW/DSWNz.pdf}
+			\caption{Zoomed in.}
+		\end{minipage}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{New Observed Behaviour for Dispersive Shock Waves}
+	
+	\begin{figure}
+		\centering
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{./Pictures/DSW/DSWN2.pdf}
 			\caption{New observed structure.}
 		\end{minipage}%
 		\pause
@@ -165,16 +183,16 @@
 
 
 
-\begin{frame}<1>[label=test]{Properties of DSW for the Serre Equations}
-	Asymptotic results for long times
+\begin{frame}<1>[label=test]{Properties of Dispersive Shock Waves of the Serre Equations}
+	Asymptotic results for long times:
 	\begin{itemize}
-		\item Whitham modulation results for leading wave amplitude and location \pause
-		\item Oscillations of the DSW for the Serre equations oscillate around the SW of the SWWE \newline 
+		\item Whitham modulation results for leading wave amplitude and location. \pause
+		\item Oscillations of the dispersive shock waves for the Serre equations oscillate around the shock waves of the shallow water wave equations. \newline 
 		\pause
 	\end{itemize}
-	Linear results
+	Linear results:
 		\begin{itemize}
-			\item Separate dispersive wave trains
+			\item Separate dispersive wave trains.
 		\end{itemize}
 \end{frame}
 
@@ -195,7 +213,7 @@
 
 \againframe<2>{test}
 
-\begin{frame}{DSW comparison to SW}
+\begin{frame}{Dispersive Shock Waves compared to Shock Waves}
 	\begin{figure}
 		\hspace*{-0.9cm}%
 		\begin{minipage}{.5\textwidth}
@@ -230,17 +248,15 @@
 
 \begin{frame}{Problem}
 	\begin{itemize}
-		\item No analytic solution of the Serre equations for DSW
-		\item Lack transient properties of DSW 
+		\item No analytic solution of the Serre equations for dispersive shock waves.
+		\item Lack transient properties of dispersive shock waves.
 	\end{itemize}
 \end{frame}
 
 \section{Investigation}
-\subsection{Aim}
+\subsection{Investigation}
 \begin{frame}{Solution}
-		\begin{itemize}
-			\item 	Use numerical solvers for the Serre equations on a problem with a smooth approximation to the initial conditions of the dam-break problem.
-		\end{itemize}
+ 	Use numerical solvers for the Serre equations on a problem with a smooth approximation to the initial conditions of the dam-break problem.
 \end{frame}
 
 \begin{frame}{Smooth Dam Break Problem}
@@ -273,13 +289,13 @@
 	We observed four different behaviours of the numerical solution as $\alpha \rightarrow 0 $
 	\pause
 	\begin{itemize}
-		\item Non Oscillatory Structure for large $\alpha$ values
+		\item Non Oscillatory Structure for large $\alpha$ values.
 		\pause 
-		\item Flat Structure (common one in the literature)
+		\item Flat Structure (common one in the literature).
 		\pause
-		\item Node Structure (also present in literature)	
+		\item Node Structure (also present in literature).	
 		\pause	
-		\item Growth Structure for small $\alpha$ values and the dam-break problem (New behaviour)
+		\item Growth Structure for small $\alpha$ values and the dam-break problem (New behaviour).
 	\end{itemize}
 \end{frame}
 
@@ -308,6 +324,13 @@
 
 \begin{frame}{Node Structure $\alpha = 0.4$}
 	\begin{figure}
+		\includegraphics[width=0.65\textwidth]{./Pictures/Results/Example/node1.pdf}
+		\caption{Highest resolution numerical solution at $t=30s$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Node Structure $\alpha = 0.4$}
+	\begin{figure}
 		\includegraphics[width=0.65\textwidth]{./Pictures/Results/Example/nodez.pdf}
 	\end{figure}
 \end{frame}
@@ -317,6 +340,13 @@
 \begin{frame}{Growth Structure $\alpha = 0.1$}
 	\begin{figure}
 		\includegraphics[width=0.65\textwidth]{./Pictures/Results/Example/growth.pdf}
+		\caption{Highest resolution numerical solution at $t=30s$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Growth Structure $\alpha = 0.1$}
+	\begin{figure}
+		\includegraphics[width=0.65\textwidth]{./Pictures/Results/Example/growth1.pdf}
 		\caption{Highest resolution numerical solution at $t=30s$}
 	\end{figure}
 \end{frame}
@@ -345,39 +375,58 @@
 	\end{figure}
 \end{frame}
 
+\begin{frame}{Structure Comparison Energy of Initial Conditions}
+	Hamiltonian (Energy):
+	\[\mathcal{H}(x,t) =\frac{1}{2} \left(hu^2 + \frac{h^3}{3}\left(\frac{\partial u}{\partial x}\right)^2 + gh^2\right) \]
+	\newline 
+	Comparison of Energy of Initial Conditions:
+	\begin{center}
+		\begin{tabular}{l | l | l}
+			Structure & $\alpha$ & $\mathcal{H}$\\
+			\hline
+			Non-Oscillatory & $40$ & $10335.8$ \\
+			Flat & $2$ & $10395.5$\\
+			Node & $0.4$ & $10398.0$ \\
+			Growth & $0.1$ & $10398.4$
+		\end{tabular}
+	\end{center}
+
+
+\end{frame}
+
 \begin{frame}{Justifying These Numerical Solutions}
 	For a particular $\alpha$ value:
 	\begin{itemize}
-		\item Demonstrated convergence as the resolution of the method increases
-		\item Demonstrated numerical solutions conserve mass, momentum and the Hamiltonian
+		\item Demonstrated convergence as the resolution of the method increases.
+		\item Demonstrated numerical solutions conserve mass, momentum and energy.
 	\end{itemize}
-	These results demonstrated that the Growth Structure is correct structure of DSW for short time spans
+	These results demonstrated that the Growth Structure is correct structure of DSW for short time spans.
 \end{frame}
 
 
 \begin{frame}{Long term solutions}
 	\begin{itemize}
-		\item Growth structure agrees well with asymptotic results for short and long times
-		\item Growth structure decays to node structure which decays to the flat structure
-		\item Separation of dispersive wave trains over long times
+		\item Growth structure agrees well with asymptotic results for short and long times.
+		\item Growth structure decays to node structure which decays to the flat structure.
+		\item Separation of dispersive wave trains over long times.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Dam break solution at $t=30s$}
+\begin{frame}{Dam break solution at $t=30s$ ($\alpha = 0$)}
 		\begin{figure}
 			\includegraphics[width=0.65\textwidth]{./Pictures/Results/Example/G30.pdf}
 		\end{figure}
 
 \end{frame}
 
-\begin{frame}{Dam break solution at $t=100s$}
+\begin{frame}{Dam break solution at $t=100s$ ($\alpha = 0$)}
 	\begin{figure}
 		\includegraphics[width=0.65\textwidth]{./Pictures/Results/Example/N100.pdf}
 	\end{figure}
 	
 \end{frame}
 
-\begin{frame}{Dam break solution at $t=300s$}
+\begin{frame}{Dam break solution at $t=300s$ ($\alpha = 0$)}
 	\begin{figure}
 		\includegraphics[width=0.65\textwidth]{./Pictures/Results/Example/F300.pdf}
 	\end{figure}
@@ -389,14 +438,20 @@
 \begin{frame}{Conclusion}
 	Presentation
 	\begin{itemize}
-		\item Found new behaviour of DSW for short time spans not previously published in the literature
-		\item Good agreement between numerical solutions and known properties of DSW for long time periods
+		\item Found new behaviour of dispersive shock waves for short time spans not previously published in the literature.
+		\item Good agreement between numerical solutions and known properties of dispersive shock waves for long time periods.
 	\end{itemize}
 	Paper
 		\begin{itemize}
-			\item Explained why different behaviour published in the literature
-			\item Justified the robustness of our numerical methods
+			\item Explained why different behaviour published in the literature.
+			\item Justified the robustness of our numerical methods.
 		\end{itemize}
+\end{frame}
+
+\begin{frame}{Comparison of Node and Growth Structures}
+	\begin{figure}
+		\includegraphics[width=0.7\textwidth]{./Pictures/Results/Example/912Comparison.pdf}
+	\end{figure}
 \end{frame}
 
 
