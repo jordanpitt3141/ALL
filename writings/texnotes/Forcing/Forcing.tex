@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\title{Forcing}
+\author{Jordan Pitt / u5013521}
+
+Evolution equations:
+
+\begin{equation}
+\frac{\partial q}{\partial t} + \frac{\partial}{\partial x}\left(f(q)\right) = 0
+\end{equation}
+
+For forcing we get
+
+\begin{equation}
+\frac{\partial q}{\partial t} + \frac{\partial}{\partial x}\left(f(q)\right) = H
+\end{equation}
+
+Integrate from $x_{j-1/2}$ to $x_{j+1/2}$
+
+\begin{equation}
+\int_{x_{j-1/2}}^{x_{j+1/2}}\frac{\partial q}{\partial t} \; dx +  \int_{x_{j-1/2}}^{x_{j+1/2}} \frac{\partial}{\partial x}\left(f(q)\right) \; dx  =  \int_{x_{j-1/2}}^{x_{j+1/2}} H \; dx
+\end{equation}
+
+Defining $$\bar{q}^n= \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q^n\; dx$$
+
+\begin{equation}
+\Delta x\left(\frac{\partial \bar{q}}{\partial t}  \right)+  \left(f(q_{j+1/2}) -f(q_{j-1/2}) \right)  =  \int_{x_{j-1/2}}^{x_{j+1/2}} H \; dx
+\end{equation}
+
+Integrate from $t^{n+1}$ to $t^n$
+
+\begin{equation}
+\Delta x \int_{t^n}^{t^{n+1}}\left(\frac{\partial \bar{q}}{\partial t}  \right) \; dt+  \int_{t^n}^{t^{n+1}} \left(f(q_{j+1/2}) -f(q_{j-1/2}) \right) \; dx  =   \int_{t^n}^{t^{n+1}} \int_{x_{j-1/2}}^{x_{j+1/2}} H \; dx \; dt
+\end{equation}
+
+\begin{equation}
+\Delta x \left(\bar{q}^{n+1} - \bar{q}^n  \right) +  \int_{t^n}^{t^{n+1}} \left(f(q_{j+1/2}) -f(q_{j-1/2}) \right) \; dt  =   \int_{t^n}^{t^{n+1}} \int_{x_{j-1/2}}^{x_{j+1/2}} H \; dx \; dt
+\end{equation}
+
+\begin{equation}
+\Delta x \left(\bar{q}^{n+1} - \bar{q}^n  \right) +  \int_{t^n}^{t^{n+1}}f(q_{j+1/2}) \; dt - \int_{t^n}^{t^{n+1}}f(q_{j-1/2}) \; dt  =   \int_{t^n}^{t^{n+1}} \int_{x_{j-1/2}}^{x_{j+1/2}} H \; dx \; dt
+\end{equation}
+
+Defining $$F_{i -1/2}= \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}} f(q_{j-1/2})\; dx$$
+
+$$F_{i + 1/2}= \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}} f(q_{j+1/2})\; dx$$
+
+\begin{equation}
+\Delta x \left(\bar{q}^{n+1} - \bar{q}^n  \right) +  \Delta t\left(F_{i + 1/2} - F_{i -1/2}\right)  =   \int_{t^n}^{t^{n+1}} \int_{x_{j-1/2}}^{x_{j+1/2}} H \; dx \; dt
+\end{equation}
+
+\begin{equation}
+\bar{q}^{n+1} =  \bar{q}^n  - \frac{\Delta t}{\Delta x} \left(F_{i + 1/2} - F_{i -1/2}\right)  +     \frac{1}{\Delta x}\int_{t^n}^{t^{n+1}} \int_{x_{j-1/2}}^{x_{j+1/2}} H \; dx \; dt
+\end{equation}
+
+We can break $H$ up further as
+
+$H = \frac{\partial q}{\partial t} + \frac{\partial}{\partial x}\left(f(q)\right)$
+
+So that 
+
+$$Force = \bar{q}^{n+1} -  \bar{q}^n  + \frac{\Delta t}{\Delta x} \left(F_{i + 1/2} - F_{i -1/2}\right)  $$
+
+
+where $Force$ uses the analytic values of these quantities rather than the approximate values.
+ \end{document}

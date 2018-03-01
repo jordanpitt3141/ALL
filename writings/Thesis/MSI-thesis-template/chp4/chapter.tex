@@ -19,21 +19,21 @@ X = uh\frac{\partial u}{\partial x} + gh\frac{\partial h}{\partial x} + h^2\frac
 All derivatives are approximated by second-order centred finite difference approximations on a uniform grid in space and time, which after rearranging into an update formula becomes
 
 \begin{equation}
-h^{n}_ju^{n+1}_j - \left(h^{n}_j\right)^2 \left(\frac{u^{n+1}_{j+1} -u^{n+1}_{j-1} }{2 \Delta x}\right) - \frac{\left(h^{n}_j\right)^3}{3}\left(\frac{u^{n+1}_{j+1} - 2u^{n+1}_{j} + u^{n+1}_{j-1} }{\Delta x^2}\right) = - Y^n_j
+h^{n}_ju^{n+1}_j - \left(h^{n}_j\right)^2 \left(\frac{-u^{n+1}_{j-1}+u^{n+1}_{j+1} }{2 \Delta x}\right) - \frac{\left(h^{n}_j\right)^3}{3}\left(\frac{u^{n+1}_{j-1} - 2u^{n+1}_{j}  +u^{n+1}_{j+1} }{\Delta x^2}\right) = - Y^n_j
 \label{eq:expandedutdisc3}
 \end{equation}
 
 where
 
 \begin{equation*}
-Y_j^n = 2\Delta tX_j^{n} - h_j^{n}u_j^{n-1} + \left(h_j^{n}\right)^2\left(\frac{u^{n-1}_{j+1} -u^{n-1}_{j-1} }{2 \Delta x}\right) + \frac{\left(h_j^{n}\right)^3}{3}\left(\frac{u^{n-1}_{j+1} - 2u^{n-1}_{j} + u^{n-1}_{j-1} }{\Delta x^2}\right)
+Y_j^n = 2\Delta tX_j^{n} - h_j^{n}u_j^{n-1} + \left(h_j^{n}\right)^2\left(\frac{-u^{n-1}_{j-1}+u^{n-1}_{j+1}  }{2 \Delta x}\right) + \frac{\left(h_j^{n}\right)^3}{3}\left(\frac{u^{n-1}_{j-1} - 2u^{n-1}_{j} + u^{n-1}_{j+1} }{\Delta x^2}\right)
 \label{eq:expandfactor Xp}
 \end{equation*}
 
 and
 
 \begin{multline*}
-X_j^n = u_j^nh_j^n\frac{u^{n}_{j+1} -u^{n}_{j-1} }{2 \Delta x} + gh^n_j\frac{h^{n}_{j+1} -h^{n}_{j-1} }{2 \Delta x} + \left(h^n_j\right)^2\left(\frac{u^{n}_{j+1} -u^{n}_{j-1} }{2 \Delta x} \right)^2  \\ + \frac{\left(h^n_j\right)^3}{3}\frac{u^{n}_{j+1} -u^{n}_{j-1} }{2 \Delta x}\frac{u^{n}_{j+1} - 2u^{n}_{j} + u^{n}_{j-1} }{\Delta x^2} - \left(h^n_j\right)^2u_j^n\frac{u^{n}_{j+1} - 2u^{n}_{j} + u^{n}_{j-1} }{\Delta x^2} \\- \frac{\left(h^n_j\right)^3}{3}u^n_j \frac{u^{n}_{j+2} - 2u^{n}_{j+1} + 2u^{n}_{j-1} - u^{n}_{j-2} }{2\Delta x^3}.
+X_j^n = u_j^nh_j^n\frac{-u^{n}_{j-1} + u^{n}_{j+1} }{2 \Delta x} + gh^n_j\frac{-h^{n}_{j-1} + h^{n}_{j+1} }{2 \Delta x} + \left(h^n_j\right)^2\left(\frac{-u^{n}_{j-1} + u^{n}_{j+1} }{2 \Delta x} \right)^2  \\ + \frac{\left(h^n_j\right)^3}{3}\frac{-u^{n}_{j-1} + u^{n}_{j+1} }{2 \Delta x}\frac{u^{n}_{j-1} - 2u^{n}_{j} + u^{n}_{j+1} }{\Delta x^2} - \left(h^n_j\right)^2u_j^n\frac{u^{n}_{j-1} - 2u^{n}_{j} + u^{n}_{j+1} }{\Delta x^2} \\- \frac{\left(h^n_j\right)^3}{3}u^n_j \frac{- u^{n}_{j-2} + 2u^{n}_{j-1} - 2u^{n}_{j+1} + u^{n}_{j+2}}{2\Delta x^3}.
 \end{multline*}
 
 Equation \eqref{eq:expandedutdisc3} can be rearranged into an explicit update scheme $\mathcal{D}_u$ for $u$ given its current and previous values, so that
@@ -53,9 +53,9 @@ where $A$ is a tri-diagonal matrix.
 
 with
 \begin{align}
-	&A_{j,j-1} = \frac{\left(h^n_j\right)^2}{2\Delta x}\frac{h^n_{j+1} - h^n_{j-1}}{2\Delta x} - \frac{\left(h^n_j\right)^3}{3 \Delta x^2}  ,\\
+	&A_{j,j-1} = \frac{\left(h^n_j\right)^2}{2\Delta x}\frac{- h^n_{j-1}+ h^n_{j+1}}{2\Delta x} - \frac{\left(h^n_j\right)^3}{3 \Delta x^2}  ,\\
 	&A_{j,j} = h^n_j + \frac{2 h^n_j}{3 \Delta x^2}, \\
-	&A_{j,j+1} = -\frac{\left(h^n_j\right)^2}{2\Delta x}\frac{h^n_{j+1} - h^n_{j-1}}{2\Delta x} - \frac{\left(h^n_j\right)^3}{3 \Delta x^2}.
+	&A_{j,j+1} = -\frac{\left(h^n_j\right)^2}{2\Delta x}\frac{- h^n_{j-1} + h^n_{j+1}}{2\Delta x} - \frac{\left(h^n_j\right)^3}{3 \Delta x^2}.
 \end{align}
 
 
@@ -79,11 +79,11 @@ The two step Lax-Wendroff update $\mathcal{W}_h$ for $h$ is
 The quantities $u^{n + 1/2}_{j \pm 1/2}$ are calculated using $\boldsymbol{u}^{n+1}$ obtained by applying $\mathcal{D}_u$ \eqref{eq:FDcentforu} to $\boldsymbol{u}^{n}$  then linearly interpolating in space and time to give
 
 	\begin{equation*}
-	u^{n + 1/2}_{j+ 1/2} = \frac{u^{n+1}_{j+1} + u^{n}_{j+1} + u^{n+1}_{j} + u^{n}_{j} }{4}
+	u^{n + 1/2}_{j+ 1/2} = \frac{ u^{n}_{j} + u^{n}_{j+1} + u^{n+1}_{j} +   u^{n+1}_{j+1}  }{4}
 	\end{equation*}
 	and
 	\begin{equation*}
-	u^{n + 1/2}_{j- 1/2} = \frac{u^{n+1}_{j} + u^{n}_{j} + u^{n+1}_{j-1}+ u^{n}_{j-1} }{4}.
+	u^{n + 1/2}_{j- 1/2} = \frac{u^{n}_{j-1}  + u^{n}_{j}+ u^{n+1}_{j-1} + u^{n+1}_{j}   }{4}.
 	\end{equation*}
 
 Thus we have the following update scheme $\mathcal{W}_h$ for \eqref{eqn:FullSerreNonConMass}
@@ -98,7 +98,7 @@ Thus we have the following update scheme $\mathcal{W}_h$ for \eqref{eqn:FullSerr
 The second order centered finite difference approximation to the conservation of mass equation \eqref{eqn:FullSerreNonConMass} is
 
 	\begin{equation*}
-	h^{n+1}_j = h^{n-1}_j - \Delta t \left(u^{n}_{j}\frac{h^{n}_{j+1} - h^{n}_{j-1}}{\Delta x} + h^{n}_{j}\frac{u^{n}_{j+1} - u^{n}_{j-1}}{\Delta x}\right).
+	h^{n+1}_j = h^{n-1}_j - \Delta t \left(u^{n}_{j}\frac{ - h^{n}_{j-1} + h^{n}_{j+1}}{\Delta x} + h^{n}_{j}\frac{- u^{n}_{j-1} + u^{n}_{j+1}}{\Delta x}\right).
 	\end{equation*}
 
 Thus we have an update scheme $\mathcal{D}_h$ for all $i$

@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\begin{document}
+
+Serre Equations with non flat bottom:
+
+\[\frac{\partial G}{\partial t} + \frac{\partial}{\partial x} \left( G\bar{u} + \frac{gh^2}{2} - \frac{2h^3}{3} \left(\frac{\partial \bar{u}}{\partial x}\right)^2   \right)  = -\frac{\partial}{\partial x} \left( \frac{h^2}{2} \Psi \right)   -  \left(gh + \frac{h^2}{2}\Phi + h \Psi \right) \frac{\partial b}{\partial x}\]
+
+where:
+ \[ G = \bar{u} h - h^2 \frac{\partial h}{\partial x} \frac{\partial \bar{u}}{\partial x} + \frac{h^3}{3}\frac{\partial^2 \bar{u}}{\partial x^2} \]
+ 
+
+However I'm going to assume that we do not want temporal derivative in our source term, so we want to modify G so that we can do this. The important thing here to note is that b is independent of time. By simple calculus it is true that:
+
+\[\frac{\partial}{\partial t } \left(\frac{h^2}{2} \frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x}\right) = h\frac{\partial h}{\partial t}\frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x} + \frac{h^2}{2}\frac{\partial^2 b}{\partial t \partial x}\frac{\partial \bar{u}}{\partial x} + \frac{h^2}{2}\frac{\partial b}{\partial x}\frac{\partial^2 \bar{u}}{ \partial t \partial x} \]
+
+since b is independent of time, so is its derivative with respect to x and so $\frac{\partial^2 b}{\partial t \partial x} = 0$. Thus:
+
+\[\frac{\partial}{\partial t } \left(\frac{h^2}{2} \frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x}\right) = h\frac{\partial h}{\partial t}\frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x}  + \frac{h^2}{2}\frac{\partial b}{\partial x}\frac{\partial^2 \bar{u}}{ \partial t \partial x} \]
+
+Applying  the equation for conservation of mass [] gives:
+
+\[\frac{\partial}{\partial t } \left(\frac{h^2}{2} \frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x}\right) = h\frac{\partial (\bar{u}h)}{\partial x}\frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x}  + \frac{h^2}{2}\frac{\partial b}{\partial x}\frac{\partial^2 \bar{u}}{ \partial t \partial x} \]
+
+\[\frac{h^2}{2}\frac{\partial b}{\partial x}\frac{\partial^2 \bar{u}}{ \partial t \partial x} =  h^2\frac{\partial \bar{u}}{\partial x}\frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x} + h \bar{u}\frac{\partial h}{\partial x}\frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x} - \frac{\partial}{\partial t } \left(\frac{h^2}{2} \frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x}\right) \]
+
+So the first equation can be rearranged to give:
+\[\frac{\partial G}{\partial t} + \frac{\partial}{\partial x} \left( G\bar{u} + \frac{h^2}{2}\Psi + \frac{gh^2}{2} - \frac{2h^3}{3} \left(\frac{\partial \bar{u}}{\partial x}\right)^2   \right) - \frac{h^2}{2}\frac{\partial^2 \bar{u}}{\partial x \partial t} \frac{\partial b}{\partial x}  =  - \left(gh + \frac{h^2}{2}\left(\frac{\partial \bar{u}}{\partial x}\right)^2 - \bar{u}\frac{\partial^2 \bar{u}}{\partial x^2} + h \Psi \right)  \frac{\partial b}{\partial x}\]
+
+
+\[\frac{\partial H}{\partial t} + \frac{\partial}{\partial x} \left( H\bar{u} + \frac{gh^2}{2} - \frac{2h^3}{3} \left(\frac{\partial \bar{u}}{\partial x}\right)^2   \right) =  - \left(gh - \frac{h^2}{2}\left(\frac{\partial \bar{u}}{\partial x}\right)^2 - \bar{u}\frac{\partial^2 \bar{u}}{\partial x^2} + h \Psi - h \bar{u}\frac{\partial h}{\partial x}\frac{\partial \bar{u}}{\partial x} \right)  \frac{\partial b}{\partial x}\]
+
+Where:
+
+\[H = \bar{u} h - h^2 \frac{\partial h}{\partial x} \frac{\partial \bar{u}}{\partial x} + \frac{h^3}{3}\frac{\partial^2 \bar{u}}{\partial x^2} + \frac{h^2}{2} \frac{\partial b}{\partial x}\frac{\partial \bar{u}}{\partial x}  \]
+
+\end{document}

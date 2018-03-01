@@ -1,0 +1,21 @@
+\documentclass[pdf]{article}
+\usepackage{pgfplots} 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round},every non boxed x axis/.append style={x axis line style=-}, every non boxed y axis/.append style={y axis line style=-}}
+\begin{document} 
+\begin{equation}
+\begin{bmatrix}
+G^0_0 \\ \vdots \\ \vdots \\G^2_{j-2} +  G^0_{j-1}  \\ G^1_{j-1}\\ G^2_{j-1} + G^0_{j} \\ G^1_{j}\\ G^2_{j} +G^0_{j+1}\\ G^1_{j + 1} \\G^2_{j + 1} +G^0_{j+2} \\ \vdots \\ \vdots \\ G_{m + 1/2}
+\end{bmatrix}
+ = \begin{bmatrix}
+  A^{0,0}_{0} &  A^{0,1}_{0} & A^{0,2}_{0} \\ A^{1,0}_{0} &  A^{1,1}_{0} & A^{1,2}_{0} \\ \vdots \\ \vdots \\u_{j-3/2}   \\ u_{j-1} \\ u_{j-1/2}  \\ u_{j} \\ u_{j+1/2} \\ u_{j+1} \\ u_{j+3/2} \\ \vdots \\ \vdots \\ u_{m + 1/2}
+ \end{bmatrix}
+ \begin{bmatrix}
+ u_{-1/2} \\ \vdots \\ \vdots \\u_{j-3/2}   \\ u_{j-1} \\ u_{j-1/2}  \\ u_{j} \\ u_{j+1/2} \\ u_{j+1} \\ u_{j+3/2} \\ \vdots \\ \vdots \\ u_{m + 1/2}
+ \end{bmatrix}
+\end{equation}
+\end{document}

@@ -1,0 +1,143 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Derivation of Eulers Equations for Incompressible Fluid}
+\author{Jordan Pitt}
+
+\maketitle
+
+\begin{abstract}
+borrows heavily from the books I need to reference, in fact its pretty much just that copy pasted
+\end{abstract}
+
+\section{Derivation}
+
+I will begin by deriving Eulers equations in the case where fluid is incompressible from first principles in a Eulerian coordinate system. In this derivation we are following the path laid out as in [] and in fact the following is just a paraphrased vesion of that derivation. \\
+
+
+ \noindent The flow of a fluid is determined by the velocty field $\vec{v} = \vec{v}(x,y,z,t)$ and any other 2 thermodynamical quantities, canonically we usually choose the pressure quantity $p = p(x,y,z,t)$ and density $\rho = \rho(x,y,z,t)$. \\
+
+
+\noindent [picture will go here]\\
+
+\noindent Conservation of Mass: \\
+\begin{figure}
+    \centering
+    \caption{Simulation Results}
+    \label{simulationfigure}
+\end{figure}
+
+\noindent Consider the mass of fluid inside V, it can be calculated as:
+
+\begin{equation}
+    \label{mass in V}
+    \int_V \rho \,dV
+\end{equation}
+
+\noindent Also consider the flow of mass out of V which is:
+
+\begin{equation}
+    \label{Flow out of V}
+     - \oint_{\partial V} \rho  \vec{v} \cdot \vec{n} \,dS
+\end{equation}
+
+\noindent Conservation of mass dictates that the only change in mass comes from the flow out so:
+\begin{equation}
+    \label{Conservation of Mass}
+    {\partial \over \partial t}\int_V \rho \,dV = - \oint_{\partial V} \rho  \vec{v} \cdot \vec{n} \,dS
+\end{equation}
+
+\noindent appyling Greens Formula gives:
+\begin{equation}
+    \label{Greens formula}
+    - \oint_{\partial V} \rho  \vec{v}\cdot \vec{n} \,dS = - \int_{V} \nabla \cdot (\rho\vec{v}) \,dV
+\end{equation}
+
+\noindent this gives:
+\begin{equation}
+    \label{Greens formula}
+    {\partial \over \partial t}\int_V \rho \,dV = - \int_{V} \nabla \cdot (\rho\vec{v}) \,dV
+\end{equation}
+
+\noindent bringing the derivative inside, assuming the density function is smooth, since we assume constant pressure later on this won't make any difference for us. Then brining everything together gives:
+
+\begin{equation}
+    \label{Greens formula}
+    \int_V {\partial \rho \over \partial t} + \nabla \cdot (\rho\vec{v}) \,dV = 0
+\end{equation}
+
+\noindent This is true for any V we choose, and so it must be that the integrand is identically zero for all points, so we get that:
+
+\begin{equation}
+    \label{Greens formula}
+    {\partial \rho \over \partial t} + \nabla \cdot (\rho\vec{v}) = 0
+\end{equation}
+
+\noindent This is the conservation of mass in a general fluid, now applying a constant density we get that, the change in density is constant, and we can divide the density out of the second term as well giving:
+
+\begin{equation}
+    \label{Greens formula}
+    \nabla \cdot \vec{v} = 0
+\end{equation}
+
+\noindent Conservation of Momentum: \\
+
+\noindent To get the conservation of momentum we consider the force acting on V, this is given by:
+
+\begin{equation}
+    \label{Flow out of V}
+     - \oint_{\partial V} p\cdot \vec{n} \,dS
+\end{equation}
+
+\noindent applying Greens formula gives:
+
+\begin{equation}
+    \label{Flow out of V}
+     - \oint_{\partial V} p\cdot \vec{n} \,dS = \int_{V} \nabla p \,dV
+\end{equation}
+
+\noindent This says that for a volume element $dV$ a force is applied of magnitude $ - \nabla p \,dV$, this means that for a unit volume of fluid there is a force of $- \nabla p$m acting on it. Applying the derivative form of Newtons second law gives:
+
+\begin{equation}
+    \label{Flow out of V}
+    {D\ (\rho \vec{v})\over Dt} = - \nabla p
+\end{equation}
+
+\noindent Where ${D\vec{v}\over Dt}$ is the substantial time derivative. Which instead of taking the derivative for a constant point in space, it does so over a particles path. To put this in terms of our regular time derivative notice that a change of velocity $d\vec{v}$ during the time $dt$ is composed of parts, namely the change during $dt$ in the velocity at a fixed point in space and the difference between the velocities $($ at the same instant $)$ at two points $dr$ apart, where $dr$ is the distance moved by the particle during $dt$. The first part gives us the standard partial derivative ${\partial \vec{v}\over \partial t}$ the second is:
+
+\begin{equation}
+    \label{Flow out of V}
+    dx{\partial \vec{v} \over \partial x} + dy{\partial \vec{v} \over \partial y} + dz{\partial \vec{v} \over \partial z} = (dr \cdot \nabla) \vec{v}
+\end{equation}
+
+\noindent Therefore:
+
+\begin{equation}
+    \label{Flow out of V}
+    {D\vec{v} \over Dt} = {\partial \vec{v} \over \partial t} + (\vec{v} \cdot \nabla) \vec{v}
+\end{equation}
+
+\noindent applying the incompressibility of the fluid. expanding the dubstantial time derivative and adding an acceleration fue to gravity called $ \vec{g} = (0,0,g) $ where g is the acceleration due to gravity. gives us:
+
+\begin{equation}
+    \label{Flow out of V}
+    {\partial \vec{v}\over \partial t} + (\vec{v} \cdot \nabla)\vec{v} = -{ \nabla p \over \rho } + \vec{g}
+\end{equation}
+
+\noindent Thus giving the Euler Equations for incompressible flow, representing the conservation of mass and momentum respectivly:
+
+
+\begin{equation}
+    \label{Greens formula}
+    \nabla \cdot \vec{v} = 0
+\end{equation}
+
+\begin{equation}
+    \label{Flow out of V}
+    {\partial \vec{v}\over \partial t} + (\vec{v} \cdot \nabla)\vec{v} = -{ \nabla p \over \rho } + \vec{g}
+\end{equation}
+
+
+\end{document}
