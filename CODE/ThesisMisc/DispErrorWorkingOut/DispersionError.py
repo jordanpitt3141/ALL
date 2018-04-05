@@ -57,7 +57,7 @@ def M(k,w,t,dx,dt,ord1):
     if(ord1 == 1 or ord1 == 2):
         M = 1
     elif(ord1 == 3):
-        M = simplify(-qjp1 + 26*qj - qjm1)/24
+        M = 24/simplify(-qjp1 + 26*qj - qjm1)
     else:
         qintph = qoff(k,w,S('1/2'),0,x,t,dx,dt)
         qintmh = qoff(k,w,S('-1/2'),0,x,t,dx,dt)
@@ -134,10 +134,13 @@ def FEM(H,k,w,x,t,dx,dt,Rm,Rp):
     
     qjp = qoff(k,w,1,0,x,t,dx,dt)
     
-    RHS = dx/6*simplify(Rp + Rm)
+    RHS = simplify(Rp + Rm)
         
-    LHSt1 = H*dx/30*simplify(-qjmh + 2*qj + 4*qjph +  qjp*(4*qjmh + 2*qj - qjph))
-    LHSt2 = H*H*H*3/dx*simplify((qjmh - 8*qj + 7*qjph +  qjp*(7*qjmh - 8*qj + qjph)))
+    LHSt1 = 6*H/30*simplify(-qjmh + 2*qj + 4*qjph +  qjp*(4*qjmh + 2*qj - qjph))
+    LHSt2 = 6*H*H*H/(9*dx*dx)*simplify(qjmh - 8*qj + 7*qjph +  qjp*(7*qjmh - 8*qj + qjph))
+    
+    #print(simplify(-qjmh + 2*qj + 4*qjph +  qjp*(4*qjmh + 2*qj - qjph)))
+    #print(simplify(qjmh - 8*qj + 7*qjph +  qjp*(7*qjmh - 8*qj + qjph)))
     
     return (LHSt1 + LHSt2)/ RHS
     
@@ -159,6 +162,7 @@ def TaylorSeries(exp,x,n,a,mult):
             TaySer.append(newtermmult*newterm/(mult*num))
         num = num*(i+1)
     return TaySer
+
 
 
 def Flux(h,u,H,g,k,w,x,t,dx,dt,Rp,Rm,Ru,G,mass):
@@ -274,10 +278,35 @@ Fmomesym = Flux(h,u,H,g,k,w,x,t,dx,dt,Rps,Rms,Rus,Gs,0)
 
 Fmatsym = Fmat(H,g,k,w,x,t,dx,dt, Ms, Gs, Fnn ,Fnu, Fun ,Fuu)
 
+#Evaluate fluxes
+"""
+Fnn1 = Fmasssym[1].subs(Rms,Rm1).subs(Rps,Rp1)
+Fnu1 = Fmasssym[0].subs(Rus,Ru1)
+Fun1 = Fmomesym[0].subs(Rms,Rm1).subs(Rps,Rp1)
+Fuu1 = Fmomesym[1].subs(Rms,Rm1).subs(Rps,Rp1).subs(Gs,G2)
+
+Fnn2 = Fmasssym[1].subs(Rms,Rm2).subs(Rps,Rp2)
+Fnu2 = Fmasssym[0].subs(Rus,Ru2)
+Fun2 = Fmomesym[0].subs(Rms,Rm2).subs(Rps,Rp2)
+Fuu2 = Fmomesym[1].subs(Rms,Rm2).subs(Rps,Rp2).subs(Gs,G2)
+
+FnnFEM = Fmasssym[1].subs(Rms,Rm2).subs(Rps,Rp2)
+FnuFEM = Fmasssym[0].subs(Rus,RuA)
+FunFEM = Fmomesym[0].subs(Rms,Rm2).subs(Rps,Rp2)
+FuuFEM = Fmomesym[1].subs(Rms,Rm2).subs(Rps,Rp2).subs(Gs,GFEM)
+
+Fnn3 = Fmasssym[1].subs(Rms,Rm3).subs(Rps,Rp3)
+Fnu3 = Fmasssym[0].subs(Rus,Ru3)
+Fun3 = Fmomesym[0].subs(Rms,Rm3).subs(Rps,Rp3)
+Fuu3 = Fmomesym[1].subs(Rms,Rm3).subs(Rps,Rp3).subs(Gs,G4)
+
+Fmatsym1 = Fmatsym.subs(Fnn,Fnn1).subs(Fnu,Fnu1).subs(Fun,Fun1).subs(Fuu,Fuu1).subs(Ms,M1).subs(Gs,G2)
+
+Fmatsym2 = Fmatsym.subs(Fnn,Fnn2).subs(Fnu,Fnu2).subs(Fun,Fun2).subs(Fuu,Fuu2).subs(Ms,M2).subs(Gs,G2)
 
 
+FmatsymFEM = Fmatsym.subs(Fnn,FnnFEM).subs(Fnu,FnuFEM).subs(Fun,FunFEM).subs(Fuu,FuuFEM).subs(Ms,M2).subs(Gs,GFEM)
 
-
-
-
+Fmatsym3 = Fmatsym.subs(Fnn,Fnn3).subs(Fnu,Fnu3).subs(Fun,Fun3).subs(Fuu,Fuu3).subs(Ms,M3).subs(Gs,G4)
+"""
 

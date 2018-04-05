@@ -11,8 +11,11 @@ order = "o3"
 #wdir = "../../../../data/raw/ChrisDatn/solen/"+order+"/"
 #sdir = "../../../../data/postprocessing/ChrisDatn/sendsolen/"+order+"/"
 
-wdir = "../../../../data/raw/solconnonsmallg10Hamil/o2/"
-sdir = "../../../../data/postprocessing/solconnonsmallg10HamilCDB/o2/"
+#wdir = "../../../../data/raw/solconnonsmallg10Hamil/o2/"
+#sdir = "../../../../data/postprocessing/solconnonsmallg10HamilCDB/o2/"
+
+wdir = "../../../../data/raw/Solnon0p7TEST/o3/"
+sdir = "../../../../data/postprocessing/Solnon0p7TEST/o3/"
 
 if not os.path.exists(sdir):
     os.makedirs(sdir) 

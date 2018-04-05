@@ -1837,6 +1837,7 @@ for k in range(20):
     deallocPy(hmbeg_c)
     deallocPy(hmend_c)
 """
+"""
 
 ######### Strange Soliton
 width = 0
@@ -1956,7 +1957,7 @@ ufromGh(G_c,h_c,hmbeg_c,hmend_c,umbeg_c,umend_c,dx,n,niBC, u_c)
 u = copyarrayfromC(u_c,n)
 G = copyarrayfromC(G_c,n)
 h = copyarrayfromC(h_c,n)
-
+"""
 
 
 ######### Solitary Soliton
@@ -2414,10 +2415,10 @@ with open(s,'a') as file2:
          writefile2.writerow([str(dx),str(dt),str(t[i]), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j]),str(normh),str(normu), str(timeelapse),str(len(t) - 1) , str((1.0*timeelapse)/ (len(t) - 1) )])
 """
 
-"""
+
 ##Accuracy Test
 ### Soliton Accuracy ################
-wdir = "../../../data/raw/Solnon0p7/o3/"
+wdir = "../../../data/raw/Solnon0p7TEST/o3/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -2437,10 +2438,10 @@ for k in range(6,21):
     Cr = 0.5
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
-    startx = -250.0
-    endx = 250.0 + dx
+    startx = -50.0
+    endx = 50.0 + dx
     startt = 0.0
-    endt = 50 + dt
+    endt = 0.1 + dt
     
     print(dx,dt)
         
@@ -2606,7 +2607,7 @@ for k in range(6,21):
         writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
         writefile.writerow([str(dx),str(normhdiffi), str(normudiffi),str(normHamdiff)])
-"""
+
 
 
 """

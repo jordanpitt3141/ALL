@@ -239,64 +239,48 @@ def Forced(x,t,a,b,c,d,e,g):
     
     return h,u,G
 
-def hbar(x,t):
-    return 10.0*x - exp(0.5*t)*cos(2*x)/2;
-    
-def Gbar(x,t):
-    return (0.25*exp(0.5*t)*sin(2*x)*sin(2*x) \
-            + 5.0*sin(2*x))*exp(0.5*t) \
-            + 4*(3.33333333333333*exp(0.5*t)*sin(2*x)*sin(2*x)*sin(2*x) \
-            - 0.25*exp(1.0*t)*sin(2*x)*sin(2*x)*cos(2*x)*cos(2*x)\
-            - 0.125*exp(1.0*t)*cos(2*x)*cos(2*x)*cos(2*x)*cos(2*x) \
-            + 25.0*sin(2*x)*sin(2*x))*exp(1.0*t) \
-            + 4*(75.0*exp(0.5*t)*sin(2*x)*sin(2*x) \
-            + 5.0*exp(1.0*t)*sin(2*x)*sin(2*x)*sin(2*x) \
-            - 0.25*exp(1.5*t)*sin(2*x)*sin(2*x)*cos(2*x)*cos(2*x) \
-            - 0.125*exp(1.5*t)*cos(2*x)*cos(2*x)*cos(2*x)*cos(2*x) \
-            + 500.0*sin(2*x))*exp(0.5*t)/3;    
-
-def ForcedAVG(x,t,dx):
-    n = len(x)
-    hA = zeros(n)
-    uA = zeros(n)
-    GA = zeros(n)
-    
-    for i in range(n):
-        hA[i] = (hbar(x[i] + 0.5*dx,t) - hbar(x[i] - 0.5*dx,t) )/ dx
-        GA[i] = (Gbar(x[i] + 0.5*dx,t) - Gbar(x[i] - 0.5*dx,t) ) / dx
-    
-    return hA,GA
 
 #Forced solution
 #So our solver solves the analytic soliton problem with second order accuracy in h, u and G. 
 
-"""
-wdir = "../../../../../../data/raw/Forced/o2FEMP1P2/Obvioussplit1UseMidN1TA/"  
+wdir = "../../../../../../data/raw/Forced/o2FEMP1P2/FEMt/"  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-for j in range(23,24):        
+for j in range(15):        
 
+    """
     a0 = 10
     a1 = 2
     a2 = 0.5
     a3 = 3
     a4 = 0.7
+    """
     
-    width = 10
+    a0 = 2
+    a1 = 0.2
+    a2 = 1.3
+    a3 = 0.4
+    a4 = 1.5
+    a5 = 0.6
+    a6 = 1.7
+    a7 = 0.8
+    a8 = 0.9
+    
+    width = 50
     
     g = 9.81
     t0 = 0
     bot = 0
     
-    dx = width / (2.0)**(j/2.0)
-    l =  0.01
+    dx = width / (2.0)**(j)
+    l =  0.5 / (3 + sqrt(10*12))
     dt = l*dx
     startx = -width/2
-    endx = width/2 + 0.9*dx
+    endx = width/2 
     startt = 0.0
-    endt = 0.1
+    endt = 0
             
     szoomx = startx
     ezoomx = endx
@@ -428,34 +412,36 @@ for j in range(23,24):
     with open(s,'a') as file1:
         s ="%3.8f%5s%1.15f\n" %(dx," ",unorm)
         file1.write(s) 
+
+
 """
-
-
 # Temporal error
-wdir = "../../../../../../data/raw/Forced/o2FEMP1P2/Temporal0.1FMH/"  
+wdir = "../../../../../../data/raw/Forced/o2FEMP1P2/AnaComp8/"  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
-largej = 15
-for j in range(largej,0,-1):        
+largej =100
+for j in range(largej,1000):        
 
     a0 = 10
     a1 = 2
     a2 = 0.5
-    a3 = 2
-    a4 = 0.5
+    a3 = 3
+    a4 = 0.7
     
-    width = 10
+    width = 1.0
     
     g = 9.81
     t0 = 0
     bot = 0
     
-    dx = 0.1
-    #l =  0.01 / (2**(j/2))
-    dt = 0.1 / (2**(j))
+    dx = 0.01
+    l =  1.0 / (3 + sqrt(10*12))
+    #dt = 0.1 / (2**(j))
+    
+    dt = 0.1*j/20.0*l*dx
     startx = -width/2
-    endx = width/2 + 0.9*dx
+    endx = width/2 
     startt = 0.0
     endt = 0.1
             
@@ -530,6 +516,7 @@ for j in range(largej,0,-1):
     hpp_c = mallocPy(n)
     Gpp_c = mallocPy(n)  
 
+    print(ct)
     while ct < endt:
         evolvewrapperconsistenttimeForced(G_c, h_c,hMbeg_c , hMend_c,GMbeg_c ,GMend_c,uMbeg_c,uMend_c,hMbeg1_c , hMend1_c,GMbeg1_c ,GMend1_c,uMbeg1_c,uMend1_c,g,dx, dt,n,GhnBC,unBC,nGhhbc,nubc,theta, hhbc_c,Ghbc_c,ubc_c,Gp_c,hp_c, Gpp_c,hpp_c, x_c, ct,a0,a1,a2,a3,a4)        
         ct = ct + dt
@@ -554,16 +541,12 @@ for j in range(largej,0,-1):
         print(ct)
    
 
+    hC = copyarrayfromC(h_c,n)
+    GC = copyarrayfromC(G_c,n)
     
     getufromG(h_c, G_c,hMbeg_c,hMend_c,GMbeg_c,GMend_c,uMbeg_c,uMend_c,theta,dx,n,2*n +1,GhnBC,unBC,nGhhbc,nubc,ubc_c,hhbc_c,Ghbc_c)
     
-    
-    hC = copyarrayfromC(h_c,n)
-    GC = copyarrayfromC(G_c,n) 
-        
-    
-    
-    
+
     hF,uF,GF = Forced(x,ct,a0,a1,a2,a3,a4,g)
     
     ubcC = copyarrayfromC(ubc_c,nubc)
@@ -571,18 +554,18 @@ for j in range(largej,0,-1):
     hhbcC = copyarrayfromC(hhbc_c,nGhhbc)
     GhbcC = copyarrayfromC(Ghbc_c,nGhhbc) 
     
-    if (j == largej):
-        href = array(hC)
-        Gref = array(GC)
-        uref = array(uC)
+    uF = array(uF)
+    hF = array(hF)
+    GF = array(GF)  
+   
  
     uC = array(uC)
     hC = array(hC)
     GC = array(GC)
  
-    unorm = norm(uC - uref,ord =1) / norm(uref,ord=1)
-    hnorm = norm(hC - href,ord =1) / norm(href,ord=1)
-    Gnorm = norm(GC- Gref,ord =1) / norm(Gref,ord=1)   
+    unorm = norm(uC - uF,ord =2) / norm(uF,ord=2)
+    hnorm = norm(hC - hF,ord =2) / norm(hF,ord=2)
+    Gnorm = norm(GC- GF,ord =2) / norm(GF,ord=2)   
 
     s = wdir + "h.dat"
     with open(s,'a') as file1:
@@ -599,6 +582,32 @@ for j in range(largej,0,-1):
         s ="%3.8f%5s%1.15f\n" %(dt," ",unorm)
         file1.write(s) 
 
+    deallocPy(h_c)
+    deallocPy(G_c)
+    deallocPy(u_c)
+    deallocPy(hp_c)
+    deallocPy(Gp_c)
+    deallocPy(hpp_c)
+    deallocPy(Gpp_c)
+    
+    deallocPy(hMbeg_c)
+    deallocPy(GMbeg_c)
+    deallocPy(uMbeg_c)
+    deallocPy(hMend_c)
+    deallocPy(GMend_c)
+    deallocPy(uMend_c)
+ 
+    deallocPy(hMbeg1_c)
+    deallocPy(GMbeg1_c)
+    deallocPy(uMbeg1_c)
+    deallocPy(hMend1_c)
+    deallocPy(GMend1_c)
+    deallocPy(uMend1_c)
+    
+    deallocPy(ubc_c)
+    deallocPy(hhbc_c)
+    deallocPy(Ghbc_c)
+"""
 
 """
 #Solver

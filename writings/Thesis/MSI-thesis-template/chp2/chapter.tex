@@ -50,6 +50,23 @@ where $\Phi$ and $\Psi$ are defined as
 
 \end{defn}	
 
+for a horizontal bed this becomes
+
+\begin{subequations}
+	\label{eqn:FullSerreNonConHorizbed}
+	\begin{equation}
+	\label{eqn:FullSerreNonConMassHorizbed}
+	\frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+	\end{equation}
+	
+	and
+	
+	\begin{equation}
+	\label{eqn:FullSerreNonConMomeHorizbed}
+	\dfrac{\partial (uh)}{\partial t} + \dfrac{\partial}{\partial x} \left ( u^2h + \dfrac{gh^2}{2} + \dfrac{h^3}{3}{ \Phi }  \right ) = 0
+	\end{equation}
+\end{subequations}	
+
 
 \subsection{Alternative form of the Serre Equations}
 
@@ -76,6 +93,31 @@ With $G$ defined as
 	\label{defn:SerreEqnConservedQuantity1}
 	\[ G =  h {u} \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right)\]
 \end{defn}
+
+while for a horizontal bed
+
+
+\begin{subequations}
+	\label{eqn:FullSerreConHorizBed}
+	\begin{equation}
+	\label{eqn:FullSerreConMassHorizBed}
+	\frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+	\end{equation}
+	
+	and
+	
+	\begin{equation}
+	\label{eqn:SerreconsconmomHorizBed}
+	\frac{\partial}{\partial t} \left( G \right)  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} - \frac{2}{3}h^3 \frac{\partial {u}}{\partial x}^2 \right) = 0
+	\end{equation}
+	
+\end{subequations}
+With $G$ 
+\begin{equation}
+	\label{defn:SerreEqnConservedQuantity1HorizBed}
+G =  h {u}  - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right)
+\end{equation}
+
 
 \section{Properties of the Serre Equations}
 

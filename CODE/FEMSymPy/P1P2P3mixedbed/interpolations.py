@@ -10,7 +10,7 @@ from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, 
 import csv  
 from sympy import Matrix, solve_linear_system
 
-def cubicCent(a,b,c,d,f,g,h,i,x):
+def cubicCentInterior(a,b,c,d,f,g,h,i,x):
     system = Matrix( (((-2*x)**3,(-2*x)**2,(-2*x),1,f), ((-1*x)**3,(-1*x)**2,(-1*x),1,g), \
                   ((x)**3,(x)**2,x,1,h), ((2*x)**3,(2*x)**2,(2*x),1,i)))
 
@@ -34,17 +34,6 @@ def cubicRight(a,b,c,d,f,g,h,i,x):
 
     return solve_linear_system(system, a, b,c,d)  
 
-def quadCent(a,b,c,f,g,h,x):
-    system = Matrix( (((-x)**2,(-x),1,f), (0,0,1,g), \
-                  ((x)**2,x,1,h)))
-
-    return solve_linear_system(system, a, b,c)
- 
-def quadCentCell(a,b,c,f,g,h,x):
-    system = Matrix( (((-x/2)**2,(-x/2),1,f), (0,0,1,g), \
-                  ((x/2)**2,x/2,1,h)))
-
-    return solve_linear_system(system, a, b,c)    
 
 
 
@@ -53,23 +42,33 @@ b = Symbol('b')
 c = Symbol('c')
 d = Symbol('d')
 
-f = Symbol('f')
-g = Symbol('g')
-h = Symbol('h')
-i = Symbol('i')
+qjm3 = Symbol('qjm3')
+qjm2 = Symbol('qjm2')
+qjm1 = Symbol('qjm1')
+qj = Symbol('qj')
+qjp1 = Symbol('qjp1')
+qjp2 = Symbol('qjp2')
+qjp3 = Symbol('qjp3')
+
+qjmh = Symbol('qjmh')
+qjms = Symbol('qjms')
+qjps = Symbol('qjps')
+qjph = Symbol('qjph')
 
 x = Symbol('x')
 
+#Cubic over jm2,jm1,jp1,jp2
+CubicCent = cubicCentInterior(a,b,c,d,qjm2,qjm1,qjp1,qjp2,x)
 
-CubicCent = cubicCent(a,b,c,d,f,g,h,i,x)
-QuadCent = quadCent(a,b,c,f,g,h,x)
+#calculate bj from b values in cell
+CubicoverCell = cubicCentOverCell(a,b,c,d,qjmh ,qjms,qjps ,qjph ,x)
 
-CubicRight = cubicRight(a,b,c,d,f,g,h,i,x)
-CubicLeft = cubicLeft(a,b,c,d,f,g,h,i,x)
+#Cubic over j,jp1,jp2,jp3
+CubicRightInt = cubicRight(a,b,c,d,qjp3,qjp2,qjp1,qj,x)
 
-CubicCell = cubicCentOverCell(a,b,c,d,f,g,h,i,x)
-QuadCell = quadCentCell(a,b,c,f,g,h,x)
 
+#Cubic over j,jm1,jm2,jm3
+CubicLeftInt = cubicLeft(a,b,c,d,qjm3,qjm2,qjm1,qj,x)
 
 
 
