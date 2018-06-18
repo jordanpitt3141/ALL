@@ -136,7 +136,7 @@ hyperlist.append( ('c',dpsis,dpsisNAME))
 
 
 
-
+"""
 s = "Gv.csv"
 with open(s,'a') as file2:
      writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -179,4 +179,4 @@ with open(s,'a') as file2:
 
      writefile2.writerow(['Integrand','lower bound of integral','upper bound of integral', 'Value of Integral', 'W Term 1' , 'D Term 1', 'D Term 2', 'P Term 1', 'P Term 2'])        
      ExpressionConvert('wccpp',hyperlist,x,None,None,-1,1,writefile2) 
-
+"""

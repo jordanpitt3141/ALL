@@ -20,6 +20,8 @@
 
 \section{Structure Overview}
 
+%make this the same as the linear numerical analysis description, so we can just refer back to it
+
 %Define how these arrays are constructed, also use u at the edges
 
 In this section we will give the general structure for how the hybrid finite volume methods take the array of cell average values at time $t^n$; $\bar{\boldsymbol{h}}^n$ and $\bar{\boldsymbol{G}}^n$ and evolve the system to the cell average values at time $t^{n+1}$; $\bar{\boldsymbol{h}}^{n+ 1}$ and $\bar{\boldsymbol{G}}^{n+ 1}$.
@@ -72,49 +74,7 @@ So for the third-order method $\mathcal{M}$ is a multiplication by the above mat
 The elliptic equation that relates the conserved variables $h$ and $G$ to the primitive variable $u$ was given in Def \ref{defn:SerreEqnConservedQuantity1} and is presented here to remind the reader
 
 	\[ G =  uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right).\]
-\subsection{Finite Difference Methods}
-One way to approximate this ordinary differential equation is to replace all the derivatives with finite differences as has been done to second order accuracy in []. We have expanded this work by  building a fourth order accurate finite difference method, where all derivatives were replaced with their centred fourth order approximation. This results in the following equation for each row of a the matrix $\boldsymbol{A}$
 
-\begin{equation}
-G_j = A_{j,j-2} \;u_{j-2} + A_{j,j-1} \; u_{j-1} + A_{j,j} \; u_{j} +  A_{j,j + 1} \;u_{j+1} +  A_{j,j + 2} \;u_{j+2}
-\end{equation}
-
-where 
-
-\begin{align*}
-&A_{j,j-2} = -h^2_j \left(\frac{h_{j-2}  - 8h_{j-1}  + 8 h_{j+1} -h_{j+2} }{144 \Delta x ^2}\right) + \frac{h_{j}^3}{36 \Delta x^2} , \\
-&A_{j,j-1} = h^2_j \left(\frac{h_{j-2}  - 8h_{j-1}  + 8 h_{j+1} -h_{j+2}}{18 \Delta x ^2}\right) - \frac{4h_{j}^3}{9 \Delta x^2} , \\
-&A_{j,j} = h_j + \frac{5h_{j}^3}{6 \Delta x^2}   + h_j \left(\frac{ \left(h_{j-2}  - 8h_{j-1}  + 8 h_{j+1} -h_{j+2} \right) \left(b_{j-2}  - 8b_{j-1}  + 8 b_{j+1} -b_{j+2} \right) }{144 \Delta x ^2}\right)  \\
-& \hspace{1cm}+ h_j \left(\frac{-b_{j-2} + 16 b_{j-1} - 30b_{j-1} + 16b_{j+1} - b_{j+2}}{24 \Delta x ^2}\right)  + h_j \left(\frac{b_{j-2}  - 8b_{j-1}  + 8 b_{j+1} -b_{j+2} }{144 \Delta x ^2}\right), \\ 
-&A_{j,j+1} = -h^2_j \left(\frac{h_{j-2}  - 8h_{j-1}  + 8 h_{j+1} -h_{j+2} }{18 \Delta x ^2}\right) - \frac{4h_{j}^3}{9 \Delta x^2} , \\
-&A_{j,j+2} = h^2_j \left(\frac{h_{j-2}  - 8h_{j-1}  + 8 h_{j+1} -h_{j+2} }{144 \Delta x ^2}\right) + \frac{h_{j}^3}{36 \Delta x^2} , \\
-\end{align*}
-
-This can be written for the whole domain 
-
-\begin{equation*}
-\boldsymbol{G} = \boldsymbol{A}
-\boldsymbol{u}.
-\end{equation*}
-Dirichlet boundary conditions
-
-Therefore $\mathcal{G}$ is the solution of this matrix problem with $\boldsymbol{G}$ known and $\boldsymbol{u}$ unknown. 
-
-For completeness the second-order method finite difference approximation which is used for both the first and second order FDVM [] is given by
-
-\begin{equation*}
-G_j = A_{j,j-1} \; u_{j-1} + A_{j,j} \; u_{j} +  A_{j,j + 1} \;u_{j+1}
-\end{equation*}
-
-where 
-\begin{align*}
-&A_{j,j-1} = h^2_j\frac{-h_{j-1} + h_{j+1}}{4 \Delta x ^2} - \frac{h_{j}^3}{3 \Delta x ^2}, \\
-&A_{j,j} = h_j + h_j \frac{-h_{j-1} + h_{j+1}}{2 \Delta x}\frac{-b_{j-1} + b_{j+1}}{2 \Delta x} + h_j^2\frac{b_{j-1} - 2b_j + b_{j+1}}{2 \Delta x^2} + h_j \left(\frac{-b_{j-1} + b_{j+1}}{2 \Delta x}\right)^2 \\
-& \hspace{1cm}+ \frac{2 h_j^3}{3 \Delta x^2}, \\ \\
-&A_{j,j+1} = -h^2_j\frac{-h_{j-1} + h_{j+1}}{4 \Delta x ^2} - \frac{h_{j}^3}{3 \Delta x ^2}. \\
-\end{align*}
-
-\subsection{Finite Element Methods}
 For a finite element method we take the weak form of the elliptic equation in Def \ref{defn:SerreEqnConservedQuantity1} which is 
 
 	\[ \int_{\Omega } G v \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) v \; dx.\]
@@ -475,6 +435,7 @@ We approximate the derivatives in the following way
 \end{figure}
 
 \subsection{Source Terms and Well Balancing}
+%Change this to splitting!
 In [] we demonstrated that second-order accuracy is sufficient and so we have only included source terms and well balancing for the second-order method. So this section will only demonstrate the second-order method.
 
 From \eqref{eqn:evolupdatescheme} the only term that we have not computed is $S^n_j$ according to the development of our finite volume method we should have
@@ -627,3 +588,5 @@ For the third order method we have
 	\bar{\boldsymbol{h}}^{n+1}, \bar{\boldsymbol{G}}^{n+1} =  \frac{1}{3} \bar{\boldsymbol{h}}^{n} + \frac{2}{3}\bar{\boldsymbol{h}}'''' ,  \frac{1}{3} \bar{\boldsymbol{G}}^{n} + \frac{2}{3}\bar{\boldsymbol{G}}''''
 	\end{equation}
 \end{subequations}
+
+\section{CFL Condition}

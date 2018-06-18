@@ -11,9 +11,14 @@ const double i12 = 1.0/12.0;
 const double i3 = 1.0/3.0;
 const double i8 = 1.0/8.0;
 
+const double e = 2.718281828459045235360287471352662497757247093699959574966967627724076630353547594571382178525166427427466391932003059921817413596629043572900334295260595630738132328627943490763233829880753195251019011573834187930702154089149934884167509244761460668082264800168477411853742345442437107539077744992069;
+
+const double pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273;
+
 const double E = 2.718281828459045235360287471352662497757247093699959574966967627724076630353547594571382178525166427427466391932003059921817413596629043572900334295260595630738132328627943490763233829880753195251019011573834187930702154089149934884167509244761460668082264800168477411853742345442437107539077744992069;
 
 const double Pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273;
+
 
 void conc(double *a , double *b, double *c,int n,int m ,int k, double *d)
 {
@@ -515,13 +520,77 @@ double FG(double x, double t,double a0,double a1,double a2, double a3, double a4
 }*/
 
 
+double hI(double x, double t,double a0, double a1,double a2,double a3,double a4,double a5,double a6,double a7)
+{
+    return a0*x - a1*sqrt(a4)*sqrt(pi/2.)*erf((a3 + a2*t - x)/(sqrt(2)*sqrt(a4)));
+}
+    
+double hA(double xi1,double xi2,double t,double a0,double a1,double a2,double a3,double a4,double a5,double a6,double a7)
+{
+    double hxi1,hxi2,hAv;
+    hxi1 = hI(xi1,t,a0,a1,a2,a3,a4,a5,a6,a7);
+    hxi2 = hI(xi2,t,a0,a1,a2,a3,a4,a5,a6,a7);
+    hAv = (hxi2 - hxi1)/(xi2 - xi1);
+    return hAv;
+}
+    
+double GI(double x, double t,double a0, double a1,double a2,double a3,double a4,double a5,double a6,double a7)
+{
+    return (a5*(2*pow(e,((a3 + a2*t)*x)/a4)*pow(a1*pow(e,((a3 + a2*t)*x)/a4) + a0*pow(e,(pow(a3,2) + 2*a2*a3*t + pow(a2,2)*pow(t,2) + pow(x,2))/(2.*a4)),3)*(-a3 - a2*t + x) + 
+       3*a1*pow(a4,1.5)*pow(e,(2*(pow(a3,2) + 2*a2*a3*t + pow(a2,2)*pow(t,2) + pow(x,2)))/a4)*sqrt(pi)*erf((-a3 - a2*t + x)/sqrt(a4)) + 
+       3*a0*pow(a4,1.5)*pow(e,(2*(pow(a3,2) + 2*a2*a3*t + pow(a2,2)*pow(t,2) + pow(x,2)))/a4)*sqrt(2*pi)*erf((-a3 - a2*t + x)/(sqrt(2)*sqrt(a4)))))/(6.*a4*pow(e,(2*(pow(a3 + a2*t,2) + pow(x,2)))/a4));
+}
+
+double GA(double xi1,double xi2,double t,double a0,double a1,double a2,double a3,double a4,double a5,double a6,double a7)
+{
+    double Gxi1,Gxi2,GAv;
+    Gxi1 = GI(xi1,t,a0,a1,a2,a3,a4,a5,a6,a7);
+    Gxi2 = GI(xi2,t,a0,a1,a2,a3,a4,a5,a6,a7);
+    GAv = (Gxi2 - Gxi1)/ (xi2 - xi1);
+    return GAv;
+}
+
+double FhI(double x, double t,double a0, double a1,double a2,double a3,double a4,double a5,double a6,double a7, double g)
+{
+    return (sqrt(a4)*a5*sqrt(pi)*(a1*erf((a3 + a2*t - x)/sqrt(a4)) + sqrt(2)*a0*erf((a3 + a2*t - x)/(sqrt(2)*sqrt(a4)))))/(2.*a2);
+}
+
+double FhA(double x, double ti1,double ti2,double a0, double a1,double a2,double a3,double a4,double a5,double a6,double a7, double g)
+{
+    double Fti1,Fti2,FhAv;
+    Fti1 = FhI(x,ti1,a0,a1,a2,a3,a4,a5,a6,a7,g);
+    Fti2 = FhI(x,ti2,a0,a1,a2,a3,a4,a5,a6,a7,g);
+    FhAv = (Fti2 - Fti1)/(ti2 - ti1);
+    return FhAv;
+}
+
+double FGI(double x, double t,double a0, double a1,double a2,double a3,double a4,double a5,double a6,double a7, double g)
+{
+    return (300*sqrt(a4)*pow(e,(5*pow(a3 + a2*t - x,2))/(2.*a4))*(-(pow(a0,3)*pow(a5,2)) + 6*a0*a4*pow(a5,2) + 3*pow(a1,2)*a4*g)*sqrt(pi)*erf((a3 + a2*t - x)/sqrt(a4)) - 
+     200*a1*(pow(a0,2) - 3*a4)*sqrt(a4)*pow(a5,2)*pow(e,(5*pow(a3 + a2*t - x,2))/(2.*a4))*sqrt(6*pi)*erf((sqrt(1.5)*(a3 + a2*t - x))/sqrt(a4)) + 
+     3*(600*a0*a1*pow(a4,1.5)*pow(e,(5*pow(a3 + a2*t - x,2))/(2.*a4))*g*sqrt(2*pi)*erf((a3 + a2*t - x)/(sqrt(2)*sqrt(a4))) - 
+        75*a0*pow(a1,2)*sqrt(a4)*pow(a5,2)*pow(e,(5*pow(a3 + a2*t - x,2))/(2.*a4))*sqrt(2*pi)*erf((sqrt(2)*(a3 + a2*t - x))/sqrt(a4)) + 
+        4*(5*(24*pow(a1,3)*pow(a5,2) + 75*a0*pow(a1,2)*pow(a5,2)*pow(e,pow(a3 + a2*t - x,2)/(2.*a4)) + 80*pow(a0,2)*a1*pow(a5,2)*pow(e,pow(a3 + a2*t - x,2)/a4) + 
+              30*pow(a0,2)*pow(e,(3*pow(a3 + a2*t - x,2))/(2.*a4))*(a0*pow(a5,2) + a4*pow(e,pow(a3 + a2*t - x,2)/a4)*g))*(a3 + a2*t - x) - 
+           2*pow(a1,3)*sqrt(a4)*pow(a5,2)*pow(e,(5*pow(a3 + a2*t - x,2))/(2.*a4))*sqrt(10*pi)*erf((sqrt(2.5)*(a3 + a2*t - x))/sqrt(a4)))))/ 
+   (3600.*a2*a4*pow(e,(5*pow(a3 + a2*t - x,2))/(2.*a4)));
+}
+
+double FGA(double x, double ti1,double ti2,double a0, double a1,double a2,double a3,double a4,double a5,double a6,double a7, double g)
+{
+    double Fti1,Fti2,FGAv;
+    Fti1 = FGI(x,ti1,a0,a1,a2,a3,a4,a5,a6,a7,g);
+    Fti2 = FGI(x,ti2,a0,a1,a2,a3,a4,a5,a6,a7,g);
+    FGAv = (Fti2 - Fti1)/(ti2 - ti1);
+    return FGAv;
+}
 
 void evolve(double *G, double *h, double *u, double g, double dx, double dt,int n, int nBC, double *nh, double *nG, double *x, double t, double a0, double a1, double a2, double a3, double a4, double a5, double a6, double a7)
 {
     //Dodgy down at machine precision?
     double idx = 1.0 / dx;
     double hS, GS,xi1,xi2,hxi1,Gxi1,hxi2,Gxi2;
-    double han,hanp1,Fhjph,Fhjmh, Gan,Ganp1,FGjph,FGjmh;
+    double hAn,hAnp1,Fhjph,Fhjmh, GAn,GAnp1,FGjph,FGjmh;
     double hSt,GSt, ti1,ti2, Fhti1ph, FGti1ph,Fhti2ph, FGti2ph,hSfxph,GSfxph, Fhti1mh, FGti1mh,Fhti2mh, FGti2mh,hSfxmh,GSfxmh,hFx, GFx;
 
     double *nGm = malloc((n)*sizeof(double));
@@ -802,14 +871,29 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
 
         //GS = Gt(x[i-nBC],t,a0,a1,a2,a3,a4,a5,a6,a7,g) + FluxGdiff(x[i-nBC],t,a0,a1,a2,a3,a4,a5,a6,a7,g); */
 
+
+        //Averages
+        /*
+        hAnp1 = hA(x[i -nBC] + dx - 0.5*dx ,x[i -nBC] + dx + 0.5*dx,t,a0,a1,a2,a3,a4,a5,a6,a7);
+        hAn = hA(x[i -nBC] - 0.5*dx ,x[i -nBC] + 0.5*dx,t,a0,a1,a2,a3,a4,a5,a6,a7);
+        Fhjmh = FhA(x[i -nBC] - 0.5*dx, t,t + dt,a0,a1,a2,a3,a4,a5,a6,a7,g);
+        Fhjph = FhA(x[i -nBC] + 0.5*dx, t,t + dt,a0,a1,a2,a3,a4,a5,a6,a7,g);
+
+
+        GAnp1 = GA(x[i -nBC] + dx - 0.5*dx ,x[i -nBC] + dx + 0.5*dx,t,a0,a1,a2,a3,a4,a5,a6,a7);
+        GAn = GA(x[i -nBC] - 0.5*dx ,x[i -nBC] + 0.5*dx,t,a0,a1,a2,a3,a4,a5,a6,a7);
+        FGjmh = FGA(x[i -nBC] - 0.5*dx, t,t + dt,a0,a1,a2,a3,a4,a5,a6,a7,g);
+        FGjph = FGA(x[i -nBC] + 0.5*dx, t,t + dt,a0,a1,a2,a3,a4,a5,a6,a7,g);*/
+
         //Original
-        nh[i -nBC] = h[i] -dt*idx*(foh - fih);
-        nG[i -nBC] = G[i] -dt*idx*(foG - fiG);
+        nh[i -nBC] =  h[i] -dt*idx*(foh - fih) ;
+        nG[i -nBC] =  G[i]  -dt*idx*(foG - fiG);
 
         fih = foh;
         fiG = foG;
 
     }
+
 
     ca2midpt(nh,dx,n,nhm);
     ca2midpt(nG,dx,n,nGm);
@@ -831,6 +915,7 @@ void evolve(double *G, double *h, double *u, double g, double dx, double dt,int 
 
     free(nhm);
     free(nGm);
+
         
 }      
 
@@ -896,7 +981,8 @@ void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *ha
 // ################################### RK BUILD ###############################
 
     weightsum(0.75,ha, 0.25,nhap,n,nhapp);
-    weightsum(0.75,Ga, 0.25,nGap,n,nGapp);
+    weightsum(0.75,Ga, 0.25,nGap,n,nGapp); 
+
 
 //######################################### THIRD ITERATION #############################
 

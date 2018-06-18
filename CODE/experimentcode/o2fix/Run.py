@@ -190,6 +190,7 @@ def dambreaksmoothChris(x,x0,dx):
     G = getGfromupy(h,u,0.0,0.0,h[0],h[-1],dx)
     return h,G 
 
+"""
 #Dam break different asspect ratios
 wdirbase = "../../data/raw/DiffAspectRat/"
 #h1list = [10,7.5,5,2.5,2,1.8,1.75,1.5,1.25,1.1]
@@ -273,7 +274,7 @@ for h1 in h1list:
     deallocPy(u0_c)
     deallocPy(u1_c)
 
-
+"""
 
 #Dam break aspect ratio constant test
 """
@@ -789,9 +790,9 @@ for k in range(20):
 """
 
 
-"""
+
 ################################# SOLITON Accuracy ####################3
-wdir = "../../../data/raw/Solnon0p7/o2/"
+wdir = "../../../data/raw/test/Solnon0p7/o2/"
 
 #thetas = [0.0,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0]
 #thetas = [0.0]
@@ -805,7 +806,7 @@ with open(s,'a') as file1:
 
     writefile.writerow(['dx',"theta",'Normalised L1-norm Difference Height', ' Normalised L1-norm Difference Velocity','Hamiltonian Difference'])
 #for k in range(6,7):    
-for k in range(6,21):
+for k in range(11,12):
     dx = 100.0 / (2**k)
     a0 = 1.0
     a1 = 0.7
@@ -814,10 +815,10 @@ for k in range(6,21):
     Cr = 0.5
     l = 1.0 / (sqrt(g*(a0 + a1)))
     dt = Cr*l*dx
-    startx = -250.0
-    endx = 250.0 + dx
+    startx = -50.0
+    endx = 50.0 + dx
     startt = 0
-    endt = 50 + dt
+    endt =  2*dt
     
     wdatadir = wdir+ str(k) + "/" 
     if not os.path.exists(wdatadir):
@@ -944,7 +945,7 @@ for k in range(6,21):
     deallocPy(h1_c)
     deallocPy(u0_c)
     deallocPy(u1_c)
-"""
+
 
 """
 ################################# SOLITON  ####################3

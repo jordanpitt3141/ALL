@@ -77,13 +77,13 @@ wdir = "../../../../../../../data/raw/Forced/P1P2P3BedFEM/GaussBedGrowAll/exp12/
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-for j in range(13,14):
+for j in range(12,13):
     g =9.81
 
     a0 = 0
     a1 = 0.5
     a2 = 1
-    a3 = -7
+    a3 = -25
     a4 = 1
     a5 = 0.0
     a6 = 1
@@ -98,7 +98,7 @@ for j in range(13,14):
     startx = -width/2
     endx = width/2
     startt = 0.0
-    endt = 1
+    endt = 10**-8
     
     dx = width / (2.0)**(j)
     l =  0.5 / (a6*exp(a7*endt) + sqrt(g*(a0 + a1*exp(a5*endt))))

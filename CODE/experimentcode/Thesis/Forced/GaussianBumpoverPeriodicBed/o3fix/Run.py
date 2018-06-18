@@ -148,20 +148,51 @@ def cellaveragestomidpoints(q,dx):
     
     return mq
     
-def havg(x,t,a0,a1,a2,a3,a4):
-    return a0*x - sqrt(pi/2.0)*a1*sqrt(a4)*erf(- ((x - a2*t) - a3)/ sqrt(2*a4))
-  
-def uavg(x,t,a0,a1,a2,a3,a4):
-    return a0*x - sqrt(pi/2.0)*a1*sqrt(a4)*erf(- ((x - a2*t) - a3)/ sqrt(2*a4))  
+def hI(x,t,a0,a1,a2,a3,a4,a5,a6,a7):
+    return a0*x - a1*sqrt(a4)*sqrt(pi/2.)*erf((a3 + a2*t - x)/(sqrt(2)*sqrt(a4)))
+    
+def hA(xi1,xi2,t,a0,a1,a2,a3,a4,a5,a6,a7):
+    hxi1 = hI(xi1,t,a0,a1,a2,a3,a4,a5,a6,a7)
+    hxi2 = hI(xi2,t,a0,a1,a2,a3,a4,a5,a6,a7)
+    hAv = (hxi2 - hxi1)/(xi2 - xi1)
+    return hAv
+
+def uI(x,t,a0,a1,a2,a3,a4,a5,a6,a7):
+    return - a5*sqrt(a4)*sqrt(pi/2.)*erf((a3 + a2*t - x)/(sqrt(2)*sqrt(a4)))
+
+def uA(xi1,xi2,t,a0,a1,a2,a3,a4,a5,a6,a7):
+    uxi1 = uI(xi1,t,a0,a1,a2,a3,a4,a5,a6,a7)
+    uxi2 = uI(xi2,t,a0,a1,a2,a3,a4,a5,a6,a7)
+    uAv = (uxi2 - uxi1)/(xi2 - xi1)
+    return uAv
+
+    
+def GI(x,t,a0,a1,a2,a3,a4,a5,a6,a7):
+    return (a5*(2*pow(e,((a3 + a2*t)*x)/a4)*pow(a1*pow(e,((a3 + a2*t)*x)/a4) + a0*pow(e,(pow(a3,2) + 2*a2*a3*t + pow(a2,2)*pow(t,2) + pow(x,2))/(2.*a4)),3)*(-a3 - a2*t + x) + \
+       3*a1*pow(a4,1.5)*pow(e,(2*(pow(a3,2) + 2*a2*a3*t + pow(a2,2)*pow(t,2) + pow(x,2)))/a4)*sqrt(pi)*erf((-a3 - a2*t + x)/sqrt(a4)) + \
+       3*a0*pow(a4,1.5)*pow(e,(2*(pow(a3,2) + 2*a2*a3*t + pow(a2,2)*pow(t,2) + pow(x,2)))/a4)*sqrt(2*pi)*erf((-a3 - a2*t + x)/(sqrt(2)*sqrt(a4)))))/(6.*a4*pow(e,(2*(pow(a3 + a2*t,2) + pow(x,2)))/a4))
+
+def GA(xi1,xi2,t,a0,a1,a2,a3,a4,a5,a6,a7):
+    Gxi1 = GI(xi1,t,a0,a1,a2,a3,a4,a5,a6,a7)
+    Gxi2 = GI(xi2,t,a0,a1,a2,a3,a4,a5,a6,a7)
+    GAv = (Gxi2 - Gxi1)/ (xi2 - xi1)
+    return GAv
     
 def ForcedbedA(x,t,a0,a1,a2,a3,a4,a5,a6,a7,g,dx):
     n = len(x)
     ha = zeros(n)
+    ua = zeros(n)
+    Ga = zeros(n)
     
     for i in range(n):
-        ha[i] = (havg(x[i] + 0.5*dx,t,a0,a1,a2,a3,a4) - havg(x[i] - 0.5*dx,t,a0,a1,a2,a3,a4) ) /dx
-       
-    return ha
+        xi1 = x[i] - 0.5*dx
+        xi2 = x[i] + 0.5*dx
+        ha[i] = hA(xi1,xi2,t,a0,a1,a2,a3,a4,a5,a6,a7)
+        ua[i] = uA(xi1,xi2,t,a0,a1,a2,a3,a4,a5,a6,a7)
+        Ga[i] = GA(xi1,xi2,t,a0,a1,a2,a3,a4,a5,a6,a7)
+
+    return ha,ua,Ga
+    
     
 def ForcedbedM(x,t,a0,a1,a2,a3,a4,a5,a6,a7,g,dx):
     n = len(x)
@@ -171,8 +202,7 @@ def ForcedbedM(x,t,a0,a1,a2,a3,a4,a5,a6,a7,g,dx):
     
     for i in range(n):
         phi = x[i] - a2*t  
-        
-        
+           
         
         h[i] = a0 + a1*exp(-(phi - a3)**2/(2*a4))
         u[i] = a5*exp(-(phi - a3)**2/(2*a4))
@@ -186,11 +216,112 @@ def ForcedbedM(x,t,a0,a1,a2,a3,a4,a5,a6,a7,g,dx):
         G[i] = u[i]*h[i] - h[i]*h[i]*hxi*uxi - h[i]*h[i]*h[i]/3.0*uxxi
         
     return h,u,G
+ 
+
+
+def solveGfromuh(u,h,hbeg,hend,ubeg,uend,dx):
+    #takes midpoint values of u,h and gives midpoint values of G    
     
+    idx = 1.0 / dx
+    i12 = 1.0 / 12.0
+    i3 = 1.0 / 3.0
+    n = len(u)
     
+    G = zeros(n)
     
+    for i in range(2,n-2):
+        th = h[i]
+        thx = i12*idx*(-h[i+2] + 8*h[i+1] - 8*h[i-1] + h[i-2] )
+        
+        ai = -(i12*idx)*(th*th*thx) +(i12*idx*idx)*(i3*th*th*th) #ui-2
+        bi = (8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui-1
+        ci = th + (30*i12*idx*idx)*(i3*th*th*th)
+        di = -(8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui+1
+        ei = (i12*idx)*(th*th*thx) + (i12*idx*idx)*(i3*th*th*th) #ui+2
+        
+        G[i] = ai*u[i-2] + bi*u[i-1] + ci*u[i] + di*u[i+1] + ei*u[i+2]
+        
+        
+    #boundary    
+    #i=0
+    i=0
+    th = h[i]
+    thx = i12*idx*(-h[i+2] + 8*h[i+1] - 8*hbeg[-1] + hbeg[-2] )
+            
+    ai = -(i12*idx)*(th*th*thx) +(i12*idx*idx)*(i3*th*th*th) #ui-2
+    bi = (8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui-1
+    ci = th + (30*i12*idx*idx)*(i3*th*th*th)
+    di = -(8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui+1
+    ei = (i12*idx)*(th*th*thx) + (i12*idx*idx)*(i3*th*th*th) #ui+2
+    
+    G[i] = ai*ubeg[-2] + bi*ubeg[-1] + ci*u[i] + di*u[i+1] + ei*u[i+2]
+
+    
+    #i=1
+    i=1
+    th = h[i]
+    thx = i12*idx*(-h[i+2] + 8*h[i+1] - 8*h[i-1] + hbeg[-1] )
+            
+    ai = -(i12*idx)*(th*th*thx) +(i12*idx*idx)*(i3*th*th*th) #ui-2
+    bi = (8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui-1
+    ci = th + (30*i12*idx*idx)*(i3*th*th*th)
+    di = -(8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui+1
+    ei = (i12*idx)*(th*th*thx) + (i12*idx*idx)*(i3*th*th*th) #ui+2
+
+    G[i] = ai*ubeg[-1] + bi*u[i-1] + ci*u[i] + di*u[i+1] + ei*u[i+2]
+    
+    #boundary    
+    #i=n-2
+    i=n-2
+    th = h[i]
+    thx = i12*idx*(-hend[0] + 8*h[i+1] - 8*h[i-1] + h[i-2] )
+            
+    ai = -(i12*idx)*(th*th*thx) +(i12*idx*idx)*(i3*th*th*th) #ui-2
+    bi = (8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui-1
+    ci = th + (30*i12*idx*idx)*(i3*th*th*th)
+    di = -(8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui+1
+    ei = (i12*idx)*(th*th*thx) + (i12*idx*idx)*(i3*th*th*th) #ui+2
+
+    G[i] = ai*u[i-2] + bi*u[i-1] + ci*u[i] + di*u[i+1] + ei*uend[0]
+    
+    #i=n-1
+    i=n-1
+    th = h[i]
+    thx = i12*idx*(-hend[1] + 8*hend[0] - 8*h[i-1] + h[i-2] )
+            
+    ai = -(i12*idx)*(th*th*thx) +(i12*idx*idx)*(i3*th*th*th) #ui-2
+    bi = (8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui-1
+    ci = th + (30*i12*idx*idx)*(i3*th*th*th)
+    di = -(8*i12*idx)*(th*th*thx) - (16*i12*idx*idx)*(i3*th*th*th) #ui+1
+    ei = (i12*idx)*(th*th*thx) + (i12*idx*idx)*(i3*th*th*th) #ui+2
+
+    G[i] = ai*u[i-2] + bi*u[i-1] + ci*u[i] + di*uend[0] + ei*uend[1]
+
+    return G
+    
+def sech2 (x):
+  a = 2./(exp(x) + exp(-x))
+  return a*a
+
+def soliton (x,t,g,a0,a1):
+  c = sqrt(g*(a0 + a1))
+  phi = x - c*t;
+  k = sqrt(3.0*a1) / (2.0*a0 *sqrt(a0 + a1))
+  return a0 + a1*sech2(k*phi)
+  
+def solitoninit(n,a0,a1,g,x,t0,dx):
+    h = zeros(n)
+    u = zeros(n)
+    c = sqrt(g*(a0 + a1))
+    for i in range(n):
+        h[i] = soliton(x[i],t0,g,a0,a1)
+        u[i] =  c* ((h[i] - a0) / h[i])
+    
+    return h,u   
+    
+  
     #Forcing Problem    
-wdir = "../../../../../../../data/raw/Forced/FDVM3NoBed/GaussBedAll/testUGHHH/"  
+wdir = "../../../../../../../data/raw/Forced/FDVM3NoBed/GaussBedAll/EvotBest3/"  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -205,7 +336,7 @@ for j in range(4,15):
     a4 = 1.5
     a5 = 0.1
     a6 = 0
-    a7 = 0
+    a7 = 0.1
     
     width = 20.0
     
@@ -217,7 +348,7 @@ for j in range(4,15):
     startx = -width/2
     endx = width/2
     startt = 0.0
-    endt = 0.1
+    endt = 1
             
     
     t = startt
@@ -320,11 +451,12 @@ for j in range(4,15):
 
     uC = copyarrayfromC(u_c,n)
     
-    hA,uA,GA = ForcedbedM(x,t,a0,a1,a2,a3,a4,a5,a6,a7,g,dx)
+    haA,uaA,GaA = ForcedbedA(x,t,a0,a1,a2,a3,a4,a5,a6,a7,g,dx)
+    hmA,umA,GmA = ForcedbedM(x,t,a0,a1,a2,a3,a4,a5,a6,a7,g,dx)
     
-    hnorm = norm(hC - hA, ord=2)/ norm(hA, ord=2)
-    unorm = norm(uC - uA, ord=2)/ norm(uA, ord=2)
-    Gnorm = norm(GC - GA, ord=2)/ norm(GA, ord=2)
+    hnorm = norm(haC - haA, ord=2)/ norm(haA, ord=2)
+    unorm = norm(uC - umA, ord=2)/ norm(umA, ord=2)
+    Gnorm = norm(GaC - GaA, ord=2)/ norm(GaA, ord=2)
     
     
     
@@ -366,11 +498,10 @@ for j in range(4,15):
 
 
     
-
 """
 ##Accuracy Test
 ### Soliton Accuracy ################
-wdir = "../../../data/raw/Solnon0p7/o3/"
+wdir = "../../../../../../../data/raw/Forced/FDVM3NoBed/GaussBedAll/Soliton1/"  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -393,7 +524,7 @@ for k in range(6,21):
     startx = -250.0
     endx = 250.0 + dx
     startt = 0.0
-    endt = 50 + dt
+    endt = 1 + dt
     
     print(dx,dt)
         
@@ -472,6 +603,7 @@ for k in range(6,21):
     
     xbc =  concatenate([xbeg,x,xend])  
     
+    x_c = copyarraytoC(x)
     xbc_c = copyarraytoC(xbc)
     hbc_c = mallocPy(n + 2*niBC)
     ubc_c = mallocPy(n + 2*niBC)
@@ -486,8 +618,9 @@ for k in range(6,21):
             ufromGh(G_c,h_c,hmbeg_c,hmend_c,umbeg_c,umend_c,dx,n,niBC, u_c)
             
             conc(hmbeg_c , h_c,hmend_c,niBC,n ,niBC , hbc_c)
-            conc(umbeg_c , u_c,umend_c,niBC,n ,niBC , ubc_c)        
-            Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+            conc(umbeg_c , u_c,umend_c,niBC,n ,niBC , ubc_c)
+            Eval =1
+            #Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
             
             Evals.append(Eval)
             u = copyarrayfromC(u_c,n)
@@ -514,8 +647,9 @@ for k in range(6,21):
                 for j in range(n):
                     writefile2.writerow([str(dx),str(dt),str(t[i]),str(x[j]),str(Eval), str(h[j]) , str(G[j]) , str(u[j]), str(htrue[j]), str(utrue[j])])  
                  
-            
-        evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,dx,dt,n,cnBC,niBC)
+        evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,dx,dt,n,cnBC,niBC,x_c,t[i-1],0.0,0.0,1,1,1,0.0,1,1)
+    
+        #evolvewrap(Ga_c,ha_c,Gabeg_c,Gaend_c,habeg_c,haend_c,hmbeg_c,hmend_c,uabeg_c,uaend_c,umbeg_c,umend_c,nfcBC,nGsBC,g,dx,dt,n,cnBC,niBC)
         print t[i]
         print(h[3],G[3]) 
     
@@ -526,7 +660,7 @@ for k in range(6,21):
     
     conc(hmbeg_c , h_c,hmend_c,niBC,n ,niBC , hbc_c)
     conc(umbeg_c , u_c,umend_c,niBC,n ,niBC , ubc_c)        
-    Eval = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+    Eval = 1
     
     Evals.append(Eval)
     u = copyarrayfromC(u_c,n)
@@ -559,5 +693,15 @@ for k in range(6,21):
         writefile = csv.writer(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
         writefile.writerow([str(dx),str(normhdiffi), str(normudiffi),str(normHamdiff)])
+        
+    s = wdir + "h.dat"
+    with open(s,'a') as file1:
+        s ="%3.8f%5s%1.20f\n" %(dx," ",normhdiffi)
+        file1.write(s)
+    
+    s = wdir + "u.dat"
+    with open(s,'a') as file1:
+        s ="%3.8f%5s%1.20f\n" %(dx," ",normudiffi)
+        file1.write(s) 
 """
 

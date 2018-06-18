@@ -1,0 +1,527 @@
+
+\chapter{Linear Analysis of Numerical Methods}
+\label{chp:AnalNumMethod}
+An important property of a numerical method is convergence. Convergence guarantees that as we increase the spatial and temporal resolution of a numerical method, its numerical solution approaches the solution of the partial differential equations. For linear partial differential equations the Lax-equivalence theorem states that a numerical method is convergent if and only if it is stable and consistent \cite{Lax-Richtmyer-1956-267}. A numerical scheme is consistent if the error introduced by the numerical method over a time step approaches zero as the spatial and temporal resolution is increased. While stability means that the errors from previous time steps are not amplified by the current time step.
+
+Another important property of a numerical method modelling dispersive wave equations such as the Serre equations is its dispersion relation. The dispersion properties of a numerical method determine the phase and group velocity of travelling waves in its numerical solutions. Because the Serre equations possess dispersion properties that well approximate those of linear theory for water waves [], approximating the dispersion properties of the Serre equations well by the numerical method is essential.
+
+We analysed the convergence and the dispersion properties of our numerical methods for the linearised Serre equations with horizontal beds. To offer some insight into the convergence properties of our numerical method for the full Serre equations and because the dispersion properties are derived from the linearised Serre equations. 
+
+The analysis of the convergence and dispersion properties of our numerical methods rely on establishing a relation of the form
+
+\begin{equation}
+\label{eqn:linearanalaim}
+\begin{bmatrix}
+h \\G
+\end{bmatrix}^{n+1}_j = \matr{E} \begin{bmatrix}
+h \\G
+\end{bmatrix}^{n}_j
+\end{equation}
+ where $\matr{E}$ is the evolution matrix relating the conserved quantities $h$ and $G$ at time level $t^n$ with the conserved quantities at time level $t^{n+1}$. The evolution matrix $\matr{E}$ is obtained in the analyses by propagating Fourier modes through the numerical scheme. 
+ 
+ We begin our analyses by giving the linearised Serre equations with horizontal beds. We then derive $\matr{E}$ \eqref{eqn:linearanalaim} for the second-order FEVM and perform the convergence and dispersion analysis. We will then present the results of these analyses for all numerical methods and the unique steps required to perform the analyses for the other numerical methods.
+ 
+
+ 
+\section{Linearised Serre equations with horizontal bed}
+The Serre equations with a horizontal bed \eqref{eqn:FullSerreNonConHorizbed} are linearised by considering waves as small perturbations $\delta\eta$ and $\delta\upsilon$ on a flow with a mean height $H$ and a mean velocity $U$ respectively. So we have
+\begin{subequations}
+	\label{eq:pertubation}
+\begin{align}
+h(x,t) &= H + \delta \eta(x,t) + \mathcal{O}\left(\delta^2 \right), \\
+u(x,t) &= U + \delta \upsilon(x,t) + \mathcal{O}\left(\delta^2 \right),
+\end{align}
+\end{subequations}
+where $\delta \ll 1$. These waves are relatively small so terms of order $\delta^2$ are negligible. We substitute \eqref{eq:pertubation} into the Serre equations and neglect terms of order $\delta^2$ to obtain
+
+\begin{subequations}
+	\begin{gather}
+		\label{eqn:LinCont}
+		\frac{\partial  \left(\delta\eta \right)}{\partial  t} + H\frac{\partial  \left(\delta\upsilon \right)}{\partial  x} + U\frac{\partial  \left(\delta\eta \right)}{\partial  x}  = 0,
+	\end{gather}
+	\begin{gather}
+	\label{eqn:LineMome}
+	H\frac{\partial  \left(\delta\upsilon \right)}{\partial  t} + gH\frac{\partial  \left(\delta\eta \right)}{\partial  x} + UH\frac{\partial  \left(\delta\upsilon \right)}{\partial  x} - \frac{H^3}{3}\left(U\frac{\partial^3  \left(\delta\upsilon \right)}{\partial  x^3} + \frac{\partial^3  \left(\delta\upsilon \right)}{\partial  x^2 \partial  t}  \right)  = 0
+	\end{gather}
+\label{eqn:LinSerre}	
+and for $G$
+\begin{gather}
+	G = UH + U \delta \eta + H \delta \upsilon -\frac{H^3}{3} \frac{\partial^2 \left(\delta\upsilon \right)}{\partial x^2}.
+	\label{eqn:LinConSerre}
+\end{gather}	
+\end{subequations}
+The these equations can be reformulated  into conservation law form
+\begin{subequations}
+	\begin{gather}
+	\label{eqn:LinContG}
+	\frac{\partial  \eta}{\partial  t} +\frac{\partial}{\partial  x} \left(H\upsilon + U \eta\right) = 0,
+	\end{gather}
+	\begin{gather}
+	\label{eqn:LineMomeG}
+	\frac{\partial  G}{\partial  t} + \frac{\partial}{\partial  x}\left(UG + UH\upsilon + gH \eta\right) = 0.
+	\end{gather}
+	and for $G$
+	\begin{gather}
+	G = UH + U \eta + H \upsilon -\frac{H^3}{3} \frac{\partial^2 \left(\upsilon \right)}{\partial x^2}.
+	\label{eqn:LinConSerreG}
+	\end{gather}
+	\label{eqn:LinSerreG}	
+\end{subequations}
+We have absorbed the $\delta$ factor into the corresponding $\eta$ and $\upsilon$ terms to simplify the notation.
+
+\section{Evolution Matrix}
+To derive the evolution matrix we first assume that the solutions of the linearised Serre equations with horizontal beds \eqref{eqn:LinSerreG} are periodic in space and time. In particular, we assume that $\eta$ and $\upsilon$ are Fourier modes, which for a general quantity $q$ means
+\begin{equation}
+q(x,t) = q(0,0) e^{i\left(\omega t + kx\right)}.
+\label{eqn:FourierNode}
+\end{equation}
+This is precisely the assumption made to derive the analytical dispersion relation of the linearised Serre equations []. A consequence of a quantity $q$ being a Fourier mode represented on uniform temporal and spatial grid is that for any real numbers $m$ and $l$ we have
+\begin{equation}
+q^{n + m}_{j + l} = q^n_j e^{ i \left(m \omega \Delta t + l k \Delta x\right)}.
+\label{eqn:fourierfactor}
+\end{equation}
+Because $\eta$ and $\upsilon$ are Fourier modes then so is $G$. Furthermore, the cell averages of these quantities $\overline{\eta}$, $\overline{\upsilon}$ and $\overline{G}$ are Fourier modes as well.
+
+\subsection{Overview of the analysis}
+We will now present a brief overview of the analysis for a single evolution step of the second-order FEVM. Given the vectors of the cell averages $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ at the current time the second-order FEVM evolution step progresses in the following way
+\begin{enumerate}
+	\item Reconstruction: We use the operator $\mathcal{M}$ to calculate $\eta$ and $G$ at the cell midpoint $x_{j}$ from the cell averages. We also reconstruct $\eta$ and $G$ at the cell interface $x^-_{j+1/2}$ and $x^+_{j+1/2}$ from the cell average values using $\mathcal{R}^{-}$ and $\mathcal{R}^{+}$ respectively. So that
+	\begin{align*}	&\eta_j = \mathcal{M}\left(\overline{\vecn{\eta}}\right),& G_j = \mathcal{M}\left(\overline{\vecn{G}}\right),\\
+	&\eta^-_{j+1/2} = \mathcal{R}^{-}\left(\overline{\vecn{\eta}}\right),  &G^-_{j+1/2} = \mathcal{R}^{-}\left(\overline{\vecn{G}}\right), \\
+	&\eta^+_{j+1/2} = \mathcal{R}^{+}\left(\overline{\vecn{\eta}}\right),  &G^+_{j+1/2} = \mathcal{R}^{+}\left(\overline{\vecn{G}}\right). \\	
+	\end{align*}
+	\item Calculate $\upsilon$: We use the map $\mathcal{G}$ given by the elliptic equation between $G$ and $\upsilon$ to calculate $\upsilon_{j+1/2} $ from ${\vecn{G}}$ and $H$
+	\[\upsilon_{j+1/2} = \mathcal{G}\left(H, {\vecn{G}}\right).\]
+	\item Calculate Flux: We calculate the average flux across the cell boundary $x_{j+1/2}$ over time; $F_{j+1/2}$ using $\mathcal{F}$
+	\[F_{j+1/2} =\mathcal{F} \left(\eta^-_{j+1/2}, G^-_{j+1/2},\eta^+_{j+1/2}, G^+_{j+1/2},\upsilon_{j+1/2}  \right). \]
+	\item Forward Euler Step: We repeat this process for each cell edge and then apply the update formula \eqref{eqn:evolupdatescheme} to update the vectors $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ from the current time level to the next time level with first-order accuracy in time.
+	\item SSP Runge-Kutta Steps: We repeat the Euler step encapsulated by steps 1-4 and use SSP Runge-Kutta time stepping [] to calculate $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ at the next time level with second-order accuracy in time.
+\end{enumerate}
+
+We will now derive expressions for all the operators in the evolution step, which will be linear due to our assumption that $\eta$ and $\upsilon$ are Fourier modes. We will then combine these to derive $\matr{E}$ for the second-order FEVM.
+
+\subsection{1. Reconstruction}
+Given $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ at $t^n$ the second step of our numerical method is to calculate $\eta$ and $G$ at $x_j$ using $\mathcal{M}$ and at $x^-_{j+1/2}$ and $x^+_{j+1/2}$ using $\mathcal{R}^-$ and $\mathcal{R}^+$ respectively. The derivation of these operators is given in terms of a general quantity $q$, as they are the same for $\eta$ and $G$.
+\subsubsection{Cell average values to nodal values: $\mathcal{M}$}
+For the second-order FEVM we use the fact that
+\begin{equation*}
+\overline{q}_j =q_j  + \mathcal{O}\left(\Delta x^2\right).
+\end{equation*}
+%
+So to attain second-order accuracy we use
+%
+\begin{equation}
+\label{eqn:Mfactorfourier}
+q_j = \overline{q}_j  = \mathcal{M} \overline{q}_j.
+\end{equation}
+Therefore, we have a factor $\mathcal{M}=1$ representing the map between cell averages and nodal values for our numerical method.
+
+\subsubsection{Cell average values to interface values: $\mathcal{R}^-$ and $\mathcal{R}^+$}
+
+We reconstruct $\eta$ and $G$ at $x^-_{j+1/2}$ and $x^+_{j+1/2}$. These quantities can be discontinuous across the cell interfaces in our finite volume method. However, since we are assuming that these quantities are Fourier modes and therefore smooth we do not require non-linear limiters to ensure our scheme is TVD. Without limiters our reconstruction scheme for $\eta$ and $G$ can be written for a general quantity $q$ as
+
+\begin{equation*}
+q^-_{j+\frac{1}{2}} = \overline{q}_j + \frac{- \overline{q}_{j - 1} + \overline{q}_{j+ 1} }{4},
+\end{equation*}
+\begin{equation*}
+q^+_{j+\frac{1}{2}} = \overline{q}_{j+1} + \frac{- \overline{q}_{j} + \overline{q}_{j+ 2}}{4}.
+\end{equation*}
+
+Using \eqref{eqn:fourierfactor} and \eqref{eqn:Mfactorfourier} these equations become
+
+\begin{subequations}
+	\label{eqn:RpmfactorFDVM}
+	\begin{align}
+	&q^-_{j+\frac{1}{2}} =\overline{q}_j + \frac{- \overline{q}_{j} e^{-ik\Delta x} + \overline{q}_{j} e^{ik\Delta x}}{4} = \left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right)\overline{q}_{j} =\mathcal{R}^- \overline{q}_{j},\\
+	&q^+_{j+\frac{1}{2}}= \frac{\overline{q}_{j}e^{ik\Delta x} + \overline{q}_{j} + \overline{q}_{j}e^{2ik\Delta x} }{4} = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\overline{q}_{j} = \mathcal{R}^+ \overline{q}_{j}.
+	\end{align}
+\end{subequations}
+These are the reconstruction factors for both $\eta^{\pm}_{j+1/2}$ and $G^{\pm}_{j+1/2}$.
+
+\subsection{2. Calculate $\upsilon$}
+We begin our FEM for \eqref{eqn:LinConSerreGu0} with its weak formulation, obtained by multiplying \eqref{eqn:LinConSerreGu0} by a test function $\tau$ and integrating over the domain $\Omega$
+\begin{equation*}
+\int_{\Omega}G \tau \; dx = UH\int_{\Omega} \tau \; dx + U \int_{\Omega} \eta \tau \; dx +   H\int_{\Omega} \upsilon \tau \; dx  + \frac{H^3}{3} \int_{\Omega} \frac{\partial \upsilon}{\partial x } \frac{\partial \tau}{\partial x }\; dx.
+\end{equation*}
+For $G$ we use the basis functions $\psi^+_{j - 1/2}$ and $\psi^-_{j + 1/2}$ defined in Chapter [], which means $G$ is linear inside a cell with discontinuous jumps at the cell edges. For $\tau$ and $\upsilon$ we use the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ defined in Chapter [], so that $\tau$ and $\upsilon$ are quadratic functions inside a cell that are continuous across the cell edges. Substituting in the approximations to our quantities based on these basis functions and breaking our integration up into the sum of the integrals over a cell as we did in Chapter [], we get that
+
+\begin{multline*}
+\sum_j \int_{x_{j-1/2}}^{x_{j + 1/2}} \left(G^+_{j-1/2}\psi^+_{j - 1/2} + G^-_{j+1/2}\psi^-_{j + 1/2}\right) \begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
+\end{bmatrix}  \; dx= \\ \sum_j UH\int_{x_{j-1/2}}^{x_{j + 1/2}}  \begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
+\end{bmatrix}  \; dx + \sum_j U\int_{x_{j-1/2}}^{x_{j + 1/2}} \left(\eta^+_{j-1/2}\psi^+_{j - 1/2} + \eta^-_{j+1/2}\psi^-_{j + 1/2}\right) \begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
+\end{bmatrix}  \; dx \\ \\   +\sum_j H\int_{x_{j-1/2}}^{x_{j + 1/2}} \left(\upsilon_{j-1/2}\phi_{j - 1/2} + \upsilon_{j}\phi_{j}+ \upsilon_{j+1/2}\phi_{j + 1/2}\right) \begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
+\end{bmatrix}  \; dx \\ + 
+\sum_j \frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j + 1/2}} \left(\upsilon_{j-1/2} \frac{\partial \phi_{j - 1/2} }{\partial x} + \upsilon_{j}\frac{\partial \phi_{j} }{\partial x}+ \upsilon_{j+1/2}\frac{\partial \phi_{j + 1/2} }{\partial x}\right) \begin{bmatrix}
+\dfrac{\partial \phi_{j - 1/2} }{\partial x}\\ \\\dfrac{\partial \phi_{j} }{\partial x}\\ \\\dfrac{\partial \phi_{j + 1/2} }{\partial x}   \end{bmatrix} \; dx.
+\end{multline*}
+Calculating all the integrals of the appropriate basis function combinations we get 
+\begin{multline*}
+\sum_j \frac{\Delta x}{6}\begin{bmatrix} G^+_{j -1/2} \\2 G^+_{j -1/2}+2 G^-_{j +1/2} \\ G^-_{j +1/2} \end{bmatrix} = \sum_jUH \frac{\Delta x}{6}\begin{bmatrix} 1 \\4 \\ 1 \end{bmatrix} +  \sum_j \frac{\Delta x}{6}U\begin{bmatrix} \eta^+_{j -1/2} \\2 \eta^+_{j -1/2}+2 \eta^-_{j +1/2} \\ \eta^-_{j +1/2} \end{bmatrix}\\ + \sum_j \left(H\frac{\Delta x}{30}\begin{bmatrix} 4 &2 &-1 \\2 &16 &2  \\-1 &2 &4 \end{bmatrix} + \frac{H^3 }{9\Delta x}\begin{bmatrix} 7 &-8 &1  \\-8 &16 &-8  \\1 &-8 &7  \end{bmatrix} \right) \begin{bmatrix} \upsilon_{j -1/2} \\\upsilon_{j} \\ \upsilon_{j +1/2} \end{bmatrix}.
+\end{multline*} 
+%minmod limiter for G
+Using \eqref{eqn:fourierfactor} and the reconstructions $\mathcal{R}^+$ and $\mathcal{R}^-$ used on $\overline{G}$ to obtain $G^+_{j +1/2}$ and $G^-_{j +1/2}$ respectively \eqref{eqn:RpmfactorFDVM}, we obtain
+
+\begin{multline*}
+\sum_j \frac{\Delta x}{6} \begin{bmatrix} e^{-ik\Delta x} \mathcal{R}^+ \overline{G}_{j} \\2 e^{-ik\Delta x} \mathcal{R}^+\overline{G}_{j} +2 \mathcal{R}^- \overline{G}_{j}\\ \mathcal{R}^- \overline{G}_{j} \end{bmatrix} =   \sum_jUH \frac{\Delta x}{6}\begin{bmatrix} 1 \\4 \\ 1 \end{bmatrix} +  \sum_j \frac{\Delta x}{6} U \begin{bmatrix} e^{-ik\Delta x} \mathcal{R}^+ \overline{\eta}_{j} \\2 e^{-ik\Delta x} \mathcal{R}^+\overline{\eta}_{j} +2 \mathcal{R}^- \overline{\eta}_{j}\\ \mathcal{R}^- \overline{\eta}_{j} \end{bmatrix}  \\\sum_j \left(H\frac{\Delta x}{30}\begin{bmatrix} 4 &2 &-1 \\2 &16 &2  \\-1 &2 &4 \end{bmatrix} + \frac{H^3 }{9\Delta x}\begin{bmatrix} 7 &-8 &1  \\-8 &16 &-8  \\1 &-8 &7  \end{bmatrix} \right) \begin{bmatrix} e^{-ik\frac{\Delta x}{2}}\upsilon_{j} \\\upsilon_{j} \\ e^{ik\frac{\Delta x}{2}}\upsilon_{j} \end{bmatrix}
+\end{multline*}
+\begin{multline*}
+\sum_j \frac{\Delta x}{6}\begin{bmatrix} e^{-ik\Delta x} \mathcal{R}^+ \\2 e^{-ik\Delta x} \mathcal{R}^+ +2 \mathcal{R}^-\\ \mathcal{R}^- \end{bmatrix} \overline{G}_{j} = \sum_jUH \frac{\Delta x}{6}\begin{bmatrix} 1 \\4 \\ 1 \end{bmatrix} +  \sum_j \frac{\Delta x}{6}\begin{bmatrix} e^{-ik\Delta x} \mathcal{R}^+ \\2 e^{-ik\Delta x} \mathcal{R}^+ +2 \mathcal{R}^-\\ \mathcal{R}^- \end{bmatrix} \overline{\eta}_{j} \\ + \sum_j \Bigg(H\frac{\Delta x}{30}\begin{bmatrix} 4e^{-ik\frac{\Delta x}{2}} +  2 - e^{ik\frac{\Delta x}{2}}\\2e^{-ik\frac{\Delta x}{2}}  + 16  +2 e^{ik\frac{\Delta x}{2}}  \\ -e^{-ik\frac{\Delta x}{2}} +  2 + 4e^{ik\frac{\Delta x}{2}} \end{bmatrix} \\+ \frac{H^3 }{9\Delta x}\begin{bmatrix} 7e^{-ik\frac{\Delta x}{2}} -8 + e^{ik\frac{\Delta x}{2}} \\ -8e^{-ik\frac{\Delta x}{2}} +  16  -8e^{ik\frac{\Delta x}{2}} \\ e^{-ik\frac{\Delta x}{2}} -8 + 7e^{ik\frac{\Delta x}{2}} \end{bmatrix}  \Bigg) \upsilon_j.
+\end{multline*}
+These vectors represent three equations for the $j^{th}$ cell, the first relates $\overline{G}_j$ to $\upsilon_{j-1/2}$, the second relates $\overline{G}_j$ to $\upsilon_{j}$ and the third relates $\overline{G}_j$ to $\upsilon_{j+1/2}$. Since the flux calculation \eqref{eqn:etafluxapprox} only requires $\upsilon_{j+1/2}$ we will neglect the other equations here. So far we have only given the equation for $\upsilon_{j+1/2}$ from the $j$th cell, but $\upsilon_{j+1/2}$ will also have an equation for the $(j+1)$th cell as $\phi_{j+1/2}$ is non-zero there. Taking this into account we get that the  third equation is
+\begin{multline*}
+\frac{\Delta x}{6} \left(\mathcal{R}^- + \mathcal{R}^+ \right)\overline{G}_{j} = \frac{\Delta x}{6} 2UH   + \frac{\Delta x}{6} U \left(\mathcal{R}^- + \mathcal{R}^+ \right)\overline{\eta}_{j} \\ \Bigg(H\frac{\Delta x}{30} \left( -e^{-ik\frac{\Delta x}{2}} +  2 + 4e^{ik\frac{\Delta x}{2}} + e^{ik{\Delta x}}\left(4e^{-ik\frac{\Delta x}{2}} +  2 - e^{ik\frac{\Delta x}{2}}\right) \right)  \\+ \frac{H^3 }{9\Delta x} \left(  e^{-ik\frac{\Delta x}{2}} -8 + 7e^{ik\frac{\Delta x}{2}}  + e^{ik{\Delta x}}\left(7e^{-ik\frac{\Delta x}{2}} -8 + e^{ik\frac{\Delta x}{2}}  \right)  \right)   \Bigg) \upsilon_j.
+\\ = \frac{\Delta x}{3}UH   + \frac{\Delta x}{6} U \left(\mathcal{R}^- + \mathcal{R}^+ \right)\overline{\eta}_{j} +  \Bigg[H\frac{\Delta x}{30} \left( 4\cos\left(\frac{k \Delta x}{2}\right) - 2\cos\left({k \Delta x}\right) + 8\right)   \\+ \frac{H^3 }{9\Delta x} \left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right) \Bigg]e^{i k \frac{\Delta x}{2}} \upsilon_{j}.
+\end{multline*}
+Since $e^{i k \frac{\Delta x}{2}} \upsilon_{j} =  \upsilon_{j+1/2}$ \eqref{eqn:fourierfactor} we have that
+\begin{multline}
+\label{eqn:2ndFEMutoG}
+\upsilon_{j+1/2} =  \left[\left(\frac{\Delta x}{6} \left(\mathcal{R}^- + \mathcal{R}^+ \right)\right)  \overline{G}_{j}  - \frac{\Delta x}{3}UH - U\left(\frac{\Delta x}{6} \left(\mathcal{R}^- + \mathcal{R}^+ \right)\right)  \overline{\eta}_{j}   \right]\\
+\div  \Bigg[H\frac{\Delta x}{30} \left( 2\left(2\cos\left(\frac{k \Delta x}{2}\right) - \cos\left({k \Delta x}\right) + 4\right)  \right)  \\+ \frac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right)    \Bigg]
+\\= \mathcal{G}^G \overline{G}_{j} + \mathcal{G}^{\eta} \overline{\eta}_{j} + \mathcal{G}^c .
+\end{multline}
+ 
+
+\subsection{3. Flux calculation}
+To calculate the average flux $F_{j+1/2}$ we use Kurganov's method \cite{Kurganov-etal-2001-707}. For the linearised Serre equations we have the wave speed bounds \eqref{eqn:WaveVelocitiesBound}, so that
+\begin{align}
+a^-_{j+ 1/2} = \min \left\lbrace 0,  U - \sqrt{g H} \right \rbrace& &\text{and}& &a^+_{j+ 1/2} =  \max \left\lbrace 0, U + \sqrt{g H} \right \rbrace .
+\label{eqn:wavespeedboundslinSerre}
+\end{align}
+
+Therefore our method has three possibilities depending on $U$, $g$ and $H$;  supercritical flow to the left $U < - \sqrt{gH}$, subcritical flow $-\sqrt{gH} \le U \le \sqrt{gH}$ and supercritical flow to the right $\sqrt{gH} < U$. We will derive the flux operators for each of these scenario separately.
+
+\subsubsection{Left supercritical flow $U < - \sqrt{gH}$:}
+For left supercritical flow; $U < - \sqrt{gH}$  we have that from \eqref{eqn:wavespeedboundslinSerre} that $a^-_{j+ 1/2} = U - \sqrt{g H}$ and $a^+_{j+ 1/2} =  0$. For these values the Kurganov flux approximation for a general quantity $q$ [] reduces to 
+\begin{equation}
+F_{j+\frac{1}{2}} = f\left(q^+_{j+\frac{1}{2}}\right)
+\label{eqn:fluxleftsupercrit}
+\end{equation}
+
+Substituting our flux function for $\eta$ \eqref{eqn:LinContG} into our Kurganov flux approximation \eqref{eqn:fluxleftsupercrit} we obtain
+\begin{equation*}
+F^\eta_{j+\frac{1}{2}} = H \upsilon_{j+1/2} + U \eta^+_{j+1/2}
+\end{equation*}
+since $\upsilon$ is continuous and therefore $\upsilon_{j+1/2} = \upsilon_{j+1/2}^+ = \upsilon_{j+1/2}^- $. Using our solver for $\upsilon$ \eqref{eqn:2ndFEMutoG} and the reconstruction \eqref{eqn:RpmfactorFDVM} we have
+\begin{align}
+F^\eta_{j+\frac{1}{2}} &= H \left(\mathcal{G}^G \overline{G}_{j} + \mathcal{G}^{\eta} \overline{\eta}_{j} + \mathcal{G}^c\right) + U \eta^+_{j+1/2} \nonumber \\ &= \left(H \mathcal{G}^{\eta} + U \mathcal{R}^+ \right)  \overline{\eta}_{j} + H \mathcal{G}^G \overline{G}_{j} + H\mathcal{G}^c \nonumber \\
+&= F^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + F^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + F^{\eta, c}_{j+\frac{1}{2}}
+\label{eqn:Fluxfactorsupercritetaleft}
+\end{align}
+
+Substituting our flux function for $G$ \eqref{eqn:LineMomeG} into our Kurganov flux approximation \eqref{eqn:fluxleftsupercrit} we obtain
+\begin{equation*}
+F^G_{j+\frac{1}{2}} =U G^+_{j+1/2} + U  H \upsilon_{j+1/2} + gH \eta^+_{j+1/2}
+\end{equation*}
+Using our elliptic solver \eqref{eqn:2ndFEMutoG} and our interface reconstruction \eqref{eqn:RpmfactorFDVM} we have
+\begin{align}
+F^G_{j+\frac{1}{2}} &=  U G^+_{j+1/2} + UH \left(\mathcal{G}^G \overline{G}_{j} + \mathcal{G}^{\eta} \overline{\eta}_{j} + \mathcal{G}^c\right) + gH \eta^+_{j+1/2} \nonumber \\ &= \left(UH \mathcal{G}^{\eta} + gH \mathcal{R}^+ \right)  \overline{\eta}_{j} + \left(U\mathcal{R}^+  +  UH \mathcal{G}^G \right) \overline{G}_{j} + UH\mathcal{G}^c \nonumber \\
+&= F^{G, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + F^{G, G}_{j+\frac{1}{2}} \overline{G}_{j} + F^{G, c}_{j+\frac{1}{2}}
+\label{eqn:FluxfactorsupercritGleft}
+\end{align}
+
+
+\subsubsection{Subcritical flow $-\sqrt{gH} \le U \le \sqrt{gH}$:}
+When the flow is subcritical we have $-\sqrt{gH} \le U \le \sqrt{gH}$, which means that $a^-_{j+ 1/2} = U - \sqrt{g H}$ and $a^+_{j+ 1/2} =  U + \sqrt{g H}$. So our Kurganov flux approximation for a general quantity $q$ [] reduces to
+
+\begin{align}
+F_{j+\frac{1}{2}} = &\frac{U}{2 \sqrt{gH}} \left[f\left(q^-_{j+\frac{1}{2}}\right) - f\left(q^+_{j+\frac{1}{2}}\right) \right]  + \frac{1}{2}\left[f\left(q^-_{j+\frac{1}{2}}\right) + f\left(q^+_{j+\frac{1}{2}}\right)\right] \nonumber \\ &+ \dfrac{U^2 - gH}{2\sqrt{g H}} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ].
+\label{eqn:fluxsubcrit}
+\end{align}
+
+Substituting in the flux function for $\eta$ \eqref{eqn:LinContG} into \eqref{eqn:fluxsubcrit} we get
+
+\begin{align}
+F^\eta_{j+\frac{1}{2}} = &\frac{U}{2 \sqrt{gH}} \left[ H\upsilon_{j+1/2} + U\eta^-_{j+\frac{1}{2}} -  H\upsilon_{j+1/2} - U \eta^+_{j+\frac{1}{2}} \right]   \nonumber \\ &+ \frac{1}{2}\left[H\upsilon_{j+1/2} + U\eta^-_{j+\frac{1}{2}} +  H\upsilon_{j+1/2} + U \eta^+_{j+\frac{1}{2}}\right] \nonumber \\ &+ \dfrac{U^2 - gH}{2\sqrt{g H}} \left [ \eta^+_{j+\frac{1}{2}} - \eta^-_{j+\frac{1}{2}} \right ].
+\end{align}
+
+By using our reconstruction factors \eqref{eqn:RpmfactorFDVM} and our elliptic solver \eqref{tab:Gfactor} we get
+
+\begin{align}
+F^\eta_{j+\frac{1}{2}} = &\left(H\mathcal{G}^{\eta}  + \frac{U}{2}\left[ \mathcal{R}^- +  \mathcal{R}^+\right]- \dfrac{\sqrt{gH}}{2} \left [ \mathcal{R}^+ - \mathcal{R}^- \right ] \right) \overline{\eta}_j \nonumber \\  &+ H\mathcal{G}^G \overline{G}_{j} + H \mathcal{G}^c \nonumber \\ &= F^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + F^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + F^{\eta, c}_{j+\frac{1}{2}} .
+\label{eqn:Fluxfactorsubcriteta}
+\end{align}
+
+For the flux function of $G$ \eqref{eqn:LineMomeG} \eqref{eqn:fluxsubcrit} becomes
+
+\begin{align}
+F^G_{j+\frac{1}{2}} = &\frac{U}{2 \sqrt{gH}} \left[ UG^-_{j+\frac{1}{2}} + UH \upsilon_{j+1/2} + gH\eta^-_{j+\frac{1}{2}} - UG^+_{j+\frac{1}{2}} - UH \upsilon_{j+1/2} - gH\eta^+_{j+\frac{1}{2}}  \right]   \nonumber \\ &+ \frac{1}{2}\left[UG^-_{j+\frac{1}{2}} + UH \upsilon_{j+1/2} + gH\eta^-_{j+\frac{1}{2}} + UG^+_{j+\frac{1}{2}} + UH \upsilon_{j+1/2} + gH\eta^+_{j+\frac{1}{2}}\right] \nonumber \\ &+ \dfrac{U^2 - gH}{2\sqrt{g H}} \left [ G^+_{j+\frac{1}{2}} - G^-_{j+\frac{1}{2}} \right ].
+\end{align}
+
+By using our reconstruction factors \eqref{eqn:RpmfactorFDVM} and our elliptic solver \eqref{tab:Gfactor} we get
+
+\begin{align}
+F^G_{j+\frac{1}{2}} =  &\left(\frac{U\sqrt{gH}}{2} \left[ \mathcal{R}^- - \mathcal{R}^+  \right] + UH\mathcal{G}^{\eta} + \frac{gH}{2} \left[ \mathcal{R}^- +\mathcal{R}^+ \right]   \right)\overline{\eta}_j \nonumber \\ &+ \left(UH\mathcal{G}^{G} + + \frac{U}{2} \left[ \mathcal{R}^- +\mathcal{R}^+ \right] - \dfrac{\sqrt{g H}}{2} \left [\mathcal{R}^+ - \mathcal{R}^- \right ]   \right) \overline{G}_j + UH\mathcal{G}^{c}  \nonumber \\
+& = F^{G, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + F^{G, G}_{j+\frac{1}{2}} \overline{G}_{j} + F^{G, c}_{j+\frac{1}{2}}   .
+\label{eqn:FluxfactorsubcritG}
+\end{align}
+
+
+
+
+\subsubsection{Right supercritical flow $\sqrt{gH} < U$:}
+When the flow is flowing to the right and supercritical we have $ \sqrt{gH} < U $, which means that $a^-_{j+ 1/2} = 0$ and $a^+_{j+ 1/2} =  U + \sqrt{g H}$. This is very similar to the left supercritical case, except instead of using the $\mathcal{R}^+$ we have $\mathcal{R}^-$ as our flux update for a general quantity reduces to
+\begin{equation}
+F_{j+\frac{1}{2}} = f\left(q^-_{j+\frac{1}{2}}\right).
+\label{eqn:fluxsupercritright}
+\end{equation}
+Substituting in the flux function for $\eta$ \eqref{eqn:LinContG} into \eqref{eqn:fluxsupercritright} we obtain
+
+\begin{align}
+F^\eta_{j+\frac{1}{2}} &= \left(H \mathcal{G}^{\eta} + U \mathcal{R}^- \right)  \overline{\eta}_{j} + H \mathcal{G}^G \overline{G}_{j} + H\mathcal{G}^c \nonumber \\
+&= F^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + F^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + F^{\eta, c}_{j+\frac{1}{2}}.
+\label{eqn:Fluxfactorsupercritetaright}
+\end{align}
+
+While for the flux function of $G$ \eqref{eqn:LineMomeG}  \eqref{eqn:fluxsupercritright} becomes
+\begin{align}
+F^G_{j+\frac{1}{2}}  &= \left(UH \mathcal{G}^{\eta} + gH \mathcal{R}^- \right)  \overline{\eta}_{j} + \left(U\mathcal{R}^- +  UH \mathcal{G}^G \right) \overline{G}_{j} + UH\mathcal{G}^c \nonumber \\
+&= F^{G, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + F^{G, G}_{j+\frac{1}{2}} \overline{G}_{j} + F^{G, c}_{j+\frac{1}{2}}.
+\label{eqn:FluxfactorsupercritGright}
+\end{align}
+
+
+\subsection{4. Forward Euler Step}
+We have obtained the operators for the flux functions for all three flow scenarios, supercrticial flow in the left or right direction and subcritical flow. By substituing in the appropraite flux approximation for the physical situation into our update scheme \eqref{eqn:evolupdatescheme} and making use of \eqref{eqn:Mfactorfourier} our second order finite element volume method can be written as
+
+\begin{align*}
+\overline{\eta}_{j}^{\,n + 1} &=  \overline{\eta}^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(\mathcal{F}^{\eta,\eta} \overline{\eta}_j  + \mathcal{F}^{\eta,G} \overline{G}_j + \mathcal{F}^{\eta,c} \right) - \left(\mathcal{F}^{\eta,\eta} \overline{\eta}_{j-1}  + \mathcal{F}^{\eta,G} \overline{G}_{j-1} + \mathcal{F}^{\eta,c} \right)  \right], \\
+ \overline{G}^{\,n + 1}_{j} &= \overline{G}^{\,n }_{j} -\frac{\Delta t}{\Delta x}  \left[ \left(  \mathcal{F}^{G,\eta} \overline{\eta}_{j}  + \mathcal{F}^{G,G} \overline{G}_j + \mathcal{F}^{G,c} \right) - \left(  \mathcal{F}^{G,\eta} \overline{\eta}_{j-1}  + \mathcal{F}^{G,G} \overline{G}_{j-1} + \mathcal{F}^{G,c} \right) \right].
+\end{align*}
+
+	
+Furthermore by noting that the cell averages of quantities that are fourier modes, are fourier modes themselves and making use of \eqref{eqn:fourierfactor} we obtain
+	
+\begin{align*}
+\overline{\eta}_{j}^{\,n + 1} &=  \overline{\eta}^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{-ik\Delta x}\right) \left(\mathcal{F}^{\eta,\eta} \overline{\eta}_j  + \mathcal{F}^{\eta,G} \overline{G}_j \right) \right], \\
+\overline{G}^{\,n + 1}_{j} &= \overline{G}^{\,n }_{j} -\frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{-ik\Delta x}\right)\left(  \mathcal{F}^{G,\eta} \overline{\eta}_{j}  + \mathcal{F}^{G,G} \overline{G}_j \right) \right].
+\end{align*}
+
+
+This can be written in matrix form as
+
+\begin{multline}
+\label{eqn:singleEvolveStep}
+\begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n+1}_j = \begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j - \frac{\left(1 - e^{-ik\Delta x}\right) \Delta t}{ \Delta x}\begin{bmatrix}
+\mathcal{F}^{\eta,\eta} & \mathcal{F}^{\eta,G} \\\mathcal{F}^{G,\eta} &\mathcal{F}^{G,G} 
+\end{bmatrix}\begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j \\= \left(\matr{I}  - \Delta t \matr{F} \right) \begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j
+\end{multline}
+for a single Euler step as desired.
+
+\subsection{5. SSP Runge-Kutta Time Steps}
+\label{subsec:RKstepdisp}
+The second-order SSP Runge Kutta time stepping uses two forward Euler steps to accomplish temporally higher order accurate methods in the following way
+\begin{subequations}
+	\label{eqn:RKstepfull}
+	\begin{equation}
+	\label{eqn:RKstepfullp1}
+	\begin{bmatrix}
+	\overline{\eta} \\ \overline{G}
+	\end{bmatrix}_j^1 = \left(\matr{I} - \Delta t\matr{F} \right)\begin{bmatrix}
+	\overline{\eta} \\ \overline{G}
+	\end{bmatrix}^{n}_j,
+	\end{equation}
+	
+	\begin{equation}
+	\label{eqn:RKstepfullp2}
+	\begin{bmatrix}
+	\overline{\eta} \\ \overline{G}
+	\end{bmatrix}_j^2 = \left(\matr{I} - \Delta t\matr{F} \right)\begin{bmatrix}
+	\overline{\eta} \\ \overline{G}
+	\end{bmatrix}_j^1,
+	\end{equation}
+		
+	\begin{equation}
+	\label{eqn:RKstepfullp3}
+	\begin{bmatrix}
+	\overline{\eta} \\ \overline{G}
+	\end{bmatrix}^{n+1}_j = \frac{1}{2} \left(\begin{bmatrix}
+	\overline{\eta} \\ \overline{G}
+	\end{bmatrix}^{n}_j + \begin{bmatrix}
+	\overline{\eta} \\ \overline{G}
+	\end{bmatrix}_j^2\right) .
+	\end{equation}
+\end{subequations}
+
+
+Substituting \eqref{eqn:RKstepfullp1} and \eqref{eqn:RKstepfullp2} into \eqref{eqn:RKstepfullp3} we can write this in terms of the flux matrix $\matr{F}$ and our cell averages at $t^n$ as
+\begin{equation*}
+\begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n+1}_j = \frac{1}{2} \left(\begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j + \left(\matr{I} - \Delta t\matr{F} \right)^2 \begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j\right).
+\end{equation*}
+
+Expanding $\left(\matr{I} - \Delta t\matr{F} \right)^2$ we get
+
+\begin{equation}
+\begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n+1}_j = \left(\matr{I}  -\Delta t\matr{F} + \frac{1}{2}\Delta t^2\matr{F}^2 \right) \begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j = \matr{E}\begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j.
+\label{eqn:evolutionmatrix}
+\end{equation}
+
+So we have derived the evolution matrix $\matr{E}$ for the second-order FEVM and so we have a relationship in the form of \eqref{eqn:linearanalaim} as desired. Both the dispersion and the convergence analysis then proceed by investigating the properties of the evolution matrix $\matr{E}$. We begin with the convergence analysis.
+
+\section{Convergence Analysis}
+Because the linearised Serre equations are linear partial differential equations, the Lax-equivalence theorem applies and we can focus on demonstrating the consistency and stability of the method separately. 
+
+\subsection{Consistency}
+To demonstrate consistency we need to demonstrate that the evolution matrix $\matr{E}$ of the numerical method approaches the analytical evolution matrix. The analytic evolution matrix of the Serre equations can be found by assuming  again that $\eta$ and $\upsilon$ are Fourier modes and performing the FVM [] analytically, as the finite volume formulation is an exact equation.
+
+To do this we repeat steps 1-4 [] analytically and due to this, we do not need to perform Runge-Kutta time stepping as our update formula is exact. 
+
+\subsubsection{1. Reconstruction} 
+We begin with the operator $\mathcal{M}$ which reconstructs the midpoint values from the cell averages. For a general quantity $q$ we have by definition [] that
+\begin{equation*}
+\overline{q}_j = \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q \; dx.
+\end{equation*}
+Assuming $q$ is a Fourier mode by \eqref{eqn:FourierNode} we have that
+\begin{align*}
+\overline{q}_j &= \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q(0,0) e^{i\left(\omega t + kx\right)} \; dx = \frac{q(0,0)e^{i \omega  t}}{\Delta x} \left[\frac{1}{ik} e^{ikx}\right]_{x_{j-1/2}}^{x_{j+1/2}} \\
+&= \frac{q(0,0)e^{i \omega  t}}{\Delta x} \frac{1}{ik} e^{ikx_j} \left[ e^{ik\frac{\Delta x}{2}} - e^{-ik\frac{\Delta x}{2}}\right] = \frac{q(0,0)e^{i \left(\omega  t + kx_j \right)}}{\Delta x} \frac{1}{ik} \left[ 2 i \sin \left(k\frac{\Delta x}{2}\right)\right]\\
+&=  \frac{2}{k\Delta x} \sin \left(k\frac{\Delta x}{2}\right) q_j.
+\end{align*}
+Therefore we have
+\begin{equation}
+q_j =  \frac{k\Delta x}{2 \sin \left(k\frac{\Delta x}{2}\right)  } \overline{q}_j = \mathcal{M}  \overline{q}_j
+\label{eqn:MfactorA}
+\end{equation}
+where $\mathcal{M}$ is the analytic value.
+
+For the both $\mathcal{R}^-$ and $\mathcal{R}^+$ we are approximating the value of the quantity at $x_{j+1/2}$ in terms of the cell average. Now from \eqref{eqn:fourierfactor} and \eqref{eqn:MfactorA} we have that
+\begin{equation}
+q_{j+1/2} = e^{i {k\Delta x}/{2}}q_{j} = e^{i {k\Delta x}/{2}}\mathcal{M}\overline{q}_j = \mathcal{R}^- \overline{q}_j = \mathcal{R}^+ \overline{q}_j
+\label{eqn:RfactorA}
+\end{equation}
+where for the analytic solution we have that $\mathcal{R}^-=\mathcal{R}^+$, as Fourier modes are continuous.
+
+\subsubsection{2. Calculate $\upsilon$} 
+In the calculation of $\upsilon$ we require a relation between the cell average values $\overline{\eta}_j$ and $\overline{G}_j$ to the cell edge value $\upsilon_{j+1/2}$. Equation \eqref{eqn:LinConSerreG} holds for all $x$ and so in particular we have 
+\begin{equation}
+G_{j+1/2} = UH + U \eta_{j+1/2} + \left(H  + \frac{H^3}{3}k^2\right)\upsilon_{j+1/2}
+\label{eqn:GeqnFourierModejph}
+\end{equation}
+Substituting our analytic reconstruction factor \eqref{eqn:RfactorA} into \eqref{eqn:GeqnFourierModejph} we obtain
+\begin{equation}
+e^{i {k\Delta x}/{2}}\mathcal{M}\overline{G}_j +  UH + U e^{i {k\Delta x}/{2}}\mathcal{M}\overline{\eta}_j = \left(H  + \frac{H^3}{3}k^2\right)\upsilon_{j+1/2}
+\end{equation}
+Rearranging this into an equation for $\upsilon_{j+1/2}$ we obtain
+\begin{align}
+\upsilon_{j+1/2} &=\dfrac{ e^{i {k\Delta x}/{2}}\mathcal{M}}{H  + \frac{H^3}{3}k^2} \overline{G}_j +  \dfrac{UH}{H  + \frac{H^3}{3}k^2} +  \dfrac{U e^{i {k\Delta x}/{2}}\mathcal{M}}{H  + \frac{H^3}{3}k^2}\overline{\eta}_j  \nonumber \\
+& = \mathcal{G}^G \overline{G}_j + \mathcal{G}^\eta \overline{\eta}_j + \mathcal{G}^c
+\label{eqn:GfactorA}
+\end{align}
+
+\subsubsection{3. Calculate Flux} 
+For the finite volume method [] the flux across the boundary $x_{j+1/2}$ is averaged over time so that
+\begin{equation}
+F_{j+1/2} = \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}}f(x_{j+1/2},t) dt .
+\label{eqn:AvgFluxDef}
+\end{equation}
+
+For a general Fourier mode $q$ we have that time averaging results in a factor $\mathcal{T}$ in the following way
+\begin{align}
+\frac{1}{\Delta t} \int_{t^n}^{t^{n+1}} q(x_j,t)\; dt &= \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}} q(0,0) e^{i\left(\omega t + kx_j\right)} \; dt \nonumber\\ &= \frac{q(0,0)e^{i k  x_j}}{\Delta t} \left[\frac{1}{i\omega} e^{i\omega t}\right]_{t^n}^{t^{n+1}} \nonumber = \frac{q(0,0)e^{i k  x_j}}{\Delta t}  \frac{1}{i\omega} e^{i\omega t^n} \left[e^{i\omega \Delta t} -1\right] \nonumber\\ &= \frac{e^{i\omega \Delta t} -1}{i\omega\Delta t} q^n_j = \mathcal{T}q^n_j
+\end{align}
+
+For linear flux functions with Fourier node variables we have
+
+\begin{equation}
+F_{j+1/2} = \mathcal{T}f(x_{j+1/2}).
+\label{eqn:AvgFluxT}
+\end{equation}
+
+For \eqref{eqn:LinContG} the flux function is
+\begin{equation}
+f(x_{j+1/2}) = H\upsilon_{j+1/2} + U \eta_{j+1/2}
+\label{eqn:fluxfunctioneta}
+\end{equation} 
+
+Since we desire our fluxes to be written in terms of the cell averages of the conserved variables $\eta$ and $G$ we use \eqref{eqn:GfactorA} and \eqref{eqn:RfactorA} to rewrite this as
+
+\begin{align}
+f(x_{j+1/2},t) &= H\left(\mathcal{G}^G \overline{G}_j + \mathcal{G}^\eta \overline{\eta}_j + \mathcal{G}^c\right) + U e^{i {k\Delta x}/{2}}\mathcal{M} \overline{\eta}_j \nonumber \\ &= H\mathcal{G}^G \overline{G}_j + U\left(H\mathcal{G}^\eta + e^{i {k\Delta x}/{2}}\mathcal{M} \right) \overline{\eta}_j + H\mathcal{G}^c 
+\label{eqn:etafourierfuncA}
+\end{align}
+
+In \eqref{eqn:etafourierfuncA} there is a Fourier mode component associated with the quantities $\overline{G}_j$ and $\overline{\eta}_j$ and a constant component $H\mathcal{G}^c $. The Fourier mode component can be substitute directly into \eqref{eqn:AvgFluxT}, for the constant component we note that the average of a constant function in time  is just the constant value and so we have
+\begin{align}
+F^\eta_{j+1/2} &= \mathcal{T} H\mathcal{G}^G \overline{G}_j + U \mathcal{T} \left(H\mathcal{G}^\eta + e^{i {k\Delta x}/{2}}\mathcal{M} \right) \overline{\eta}_j + H\mathcal{G}^c \nonumber \\ 
+& =\mathcal{F}^{\eta,\eta}\overline{\eta}_j + \mathcal{F}^{\eta,G}\overline{G}_j + \mathcal{F}^{\eta,c}
+\label{eqn:FfactorsetaA}
+\end{align}
+
+
+From \eqref{eqn:LineMomeG} the flux function for $G$ is
+\begin{equation}
+f(x_{j+1/2},t) = UG_{j+1/2} + UH \upsilon_{j+1/2} + gH \eta_{j+1/2}
+\label{eqn:fluxfunctionG}
+\end{equation}
+
+Substituting \eqref{eqn:GfactorA} and \eqref{eqn:RfactorA} into \eqref{eqn:fluxfunctionG} the equation can be written in terms of the conserved variables as
+
+\begin{align}
+f(x_{j+1/2},t) &= Ue^{i {k\Delta x}/{2}}\mathcal{M} \overline{G}_j + UH\left(\mathcal{G}^G \overline{G}_j + \mathcal{G}^\eta \overline{\eta}_j + \mathcal{G}^c\right) + gH e^{i {k\Delta x}/{2}}\mathcal{M} \overline{\eta}_j  \nonumber \\ &= \left(Ue^{i {k\Delta x}/{2}}\mathcal{M} + UH \mathcal{G}^G \right) \overline{G}_j  \nonumber \\ & \quad + \left(UH\mathcal{G}^\eta + gH e^{i {k\Delta x}/{2}}\mathcal{M} \right)\overline{\eta}_j + UH\mathcal{G}^c
+\label{eqn:GfourierfuncA}
+\end{align}
+
+Substituting \eqref{eqn:GfourierfuncA} into \eqref{eqn:AvgFluxT}
+
+\begin{align}
+F^G_{j+1/2} &= \mathcal{T} \left(Ue^{i {k\Delta x}/{2}}\mathcal{M} + UH \mathcal{G}^G \right) \overline{G}_j + \mathcal{T} \left(UH\mathcal{G}^\eta + gH e^{i {k\Delta x}/{2}}\mathcal{M} \right)\overline{\eta}_j   \nonumber \\
+& \quad+ UH\mathcal{G}^c 
+\nonumber \\ &=  \mathcal{F}^{G,\eta}\overline{\eta}_j + \mathcal{F}^{G,G}\overline{G}_j + \mathcal{F}^{G,c}
+\label{eqn:FfactorsGA}
+\end{align}
+
+\subsubsection{4. Update Formula} 
+For \eqref{eqn:LinConSerre} the update formula of the finite volume method is
+\begin{align*}
+\overline{\eta}_{j}^{\,n + 1} &=  \overline{\eta}^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(\mathcal{F}^{\eta,\eta} \overline{\eta}_j  + \mathcal{F}^{\eta,G} \overline{G}_j + \mathcal{F}^{\eta,c} \right) - \left(\mathcal{F}^{\eta,\eta} \overline{\eta}_{j-1}  + \mathcal{F}^{\eta,G} \overline{G}_{j-1} + \mathcal{F}^{\eta,c} \right)  \right], \\
+\overline{G}^{\,n + 1}_{j} &= \overline{G}^{\,n }_{j} -\frac{\Delta t}{\Delta x}  \left[ \left(  \mathcal{F}^{G,\eta} \overline{\eta}_{j}  + \mathcal{F}^{G,G} \overline{G}_j + \mathcal{F}^{G,c} \right) - \left(  \mathcal{F}^{G,\eta} \overline{\eta}_{j-1}  + \mathcal{F}^{G,G} \overline{G}_{j-1} + \mathcal{F}^{G,c} \right) \right].
+\end{align*}
+By using \eqref{eqn:fourierfactor} this can be written in matrix form as
+\begin{multline}
+\begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n+1}_j = \begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j - \frac{\left(1 - e^{-ik\Delta x}\right) \Delta t}{ \Delta x}\begin{bmatrix}
+\mathcal{F}^{\eta,\eta} & \mathcal{F}^{\eta,G} \\\mathcal{F}^{G,\eta} &\mathcal{F}^{G,G} 
+\end{bmatrix}\begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j \\= \left(\matr{I}  - \Delta t \matr{F} \right) \begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j = \matr{E} \begin{bmatrix}
+\overline{\eta} \\ \overline{G}
+\end{bmatrix}^{n}_j
+\label{eqn:evolutionmatrixA}
+\end{multline}
+
+This gives the analytic evolution matrix $\matr{E}$. By comparing the evolution matrices \eqref{eqn:evolutionmatrixA} and \eqref{eqn:evolutionmatrixA}
+
+\section{Results}
+
+
+
+\subsection{Stability}
+ 

@@ -279,7 +279,7 @@ Fmomesym = Flux(h,u,H,g,k,w,x,t,dx,dt,Rps,Rms,Rus,Gs,0)
 Fmatsym = Fmat(H,g,k,w,x,t,dx,dt, Ms, Gs, Fnn ,Fnu, Fun ,Fuu)
 
 #Evaluate fluxes
-"""
+
 Fnn1 = Fmasssym[1].subs(Rms,Rm1).subs(Rps,Rp1)
 Fnu1 = Fmasssym[0].subs(Rus,Ru1)
 Fun1 = Fmomesym[0].subs(Rms,Rm1).subs(Rps,Rp1)
@@ -308,5 +308,5 @@ Fmatsym2 = Fmatsym.subs(Fnn,Fnn2).subs(Fnu,Fnu2).subs(Fun,Fun2).subs(Fuu,Fuu2).s
 FmatsymFEM = Fmatsym.subs(Fnn,FnnFEM).subs(Fnu,FnuFEM).subs(Fun,FunFEM).subs(Fuu,FuuFEM).subs(Ms,M2).subs(Gs,GFEM)
 
 Fmatsym3 = Fmatsym.subs(Fnn,Fnn3).subs(Fnu,Fnu3).subs(Fun,Fun3).subs(Fuu,Fuu3).subs(Ms,M3).subs(Gs,G4)
-"""
+
 
