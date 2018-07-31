@@ -1,0 +1,135 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Elliptic Equation}
+The linearised elliptic equation is
+
+\[G = Hu - \frac{H^3}{3}u_{xx}\]
+
+Want to find out the FEM approximation to this $G'$ such that
+
+\[G' = \mathcal{G}_{FE_1} u\]
+
+for $P^1$ FEM
+
+\[G' = \mathcal{G}_{FE_2} u\]
+
+for $P^2$ FEM.
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+\[Gv = Huv - \frac{H^3}{3}u_{xx}v\]
+
+and then we integrate over the entire domain to get 
+\[\int_\Omega Gv dx = \int_\Omega Huv dx - \int_\Omega \frac{H^3}{3}u_{xx}vdx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega Huv dx + \int_\Omega \frac{H^3}{3}u_{x}v_xdx\]
+
+Our FVM discretisation already has a natrual structure with linear functions intervals of $[x_{j- 1/2} , x_{j+1/2}]$, to achieve this in $P^1$ we have our nodes at the boundaries, thus
+
+So we can reformulate this as 
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Gv dx = \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Huv dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{H^3}{3}u_{x}v_{x}dx\]
+
+or more aptly
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Gv dx - \int_{x_{j-1/2}}^{x_{j+3/2}} Huv dx - \int_{x_{j-1/2}}^{x_{j+3/2}} \frac{H^3}{3}u_{x}v_{x}dx = 0 \]
+
+for all v
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Gv dx - H\int_{x_{j-1/2}}^{x_{j+3/2}} uv dx -  \frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+3/2}}u_{x}v_{x}dx = 0 \]
+
+\section{P1 FEM}
+We have the basis functions for linear elements:
+
+\[v_{j + 1/2} = \left\lbrace \begin{array}{c c}
+\frac{x - x_{j-1/2}}{\Delta x}  & x_{j - 1/2} \le x < x_{j+1/2} \\
+1 - \frac{x - x_{j+1/2}}{\Delta x}  & x_{j + 1/2} \le x < x_{j+3/2}\\
+0 & \text{otherwise}
+\end{array} \right.\]
+Thus
+
+\[(v_{j + 1/2})_{x} = \left\lbrace \begin{array}{c c}
+\frac{1}{\Delta x}  & x_{j - 1/2} \le x < x_{j+1/2} \\
+- \frac{1}{\Delta x}  & x_{j + 1/2} \le x < x_{j+3/2}\\
+0 & \text{otherwise}
+\end{array} \right.\]
+
+For this FEM we are intereseted in $G_{i+1/2}$ and then we can just get a shift operator to get the otherones. For FEM we replace the functions by their P1 approximations so
+
+\[G \approx G' = \sum^{j}G_{j+ 1/2}v_{j+ 1/2}\]
+\[u \approx u' = \sum^{j}u_{j+ 1/2}v_{j+ 1/2}\]
+
+We hit our weak formulation with the test function $v_{j + 1/2}$ with our P1 approximations
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} G'v_{j+ 1/2} dx - H\int_{x_{j-1/2}}^{x_{j+3/2}} u'v_{j+ 1/2} dx -  \frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+3/2}}u'_{x}(v_{j+ 1/2})_{x}dx = 0 \]
+
+This test function is zero on all elements except $j$ thus
+
+\begin{multline}
+\int_{x_{j-1/2}}^{x_{j+3/2}} \left(G_{j- 1/2}v_{j- 1/2} + G_{j+ 1/2}v_{j+ 1/2} +G_{j+3/2}v_{j+3/2}   \right)v_{j+ 1/2} dx \\ - H\int_{x_{j-1/2}}^{x_{j+3/2}} \left(u_{j- 1/2}v_{j- 1/2} + u_{j+ 1/2}v_{j+ 1/2} +u_{j+3/2}v_{j+3/2}   \right)v_{j+ 1/2} dx - \\ \frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+3/2}}\left(u_{j- 1/2}(v_{j- 1/2})_{x} + u_{j+ 1/2}(v_{j+ 1/2})_{x} +u_{j+3/2}(v_{j+ 3 /2})_{x}   \right)(v_{j+ 1/2})_{x}dx = 0
+\end{multline}
+
+To calculate these we just need expressions for 
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}}v_{j- 1/2}v_{j+ 1/2} dx\]
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}}v_{j+ 1/2}v_{j+ 1/2} dx\]
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}}v_{j+3/2}v_{j+ 1/2} dx\]
+
+and 
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}}(v_{j- 1/2})_x(v_{j+ 1/2})_x dx\]
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}}(v_{j+ 1/2})_x(v_{j+ 1/2})_x dx\]
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}}(v_{j+ 3/2})_x(v_{j+ 1/2})_x dx\]
+
+
+\[v_{j + 1/2} = \left\lbrace \begin{array}{c c}
+\frac{x - x_{j-1/2}}{\Delta x}  & x_{j - 1/2} \le x < x_{j+1/2} \\
+1 - \frac{x - x_{j+1/2}}{\Delta x}  & x_{j + 1/2} \le x < x_{j+3/2}\\
+0 & \text{otherwise}
+\end{array} \right.\]
+Thus
+
+\[(v_{j + 1/2})_{x} = \left\lbrace \begin{array}{c c}
+\frac{1}{\Delta x}  & x_{j - 1/2} \le x < x_{j+1/2} \\
+- \frac{1}{\Delta x}  & x_{j + 1/2} \le x < x_{j+3/2}\\
+0 & \text{otherwise}
+\end{array} \right.\]
+
+We begin:
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}}v_{j- 1/2}v_{j+ 1/2} dx = \int_{x_{j-1/2}}^{x_{j+1/2}}v_{j- 1/2}v_{j+ 1/2} dx \]
+\[ = \int_{x_{j-1/2}}^{x_{j+1/2}}(1 - \frac{x - x_{j-1/2}}{\Delta x})\frac{x - x_{j-1/2}}{\Delta x} dx \]
+
+\[ = \int_{x_{j-1/2}}^{x_{j+1/2}}\frac{x - x_{j-1/2}}{\Delta x} - \left(\frac{x - x_{j-1/2}}{\Delta x}\right)^2 dx \]
+
+\[ = \int_{x_{j-1/2}}^{x_{j+1/2}}\frac{x - x_{j-1/2}}{\Delta x} - \left(\frac{x^2 - 2x x_{j-1/2} + x^2_{j-1/2}}{\Delta x^2}\right) dx \]
+
+\[ = \int_{x_{j-1/2}}^{x_{j+1/2}}\frac{\Delta x x - \Delta x x_{j-1/2}}{\Delta x^2} - \left(\frac{x^2 - 2x x_{j-1/2} + x^2_{j-1/2}}{\Delta x^2}\right)dx \]
+
+\[ = \int_{x_{j-1/2}}^{x_{j+1/2}}\frac{\Delta x x - \Delta x x_{j-1/2}}{\Delta x^2} - \frac{x^2 - 2x x_{j-1/2} + x^2_{j-1/2}}{\Delta x^2} dx \]
+
+\[ = \int_{x_{j-1/2}}^{x_{j+1/2}}\frac{\Delta x x - \Delta x x_{j-1/2} - x^2 + 2x x_{j-1/2} - x^2_{j-1/2}}{\Delta x^2} dx \]
+
+\[ = \int_{x_{j-1/2}}^{x_{j+1/2}}\frac{- x^2  +(\Delta x + 2x_{j-1/2} ) x - \Delta x x_{j-1/2} - x^2_{j-1/2}}{\Delta x^2} dx \]
+
+\[ = \frac{1}{\Delta x^2}\int_{x_{j-1/2}}^{x_{j+1/2}}- x^2  +(\Delta x + 2x_{j-1/2} ) x - \Delta x x_{j-1/2} - x^2_{j-1/2} dx \]
+
+\[ = \frac{1}{\Delta x^2} \left[- \frac{1}{3}x^3  + \frac{1}{2}(\Delta x + 2x_{j-1/2} ) x^2 + (-\Delta x x_{j-1/2} - x^2_{j-1/2})x  \right]_{x_{j-1/2}}^{x_{j+1/2}} \]
+
+\begin{multline}
+\frac{1}{\Delta x^2} \left[- \frac{1}{3}x_{j+1/2}^3  + \frac{1}{2}(\Delta x + 2x_{j-1/2} ) x_{j+1/2}^2 + (-\Delta x x_{j-1/2} - x^2_{j-1/2})x_{j+1/2}  \right]\\ - \frac{1}{\Delta x^2} \left[- \frac{1}{3}x_{j-1/2}^3  + \frac{1}{2}(\Delta x + 2x_{j-1/2} ) x_{j-1/2}^2 + (-\Delta x x_{j-1/2} - x^2_{j-1/2})x_{j-1/2} \right]
+\end{multline}
+
+\end{document}

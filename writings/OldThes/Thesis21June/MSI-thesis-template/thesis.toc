@@ -1,0 +1,57 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Objectives of the Thesis}{1}
+\contentsline {section}{\numberline {1.2}Original Contribution of the Thesis}{1}
+\contentsline {section}{\numberline {1.3}Organisation of the Thesis}{1}
+\contentsline {chapter}{\numberline {2}The Serre Equations}{3}
+\contentsline {section}{\numberline {2.1}The Serre Equations}{3}
+\contentsline {subsection}{\numberline {2.1.1}Alternative form of the Serre Equations}{4}
+\contentsline {section}{\numberline {2.2}Properties of the Serre Equations}{5}
+\contentsline {subsection}{\numberline {2.2.1}Conservation Properties}{5}
+\contentsline {subsection}{\numberline {2.2.2}Dispersion Relation}{5}
+\contentsline {chapter}{\numberline {3}Hybrid Finite Volume Methods}{7}
+\contentsline {section}{\numberline {3.1}Structure Overview}{7}
+\contentsline {section}{\numberline {3.2}Transformation Between Nodal Values and Cell Averages}{7}
+\contentsline {section}{\numberline {3.3}Elliptic Equation}{8}
+\contentsline {subsubsection}{Second Order}{9}
+\contentsline {subsubsection}{Element wise}{12}
+\contentsline {section}{\numberline {3.4}Evolution Equations}{15}
+\contentsline {subsection}{\numberline {3.4.1}Kurganovs Method}{15}
+\contentsline {subsubsection}{First Order}{16}
+\contentsline {subsubsection}{Second Order}{17}
+\contentsline {subsubsection}{Third Order}{17}
+\contentsline {subsection}{\numberline {3.4.2}Source Terms and Well Balancing}{18}
+\contentsline {subsubsection}{Finite Element Method}{20}
+\contentsline {subsubsection}{Finite Difference Method}{20}
+\contentsline {subsubsection}{Well balancing}{21}
+\contentsline {section}{\numberline {3.5}Runge-Kutta Time-Stepping}{22}
+\contentsline {section}{\numberline {3.6}CFL Condition}{23}
+\contentsline {chapter}{\numberline {4}Linear Analysis of Numerical Methods}{25}
+\contentsline {section}{\numberline {4.1}Linearised Serre equations with horizontal bed}{26}
+\contentsline {section}{\numberline {4.2}Evolution Matrix}{27}
+\contentsline {subsection}{\numberline {4.2.1}Overview of the Evolution Step}{28}
+\contentsline {subsection}{\numberline {4.2.2}1. Reconstruction}{29}
+\contentsline {subsubsection}{Cell average values to nodal values: $\mathcal {M}$}{29}
+\contentsline {subsubsection}{Cell average values to interface values: $\mathcal {R}^-$ and $\mathcal {R}^+$}{29}
+\contentsline {subsection}{\numberline {4.2.3}2. Calculate $\upsilon $}{30}
+\contentsline {subsection}{\numberline {4.2.4}3. Flux calculation}{32}
+\contentsline {subsubsection}{Left supercritical flow $U < - \sqrt {gH}$:}{33}
+\contentsline {subsubsection}{Subcritical flow $-\sqrt {gH} \le U \le \sqrt {gH}$:}{33}
+\contentsline {subsubsection}{Right supercritical flow $\sqrt {gH} < U$:}{34}
+\contentsline {subsection}{\numberline {4.2.5}4. Forward Euler Step}{35}
+\contentsline {subsection}{\numberline {4.2.6}5. SSP Runge-Kutta Time Steps}{36}
+\contentsline {section}{\numberline {4.3}Convergence Analysis}{37}
+\contentsline {subsection}{\numberline {4.3.1}Stability}{37}
+\contentsline {subsection}{\numberline {4.3.2}Consistency}{38}
+\contentsline {section}{\numberline {4.4}Dispersion Analysis}{40}
+\contentsline {chapter}{\numberline {5}Validation}{53}
+\contentsline {section}{\numberline {5.1}Analytic Validation}{53}
+\contentsline {subsection}{\numberline {5.1.1}Soliton}{53}
+\contentsline {subsection}{\numberline {5.1.2}Lake at Rest}{53}
+\contentsline {section}{\numberline {5.2}Forced Solutions}{53}
+\contentsline {subsection}{\numberline {5.2.1}Periodic in space, Exponential in time}{53}
+\contentsline {subsection}{\numberline {5.2.2}Travelling Solitary Wave}{53}
+\contentsline {section}{\numberline {5.3}Experimental Validation}{54}
+\contentsline {subsection}{\numberline {5.3.1}Beji}{54}
+\contentsline {subsection}{\numberline {5.3.2}Synolakis}{54}
+\contentsline {subsection}{\numberline {5.3.3}Roeber}{54}
+\contentsline {chapter}{Bibliography}{55}

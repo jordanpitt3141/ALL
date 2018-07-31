@@ -1,0 +1,107 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2680,         98]
+NotebookOptionsPosition[      2155,         74]
+NotebookOutlinePosition[      2499,         89]
+CellTagsIndexPosition[      2456,         86]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Rp1", " ", "=", " ", 
+  FractionBox[
+   RowBox[{"\[ImaginaryI]", " ", "k", " ", "dx"}], "2"]}]], "Input",
+ CellChangeTimes->{{3.7352199207606115`*^9, 3.735219930891191*^9}, 
+   3.735219965116149*^9, {3.7352201689628077`*^9, 3.7352201788983765`*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"\[ImaginaryI]", " ", "dx", " ", "k"}], "2"]], "Output",
+ CellChangeTimes->{{3.735220173745082*^9, 3.735220187916892*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Rp2", " ", "=", " ", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["k", "2"], " ", 
+    SuperscriptBox["dx", "2"]}], "12"]}]], "Input",
+ CellChangeTimes->{{3.735219970616463*^9, 3.735219972499571*^9}, 
+   3.7352200125718627`*^9, {3.735220151890832*^9, 3.735220181634533*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   SuperscriptBox["dx", "2"], " ", 
+   SuperscriptBox["k", "2"]}], "12"]], "Output",
+ CellChangeTimes->{3.735220015410025*^9, 3.7352201879798956`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Rp3", " ", "=", " ", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "\[ImaginaryI]", " ", 
+   SuperscriptBox["k", "3"], " ", 
+   SuperscriptBox["dx", "3"]}]}]], "Input",
+ CellChangeTimes->{{3.735220075201445*^9, 3.7352200765715237`*^9}, 
+   3.735220135851914*^9, 3.7352201834346356`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", "12"], " ", "\[ImaginaryI]", " ", 
+  SuperscriptBox["dx", "3"], " ", 
+  SuperscriptBox["k", "3"]}]], "Output",
+ CellChangeTimes->{
+  3.735220079045665*^9, {3.735220185744768*^9, 3.7352201879948964`*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 998},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 273, 5, 47, "Input"],
+Cell[856, 29, 160, 3, 47, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1053, 37, 300, 7, 49, "Input"],
+Cell[1356, 46, 189, 5, 49, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1582, 56, 308, 7, 46, "Input"],
+Cell[1893, 65, 246, 6, 79, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

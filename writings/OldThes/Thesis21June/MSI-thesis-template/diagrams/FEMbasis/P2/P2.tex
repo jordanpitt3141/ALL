@@ -1,0 +1,70 @@
+\documentclass[pdf]{article}
+\usepackage{pgfplots} 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round},every non boxed x axis/.append style={x axis line style=-}, every non boxed y axis/.append style={y axis line style=-}}
+\begin{document} 
+	\begin{tikzpicture} 
+	\begin{axis}[ 
+	width = 14cm,
+	height = 5cm,
+	axis lines=left, 
+	xticklabels=\empty,
+	x axis line style={draw=none},
+	y axis line style={draw=none},
+	ytick=\empty,
+	xtick = \empty,
+	clip mode=individual,
+	xmin=0, 
+	xmax=3, 
+	ymin = -.2, 
+	ymax = 1]
+		
+		\draw (axis cs:3,0) -- (axis cs:0,0);
+		\draw (axis cs:0,1) -- (axis cs:0,0);
+		
+		\draw[thin] (axis cs:0,0) -- (axis cs:0,-0.15);
+		\draw[thin] (axis cs:0.5,0) -- (axis cs:0.5,-0.1);
+		\draw[thin] (axis cs:1,0) -- (axis cs:1,-0.15);
+		\draw[thin] (axis cs:1.5,0) -- (axis cs:1.5,-0.1);
+		\draw[thin] (axis cs:2,0) -- (axis cs:2,-0.15);
+		\draw[thin] (axis cs:2.5,0) -- (axis cs:2.5,-0.1);
+		\draw[thin] (axis cs:3,0) -- (axis cs:3,-0.15);
+		
+		\draw[thin] (axis cs:0,1) -- (axis cs:-0.05,1);
+		\draw[thin] (axis cs:0,0) -- (axis cs:-0.05,0);
+		
+		\node[left] at (-0.05,0) {$0$};
+		
+		\node[left] at (-0.05,1) {$1$};
+		
+		\node[below] at (0,-0.15) {$x_{j-3/2}$};
+		\node[below] at (0.5,-0.1) {$x_{j-1}$};
+		\node[below] at (1,-0.15) {$x_{j-1/2}$};
+		\node[below] at (1.5,-0.1) {$x_{j}$};
+		\node[below] at (2,-0.15) {$x_{j+1/2}$};
+		\node[below] at (2.5,-0.1) {$x_{j+1}$};
+		\node[below] at (3,-0.15) {$x_{j+3/2}$};
+		
+		\addplot[domain=1:2,samples=25, smooth] gnuplot[id=poly1]{-4*(x-1)*(x-2)};
+		
+		\addplot[domain=0:1,samples=25, smooth,dashed] gnuplot[id=poly2]{-4*(x)*(x-1)};
+		\addplot[domain=2:3,samples=25, smooth,dashed] gnuplot[id=poly3]{-4*(x-2)*(x-3)};
+		
+		\addplot[domain=0:1,samples=25, smooth] gnuplot[id=poly4]{2*(x-0.5)*(x)};
+		\addplot[domain=1:2,samples=25, smooth] gnuplot[id=poly5]{2*(x-1.5)*(x-2)};
+		
+		\addplot[domain=1:2,samples=25, smooth] gnuplot[id=poly6]{2*(x-1.5)*(x-1)};
+		\addplot[domain=2:3,samples=25, smooth] gnuplot[id=poly7]{2*(x-2.5)*(x-3)};
+		
+		\addplot[domain=2:3,samples=25, smooth,dashed] gnuplot[id=poly8]{2*(x-2.5)*(x-2)};
+		
+		\addplot[domain=0:1,samples=25, smooth,dashed] gnuplot[id=poly9]{2*(x-0.5)*(x-1)};
+		
+		
+	\end{axis} 
+	\end{tikzpicture} 
+\end{document}

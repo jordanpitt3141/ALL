@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{All Definitions for Numerical Versions}
+\[\mathcal{C}_2 = \frac{ 2\cos\left(k\Delta x\right) - 2 }{\Delta x^2}\]
+
+\[\mathcal{C}_4 = \frac{-2\cos\left(2k\Delta x\right) + 32\cos\left(k\Delta x\right)  - 30 }{12\Delta x^2}\]
+
+\[\mathcal{G} = \left[H -\frac{H^3}{3} \mathcal{C}\right]\]
+
+\[\mathcal{M}_3= \frac{24}{26  -2\cos\left(k\Delta x\right)}\]
+\[\mathcal{M}_1 = \mathcal{M}_2 = 1\]
+
+\[\mathcal{R}^+_1 =  e^{ik\Delta x} \quad , \quad\mathcal{R}^-_1 =  1\]
+
+\[\mathcal{R}_2^- = 1  + \frac{i\sin\left(k\Delta x\right)}{2}\]
+\[\mathcal{R}_2^+ = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+\[\mathcal{R}_3^-= \frac{\mathcal{M}_3}{6}\left[5 +  - e^{-ik\Delta x} + 2e^{ik\Delta x} \right]\]
+
+\[\mathcal{R}_3^+= \frac{\mathcal{M}_3 e^{ik\Delta x }}{6}\left[5 + 2e^{-ik\Delta x} - e^{ik\Delta x} \right]\] 
+
+\[\mathcal{R}^u_2 = \frac{e^{ik\Delta x } + 1}{2} \]
+
+\[\mathcal{R}^u_3 = \frac{-3e^{2ik\Delta x } + 27e^{ik\Delta x } + 27 - 3e^{-ik\Delta x }}{48}\]
+
+
+\[\mathcal{F}^{h,u} = H\mathcal{R}^u\]
+
+\[\mathcal{F}^{h,h} = -\dfrac{ \sqrt{gH}}{ 2} \left [ \mathcal{R}^+- \mathcal{R}^- \right ]\]
+
+\[\mathcal{F}^{u,u} = - \dfrac{ \sqrt{gH}}{ 2} \mathcal{G} \left [ \mathcal{R}^+ \ -  \mathcal{R}^-  \right ]\]
+
+\[\mathcal{F}^{u,h} = \dfrac{ gH \mathcal{R}^- + gH \mathcal{R}^+}{ 2}\]
+
+
+$\mathcal{D} = 1 -e^{-ik\Delta x}$
+
+\section{Taylor Expansions Of Analytic Values }
+We denote exact/analytic version with a subscript $a$
+
+\[\mathcal{G}_a = H + \frac{H^3}{3}k^2\]
+
+\[\mathcal{M}_a = 1 - \frac{1}{24} (k\Delta x)^2 + \frac{1}{192} (k\Delta x)^4 + O(x^{6}) \]
+
+\[\mathcal{R}_a^+ = \mathcal{R}_a^-=\mathcal{R}_a = 1 + \frac{i}{2}k\Delta x   - \frac{1}{8}k^2\Delta x^2 - \frac{i}{48}k^3\Delta x^3 + O(x^{4})\]
+
+
+For the fluxes I think its best to group the $ \frac{\mathcal{D}}{\Delta x\mathcal{M}}\mathcal{F}$ because its collects all the terms using spatial approximations and has a nice form. In fact these terms approximate the derivative of the flux.
+\[\frac{\mathcal{D}_a}{\Delta x\mathcal{M}_a}\mathcal{F}^{h,u}_a = ikH\]
+\[\frac{\mathcal{D}_a}{\Delta x\mathcal{M}_a}\mathcal{F}^{h,h}_a = 0\]
+\[\frac{\mathcal{D}_a}{\Delta x\mathcal{M}_a}\mathcal{F}^{u,h}_a = ikgH\]
+\[\frac{\mathcal{D}_a}{\Delta x\mathcal{M}_a}\mathcal{F}^{u,u}_a = 0\]
+
+So in particular for the mass equation
+\[h_t + Hu_x = 0\]
+
+then
+\[ i \omega h + \frac{\mathcal{D}_a}{\Delta x\mathcal{M}_a}\mathcal{F}^{h,u}_a u_j + \frac{\mathcal{D}_a}{\Delta x\mathcal{M}_a}\mathcal{F}^{h,h}_a h_j = 0  \]
+
+Indeed it is these the values of our approximations to these terms that confirm that our methods have the correct spatial accuracy.
+
+\section{Taylor Expansions Of First Order Values }
+
+\[\mathcal{G}_1 = H +\frac{H^3}{3} k^2 -\frac{H^3 k^4(\Delta x)^2}{36} + O(x^{4})\]
+\[\mathcal{M}_1 = 1\]
+
+\[\mathcal{R}^-_1 =  1\]
+
+\[\mathcal{R}^+_1 = 1 + i k\Delta x  - \frac{1}{2} (k\Delta x)^2 - \frac{i}{3!} (k\Delta x)^3 + \frac{1}{4!} (k\Delta x)^4 +  O((k\Delta x)^5)\]
+
+\[\mathcal{R}^u_1 = 1 + \frac{i}{2}k\Delta x - \frac{1}{4} (k \Delta x)^2 - \frac{i}{12} (k \Delta x)^3 +  O( \Delta x^4)\]
+
+\[\mathcal{D}\mathcal{F}^{h,u}_1 = Hik\Delta x  - \frac{Hi}{6} (k \Delta x)^3 +  O( \Delta x^4) \]
+
+\[\mathcal{D}\mathcal{F}^{h,h}_1 = -\frac{\sqrt{gH}}{ 2} k^2 \Delta x + O( \Delta x^3) \]
+\[\mathcal{D}\mathcal{F}^{u,h}_1 = igHk -\frac{igHk^3(\Delta x)^2}{6} +  O( \Delta x^3) \]
+\[\mathcal{D}\mathcal{F}^{u,u}_1 = \frac{i\sqrt{gH}H}{6}(H^2 + 3) k^2(\Delta x) - \frac{\sqrt{gH}H}{72}(2H^2 + 3)k^4 (\Delta x)^3 + O( \Delta x^5) \]
+
+
+\section{Taylor Expansions Of Second Order Values }
+
+\[\mathcal{G}_2 = H +\frac{H^3}{3} k^2 -\frac{H^3 k^4(\Delta x)^2}{36} + O(x^{4})\]
+
+\[\mathcal{M}_2 = 1\]
+
+\[\mathcal{R}_2^- = 1  + \frac{i}{2} (k \Delta x) - \frac{i}{12}(k \Delta x)^3  +  O(x^{4})\]
+
+\[\mathcal{R}_2^+ =1 + \frac{i}{2}k\Delta x + \frac{i}{6} k^3 \Delta x^3 + O\left(\Delta x ^4\right)\]
+
+\[\mathcal{R}^u_2 = 1 + \frac{i}{2}k\Delta x - \frac{1}{4} (k \Delta x)^2 - \frac{i}{12} (k \Delta x)^3 +  O( \Delta x^4)\]
+
+\[\mathcal{D}\mathcal{F}_2^{h,u} = Hik - \frac{iH}{6}k^3(\Delta x)^2 + \frac{iH}{120}k^5 (\Delta x)^4 + O(\Delta x ^5) \]
+
+\[\mathcal{D}\mathcal{F}_2^{h,h} = \frac{\sqrt{gH}}{8} k^4(\Delta x)^3  - \frac{\sqrt{gH}}{48} k^6(\Delta x)^5 + O(\Delta x^7) \]
+
+\[\mathcal{D}\mathcal{F}_2^{u,u} =  \frac{\sqrt{gH}}{24}H(H^2 +3)k^4 \Delta x^3 - \frac{\sqrt{gH}}{96}H(H^2 +2)k^6 \Delta x^5 + O(\Delta x ^6)\]
+
+\[\mathcal{D}\mathcal{F}_2^{u,h} = igHk + \frac{igH}{12}  k^3 \Delta x^2 - \frac{13igH}{240}  k^5 \Delta x^4 + O(\Delta x ^6)  \]
+
+\section{Taylor Expansions Of Third Order Values }
+
+\[\mathcal{G}_3 = H + \frac{H^3k^2}{3} -\frac{H^3 k^6 (\Delta x)^4}{270} + O(\Delta x^{6}) \]
+
+\[\mathcal{M}_3= 1 + \frac{1}{24} (k\Delta x)^2 - \frac{1}{288} (k\Delta x)^4 + O(x^{6})\]
+
+\[R_3^-= 1 + \frac{i}{2}k\Delta x - \frac{1}{8} (k \Delta x)^2 - \frac{5}{48} (k \Delta x)^3 +  O( \Delta x^4) \]
+
+\[R_3^+= 1 + \frac{i}{2}k\Delta x - \frac{1}{8} (k \Delta x)^2 + \frac{1}{16} (k \Delta x)^3 +  O( \Delta x^4)\] 
+
+\[R^u_3 = 1 + \frac{i}{2}k\Delta x - \frac{1}{8} (k \Delta x)^2 - \frac{i}{48} (k \Delta x)^3 +  O( \Delta x^4) \]
+
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_3}\mathcal{F}_3^{h,u} = ikH - \frac{9iH}{320} k^5 \Delta x^4 - \frac{iH}{448 }k^7 \Delta x ^6 + O(\Delta x ^9) \]
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_3}\mathcal{F}_3^{h,h} = \frac{\sqrt{gH}}{12} k^4 \Delta x^3 - \frac{\sqrt{gH}}{72}k^6 \Delta x^5 + \frac{\sqrt{gH}}{960}k^8 \Delta x^7 + O(\Delta x ^{9})\]
+
+
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_3}\mathcal{F}_3^{u,u} = \frac{H\sqrt{gH}}{36}(H^2 + 3) k^4 \Delta x^3 - \frac{iH\sqrt{gH}}{144}(H^2 + 3) k^5 \Delta x^4  + O(\Delta x^5) \]
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_3}\mathcal{F}_3^{u,h} = igkH  - \frac{igH }{30} k^5\Delta x ^4 + O(\Delta x ^6) \]
+
+\[\frac{\mathcal{D}}{\Delta x\mathcal{M}_3}\mathcal{F}_3^{u,h} = igkH  - \frac{igH }{30} k^5\Delta x ^4 + O(\Delta x ^6) \]
+\end{document}

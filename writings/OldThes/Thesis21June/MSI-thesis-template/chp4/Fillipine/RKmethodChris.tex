@@ -1,0 +1,387 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+\section{Numerical Method for dispersion error Break Down}
+To do the first analysis we first construct the update matrix F, which plays a similar role to $\lambda$ I showed you in the space continuos case. We then diagonalise this so that we get back to just factors (basically). This also means I would like to update what we present in the table, I think we should present all the elements of the matrices, for $\mathcal{F}^{h,u}$ and $\mathcal{F}^{h,h}$ there is no change but for $\mathcal{F}^{u,u}$ and $\mathcal{F}^{u,h}$ this means also dividing it by $\mathcal{G}$ as well as $\mathcal{M}$ and $\Delta x$. Anyway onto the method.
+
+\subsection{$\boldsymbol{F}$}
+$\boldsymbol{F}$ comes from the FVM update scheme which for us is
+\[\bar{q}_j^{n+1} = \bar{q}_j^{n} - \frac{\Delta t}{\Delta x} \left[F_{j + \frac{1}{2}} - F_{j - \frac{1}{2}} \right] \]
+This converts to (both analytical and numerical)
+
+\[\mathcal{M}q_j^{n+1} = \mathcal{M}q_j^{n} - \frac{\Delta t}{\Delta x} \left[\mathcal{F}^{q,v}v_{j} + \mathcal{F}^{q,q}q_{j} - \mathcal{F}^{q,v}v_{j-1} - \mathcal{F}^{q,q}q_{j-1} \right] \]
+
+\[\mathcal{M}q_j^{n+1} = \mathcal{M}q_j^{n} - \frac{\Delta t}{\Delta x} \left[\mathcal{F}^{q,v}v_{j} + \mathcal{F}^{q,q}q_{j} - \mathcal{F}^{q,v}e^{-ik\Delta x}v_{j} - \mathcal{F}^{q,q}e^{-ik\Delta x}q_{j} \right] \]
+
+Defining $\mathcal{D}_x = 1 - e^{-ik\Delta x} $
+
+\[\mathcal{M}q_j^{n+1}  = \mathcal{M}q_j^{n}   - \frac{\Delta t}{\Delta x} \left[ \mathcal{D}_x\mathcal{F}^{q,v}v_{j} + \mathcal{D}_x\mathcal{F}^{q,q}q_{j}\right] \]
+So we have
+
+\[q_j^{n+1}  = q_j^{n}   - \frac{\mathcal{D}_x\Delta t}{\mathcal{M}\Delta x} \left[ \mathcal{F}^{q,v}v_{j} + \mathcal{F}^{q,q}q_{j}\right] \]
+
+Thus we have
+
+\[\left[\begin{array}{c}
+h \\ \mathcal{G}u
+\end{array}\right]^{n+1}_j = \left[\begin{array}{c}
+h \\ \mathcal{G}u
+\end{array}\right]^{n}_j - \frac{\mathcal{D}_x\Delta t}{\mathcal{M}\Delta x}\left[\begin{array}{c c}
+\mathcal{F}^{h,h} & \mathcal{F}^{h,u} \\ \mathcal{F}^{u,h} & \mathcal{F}^{u,u} 
+\end{array}\right]\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j - \frac{\mathcal{D}_x\Delta t}{\mathcal{M}\Delta x}\left[\begin{array}{c c}
+\mathcal{F}^{h,h} & \mathcal{F}^{h,u} \\ \frac{1}{\mathcal{G}}\mathcal{F}^{u,h} &  \frac{1}{\mathcal{G}}\mathcal{F}^{u,u} 
+\end{array}\right]\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+Lets define
+
+\[\boldsymbol{\mathcal{F}} = \frac{\mathcal{D}_x}{\mathcal{M}\Delta x}\left[\begin{array}{c c}
+\mathcal{F}^{h,h} & \mathcal{F}^{h,u} \\ \frac{1}{\mathcal{G}}\mathcal{F}^{u,h} &  \frac{1}{\mathcal{G}}\mathcal{F}^{u,u} 
+\end{array}\right] \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j - \Delta t\boldsymbol{\mathcal{F}}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}} \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+So we can see that ever time step produces a factor $\left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}} \right)$, I will now demonstrate the method with the hardest example, third order.
+
+\subsection{Third Order}
+For third order the time stepping algorithm is
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{1} = (\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 )\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{2} = (\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 )\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^1\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{3} = \frac{3}{4}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n +  \frac{1}{4}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^2\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{4} = (\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 )\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^3\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \frac{1}{3}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n + \frac{2}{3}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{4}\]
+
+Thus
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{3} = \frac{3}{4}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n +  \frac{1}{4}(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 )^2\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{3} = \left(\frac{3}{4}\boldsymbol{I}  +  \frac{1}{4}(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 )^2\right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \frac{1}{3}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n + \frac{2}{3}(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 )\left(\frac{3}{4}\boldsymbol{I}  +  \frac{1}{4}\left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 \right)^2\right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \left(\frac{1}{3}\boldsymbol{I} +  \frac{2}{3}(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 )\left(\frac{3}{4}\boldsymbol{I}  +  \frac{1}{4}\left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 \right)^2\right) \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \left(\frac{1}{3}\boldsymbol{I} + (\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 )\left(\frac{1}{2}\boldsymbol{I}  +  \frac{1}{6}\left(\boldsymbol{I} - 2\Delta t\boldsymbol{\mathcal{F}}_3 + \Delta t^2\boldsymbol{\mathcal{F}}_3^2 \right)\right) \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \left(\frac{1}{3}\boldsymbol{I} + (\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_3 )\left(\frac{2}{3}\boldsymbol{I}  -  \frac{1}{3}\Delta t\boldsymbol{\mathcal{F}}_3 + \frac{1}{6}\Delta t^2\boldsymbol{\mathcal{F}}_3^2 \right) \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \left(\frac{1}{3}\boldsymbol{I} + \frac{2}{3}\boldsymbol{I}  -  \frac{1}{3}\Delta t\boldsymbol{\mathcal{F}}_3 + \frac{1}{6}\Delta t^2\boldsymbol{\mathcal{F}}_3^2 + (- \Delta t\boldsymbol{\mathcal{F}}_3 )\left(\frac{2}{3}\boldsymbol{I}  -  \frac{1}{3}\Delta t\boldsymbol{\mathcal{F}}_3 + \frac{1}{6}\Delta t^2\boldsymbol{\mathcal{F}}_3^2 \right) \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \left(\boldsymbol{I}  -  \frac{1}{3}\Delta t\boldsymbol{\mathcal{F}}_3 + \frac{1}{6}\Delta t^2\boldsymbol{\mathcal{F}}_3^2 -\frac{2}{3} \Delta t\boldsymbol{\mathcal{F}}_3   + \frac{1}{3}\Delta t\boldsymbol{\mathcal{F}}_3 \Delta t\boldsymbol{\mathcal{F}}_3 - \frac{1}{6}\Delta t^2\boldsymbol{\mathcal{F}}_3^2 \Delta t\boldsymbol{\mathcal{F}}_3 \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \left(\boldsymbol{I}  -  \boldsymbol{\mathcal{F}}_3 + \frac{1}{6}\Delta t^2\boldsymbol{\mathcal{F}}_3^2   + \frac{1}{3}\Delta t^2\boldsymbol{\mathcal{F}}_3^2- \frac{1}{6}\Delta t^3\boldsymbol{\mathcal{F}}_3^3 \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+Finally
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \left(\boldsymbol{I}  -  \Delta t\boldsymbol{\mathcal{F}}_3   + \frac{1}{2}\Delta t^2\boldsymbol{\mathcal{F}}_3^2- \frac{1}{6}\Delta t^3\boldsymbol{\mathcal{F}}_3^3 \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+lets say we have  an eigenvalue decomposition for $\boldsymbol{\mathcal{F}}_3 $
+
+\[\boldsymbol{\mathcal{F}}_3 = \boldsymbol{\mathcal{S}}_3 \boldsymbol{\mathcal{D}}_3 \boldsymbol{\mathcal{S}}_3^{-1}  \]
+
+where 
+
+\[ \boldsymbol{\mathcal{D}}_3 = \left[\begin{array}{c c}
+\lambda_{3,-}  & 0 \\0  &  \lambda_{3,+}
+\end{array}\right]\]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \left(\boldsymbol{I}  -  \Delta t\boldsymbol{\mathcal{S}}_3 \boldsymbol{\mathcal{D}}_3 \boldsymbol{\mathcal{S}}_3^{-1}   + \frac{1}{2}\Delta t^2\boldsymbol{\mathcal{S}}_3 \boldsymbol{\mathcal{D}}_3^2 \boldsymbol{\mathcal{S}}_3^{-1}- \frac{1}{6}\Delta t^3\boldsymbol{\mathcal{S}}_3 \boldsymbol{\mathcal{D}}_3^3 \boldsymbol{\mathcal{S}}_3^{-1} \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+Multiply on the LHS by $\boldsymbol{\mathcal{S}}_3^{-1}$
+
+\[\boldsymbol{\mathcal{S}}_3^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1} = \left(\boldsymbol{\mathcal{S}}_3^{-1} -  \Delta t \boldsymbol{\mathcal{D}}_3 \boldsymbol{\mathcal{S}}_3^{-1}   + \frac{1}{2}\Delta t^2 \boldsymbol{\mathcal{D}}_3^2 \boldsymbol{\mathcal{S}}_3^{-1}- \frac{1}{6}\Delta t^3 \boldsymbol{\mathcal{D}}_3^3 \boldsymbol{\mathcal{S}}_3^{-1} \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[\boldsymbol{\mathcal{S}}_3^{-1} e^{i\omega \Delta t}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n} = \left(\boldsymbol{I} -  \Delta t \boldsymbol{\mathcal{D}}_3   + \frac{1}{2}\Delta t^2 \boldsymbol{\mathcal{D}}_3^2- \frac{1}{6}\Delta t^3 \boldsymbol{\mathcal{D}}_3^3 \right) \boldsymbol{\mathcal{S}}_3^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\[e^{i\omega \Delta t}\boldsymbol{\mathcal{S}}_3^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n} = \left(\boldsymbol{I} -  \Delta t \boldsymbol{\mathcal{D}}_3   + \frac{1}{2}\Delta t^2 \boldsymbol{\mathcal{D}}_3^2- \frac{1}{6}\Delta t^3 \boldsymbol{\mathcal{D}}_3^3 \right) \boldsymbol{\mathcal{S}}_3^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n\]
+
+\begin{multline}
+e^{i\omega \Delta t}\boldsymbol{\mathcal{S}}_3^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n} = \\ \left[\begin{array}{c c}
+1 - \Delta t \lambda_{3,-} + \frac{\Delta t^2}{2} \lambda_{3,-}^2 - \frac{\Delta t^3}{6} \lambda_{3,-}^3  & 0 \\0  & 1 - \Delta t \lambda_{3,+} + \frac{\Delta t^2}{2} \lambda_{3,+}^2 - \frac{\Delta t^3}{6} \lambda_{3,+}^3
+\end{array}\right] \boldsymbol{\mathcal{S}}_3^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n
+\end{multline}
+
+Since $\boldsymbol{\mathcal{S}}_3^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^n$ is just a vector then $e^{i\omega\Delta t}$ an eigenvalue of this diagonal matrix, so it must be that
+
+\[e^{i\omega\Delta t} = 1 - \Delta t \lambda_{3,\pm} + \frac{\Delta t^2}{2} \lambda_{3,\pm}^2 - \frac{\Delta t^3}{6} \lambda_{3,\pm}^3 \]
+
+\[i\omega\Delta t =  \ln \left(1 - \Delta t \lambda_{3,\pm} + \frac{\Delta t^2}{2} \lambda_{3,\pm}^2 - \frac{\Delta t^3}{6} \lambda_{3,\pm}^3\right) \]
+
+\[\omega = \frac{1}{i \Delta t} \ln \left(1 - \Delta t \lambda_{3,\pm} + \frac{\Delta t^2}{2} \lambda_{3,\pm}^2 - \frac{\Delta t^3}{6} \lambda_{3,\pm}^3\right) \]
+
+We note that $\lambda_{3,\pm}$ means we get both the positive and negative $\omega$. So then our method is to form the matrix $\boldsymbol{F}_3$ and calculate the eigenvlaues numerically, then use the above operations to calculate $\omega$ for the numerical method. 
+
+\subsection{First Order}
+We repeat this method for first order
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}_1} \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+
+
+lets say we have 
+
+\[\boldsymbol{\mathcal{F}}_1 = \boldsymbol{\mathcal{S}}_1 \left[\begin{array}{c c}
+\lambda_{1,-}  & 0 \\0  & \lambda_{1,+}
+\end{array}\right] \boldsymbol{\mathcal{S}}_1^{-1}  \]
+
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{S}}_1 \left[\begin{array}{c c}
+\lambda_{1,-}  & 0 \\0  & \lambda_{1,+}
+\end{array}\right] \boldsymbol{\mathcal{S}}_1^{-1} \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\boldsymbol{\mathcal{S}}_1^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \left(\boldsymbol{\mathcal{S}}_1^{-1} - \Delta t \left[\begin{array}{c c}
+\lambda_{1,-}  & 0 \\0  & \lambda_{1,+}
+\end{array}\right] \boldsymbol{\mathcal{S}}_1^{-1} \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[e^{i \omega \Delta t}\boldsymbol{\mathcal{S}}_1^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j = \left(\boldsymbol{I}- \Delta t \left[\begin{array}{c c}
+\lambda_{1,-}  & 0 \\0  & \lambda_{1,+}
+\end{array}\right] \right) \boldsymbol{\mathcal{S}}_1^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[e^{i \omega \Delta t}\boldsymbol{\mathcal{S}}_1^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j = \left[\begin{array}{c c}
+1 - \Delta t\lambda_{1,-}  & 0 \\0  & 1- \Delta t\lambda_{1,+}
+\end{array}\right] \boldsymbol{\mathcal{S}}_1^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+So we have
+
+\[e^{i\omega\Delta t} = 1 - \Delta t\lambda_{1,-}\]
+
+\[\omega = \frac{1}{i \Delta t} \ln \left(1 - \Delta t\lambda_{1,-}\right) \]
+
+\subsection{Second Order}
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{1}_j = \left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_2 \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{2}_j = \left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_2 \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{1}_j  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j + \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{2}_j\right)  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j + \left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_2 \right)^2 \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j\right)  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(\boldsymbol{I} + \left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}}_2 \right)^2 \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(\boldsymbol{I} +  \boldsymbol{I} -2\Delta t\boldsymbol{\mathcal{F}}_2 + \Delta t^2\boldsymbol{\mathcal{F}}_2^2 \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(2\boldsymbol{I}  -2\Delta t\boldsymbol{\mathcal{F}}_2 + \Delta t^2\boldsymbol{\mathcal{F}}^2_2 \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+lets say we have 
+
+\[\boldsymbol{\mathcal{F}}_2 = \boldsymbol{\mathcal{S}}_2 \left[\begin{array}{c c}
+\lambda_{2,-}  & 0 \\0  & \lambda_{2,+}
+\end{array}\right] \boldsymbol{\mathcal{S}}_2^{-1}  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(2\boldsymbol{I}  -2\Delta t\boldsymbol{\mathcal{S}}_2 \left[\begin{array}{c c}
+\lambda_{2,-}  & 0 \\0  & \lambda_{2,+}
+\end{array}\right] \boldsymbol{\mathcal{S}}_2^{-1} + \Delta t^2\boldsymbol{\mathcal{S}}_2 \left[\begin{array}{c c}
+\lambda_{2,-}^2  & 0 \\0  & \lambda_{2,+}^2
+\end{array}\right] \boldsymbol{\mathcal{S}}_2^{-1} \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\boldsymbol{\mathcal{S}}_2^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(2\boldsymbol{\mathcal{S}}_2^{-1}  -2\Delta t \left[\begin{array}{c c}
+\lambda_{2,-}  & 0 \\0  & \lambda_{2,+}
+\end{array}\right] \boldsymbol{\mathcal{S}}_2^{-1} + \Delta t^2 \left[\begin{array}{c c}
+\lambda_{2,-}^2  & 0 \\0  & \lambda_{2,+}^2
+\end{array}\right] \boldsymbol{\mathcal{S}}_2^{-1} \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\boldsymbol{\mathcal{S}}_2^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \frac{1}{2} \left(2\boldsymbol{\mathcal{S}}_2^{-1}  + \left[\begin{array}{c c}
+\Delta t^2 \lambda_{2,-}^2  -2\Delta t\lambda_{2,-}  & 0 \\0  & \Delta t^2 \lambda_{2,+}^2 -2\Delta t\lambda_{2,-}
+\end{array}\right] \boldsymbol{\mathcal{S}}_2^{-1} \right) \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[e^{i\omega\Delta t}\left(\boldsymbol{\mathcal{S}}_2^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j \right) = \frac{1}{2} \left(2  + \left[\begin{array}{c c}
+\Delta t^2 \lambda_{2,-}^2  -2\Delta t\lambda_{2,-}  & 0 \\0  & \Delta t^2 \lambda_{2,+}^2 -2\Delta t\lambda_{2,-}
+\end{array}\right] \right) \left(\boldsymbol{\mathcal{S}}_2^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j \right)  \]
+
+\[e^{i\omega\Delta t}\left(\boldsymbol{\mathcal{S}}_2^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j \right) = \frac{1}{2}\left[\begin{array}{c c}
+2 + \Delta t^2 \lambda_{2,-}^2  -2\Delta t\lambda_{2,-}  & 0 \\0  & 2 + \Delta t^2 \lambda_{2,+}^2 -2\Delta t\lambda_{2,-}
+\end{array}\right]  \left(\boldsymbol{\mathcal{S}}_2^{-1}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j \right)  \]
+
+So we have
+
+\[e^{i\omega\Delta t} = 1 + \frac{1}{2}\Delta t^2 \lambda_{2,\pm}^2  -\Delta t\lambda_{2,\pm}\]
+\[\omega = \frac{1}{i \Delta t} \ln \left(1 + \frac{1}{2}\Delta t^2 \lambda_{2,\pm}^2  -\Delta t\lambda_{2,\pm}\right) \]
+\end{document}

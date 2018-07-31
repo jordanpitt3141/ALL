@@ -1,0 +1,229 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\subsubsection{Finite Element Method} 
+Instead of a relation between $G_j$ and $\upsilon_j$ as in the finite difference method above, we get $\upsilon_{j+1/2}$ by solving the finite element method. So we desire the error coefficient produced by the FEM solution of the elliptic equation given $G_j$ and solving for $\upsilon_{j+1/2}$ which will be used in the conservation equation part below as our reconstruction error coefficient for $\upsilon$ at the cell interface. The matrix equation of the FEM for the linearised equations \eqref{eqn:LinConSerreGu0} can be attained by just using $h^+_{j-/2} = H =h^-_{j+1/2} $ and so we obtain from []
+
+\begin{multline*}
+\sum_j \frac{\Delta x}{6}\begin{bmatrix} G^+_{j -1/2} \\2 G^+_{j -1/2}+2 G^-_{j +1/2} \\ G^-_{j +1/2} \end{bmatrix} = \\\sum_j \left(H\frac{\Delta x}{30}\begin{bmatrix} 4 &2 &-1 \\2 &16 &2  \\-1 &2 &4 \end{bmatrix} + \frac{H^3 }{9\Delta x}\begin{bmatrix} 7 &-8 &1  \\-8 &16 &-8  \\1 &-8 &7  \end{bmatrix} \right) \begin{bmatrix} \upsilon_{j -1/2} \\\upsilon_{j} \\ \upsilon_{j +1/2} \end{bmatrix}
+\end{multline*}
+
+%minmod limiter for G
+Using our relations from the periodic nature of $u$ and $G$, and the minmod reconstruction used on $G$ we get that
+
+\begin{multline}
+\sum_j \frac{\Delta x}{6}\begin{bmatrix} e^{-ik\Delta x} \mathcal{R}^+_2 \\2 e^{-ik\Delta x} \mathcal{R}^+_2 +2 \mathcal{R}^-_2 \\ \mathcal{R}^-_2 \end{bmatrix} G_j = \\\sum_j \Bigg(H\frac{\Delta x}{30}\begin{bmatrix} 5i\sin\left(k \frac{\Delta x}{2}\right) + 3\cos\left(k \frac{\Delta x}{2}\right) + 2\\16 + 4 \cos\left(k \frac{\Delta x}{2}\right) \\ -5i\sin\left(k \frac{\Delta x}{2}\right) + 3\cos\left(k \frac{\Delta x}{2}\right) + 2 \end{bmatrix} \\+ \frac{H^3 }{9\Delta x}\begin{bmatrix} 6i\sin\left(k \frac{\Delta x}{2}\right) + 8\cos\left(k \frac{\Delta x}{2}\right) - 8 \\ - 16\cos\left(k \frac{\Delta x}{2}\right) + 16 \\ -6i\sin\left(k \frac{\Delta x}{2}\right) + 8\cos\left(k \frac{\Delta x}{2}\right) - 8 \end{bmatrix}  \Bigg) \upsilon_j
+\end{multline}
+
+We can now add all the terms that overlap i.e the extra contributions from the functions $\phi_{j+1/2}$ and $\phi_{j-1/2}$ from outside the cell $\left[x_{j-1/2}, x_{j+1/2}\right]$, this then gives us a relation between the sub-vectors of the total vectors of the FEM. Doing this we can rewrite the matrix equation as
+%don't like this notation
+[]
+\begin{multline}
+\sum_j \frac{\Delta x}{6}\begin{bmatrix} 2  \\ \mathcal{R}^-_2 + \mathcal{R}^+_2 \end{bmatrix}^T \begin{bmatrix} G_j  \\ G_j\end{bmatrix}  = \\\sum_j \Bigg(H\frac{\Delta x}{30}\begin{bmatrix}16 + 4 \cos\left(k \frac{\Delta x}{2}\right) \\ 4\cos\left(\frac{k\Delta x}{2}\right) + 8 \cos\left(k \Delta x\right) - 2\end{bmatrix}^T  \\+ \frac{H^3 }{9\Delta x}\begin{bmatrix}  - 16\cos\left(k \frac{\Delta x}{2}\right) + 16 \\ -16\cos\left(\frac{k\Delta x}{2}\right) + 14 \cos\left(k \Delta x\right) + 2 \end{bmatrix}^T    \Bigg) \begin{bmatrix} u_j  \\ u_{j+1/2} \end{bmatrix}
+\end{multline}
+
+%diagonal matrix with the eigenvalues
+
+So the equation for $u_{j+1/2}$ is
+
+\begin{multline}
+\frac{\Delta x}{6}\left(\mathcal{R}^+_2 +\mathcal{R}^-_2\right)  G_j = \\ \Bigg(H\frac{\Delta x}{30} \left(4\cos\left(\frac{k\Delta x}{2}\right) + 8 \cos\left(k \Delta x\right) - 2 \right) \\+ \frac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 14 \cos\left(k \Delta x\right) + 2 \right)   \Bigg)  u_{j + 1/2}
+\end{multline}
+
+
+We have
+
+\[G_j = \mathcal{G}_{FEM} u_{j + 1/2}\]
+
+\[\mathcal{G}_au_j = \mathcal{G}_{FEM} u_{j + 1/2}\]
+\[\frac{\mathcal{G}_a}{\mathcal{G}_{FEM}}u_j =  u_{j + 1/2}\]
+
+This is the error introduced by calculating $u_{j+1/2}$ in our method.
+
+
+\subsection{Conservation Equation}
+
+Finite volume methods have the following update scheme to approximate equations in conservation law form [] for some quantity $q$
+
+\[\bar{q}^{\,n + 1}_{j} = \bar{q}^{\,n}_{j} - \frac{\Delta t}{\Delta x} \left[F^{\,n} _{j+1/2} - F^{\,n} _{j-1/2} \right].\]
+
+Where the bar denotes that it is the cell average of the quantity $q$ and $F^{\,n} _{j+1/2}$ and $F^{\,n} _{j-1/2}$ are the approximations to the average fluxes across the cell boundary between the times $t^n$ and $t^{n+1}$. 
+
+In our methods there is some transformation between the nodal value $q_j$ and the cell average $\bar{q}_j$, which will introduce some error factor $\mathcal{M}$. For first and second order methods $\mathcal{M}_1 = \mathcal{M}_2 = 1$, however for higher-order methods $\mathcal{M} \neq 1$.
+
+To calculate the fluxes $F^{\,n} _{j+1/2}$ and $F^{\,n} _{j-1/2}$ we use Kurganovs method [superscript dropped][]
+
+\begin{equation*}
+F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
+\end{equation*}
+
+where $a^+_{j+\frac{1}{2}}$ and $a^-_{j+\frac{1}{2}}$ are given by the wave speed bounds [], so that 
+
+\[a^-_{j+ 1/2} =  - \sqrt{g H}\]
+
+\[a^+_{j+ 1/2} = \sqrt{g H}.\]
+
+Substituting these values into Kurganovs flux approximation we obtain 
+
+\begin{equation}\label{eqn:HLL_fluxred}
+F_{j+\frac{1}{2}} = \dfrac{ f\left(q^-_{j+\frac{1}{2}}\right) + f\left(q^+_{j+\frac{1}{2}}\right)}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
+\end{equation}
+
+For $\eta$ our Kurganov approximation to the flux of \eqref{eqn:LinContG} is then
+
+
+\begin{equation}
+\label{eqn:HLL_fluxeta}
+F^{\eta}_{j+\frac{1}{2}} = \dfrac{ H \upsilon_{j+\frac{1}{2}}+ H \upsilon_{j+\frac{1}{2}}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ \eta^+_{j+\frac{1}{2}} - \eta^-_{j+\frac{1}{2}} \right ]
+\end{equation}
+
+The missing piece here is the error introduced by reconstruction of the edge values $\upsilon ^-_{j+\frac{1}{2}}$, $\upsilon ^+_{j+\frac{1}{2}}$, $\eta ^-_{j+\frac{1}{2}}$ and $\eta ^+_{j+\frac{1}{2}}$ from the cell averages $\bar{\upsilon}_j$ and $\bar{\eta}_j$. Because our quantities are smooth the nonlinear limiters can be neglected so we have for the second-order reconstruction of $\eta$ 
+
+
+\begin{equation*}
+\eta^-_{j+\frac{1}{2}} = \bar{\eta}_j + \frac{- \bar{\eta}_{j - 1} + \bar{\eta}_{j+ 1} }{4}
+\end{equation*}
+\begin{equation*}
+\eta^+_{j+\frac{1}{2}} = \bar{\eta}_{j+1} + \frac{- \bar{\eta}_{j} + \bar{\eta}_{j+ 2}}{4}.
+\end{equation*}
+
+
+Using \eqref{eqn:spatialfactor} these equations become
+
+
+\begin{equation*}
+\eta^-_{j+\frac{1}{2}} = \mathcal{M}_2{\eta}_j + \frac{- \mathcal{M}_2{\eta}_{j} e^{-ik\Delta x} + \mathcal{M}_2{\eta}_{j} e^{ik\Delta x}}{4}
+\end{equation*}
+\begin{equation*}
+\eta^+_{j+\frac{1}{2}} = \mathcal{M}_2{\eta}_{j}e^{ik\Delta x} + \frac{- \mathcal{M}_2{\eta}_{j} + \mathcal{M}_2{\eta}_{j}e^{2ik\Delta x} }{4}.
+\end{equation*}
+
+
+For the second order case $\mathcal{M}_2 = 1$ and these equations can be reduced to 
+
+\begin{subequations}
+	\label{eqn:2ndrecon}
+	\begin{equation}
+	\eta^-_{j+\frac{1}{2}} = \left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right){\eta}_j
+	\end{equation}
+	\begin{equation}
+	\eta^+_{j+\frac{1}{2}} = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right){\eta}_{j}.
+	\end{equation}
+\end{subequations}
+
+From these we introduce the second order reconstruction factors $\mathcal{R}^+_2 = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)$ and $\mathcal{R}^-_2 = 1  + \frac{i\sin\left(k\Delta x\right)}{2}$ for both $\eta$ and $G$. So that we have 
+
+\begin{equation*}
+\eta^-_{j+\frac{1}{2}} = \mathcal{R}^-_2 {\eta}_j
+\end{equation*}
+\begin{equation*}
+\eta^+_{j+\frac{1}{2}} = \mathcal{R}^+_2{\eta}_{j}.
+\end{equation*}
+
+In our numerical methods our reconstruction of $\upsilon$ is slightly different as $\upsilon_{j+\frac{1}{2}}$ are equal as we assume $\upsilon$ is continuous. For the second order method we have
+
+\begin{equation*}
+\upsilon_{j + 1/2} =   \frac{\mathcal{G}_{A}}{\mathcal{G}_{FEM}} \upsilon_j
+\end{equation*}
+
+We now have all the pieces to substitute into \eqref{eqn:HLL_fluxeta} which for the second order method results in
+
+\begin{equation*}
+F^{\eta}_{j+\frac{1}{2}} =  H  \frac{\mathcal{G}_{A}}{\mathcal{G}_{FEM}} \upsilon_j  - \dfrac{ \sqrt{gH}}{ 2} \left [  \mathcal{R}^+_2 {\eta}_j -  \mathcal{R}^-_2 {\eta}_j \right ]
+\end{equation*}
+
+Which becomes
+
+\begin{equation*}
+F^{\eta}_{j+\frac{1}{2}} = H \frac{\mathcal{G}_{A}}{\mathcal{G}_{FEM}} \upsilon_j  - \dfrac{ \sqrt{gH}}{ 2} \left [  \mathcal{R}^+_2 -  \mathcal{R}^-_2 \right ] {\eta}_j
+\end{equation*}
+
+We then introduce the factors $\mathcal{F}_2^{\eta,\upsilon}$ and $\mathcal{F}_2^{\eta,\eta}$ so that 
+
+\begin{equation}
+\label{eqn:etafluxapprox}
+F^{\eta}_{j+\frac{1}{2}} = \mathcal{F}_2^{\eta,\upsilon} \upsilon_{j}   +  \mathcal{F}_2^{\eta,\eta} {\eta}_j.
+\end{equation}
+
+Repeating this process for $G$ using [] and [] we get that
+
+\begin{equation}
+\label{eqn:HLL_fluxG}
+F^{G}_{j+\frac{1}{2}} = \dfrac{ gHh^-_{j+\frac{1}{2}} + gHh^+_{j+\frac{1}{2}}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [ G^+_{j+\frac{1}{2}} - G^-_{j+\frac{1}{2}} \right ]
+\end{equation}
+
+Using our reconstruction factors this becomes:
+
+\begin{equation*}
+F^{G}_{j+\frac{1}{2}} = \dfrac{ gH \mathcal{R}^-_2h_{j} + gH \mathcal{R}^+_2 h_{j}}{ 2}  - \dfrac{ \sqrt{gH}}{ 2} \left [  \mathcal{R}^+_2 G_{j} -  \mathcal{R}^-_2G_{j} \right ]
+\end{equation*}
+
+which by factoring and using the factor $\mathcal{G}_{FD2}$ becomes
+
+\begin{equation*}
+F^{G}_{j+\frac{1}{2}} =  gH \dfrac{\mathcal{R}^-_2 + \mathcal{R}^+_2 }{ 2} h_{j}  - \dfrac{ \sqrt{gH}}{ 2} \left [  \mathcal{R}^+_2 -  \mathcal{R}^-_2 \right ] \mathcal{G}_{a}\upsilon_j
+\end{equation*}
+
+We then introduce the factors $\mathcal{F}_2^{G,\upsilon}$ and $\mathcal{F}_2^{G,\eta}$ so that 
+
+\begin{equation}
+\label{eqn:Gfluxapprox}
+F^{G}_{j+\frac{1}{2}} =  \mathcal{F}_2^{G,\eta} \eta_{j}  + \mathcal{F}_2^{G,\upsilon} \upsilon_j
+\end{equation}
+
+By substituting \eqref{eqn:etafluxapprox}, \eqref{eqn:Gfluxapprox} and $\mathcal{M}_2$ into [] our finite volume method can be written as
+
+
+\begin{equation*}
+\mathcal{M}_2 \eta^{\,n + 1}_{j} = \mathcal{M}_2 \eta^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{ik\Delta x}\right) \left(\mathcal{F}_2^{\eta,\eta} h_{j}  + \mathcal{F}_2^{\eta,\upsilon} \upsilon_j \right) \right]
+\end{equation*}
+\begin{equation*}
+\mathcal{M}_2 G^{\,n + 1}_{j} = \mathcal{M}_2 G^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{ik\Delta x}\right) \left(  \mathcal{F}_2^{G,\eta} \eta_{j}  + \mathcal{F}_2^{G,\upsilon} \upsilon_j \right) \right]
+\end{equation*}
+
+Furthermore by transforming the $G$'s into $\upsilon$'s using our second order finite volume factor $\mathcal{G}_{FD2}$ and using $\mathcal{M}_2 = 1$ we obtain
+
+
+\begin{equation*}
+\eta^{\,n + 1}_{j} = \eta^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{ik\Delta x}\right) \left(\mathcal{F}_2^{\eta,\eta} \eta_{j}  + \mathcal{F}_2^{\eta,\upsilon} \upsilon_j \right) \right]
+\end{equation*}
+\begin{equation*}
+\upsilon^{\,n + 1}_{j} = \upsilon^{\,n }_{j} -  \frac{1}{\mathcal{G}_{FD2}}\frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{ik\Delta x}\right) \left(  \mathcal{F}_2^{G,\eta} \eta_{j}  + \mathcal{F}_2^{G,\upsilon} \upsilon_j \right) \right]
+\end{equation*}
+
+This can be written in matrix form as
+
+\begin{equation*}
+\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n+1}_j = \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j - \frac{\left(1 - e^{ik\Delta x}\right) \Delta t}{\Delta x}\left[\begin{array}{c c}
+\mathcal{F}_2^{\eta,\eta} & \mathcal{F}_2^{\eta,\upsilon} \\ \frac{1}{\mathcal{G}}\mathcal{F}_2^{\upsilon,\eta} &  \frac{1}{\mathcal{G}}\mathcal{F}_2^{\upsilon,\upsilon} 
+\end{array}\right]\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j
+\end{equation*}
+
+Introducing 
+
+\[\boldsymbol{F}_2 = \frac{\left(1 - e^{ik\Delta x}\right)}{\Delta x}\left[\begin{array}{c c}
+\mathcal{F}_2^{\eta,\eta} & \mathcal{F}_2^{\eta,\upsilon} \\ \frac{1}{\mathcal{G}}\mathcal{F}_2^{\upsilon,\eta} &  \frac{1}{\mathcal{G}}\mathcal{F}_2^{\upsilon,\upsilon} 
+\end{array}\right] \]
+
+this becomes
+
+\begin{equation*}
+\label{eqn:matrixevolupdate}
+\left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n+1}_j = \left(\boldsymbol{I}  - \Delta t \boldsymbol{F}_2 \right) \left[\begin{array}{c}
+\eta \\ \upsilon
+\end{array}\right]^{n}_j
+\end{equation*}
+
+
+\end{document}

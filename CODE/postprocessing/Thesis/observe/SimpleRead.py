@@ -7,26 +7,25 @@ from numpy import ones
 
 
 
-wdir = "../../../../../data/ThesisRAW/DambreakPaper/ASPECTRAT/differentleft/dx11/1.5/"
+wdir = "../../../experimentcode/data/2018/raw/Thesis/Forced/Dry/FDVM/10/"
 
 
 
-s = wdir + "outlast.txt"
+s = wdir + "outList5.00022155289s.txt"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
-    h = []
-    u = []
+    b = []
+    w = []
     x = []
     j = -1
     for row in readfile:       
         if (j >= 0):
            
             #ASPECTRAT/constantmultiplier
-            x.append(float(row[3]))
-            t =float(row[2])
-            h.append(float(row[4]))
-            u.append(float(row[6]))
+            x.append(float(row[0]))
+            b.append(float(row[4]))
+            w.append(float(row[5]))
             
             
             
@@ -38,8 +37,8 @@ with open(s,'r') as file1:
 
     n = len(x)        
     x = array(x)
-    u = array(u)
-    h = array(h)
+    b = array(b)
+    w = array(w)
     
 
    

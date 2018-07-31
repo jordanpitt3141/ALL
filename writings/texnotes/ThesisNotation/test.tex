@@ -2,9 +2,12 @@
 \usepackage{amsmath}
 \usepackage{ amssymb }
 \usepackage{breqn}
+\usepackage{tikz}
 \begin{document}
 \newcommand{\matr}[1]{\mathbf{#1}}
 \newcommand{\vecn}[1]{\boldsymbol{#1}}
+\newcommand{\squaren}[1]{\tikz{\filldraw[draw=#1,fill=#1] (0,0) rectangle (0.2cm,0.2cm);}}
 
 $\vecn{G} \matr{G}$
+\squaren{black}
  \end{document}

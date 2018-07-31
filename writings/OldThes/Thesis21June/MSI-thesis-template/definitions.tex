@@ -1,0 +1,41 @@
+  \usepackage{amssymb}
+  \usepackage{latexsym}
+  \usepackage{amsfonts}
+  \usepackage{amsthm}
+  \usepackage{amsmath}
+
+
+% put your command and environment definitions here
+
+
+
+
+% some theorem environments
+% remove "[theorem]" if you do not want them to use the same number sequence
+
+
+  \newtheorem{theorem}{Theorem}[chapter]
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{prop}[theorem]{Proposition}
+  \newtheorem{cor}[theorem]{Corollary}
+
+  \newtheorem{conj}{Conjecture}
+  \renewcommand{\theconj}{\Alph{conj}}  % numbered A, B, C etc
+  
+  \newcommand{\matr}[1]{\mathbf{#1}}
+  \newcommand{\vecn}[1]{\boldsymbol{#1}}
+  \newcommand\solidrule[1][0.25cm]{\rule[0.5ex]{#1}{1.5pt}}
+  \newcommand\dashedrule{\mbox{%
+  		\solidrule[2mm]\hspace{2mm}\solidrule[2mm]}}
+  
+  \newcommand{\dotrule}[1][4mm]{%
+  	\parbox{#1}{\dotfill}} 
+
+  \theoremstyle{definition}
+  \newtheorem{defn}[theorem]{Definition}
+  \newtheorem{ex}[theorem]{Example}
+  \newtheorem{exs}[theorem]{Examples}
+  \newtheorem{question}[theorem]{Question}
+  \newtheorem{remark}[theorem]{Remark}
+  \newtheorem{notn}[theorem]{Notation}
+  \newtheorem{alg}[theorem]{Algorithm}

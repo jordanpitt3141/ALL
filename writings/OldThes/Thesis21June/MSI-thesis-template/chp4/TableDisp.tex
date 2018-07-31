@@ -1,0 +1,108 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\usepackage{adjustbox}
+\begin{document}
+	
+\[Error = Approximation - Exact\]	
+ \section{Cell Average to Nodal Values}
+
+\begin{tabular}{l  c  c}
+	Variable& Formula& Lowest Order of Error \\
+	\hline && \\
+	$\mathcal{M}_A$& $\dfrac{2}{k \Delta x } \sin\left(\dfrac{k\Delta x}{2}\right)$ & $-$ \\ & & \\
+	$\mathcal{M}_1$& $1$ & $\dfrac{k^2 \Delta x^2}{24}$ \\ & & \\
+	$\mathcal{M}_2$& $1$ & $\dfrac{k^2 \Delta x^2}{24}$ \\ & & \\
+	$\mathcal{M}_3$& $\dfrac{24}{26 - 2 \cos\left(k \Delta x\right)}$ & $\dfrac{3k^4 \Delta x^4}{640}$ \\ & & \\
+\end{tabular}
+
+ \section{Reconstruction}
+ 
+  \subsection{Reconstructions for $\eta$ and $G$ }
+  
+  \subsubsection{$\mathcal{R}^+$}
+ \begin{tabular}{l  c  c}
+ 	Variable& Formula& Lowest Order of Error\\
+ 	\hline && \\
+ 	$\mathcal{R}^+_A$& $\exp\left(i k \dfrac{\Delta x}{2}\right)$ & $-$ \\ & & \\
+ 	$\mathcal{R}^+_1$& $\exp\left(i k {\Delta x}\right)$ & $\dfrac{1}{2}k \Delta x$ \\ & & \\
+ 	$\mathcal{R}^+_2$& $\exp\left(i k {\Delta x}\right) \left(1 - \dfrac{i \sin\left(k\Delta x \right)}{2} \right)$ & $\dfrac{1}{8}k^2 \Delta x^2$ \\ & & \\
+ 	$\mathcal{R}^+_3$& $\dfrac{2\exp\left(2ik \Delta x\right) - 10\exp\left(ik \Delta x\right) - 4}{\cos\left(k \Delta x\right) - 13}$ & $\dfrac{i}{12}k^3 \Delta x^3$ \\ & & \\
+ \end{tabular}
+
+
+  \subsubsection{$\mathcal{R}^-$}
+  \begin{tabular}{l  c  c}
+  	Variable& Formula& Lowest Order of Error\\
+  	\hline && \\
+  	$\mathcal{R}^-_A$& $\exp\left(i k \dfrac{\Delta x}{2}\right)$ & $-$ \\ & & \\
+  	$\mathcal{R}^-_1$& $1$ & $\dfrac{1}{2}k \Delta x$ \\ & & \\
+  	$\mathcal{R}^-_2$& $1 +  \dfrac{i \sin\left(k\Delta x \right)}{2}$ & $\dfrac{1}{8}k^2 \Delta x^2$ \\ & & \\
+  	$\mathcal{R}^-_3$& $\dfrac{2 \exp\left(-i k \Delta x\right) - 4\exp\left(i k \Delta x\right) - 10}{\cos\left(k \Delta x\right) - 13}$ & $-\dfrac{i}{12}k^3 \Delta x^3$ \\ & & \\
+  \end{tabular}
+
+
+ \subsection{Reconstruction for $\upsilon$ } 
+ 
+   \subsubsection{$\mathcal{R}^u$}
+   \begin{tabular}{l  c  c}
+   	Variable& Formula& Lowest Order of Error\\
+   	\hline && \\
+   	$\mathcal{R}^u_A$& $\exp\left(i k \dfrac{\Delta x}{2}\right)$ & $-$ \\ & & \\
+   	$\mathcal{R}^u_1$& $\dfrac{\exp\left(i k \Delta x\right) + 1}{2}$ & $-\dfrac{1}{8} k^2 \Delta x^2$ \\ & & \\
+   	$\mathcal{R}^u_2$& $\dfrac{\exp\left(i k \Delta x\right) + 1}{2}$ & $-\dfrac{1}{8}k^2 \Delta x^2$ \\ & & \\
+   	$\mathcal{R}^u_3$& $\dfrac{-\exp\left(-ik \Delta x\right) + 9 \exp\left(ik \Delta x\right) -\exp\left(2ik \Delta x\right) + 9}{16}$ & $-\dfrac{3}{128}k^4 \Delta x^4$ \\ & & \\
+   \end{tabular}
+
+ \section{Elliptic Equation}
+ 
+    \begin{tabular}{l  c  c}
+    	Variable& Formula& Lowest Order of Error\\
+    	\hline && \\
+    	$\mathcal{G}_A$& $H + \dfrac{H^3}{3}k^2$ & $-$ \\ & & \\
+    	$\mathcal{G}_1$& $H - \dfrac{H^3}{3}\dfrac{2\cos\left(k \Delta x\right) -2}{\Delta x^2}$ & $-\dfrac{H^3}{36}k^4 \Delta x ^2$ \\ & & \\
+    	$\mathcal{G}_{2FD}$& $H - \dfrac{H^3}{3}\dfrac{2\cos\left(k \Delta x\right) -2}{\Delta x^2}$ & $-\dfrac{H^3}{36}k^4 \Delta x ^2$ \\ & & \\
+ 	    $\mathcal{G}_{2FEM}$& $*$ & $-\dfrac{3 H}{40}k^2 \Delta x^2 - \dfrac{H^3}{36}k^4 \Delta x^2$ \\ & & \\
+    	$\mathcal{G}_3$& $H - \dfrac{H^3}{3}\dfrac{32\cos\left(k \Delta x\right) -2\cos\left(2k \Delta x\right) - 30}{12 \Delta x^2}$ & $-\dfrac{H^3}{270}k^6 \Delta x ^4$ \\ & & \\
+    \end{tabular}
+    
+\begin{multline}
+\mathcal{G}_{2FEM} =  \Bigg(\dfrac{2 H^3}{3 \Delta x ^2} \left(\exp\left(ik \dfrac{3\Delta x}{2}\right) + 14 \exp\left(ik \dfrac{\Delta x}{2}\right) - 8 \exp\left(ik\Delta x\right) - 8 + \exp\left(-ik \dfrac{\Delta x}{2}\right)\right) \\ + \dfrac{H}{5}\left(-\exp\left(ik \dfrac{3\Delta x}{2}\right) + 8 \exp\left(ik \dfrac{\Delta x}{2}\right) + 2\exp\left(ik \Delta x\right) + 2 - \exp\left(-ik \dfrac{\Delta x}{2}\right)\right) \Bigg) \div \\\left( - \dfrac{1}{4} \exp\left(2 i \Delta x k\right) + \exp\left(i \Delta x k\right) + \dfrac{i}{2} \sin\left(k\Delta x\right) + \dfrac{5}{4} \right) 
+\end{multline}
+
+
+ \section{Conservation Equation}
+ \iffalse 
+Original equation
+\[\frac{\partial q}{\partial t} + \frac{\partial f(q)}{\partial x} = 0\]
+
+Because we have linearised the equations $f()$ is linear in $q$ we get that
+
+\[i\omega q^n_j + ik f(q^n_j) = 0\]
+
+We however do not solve the original equation, but instead solve an integrated version
+
+\[\Delta x\left(\bar{q}^{n+1}_j - \bar{q}^{n}_j \right) + \Delta t \left(F^n_{j+1/2} - F^n_{j-1/2}\right) = 0\]
+
+Using again that $f$ is linear and using our error coefficients we have
+\begin{multline}
+\Delta x \mathcal{M}\left(\exp\left(i \omega \Delta t\right) - 1 \right)\bar{q}^{n}_j  + \Delta t \frac{1}{i \omega \Delta t}\left(\exp\left(i \omega \Delta t\right) - 1\right) \\\left(\exp\left(i k \frac{\Delta x}{2}\right) - \left(\exp\left(i k \frac{\Delta x}{2}\right)\right) \right)f(q^n_j) = 0
+\end{multline}
+\fi
+
+
+\begin{adjustbox}{angle=90}
+  \begin{tabular}{l c c c c c}
+     	Variable& Exact &\multicolumn{4}{l}{Lowest Order Truncation Term}\\
+     	 & &  \multicolumn{4}{l}{\rule{1\textwidth}{0.4pt}} \\
+     	 & & $\text{FDVM}_1$& $\text{FDVM}_2$& $\text{FEVM}_2$ & $\text{FDVM}_3$ \\
+     	 \hline \\
+     	$ \frac{\mathcal{D}}{\mathcal{M}\Delta x}\mathcal{F}^{\eta,\eta}$& $0$ & $\frac{\sqrt{gH}}{2}k^2 \Delta x$&$\frac{\sqrt{gH}}{8}k^4 \Delta x^3$& $\frac{\sqrt{gH}}{8}k^4 \Delta x^3$ & $\frac{\sqrt{gH}}{12}k^4 \Delta x^3$ \\ [5mm]
+     	$\frac{\mathcal{D}}{\mathcal{M}\Delta x} \mathcal{F}^{\eta,\upsilon}$& $ikH$  &$ -\frac{iH}{6} k^3 \Delta x^2$&$ -\frac{iH}{6} k^3 \Delta x^2$& $ -\frac{iH}{24} k^3 \Delta x^2$ & $ -\frac{9iH}{320} k^5 \Delta x^4$ \\ [5mm]
+  	    $ \frac{\mathcal{D}}{\mathcal{G}\mathcal{M}\Delta x} \mathcal{F}^{G,\eta}$& $\dfrac{3ikgH}{H^2k^2 +3}$ & $-\frac{ig\left(H^2k^2 + 6\right)}{4\left(H^2k^2 +3\right)^2} k^3 \Delta x^2$ & $\frac{ig\left(2H^2k^2 + 3\right)}{4\left(H^2k^2 +3\right)^2} k^3 \Delta x^2$& $\frac{ig\left(57 + 20H^2k^2\right)}{40\left(3 + h^2k^2\right)^2} k^3 \Delta x^2$ & $-\frac{ig\left(9 + 2H^2k^2\right)}{30\left(3 + h^2 k^2\right)^2}k^5 \Delta x^4$ \\  [5mm]
+  	    $\frac{\mathcal{D}}{\mathcal{G}\mathcal{M}\Delta x} \mathcal{F}^{G,\upsilon}$& $0$ & $\frac{\sqrt{gH}}{2}k^2 \Delta x$&$\frac{\sqrt{gH}}{8}k^4 \Delta x^3$& $\frac{\sqrt{gH}}{8}k^4 \Delta x^3$ & $\frac{\sqrt{gH}}{12}k^4 \Delta x^3$ \\ 
+  \end{tabular}
+\end{adjustbox}
+
+\end{document}

@@ -64,7 +64,7 @@ def solitoninit(a0,a1,g,x,t0,dx):
         w[i] = h[i]
         u[i] =  c* (1 - a0 / h[i])
         G[i] = 2.0/3*a0*a1*c*k**2*sech(k*(x[i] - c*t0))**4*h[i] + h[i]*u[i] - 4.0/3*a0*a1**2*c*k**2*sech(k*(x[i] - c*t0))**4*tanh(k*(x[i] - c*t0))**2 - 4.0/3*a0*a1*c*k**2*sech(k*(x[i] - c*t0))**2*h[i]*tanh(k*(x[i] - c*t0))**2
-    
+        
     return h,u,G,w,b
 
 def close(t,ts,dt):
@@ -76,6 +76,7 @@ def close(t,ts,dt):
     
     return var    
 
+
 #Soliton  
 wdirb = "../../../data/2018/raw/Thesis/Soltion/FEVM/"  
 if not os.path.exists(wdirb):
@@ -84,7 +85,7 @@ if not os.path.exists(wdirb):
 L1us = []
 L1hs = []
 dxs = []
-for ki in range(6,20):
+for ki in range(8,9):
     wdir = wdirb + str(ki) + "/"
     
     if not os.path.exists(wdir):
@@ -123,6 +124,7 @@ for ki in range(6,20):
     
     h,u,G,w,b = solitoninit(a0,a1,g,x,startt,dx)
     
+    """
     hMbeg,uMbeg,GMbeg,wMbeg,bta = solitoninit(a0,a1,g,xhuMbeg,startt,dx)
     hMend ,uMend ,GMend,wMend,bta = solitoninit(a0,a1,g,xhuMend,startt,dx)
     
@@ -186,7 +188,7 @@ for ki in range(6,20):
     
     
     ht,ut,Gt,wt,bt = solitoninit(a0,a1,g,x,t,dx)
-    
+
     s = wdir +  "outlast.txt"
     with open(s,'a') as file2:
         writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -224,6 +226,7 @@ for ki in range(6,20):
     deallocPy(wMbeg_c)
     deallocPy(wMend_c)
 
+
 n = len(dxs)
 s = wdirb + "L1h.dat"
 with open(s,'w') as file1:
@@ -236,3 +239,4 @@ with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",L1us[i])
         file1.write(s)  
+        """

@@ -338,17 +338,18 @@ with open(s,'r') as file1:
             WGloc.append(round(float(row[0]),1))  
 
 
+
 g = 9.81
 sr = 0.02
-dt = sr/ (2**3)
-dx = 0.1 / (2**2)
+dt = sr/ (2**1)
+dx = 0.1 / (2**0)
 l = 1.0 / (5 + sqrt(g*4))
 
 theta = 1.2
 sx = WGloc[0] + 0.5*dx
-ex = 400
-st = texp[0]
-et = 119
+ex = 100
+st = 0
+et = 20
 hb = 2.46
 
 

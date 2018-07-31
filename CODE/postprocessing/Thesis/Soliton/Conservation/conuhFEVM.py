@@ -159,7 +159,7 @@ sdirord = "FEVM2"
 #wdir = "../../../../data/raw/NEWdata/FDredo/grim/"
 #sdir = "../../../../data/postprocessing/scFDallAE/grim/"
 
-wdirb = "../../../../../data/raw/Thesis/Soliton/"+wdirord+"/"
+wdirb = "../../../../../../data/raw/Thesis/Soltion/"+wdirord+"/"
 Mns = []
 Pns = []
 Mis = []
@@ -170,13 +170,13 @@ Eis = []
 Gns = []
 Gis = []
 
-sdir = "../../../../../data/ThesisPost/Soliton/"+sdirord+"/C1/"
+sdir = "../../../../../../data/ThesisPost/Soliton/"+sdirord+"/C1/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)
         
         
-for ki in range(6,18):
+for ki in range(6,19):
         
         
     wdir = wdirb + str(ki) + "/"

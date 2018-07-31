@@ -5,9 +5,15 @@
 \documentclass[a4paper,12pt]{book}
 \usepackage{mathtools}
 \usepackage{subcaption}
+\usepackage{enumerate}
 \usepackage{lscape}
 \usepackage{graphicx,psfrag}
 \usepackage{pgfplotstable}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usepackage[numbers]{natbib} 
+\bibliographystyle{unsrtnat}
+\pgfplotsset{compat=1.13}
 
   % a file containing your definitions, which packages to load etc
   \include{definitions}
@@ -46,12 +52,12 @@
 
 
   % remove or switch the order of these as you see fit
-  %\include{titlepage}\blanknonumber
+ %\include{titlepage}\blanknonumber
   %\include{dedication}\blanknonumber
   %\include{declaration}\blanknonumber
   %\include{acknowledgements}\blanknonumber
   %\include{abstract}\blanknonumber
-  %\tableofcontents\blanknonumber
+ \tableofcontents\blanknonumber
   %\include{notation}\blanknonumber
 
 
@@ -60,12 +66,12 @@
   \mainmatter
 
   % assuming there are files chapter1.tex etc...
-  %\include{chp1/chapter}
-  %\include{chp2/chapter}
-  %\include{chp3/chapter}
+ \include{chp1/chapter}
+  \include{chp2/chapter}
+  \include{chp3/chapter}
   \include{chp4/chapter}
   \include{chp5/chapter}
-  %\include{chp6/chapter}
+  \include{chp6/chapter}
   %\include{chp7/chapter}
 
   %etc
@@ -77,11 +83,11 @@
 
 
   % change chapter name and counters (eg Chapter 1 -> Appendix A)
-  %\appendix
+  \appendix
 
 
   % assuming there are files appendix1.tex etc...
-  %\include{appendix1}
+  \include{app1/appendix}
   %\include{appendix2}
   %\include{appendix3}
   %etc
@@ -98,7 +104,7 @@
 
   % list BibTeX (.bib) files and choose bibliography style
   \bibliography{bibliography}
-  \bibliographystyle{abbrv}
+  %\bibliographystyle{abbrv}
 
   % OR... do it manually in the file bibliography.tex
   %\include{bibliography}

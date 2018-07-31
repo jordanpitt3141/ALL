@@ -1,0 +1,58 @@
+\documentclass[pdf]{article}
+\usepackage{pgfplots} 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
+\usepgfplotslibrary{fillbetween}
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest}
+\begin{document} 
+	\begin{tikzpicture} 
+	\begin{axis}[ 
+	width = 0.7\textwidth,
+	axis lines=left, xtick=\empty,
+	ytick={0.75,0.1},
+	yticklabels=\empty,
+	clip mode=individual,
+	xmin=0, 
+	xmax=1, 
+	width = 6cm,
+	height = 6cm,
+	ymin = 0, 
+	ymax = 1,
+	xlabel=$x$, 
+	ylabel=$z$ ]
+
+	\path[name path=axis] (axis cs:0,0) -- (axis cs:1,0); 
+	
+	%\node[left] at (0,0.9) {$h$};
+	\addplot[domain=0:1,samples=100, smooth, name path=h,blue] gnuplot[id=sin1]{0.75 + 0.05*sin(27*x)};
+	
+	\addplot[domain=0:1,samples=100, smooth, name path=b,brown] gnuplot[id=sin2]{0.1 + 0.05*cos(15*x)};
+	
+	\addplot [
+	thick,
+	color=blue,
+	fill=blue, 
+	fill opacity=0.3
+	] fill between[of=h and b];
+
+
+	\addplot [
+	thick,
+	color=brown,
+	fill=brown, 
+	fill opacity=0.3
+	] fill between[of=b and axis];	
+	
+	\addplot [dashed,black] coordinates {(0,0.75) (1,0.75)};
+	\node[left] at (0,0.75) {$H$};
+	
+	\addplot [dashed,black] coordinates {(0,0.1) (1,0.1)};
+	\node[left] at (0,0.1) {$B$};
+	
+	
+	\end{axis} 
+	\end{tikzpicture}  
+\end{document}

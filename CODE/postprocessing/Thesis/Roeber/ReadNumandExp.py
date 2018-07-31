@@ -9,8 +9,8 @@ import os
 
 expdir = "../../../../../data/Experimental/HIreef/Trial8/"
 
-wdir = "../../../../../data/raw/Thesis/Experiment/Roeber/Trial8/FEVM/run4/"
-sdirb = "../../../../../data/ThesisPost/Experiment/Roeber/Trial8/FEVM/"
+wdir = "../../../../../data/raw/Thesis/Experiment/Roeber/Trial8/FEVMFluxSplit/run2/"
+sdirb = "../../../../../data/ThesisPost/Experiment/Roeber/Trial8/FEVMFin/"
 sdirexp =sdirb + "Exp/"
 sdirnum =sdirb + "Num/"
 

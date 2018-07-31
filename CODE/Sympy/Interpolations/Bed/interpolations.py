@@ -28,6 +28,18 @@ def cubicLeft(a,b,c,d,f,g,h,i,x):
 
     return solve_linear_system(system, a, b,c,d)   
 
+def cubicLeftBC(a,b,c,d,f,g,h,i,x):
+    system = Matrix( (((-x)**3,(-x)**2,(-x),1,f), (0,0,0,1,g), \
+                  ((x)**3,(x)**2,x,1,h), ((2*x)**3,(2*x)**2,(2*x),1,i)))
+
+    return solve_linear_system(system, a, b,c,d)  
+
+def cubicRightBC(a,b,c,d,f,g,h,i,x):
+    system = Matrix( (((x)**3,(x)**2,(x),1,f), (0,0,0,1,g), \
+                  ((-x)**3,(-x)**2,-x,1,h), ((-2*x)**3,(-2*x)**2,-2*x,1,i)))
+
+    return solve_linear_system(system, a, b,c,d)  
+
 def cubicRight(a,b,c,d,f,g,h,i,x):
     system = Matrix( (((3*x)**3,(3*x)**2,(3*x),1,f), ((2*x)**3,(2*x)**2,(2*x),1,g), \
                   ((x)**3,(x)**2,x,1,h), (0,0,0,1,i)))
@@ -51,6 +63,9 @@ x = Symbol('x')
 
 CubicCent = cubicCent(a,b,c,d,f,g,h,i,x)
 #QuadCent = quadCent(a,b,c,f,g,h,x)
+
+CubicRightBC = cubicRightBC(a,b,c,d,f,g,h,i,x)
+CubicLeftBC = cubicLeftBC(a,b,c,d,f,g,h,i,x)
 
 CubicRight = cubicRight(a,b,c,d,f,g,h,i,x)
 CubicLeft = cubicLeft(a,b,c,d,f,g,h,i,x)

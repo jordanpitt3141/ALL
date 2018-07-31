@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Elliptic Equation}
+The linearised elliptic equation is
+
+\[G = Hu - \frac{H^3}{3}u_{xx}\]
+
+Want to find out the FEM approximation to this $G'$ such that
+
+\[G' = \mathcal{G}_{FE_1} u\]
+
+for $P^1$ FEM
+
+\[G' = \mathcal{G}_{FE_2} u\]
+
+for $P^2$ FEM.
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+\[Gv = Huv - \frac{H^3}{3}u_{xx}v\]
+
+and then we integrate over the entire domain to get 
+\[\int_\Omega Gv dx = \int_\Omega Huv dx - \int_\Omega \frac{H^3}{3}u_{xx}vdx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega Huv dx + \int_\Omega \frac{H^3}{3}u_{x}v_xdx\]
+
+Our FVM discretisation already has a natrual structure with linear functions intervals of like $[x_{j- 1/2} , x_{j+1/2}]$
+
+So we can reformulate this as 
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} Gv dx = \sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} Huv dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} \frac{H^3}{3}u_{xx}vdx\]
+
+or more aptly
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} Gv dx - \int_{x_{j-1/2}}^{x_{j+1/2}} Huv dx - \int_{x_{j-1/2}}^{x_{j+1/2}} \frac{H^3}{3}u_{xx}vdx = 0 \]
+
+for all v
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} Gv dx - H\int_{x_{j-1/2}}^{x_{j+1/2}} uv dx -  \frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+1/2}}u_{xx}vdx = 0 \]
+
+
+
+\end{document}

@@ -1,0 +1,122 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Elliptic Equation}
+The linearised elliptic equation is
+
+\[G = Hu - \frac{H^3}{3}u_{xx}\]
+
+Want to find out the FEM approximation to this $G'$ such that
+
+\[G' = \mathcal{G}_{FE_1} u\]
+
+for $P^1$ FEM
+
+\[G' = \mathcal{G}_{FE_2} u\]
+
+for $P^2$ FEM.
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+\[Gv = Huv - \frac{H^3}{3}u_{xx}v\]
+
+and then we integrate over the entire domain to get 
+\[\int_\Omega Gv dx = \int_\Omega Huv dx - \int_\Omega \frac{H^3}{3}u_{xx}vdx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega Huv dx + \int_\Omega \frac{H^3}{3}u_{x}v_xdx\]
+
+Our FVM discretisation already has a natrual structure with linear functions intervals of like $[x_{j- 1/2} , x_{j+1/2}]$
+
+So we can reformulate this as 
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} Gv dx = \sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} Huv dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} \frac{H^3}{3}u_{xx}vdx\]
+
+or more aptly
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} Gv dx - \int_{x_{j-1/2}}^{x_{j+1/2}} Huv dx - \int_{x_{j-1/2}}^{x_{j+1/2}} \frac{H^3}{3}u_{xx}vdx = 0 \]
+
+for all v
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+1/2}} Gv dx - H\int_{x_{j-1/2}}^{x_{j+1/2}} uv dx -  \frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+1/2}}u_{xx}vdx = 0 \]
+
+Each of these integrals has been computed by Chris previously, for the basis functions that are non-zero on the element. We include just the basis function which is 1 at $x_j$
+
+\[\int_{x_{j-1/2}}^{x_{j+1/2}} Gv dx = \frac{dx}{d\xi}\int_{-1}^{1} Gv d\xi  = \frac{\Delta x}{15} \left[
+G^+_{j - 1/2} + 8G_{j} + G^{-}_{j+1/2} \right]\]
+
+
+\[H\int_{x_{j-1/2}}^{x_{j+1/2}} uv dx = \frac{dx}{d\xi}H\int_{-1}^{1} uv d\xi =  \frac{H\Delta x}{15} \left[
+u_{j - 1/2} + 8u_{j} + u_{j+1/2} \right]\]
+
+\[\frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+1/2}}u_{x}v_{x}dx = \frac{d\xi}{dx}\frac{H^3}{3}\int_{-1}^{1} u_\xi v_\xi d\xi = \frac{H^3}{3} \frac{2}{3\Delta x}\left[ -
+4u_{j - 1/2} + 8u_{j} - 4u_{j+1/2} \right]\]
+
+So we ahve 
+
+\begin{multline}
+ \frac{\Delta x}{15} \left[
+ G^+_{j - 1/2} + 8G_{j} + G^{-}_{j+1/2} \right] \\= \frac{H\Delta x}{15} \left[
+ u_{j - 1/2} + 8u_{j} + u_{j+1/2} \right] + \frac{H^3}{3} \frac{2}{3\Delta x}\left[ -
+ 4u_{j - 1/2} + 8u_{j} - 4u_{j+1/2} \right]
+\end{multline}
+
+\begin{multline}
+\frac{\Delta x}{15} \left[
+G^+_{j - 1/2} + 8G_{j} + G^{-}_{j+1/2} \right] \\= \frac{H\Delta x}{15} \left[
+u_{j - 1/2} + 8u_{j} + u_{j+1/2} \right] + \frac{H^3}{3} \frac{8}{3\Delta x}\left[ -
+u_{j - 1/2} + 2u_{j} - u_{j+1/2} \right]
+\end{multline}
+
+\begin{multline}
+\frac{1}{5} \left[
+G^+_{j - 1/2} + 8G_{j} + G^{-}_{j+1/2} \right] \\= \frac{H\Delta x}{5} \left[
+u_{j - 1/2} + 8u_{j} + u_{j+1/2} \right] + \frac{H^3}{3} \frac{8}{\Delta x^2}\left[ -
+u_{j - 1/2} + 2u_{j} - u_{j+1/2} \right]
+\end{multline}
+
+\begin{multline}
+ \left[
+G^+_{j - 1/2} + 8G_{j} + G^{-}_{j+1/2} \right] \\= H \left[
+u_{j - 1/2} + 8u_{j} + u_{j+1/2} \right] + \frac{H^3}{3} \frac{40}{\Delta x^2}\left[ -
+u_{j - 1/2} + 2u_{j} - u_{j+1/2} \right]
+\end{multline}
+
+This formula works, then using our shift operators we can do
+
+\begin{multline}
+\left[
+e^{-ik\Delta x}\mathcal{R}^+ + 8 + \mathcal{R}^- \right] G_{j} \\=\left( H \left[
+e^{-ik\Delta x/2} + 8 + e^{ik\Delta x/2}\right] + \frac{H^3}{3} \frac{40}{\Delta x^2}\left[ -
+e^{-ik\Delta x/2} + 2 - e^{ik\Delta x/2} \right] \right) u_j
+\end{multline}
+
+\begin{multline}
+ G_{j} \\= \frac{1}{
+ 	e^{-ik\Delta x}\mathcal{R}^+ + 8 + \mathcal{R}^-}\left( H \left[8 + 2 \cos\left(k\Delta x/2\right) \right] + \frac{H^3}{3} \frac{40}{\Delta x^2}\left[ 2 - 2 \cos\left(k\Delta x/2\right) \right] \right) u_j
+\end{multline}
+
+\begin{multline}
+G_{j} \\= \frac{2}{
+	e^{-ik\Delta x}\mathcal{R}^+ + 8 + \mathcal{R}^-}\left( H \left[4 +  \cos\left(k\Delta x/2\right) \right] + \frac{H^3}{3} \frac{40}{\Delta x^2}\left[1 -  \cos\left(k\Delta x/2\right) \right] \right) u_j
+\end{multline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

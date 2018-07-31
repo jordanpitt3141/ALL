@@ -1,0 +1,60 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Elliptic Equation}
+The linearised elliptic equation is
+
+\[G = H\upsilon -\frac{H^3}{3} \left(\frac{\partial^2 \upsilon}{\partial x^2}\right)\]
+
+Taking the weak version of this we get that
+
+\[\int_{\Omega}G  v \; dx = H \int_{\Omega} \upsilon v \; dx -\frac{H^3}{3}  \int_{\Omega} \frac{\partial^2 \upsilon}{\partial x^2} v \; dx\]
+
+\[\int_{\Omega}G  v \; dx = H \int_{\Omega} \upsilon v \; dx  + \frac{H^3}{3}  \int_{\Omega} \frac{\partial \upsilon}{\partial x} \frac{\partial v}{\partial x} \; dx\]
+
+In particular for the basis function $\phi_j$ we must have
+
+\[\int_{\Omega}G  \phi_j \; dx = H \int_{\Omega} \upsilon \phi_j \; dx  + \frac{H^3}{3}  \int_{\Omega} \frac{\partial \upsilon}{\partial x} \frac{\partial \left(\phi_j\right)}{\partial x} \; dx\]
+
+We use the FEM discretisation from []
+
+\begin{equation*}
+G = \sum_j G^+_{j-1/2}\psi^+_{j-1/2}  + G^-_{j+1/2}\psi^-_{j+1/2}
+\end{equation*}
+
+and
+
+\begin{equation}
+\upsilon = \sum_j \upsilon_{j-1/2}\phi_{j-1/2} + \upsilon_{j+1/2}\phi_{j+1/2}
+\end{equation}
+
+From our equation making the substitutions and integrating the basis functions we get that
+\begin{equation}
+ \sum _j \frac{\Delta x}{2}\begin{bmatrix} \frac{1}{3}  \\\frac{1}{3}  \end{bmatrix} \begin{bmatrix} G^+_{j-1/2}  \\G^-_{j+1/2} \end{bmatrix} =  \sum_j H \frac{\Delta x}{2} \begin{bmatrix} \frac{4}{15}  && \frac{-1}{15}  \\\frac{-1}{15} && \frac{14}{15}   \end{bmatrix} \begin{bmatrix} u_{j-1/2}  \\u_{j+1/2}   \end{bmatrix}  + \frac{2H^3}{3\Delta x} \begin{bmatrix} \frac{7}{6}  && \frac{1}{6}  \\\frac{1}{6} && \frac{7}{6}   \end{bmatrix}\begin{bmatrix} u_{j-1/2}  \\u_{j+1/2}   \end{bmatrix}
+\end{equation}
+
+
+\begin{equation}
+\sum _j\frac{1}{3} \begin{bmatrix} e^{-ik\Delta x}\mathcal{R}^+_2 \\\mathcal{R}^-_2  \end{bmatrix} G_j=  \sum_j H \begin{bmatrix} \frac{4}{15}  && \frac{-1}{15}  \\\frac{-1}{15} && \frac{14}{15}   \end{bmatrix} \begin{bmatrix} e^{-ik\frac{\Delta x}{2}}  \\e^{ik\frac{\Delta x}{2}}   \end{bmatrix} u_j  + \frac{4H^3}{3\Delta x^2} \begin{bmatrix} \frac{7}{6}  && \frac{1}{6}  \\\frac{1}{6} && \frac{7}{6}   \end{bmatrix}\begin{bmatrix} e^{-ik\frac{\Delta x}{2}}  \\e^{ik\frac{\Delta x}{2}}   \end{bmatrix} u_j
+\end{equation}
+
+\begin{equation}
+\sum _j\frac{1}{3} \begin{bmatrix} e^{-ik\Delta x}\mathcal{R}^+_2 \\\mathcal{R}^-_2  \end{bmatrix} G_j=  \sum_j H \frac{1}{15}  \begin{bmatrix} 4  && -1 \\-1 && 4   \end{bmatrix} \begin{bmatrix} e^{-ik\frac{\Delta x}{2}}  \\e^{ik\frac{\Delta x}{2}}   \end{bmatrix} u_j  + \frac{4H^3}{3\Delta x^2} \frac{1}{6}  \begin{bmatrix} 7  && 1  \\1 && 7   \end{bmatrix}\begin{bmatrix} e^{-ik\frac{\Delta x}{2}}  \\e^{ik\frac{\Delta x}{2}}   \end{bmatrix} u_j
+\end{equation}
+
+\begin{multline}
+\sum _j\frac{1}{3} \begin{bmatrix} e^{-ik\Delta x}\mathcal{R}^+_2 \\\mathcal{R}^-_2  \end{bmatrix} G_j=  \sum_j H \frac{1}{15}  \begin{bmatrix} 3\cos\left(k \frac{\Delta x}{2}\right) - 5i \sin\left(k \frac{\Delta x}{2}\right) \\3\cos\left(k \frac{\Delta x}{2}\right) + 5i \sin\left(k \frac{\Delta x}{2}\right)  \end{bmatrix} u_j  \\+ \frac{4H^3}{3\Delta x^2} \frac{1}{6} \begin{bmatrix} 8 \cos\left(k \frac{\Delta x}{2}\right) - 6i \sin\left(k \frac{\Delta x}{2}\right)  \\8 \cos\left(k \frac{\Delta x}{2}\right) + 6i \sin\left(k \frac{\Delta x}{2}\right)   \end{bmatrix} u_j
+\end{multline}
+
+If we add the contributions from the overlapping elements we get
+
+\begin{multline}
+\sum _j\frac{1}{3} \begin{bmatrix} e^{-ik\Delta x}\left(\mathcal{R}^-_2 + \mathcal{R}^+_2\right) \\\mathcal{R}^-_2 + \mathcal{R}^+_2   \end{bmatrix} G_j=  \sum_j H \frac{1}{15}  \begin{bmatrix} -2e^{-ik\frac{\Delta x}{2}} \left(\cos\left(2k\frac{\Delta x}{2}\right) - 4\right)\\- 2e^{ik\frac{\Delta x}{2}} \left(\cos\left(2k\frac{\Delta x}{2}\right) - 4\right) \end{bmatrix} u_j  \\+ \frac{4H^3}{3\Delta x^2} \frac{1}{6} \begin{bmatrix}2e^{-ik\frac{\Delta x}{2}} \left(\cos\left(2k\frac{\Delta x}{2}\right) + 7\right)   \\ 2e^{ik\frac{\Delta x}{2}} \left(\cos\left(2k\frac{\Delta x}{2}\right) + 7\right)   \end{bmatrix} u_j
+\end{multline}
+
+easy pattern to get, should be a pattern in the full one as well, the pattern just relates the two vectors, so the mass matrix really is simple.
+
+\end{document}

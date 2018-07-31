@@ -1,0 +1,91 @@
+\chapter{Linear Analysis Results}
+\label{app:LinAnal}
+
+\begin{table}
+	\centering
+	\begin{tabular}{l  c  c}
+		Scheme& Expression& Lowest Order Term of Error \\
+		\hline && \\
+		$\text{FDVM}_1$ & $1$ & $-\dfrac{1}{24}k^2 \Delta x^2$ \\ & & \\
+		$\text{FDVM}_2$ and $\text{FEVM}_2$& $1$ & $-\dfrac{1}{24}k^2 \Delta x^2$ \\ & & \\
+		$\text{FDVM}_3$& $\dfrac{26 - 2 \cos\left(k \Delta x\right)}{24}$ & $-\dfrac{3}{640}k^4 \Delta x^4$ \\ & & \\
+	\end{tabular}
+	\caption{Factor $\mathcal{M}$ from transformation between nodal and cell average values. Where the analytic value is $\mathcal{M} = \dfrac{k\Delta x}{2 \sin \left(k\frac{\Delta x}{2}\right)  }$.}
+	\label{tab:Mfactor}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{l  c  c}
+		Scheme& Formula& Lowest Order Term of Error\\
+		\hline && \\
+		$\text{FDVM}_1$ & $e^{i k {\Delta x}}$ & $\dfrac{i}{2}k \Delta x$ \\ & & \\
+		$\text{FDVM}_2$ and $\text{FEVM}_2$& $e^{i k {\Delta x}} \left(1 - \dfrac{i \sin\left(k\Delta x \right)}{2} \right)$ & $\dfrac{1}{12}k^2 \Delta x^2$ \\ & & \\
+		$\text{FDVM}_3$& $\dfrac{e^{i k {\Delta x}}}{6}\left({5 + 2e^{-i k {\Delta x}} - e^{i k {\Delta x}}} \right)$ & $\dfrac{i}{12}k^3 \Delta x^3$ \\ & & \\
+	\end{tabular}
+	\caption{Factor $\mathcal{R}^+$ from reconstruction of $\eta$ and $G$ at $x^+_{j+1/2}$. Where the analytic value is $\mathcal{R}^+ =e^{i k \Delta x/2} \dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$. }
+	\label{tab:Rpfactor}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{l  c  c}
+		Scheme& Expression& Lowest Order Term of Error\\
+		\hline && \\
+		$\text{FDVM}_1$& $1$ & $-\dfrac{i}{2}k \Delta x$ \\ & & \\
+		$\text{FDVM}_2$ and $\text{FEVM}_2$& $1 +  \dfrac{i \sin\left(k\Delta x \right)}{2}$ & $\dfrac{1}{12}k^2 \Delta x^2$ \\ & & \\
+		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 - e^{-i k {\Delta x}} +2 e^{i k {\Delta x}}} \right)$ & $-\dfrac{i}{12}k^3 \Delta x^3$ \\ & & \\
+	\end{tabular}
+	\caption{Factor $\mathcal{R}^-$ from reconstruction of $\eta$ and $G$ at $x^-_{j+1/2}$. Where the analytic value is $\mathcal{R}^- =e^{i k \Delta x/2} \dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$.}
+	\label{tab:Rmfactor}
+\end{table}
+%
+\begin{table}
+	\centering   
+	\begin{tabular}{l  c  c}
+		Scheme& Expression& Lowest Order Term of Error\\
+		\hline && \\
+		$\text{FDVM}_1$& $\dfrac{3 \Delta x^2 \left(\frac{1 + e^{ik\Delta x}}{2}\right)}{3 \Delta x^2 H - H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $-\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$ \\ & & \\
+		$\text{FDVM}_2$& $\dfrac{3 \Delta x^2 \left(\frac{1 + e^{ik\Delta x}}{2}\right)}{3 \Delta x^2 H - H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $-\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$ \\ & & \\
+		& $\left(\frac{\Delta x}{6} \left(1 + \frac{i \sin\left(k \Delta x\right)}{2} + e^{ik\Delta x}\left(1 - \frac{i \sin\left(k \Delta x\right)}{2}\right) \right)\right)$ & \\  $\text{FEVM}_2$ & $\div  \Bigg(H\frac{\Delta x}{30} \left( 2\left(2\cos\left(\frac{k \Delta x}{2}\right) - \cos\left({k \Delta x}\right) + 4\right)  \right)$  & $\dfrac{12 + 5H^2k^2}{40H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$ \\ &$+ \frac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right)    \Bigg)$ & \\ & & \\
+		$\text{FDVM}_3$&  $\dfrac{36 \Delta x^2 \left(\frac{-e^{-ik\Delta x} + 9e^{ik\Delta x} - e^{2ik\Delta x} + 9}{16}\right)}{36 \Delta x^2H - H^3\left(32\cos\left(k \Delta x\right) -2\cos\left(2k \Delta x\right) - 30\right)}$ & $-\dfrac{243 + 49H^2k^2}{960H\left(3 + H^2k^2\right)^2}k^4 \Delta x^4$ \\ & & \\ 
+	\end{tabular}
+	\caption{Factor $\mathcal{G}$ from solving the elliptic equation \eqref{eqn:LinConSerreGu0} for $\upsilon_{j+1/2}$. Where the analytic value is  $\mathcal{G} = \dfrac{3}{3H + H^3k^2} \dfrac{1}{e^{-ik\Delta x/2}} \dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$.}
+	\label{tab:Gfactor} 
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{adjustbox}{}
+		\begin{tabular}{l c c c c}
+			Scheme &\multicolumn{4}{c}{Variable}\\
+			&  \multicolumn{4}{l}{\rule{0.95\textwidth}{0.4pt}} \\
+			& $\frac{\left(1 - e^{-ik\Delta x}\right)}{\Delta x}\mathcal{F}^{\eta,\eta}$& $\frac{\left(1 - e^{-ik\Delta x}\right)}{\Delta x} \mathcal{F}^{\eta,G}$& $ \frac{\left(1 - e^{-ik\Delta x}\right)}{\Delta x} \mathcal{F}^{G,\eta}$ & $\frac{\left(1 - e^{-ik\Delta x}\right)}{\Delta x} \mathcal{F}^{G,G}$ \\
+			\hline \\
+			Exact &  $0$& $\frac{3ik}{3 +H^2k^2}$ & ${igkH}$ & $0$\\
+			\\ \hline \multicolumn{5}{c}{Lowest Order Error Term from Taylor Series} \\ \hline\\
+			$\text{FDVM}_1$ & $\frac{\sqrt{gH}}{2}k^2 \Delta x$& $ -\frac{i\left(6 + H^2k^2\right)}{4 \left(3 + H^2k^2\right)^2} k^3 \Delta x^2$& $-\frac{igH}{6}k^3 \Delta x^2$&$\frac{\sqrt{gH}}{2}k^2 \Delta x$ \\ [5mm]
+			$\text{FDVM}_2$ & $\frac{\sqrt{gH}}{8}k^4 \Delta x^3$& $-\frac{i\left(6 +H^2k^2\right)}{4H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$& $\frac{igH}{12}k^3 \Delta x^2$&$\frac{\sqrt{gH}}{8}k^4 \Delta x^3$ \\ [5mm]
+			$\text{FEVM}_2$ & $\frac{\sqrt{gH}}{8}k^4 \Delta x^3$& $ \frac{i\left(12 + 5H^2k^2\right)}{40 \left(3 + H^2k^2\right)^2} k^3 \Delta x^2$& $\frac{igH}{12}k^3 \Delta x^2$&$\frac{\sqrt{gH}}{8}k^4 \Delta x^3$ \\ [5mm]
+			$\text{FDVM}_3$ & $\frac{\sqrt{gH}}{12}k^4 \Delta x^3$& $ -\frac{i\left(243 + 49H^2k^2\right)}{960 \left(3 + H^2k^2\right)^2} k^5 \Delta x^4$& $-\frac{igH}{30}k^5 \Delta x^4$&$\frac{\sqrt{gH}}{12}k^4 \Delta x^3$ \\
+		\end{tabular}
+	\end{adjustbox}
+	\caption{Spatial error for elements of $\matr{F}$ for all FDVM and the FEVM.}
+	\label{tab:Ffactor}
+\end{table}
+%
+\begin{table}
+	\centering   
+	\begin{tabular}{l  c  c}
+		Scheme & \multicolumn{2}{c}{Lowest Order Term of Error}\\
+		&  \multicolumn{2}{l}{\rule{0.95\textwidth}{0.4pt}} \\
+		& $\Delta x$&$\Delta t$\\
+		\hline && \\
+		$\text{FDVM}_1$& $\dfrac{i\sqrt{gH}}{2}k^2\Delta x$ & $-\dfrac{3igH}{6 + 2H^2k^2}k^2\Delta t$ \\ & & \\
+		$\text{FDVM}_2$& $-\dfrac{\sqrt{3gH}}{8\left(3 + H^2k^2\right)^{3/2}}k^3\Delta x^2$ & $\dfrac{\sqrt{3}}{2}\left(\dfrac{gH}{3 + H^2k^2}\right)^{3/2} k^3\Delta t^2$ \\ & & \\
+		$\text{FEVM}_2$& $\dfrac{\sqrt{3gH}\left(14 + 5H^2k^2\right)}{80\left(3 + H^2k^2\right)^{3/2}}k^3\Delta x^2$ & $\dfrac{\sqrt{3}}{2}\left(\dfrac{gH}{3 + H^2k^2}\right)^{3/2}k^3\Delta t^2$  \\ & & \\
+		$\text{FDVM}_3$& $\dfrac{i\sqrt{gH}}{12}k^4\Delta x^3$ & $\dfrac{3ig^2H^2}{8\left(3 + H^2k^2\right)^2} k^4\Delta t^3$  \\ & & \\ 
+	\end{tabular}
+	\caption{Table showing lowest order error term for approximating $\omega_+$ for all FDVM and the FEVM. Where the analytic value is  $\omega_+ = k\sqrt{gH}\sqrt{\dfrac{3}{3 + k^2H^2}}$. All cross terms, $\Delta x^a \Delta t^b$ had $a +b$ larger than the reported terms here.}
+	\label{tab:Wfactor} 
+\end{table}

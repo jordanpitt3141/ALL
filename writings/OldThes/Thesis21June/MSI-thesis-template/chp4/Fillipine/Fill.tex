@@ -1,0 +1,230 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+
+
+\section{Linearised Equations}
+
+
+
+\[G = uh  -  \frac{h^3}{3} u_{xx}\]
+
+\[\eta_t + h u_x = 0\]
+
+\[h u_t - \frac{h^3}{3} u_{xxt}  + gh \eta_x  = 0\]
+
+\[ \left(G\right)_t  + gh \eta_x  = 0\]
+
+\section{Numerical Approximation}
+
+We investigate our numerical technique by adding in a fourier mode so $W_j = W_0 e^{ i\left(vt + kx_j\right)}$, and rewriting the equations using our spatial discretisation
+
+\subsection{G}
+
+Analytic:
+
+\[G_j = u_jh _j  -  (\frac{h_j^3}{3} {u_{xx}})_j\]
+
+Numerical approximation, we used second order central differences so we replace the second derivative of u with this approximation to it
+So we get
+
+\[G_j = u_jh _j  -  \frac{h_j^3}{3} \left(\dfrac{u_{j+1} - 2 u_{j} + u_{j-1}}{\Delta x^2}\right)\]
+
+\[G_j = u_0 e^{ i\left(vt + kx_j\right)} h_0 -  \frac{h_0}{3} u_0 \left(\dfrac{e^{ i\left(vt + kx_{j+ 1}\right)} - 2e^{ i\left(vt + kx_j\right)} +e^{ i\left(vt + kx_{j-1}\right)}}{\Delta x^2}\right)\]
+
+\[G_j = u_0 e^{ i\left(vt + kx_j\right)} h_0 -  \frac{h_0}{3} u_0 \left(\dfrac{e^{ i\left(vt + kx_{j}\right) + ik\Delta x} - 2e^{ i\left(vt + kx_j\right)} +e^{ i\left(vt + kx_{j}\right) + ik\Delta x}}{\Delta x^2}\right)\]
+
+
+\[G_j = u_j h_0 -  \frac{h_0}{3} u_j \left(\dfrac{e^{ ik\Delta x} - 2 +e^{ -ik\Delta x}}{\Delta x^2}\right)\]
+
+
+\[G_j = u_j \left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)\]
+
+
+We are dealing with time continuous  variables so, we first take the derivative in time exactly for the Fourier nodes so that:
+
+\[iv\eta_j +  \left(h_j u_x \right)_j = 0\]
+
+\[ \left(G_t\right)_j  + \left(gh \eta_x \right)_j  = 0\]
+
+
+%UNSURE!!!
+\[ \left(u_j \left( h_0 -  \frac{h_0^3}{3} \left(\dfrac{2\cos\left(k{\Delta x}\right) - 2}{\Delta x^2}\right) \right)\right)_t  + \left(gh \eta_x \right)_j  = 0\]
+
+\[iv G_j + \left(gh \eta_x \right)_j  = 0\]
+
+So we have 
+
+\[iv\eta_j +  \left(h u_x \right)_j = 0\]
+
+\[iv G_j + \left(gh \eta_x \right)_j  = 0\]
+
+Four our first step we need to preform the reconstruction to obtain the flux values at the edges., the only values we need to reconstruct are $u$ and $\eta$ ($h$ fixed)
+
+\[u^+_{j + 1/2} = u_{j+1} - \phi\left(u,\theta\right) \frac{\Delta x}{2} \]
+
+\[u^-_{j + 1/2} = u_{j} + \phi\left(u,\theta\right) \frac{\Delta x}{2} \]
+
+\[\phi\left(u,\theta\right) = minmod \left( \theta \left(u_j - u_{j} e^{-ik\Delta x}\right), 0.5\left(u_{j}e^{ik\Delta x} - u_{j}e^{-ik\Delta x}\right)  , \theta \left(u_{j} e^{ik\Delta x} - u_{j}\right) \right) \]
+
+\[\phi\left(u,\theta\right) = minmod \left( \theta u_j \left( 1- e^{-ik\Delta x}\right), 0.5u_j\left(e^{ik\Delta x} - e^{-ik\Delta x}\right)  , \theta u_j \left( e^{ik\Delta x} - 1\right) \right) \]
+
+\[\phi\left(u,\theta\right) = minmod \left( \theta u_j \left( 1- e^{-ik\Delta x}\right), u_j\left(i\sin\left(k \Delta x\right)\right)  , \theta u_j \left( e^{ik\Delta x} - 1\right) \right) \]
+
+\[\phi\left(u,\theta\right) = u_j \, minmod \left( \theta\left( 1- e^{-ik\Delta x}\right), i\sin\left(k \Delta x\right)  , \theta \left( e^{ik\Delta x} - 1\right) \right) \]
+
+%same sign?
+minmod returns the smallest modulus argument so, lets look at the modulus
+
+\[| 1 - e^{ikx}| = \sqrt{2 - 2\cos \left(k\Delta x\right)} \]
+
+\[| 1 - e^{-ikx}| = \sqrt{2 - 2\cos \left(-k\Delta x\right)} \]
+
+\[| 1 - e^{-ikx}| = \sqrt{2 - 2\cos \left(k\Delta x\right)} \]
+
+So both front and back give same modulus, so lets just take the front one, as an argument so
+
+\[\phi\left(u,\theta\right) = u_j \, minmod \left( i\sin\left(k \Delta x\right)  , \theta \left( e^{ik\Delta x} - 1\right) \right) \]
+
+These pertubations are small so lets just take the centered difference. thus 
+
+\[u^+_{j + 1/2} = u_{j+1} - u_j i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \]
+
+\[u^+_{j + 1/2} = u_j\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) \]
+
+\[u^-_{j + 1/2} =  u_j\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) \]
+
+Similarly 
+
+\[\eta^+_{j + 1/2} = \eta_j\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) \]
+
+\[\eta^-_{j + 1/2} =  \eta_j\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) \]
+
+From these  we calculate $f^+_{j + 1/2}$ , $f^-_{j + 1/2}$, $a_{j + 1/2}^+$ and $a_{j + 1/2}^{-}$. 
+
+Firstly we need to calculate the wave speeds in the system, we use the wavespeeds from the linearisation assuming the water is still then, the wavespeed is just (approximately as well)
+
+\[a^-_{j + 1/2} = - \sqrt{g h_0} \]
+
+\[a^+_{j + 1/2} =  \sqrt{g h_0} \]
+%right?
+
+We have 
+	\begin{gather}\label{eq:HLL_flux}
+	F_{i+\frac{1}{2}} = \dfrac{a^+_{i+\frac{1}{2}} f\left(q^-_{i+\frac{1}{2}}\right) - a^-_{i+\frac{1}{2}} f\left(q^+_{i+\frac{1}{2}}\right)}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}}  + \dfrac{a^+_{i+\frac{1}{2}} \, a^-_{i+\frac{1}{2}}}{a^+_{i+\frac{1}{2}} - a^-_{i+\frac{1}{2}}} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
+	\end{gather}
+So for mass:
+\begin{gather}
+F_{i+\frac{1}{2}} = \dfrac{\sqrt{g h_0} f\left(q^-_{i+\frac{1}{2}}\right) + \sqrt{g h_0} f\left(q^+_{i+\frac{1}{2}}\right)}{2\sqrt{g h_0}}  + \dfrac{g h_0}{2\sqrt{g h_0}} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
+\end{gather}
+
+\begin{gather}
+F_{i+\frac{1}{2}} = \dfrac{\sqrt{g h_0} h_0 u^-_{j + 1/2} + \sqrt{g h_0}  h_0 u^+_{j + 1/2}}{2\sqrt{g h_0}}  + \dfrac{g h_0}{2\sqrt{g h_0}} \left [  h_0 u^+_{j + 1/2} -  h_0 u^-_{j + 1/2} \right ]
+\end{gather}
+
+\begin{gather}
+F_{i+\frac{1}{2}} = \dfrac{h_0 u^-_{j + 1/2} +  h_0 u^+_{j + 1/2}}{2}  + \dfrac{\sqrt{g h_0}}{2} \left [  h_0 u^+_{j + 1/2} -  h_0 u^-_{j + 1/2} \right ]
+\end{gather}
+
+\begin{gather}
+F_{i+\frac{1}{2}} = \dfrac{h_0 u^-_{j + 1/2} +  h_0 u^+_{j + 1/2}  + \sqrt{g h_0} \left [  h_0 u^+_{j + 1/2} -  h_0 u^-_{j + 1/2} \right ]}{2}
+\end{gather}
+
+\begin{gather}
+F_{i+\frac{1}{2}} = \dfrac{\left(1 - \sqrt{g h_0}\right)h_0 u^-_{j + 1/2} + \left(1 + \sqrt{g h_0}\right) h_0 u^+_{j + 1/2} }{2}
+\end{gather}
+
+\begin{gather}
+F_{i+\frac{1}{2}} = \dfrac{\left(1 - \sqrt{g h_0}\right)h_0 u_j\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right) h_0 u_j\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2}
+\end{gather}
+
+\begin{gather}
+F_{j+\frac{1}{2}} = h_0 u_j\dfrac{\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2}
+\end{gather}
+ 
+ \begin{gather}
+ F_{j-\frac{1}{2}} = h_0 u_{j-1}\dfrac{\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2}
+ \end{gather}
+ 
+  \begin{gather}
+  F_{j-\frac{1}{2}} = h_0 u_{j}e^{-ik\Delta x}\dfrac{\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2}
+  \end{gather}
+  
+  So we have
+ 
+\begin{multline}
+iv\eta_j +  \frac{1}{\Delta x}\left(F_{j+1/2} - F_{j-1/2} \right) = 0
+\end{multline}
+
+\begin{multline}
+iv\eta_j +  \frac{1}{\Delta x}\left(h_0 u_j\dfrac{\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2} \right)
+  \\- \frac{1}{\Delta x}\left( h_0 u_{j}e^{-ik\Delta x}\dfrac{\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2}\right)  = 0
+\end{multline}
+
+\begin{multline}
+iv\eta_j + h_0 u_j  \frac{1}{\Delta x}[ \dfrac{\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2} 
+\\-  e^{-ik\Delta x}\dfrac{\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2}] = 0
+\end{multline}
+
+So for mass:
+
+\begin{multline}
+iv\eta_j + h_0 u_j  \frac{1}{2\Delta x}[ \left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right)
+\\-  e^{-ik\Delta x}\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) +  e^{-ik\Delta x}\left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) ] = 0
+\end{multline}
+
+For momentum:
+\begin{gather}
+F_{i+\frac{1}{2}} = \dfrac{\sqrt{g h_0} f\left(q^-_{i+\frac{1}{2}}\right) + \sqrt{g h_0} f\left(q^+_{i+\frac{1}{2}}\right)}{2\sqrt{g h_0}}  + \dfrac{g h_0}{2\sqrt{g h_0}} \left [ q^+_{i+\frac{1}{2}} - q^-_{i+\frac{1}{2}} \right ]
+\end{gather}
+
+Similar to before
+
+\begin{gather}
+F_{j+\frac{1}{2}} = gh_0 \eta_j\dfrac{\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2}
+\end{gather}
+
+\begin{gather}
+F_{j-\frac{1}{2}} = gh_0e^{-ik\Delta x} \eta_j\dfrac{\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) }{2}
+\end{gather}
+
+Similarly
+
+\begin{multline}
+ivG_j + gh_0 \eta_j  \frac{1}{2\Delta x}[ \left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right)
+\\-  e^{-ik\Delta x}\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) +  e^{-ik\Delta x}\left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) ] = 0
+\end{multline}
+
+So we have
+
+mass
+
+\begin{multline}
+iv\eta_j + h_0 u_j  \frac{1}{2\Delta x}[ \left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right)
+\\-  e^{-ik\Delta x}\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) +  e^{-ik\Delta x}\left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) ] = 0
+\end{multline}
+
+momentum 
+
+\begin{multline}
+ivG_j + gh_0 \eta_j  \frac{1}{2\Delta x}[ \left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) + \left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right)
+\\-  e^{-ik\Delta x}\left(1 - \sqrt{g h_0}\right)\left(1 + i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) +  e^{-ik\Delta x}\left(1 + \sqrt{g h_0}\right)\left(e^{ik\Delta x} -  i\sin\left(k \Delta x\right) \frac{\Delta x}{2} \right) ] = 0
+\end{multline}
+
+We impose that this gets a nontrivial solution, to get our numerical dispersion. 
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

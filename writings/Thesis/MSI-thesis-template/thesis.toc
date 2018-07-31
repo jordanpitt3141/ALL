@@ -3,55 +3,69 @@
 \contentsline {section}{\numberline {1.2}Original Contribution of the Thesis}{1}
 \contentsline {section}{\numberline {1.3}Organisation of the Thesis}{1}
 \contentsline {chapter}{\numberline {2}The Serre Equations}{3}
-\contentsline {section}{\numberline {2.1}The Serre Equations}{3}
-\contentsline {subsection}{\numberline {2.1.1}Alternative form of the Serre Equations}{4}
-\contentsline {section}{\numberline {2.2}Properties of the Serre Equations}{5}
-\contentsline {subsection}{\numberline {2.2.1}Conservation Properties}{5}
-\contentsline {subsection}{\numberline {2.2.2}Dispersion Relation}{5}
-\contentsline {chapter}{\numberline {3}Hybrid Finite Volume Methods}{7}
-\contentsline {section}{\numberline {3.1}Structure Overview}{7}
-\contentsline {section}{\numberline {3.2}Transformation Between Nodal Values and Cell Averages}{7}
-\contentsline {section}{\numberline {3.3}Elliptic Equation}{8}
-\contentsline {subsubsection}{Second Order}{9}
-\contentsline {subsubsection}{Element wise}{12}
-\contentsline {section}{\numberline {3.4}Evolution Equations}{15}
-\contentsline {subsection}{\numberline {3.4.1}Kurganovs Method}{15}
-\contentsline {subsubsection}{First Order}{16}
-\contentsline {subsubsection}{Second Order}{17}
-\contentsline {subsubsection}{Third Order}{17}
-\contentsline {subsection}{\numberline {3.4.2}Source Terms and Well Balancing}{18}
-\contentsline {subsubsection}{Finite Element Method}{20}
-\contentsline {subsubsection}{Finite Difference Method}{20}
-\contentsline {subsubsection}{Well balancing}{21}
-\contentsline {section}{\numberline {3.5}Runge-Kutta Time-Stepping}{22}
-\contentsline {section}{\numberline {3.6}CFL Condition}{23}
-\contentsline {chapter}{\numberline {4}Linear Analysis of Numerical Methods}{25}
-\contentsline {section}{\numberline {4.1}Linearised Serre equations with horizontal bed}{26}
-\contentsline {section}{\numberline {4.2}Evolution Matrix}{27}
-\contentsline {subsection}{\numberline {4.2.1}Overview of the Evolution Step}{28}
-\contentsline {subsection}{\numberline {4.2.2}1. Reconstruction}{29}
-\contentsline {subsubsection}{Cell average values to nodal values: $\mathcal {M}$}{29}
-\contentsline {subsubsection}{Cell average values to interface values: $\mathcal {R}^-$ and $\mathcal {R}^+$}{29}
-\contentsline {subsection}{\numberline {4.2.3}2. Calculate $\upsilon $}{30}
-\contentsline {subsection}{\numberline {4.2.4}3. Flux calculation}{32}
-\contentsline {subsubsection}{Left supercritical flow $U < - \sqrt {gH}$:}{33}
-\contentsline {subsubsection}{Subcritical flow $-\sqrt {gH} \le U \le \sqrt {gH}$:}{33}
-\contentsline {subsubsection}{Right supercritical flow $\sqrt {gH} < U$:}{34}
-\contentsline {subsection}{\numberline {4.2.5}4. Forward Euler Step}{35}
-\contentsline {subsection}{\numberline {4.2.6}5. SSP Runge-Kutta Time Steps}{36}
-\contentsline {section}{\numberline {4.3}Convergence Analysis}{37}
-\contentsline {subsection}{\numberline {4.3.1}Stability}{37}
-\contentsline {subsection}{\numberline {4.3.2}Consistency}{38}
-\contentsline {section}{\numberline {4.4}Dispersion Analysis}{40}
-\contentsline {chapter}{\numberline {5}Validation}{53}
-\contentsline {section}{\numberline {5.1}Analytic Validation}{53}
-\contentsline {subsection}{\numberline {5.1.1}Soliton}{53}
-\contentsline {subsection}{\numberline {5.1.2}Lake at Rest}{53}
-\contentsline {section}{\numberline {5.2}Forced Solutions}{53}
-\contentsline {subsection}{\numberline {5.2.1}Periodic in space, Exponential in time}{53}
-\contentsline {subsection}{\numberline {5.2.2}Travelling Solitary Wave}{53}
-\contentsline {section}{\numberline {5.3}Experimental Validation}{54}
-\contentsline {subsection}{\numberline {5.3.1}Beji}{54}
-\contentsline {subsection}{\numberline {5.3.2}Synolakis}{54}
-\contentsline {subsection}{\numberline {5.3.3}Roeber}{54}
-\contentsline {chapter}{Bibliography}{55}
+\contentsline {section}{\numberline {2.1}The Equations}{3}
+\contentsline {subsection}{\numberline {2.1.1}Alternative form of the Serre Equations}{5}
+\contentsline {section}{\numberline {2.2}Properties of the Serre Equations}{6}
+\contentsline {subsection}{\numberline {2.2.1}Conservation Properties}{6}
+\contentsline {subsection}{\numberline {2.2.2}Dispersion Properties}{7}
+\contentsline {subsection}{\numberline {2.2.3}Analytic Solutions}{7}
+\contentsline {subsubsection}{Solitary Travelling Wave Solution}{8}
+\contentsline {subsubsection}{Lake at Rest}{10}
+\contentsline {subsection}{\numberline {2.2.4}Forced Solutions}{11}
+\contentsline {subsection}{\numberline {2.2.5}Asymptotic Results}{12}
+\contentsline {chapter}{\numberline {3}Finite Element Volume Method}{13}
+\contentsline {section}{\numberline {3.1}Notation for Numerical Grids}{13}
+\contentsline {section}{\numberline {3.2}Structure Overview}{14}
+\contentsline {subsection}{\numberline {(i)}Reconstruction}{16}
+\contentsline {subsubsection}{The height, stage and $G$}{16}
+\contentsline {subsubsection}{The bed profile}{17}
+\contentsline {subsection}{\numberline {(ii)}Fluid Velocity}{18}
+\contentsline {subsubsection}{Basis Function Approximations}{19}
+\contentsline {subsubsection}{Calculation of Element-wise Matrices}{21}
+\contentsline {subsubsection}{Assembly of the Global Matrix}{23}
+\contentsline {subsection}{\numberline {(iii)}Flux Across the Cell Interfaces}{23}
+\contentsline {subsubsection}{Calculation of Derivatives}{24}
+\contentsline {subsubsection}{Well Balancing}{26}
+\contentsline {subsection}{\numberline {(iv)}Source Terms}{27}
+\contentsline {subsection}{\numberline {(v)}Update Cell Averages}{28}
+\contentsline {subsection}{\numberline {(vi)}Second-Order SSP Runge-Kutta Method}{28}
+\contentsline {section}{\numberline {3.3}CFL condition}{29}
+\contentsline {section}{\numberline {3.4}Boundary Conditions}{29}
+\contentsline {section}{\numberline {3.5}Dry Beds}{30}
+\contentsline {chapter}{\numberline {4}Linear Analysis of the Numerical Methods}{33}
+\contentsline {section}{\numberline {4.1}Linearised Serre equations with horizontal bed}{34}
+\contentsline {section}{\numberline {4.2}Evolution Matrix}{35}
+\contentsline {subsection}{\numberline {4.2.1}Overview of the Evolution Step}{36}
+\contentsline {subsection}{\numberline {(i)}Reconstruct the Quantities Inside the Cells}{37}
+\contentsline {subsubsection}{Cell average values to nodal values: $\mathcal {M}$}{37}
+\contentsline {subsubsection}{Cell average values to interface values: $\mathcal {R}^-$ and $\mathcal {R}^+$}{37}
+\contentsline {subsection}{\numberline {(ii)}Calculate the Velocity Over the Domain}{38}
+\contentsline {subsection}{\numberline {(iii)}Calculate All the Fluxes Across the Cell Interfaces}{40}
+\contentsline {subsubsection}{Left Supercritical Flow $Fr < -1$:}{41}
+\contentsline {subsubsection}{Subcritical flow $-1 \le Fr \le 1$:}{42}
+\contentsline {subsubsection}{Right supercritical flow $Fr > 1$:}{43}
+\contentsline {subsection}{\numberline {(iv)}Calculate All the Source Terms for the Cells}{43}
+\contentsline {subsection}{\numberline {(v)}Update All the Cell Averages Using a Forward Euler Approximation}{43}
+\contentsline {subsection}{\numberline {(vi)}Update All the Cell Averages Using a Second-Order SSP Runge-Kutta Method}{44}
+\contentsline {section}{\numberline {4.3}Convergence Analysis}{45}
+\contentsline {subsection}{\numberline {4.3.1}Stability}{45}
+\contentsline {subsection}{\numberline {4.3.2}Consistency}{47}
+\contentsline {section}{\numberline {4.4}Dispersion Analysis}{52}
+\contentsline {chapter}{\numberline {5}Numerical Validation}{61}
+\contentsline {section}{\numberline {5.1}Measuring Convergence and Conservation}{61}
+\contentsline {subsection}{\numberline {5.1.1}Measures of Convergence}{61}
+\contentsline {subsection}{\numberline {5.1.2}Measures of Conservation}{62}
+\contentsline {section}{\numberline {5.2}Analytic Solutions}{63}
+\contentsline {subsection}{\numberline {5.2.1}Solitary Cnoidal Wave Solution}{63}
+\contentsline {subsubsection}{Results}{63}
+\contentsline {subsection}{\numberline {5.2.2}Lake at Rest}{69}
+\contentsline {section}{\numberline {5.3}Forced Solution}{69}
+\contentsline {subsection}{\numberline {5.3.1}Travelling Gaussian}{69}
+\contentsline {chapter}{\numberline {6}Experimental Validation}{73}
+\contentsline {section}{\numberline {6.1}Periodic Waves Over A Submerged Bar}{73}
+\contentsline {subsection}{\numberline {6.1.1}Low Frequency Results}{74}
+\contentsline {subsection}{\numberline {6.1.2}High Frequency Results}{75}
+\contentsline {section}{\numberline {6.2}Synolakis}{80}
+\contentsline {section}{\numberline {6.3}Roeber}{80}
+\contentsline {chapter}{\numberline {A}Linear Analysis Results}{91}
+\contentsline {chapter}{Bibliography}{96}
