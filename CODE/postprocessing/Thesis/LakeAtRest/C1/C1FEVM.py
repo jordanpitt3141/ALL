@@ -200,64 +200,18 @@ def LakeAtRest(x,a0,a1,a2,g,dx):
        
     return h,u,G,b,w
 
-"""
-ki = 16
-
-a0 = 1.0
-a1 = 2*pi/50.0
-
-width = 2*(2*pi/a1)
-    
-a2 = 0.0
-g = 9.81
-
-startx = -pi/2.0/a1 -width
-sx= startx
-endx = -pi/2.0/a1 +width
-ex = endx
-startt = 0.0
-endt = 10.0
-et = endt
-
-dx = width / (2.0)**(ki)
-l =  0.5 / sqrt(g*(a2+ a0))
-dt = l*dx
-        
-szoomx = startx
-ezoomx = endx
-
-t = startt
-        
-#x,t = makevar(startx,endx +0.1*dx,dx,startt,endt,dt)
-        
-        
-
-x = arange(startx,endx +0.1*dx, dx)
-n = len(x)
-h,u,G,b,w =  LakeAtRest(x,a0,a1,a2,g,dx)
-
-xpsA = FindWetARegLakeAtRest(a0,a1,a2,ex + 0.5*dx,sx - 0.5*dx)
-
-xpsNum = FindWetNumRegLakeAtRest(a0,a1,a2,x,h)
-
-HA = HamInt(a0,a1,a2,g,ex + 0.5*dx,sx - 0.5*dx)
-HnA = HamIntNum(a0,a1,a2,g,x,h)
+meth = "FDVM2WB"
+wdirb = "/home/jp/Documents/PhD/project/data/ThesisRaw/LakeAtRest/Dry/" +meth+"/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/LakeAtRest/" +meth+"/C1/"
 
 
-"""
-wdirord = "FEVM2"
+if not os.path.exists(sdir):
+    os.makedirs(sdir)
 
-
-wdirb = "../../../../../../data/ThesisRAW/LakeAtRest/Dry/"+wdirord+"/"
 L1hs = []
 L1us = []
 L1Gs = []
 dxs=  []
-
-sdir = "../../../../../../data/ThesisPost/LakeAtRest/"+wdirord+"/C1/"
-
-if not os.path.exists(sdir):
-        os.makedirs(sdir)
         
         
 for ki in range(3,18):
@@ -307,7 +261,7 @@ for ki in range(3,18):
         
     n = len(x)
 
-
+    """
     a0 = 1.0
     a1 = 2*pi/50.0
     a2 = 0.0
@@ -318,22 +272,30 @@ for ki in range(3,18):
 
     MA = MassInt(a0,a1,a2,x[-1] + 0.5*dx,x[0] - 0.5*dx)
     HA = HamInt(a0,a1,a2,g,x[-1] + 0.5*dx,x[0] - 0.5*dx)
+    """
 
-    hC1v =abs(Mn - MnA)/abs(MnA)
-    EC1v = abs(En - HnA)/abs(HnA)
+    hC1v =abs(Mn - Mni)/abs(Mni)
+    EC1v = abs(En - Eni)/abs(Eni)
     GC1v = abs(Gn - Gni)
     uhC1v = abs(Pn - Pni)
     
 
-    """
-
-    s = sdir + "hnAC1.dat"
+    s = sdir + "hC1.dat"
     with open(s,'a') as file1:
             s ="%3.8f%5s%1.20f\n" %(dx," ",hC1v)
             file1.write(s) 
     
-    s = sdir + "HnAC1.dat"
+    s = sdir + "HC1.dat"
     with open(s,'a') as file1:
             s ="%3.8f%5s%1.20f\n" %(dx," ",EC1v)
             file1.write(s)     
-    """
+
+    s = sdir + "uhC1.dat"
+    with open(s,'a') as file1:
+            s ="%3.8f%5s%1.20f\n" %(dx," ",uhC1v)
+            file1.write(s) 
+    
+    s = sdir + "GC1.dat"
+    with open(s,'a') as file1:
+            s ="%3.8f%5s%1.20f\n" %(dx," ",GC1v)
+            file1.write(s)     

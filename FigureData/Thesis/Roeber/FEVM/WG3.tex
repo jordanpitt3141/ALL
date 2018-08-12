@@ -1,0 +1,36 @@
+\documentclass[]{article} 
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{pgfplots} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},every axis plot/.append style={thick}  }
+\begin{document} 
+	\begin{tikzpicture}
+	\begin{axis}[ 
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick = {20,30,40,50,60},
+	ytick = {2,3,4,5},
+	xticklabel style = {yshift=-1.5mm},
+	extra x ticks={25,35,45,55},
+	extra y ticks={2.5,3.5,4.5},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=20, 
+	xmax=60, 
+	ymin =2, 
+	ymax = 5,
+	xlabel=\Large$t \; (s)$, 
+	ylabel=\Large$z \; (m)$ ]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=20:60] table {./Num/WG3.dat };
+	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=20:60,each nth point=10] table {./Exp/WG3.dat };
+
+	\end{axis} 
+	
+	
+	
+	\end{tikzpicture}
+\end{document}

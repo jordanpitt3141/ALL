@@ -152,15 +152,13 @@ g = 9.81
 k = sqrt(3.0*a1) / (2.0*a0 *sqrt(a0 + a1))
 c = sqrt(g*(a0 + a1))
 
-ordn = "3"
+meth = "o1"
+meth = "o2"
+meth = "o3"
 
-wdirord = "o" + ordn
-sdirord = "FDVM"+ ordn
 
-#wdir = "../../../../data/raw/NEWdata/FDredo/grim/"
-#sdir = "../../../../data/postprocessing/scFDallAE/grim/"
+wdirb = "/home/jp/Documents/PhD/project/data/ThesisRaw/Solitono1o2o3/" +meth+"/"
 
-wdirb = "../../../../../data/raw/Solnon0p7NEW/"+wdirord+"/"
 Mns = []
 Pns = []
 Mis = []
@@ -171,7 +169,12 @@ Eis = []
 Gns = []
 Gis = []
 
-sdir = "../../../../../data/ThesisPost/Soliton/"+sdirord+"/C1/"
+MIns = []
+PIns = []
+EIns = []
+GIns = []
+
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/Soliton/" +meth+"/C1/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)
@@ -239,6 +242,28 @@ for ki in range(6,20):
     Mn = hall(xbc_c,hbc_c,n + 2*niBC,niBC,dx)
     Gcn = Gall(xbc_c,Gbc_c,n + 2*niBC,niBC,dx)
     
+    hI,uI,GI  = solitoninit(n,a0,a1,g,x,0,dx)
+    
+    uI0 = uI[0]*ones(niBC)
+    uI1 = uI[-1]*ones(niBC)   
+    hI0 = hI[0]*ones(niBC)
+    hI1 = hI[-1]*ones(niBC)
+    GI0 = GI[0]*ones(niBC)
+    GI1 = GI[-1]*ones(niBC)  
+    
+    hIbc =  concatenate([hI0,hI,hI1])
+    uIbc =  concatenate([uI0,uI,uI1])
+    GIbc =  concatenate([GI0,GI,GI1])
+    
+    hIbc_c = copyarraytoC(hIbc)
+    uIbc_c = copyarraytoC(uIbc)
+    GIbc_c = copyarraytoC(GIbc)
+    
+    EIn = HankEnergyall(xbc_c,hIbc_c,uIbc_c,g,n + 2*niBC,niBC,dx)
+    PIn = uhall(xbc_c,hIbc_c,uIbc_c,n + 2*niBC,niBC,dx)
+    MIn = hall(xbc_c,hIbc_c,n + 2*niBC,niBC,dx)
+    GcIn = Gall(xbc_c,GIbc_c,n + 2*niBC,niBC,dx)
+    
     xbeg = startx - 0.5*dx
     xend = endx + 0.5*dx
 
@@ -246,7 +271,16 @@ for ki in range(6,20):
     Pi = SolitonMome(a0,a1,c,k,xbeg,xend)
     Gci =  SolitonG(a0,a1,c,k,xbeg,xend)
     Ei = SolitonHam(a0,a1,c,k,xbeg,xend)
+
+
+    deallocPy(xbc_c)
+    deallocPy(hbc_c)
+    deallocPy(ubc_c)
+    deallocPy(Gbc_c)
     
+    deallocPy(hIbc_c)
+    deallocPy(uIbc_c)
+    deallocPy(GIbc_c)
     
     Pns.append(Pn)
     Pis.append(Pi)
@@ -257,6 +291,11 @@ for ki in range(6,20):
     dxs.append(dx)
     Ens.append(En)
     Eis.append(Ei)
+    PIns.append(PIn)
+    MIns.append(MIn)
+    GIns.append(GcIn)
+    EIns.append(EIn)
+    
 
 Gns = array(Gns)
 Gis = array(Gis) 
@@ -267,10 +306,20 @@ Pns = array(Pns)
 Mis = array(Mis)
 Pis = array(Pis)
 
-relerrP = abs(Pis - Pns)
+GIns = array(GIns)
+EIns = array(EIns)   
+MIns = array(MIns)
+PIns = array(PIns)
+
+relerrP = abs(Pis - Pns)/abs(Pis)
 relerrM = abs(Mis - Mns)/ abs(Mis)
 relerrG = abs(Gis - Gns)/ abs(Gis)
 relerrE = abs(Eis - Ens)/ abs(Eis)
+
+relerrPn = abs(PIns - Pns) / abs(PIns)
+relerrMn = abs(MIns - Mns)/ abs(MIns)
+relerrGn = abs(GIns - Gns)/ abs(GIns)
+relerrEn = abs(EIns - Ens)/ abs(EIns)
 
 
 
@@ -299,4 +348,29 @@ with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",relerrE[i])
         file1.write(s) 
+
+
        
+s = sdir + "conhNum.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",relerrMn[i])
+        file1.write(s) 
+
+s = sdir + "conGNum.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",relerrGn[i])
+        file1.write(s)          
+    
+s = sdir + "conuhNum.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",relerrPn[i])
+        file1.write(s)  
+        
+s = sdir + "conHNum.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",relerrEn[i])
+        file1.write(s)  

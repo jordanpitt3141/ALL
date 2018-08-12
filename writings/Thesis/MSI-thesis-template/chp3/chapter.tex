@@ -105,10 +105,10 @@ We reconstruct $h$, $w$ and $G$ with piecewise functions that are linear over a 
 	\label{eqn:ReconforhwG}
 \end{subequations}
 where 
-\begin{equation*}
+\begin{equation}
 d_j = \text{minmod}\left(\theta \dfrac{\overline{q}_j -\overline{q}_{j-1} }{\Delta x}, \dfrac{\overline{q}_{j+1} -\overline{q}_{j-1} }{2\Delta x}, \theta\dfrac{\overline{q}_{j+1} -\overline{q}_{j} }{\Delta x}\right)
 \label{eqn:slopehGrecon}
-\end{equation*}
+\end{equation}
 with $\theta \in \left[1,2\right]$. The choice of the $\theta$ parameter changes the diffusion introduced by the reconstruction, with $\theta =1$ the reconstruction introduces the most diffusion and is equivalent to the basic minmod reconstruction \cite{Roe-1986-337} While for $\theta = 2$ the reconstruction is equivalent to the monotized central reconstruction \citealp{VanLeer-1977-276} and introduces the least diffusion.
 
 \begin{defn}

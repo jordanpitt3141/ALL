@@ -80,7 +80,7 @@ def close(t,ts,dt):
     return var    
 
 #Forcing Problem    
-wdir = "../../../../../../../data/2018/raw/Thesis/ForcedFin/Dry/P2P/FDEVMT/r4/"
+wdir = "/home/jp/Documents/PhD/project/data/2018/raw/Thesis/ForcedFin/Dry/P2P/FDEVMT/runDry2/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -95,7 +95,7 @@ for ki in range(3,13):
     
     width = 2*(2*pi/a7)
         
-    a0 = 1.0
+    a0 = 0.0
     a1 = 0.5
     a2 =  ((2*pi) / a7)/10.0
     a3 = -pi/2.0/a7 -width/4.0

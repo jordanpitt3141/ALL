@@ -153,30 +153,40 @@ k = sqrt(3.0*a1) / (2.0*a0 *sqrt(a0 + a1))
 c = sqrt(g*(a0 + a1))
 
 
-wdirord = "FEVM"
-sdirord = "FEVM2"
+meth = "FEVM"
+
 
 #wdir = "../../../../data/raw/NEWdata/FDredo/grim/"
 #sdir = "../../../../data/postprocessing/scFDallAE/grim/"
 
-wdirb = "../../../../../../data/raw/Thesis/Soltion/"+wdirord+"/"
-Mns = []
-Pns = []
-Mis = []
-Pis = []
-dxs = []
-Ens = []
-Eis = []
-Gns = []
-Gis = []
+wdirb = "/home/jp/Documents/PhD/project/data/ThesisRaw/SolitonFD&FEVM/" +meth+"/"
+GNAs=[]
+MNAs=[]
+PNAs=[]
+ENAs=[]
 
-sdir = "../../../../../../data/ThesisPost/Soliton/"+sdirord+"/C1/"
+GNNs=[]
+MNNs=[]
+PNNs=[]
+ENNs=[]
+
+GFNAs=[]
+MFNAs=[]
+PFNAs=[]
+
+GFNNs=[]
+MFNNs=[]
+PFNNs=[]
+
+dxs=[]
+
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/Soliton/" +meth+"/TestC1/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)
         
         
-for ki in range(6,19):
+for ki in range(11,12):
         
         
     wdir = wdirb + str(ki) + "/"
@@ -238,6 +248,28 @@ for ki in range(6,19):
     Mn = hall(xbc_c,hbc_c,n + 2*niBC,niBC,dx)
     Gcn = Gall(xbc_c,Gbc_c,n + 2*niBC,niBC,dx)
     
+    hI,uI,GI  = solitoninit(n,a0,a1,g,x,0,dx)
+    
+    uI0 = uI[0]*ones(niBC)
+    uI1 = uI[-1]*ones(niBC)   
+    hI0 = hI[0]*ones(niBC)
+    hI1 = hI[-1]*ones(niBC)
+    GI0 = GI[0]*ones(niBC)
+    GI1 = GI[-1]*ones(niBC)  
+    
+    hIbc =  concatenate([hI0,hI,hI1])
+    uIbc =  concatenate([uI0,uI,uI1])
+    GIbc =  concatenate([GI0,GI,GI1])
+    
+    hIbc_c = copyarraytoC(hIbc)
+    uIbc_c = copyarraytoC(uIbc)
+    GIbc_c = copyarraytoC(GIbc)
+    
+    EIn = HankEnergyall(xbc_c,hIbc_c,uIbc_c,g,n + 2*niBC,niBC,dx)
+    PIn = uhall(xbc_c,hIbc_c,uIbc_c,n + 2*niBC,niBC,dx)
+    MIn = hall(xbc_c,hIbc_c,n + 2*niBC,niBC,dx)
+    GcIn = Gall(xbc_c,GIbc_c,n + 2*niBC,niBC,dx)
+    
     xbeg = startx - 0.5*dx
     xend = endx + 0.5*dx
 
@@ -247,55 +279,225 @@ for ki in range(6,19):
     Ei = SolitonHam(a0,a1,c,k,xbeg,xend)
     
     
-    Pns.append(Pn)
-    Pis.append(Pi)
-    Mns.append(Mn)
-    Mis.append(Mi)
-    Gns.append(Gcn)
-    Gis.append(Gci)
+    # Now Do Recon and Solve
+    b = zeros(n)
+    
+    hnBC = 3
+    hnbc = 3*n + 2*hnBC
+    bnMBC = 7
+    bnBC = 4
+    bnbc = 3*n + 1 + 2*(bnBC -1)
+    unBC = 3
+    unbc = 2*n + 1 + 2*(unBC -1)
+    
+    hMbeg = a0*ones(hnBC)
+    hMend = a0*ones(hnBC)
+    wMbeg = a0*ones(hnBC)
+    wMend = a0*ones(hnBC)
+    GMbeg = zeros(hnBC)
+    GMend = zeros(hnBC)
+    bMbeg = zeros(bnBC)
+    bMend = zeros(bnBC)
+    uMbeg = zeros(unBC)
+    uMend = zeros(unBC)
+    
+    theta = 1.2
+    
+    uMbeg_c = copyarraytoC(uMbeg)
+    hMbeg_c = copyarraytoC(hMbeg)
+    wMbeg_c = copyarraytoC(wMbeg)
+    GMbeg_c = copyarraytoC(GMbeg)
+    
+    bMbeg_c = copyarraytoC(bMbeg)
+    
+    uMend_c = copyarraytoC(uMend)
+    hMend_c = copyarraytoC(hMend)
+    wMend_c = copyarraytoC(wMend)
+    GMend_c = copyarraytoC(GMend)
+    
+    bMend_c = copyarraytoC(bMend)
+    
+    h_c = copyarraytoC(h)
+    b_c = copyarraytoC(b)
+    G_c = copyarraytoC(G)
+    
+    hbc_c =  mallocPy(hnbc)
+    wbc_c =  mallocPy(hnbc)
+    ubc_c =  mallocPy(unbc)
+    Gbc_c =  mallocPy(hnbc)
+    bbc_c =  mallocPy(bnbc)
+    
+    ReconandSolve(h_c,G_c,b_c,hMbeg_c,hMend_c,GMbeg_c,GMend_c,wMbeg_c,wMend_c,bMbeg_c,bMend_c,uMbeg_c,uMend_c,n,hnBC,hnbc,bnBC,bnMBC,bnbc,unBC,unbc,theta,dx,dt,g,Gbc_c,hbc_c,wbc_c,ubc_c,bbc_c)    
+
+    wbcC = copyarrayfromC(wbc_c,hnbc)  
+    hbcC = copyarrayfromC(hbc_c,hnbc)  
+    ubcC = copyarrayfromC(ubc_c,unbc)  
+    GbcC = copyarrayfromC(Gbc_c,hnbc)  
+    bbcC = copyarrayfromC(bbc_c,bnbc)
+    
+
+    hI_c = copyarraytoC(hI)
+    GI_c = copyarraytoC(GI)
+    
+    hIbc_c =  mallocPy(hnbc)
+    wIbc_c =  mallocPy(hnbc)
+    uIbc_c =  mallocPy(unbc)
+    GIbc_c =  mallocPy(hnbc)
+    bIbc_c =  mallocPy(bnbc)
+    
+    ReconandSolve(hI_c,GI_c,b_c,hMbeg_c,hMend_c,GMbeg_c,GMend_c,wMbeg_c,wMend_c,bMbeg_c,bMend_c,uMbeg_c,uMend_c,n,hnBC,hnbc,bnBC,bnMBC,bnbc,unBC,unbc,theta,dx,dt,g,GIbc_c,hIbc_c,wIbc_c,uIbc_c,bIbc_c)    
+
+    wIbcC = copyarrayfromC(wIbc_c,hnbc)  
+    hIbcC = copyarrayfromC(hIbc_c,hnbc)  
+    uIbcC = copyarrayfromC(uIbc_c,unbc)  
+    GIbcC = copyarrayfromC(GIbc_c,hnbc)  
+    bIbcC = copyarrayfromC(bIbc_c,bnbc)
+        
+    GFEMn = LinallFEM(Gbc_c,n,hnBC,dx)
+    MFEMn = LinallFEM(hbc_c,n,hnBC,dx)
+    PFEMn = uhallFEM(ubc_c,hbc_c,n,hnBC,unBC,dx)
+    EFEMn = HamFEM(ubc_c,hbc_c,bbc_c,n,hnBC,unBC,bnBC,dx,g)
+
+    GFEMIn = LinallFEM(GIbc_c,n,hnBC,dx)
+    MFEMIn = LinallFEM(hIbc_c,n,hnBC,dx)    
+    PFEMIn = uhallFEM(uIbc_c,hIbc_c,n,hnBC,unBC,dx)
+    EFEMIn = HamFEM(uIbc_c,hIbc_c,bIbc_c,n,hnBC,unBC,bnBC,dx,g)
+    
+    relGNumAna = abs(Gcn- Gci)/ abs(Gci)
+    relMNumAna = abs(Mn- Mi)/ abs(Mi)
+    relPNumAna = abs(Pn- Pi)/ abs(Pi)
+    relENumAna = abs(En- Ei)/ abs(Ei)
+    
+    relGNumNum = abs(Gcn- GcIn)/ abs(GcIn)
+    relMNumNum = abs(Mn- MIn)/ abs(MIn)
+    relPNumNum = abs(Pn- PIn)/ abs(PIn)
+    relENumNum = abs(En- EIn)/ abs(EIn)
+
+    relFEMGNumAna = abs(GFEMn- Gci)/ abs(Gci)
+    relFEMMNumAna = abs(MFEMn- Mi)/ abs(Mi)
+    relFEMPNumAna = abs(PFEMn- Pi)/ abs(Pi)
+    
+    relFEMGNumNum = abs(GFEMn- GFEMIn)/ abs(GFEMn)
+    relFEMMNumNum = abs(MFEMn- MFEMIn)/ abs(MFEMIn)
+    relFEMPNumNum = abs(PFEMn- PFEMIn)/ abs(PFEMIn)
+
+    
+    deallocPy(xbc_c)
+    deallocPy(hbc_c)
+    deallocPy(ubc_c)
+    deallocPy(Gbc_c)
+    
+    deallocPy(hIbc_c)
+    deallocPy(uIbc_c)
+    deallocPy(GIbc_c)
+    
     dxs.append(dx)
-    Ens.append(En)
-    Eis.append(Ei)
+    
+    GNAs.append(relGNumAna)
+    MNAs.append(relMNumAna)
+    PNAs.append(relPNumAna)
+    ENAs.append(relENumAna)
 
-Gns = array(Gns)
-Gis = array(Gis) 
-Ens = array(Ens)
-Eis = array(Eis)    
-Mns = array(Mns)
-Pns = array(Pns)
-Mis = array(Mis)
-Pis = array(Pis)
+    GNNs.append(relGNumNum)
+    MNNs.append(relMNumNum)
+    PNNs.append(relPNumNum)
+    ENNs.append(relENumNum)
 
-relerrP = abs(Pis - Pns)
-relerrM = abs(Mis - Mns)/ abs(Mis)
-relerrG = abs(Gis - Gns)/ abs(Gis)
-relerrE = abs(Eis - Ens)/ abs(Eis)
+    GFNAs.append(relFEMGNumAna)
+    MFNAs.append(relFEMMNumAna)
+    PFNAs.append(relFEMPNumAna)
+
+    GFNNs.append(relFEMGNumNum)
+    MFNNs.append(relFEMMNumNum)
+    PFNNs.append(relFEMPNumNum)
 
 
 
 n= len(dxs)
+"""
+s = sdir + "conG.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",GNAs[i])
+        file1.write(s)  
 
 s = sdir + "conh.dat"
 with open(s,'w') as file1:
     for i in range(n):
-        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",relerrM[i])
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",MNAs[i])
         file1.write(s) 
-
-s = sdir + "conG.dat"
-with open(s,'w') as file1:
-    for i in range(n):
-        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",relerrG[i])
-        file1.write(s)          
-    
+        
 s = sdir + "conuh.dat"
 with open(s,'w') as file1:
     for i in range(n):
-        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",relerrP[i])
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",PNAs[i])
         file1.write(s)  
         
 s = sdir + "conH.dat"
 with open(s,'w') as file1:
     for i in range(n):
-        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",relerrE[i])
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",ENAs[i])
         file1.write(s) 
-       
+
+s = sdir + "conGN.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",GNNs[i])
+        file1.write(s)  
+
+s = sdir + "conhN.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",MNNs[i])
+        file1.write(s) 
+        
+s = sdir + "conuhN.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",PNNs[i])
+        file1.write(s)  
+        
+s = sdir + "conHN.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",ENNs[i])
+        file1.write(s)       
+
+
+s = sdir + "conGF.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",GFNAs[i])
+        file1.write(s)  
+
+s = sdir + "conhF.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",MFNAs[i])
+        file1.write(s) 
+        
+s = sdir + "conuhF.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",PFNAs[i])
+        file1.write(s)  
+        
+
+s = sdir + "conGFN.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",GFNNs[i])
+        file1.write(s)  
+
+s = sdir + "conhFN.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",MFNNs[i])
+        file1.write(s) 
+        
+s = sdir + "conuhFN.dat"
+with open(s,'w') as file1:
+    for i in range(n):
+        s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",PFNNs[i])
+        file1.write(s)  
+"""        

@@ -122,6 +122,22 @@ hall = _Hamil.hall
 def Gall(x, G, n, nBC, dx):
     return _Hamil.Gall(x, G, n, nBC, dx)
 Gall = _Hamil.Gall
+
+def ReconandSolve(h, G, b, hMbeg, hMend, GMbeg, GMend, wMbeg, wMend, bMbeg, bMend, uMbeg, uMend, n, hnBC, hnbc, bnBC, bnMBC, bnbc, unBC, unbc, theta, dx, dt, g, Gbc, hbc, wbc, ubc, bbc):
+    return _Hamil.ReconandSolve(h, G, b, hMbeg, hMend, GMbeg, GMend, wMbeg, wMend, bMbeg, bMend, uMbeg, uMend, n, hnBC, hnbc, bnBC, bnMBC, bnbc, unBC, unbc, theta, dx, dt, g, Gbc, hbc, wbc, ubc, bbc)
+ReconandSolve = _Hamil.ReconandSolve
+
+def LinallFEM(qbc, n, qnBC, dx):
+    return _Hamil.LinallFEM(qbc, n, qnBC, dx)
+LinallFEM = _Hamil.LinallFEM
+
+def uhallFEM(ubc, hbc, n, hnBC, unBC, dx):
+    return _Hamil.uhallFEM(ubc, hbc, n, hnBC, unBC, dx)
+uhallFEM = _Hamil.uhallFEM
+
+def HamFEM(ubc, hbc, bbc, n, hnBC, unBC, bnBC, dx, g):
+    return _Hamil.HamFEM(ubc, hbc, bbc, n, hnBC, unBC, bnBC, dx, g)
+HamFEM = _Hamil.HamFEM
 # This file is compatible with both classic and new-style classes.
 
 

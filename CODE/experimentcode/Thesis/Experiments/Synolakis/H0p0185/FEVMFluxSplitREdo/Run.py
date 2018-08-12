@@ -147,7 +147,8 @@ def close(t,ts,dt):
     return var
 
 #Forcing Problem    
-wdir = "../../../../../../../../data/raw/Thesis/Experiment/Synolakis/H0p0185/FEVMAt/run/"  
+wdir = "/home/jp/Documents/PhD/project/data/ThesisRaws/Experiment/Synolakis/H0p0185/FEVM/run/"  
+
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 

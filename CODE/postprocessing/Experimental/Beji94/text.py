@@ -1,10 +1,11 @@
 from struct import unpack
 from matplotlib.pyplot import plot,ylim
 import csv
+import os
 
 
-wdir = "../../../../data/Experimental/Data 1994 Paper/DATA 1994 TEXT/"
-sdir = "../../../../data/Experimental/Data 1994 Paper/CSV/"
+wdir = "/home/jp/Documents/PhD/project/data/Experimental/Beji/Source/Data 1994 Paper/DATA 1994 TEXT/"
+sdir = "/home/jp/Documents/PhD/project/data/Experimental/Beji/CSVOut/"
 ts = []
 wg1s = []
 wg2s = []
@@ -15,7 +16,10 @@ wg6s = []
 wg7s = []
 wg8s= []
 
-exp = "sh"
+if not os.path.exists(sdir):
+    os.makedirs(sdir)
+
+exp = "sl"
  
 s = wdir + exp+".dat"
 with open(s, mode='r') as file1: # b is important -> binary
@@ -42,15 +46,16 @@ with open(s, mode='r') as file1: # b is important -> binary
             wg7s.append(wg7)
             #print(lsrscf)
         j= j+ 1
-    n = len(ts)
-    s = sdir + exp+".csv"
-    with open(s,'a') as file2:
-        writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    
-        writefile2.writerow(['Time(s)' ,'wg1(cm)','wg2(cm)','wg3(cm)', 'wg4(cm)', 'wg5(cm)' , 'wg6(cm)' ,'wg7(cm)'])        
-               
-        for j in range(n):
-            writefile2.writerow([str(ts[j]),str(wg1s[j]),str(wg2s[j]),str(wg3s[j]) ,str(wg4s[j]) , str(wg5s[j]) , str(wg6s[j]), str(wg7s[j])])     
-    
+
+n = len(ts)
+s = sdir + exp+".csv"
+with open(s,'a') as file2:
+    writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+
+    writefile2.writerow(['Time(s)' ,'wg1(cm)','wg2(cm)','wg3(cm)', 'wg4(cm)', 'wg5(cm)' , 'wg6(cm)' ,'wg7(cm)'])        
+           
+    for j in range(n):
+        writefile2.writerow([str(ts[j]),str(wg1s[j]),str(wg2s[j]),str(wg3s[j]) ,str(wg4s[j]) , str(wg5s[j]) , str(wg6s[j]), str(wg7s[j])])     
+
 
    

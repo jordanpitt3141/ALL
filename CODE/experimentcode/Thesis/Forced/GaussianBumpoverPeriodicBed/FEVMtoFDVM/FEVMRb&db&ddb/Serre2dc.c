@@ -1973,9 +1973,9 @@ void Recondb(double *bbc, double *dbMbeg, double *dbMend, double dx, int n, int 
 
     for(i = 0;i < n ;i++)
     {
-        dbbc[hnBC + 3*(i)] = idx*(bbc[hnBC + 3*(i+1)] - bbc[hnBC + 3*(i)]);
-        dbbc[hnBC + 3*(i) + 1] = idx*(bbc[hnBC + 3*(i) + 2] - bbc[hnBC + 3*(i)]);
-        dbbc[hnBC + 3*(i) + 2] = idx*(bbc[hnBC + 3*(i) + 2] - bbc[hnBC + 3*(i - 1) + 2]);
+        dbbc[hnBC + 3*(i)] = idx*(bbc[hnBC + 3*(i) + 1] - bbc[hnBC + 3*(i-1) + 1]);
+        dbbc[hnBC + 3*(i) + 1] = 0.5*idx*(bbc[hnBC + 3*(i+1) + 1] - bbc[hnBC + 3*(i-1) + 1]);
+        dbbc[hnBC + 3*(i) + 2] = idx*(bbc[hnBC + 3*(i+1) + 1] - bbc[hnBC + 3*(i) + 1]);
 
     }
 

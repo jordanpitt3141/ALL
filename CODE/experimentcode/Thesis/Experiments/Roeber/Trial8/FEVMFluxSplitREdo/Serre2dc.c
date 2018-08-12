@@ -1597,6 +1597,12 @@ void evolveForce(double *hbc, double *Gbc, double *wbc, double *bbc, double *ubc
     FjhG[0] = foG;
 
     himhp = hihp;
+    
+    /*printf("h : %f | %f \n", her,hel);
+   	printf("G : %f | %f \n", Ger,Gel);
+   	printf("b : %f | %f \n", dber,dbel);
+   	printf("u : %f | %f \n", uer,uel);
+   	printf("du :%f | %f \n", duer,duel);*/
 
     for(i = 0;i < n;i++)
     {
@@ -1754,6 +1760,12 @@ void FluxEvo(double *hbc, double *Gbc,double g, double dx, double dt, int n, int
     double hS,GS;
     int i;
     double idx = 1.0 / dx;
+    i = 0;
+    printf("h Flux  : %d | %f | %f | %e \n ",i,FjhH[i+1],FjhH[i],- dt*idx*(FjhH[i+1] - FjhH[i]));
+    i = 1;
+    printf("h Flux  : %d | %f | %f | %e \n ",i,FjhH[i+1],FjhH[i],- dt*idx*(FjhH[i+1] - FjhH[i]));
+    i = 2;
+    printf("h Flux  : %d | %f | %f | %e \n ",i,FjhH[i+1],FjhH[i],- dt*idx*(FjhH[i+1] - FjhH[i]));
     for (i = 0; i < n; i++)
     {
 
@@ -1761,7 +1773,6 @@ void FluxEvo(double *hbc, double *Gbc,double g, double dx, double dt, int n, int
         Gp[i] = Gbc[hnBC + 3*(i) + 1] - dt*idx*(FjhG[i+1] - FjhG[i]) + dt*idx*(SjG[i]);
         //Gp[i] = Gbc[hnBC + 3*(i) + 1] + dt*idx*(SjG[i]) + dt*SjGa[i];
 
-        //printf("h Flux  : %d | %e | %e | %e  \n ",i,- dt*idx*(FjhH[i+1] - FjhH[i]),dt*Fluxhdiff(x[i],t,a0,a1,a2,a3,a4,a5,a6,a7,g), - dt*idx*(FjhH[i+1] - FjhH[i]) + dt*Fluxhdiff(x[i],t,a0,a1,a2,a3,a4,a5,a6,a7,g));
         //printf("G Flux  : %d | %e | %e | %e  \n ",i,- dt*idx*(FjhG[i+1] - FjhG[i]),dt*FluxGdiff(x[i],t,a0,a1,a2,a3,a4,a5,a6,a7,g), - dt*idx*(FjhG[i+1] - FjhG[i]) + dt*FluxGdiff(x[i],t,a0,a1,a2,a3,a4,a5,a6,a7,g));
         //printf("G Source: %d | %e | %e | %e  \n ",i,dt*idx*(SjG[i]),dt*SourceG(x[i],t,a0,a1,a2,a3,a4,a5,a6,a7,g), dt*idx*(SjG[i])+ dt*SourceG(x[i],t,a0,a1,a2,a3,a4,a5,a6,a7,g) );
 

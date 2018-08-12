@@ -107,7 +107,7 @@ def Roeberflume(x,xexp,bedexp,dx):
     MollPy = zeros(n)
     
     D = 1.0/0.444994
-    eta = 1
+    eta = 3*dx
     rublen = 600
     
     for i in range(n):
@@ -288,15 +288,14 @@ def BedSlopes(b,h,x,theta,dx):
     return bxe,xbxe,bxm,xbxm,bxxm,xbxxm
 
 
-#Roeber Problem    
-expdir = "../../../../../../../../data/Experimental/HIreef/Trial8/"
-wdir = "../../../../../../../../data/raw/Thesis/Experiment/Roeber/Trial8/FDVM/t1/"  
-
+expdir = "/home/jp/Documents/PhD/project/data/Experimental/Roeber/Out/Trial8/"
+#wdir = "/home/jp/Documents/PhD/project/data/ThesisRaws/Experiment/Roeber/Trial8/FDVM/r3/"  
+wdir = "/home/jp/Documents/PhD/project/data/test/"  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-s = expdir + "bed.txt"
+s = expdir + "bed.dat"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
@@ -306,113 +305,49 @@ with open(s,'r') as file1:
             xexp.append(float(row[0]))
             bedexp.append(float(row[1]))
             
-s = expdir + "WG1.txt"
+s = expdir + "WGs.dat"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
     texp = []
     WG1exp = []
-    for row in readfile:       
-            texp.append(float(row[0]))
-            WG1exp.append(float(row[1]))
-            
-s = expdir + "WG2.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG2exp = []
-    for row in readfile:       
-            WG2exp.append(float(row[1]))
-            
-s = expdir + "WG3.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG3exp = []
-    for row in readfile:       
-            WG3exp.append(float(row[1]))
-            
-s = expdir + "WG4.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG4exp = []
-    for row in readfile:       
-            WG4exp.append(float(row[1]))
-            
-s = expdir + "WG5.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG5exp = []
-    for row in readfile:       
-            WG5exp.append(float(row[1]))
-            
-s = expdir + "WG6.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG6exp = []
-    for row in readfile:       
-            WG6exp.append(float(row[1]))
-
-s = expdir + "WG7.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG7exp = []
-    for row in readfile:       
-            WG7exp.append(float(row[1]))
- 
-s = expdir + "WG8.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG8exp = []
-    for row in readfile:       
-            WG8exp.append(float(row[1]))
-            
-s = expdir + "WG9.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG9exp = []
-    for row in readfile:       
-            WG9exp.append(float(row[1]))
-            
-s = expdir + "WG10.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG10exp = []
-    for row in readfile:       
-            WG10exp.append(float(row[1]))
-            
-s = expdir + "WG11.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG11exp = []
-    for row in readfile:       
-            WG11exp.append(float(row[1]))
-            
-s = expdir + "WG12.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG12exp = []
-    for row in readfile:       
-            WG12exp.append(float(row[1]))
-
-s = expdir + "WG13.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG13exp = []
-    for row in readfile:       
-            WG13exp.append(float(row[1]))
-
-s = expdir + "WG14.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG14exp = []
     for row in readfile:       
-            WG14exp.append(float(row[1]))
+            texp.append(float(row[0]))
+            WG1exp.append(float(row[1]))    
+            WG2exp.append(float(row[2]))
+            WG3exp.append(float(row[3]))    
+            WG4exp.append(float(row[4]))            
+            WG5exp.append(float(row[5]))    
+            WG6exp.append(float(row[6]))
+            WG7exp.append(float(row[7]))    
+            WG8exp.append(float(row[8]))
+            WG9exp.append(float(row[9]))    
+            WG10exp.append(float(row[10]))            
+            WG11exp.append(float(row[11]))    
+            WG12exp.append(float(row[12]))
+            WG13exp.append(float(row[13]))    
+            WG14exp.append(float(row[14]))
             
-s = expdir + "wavegauagelocations.txt"
+s = expdir + "WGLoc.dat"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WGloc = []
     for row in readfile:       
             WGloc.append(round(float(row[0]),1))  
+
 
 g = 9.81
 sr = 0.02
@@ -420,11 +355,11 @@ dt = sr/ (2**3)
 dx = 0.1 / (2**2)
 l = 1.0 / (5 + sqrt(g*4))
 
-theta = 1.0
+theta = 1.2
 sx = WGloc[0] + 0.5*dx
-ex = 150
-st = texp[0]
-et = 34
+ex = 100
+st = 20
+et = 33.55
 
 hb = 2.46
 
@@ -490,10 +425,11 @@ bMend = b[-1]*ones(nMBC)
 ddbCbeg = zeros(nCBC)
 ddbCend = zeros(nCBC)
 
+ct = st
 hMbeg,uEbeg,GMbeg,duEbeg = BejiEdge(xMbeg,h[0],u[0],0)
 wMbeg = hMbeg + bMbeg
 
-ct = dt
+ct =st +  dt
 mp = int(ct/sr)
 ftc = lineinterp(WG1exp[mp] - hb ,WG1exp[mp + 1] - hb,texp[mp],texp[mp + 1],ct - texp[mp])
 
@@ -570,7 +506,7 @@ hbwg13 = CELLRECON(readfrommem(h_c,wg13i -1),readfrommem(h_c,wg13i) ,readfrommem
 hbwg14 = CELLRECON(readfrommem(h_c,wg14i -1),readfrommem(h_c,wg14i) ,readfrommem(h_c,wg14i + 1),x[wg14i -1],x[wg14i],x[wg14i + 1],WGloc[13] - x[wg14i])
 
 
-t = 0.0
+t = st
 tts.append(t)
 #Just an FEM solve here
 while t < et: 

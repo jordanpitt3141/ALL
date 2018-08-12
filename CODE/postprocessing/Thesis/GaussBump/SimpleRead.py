@@ -49,7 +49,7 @@ with open(s,'r') as file1:
     u = array(u)    
     G = array(G)  
 
-
+"""
 s = sdir + "Stage"+ts+"s.dat"
 with open(s,'w') as file1:
     for i in range(n):
@@ -79,3 +79,4 @@ with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.20f\n" %(x[i]," ",G[i])
         file1.write(s)
+"""

@@ -1,0 +1,39 @@
+\documentclass[]{article} 
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{pgfplots} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},every axis plot/.append style={thick}  }
+\begin{document} 
+	\begin{tikzpicture}
+	\begin{axis}[ 
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick = {-50,-25,0,25},
+	ytick = {0.95,1.15,1.35,1.55},
+	xticklabel style = {yshift=-1.5mm},
+	extra x ticks={-37.5,-12.5,12.5},
+	extra y ticks={1.05,1.25,1.45},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=-50, 
+	xmax=25, 
+	ymin =0.95, 
+	ymax = 1.55,
+	xlabel=\Large$x \; (m)$, 
+	ylabel=\Large$h \; (m)$ ]
+	\addplot [blue,no markers,ultra thick] table {h0.0s.dat };
+	\addplot [red,no markers,ultra thick] table {h2.5s.dat };
+	\addplot [violet!80!white,no markers,ultra thick] table {h5.0s.dat };
+	\addplot [orange,no markers,ultra thick] table {h7.5s.dat };
+	\addplot [black,no markers,ultra thick] table {h10.0s.dat };
+
+	\end{axis} 
+	
+	
+	
+	\end{tikzpicture}
+\end{document}

@@ -259,20 +259,17 @@ k = sqrt(3.0*a1) / (2.0*a0 *sqrt(a0 + a1))
 c = sqrt(g*(a0 + a1))
 
 
-wdirord = "grim"
-sdirord = "W"
+FDmeth = "grim"
+FDmeth = "FDcent"
 
-#wdir = "../../../../data/raw/NEWdata/FDredo/grim/"
-#sdir = "../../../../data/postprocessing/scFDallAE/grim/"
-
-wdirb = "../../../../../../data/raw/Thesis/Soltion/"+wdirord+"/"
+wdirb = "/home/jp/Documents/PhD/project/data/ThesisRaw/SolitonFD&FEVM/" +FDmeth+"/"
 L1hs = []
 L1us = []
 L1Gs = []
 L1Gas = []
 dxs=  []
 
-sdir = "../../../../../../data/ThesisPost/Soliton/"+sdirord+"/L1/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/Soliton/" +FDmeth+"/L1/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)

@@ -213,14 +213,13 @@ def find_nearestidx(array1, value1):
 
 
 #Roeber Problem    
-expdir = "../../../../../../../../data/Experimental/HIreef/Trial8/"
-wdir = "../../../../../../../../data/raw/Thesis/Experiment/Roeber/Trial8/FEVMFluxSplit/run2/"  
-
+expdir = "/home/jp/Documents/PhD/project/data/Experimental/Roeber/Out/Trial8/"
+wdir = "/home/jp/Documents/PhD/project/data/test/"  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-s = expdir + "bed.txt"
+s = expdir + "bed.dat"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
@@ -230,108 +229,43 @@ with open(s,'r') as file1:
             xexp.append(float(row[0]))
             bedexp.append(float(row[1]))
             
-s = expdir + "WG1.txt"
+s = expdir + "WGs.dat"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
     texp = []
     WG1exp = []
-    for row in readfile:       
-            texp.append(float(row[0]))
-            WG1exp.append(float(row[1]))
-            
-s = expdir + "WG2.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG2exp = []
-    for row in readfile:       
-            WG2exp.append(float(row[1]))
-            
-s = expdir + "WG3.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG3exp = []
-    for row in readfile:       
-            WG3exp.append(float(row[1]))
-            
-s = expdir + "WG4.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG4exp = []
-    for row in readfile:       
-            WG4exp.append(float(row[1]))
-            
-s = expdir + "WG5.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG5exp = []
-    for row in readfile:       
-            WG5exp.append(float(row[1]))
-            
-s = expdir + "WG6.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG6exp = []
-    for row in readfile:       
-            WG6exp.append(float(row[1]))
-
-s = expdir + "WG7.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG7exp = []
-    for row in readfile:       
-            WG7exp.append(float(row[1]))
- 
-s = expdir + "WG8.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG8exp = []
-    for row in readfile:       
-            WG8exp.append(float(row[1]))
-            
-s = expdir + "WG9.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG9exp = []
-    for row in readfile:       
-            WG9exp.append(float(row[1]))
-            
-s = expdir + "WG10.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG10exp = []
-    for row in readfile:       
-            WG10exp.append(float(row[1]))
-            
-s = expdir + "WG11.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG11exp = []
-    for row in readfile:       
-            WG11exp.append(float(row[1]))
-            
-s = expdir + "WG12.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG12exp = []
-    for row in readfile:       
-            WG12exp.append(float(row[1]))
-
-s = expdir + "WG13.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG13exp = []
-    for row in readfile:       
-            WG13exp.append(float(row[1]))
-
-s = expdir + "WG14.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG14exp = []
     for row in readfile:       
-            WG14exp.append(float(row[1]))
+            texp.append(float(row[0]))
+            WG1exp.append(float(row[1]))    
+            WG2exp.append(float(row[2]))
+            WG3exp.append(float(row[3]))    
+            WG4exp.append(float(row[4]))            
+            WG5exp.append(float(row[5]))    
+            WG6exp.append(float(row[6]))
+            WG7exp.append(float(row[7]))    
+            WG8exp.append(float(row[8]))
+            WG9exp.append(float(row[9]))    
+            WG10exp.append(float(row[10]))            
+            WG11exp.append(float(row[11]))    
+            WG12exp.append(float(row[12]))
+            WG13exp.append(float(row[13]))    
+            WG14exp.append(float(row[14]))
             
-s = expdir + "wavegauagelocations.txt"
+s = expdir + "WGLoc.dat"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WGloc = []
@@ -349,7 +283,7 @@ theta = 1.2
 sx = WGloc[0] + 0.5*dx
 ex = 400
 st = texp[0]
-et = 119
+et =0.0001
 hb = 2.46
 
 
@@ -499,12 +433,11 @@ hbwg13 = CELLRECON(readfrommem(h_c,wg13i -1),readfrommem(h_c,wg13i) ,readfrommem
 hbwg14 = CELLRECON(readfrommem(h_c,wg14i -1),readfrommem(h_c,wg14i) ,readfrommem(h_c,wg14i + 1),x[wg14i -1],x[wg14i],x[wg14i + 1],WGloc[13] - x[wg14i])
 
 
-
 t = 0.0
 tts.append(t)
 #Just an FEM solve here
 while t < et: 
-    
+    print(hMbegdt,uMbegdt,GMbegdt )
     evolvewrapForcingANA(h_c,G_c,b_c,hMbeg_c,hMend_c,GMbeg_c,GMend_c,wMbeg_c,wMend_c,bMbeg_c,bMend_c,uMbeg_c,uMend_c,hMbegdt_c,hMend_c,GMbegdt_c,GMend_c,wMbegdt_c,wMend_c,uMbegdt_c,uMend_c,n,hnBC,hnbc,bnBC,bnMBC,bnbc,unBC,unbc,theta,dx,dt,g);
     
     ReconandSolve(h_c,G_c,b_c,hMbegdt_c,hMend_c,GMbegdt_c,GMend_c,wMbegdt_c,wMend_c,bMbeg_c,bMend_c,uMbegdt_c,uMend_c,n,hnBC,hnbc,bnBC,bnMBC,bnbc,unBC,unbc,theta,dx,dt,g,Gbc_c,hbc_c,wbc_c,ubc_c,bbc_c)    
@@ -583,6 +516,7 @@ bbcC = copyarrayfromC(bbc_c,bnbc)
 
 nn = len(tts)
 
+"""
 s = wdir + "nWGs.txt"
 with open(s,'a') as file2:
     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -590,3 +524,4 @@ with open(s,'a') as file2:
 
     for j in range(nn):
         writefile2.writerow([str(tts[j]),str(nwg1s[j]),str(nwg2s[j]), str(nwg3s[j]), str(nwg4s[j]),str(nwg5s[j]),str(nwg6s[j]), str(nwg7s[j]),str(nwg8s[j]),str(nwg9s[j]), str(nwg10s[j]), str(nwg11s[j]),str(nwg12s[j]),str(nwg13s[j]), str(nwg14s[j])])  
+"""

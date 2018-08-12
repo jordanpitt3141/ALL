@@ -199,9 +199,9 @@ def find_nearestidx(array1, value1):
 
 
 #Beji Problem    
-exp = "sh"
-expdir = "../../../../../../../data/Experimental/Data 1994 Paper/CSV/"
-wdir = "../../../../../../../data/raw/Thesis/Experiment/Beji/"+str(exp)+"/FEVM/r2/"  
+exp = "sl"
+expdir = "/home/jp/Documents/PhD/project/data/Experimental/Beji/Out/"
+wdir = "/home/jp/Documents/PhD/project/data/ThesisRaws/Experiment/Beji/"+str(exp)+"/FEVM/r1/"  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)

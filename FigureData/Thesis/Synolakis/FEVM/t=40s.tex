@@ -1,0 +1,37 @@
+\documentclass[]{article} 
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{pgfplots} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},every axis plot/.append style={thick}  }
+\begin{document} 
+	\begin{tikzpicture}
+	\begin{axis}[ 
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick = {-5,0,5,10,15,20},
+	ytick = {-0.04,0,0.04,0.08},
+	xticklabel style = {yshift=-1.5mm},
+	extra x ticks={-2.5,2.5,7.5,12.5,17.5},
+	extra y ticks={-0.02,0.02,0.06},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=-5, 
+	xmax=20, 
+	ymin =-0.04, 
+	ymax = 0.08,
+	xlabel=\Large$x \; (m)$, 
+	ylabel=\Large$z \; (m)$ ]
+	\addplot [green!60!black,no markers,ultra thick,restrict x to domain=-5:20] table {./Data/b30.0.dat };
+	\addplot [blue,no markers,ultra thick,restrict x to domain=-5:20] table {./Data/w40.0.dat };
+	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=-5:20] table {./Data/t=40.dat };
+
+	\end{axis} 
+	
+	
+	
+	\end{tikzpicture}
+\end{document}
