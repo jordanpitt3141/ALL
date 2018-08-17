@@ -1,0 +1,25 @@
+% A circular diagram of a TeX workflow
+% Author: Stefan Kottwitz
+% https://www.packtpub.com/hardware-and-creative/latex-cookbook
+\documentclass[border=10pt]{standalone}
+\usepackage{tikz} 
+\usetikzlibrary{shapes,arrows}
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
+
+\tikzstyle{block1} = [rectangle, draw,fill=red!20, 
+text width=8em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{block} = [rectangle, draw, 
+text width=8em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\begin{document}
+\begin{tikzpicture} 
+
+ \node [block] (PP) {Physical Phenomena};
+ \node [block1,below of=PP,right of=PP, node distance=3cm](MM) {Mathematical Model};
+ \node [block,left of= PP,below of=PP, node distance=3cm](CP) {Computational Model};
+ \path [line] (PP) -- (MM);
+ \path [line] (MM) -- (CP);
+ \path [line] (CP) -- (PP);
+\end{tikzpicture} 
+\end{document}

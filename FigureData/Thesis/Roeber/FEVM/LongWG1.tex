@@ -1,0 +1,188 @@
+\documentclass[]{article} 
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},every axis plot/.append style={thick}  }
+\begin{document} 
+	\begin{tikzpicture}
+	\begin{axis}[
+	name=WG1, 
+	clip=false,
+	height = 4cm,
+	width = 15cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick=\empty,
+	ytick = {2,3,4,5},
+	extra x ticks={20,25,30,35,40,45,50,55,60},
+	extra y ticks={2.5,3.5,4.5},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=20, 
+	xmax=60, 
+	ymin =2, 
+	ymax = 5,
+	%xlabel=\Large$t \; (s)$, 
+	ylabel=\Large$z \; (m)$ 
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=20:60] table {./Num/WG1.dat };
+	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=20:60,each nth point=10] table {./Exp/WG1.dat };
+	\node at (62, 3.5) {WG1};
+	\end{axis} 
+	\begin{axis}[ 
+	name=WG2,at={($(WG1.south west) + (0,-2.425cm)$)},
+	clip=false,
+	height = 4cm,
+	width = 15cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick=\empty,
+	ytick=\empty,
+	extra x ticks={20,25,30,35,40,45,50,55,60},
+	extra y ticks={2,2.5,3,3.5,4,4.5,5},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=20, 
+	xmax=60, 
+	ymin =2, 
+	ymax = 5,
+	axis x line*=bottom,
+	%xlabel=\Large$t \; (s)$, 
+	%ylabel=\Large$z \; (m)$ 
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=20:60] table {./Num/WG2.dat };
+	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=20:60,each nth point=10] table {./Exp/WG2.dat };
+	\node at (62, 3.5) {WG2};
+	\end{axis} 
+	\begin{axis}[ 
+	name=WG3,at={($(WG2.south west) + (0,-2.425cm)$)},
+	clip=false,
+	height = 4cm,
+	width = 15cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick=\empty,
+	ytick = {2,3,4,5},
+	extra x ticks={20,25,30,35,40,45,50,55,60},
+	extra y ticks={2.5,3.5,4.5},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=20, 
+	xmax=60, 
+	ymin =2, 
+	ymax = 5,
+	axis x line*=bottom,
+	%xlabel=\Large$t \; (s)$, 
+	ylabel=\Large$z \; (m)$ 
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=20:60] table {./Num/WG3.dat };
+	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=20:60,each nth point=10] table {./Exp/WG3.dat };
+	\node at (62, 3.5) {WG3};
+	\end{axis} 
+	\begin{axis}[ 
+	name=WG4,at={($(WG3.south west) + (0,-2.425cm)$)},
+	clip=false,
+	height = 4cm,
+	width = 15cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick=\empty,
+	ytick=\empty,
+	extra x ticks={20,25,30,35,40,45,50,55,60},
+	extra y ticks={2,2.5,3,3.5,4,4.5,5},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=20, 
+	xmax=60, 
+	ymin =2, 
+	ymax = 5,
+	axis x line*=bottom,
+	%xlabel=\Large$t \; (s)$, 
+	%ylabel=\Large$z \; (m)$ 
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=20:60] table {./Num/WG4.dat };
+	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=20:60,each nth point=10] table {./Exp/WG4.dat };
+	\node at (62, 3.5) {WG4};
+	\end{axis}
+	\begin{axis}[ 
+	name=WG5,at={($(WG4.south west) + (0,-2.425cm)$)},
+	clip=false,
+	height = 4cm,
+	width = 15cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick=\empty,
+	ytick = {2,3,4,5},
+	extra x ticks={20,25,30,35,40,45,50,55,60},
+	extra y ticks={2.5,3.5,4.5},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=20, 
+	xmax=60, 
+	ymin =2, 
+	ymax = 5,
+	axis x line*=bottom,
+	%xlabel=\Large$t \; (s)$, 
+	ylabel=\Large$z \; (m)$ 
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=20:60] table {./Num/WG5.dat };
+	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=20:60,each nth point=10] table {./Exp/WG5.dat };
+	\node at (62, 3.5) {WG5};
+	\end{axis}  
+	\begin{axis}[ 
+	name=WG6,at={($(WG5.south west) + (0,-2.425cm)$)},
+	clip=false,
+	height = 4cm,
+	width = 15cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick=\empty,
+	ytick=\empty,
+	extra x ticks={20,25,30,35,40,45,50,55,60},
+	extra y ticks={2,2.5,3,3.5,4,4.5,5},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=20, 
+	xmax=60, 
+	ymin =2, 
+	ymax = 5,
+	axis x line*=bottom,
+	%xlabel=\Large$t \; (s)$, 
+	%ylabel=\Large$z \; (m)$ 
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=20:60] table {./Num/WG6.dat };
+	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=20:60,each nth point=10] table {./Exp/WG6.dat };
+	\node at (62, 3.5) {WG6};
+	\end{axis}
+	\begin{axis}[ 
+	name=WG7,at={($(WG6.south west) + (0,-2.425cm)$)},
+	clip=false,
+	height = 4cm,
+	width = 15cm,
+	scaled ticks=false, 
+	xticklabel style = {yshift=-1.5mm},
+	tick label style={/pgf/number format/fixed},
+	xtick={20,30,40,50,60},
+	ytick=\empty,
+	ytick = {2,3,4,5},
+	extra x ticks={25,35,45,55},
+	extra y ticks={2.5,3.5,4.5},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=20, 
+	xmax=60, 
+	ymin =2, 
+	ymax = 5,
+	axis x line*=bottom,
+	xlabel=\Large$t \; (s)$, 
+	ylabel=\Large$z \; (m)$ 
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=20:60] table {./Num/WG7.dat };
+	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=20:60,each nth point=10] table {./Exp/WG7.dat };
+	\node at (62, 3.5) {WG7};
+	\end{axis}  
+	\end{tikzpicture}
+\end{document}

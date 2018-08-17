@@ -205,7 +205,7 @@ double HankEnergyacrosscell(double *x,double *h,double *u,double g,int j,double 
     double fgpu = interpquarticval(ucoeff,x[j],fgp);
     double fgpux = interpquarticgrad(ucoeff,x[j],fgp);
     
-    double fgpe = fgph*fgpu*fgpu + g*fgph*fgph + i3*(fgph*fgph*fgph)*fgpux*fgpux;
+    double fgpe = g*fgph*fgph + i3*fgph*fgph*fgph*fgpux*fgpux + fgph*fgpu*fgpu  ;
         
     //second gauss point
     double sgp = x[j];
@@ -213,7 +213,7 @@ double HankEnergyacrosscell(double *x,double *h,double *u,double g,int j,double 
     double sgpu = interpquarticval(ucoeff,x[j],sgp);
     double sgpux = interpquarticgrad(ucoeff,x[j],sgp);
     
-    double sgpe = sgph*sgpu*sgpu + g*sgph*sgph + i3*(sgph*sgph*sgph)*sgpux*sgpux;
+    double sgpe = g*sgph*sgph + i3*sgph*sgph*sgph*sgpux*sgpux + sgph*sgpu*sgpu  ;
 
     //third gauss point
     double tgp = -0.5*dx*sqrt(3.0/5.0) + x[j];
@@ -221,7 +221,7 @@ double HankEnergyacrosscell(double *x,double *h,double *u,double g,int j,double 
     double tgpu = interpquarticval(ucoeff,x[j],tgp);
     double tgpux = interpquarticgrad(ucoeff,x[j],tgp);
     
-    double tgpe = tgph*tgpu*tgpu + g*tgph*tgph + i3*(tgph*tgph*tgph)*tgpux*tgpux;
+    double tgpe = g*tgph*tgph + i3*tgph*tgph*tgph*tgpux*tgpux + tgph*tgpu*tgpu ;
 
 	free(ucoeff);
 	free(hcoeff);
@@ -391,13 +391,13 @@ double HamacrosscellFEM(double *ubc,double *hbc,double *bbc,int cj,int hnBC,int 
     
     double h3uxsq =  0.0625*pow(dx, 5)*((4.0L/5.0L)*pow(hcoeff[0], 3)*ucoeff[0]*ucoeff[1] + (12.0L/5.0L)*pow(hcoeff[0], 2)*hcoeff[1]*pow(ucoeff[0], 2)) + 0.25*pow(dx, 3)*(pow(hcoeff[0], 2)*hcoeff[1]*pow(ucoeff[1], 2) + 4*hcoeff[0]*pow(hcoeff[1], 2)*ucoeff[0]*ucoeff[1] + (4.0L/3.0L)*pow(hcoeff[1], 3)*pow(ucoeff[0], 2)) + 1.0*dx*pow(hcoeff[1], 3)*pow(ucoeff[1], 2);
     
-    double ghsq = 0.0833333333333333*pow(dx, 3)*pow(hcoeff[0], 2) + 1.0*dx*pow(hcoeff[1], 2);
+    double hsq = 0.0833333333333333*pow(dx, 3)*pow(hcoeff[0], 2) + 1.0*dx*pow(hcoeff[1], 2);
 
 	free(hcoeff);
 	free(ucoeff);
 	free(bcoeff);
     
-    return  husq + i3*h3uxsq + g*ghsq;
+    return  g*hsq + husq + h3uxsq ;
 }
 
 

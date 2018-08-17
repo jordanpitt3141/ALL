@@ -14,31 +14,8 @@ from sympy.printing.ccode import ccode
 
 
 def Polys(a0,a1,a2,a3,x):
-    return a3*x**3 + a2*x**2 + a1*x + a0
+    return a0*x**3 + a1*x**2 + a2*x + a3
 
-def Polys(a0,a1,a2,a3,x):
-    return a3*x**3 + a2*x**2 + a1*x + a0  
-
-def StringCon(string):
-    splitstring1 = string.split('**')
-    n = len(splitstring1)
-    for i in range(n-1):
-        var = (splitstring1[i].split('*'))[-1]
-        num = (splitstring1[i+1].split('*'))[0]
-        
-        
-        
-        if(' ' not in var and '(' not in var ):
-            print var,num
-        else:
-            if(' ' in var):
-                var = (var.split(' '))[-1]
-            if('('  in var):
-                var = (var.split('('))[-1]
-                
-            print var,num
-            
-    return 1
 
 dx = Symbol('dx')
 
@@ -60,20 +37,22 @@ b3 = Symbol('bcoeff[3]')
 
 x = Symbol('x')
 
-GPoly = Polys(G1,G0,0,0,x)
-hPoly = Polys(h1,h0,0,0,x)
-uPoly = Polys(u2,u1,u0,0,x)
+GPoly = Polys(0,0,G0,G1,x)
+hPoly = Polys(0,0,h0,h1,x)
+uPoly = Polys(0,u0,u1,u2,x)
 duPoly = diff(uPoly,x)
-bPoly = Polys(b3,b2,b1,b0,x)
+bPoly = Polys(b0,b1,b2,b3,x)
 dbPoly = diff(bPoly,x)
 
-Hamthu2 = integrate(hPoly*uPoly*uPoly,(x,-0.5*dx,0.5*dx))
+Hamthu2 = integrate(hPoly*uPoly*uPoly,(x,-dx/2,dx/2))
 
-Hamth3ux2 = integrate(hPoly*hPoly*hPoly*duPoly*duPoly,(x,-0.5*dx,0.5*dx))
+Hamth3ux2 = integrate(hPoly*hPoly*hPoly*duPoly*duPoly,(x,-dx/2,dx/2))
 
-Hamtgh2 = integrate(hPoly*hPoly,(x,-0.5*dx,0.5*dx))
+Hamtgh2 = integrate(hPoly*hPoly,(x,-dx/2,dx/2))
 
-hu = integrate(hPoly*uPoly,(x,-0.5*dx,0.5*dx))
+hu = integrate(hPoly*uPoly,(x,-dx/2,dx/2))
+
+h = integrate(hPoly,(x,-dx/2,dx/2))
 
 
 print
@@ -88,4 +67,6 @@ print(ccode(Hamtgh2))
 print
 print
 print(ccode(hu))
-
+print
+print
+print(ccode(h))

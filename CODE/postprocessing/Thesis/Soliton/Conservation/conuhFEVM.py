@@ -67,7 +67,7 @@ def SolitonHam(a0,a1,c,k,xb,xe):
     husqInt = Solitonhusquare(a0,a1,c,k,xe) -Solitonhusquare(a0,a1,c,k,xb)
     hcubedusq = Solitonhcubeddusquare(a0,a1,c,k,xe) - Solitonhcubeddusquare(a0,a1,c,k,xb)
     
-    return 0.5*(ghsqInt + husqInt + hcubedusq)
+    return 0.5*(hcubedusq)
     
 
 
@@ -247,6 +247,7 @@ for ki in range(11,12):
     Pn = uhall(xbc_c,hbc_c,ubc_c,n + 2*niBC,niBC,dx)
     Mn = hall(xbc_c,hbc_c,n + 2*niBC,niBC,dx)
     Gcn = Gall(xbc_c,Gbc_c,n + 2*niBC,niBC,dx)
+
     
     hI,uI,GI  = solitoninit(n,a0,a1,g,x,0,dx)
     
@@ -413,7 +414,7 @@ for ki in range(11,12):
 
 
 
-n= len(dxs)
+nn= len(dxs)
 """
 s = sdir + "conG.dat"
 with open(s,'w') as file1:

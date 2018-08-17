@@ -3,6 +3,8 @@
 \label{chp:HFVMMethod}
 %introduction
 
+%update method
+
 %describe grids up here
 \section{Notation for Numerical Grids}
 We begin by defining the numerical grid in both space and time from a starting location $x_0$ and a beginning time $t^0$. For any $j,n \in \mathbb{N}$ we have
@@ -13,12 +15,13 @@ t^n &= t^0 + n \Delta t
 \end{align}
 \label{eqn:NumGridDef}
 \end{subequations}
-which produces a uniform grid; $x_j$ in space and $t^n$ in time. The Finite Element Volume Method (FEVM) can be readily adapted to nonuniform grids and we restrict our description of the method to uniform grids for simplicity. We will extend this notation to describe locations and times not on the grid by allowing \eqref{eqn:NumGridDef} to also have subscripts and superscripts in $\mathbb{R}$. 
+which produces a uniform grid; $x_j$ in space and $t^n$ in time. The Finite Element Volume Method (FEVM) can be readily adapted to nonuniform grids and we restrict our description of the method to uniform grids for simplicity. This notation is extended to locations and times not on the grid using subscripts and superscripts in $\mathbb{R}$ for \eqref{eqn:NumGridDef}.
 
 The grid notation naturally extends to our quantities of interest, for example, for a general quantity $q$
 \begin{equation}
 q^n_j = q(x_j ,t^n). 
 \end{equation}
+This applies for all subscripts and superscripts in $\mathbb{R}$. Throughout the rest of this Thesis $j$ and $n$ will be used exclusively to denote general locations on the grid and thus are members of $\mathbb{N}$.
 
 %cells
 The description of our numerical method focuses on cells which are regions surrounding the grid points. The $j^{th}$ cell is the region $\left[x_{j - 1/2} , x_{j + 1/2}\right]$ centred around $x_j$. For each cell we define the average of a quantity
@@ -27,7 +30,7 @@ The description of our numerical method focuses on cells which are regions surro
 \end{equation}
 in cell $j$.
 
-In the FEVM we reconstruct quantities at various points inside the cell from the cell average values. We distinguish between two reconstructions that are possible at each cell edge, which both exist due to the overlap of neighbouring cells. To do this we use superscripts so that for the cell edge $x_{j+1/2}$ and a general quantity $q$, we have $q^-_{j+1/2}$ as the reconstructed value of $q$ at $x_{j+1/2}$ from the $j^{th}$ cell and $q^+_{j+1/2}$ as the reconstructed value of $q$ at $x_{j+1/2}$ from the $(j+1)^{th}$ cell. Since the particular time level is typically obvious from context and hence omitted the use of a superscript will not clutter the notation.
+In the FEVM we reconstruct quantities at various points inside the cell from the cell average values. We distinguish between two reconstructions that are possible at each cell edge, which exist due to the overlap of neighbouring cells. To do this we use superscripts so that for the cell edge $x_{j+1/2}$ and a general quantity $q$, we have $q^-_{j+1/2}$ as the reconstructed value of $q$ at $x_{j+1/2}$ from the $j^{th}$ cell and $q^+_{j+1/2}$ as the reconstructed value of $q$ at $x_{j+1/2}$ from the $(j+1)^{th}$ cell. Since the particular time level is typically obvious from context and hence omitted the use of a superscript will not clutter the notation.
 
 \section{Structure Overview}
 %define w,b
@@ -41,7 +44,7 @@ b_{0} \\ b_{1} \\ \vdots \\b_{m}
 \end{align*}
 The evolution step proceeds as follows:
 \begin{enumerate}[(i)]
-	\item Reconstruction: We reconstruct the quantities $h$, $w$, $G$ and $b$ inside every cell at various points. The values of $h$, $w$ and $G$ in the $j^{th}$ cell are reconstructed at $x_{j-1/2}$, $x_{j}$ and $x_{j+1/2}$ using the reconstruction operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ respectively. The bed profile $b$ in the $j^{th}$ cell is reconstructed at $x_{j-1/2}$, $x_{j-1/6}$, $x_{j+1/6}$ and $x_{j+1/2}$ using the reconstruction operators $\mathcal{B}_{j-1/2}$, $\mathcal{B}_{j-1/6}$, $\mathcal{B}_{j+1/6}$ and $\mathcal{B}_{j+1/2}$ respectively. So that
+	\item Reconstruction: We reconstruct the quantities $h$, $w$, $G$ and $b$ inside every cell at various points, which are demonstrated for the $j^{th}$ cell in Figure \ref{fig:ReconLocs}. The values of $h$, $w$ and $G$ in the $j^{th}$ cell are reconstructed at $x_{j-1/2}$, $x_{j}$ and $x_{j+1/2}$ using the reconstruction operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ respectively. The bed profile $b$ in the $j^{th}$ cell is reconstructed at $x_{j-1/2}$, $x_{j-1/6}$, $x_{j+1/6}$ and $x_{j+1/2}$ using the reconstruction operators $\mathcal{B}_{j-1/2}$, $\mathcal{B}_{j-1/6}$, $\mathcal{B}_{j+1/6}$ and $\mathcal{B}_{j+1/2}$ respectively. So that
 	\begin{align*}	&h^+_{j-1/2} = \mathcal{R}^+_{j-1/2} \left(\overline{\vecn{h}}\right),&& G^+_{j-1/2} = \mathcal{R}^+_{j-1/2} \left(\overline{\vecn{G}}\right),\\
 	&h_j = \mathcal{R}_{j} \left(\overline{\vecn{h}}\right),&& G_j = \mathcal{R}_{j} \left(\overline{\vecn{G}}\right),\\
 	&h^-_{j+1/2} = \mathcal{R}^-_{j+1/2}\left(\overline{\vecn{h}}\right),&& G^-_{j+1/2} = \mathcal{R}^-_{j+1/2} \left(\overline{\vecn{G}}\right),\\ \\
@@ -61,7 +64,7 @@ The evolution step proceeds as follows:
 	\end{bmatrix}.
 	\end{align*}
 	
-	\item Fluid Velocity: The remaining unknown quantity, the depth averaged fluid velocity, $u$ is calculated by solving the elliptic equation \eqref{defn:SerreEqnConservedQuantity1} with a FEM from which we obtain $u_{j-1/2}$, $u_j$ and $u_{j+1/2}$ at every cell. We denote the solution of the FEM by the map $\mathcal{G}$ given  $\vecn{\hat{h}}$, $\vecn{\hat{G}}$ and $\vecn{\hat{b}}$ as inputs. So that
+	\item Fluid Velocity: The remaining unknown quantity, the depth averaged fluid velocity $u$ is calculated by solving the elliptic equation \eqref{defn:SerreEqnConservedQuantity1} with a Finite Element Method (FEM) from which we obtain $u_{j-1/2}$, $u_j$ and $u_{j+1/2}$ for every cell. We denote the solution of the FEM by the map $\mathcal{G}$ given  $\vecn{\hat{h}}$, $\vecn{\hat{G}}$ and $\vecn{\hat{b}}$ as inputs. So that
 	\begin{equation*}
 	\vecn{\hat{u}} = 
 	\begin{bmatrix}
@@ -77,24 +80,24 @@ The evolution step proceeds as follows:
 	\begin{equation*}	
 	S_{j} =\mathcal{S}_{j} \left( \vecn{\hat{h}},\vecn{\hat{w}},\vecn{\hat{b}}, \vecn{\hat{u}}  \right).
 	\end{equation*}
-	\item Update All the Cell Averages Using a Forward Euler Approximation: We update the cell average values from time $t^n$ to the next time level combining a fractional step method and a forward Euler approximation for the flux and source terms.
+	\item Update All the Cell Averages Using a Forward Euler Approximation: We update the cell average values from time $t^n$ to the next time level combining a forward Euler approximation and a fractional step method for the flux and source terms.
 	\item Update All the Cell Averages Using a Second-Order SSP Runge-Kutta Method: We repeat steps (I)-(V) and use SSP Runge-Kutta time stepping to calculate $\overline{\vecn{h}}$ and $\overline{\vecn{G}}$ at $t^{n+1}$ with second-order accuracy in space and time.
 \end{enumerate}
 
 \setcounter{subsection}{0}
 \renewcommand{\thesubsection}{(\roman{subsection})} 
 \subsection{Reconstruction}
-We now provide the details for how each of the quantities inside the $j^{th}$ cell are calculated at the locations demonstrated in Figure \ref{fig:ReconLocs}. For $h$, $w$ and $G$ the reconstructions is performed from the cell averages. While $b$ is reconstructed from the nodal values.
+We now provide the details for the reconstruction of $h$, $w$, $G$ and $b$ in the $j^{th}$ cell at the locations demonstrated in Figure \ref{fig:ReconLocs}. For $h$, $w$ and $G$ the reconstructions is performed from the cell averages. While $b$ is reconstructed from the nodal values.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/FEVMRecon.pdf}
-	\caption{Location of the reconstructions for $h$, $w$, $G$ and $b$ .}
+	\caption{Location of the reconstructions for $h$, $w$, $G$ and $b$ inside the $j^{th}$ cell.}
 	\label{fig:ReconLocs}
 \end{figure}
 
 \subsubsection{The height, stage and $G$}
-We reconstruct $h$, $w$ and $G$ with piecewise functions that are linear over a cell with discontinuous jumps at the cell edges. Since $h$, $w$ and $G$ use the same reconstruction operators we will demonstrate them for a general quantity $q$. For the $j^{th}$ cell we reconstruct the values of $q$ at $x_{j-1/2} $, $x_{j} $ and $x_{j+1/2}$ in the following way
+We reconstruct $h$, $w$ and $G$ with piecewise functions that are linear over a cell and discontinuous at the cell edges. Since $h$, $w$ and $G$ use the same reconstruction operators we demonstrate them for a general quantity $q$. For the $j^{th}$ cell we reconstruct the values of $q$ at $x_{j-1/2} $, $x_{j} $ and $x_{j+1/2}$ in the following way
 %cite someone 
 \begin{subequations}
 	\begin{align}
@@ -109,21 +112,21 @@ where
 d_j = \text{minmod}\left(\theta \dfrac{\overline{q}_j -\overline{q}_{j-1} }{\Delta x}, \dfrac{\overline{q}_{j+1} -\overline{q}_{j-1} }{2\Delta x}, \theta\dfrac{\overline{q}_{j+1} -\overline{q}_{j} }{\Delta x}\right)
 \label{eqn:slopehGrecon}
 \end{equation}
-with $\theta \in \left[1,2\right]$. The choice of the $\theta$ parameter changes the diffusion introduced by the reconstruction, with $\theta =1$ the reconstruction introduces the most diffusion and is equivalent to the basic minmod reconstruction \cite{Roe-1986-337} While for $\theta = 2$ the reconstruction is equivalent to the monotized central reconstruction \citealp{VanLeer-1977-276} and introduces the least diffusion.
+with $\theta \in \left[1,2\right]$. The choice of the $\theta$ parameter changes the diffusion introduced by the reconstruction, with $\theta =1$ the reconstruction introduces the most diffusion and is equivalent to the minmod reconstruction \cite{Roe-1986-337}. When $\theta = 2$ the reconstruction introduces the least diffusion and is equivalent to the monotized central reconstruction \cite{VanLeer-1977-276}.
 
 \begin{defn}
-The minmod function takes a list of $x_j \in \mathbb{R}$. If all elements have the same sign then minmod returns the element with smallest absolute value, otherwise it returns $0$. 
+The minmod function takes a list of $a_i \in \mathbb{R}$. If all elements have the same sign then minmod returns the element with smallest absolute value, otherwise it returns $0$. 
 	\begin{equation*}
-	\text{minmod}\left(x_0,x_1,\dots\right) := \left\lbrace \begin{array}{l l}
-	\min\left\lbrace x_j\right\rbrace & x_j > 0 \; \forall j \\
-	\max\left\lbrace x_j\right\rbrace & x_j < 0  \; \forall j \\
+	\text{minmod}\left(a_0,a_1,\dots\right) := \left\lbrace \begin{array}{l l}
+	\min\left\lbrace a_i\right\rbrace & a_i > 0 \; \forall i \\
+	\max\left\lbrace a_i\right\rbrace & a_i < 0  \; \forall i \\
 	0 & \text{otherwise}\\
 	\end{array} \right. . 
 	\end{equation*}
 \end{defn}
-The nonlinear limiting used to calculate $d_j$ ensures that the reconstruction of $h$, $w$ and $G$ inside the cell does not introduce non-physical oscillations and is thus Total Variation Diminishing (TVD). It does this by constraining the slope $d_j$ to zero near local extrema, resulting in a first-order approximation, which is always TVD. Away from local extrema $d_j$ will be the gradient with the smallest absolute value, making our reconstruction second-order accurate.
+The nonlinear limiting used to calculate $d_j$ ensures that the reconstruction of $h$, $w$ and $G$ inside the cell is Total Variation Diminishing (TVD), hence it does not introduce non-physical oscillations. The TVD property is attained by constraining the slope $d_j$ to zero near local extrema, resulting in a first-order approximation which is necessarily TVD. Away from local extrema $d_j$ will be the gradient with the smallest absolute value, making our reconstruction second-order accurate.
 
-The reconstruction operator $\mathcal{R}_{j} $ is second-order accurate regardless of the presence of local extrema. This can be seen through the error analysis of the midpoint method for which we get that
+The reconstruction operator $\mathcal{R}_{j} $ is second-order accurate regardless of the presence of local extrema. This can be seen through the error analysis of the midpoint quadrature rule for which we have that
 \begin{equation}
 \overline{q} = \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q \; dx = q_j + \mathcal{O}\left(\Delta x^2\right).
 \end{equation}
@@ -149,14 +152,14 @@ b_{j-2} \\ b_{j-1}\\ b_{j+1} \\ b_{j+2}
 \end{bmatrix}.
 \end{equation*}
 
-Solving this we get the polynomial coefficients
+Solving this we get the polynomial coefficients for $C_j(x)$
 \begin{align*}
 c_0 &=  \dfrac{-b_{j-2} + 2b_{j-1} - 2 b_{j+1} + b_{j+2}}{12 \Delta x^3},\\ \\
 c_1 &=  \dfrac{b_{j-2} - b_{j-1} - b_{j+1} + b_{j+2}}{6 \Delta x^2},\\ \\
 c_2 &=  \dfrac{b_{j-2} - 8b_{j-1} + 8 b_{j+1} - b_{j+2}}{12 \Delta x},\\ \\
 c_3 &=  \dfrac{-b_{j-2}  + 4b_{j-1} + 4 b_{j+1} - b_{j+2}}{6}.
 \end{align*}
-We require a continuous bed profile across the cell edges and so on top of the reconstruction of the bed given by these coefficients and \eqref{eqn:cubicforbedrecon} we also average between the two reconstructions at the cell edge so that our reconstruction of the bed profile in the $j^{th}$ cell is
+We require a continuous bed profile across the cell edges and so we average the two reconstructions at the cell edges, therefore our reconstruction of the bed profile in the $j^{th}$ cell is
 \begin{subequations}
 \begin{align}
 b_{j-1/2} &=  \mathcal{B}_{j-1/2}\left(\vecn{b}\right) =  \frac{1}{2}\left( C_j(x_{j-1/2}) + C_{j-1}(x_{j-1/2})\right),\\
@@ -182,7 +185,7 @@ Integrating by parts with Dirichlet boundary conditions we get
 \int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}v \; dx.
 \label{eqn:WeakFormDomain}
 \end{multline}
-This weak formulation implies that if $G$ and $h$ are members of the function space $\mathbb{L}^p$ and $b$ is a member of the Sobolev space $\mathbb{W}^{1,p}$ then $u$ is a member of the Sobolev space $\mathbb{W}^{1,p}$ as well \cite{EvansPDE-1998}. Since our method requires the derivative of $u$ to be well defined and hence that $u \in \mathbb{W}^{1,p}$ we will restrict ourselves to only allow $h,G \in \mathbb{L}^p$ and $b \in \mathbb{W}^{1,p}$.
+This weak formulation implies that if $G$ and $h$ are members of the function space $\mathbb{L}^p$ and $b$ is a member of the Sobolev space $\mathbb{W}^{1,p}$ then $u$ is a member of the Sobolev space $\mathbb{W}^{1,p}$ as well, see \citet{EvansPDE-1998} as a reference. Since our method requires the derivative of $u$ to be well defined and hence that $u \in \mathbb{W}^{1,p}$, we will restrict ourselves to only allow $h,G \in \mathbb{L}^p$ and $b \in \mathbb{W}^{1,p}$.
 
 We simplify \eqref{eqn:WeakFormDomain} by performing the integration over the cells and then summing the integrals together to get the equation for the entire domain
 \begin{multline}
@@ -192,7 +195,7 @@ We simplify \eqref{eqn:WeakFormDomain} by performing the integration over the ce
 which holds for all test functions $v$. The next step is to replace the functions for the quantities $h$, $G$, $b$ and $u$ with their basis function approximations. 
 
 \subsubsection{Basis Function Approximations}
-For $h$ and $G$ we use the basis functions $\psi$ which are linear inside a cell and $0$ everywhere outside the cell as shown in Figure \ref{fig:P1DiscBasis}. This produces a second-order approximation to $h$ and $G$ inside the cell and allows for discontinuities at the cell edges. Since these basis functions are in $\mathbb{L}^p$ our basis function approximations to $h$ and $G$ are in the appropriate function space.
+For $h$ and $G$ we use the basis functions $\psi$ which are linear inside a cell and $0$ everywhere outside the cell as shown in Figure \ref{fig:P1DiscBasis}. This is consistent with our reconstruction which is second-order accurate inside the cell and possesses discontinuities at the cell edges. Since these basis functions are in $\mathbb{L}^p$ our basis function approximations to $h$ and $G$ are in the appropriate function space.
 
 \begin{figure}
 	\centering
@@ -200,7 +203,7 @@ For $h$ and $G$ we use the basis functions $\psi$ which are linear inside a cell
 	\caption{Discontinuous linear basis functions over a cell.}
 	\label{fig:P1DiscBasis}
 \end{figure}
-From the basis functions $\psi$ we have the following representation for $h$ and $G$ in our finite element method
+From the basis functions $\psi$ we have the following representation for $h$ and $G$ in our FEM
 \begin{subequations}
 \begin{align}
 \label{eqn:FEapproxtoh}
@@ -212,7 +215,7 @@ G &= \sum_j G^+_{j-1/2}\psi^+_{j-1/2}  + G^-_{j+1/2}\psi^-_{j+1/2}.
 \end{subequations}
 
 
-For $u$ we require a locally calculated second-order approximation to the first derivative, which forces at least a quadratic representation of $u$ in each cell. Since we require $u$ to be a member of $\mathbb{W}^{1,p}$, $u$ will be continuous. Therefore, we use basis functions $\phi$ that are continuous at the cell edges $x_{j \pm 1/2}$, resulting in the basis functions depicted in Figure \ref{fig:P2ContBasis}.
+To calculate the flux and source terms of the evolution of $G$ equation \eqref{eqn:Serreconsconmom} we require a locally  calculated second-order approximation to the first derivative of $u$. To do this we require a quadratic representation of $u$ in each cell and since $u\in\mathbb{W}^{1,p}$, this representation will be continuous across the cell edges $x_{j \pm 1/2}$. Therefore, we use the continuous quadratic basis functions $\phi_{j-1/2} $ depicted in Figure \ref{fig:P2ContBasis}.
 
 From the basis functions $\phi$ our basis function approximation to $u$ is
 \begin{equation}
@@ -227,7 +230,7 @@ u = \sum_j u_{j-1/2}\phi_{j-1/2} + u_{j}\phi_{j} + u_{j+1/2}\phi_{j+1/2}.
 	\label{fig:P2ContBasis}
 \end{figure}
 
-For the bed term we require a local approximation to the second derivative of the bed that is second-order accurate. To allow for an appropriate second derivative of the bed profile, $b$ must be a member of $\mathbb{W}^{2,p}$ which is smoother than indicated by the elliptic equation \eqref{eqn:WeakFormDomain}. We choose the cubic basis functions $\gamma$ which are continuous across the cell edges, as the bed profile will be continuous. These basis functions are shown in Figure \ref{fig:P3ContBasis} and from them we get our basis function approximation to $b$
+For the source term of the evolution of $G$ equation \eqref{eqn:Serreconsconmom} we require a local approximation to the second derivative of the bed that is second-order accurate. To allow for an appropriate second derivative of the bed profile, $b$ must be a member of $\mathbb{W}^{2,p}$ which is smoother than indicated by the elliptic equation \eqref{eqn:WeakFormDomain}. We choose the cubic basis functions $\gamma$ which are continuous across the cell edges, as the bed profile will be continuous. These basis functions are shown in Figure \ref{fig:P3ContBasis} and from them we get our basis function approximation to $b$
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P3.pdf}
@@ -238,7 +241,7 @@ For the bed term we require a local approximation to the second derivative of th
 b = \sum_j b_{j-1/2}\gamma_{j-1/2} + b_{j-1/6}\gamma_{j-1/6}  + b_{j+1/6}\gamma_{j+1/6} + b_{j+1/2}\gamma_{j+1/2}.
 \label{eqn:FEapproxtob}
 \end{equation}
-With $b_{j-1/2}$ and $b_{j+1/2}$ being well defined as our method \eqref{eqn:FEVMbedrecon} forces both reconstructions at the cell edges to be the identical for adjacent cells. 
+With $b_{j-1/2}$ and $b_{j+1/2}$ being well defined as \eqref{eqn:FEVMbedrecon} imposes a unique reconstruction at the cell edges. 
 
 \subsubsection{Calculation of Element-wise Matrices}
 The integral equation \eqref{eq:elementwiseint} holds for all $v$. However, since our solution space has the basis functions $\phi$ it is sufficient to satisfy \eqref{eq:elementwiseint} for all $\phi$ to generate the solution. Since only the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ are non-zero over the $j^{th}$ cell we can calculate the $j^{th}$ term in the sum \eqref{eq:elementwiseint} like so
@@ -263,7 +266,7 @@ Making the change of variables from $x$ to $\xi$ in \eqref{eqn:WeakFormElemXspac
 \end{bmatrix} \right) \Bigg]d\xi.
 \end{multline*}
 
-We will demonstrate the rest of the process for the $uh$ term as an example and provide the remaining integrals in the Appendix[]. The $uh$ term is 
+We will demonstrate the rest of the process for the $uh$ term as an example and provide the remaining integrals in Appendix \ref{app:FEMIntegrals}. The $uh$ term is 
 \begin{equation*}
 \frac{\Delta x}{2}\int_{-1 }^{1}  uh \begin{bmatrix}
 \phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
@@ -303,7 +306,7 @@ By combining all the matrices generated by the integral of each of the $u$ terms
 u_{j-1/2}\\u_j \\u _{j+1/2}.
 \end{bmatrix} = \sum_j \vecn{g}_j.
 \end{equation}
-This is a penta-diagonal matrix equation which can be solved by direct banded matrix solution techniques to obtain
+This is a penta-diagonal matrix equation which can be solved by direct banded matrix solution techniques such as those of \citet{NumRecC-1996} to obtain
 \begin{equation}
 \vecn{\hat{u}} =\mathcal{G}\left( \vecn{\hat{h}}, \vecn{\hat{G}},\vecn{\hat{b}} \right) =   \matr{A}^{-1}\vecn{g}
 \label{eqn:usolvefromGhb}
@@ -313,12 +316,12 @@ as desired.
 
 We use Kurganovs method \cite{Kurganov-etal-2001-707} to calculate the flux across a cell interface. This method was employed because; it can handle discontinuities across the cell boundary and only requires an estimate of the maximum and minimum wave speeds. This is precisely the situation for the Serre equations which do not have an expression for the characteristics but do possess estimates on the maximum and minimum wave speeds \eqref{eqn:WaveVelocitiesBound}.
 
-We will only demonstrate the calculation of the flux term for $F_{j+1/2}$ as the process to calculate the flux term $F_{j-1/2}$ is identical but with different cells. For a general quantity $q$, Kurganov's method \cite{Kurganov-etal-2001-707} is
+Only the calculation of the flux term $F_{j+1/2}$ is demonstrated as the process to calculate the flux term $F_{j-1/2}$ is identical but with different cells. For a general quantity $q$, Kurganov's method \cite{Kurganov-etal-2001-707} is
 \begin{equation}\label{eqn:HLL_flux}
 F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
 \end{equation}
 
-where $a^+_{j+\frac{1}{2}}$ and $a^-_{j+\frac{1}{2}}$ are given by the wave speed bounds. For the Serre equations we have the wave speed bounds \eqref{eqn:WaveVelocitiesBound} and so we obtain
+where $a^+_{j+\frac{1}{2}}$ and $a^-_{j+\frac{1}{2}}$ are given by the wave speed bounds. Applying the wave speed bounds \eqref{eqn:WaveVelocitiesBound} we obtain
 
 \begin{align}
 a^-_{j+\frac{1}{2}} &= \min\left\lbrace 0\;,\;  u^-_{j + 1/2} - \sqrt{g h^-_{j + 1/2}}  \;,\;u^+_{j + 1/2} - \sqrt{g h^+_{j + 1/2}} \right\rbrace  ,\\
@@ -326,22 +329,22 @@ a^+_{j+\frac{1}{2}} &= \max\left\lbrace 0 \;,\;  u^-_{j + 1/2} + \sqrt{g h^-_{j 
 \label{eqn:WaveSpeedBoundsFluxApprox}
 \end{align}
 
-The flux functions $f(q^-_{j+\frac{1}{2}})$ and $f(q^+_{j+\frac{1}{2}})$ are evaluated using the reconstructed values from the $j^{th}$ and $(j+1)^{th}$ cell respectively. From the continuity equation \eqref{eqn:FullSerreConMass} we have
+The flux functions $f(q^-_{j+\frac{1}{2}})$ and $f(q^+_{j+\frac{1}{2}})$ are evaluated using the reconstructed values of the $j^{th}$ and $(j+1)^{th}$ cell respectively. From the continuity equation \eqref{eqn:FullSerreConMass} we have
 \begin{align*}
 f\left(h^-_{j+\frac{1}{2}}\right) &= u^-_{j + 1/2}  h^-_{j + 1/2}   ,\\
 f\left(h^+_{j+\frac{1}{2}}\right) &= u^+_{j + 1/2}  h^+_{j + 1/2}  .
 \end{align*}
 
-For the irrotationality equation \eqref{eqn:Serreconsconmom} we have 
+For the evolution of $G$ equation \eqref{eqn:Serreconsconmom} we have 
 \begin{subequations}
 \begin{align}
-f\left(G^-_{j+\frac{1}{2}}\right) &=  u^-_{j + 1/2} G^-_{j + 1/2}  + \frac{g}{2}\left(h^-_{j + 1/2} \right)^2 - \frac{2}{3}\left(h^-_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^-_{j + 1/2} \right]^2 \\ &+ \left(h^-_{j + 1/2}\right)^2 u^-_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^-_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^-_{j + 1/2}  ,\\
-f\left(G^+_{j+\frac{1}{2}}\right) &= u^+_{j + 1/2} G^+_{j + 1/2}  + \frac{g}{2}\left(h^+_{j + 1/2} \right)^2 - \frac{2}{3}\left(h^+_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^+_{j + 1/2} \right]^2 \\ &+ \left(h^+_{j + 1/2}\right)^2 u^+_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^+_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^+_{j + 1/2}.
+f\left(G^-_{j+\frac{1}{2}}\right) &=  u^-_{j + 1/2} G^-_{j + 1/2}  + \frac{g}{2}\left(h^-_{j + 1/2} \right)^2 - \frac{2}{3}\left(h^-_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^-_{j + 1/2} \right]^2 \nonumber\\ &+ \left(h^-_{j + 1/2}\right)^2 u^-_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^-_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^-_{j + 1/2}  ,\\ \nonumber \\
+f\left(G^+_{j+\frac{1}{2}}\right) &= u^+_{j + 1/2} G^+_{j + 1/2}  + \frac{g}{2}\left(h^+_{j + 1/2} \right)^2 - \frac{2}{3}\left(h^+_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^+_{j + 1/2} \right]^2 \nonumber\\ &+ \left(h^+_{j + 1/2}\right)^2 u^+_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^+_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^+_{j + 1/2}.
 \end{align}
 \label{eqn:FluxIrrotNum}
 \end{subequations}
 
-During the reconstruction process we calculated $h^+_{j - 1/2}$, $h^-_{j + 1/2}$, $G^+_{j - 1/2}$, $G^-_{j + 1/2}$ \eqref{eqn:ReconforhwG} while during the calculation of velocity we obtained $u^\pm_{j+1/2} = u_{j+1/2}$; because $u$ is continuous across the cell boundaries. Therefore, we further require an approximation to $\left(\dfrac{\partial {b}}{\partial x} \right)^\pm_{j + 1/2}$ and $\left(\dfrac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2}$ to calculate the flux \eqref{eqn:FluxIrrotNum}. 
+During the reconstruction process $h^+_{j - 1/2}$, $h^-_{j + 1/2}$, $G^+_{j - 1/2}$, $G^-_{j + 1/2}$ \eqref{eqn:ReconforhwG} were calculated, and the FEM provided $u^\pm_{j+1/2} = u_{j+1/2}$; because $u$ is continuous across the cell boundaries. Therefore, approximations to $\left(\dfrac{\partial {b}}{\partial x} \right)^\pm_{j + 1/2}$ and $\left(\dfrac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2}$ are required to calculate the flux \eqref{eqn:FluxIrrotNum}. 
 
 \subsubsection{Calculation of Derivatives}
 To calculate the derivatives in $u$ and $b$ we use the basis function approximation to these quantities in the FEM. For $u$ we have the quadratic $P_j^u(x)$ that passes through $u_{j-1/2}$, $u_j$ and $u_{j+1/2}$ while for $b$ we have the cubic $P_j^b(x)$ that passes through $b_{j-1/2}$, $b_{j-1/6}$, $b_{j+1/6}$ and $b_{j+1/2}$. So we have 
@@ -356,7 +359,7 @@ By forcing the polynomials to pass through these reconstructed values we get tha
 \begin{align*}
 p^u_0 &=  \dfrac{u_{j-1/2} - 2u_j + u_{j+1/2}}{2 \Delta x^2},\\
 p^u_1 &=  \dfrac{-u_{j-1/2} + u_{j+1/2}}{\Delta x},\\
-p^u_2 &=  u_j.\\
+p^u_2 &=  u_j.
 \end{align*}
 While for $P^b_j(x)$ we get
 \begin{align*}
@@ -380,10 +383,10 @@ This gives a second-order approximation to the derivative of $u$ and $b$ at $x_{
 	\label{eqn:dbduRecon}
 \end{subequations}
 
-Therefore, we possess all the terms need to calculate the approximation to the flux \eqref{eqn:HLL_flux} for both the continuity and irrotationality equation, as desired. However, we must make a slight modification to ensure that our scheme is well balanced and recovers the lake at rest steady state solution.
+Therefore, we possess all the terms need to calculate the approximation to the flux \eqref{eqn:HLL_flux} for both the continuity and evolution of $G$ equation, as desired. However, to ensure that the FEVM is well balanced and recovers the lake at rest steady state solution, these fluxes must be modified.
 
 \subsubsection{Well Balancing}
-To recover the lake at rest steady state solution we follow the work of \citet{Klein-etal-2004-2050}, who accomplished this for the Shallow Water Wave equations. It was demonstrated that this process could also be extended to the Serre equations \cite{Pitt-J-2014}. To enforce well balancing $h$ is modified at the cell edges in the following way; we first calculate
+To recover the lake at rest steady state solution we follow the work of \citet{Klein-etal-2004-2050}, who accomplished this for the SWWE. It was demonstrated that this process could also be extended to the Serre equations \cite{Pitt-J-2014}. To enforce well balancing the reconstruction of $h$ is modified at the cell edges in the following way; first calculate
 \begin{align}
 \dot{b}^-_{j+1/2} = w^-_{j+1/2} - h^-_{j+1/2} & &\text{and}& &\dot{b}^+_{j+1/2} = w^+_{j+1/2} - h^+_{j+1/2}.
 \label{eqn:BedReDefWmH}
@@ -392,7 +395,7 @@ Find the maximum
 \begin{align*}
 \grave{b}_{j+1/2} = \max\left\lbrace\dot{b}^-_{j+1/2} , \dot{b}^+_{j+1/2} \right\rbrace
 \end{align*}
-then we define
+then define
 \begin{subequations}
 \begin{align}
 \grave{h}^-_{j+1/2} &= \max\left\lbrace 0, w^-_{j+1/2} - \grave{b}_{j+1/2}  \right\rbrace, \\  \grave{h}^+_{j+1/2} &= \max\left\lbrace 0, w^+_{j+1/2} - \grave{b}_{j+1/2} \right\rbrace.
@@ -402,9 +405,9 @@ then we define
 This generates the vector $\vecn{\grave{h}}$
 \begin{equation*}
 \vecn{\grave{h}}= \begin{bmatrix}
-\grave{h}^+_{-1/2} \\ \grave{h}^-_{1/2}  \\ \grave{h}^+_{1/2}  \\ \vdots \\ \grave{h}^-_{m + 1/2} \end{bmatrix}
+\grave{h}^+_{-1/2} \\ h_0 \\ \grave{h}^-_{1/2}  \\ \grave{h}^+_{1/2}  \\ \vdots  \\ h_m  \\ \grave{h}^-_{m + 1/2} \end{bmatrix}
 \end{equation*}
-which we use to calculate the flux term $F_{j+1/2}$ in \eqref{eqn:HLL_flux} for both the continuity \eqref{eqn:FullSerreConMass} and irrotationality \eqref{eqn:Serreconsconmom} equation. Applying the same process but with different cells we obtain $F_{j-1/2}$ and we have
+which we use to calculate the flux term $F_{j+1/2}$ in \eqref{eqn:HLL_flux} for both the continuity \eqref{eqn:FullSerreConMass} and evolution of $G$ \eqref{eqn:Serreconsconmom} equation. Applying the same process but with different cells we obtain $F_{j-1/2}$ and we have
 \begin{subequations}
 \begin{align}	
 F_{j-1/2} &=\mathcal{F}_{j-1/2} \left(\vecn{\grave{h}}, \vecn{\hat{G}},\vecn{\hat{b}}, \vecn{\hat{u}}  \right),\\
@@ -414,10 +417,10 @@ F_{j+1/2} &=\mathcal{F}_{j+1/2} \left(\vecn{\grave{h}}, \vecn{\hat{G}},\vecn{\ha
 \end{subequations}
 
 
-for both the continuity and irrotationality equation as desired.
+for both the continuity and evolution of $G$ equation as desired.
 
 \subsection{Source Terms}
-The Serre equations in conservation law form \eqref{eqn:FullSerreCon} contain a flux term and a source term, to treat this numerically we use a first-order splitting method. This requires an approximation to the source term at the cell centre $x_j$ which we denote as $S_j$. Since the continuity equation \eqref{eqn:FullSerreConMass} has no source term, we will just present the calculation of the source term for the irrotationality equation \eqref{eqn:Serreconsconmom}.
+The Serre equations in conservative form \eqref{eqn:FullSerreCon} contain a flux term and a source term, to treat this numerically we use a first-order splitting method. This requires an approximation to the source term at the cell centre $x_j$ which we denote as $S_j$. Since the continuity equation \eqref{eqn:FullSerreConMass} has no source term, we will just present the calculation of the source term for the evolution of $G$ equation \eqref{eqn:Serreconsconmom}.
 
 Following the work of \citet{Klein-etal-2004-2050}, we split our approximation to $S_j$ into the centred source term $S_{ci}$ and the corrective interface source terms $S^{-}_{j + \frac{1}{2}}$ and $S^{+}_{j + \frac{1}{2}}$.
 Where $S_{ci}$ is the naive source term approximation and $S^{-}_{j + \frac{1}{2}}$ and $S^{+}_{j + \frac{1}{2}}$ are correction terms that ensure that the flux and source term cancel for the lake at rest steady state. 
@@ -426,7 +429,7 @@ We calculate the centred source term using
 \begin{equation*}
  S_{ci} = -\frac{1}{2}\left(h_j\right)^2 {u_j}\left( \frac{\partial {u}}{\partial x} \right)_j \left(\frac{\partial^2 b}{\partial x^2} \right)_j  + h_j \left(u_j\right)^2 \left(\frac{\partial b}{\partial x}\right)_j \left(\frac{\partial^2 b}{\partial x^2}\right)_j - gh_j\left(\frac{\partial b}{\partial x}\right)_j.
 \end{equation*}
-Where we use $h_j$ from the reconstruction process \eqref{eqn:ReconforhwG} and $u_j$ from the solution of the elliptic equation \eqref{eqn:usolvefromGhb}. To calculate the derivatives we employ our polynomial representations of $u$ and $b$ inside a cell. However, to ensure that the terms cancel properly for a lake at rest we must modify our approximation to $\dfrac{\partial b}{\partial x}$ to use $\dot{b}^-_{j+1/2}$ and $\dot{b}^+_{j+1/2}$ from \eqref{eqn:BedReDefWmH}. Therefore, the following approximations are used in the calculation of $S_{ci}$
+Where we use $h_j$ from the reconstruction process \eqref{eqn:ReconforhwG} and $u_j$ from the solution of the elliptic equation \eqref{eqn:usolvefromGhb}. To calculate the derivatives we employ our polynomial representations of $u$ and $b$ inside a cell. However, to ensure that the terms cancel properly for a lake at rest we modify our approximation to $\dfrac{\partial b}{\partial x}$ to use $\dot{b}^-_{j+1/2}$ and $\dot{b}^+_{j+1/2}$ from \eqref{eqn:BedReDefWmH}. Therefore, the following approximations are used to calculate $S_{ci}$
 \begin{subequations}
 	\begin{align}
 	\left(\dfrac{\partial {u}}{\partial x} \right)_{j} &= \frac{\partial }{\partial x}P^u_j(x_{j}),  \\
@@ -441,7 +444,7 @@ The corrective interface source terms are
 	 S^{-}_{j + \frac{1}{2}} &=  \frac{g}{2} \left(\grave{h}^{-}_{j + \frac{1}{2}} \right)^2 - \frac{g}{2} \left(h^{-}_{j + \frac{1}{2}} \right)^2, \\ \\
 	  S^{+}_{j - \frac{1}{2}} &=  \frac{g}{2} \left(h^{+}_{j - \frac{1}{2}}\right)^2 - \frac{g}{2}\left(\grave{h}^{+}_{j - \frac{1}{2}}\right)^2 .	 
 	\end{align*}
-Which makes use of $h^{-}_{j + \frac{1}{2}}$ and $h^{+}_{j + \frac{1}{2}}$ obtained from the reconstruction \eqref{eqn:ReconforhwG} and the modified values $\grave{h}^{-}_{j + \frac{1}{2}}$ and $\grave{h}^{+}_{j + \frac{1}{2}}$ from \eqref{eqn:ModifiedHValue}. Combining the centred and interface source terms our approximation to the source term for the irrotationality equation is
+Which makes use of $h^{-}_{j + \frac{1}{2}}$ and $h^{+}_{j + \frac{1}{2}}$ obtained from the reconstruction \eqref{eqn:ReconforhwG} and the modified values $\grave{h}^{-}_{j + \frac{1}{2}}$ and $\grave{h}^{+}_{j + \frac{1}{2}}$ from \eqref{eqn:ModifiedHValue}. Combining the centred and interface source terms our approximation to the source term for the evolution of $G$ equation is
 %h' in function []?[]
 \begin{equation}
 S_j = \mathcal{S}_j\left( \vecn{\hat{h}},\vecn{\grave{h}},\vecn{\hat{w}},\vecn{\hat{b}}, \vecn{\hat{u}}  \right) =  S^{-}_{j + \frac{1}{2}} + \Delta x S_{ci} + S^{+}_{j - \frac{1}{2}}.
@@ -450,7 +453,7 @@ S_j = \mathcal{S}_j\left( \vecn{\hat{h}},\vecn{\grave{h}},\vecn{\hat{w}},\vecn{\
 
 
 \subsection{Update Cell Averages}
-We use the forward Euler approximation to approximate the time derivatives and obtain an update formula for the cell averages. Additionally we employ a fractional step method [] to split the flux term and source term part of the Serre equations written in conservation law form \eqref{eqn:FullSerreCon}. This results in the following time-stepping method that is first-order accurate in time
+We use the forward Euler approximation to approximate the time derivatives and obtain an update formula for the cell averages. Additionally we employ a fractional step method to split the flux term and source term part of the Serre equations written in conservative form \eqref{eqn:FullSerreCon}. This results in the following time-stepping method that is first-order accurate in time
 \begin{align*}
 \overline{q}'_j &= \overline{q}^{n}_j + \frac{\Delta t}{\Delta x} \left(F_{j+\frac{1}{2}} - F_{j-\frac{1}{2}}\right), \\
 \overline{q}^{n+1}_j &= \overline{q}'_j + \frac{\Delta t}{\Delta x} S_j
@@ -472,7 +475,7 @@ To increase the order of accuracy in time we employ the strong stability preserv
 \label{eqn:SSPRKStep1}
 \end{subequations}
 %TVD no oscillations introduced by the particular method
-This results in a time stepping method that preserves the stability of the first-order method \eqref{eqn:UpdateMethod} and is second-order accurate in time. Since all the spatial approximations are second-order accurate, the steps (I-VI) result in a second-order accurate FEVM for the Serre equations, as desired. 
+This results in a time stepping method that preserves the stability of the first-order method \eqref{eqn:UpdateMethod} and is second-order accurate in time. Since all the spatial approximations are second-order accurate, the steps (I-VI) should result in a second-order accurate FEVM for the Serre equations, as desired. 
 
 \setcounter{subsection}{0}
 \renewcommand{\thesubsection}{\thechapter.\arabic{section}.\arabic{subsection}} 
@@ -534,13 +537,13 @@ g_1 \\
 u_{m+1/2} \\
 \end{bmatrix}.
 \end{align}
-These are then combined with the other element contributions to the global matrix \eqref{eqn:FEMElemMatrixJ}.
+These are then combined with the other element contributions in the global matrix \eqref{eqn:FEMElemMatrixJ}.
 
 
 \section{Dry Beds}
-Dry beds are handled adequately by all steps of our FEVM in their current form, except the FEM solution for $u$. For the FEM a dry bed presents two issues; when $h=0$ the stiffness matrix will become singular, and when $h$ is small $u$ may become quite large. 
+Dry beds are handled adequately by all steps of our FEVM in their current form, except the FEM solution for $u$. For the FEM a dry bed presents two issues; when $h=0$ the stiffness matrix will become singular, and when $h$ is small $u$ may become quite large leading to instabilities. 
 
-In previous work \cite{Zoppou-etal-2017} we employed direct banded matrix solvers such as the Thomas algorithm to solve \eqref{eqn:usolvefromGhb}, however such methods rely on non-singular matrices and so are unsuitable for dry beds. To deal with this an LU decomposition algorithm by \citet{NumRecC-1996} was used. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting, which inserts small non-zero pivots when their value is below some tolerance value $p_{tol}$. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard $LU$ decomposition. This results in a FEM that could allow for $h=0$, but still faced the problem of large $u$ values when $h$ was small. 
+In previous work \cite{Zoppou-etal-2017} direct banded matrix solvers such as the Thomas algorithm were employed to solve \eqref{eqn:usolvefromGhb}, however such methods rely on non-singular matrices and so are unsuitable for dry beds. To deal with this an LU decomposition algorithm by \citet{NumRecC-1996} was used. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting, which inserts small non-zero pivots when their value is below some tolerance value $p_{tol}$. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard $LU$ decomposition. This results in a FEM that allows for $h=0$, but still faces the problem of large $u$ values when $h$ is small. 
 
 To deal with large $u$ values we restricted our solution of the FEM for $u$ to cells where $\overline{h}_j> h_{tol}$ and modified our approximation to $h^+_{j-1/2}$ and $h^-_{j+1/2}$ in our stiffness matrix. To restrict the domain of our solution we search through the domain at the beginning of each first-order step and identify  wet regions where $\overline{h}_j \ge h_{tol}$ and dry regions where $\overline{h}_j < h_{tol}$. In the dry regions we set $h$, $G$ and $u$ to be zero uniformly over the cell. In the wet regions we solve the FEM with the appropriate boundary conditions and the following modifications to $h^+_{j-1/2}$ and $h^-_{j+1/2}$
 
@@ -551,6 +554,8 @@ h^-_{j+1/2} & = h^-_{j+1/2} \left(\frac{ h^-_{j+1/2}  + h_{base}}{h^-_{j+1/2} + 
 \end{align} 
 \end{subequations}
 %mention G going to 0.
-Where on the right hand side we mean $h^+_{j-1/2}$ and $h^-_{j+1/2}$ as calculated from the reconstruction \eqref{eqn:ReconforhwG}. This modification ensures that as $h \rightarrow 0$ then $u \rightarrow 0$ by increasing the size of $h$ in the stiffness matrix. 
+Where on the right hand side we mean $h^+_{j-1/2}$ and $h^-_{j+1/2}$ as calculated from the reconstruction \eqref{eqn:ReconforhwG}. This modification ensures that as $h \rightarrow 0$ and correspondingly $G\rightarrow 0 $ then $u \rightarrow 0$ by increasing the size of $h$ in the stiffness matrix. 
 
-Typically we had $p_{tol} = 10^{-20}$, $h_{tol} = 10^{-8}$ and $h_{base} = 10^{-4}$ which allowed for an accurate calculation of $u$ in the presence of dry beds and very small water depths.
+Typically we had $p_{tol} = 10^{-20}$, $h_{tol} = 10^{-12}$ and $h_{base} = 10^{-8}$ which allowed for a stable calculation of $u$ in the presence of dry beds and small water depths. While the accuracy of the calculation of $u$ by the FEM was maintained when the water depth is large compared to $h_{tol}$ and $h_{base}$.
+
+%[]

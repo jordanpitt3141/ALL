@@ -3,6 +3,44 @@
 \label{chp:ExpMethodComp}
 
 
+\section{Segur}
+%Wave gauge, conservation properties
+%would improved dispersion help
+%read other writing on this 
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/WaveTank.pdf}
+	\caption{Diagram demonstrating the water (\squareF{blue}) and the bed (\squareF{brown!80!black}) for the Segur experiments, with the wave gauge locations marked.}
+	\label{fig:SegurWT}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFEVM1cm.pdf}
+	\caption{FEVM}
+	\label{fig:Segur1cmFEVM}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFDVM1cm.pdf}
+	\caption{FDVM}
+	\label{fig:Segur1cmFDVM}
+\end{figure}          
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFEVM3cm.pdf}
+	\caption{FEVM}
+	\label{fig:Segur3cmFEVM}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFDVM3cm.pdf}
+	\caption{FDVM}
+	\label{fig:Segur3cmFDVM}
+\end{figure}  
+
 
 \section{Periodic Waves Over A Submerged Bar}
 %only pointwise comparison
@@ -235,6 +273,7 @@ These numerical results for the $\text{FDVM}_2$ and $\text{FEVM}_2$ agree well w
 
 \section{Synolakis}
 %only pointwise comparison, and H1 and C1 as wave is well defined
+%comment on wave breaking number for nonlinearity
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -288,10 +327,22 @@ These numerical results for the $\text{FDVM}_2$ and $\text{FEVM}_2$ agree well w
 \end{figure}
 
 
-
-
 \section{Roeber}
-%only pointwise comparison
+%Wave gauge
+%way beyond nolinearity paramter
+%in fact this wave breaks, leading to large air entrainment
+
+%wave breaking
+%>>> 66 / (sqrt(9.81/2.46))
+%33.050420197470373
+%>>> 64 / (sqrt(9.81/2.46))
+%32.048892312698548
+
+%friction damps these trialing waves?
+
+
+%Fillipine/Roeber also show discrepancy between numerical model and data before the appearance of the reflected waves, assumption about them having the nolinearity speed may be dubious, good agreement with leading wave
+
 
 \begin{figure}
 	\centering
@@ -302,146 +353,26 @@ These numerical results for the $\text{FDVM}_2$ and $\text{FEVM}_2$ agree well w
 
 \begin{figure}
 	\centering
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG1-figure0.pdf}
-		\subcaption{Wave Gauge $1$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG2-figure0.pdf}
-		\subcaption{Wave Gauge $2$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG3-figure0.pdf}
-		\subcaption{Wave Gauge $3$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG4-figure0.pdf}
-		\subcaption{Wave Gauge $4$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG5-figure0.pdf}
-		\subcaption{Wave Gauge $5$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG6-figure0.pdf}
-		\subcaption{Wave Gauge $6$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\caption{.}
-	\label{fig:Roeber8WG1to6FEVM}
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs1.pdf}
+	\caption{FEVM}
+	\label{fig:Roeber8WG1to7FEVM}
 \end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs2.pdf}
+	\caption{FEVM}
+	\label{fig:Roeber8WG7to14FEVM}
+\end{figure}          
 
 \begin{figure}
 	\centering
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG7-figure0.pdf}
-		\subcaption{Wave Gauge $7$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG8-figure0.pdf}
-		\subcaption{Wave Gauge $8$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG9-figure0.pdf}
-		\subcaption{Wave Gauge $9$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG10-figure0.pdf}
-		\subcaption{Wave Gauge $10$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG11-figure0.pdf}
-		\subcaption{Wave Gauge $11$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG12-figure0.pdf}
-		\subcaption{Wave Gauge $12$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\caption{.}
-	\label{fig:Roeber8WG7to12FEVM}
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs1.pdf}
+	\caption{FEVM}
+	\label{fig:Roeber8WG1to7FDVM}
 \end{figure}
-
-
 \begin{figure}
 	\centering
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG13-figure0.pdf}
-		\subcaption{Wave Gauge $13$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/WG14-figure0.pdf}
-		\subcaption{Wave Gauge $14$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\caption{.}
-	\label{fig:Roeber13WG7to14FEVM}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/WG1-figure0.pdf}
-		\subcaption{Wave Gauge $1$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/WG2-figure0.pdf}
-		\subcaption{Wave Gauge $2$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/WG3-figure0.pdf}
-		\subcaption{Wave Gauge $3$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/WG4-figure0.pdf}
-		\subcaption{Wave Gauge $4$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/WG5-figure0.pdf}
-		\subcaption{Wave Gauge $5$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/WG6-figure0.pdf}
-		\subcaption{Wave Gauge $6$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\caption{.}
-	\label{fig:Roeber8WG1to6DEVM}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/WG7-figure0.pdf}
-		\subcaption{Wave Gauge $7$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/WG8-figure0.pdf}
-		\subcaption{Wave Gauge $8$}
-		\vspace{0.5cm}
-	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/WG9-figure0.pdf}
-		\subcaption{Wave Gauge $9$}
-		\vspace{0.5cm}
-	\end{subfigure}%
-	\caption{.}
-	\label{fig:Roeber8WG7to9DEVM}
-\end{figure}
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs2.pdf}
+	\caption{FEVM}
+	\label{fig:Roeber8WG7to14FDVM}
+\end{figure} 

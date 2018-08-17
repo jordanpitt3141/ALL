@@ -155,12 +155,13 @@ def close(t,ts,dt):
     return var    
 
 #Forcing Problem    
-wdir = "/home/thanksjoe/Documents/newPHD/data/New/LakeAtRest/Dry/FEVM2WB/"
+#wdir = "/home/thanksjoe/Documents/newPHD/data/New/LakeAtRest/Dry/FEVM2WB/"
+wdir = "/home/jp/Documents/PhD/project/data/Test/ThesisRaw/LakeAtRest3/Dry/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-for ki in range(3,18):
+for ki in range(12,13):
     
     wdirji = wdir + str(ki) + "/"
     if not os.path.exists(wdirji):
@@ -171,7 +172,7 @@ for ki in range(3,18):
     
     width = 2*(2*pi/a1)
         
-    a2 = 0.0
+    a2 = 0.0 
     g = 9.81
     
     startx = -pi/2.0/a1 -width
@@ -179,7 +180,7 @@ for ki in range(3,18):
     endx = -pi/2.0/a1 +width
     ex = endx
     startt = 0.0
-    endt = 10.0
+    endt = 30.0
     et = endt
     
     dx = width / (2.0)**(ki)
@@ -218,6 +219,9 @@ for ki in range(3,18):
  
     
     h,u,G,b,w =  LakeAtRest(x,a0,a1,a2,g,dx)
+
+    h[3999:4000] = ones(1)    
+    
     hMbeg,uMbeg,GMbeg,bta,wMbeg =  LakeAtRest(xhMbeg,a0,a1,a2,g,dx)
     hMend,uMend,GMend,bta,wMend =  LakeAtRest(xhMbeg,a0,a1,a2,g,dx)
     
@@ -309,9 +313,16 @@ for ki in range(3,18):
     uh = u*h
     uhiC = array(uiC)*array(hiC)
     hnorm = norm(hiC -h, ord=1)/ norm(h, ord=1)
+    wnorm = norm(wiC -w, ord=1)/ norm(w, ord=1)
     Gnorm = norm(GiC -G, ord=1)
     unorm = norm(uiC -u, ord=1)
     uhnorm = norm(uhiC -uh, ord=1)
+    
+    hnormI = norm(hiC -h, ord=infty)/ norm(h, ord=infty)
+    wnormI = norm(wiC -w, ord=infty)/ norm(w, ord=infty)
+    GnormI = norm(GiC -G, ord=infty)
+    unormI = norm(uiC -u, ord=infty)
+    uhnormI = norm(uhiC -uh, ord=infty)
 
     h0C,u0C,G0C,b0C,w0c =  LakeAtRest(xbegC,a0,a1,a2,g,dx)
     h1C,u1C,G1C,b1C,w1c =  LakeAtRest(xendC,a0,a1,a2,g,dx)
@@ -333,15 +344,17 @@ for ki in range(3,18):
     deallocPy(ubcC_c)
     deallocPy(GbcC_c)
     
+    hI,uI,GI,bI,wI =  LakeAtRest(x,a0,a1,a2,g,dx)
+    
  
     s = wdirji +  "outList" + str(t)+"s.txt"
     with open(s,'a') as file2:
         writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     
-        writefile2.writerow(["cell midpoint" ,'h', 'G' , 'u(m/s)','bed','w' ])        
+        writefile2.writerow(["cell midpoint" ,'h', 'G' , 'u(m/s)','bed','w', 'ht','Gt','ut','bt','wt' ])        
                    
         for j in range(n):
-            writefile2.writerow([str(x[j]), str(hiC[j]) , str(GiC[j]) , str(uiC[j]),str(b[j]),str(wiC[j])])
+            writefile2.writerow([str(x[j]), str(hiC[j]) , str(GiC[j]) , str(uiC[j]),str(b[j]),str(wiC[j]),str(h[j]) , str(G[j]) , str(u[j]),str(b[j]),str(w[j])])
             
     s = wdirji +  "outSing" + str(t)+"s.txt"
     with open(s,'a') as file2:
@@ -362,6 +375,11 @@ for ki in range(3,18):
     with open(s,'a') as file1:
         s ="%3.8f%5s%1.20f\n" %(dx," ",hnorm)
         file1.write(s)
+
+    s = wdir + "wL1.dat"
+    with open(s,'a') as file1:
+        s ="%3.8f%5s%1.20f\n" %(dx," ",wnorm)
+        file1.write(s)
     
     s = wdir + "GL1.dat"
     with open(s,'a') as file1:
@@ -377,7 +395,33 @@ for ki in range(3,18):
     with open(s,'a') as file1:
         s ="%3.8f%5s%1.20f\n" %(dx," ",unorm)
         file1.write(s)     
-        
+ 
+    s = wdir + "hLI.dat"
+    with open(s,'a') as file1:
+        s ="%3.8f%5s%1.20f\n" %(dx," ",hnormI)
+        file1.write(s)
+
+    s = wdir + "wLI.dat"
+    with open(s,'a') as file1:
+        s ="%3.8f%5s%1.20f\n" %(dx," ",wnormI)
+        file1.write(s)
+    
+    s = wdir + "GLI.dat"
+    with open(s,'a') as file1:
+        s ="%3.8f%5s%1.20f\n" %(dx," ",GnormI)
+        file1.write(s)   
+
+    s = wdir + "uhLI.dat"
+    with open(s,'a') as file1:
+        s ="%3.8f%5s%1.20f\n" %(dx," ",uhnormI)
+        file1.write(s)    
+ 
+    s = wdir + "uLI.dat"
+    with open(s,'a') as file1:
+        s ="%3.8f%5s%1.20f\n" %(dx," ",unormI)
+        file1.write(s)  
+
+       
     s = wdir + "hC1.dat"
     with open(s,'a') as file1:
         s ="%3.8f%5s%1.20f\n" %(dx," ",hC1v)
