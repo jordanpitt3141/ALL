@@ -36,22 +36,19 @@
 \contentsline {chapter}{\numberline {4}Linear Analysis of the Numerical Methods}{33}
 \contentsline {section}{\numberline {4.1}Linearised Serre equations with horizontal bed}{34}
 \contentsline {section}{\numberline {4.2}Evolution Matrix}{35}
-\contentsline {subsection}{\numberline {4.2.1}Overview of the Evolution Step}{36}
-\contentsline {subsection}{\numberline {(i)}Reconstruct the Quantities Inside the Cells}{37}
-\contentsline {subsubsection}{Cell average values to nodal values: $\mathcal {M}$}{37}
-\contentsline {subsubsection}{Cell average values to interface values: $\mathcal {R}^-$ and $\mathcal {R}^+$}{37}
-\contentsline {subsection}{\numberline {(ii)}Calculate the Velocity Over the Domain}{38}
-\contentsline {subsection}{\numberline {(iii)}Calculate All the Fluxes Across the Cell Interfaces}{40}
-\contentsline {subsubsection}{Left Supercritical Flow $Fr < -1$:}{41}
-\contentsline {subsubsection}{Subcritical flow $-1 \le Fr \le 1$:}{42}
-\contentsline {subsubsection}{Right supercritical flow $Fr > 1$:}{43}
-\contentsline {subsection}{\numberline {(iv)}Calculate All the Source Terms for the Cells}{43}
-\contentsline {subsection}{\numberline {(v)}Update All the Cell Averages Using a Forward Euler Approximation}{43}
-\contentsline {subsection}{\numberline {(vi)}Update All the Cell Averages Using a Second-Order SSP Runge-Kutta Method}{44}
-\contentsline {section}{\numberline {4.3}Convergence Analysis}{45}
-\contentsline {subsection}{\numberline {4.3.1}Stability}{45}
-\contentsline {subsection}{\numberline {4.3.2}Consistency}{47}
-\contentsline {section}{\numberline {4.4}Dispersion Analysis}{52}
+\contentsline {subsection}{\numberline {(i)}Reconstruction}{36}
+\contentsline {subsection}{\numberline {(ii)}Fluid Velocity}{36}
+\contentsline {subsection}{\numberline {(iii)}Flux Across the Cell Interfaces}{40}
+\contentsline {subsubsection}{Left Supercritical Flow $Fr < -1$:}{40}
+\contentsline {subsubsection}{Subcritical flow $-1 \le Fr \le 1$:}{41}
+\contentsline {subsubsection}{Right supercritical flow $Fr > 1$:}{42}
+\contentsline {subsection}{\numberline {(iv)}Source Terms}{42}
+\contentsline {subsection}{\numberline {(v)}Update Cell Averages}{42}
+\contentsline {subsection}{\numberline {(vi)}Second-Order SSP Runge-Kutta Method}{43}
+\contentsline {section}{\numberline {4.3}Convergence Analysis}{44}
+\contentsline {subsection}{\numberline {4.3.1}Stability}{44}
+\contentsline {subsection}{\numberline {4.3.2}Consistency}{45}
+\contentsline {section}{\numberline {4.4}Dispersion Analysis}{47}
 \contentsline {chapter}{\numberline {5}Numerical Validation}{61}
 \contentsline {section}{\numberline {5.1}Measuring Convergence and Conservation}{61}
 \contentsline {subsection}{\numberline {5.1.1}Measures of Convergence}{61}
@@ -70,5 +67,14 @@
 \contentsline {section}{\numberline {6.3}Synolakis}{86}
 \contentsline {section}{\numberline {6.4}Roeber}{86}
 \contentsline {chapter}{\numberline {A}Finite Element Integrals}{99}
-\contentsline {chapter}{\numberline {B}Linear Analysis Results}{101}
-\contentsline {chapter}{Bibliography}{104}
+\contentsline {section}{\numberline {A.1}Basis Functions}{99}
+\contentsline {section}{\numberline {A.2}Matrices for all terms}{100}
+\contentsline {subsection}{\numberline {A.2.1}$uh \frac {\partial b}{\partial \xi }^2$}{100}
+\contentsline {subsection}{\numberline {A.2.2}$h^2 \frac {\partial b}{\partial \xi } \frac {\partial u }{\partial \xi }$}{100}
+\contentsline {subsection}{\numberline {A.2.3}$G$}{101}
+\contentsline {subsection}{\numberline {A.2.4}$h^3 \frac {\partial {u}}{\partial \xi }$}{101}
+\contentsline {subsection}{\numberline {A.2.5}$ h^2 \frac {\partial b}{\partial \xi } u $}{101}
+\contentsline {chapter}{\numberline {B}Linear Analysis Results}{103}
+\contentsline {section}{\numberline {B.1}Evolution Matrices for the Finite Difference Volume Methods}{103}
+\contentsline {section}{\numberline {B.2}Evolution Matrices for the Finite Difference Methods}{103}
+\contentsline {chapter}{Bibliography}{107}

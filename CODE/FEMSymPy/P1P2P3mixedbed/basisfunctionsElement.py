@@ -86,11 +86,22 @@ def ExpressionConvert(s,hyperlist,x,Cterm,Ctermname,Clb,Cub,filen):
 x = Symbol('x')
 
 
+xjm3o2 = "-2"
+xjm7o6 = "-5/3"
+xjm1 = "-3/2"
+xjm5o6 = "-4/3"
+
 xjm1o2 = "-1"
 xjm1o3 = "-1/3"
 xj = "0"
 xjp1o3 = "1/3"
 xjp1o2 = "1"
+
+
+xjp5o6 = "4/3"
+xjp1 = "3/2"
+xjp7o6 = "5/3"
+xjp3o2 = "2"
 
 phijm1o2 = quadcontEM(x,xjm1o2,xj,xjp1o2)
 phij = quadcontM(x,xjm1o2,xj,xjp1o2)
@@ -136,7 +147,7 @@ hyperlist.append( ('c',dpsis,dpsisNAME))
 
 
 
-
+"""
 s = "Gv.csv"
 with open(s,'a') as file2:
      writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -179,4 +190,4 @@ with open(s,'a') as file2:
 
      writefile2.writerow(['Integrand','lower bound of integral','upper bound of integral', 'Value of Integral', 'W Term 1' , 'D Term 1', 'D Term 2', 'P Term 1', 'P Term 2'])        
      ExpressionConvert('wccpp',hyperlist,x,None,None,-1,1,writefile2) 
-
+"""

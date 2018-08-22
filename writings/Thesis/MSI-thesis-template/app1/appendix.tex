@@ -1,2 +1,109 @@
 \chapter{Finite Element Integrals}
 \label{app:FEMIntegrals}
+We now provide some of the details left out of Chapter \ref{chp:HFVMMethod}; the definitions for the basis functions in the $\xi$ space and the other finite element matrices. 
+
+%also put the basis funcitons
+\section{Basis Functions}
+$\psi$
+\begin{align}
+\psi^+_{j-1/2} &= \left\lbrace \begin{array}{c c}
+\frac{1}{2}\left(1 - \xi\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise}
+\end{array} \right. \\
+\psi^-_{j+1/2} &= \left\lbrace \begin{array}{c c}
+\frac{1}{2}\left(1 + \xi\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise}
+\end{array} \right. 
+\end{align}
+
+$\phi$
+\begin{align}
+\phi_{j-1/2} &= \left\lbrace \begin{array}{c c}
+2 \left(\xi + \frac{3}{2}\right)\left(\xi + 2\right) & -2 \le \xi \le -1\\
+\frac{1}{2}\xi(\xi - 1) & -1 \le \xi \le 1\\
+0 & \text{otherwise}\end{array} \right. \\
+\phi_{j} &= \left\lbrace \begin{array}{c c}
+-\left(\xi - 1\right)\left(\xi + 1\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise}
+\end{array} \right. \\ 
+\phi_{j+1/2} &= \left\lbrace \begin{array}{c c}
+\frac{1}{2}\xi(\xi + 1) & -1 \le \xi \le 1\\
+2\left(\xi - 2\right)\left(\xi - \frac{3}{2} \right) & 1 \le \xi \le 2\\
+0 & \text{otherwise}
+\end{array} \right. \\ 
+\end{align}
+
+$\gamma$
+\begin{align}
+\gamma_{j-1/2} &= \left\lbrace \begin{array}{c c}
+\frac{9}{2}\left(\xi + \frac{4}{3}\right)\left(\xi + \frac{5}{3}\right)\left(\xi + 2\right) & -2 \le \xi \le -1\\
+\frac{9}{16}\left(\xi - 1\right)\left(\xi - \frac{1}{3}\right)\left(\xi  + \frac{1}{3}\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise} 
+\end{array} \right. \\
+\gamma_{j-1/6} &= \left\lbrace \begin{array}{c c}
+\frac{27}{16}\left(\xi - 1\right)\left(\xi - \frac{1}{3}\right)\left(\xi + 1\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise} 
+\end{array} \right. \\
+\gamma_{j+1/6} &= \left\lbrace \begin{array}{c c}
+-\frac{27}{16}\left(\xi - 1\right)\left(\xi + \frac{1}{3}\right)\left(\xi + 1\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise} 
+\end{array} \right. \\
+\gamma_{j-1/2} &= \left\lbrace \begin{array}{c c}
+\frac{9}{16}\left(\xi + 1\right)\left(\xi - \frac{1}{3}\right)\left(\xi  + \frac{1}{3}\right) & -1 \le \xi \le 1\\
+-\frac{9}{2}\left(\xi - \frac{4}{3}\right)\left(\xi - \frac{5}{3}\right)\left(\xi - 2\right) & 1 \le \xi \le 2\\
+0 & \text{otherwise} 
+\end{array} \right.
+\end{align}
+
+
+%put the integrals
+\section{Matrices for all terms}
+
+\begin{multline*}
+\frac{\Delta x}{2}\int_{-1 }^{1} \Bigg[  \left( uh \left(1 + \frac{4}{\Delta x^2}\frac{\partial b}{\partial \xi}^2 \right)  - \frac{2}{\Delta x^2} h^2 \frac{\partial b}{\partial \xi}  \frac{\partial u }{\partial \xi}  -  G \right) \begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
+\end{bmatrix}   \\ + \frac{4}{\Delta x^2} \left( \frac{1}{3}h^3 \frac{\partial {u}}{\partial \xi}    -     \frac{1}{2}h^2 \frac{\partial b}{\partial \xi} u    \right) \frac{\partial}{\partial \xi}\left(\begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
+\end{bmatrix} \right) \Bigg]d\xi.
+\end{multline*}
+
+
+\subsection{$uh \frac{\partial b}{\partial \xi}^2$}
+\begin{equation*}
+\frac{2}{\Delta x}\int_{-1 }^{1}uh \frac{\partial b}{\partial \xi}^2 \begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
+\end{bmatrix} d\xi = \frac{\Delta x}{2} \matr{A}   \begin{bmatrix}
+u_{j-1/2}\\u_j \\u _{j+1/2}
+\end{bmatrix}
+\end{equation*}
+
+
+\subsection{$h^2 \frac{\partial b}{\partial \xi}  \frac{\partial u }{\partial \xi}$}
+\begin{multline*}
+\frac{1}{\Delta x}\int_{-1 }^{1} h^2 \frac{\partial b}{\partial \xi}  \frac{\partial u }{\partial \xi} \begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2} 
+\end{bmatrix} d\xi
+\end{multline*}
+
+\subsection{$G$}
+\begin{multline*}
+\frac{\Delta x}{2}\int_{-1 }^{1} G \begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2} 
+\end{bmatrix} d\xi = \dfrac{\Delta x}{2} \begin{bmatrix}
+\frac{1}{3} G_{j-1/2}^+\\\frac{2}{3} G_{j-1/2}^+ + \frac{2}{3} G_{j+1/2}^-\\ \frac{1}{3} G_{j+1/2}^-
+\end{bmatrix}
+\end{multline*}
+
+\subsection{$h^3 \frac{\partial {u}}{\partial \xi}$}
+\begin{multline*}
+\frac{2}{3\Delta x}\int_{-1 }^{1} h^3 \frac{\partial {u}}{\partial \xi}  \frac{\partial}{\partial \xi}\left(\begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2} 
+\end{bmatrix} \right)d\xi.
+\end{multline*}
+
+\subsection{$ h^2 \frac{\partial b}{\partial \xi} u $}
+\begin{multline*}
+\frac{1}{\Delta x}\int_{-1 }^{1}  h^2 \frac{\partial b}{\partial \xi} u     \frac{\partial}{\partial \xi}\left(\begin{bmatrix}
+\phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
+\end{bmatrix} \right) d\xi.
+\end{multline*}

@@ -48,7 +48,7 @@ By depth integrating the Euler equations [] with a no-slip condition at the bed 
 where the $\Phi$ and $\Psi$ terms account for the non-hydrostatic part of the pressure and are
 	\begin{subequations}
 	\begin{align}
-	{ \Psi }  &= \dfrac{\partial b}{\partial x}\left(\dfrac{\partial u}{\partial t} + u\dfrac{\partial u}{\partial x} \right)  + u^2\dfrac{\partial b}{\partial x}, \label{eqn:SerreeqnPsi} \\ \nonumber \\
+	{ \Psi }  &= \dfrac{\partial b}{\partial x}\left(\dfrac{\partial u}{\partial t} + u\dfrac{\partial u}{\partial x} \right)  + u^2\dfrac{\partial^2 b}{\partial x^2}, \label{eqn:SerreeqnPsi} \\ \nonumber \\
  { \Phi }  &= \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} -u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t} . \label{eqn:SerreeqnPhi} 
 	\end{align}
 	\label{eqn:FullSerreNonConVarDef}
@@ -117,22 +117,18 @@ Conservation of a quantity means that in a closed system the total amount of a q
 	\mathcal{C}_q(t) = \int_{a}^{b} q(x,t)\, dx.
 	\end{equation*}
 \end{defn}
-Conservation of a quantity $q$ means that $\mathcal{C}_{q}(0) = \mathcal{C}_{q}(t)$ for all $t$. Given that the Serre equations \eqref{eqn:FullSerreNonCon} are conservation equations for mass and momentum and that the conservation of momentum equation can be rewritten as a conservation equation for $G$ \eqref{eqn:FullSerreCon}, the Serre equations conserve all these quantities. Additionally the Serre equations possess a Hamiltonian $\mathcal{H}$ which is the total energy and is therefore also conserved.
-
-\begin{defn}
+Conservation of a quantity $q$ means that $\mathcal{C}_{q}(0) = \mathcal{C}_{q}(t)$ for all $t$. Given that the Serre equations \eqref{eqn:FullSerreNonCon} are conservation equations for mass and momentum and that the conservation of momentum equation can be rewritten as a conservation equation for $G$ \eqref{eqn:FullSerreCon}, the Serre equations conserve all these quantities. Additionally the Serre equations were derived by \citet{Green-Naghdi-1976-237} by conserving the energy $\mathcal{H}$
+\begin{equation}
+	\mathcal{H}(x,t) = \frac{1}{2} \left( g\left(h^2 + 2hb\right) + hu^2  + \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2 + u^2h\left[\frac{\partial b}{\partial x}\right]^2 - uh^2 \frac{\partial u}{\partial x} \frac{\partial b}{\partial x}  \right).
 	\label{eqn:Hamildef}
-	The Hamiltonian \cite{Green-Naghdi-1976-237,Li-Y-2002} of the Serre equations is
-	\begin{equation*}
-		\mathcal{H}(x,t) = \frac{1}{2} \left( g\left(h^2 + 2hb\right) + hu^2  + \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2 + u^2h\left[\frac{\partial b}{\partial x}\right]^2 - uh^2 \frac{\partial u}{\partial x} \frac{\partial b}{\partial x}  \right).
-	\end{equation*}
-\end{defn}
-The Hamiltonian is the sum of the gravitational potential energy, the horizontal kinetic energy and the vertical kinetic energy which over the depth of water are
+\end{equation}
+The energy $\mathcal{H}$ is the sum of the gravitational potential energy, the horizontal kinetic energy and the vertical kinetic energy which over the depth of water are
 \begin{align}
 & \int_{b}^{h +b} gz \; dx = g\left(h^2 + 2hb\right), \\
 & \int_{b}^{h +b} u^2 \; dx = hu^2, \\
 & \int_{b}^{h +b} v^2 \; dx = \frac{h^3}{3} \left(\frac{\partial u}{\partial x}\right)^2 + u^2h\left[\frac{\partial b}{\partial x}\right]^2 - uh^2 \frac{\partial u}{\partial x} \frac{\partial b}{\partial x},
 \end{align}
-respectively. 
+respectively. For horizontal beds $\mathcal{H}$ is also the Hamiltonian of the Serre equations \cite{Li-Y-2002}. 
  
 For the system to be closed the flux terms of the conservation of mass and momentum equations at the boundaries must cancel and the integral of the source term over the domain must be zero.
 

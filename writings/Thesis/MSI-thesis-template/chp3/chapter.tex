@@ -33,6 +33,7 @@ in cell $j$.
 In the FEVM we reconstruct quantities at various points inside the cell from the cell average values. We distinguish between two reconstructions that are possible at each cell edge, which exist due to the overlap of neighbouring cells. To do this we use superscripts so that for the cell edge $x_{j+1/2}$ and a general quantity $q$, we have $q^-_{j+1/2}$ as the reconstructed value of $q$ at $x_{j+1/2}$ from the $j^{th}$ cell and $q^+_{j+1/2}$ as the reconstructed value of $q$ at $x_{j+1/2}$ from the $(j+1)^{th}$ cell. Since the particular time level is typically obvious from context and hence omitted the use of a superscript will not clutter the notation.
 
 \section{Structure Overview}
+\label{sec:StructOverview}
 %define w,b
 To describe the FEVM we first present an overview of the evolution step and then provide the details for each component. We begin our evolution step with all the cell averages for $h$, $w$ and $G$ at time $t^n$ and all the nodal values of $b$. We write these as vectors from the $0^{th}$ cell to the $m^{th}$ in the following way
 \begin{align*} \overline{\vecn{h}} = \begin{bmatrix}
@@ -172,17 +173,17 @@ b_{j+1/2} &=  \mathcal{B}_{j+1/2}\left(\vecn{b}\right) =  \frac{1}{2}\left( C_j(
 
 
 \subsection{Fluid Velocity}
-The elliptic equation that relates the conserved variables $h$ and $G$ and the bed profile $b$ to the primitive variable $u$ was given in Def \ref{defn:SerreEqnConservedQuantity1}. To form the FEM we take the weak form of Def \ref{defn:SerreEqnConservedQuantity1} which is 
+The elliptic equation that relates the conserved variables $h$ and $G$ and the bed profile $b$ to the primitive variable $u$ was given in Def \ref{defn:SerreEqnConservedQuantity1}. To form the FEM we take the weak form of Def \ref{defn:SerreEqnConservedQuantity1} with test function $\tau$ which is 
 
 \begin{equation*}
-	\int_{\Omega } G v \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) v \; dx.
+	\int_{\Omega } G \tau \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) \tau \; dx.
 \end{equation*}
 
 Integrating by parts with Dirichlet boundary conditions we get
 \begin{multline}
-\int_{\Omega } G v \; dx = \int_{\Omega } uh \left(1 + \frac{\partial b}{\partial x}^2 \right) v \; dx +  \int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial v}{\partial x} \; dx  \\ - 
-\int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x} u \frac{\partial v }{\partial x}\; dx. - 
-\int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}v \; dx.
+\int_{\Omega } G \tau \; dx = \int_{\Omega } uh \left(1 + \frac{\partial b}{\partial x}^2 \right) \tau \; dx +  \int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial \tau}{\partial x} \; dx  \\ - 
+\int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x} u \frac{\partial \tau }{\partial x}\; dx. - 
+\int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}\tau \; dx.
 \label{eqn:WeakFormDomain}
 \end{multline}
 This weak formulation implies that if $G$ and $h$ are members of the function space $\mathbb{L}^p$ and $b$ is a member of the Sobolev space $\mathbb{W}^{1,p}$ then $u$ is a member of the Sobolev space $\mathbb{W}^{1,p}$ as well, see \citet{EvansPDE-1998} as a reference. Since our method requires the derivative of $u$ to be well defined and hence that $u \in \mathbb{W}^{1,p}$, we will restrict ourselves to only allow $h,G \in \mathbb{L}^p$ and $b \in \mathbb{W}^{1,p}$.
@@ -190,11 +191,12 @@ This weak formulation implies that if $G$ and $h$ are members of the function sp
 We simplify \eqref{eqn:WeakFormDomain} by performing the integration over the cells and then summing the integrals together to get the equation for the entire domain
 \begin{multline}
 \label{eq:elementwiseint}
- \sum_{j}  \int_{x_{j-1/2} }^{{x_{j+1/2}}} \Bigg[  \left( uh \left(1 + \frac{\partial b}{\partial x}^2 \right)  - \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}  -  G \right) v   \\ +  \left( \frac{1}{3}h^3  \frac{\partial {u}}{\partial x}    -     \frac{1}{2}h^2\frac{\partial b}{\partial x} u    \right) \frac{\partial v }{\partial x} \Bigg]dx  = 0
+ \sum_{j}  \int_{x_{j-1/2} }^{{x_{j+1/2}}} \Bigg[  \left( uh \left(1 + \frac{\partial b}{\partial x}^2 \right)  - \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}  -  G \right) \tau   \\ +  \left( \frac{1}{3}h^3  \frac{\partial {u}}{\partial x}    -     \frac{1}{2}h^2\frac{\partial b}{\partial x} u    \right) \frac{\partial \tau }{\partial x} \Bigg]dx  = 0
 \end{multline}
-which holds for all test functions $v$. The next step is to replace the functions for the quantities $h$, $G$, $b$ and $u$ with their basis function approximations. 
+which holds for all test functions $\tau$. The next step is to replace the functions for the quantities $h$, $G$, $b$ and $u$ with their basis function approximations. 
 
 \subsubsection{Basis Function Approximations}
+%mention what these basis functions ARE!@!!!!!
 For $h$ and $G$ we use the basis functions $\psi$ which are linear inside a cell and $0$ everywhere outside the cell as shown in Figure \ref{fig:P1DiscBasis}. This is consistent with our reconstruction which is second-order accurate inside the cell and possesses discontinuities at the cell edges. Since these basis functions are in $\mathbb{L}^p$ our basis function approximations to $h$ and $G$ are in the appropriate function space.
 
 \begin{figure}
@@ -244,7 +246,7 @@ b = \sum_j b_{j-1/2}\gamma_{j-1/2} + b_{j-1/6}\gamma_{j-1/6}  + b_{j+1/6}\gamma_
 With $b_{j-1/2}$ and $b_{j+1/2}$ being well defined as \eqref{eqn:FEVMbedrecon} imposes a unique reconstruction at the cell edges. 
 
 \subsubsection{Calculation of Element-wise Matrices}
-The integral equation \eqref{eq:elementwiseint} holds for all $v$. However, since our solution space has the basis functions $\phi$ it is sufficient to satisfy \eqref{eq:elementwiseint} for all $\phi$ to generate the solution. Since only the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ are non-zero over the $j^{th}$ cell we can calculate the $j^{th}$ term in the sum \eqref{eq:elementwiseint} like so
+The integral equation \eqref{eq:elementwiseint} holds for all $\tau$. However, since our solution space has the basis functions $\phi$ it is sufficient to satisfy \eqref{eq:elementwiseint} for all $\phi$ to generate the solution. Since only the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ are non-zero over the $j^{th}$ cell we can calculate the $j^{th}$ term in the sum \eqref{eq:elementwiseint} like so
 \begin{multline}
 \int_{x_{j-1/2} }^{{x_{j+1/2}}} \Bigg[  \left( uh \left(1 + \frac{\partial b}{\partial x}^2 \right)  - \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}  -  G \right) \begin{bmatrix}
 \phi_{j-1/2}\\\phi_j \\\phi_{j+1/2}
@@ -299,7 +301,7 @@ u_{j-1/2}\\u_j \\u _{j+1/2}
 \end{multline}
 
 \subsubsection{Assembly of the Global Matrix}
-By combining all the matrices generated by the integral of each of the $u$ terms we get the $j^{th}$ cells contribution to the stiffness matrix $\matr{A}_j$. Likewise all the integrals of the remaining term $Gv$ generate the vector $\vecn{g}_{j}$. Therefore, \eqref{eq:elementwiseint} can be rewritten as
+By combining all the matrices generated by the integral of each of the $u$ terms we get the $j^{th}$ cells contribution to the stiffness matrix $\matr{A}_j$. Likewise all the integrals of the remaining term $G\tau$ generate the vector $\vecn{g}_{j}$. Therefore, \eqref{eq:elementwiseint} can be rewritten as
 \begin{equation}
 \label{eqn:FEMElemMatrixJ}
 \sum_j \matr{A}_j \begin{bmatrix}
