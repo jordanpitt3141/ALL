@@ -1,16 +1,19 @@
-\documentclass[]{article} 
+\documentclass[]{standalone} 
 \usepackage{pgfplots} 
-\usepgfplotslibrary{external} 
-\tikzexternalize 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{arrows, decorations.markings}
 \usepackage{tikz} 
 \usepackage{amsmath} 
 \usepackage{pgfplots} 
+\usepackage{sansmath}
+\sansmath
 \usetikzlibrary{calc} 
 \pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\Large} }
 \begin{document} 
 	\begin{tikzpicture}
+	\fontfamily{cmss}
 	\makeatletter
 	\tikzset{
 		nomorepostaction/.code=\makeatletter\let\tikz@postactions\pgfutil@empty, % From https://tex.stackexchange.com/questions/3184/applying-a-postaction-to-every-path-in-tikz/5354#5354
@@ -48,7 +51,7 @@
 	ylabel=$z$ ]
 	\addplot [name path=b,brown!60!black,no markers, raw gnuplot] gnuplot[id=poly1] {plot 'file.dat' smooth  cspline; };
 	\addplot [name path=b2,brown!60!black] table {Wavetankp1.dat};
-	\addplot [red,only marks,mark=*] coordinates {(3,0)};
+	\addplot [red,only marks,mark=*] coordinates {(3,0.0)};
 
 	\path[name path=axis] (axis cs:0,-1) -- (axis cs:10,-1);
 	\addplot [name path=a,blue,no markers, raw gnuplot] gnuplot[id=poly2] {plot 'fileW.dat' smooth  cspline; };
@@ -57,10 +60,19 @@
 	\draw[<->,thick] (1.5, -4.7642078e-01  ) -- (1.5,-1);
 	%\draw[<->,red,ultra thick] (5.00, 5.0314933e-01) -- (5.0, -0.50143427);
 	
-	\path[->,thick] (3, 0.0) edge node[sloped, anchor=center, below]{\Large$\left(u(x,z,t) ,v(x,z,t)\right)$}  (7, 0.3);
+	\path[->,thick] (3, 0.0) edge node[sloped, anchor=center, below]{\Large$\left(u'(x,z,t) ,v'(x,z,t)\right)$}  (6.5, 0.5);
+	
+	\path[->,thick] (3, 0.0) edge node[anchor=east]{\Large$g$}  (3, -0.35);
+	
+	\node[above] at (3,0.1) {\Large$p'(x,z,t)$};
+	
+	\node[above] at (1,0.7) {\Large$\rho$};
 	
 	%\node[above] at (5,0.15) {\Large$(u(x,z,t) ,v(x,z,t))$};
-	\node[left] at (1.5,-0.75) {\Large$b(x)$};
+	\node[right] at (1.5,-0.75) {\Large$b(x)$};
+	
+	\draw[<->,thick] (0.6, -0.6) -- (0.6,0.45);
+	\node[right] at (0.6,0 ) {\Large$h(x,t)$};
 	
 		\addplot [
 		thick,

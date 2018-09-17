@@ -234,14 +234,12 @@ Now  $h^*$, $u^*$ and $b^*$ will be solutions of the forced Serre equations in c
 These forced Serre equations are then numerically solved by using operator splitting to split the Serre equations for which $S_{\text{mass}} = S_{G} = 0$ from the source term update. We then use the numerical methods to solve the Serre equation part and use a forward Euler step for the source term update, where $S_{\text{mass}}$ and $S_{G}$ are calculated analytically. 
 
 \subsection{Behaviour of Steep Gradients}
-%main results of paper
 
-%Just for the steepest case
+%Par 1: Introduce problem of steep gradients and the Serre equations
 
-%oscillations throughout,bump, which decays agreeing with theory
-%oscillations around mean as expected
-%contact discontinuity
-%agreement with asymptotic results
+%Par 2: Has been some Understanding with asymptotic results and conclusions from the linear wave speeds
+
+%Par 3: I produced a paper that provided a comprehensive review of the different smoothing techniques, many numerical methods and various resolutions to gain some insight into the behaviour of the steep graident problem, particualrly for shorter times.
 
 \subsubsection{Asymptotic Results}
 Beyond analytic solutions to the Serre equations there have also been studies of the long term behaviour of the Serre equations for situations that are difficult to treat analytically. One particular scenario of interest is the evolution of a moving discontinuous jump in $h$ known as a bore, which can be observed naturally, for example tidal bores [].
@@ -258,3 +256,16 @@ To gain some insight into the behaviour of bores for long time spans Whitham mod
 	\label{eqn:ELWhitMod}	
 \end{subequations}
 where $\Delta = h_b / h_0$, $h_b$ is the height of the bore and $h_0$ is the depth of still water in front of the bore. These estimates agreed well with numerical simulations provided that $\Delta < 1.43$ \cite{El-etal-2006}.
+
+
+\subsubsection{Results of the Paper}
+
+
+%main results of paper
+
+%Just for the steepest case
+
+%oscillations throughout,bump, which decays agreeing with theory
+%oscillations around mean as expected
+%contact discontinuity
+%agreement with asymptotic results

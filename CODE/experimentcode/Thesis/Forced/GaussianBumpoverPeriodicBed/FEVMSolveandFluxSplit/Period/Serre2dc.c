@@ -816,8 +816,8 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]*(hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]*(hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+    hjphm=  hbc[3*(i) + 2];//*(hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
+    hjmhp=  hbc[3*(i)];//*(hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
 
     Gjphm= Gbc[3*(i) + 2];
     Gjmhp= Gbc[3*(i)];
@@ -958,8 +958,8 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
         bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]* (hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]* (hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+    hjphm=  hbc[3*(i) + 2];//*(hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
+    hjmhp=  hbc[3*(i)];//*(hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
 
         Gjphm= Gbc[3*(i) + 2];
         Gjmhp= Gbc[3*(i)];
@@ -1112,8 +1112,8 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]* (hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]* (hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+    hjphm=  hbc[3*(i) + 2];//*(hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
+    hjmhp=  hbc[3*(i)];//*(hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
 
     Gjphm= Gbc[3*(i) + 2];
     Gjmhp= Gbc[3*(i)];

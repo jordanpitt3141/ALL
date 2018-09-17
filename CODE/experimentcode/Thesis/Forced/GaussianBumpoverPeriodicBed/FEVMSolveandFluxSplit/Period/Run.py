@@ -80,12 +80,12 @@ def close(t,ts,dt):
     return var    
 
 #Forcing Problem    
-wdir = "/home/jp/Documents/PhD/project/data/2018//raw/Thesis/ForcedFinT/Dry/P2P/FEVM2/"
+wdir = "/home/jp/Documents/PhD/project/data/2018/raw/Test/htransform/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-for ki in range(3,13):
+for ki in range(12,13):
     wdirji = wdir + str(ki) + "/"
     if not os.path.exists(wdirji):
         os.makedirs(wdirji)
@@ -259,21 +259,21 @@ for ki in range(3,13):
             deallocPy(ubcC_c)
             deallocPy(GbcC_c)
 
-            s = wdirji +  "outList" + str(t)+"s.txt"
-            with open(s,'a') as file2:
-                writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            
-                writefile2.writerow(["cell midpoint" ,'h', 'G' , 'u(m/s)','bed','w' ])        
-                           
-                for j in range(n):
-                    writefile2.writerow([str(x[j]), str(hiC[j]) , str(GiC[j]) , str(uiC[j]),str(b[j]),str(wiC[j])])
-                    
-            s = wdirji +  "outSing" + str(t)+"s.txt"
-            with open(s,'a') as file2:
-                writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            
-                writefile2.writerow(['dx' ,'dt','time',"Energy", "Mass", "Momentum", "G" ,"EnergyI", "MassI", "MomentumI", "GI" ])   
-                writefile2.writerow([str(dx),str(dt),str(t),str(En),str(Mn),str(Pn),str(Gn),str(Eni),str(Mni),str(Pni),str(Gni)]) 
+#            s = wdirji +  "outList" + str(t)+"s.txt"
+#            with open(s,'a') as file2:
+#                writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+#            
+#                writefile2.writerow(["cell midpoint" ,'h', 'G' , 'u(m/s)','bed','w' ])        
+#                           
+#                for j in range(n):
+#                    writefile2.writerow([str(x[j]), str(hiC[j]) , str(GiC[j]) , str(uiC[j]),str(b[j]),str(wiC[j])])
+#                    
+#            s = wdirji +  "outSing" + str(t)+"s.txt"
+#            with open(s,'a') as file2:
+#                writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+#            
+#                writefile2.writerow(['dx' ,'dt','time',"Energy", "Mass", "Momentum", "G" ,"EnergyI", "MassI", "MomentumI", "GI" ])   
+#                writefile2.writerow([str(dx),str(dt),str(t),str(En),str(Mn),str(Pn),str(Gn),str(Eni),str(Mni),str(Pni),str(Gni)]) 
 
 
         #evolvewrapForcingANA(h_c,G_c,n,dx,dt,g,x_c,t,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9)
@@ -390,70 +390,70 @@ for ki in range(3,13):
     deallocPy(GbcC_c)
     
 
-    s = wdirji +  "outList" + str(t)+"s.txt"
-    with open(s,'a') as file2:
-        writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    
-        writefile2.writerow(["cell midpoint" ,'h', 'G' , 'u(m/s)','bed','w' ])        
-                   
-        for j in range(n):
-            writefile2.writerow([str(x[j]), str(hiC[j]) , str(GiC[j]) , str(uiC[j]),str(b[j]),str(wiC[j])])
-            
-    s = wdirji +  "outSing" + str(t)+"s.txt"
-    with open(s,'a') as file2:
-        writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    
-        writefile2.writerow(['dx' ,'dt','time',"Energy", "Mass", "Momentum", "G" ,"EnergyI", "MassI", "MomentumI", "GI" ])   
-        writefile2.writerow([str(dx),str(dt),str(t),str(En),str(Mn),str(Pn),str(Gn),str(Eni),str(Mni),str(Pni),str(Gni)]) 
-
-    
-    
-    hC1v = abs(Mn - Mni)/ Mni
-    uhC1v = abs(Pn - Pni)/Pni
-    GC1v = abs(Gn - Gni)/Gni
-    EC1v = abs(En - Eni)/Eni   
-
-
-    s = wdir + "hL1.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.20f\n" %(dx," ",hnorm)
-        file1.write(s)
-    
-    s = wdir + "GL1.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.20f\n" %(dx," ",Gnorm)
-        file1.write(s)   
-
-    s = wdir + "uhL1.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.20f\n" %(dx," ",uhnorm)
-        file1.write(s)    
- 
-    s = wdir + "uL1.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.20f\n" %(dx," ",unorm)
-        file1.write(s)     
-        
-    s = wdir + "hC1.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.20f\n" %(dx," ",hC1v)
-        file1.write(s)
-    
-    s = wdir + "uhC1.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.20f\n" %(dx," ",uhC1v)
-        file1.write(s)   
-    
-
-    s = wdir + "GC1.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.20f\n" %(dx," ",GC1v)
-        file1.write(s) 
-
-    s = wdir + "HC1.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.20f\n" %(dx," ",EC1v)
-        file1.write(s) 
+#    s = wdirji +  "outList" + str(t)+"s.txt"
+#    with open(s,'a') as file2:
+#        writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+#    
+#        writefile2.writerow(["cell midpoint" ,'h', 'G' , 'u(m/s)','bed','w' ])        
+#                   
+#        for j in range(n):
+#            writefile2.writerow([str(x[j]), str(hiC[j]) , str(GiC[j]) , str(uiC[j]),str(b[j]),str(wiC[j])])
+#            
+#    s = wdirji +  "outSing" + str(t)+"s.txt"
+#    with open(s,'a') as file2:
+#        writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+#    
+#        writefile2.writerow(['dx' ,'dt','time',"Energy", "Mass", "Momentum", "G" ,"EnergyI", "MassI", "MomentumI", "GI" ])   
+#        writefile2.writerow([str(dx),str(dt),str(t),str(En),str(Mn),str(Pn),str(Gn),str(Eni),str(Mni),str(Pni),str(Gni)]) 
+#
+#    
+#    
+#    hC1v = abs(Mn - Mni)/ Mni
+#    uhC1v = abs(Pn - Pni)/Pni
+#    GC1v = abs(Gn - Gni)/Gni
+#    EC1v = abs(En - Eni)/Eni   
+#
+#
+#    s = wdir + "hL1.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.20f\n" %(dx," ",hnorm)
+#        file1.write(s)
+#    
+#    s = wdir + "GL1.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.20f\n" %(dx," ",Gnorm)
+#        file1.write(s)   
+#
+#    s = wdir + "uhL1.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.20f\n" %(dx," ",uhnorm)
+#        file1.write(s)    
+# 
+#    s = wdir + "uL1.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.20f\n" %(dx," ",unorm)
+#        file1.write(s)     
+#        
+#    s = wdir + "hC1.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.20f\n" %(dx," ",hC1v)
+#        file1.write(s)
+#    
+#    s = wdir + "uhC1.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.20f\n" %(dx," ",uhC1v)
+#        file1.write(s)   
+#    
+#
+#    s = wdir + "GC1.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.20f\n" %(dx," ",GC1v)
+#        file1.write(s) 
+#
+#    s = wdir + "HC1.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.20f\n" %(dx," ",EC1v)
+#        file1.write(s) 
 
 
     deallocPy(h_c)

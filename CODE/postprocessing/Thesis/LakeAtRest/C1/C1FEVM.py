@@ -200,7 +200,7 @@ def LakeAtRest(x,a0,a1,a2,g,dx):
        
     return h,u,G,b,w
 
-meth = "FDVM2WB"
+meth = "FEVM2WB"
 wdirb = "/home/jp/Documents/PhD/project/data/ThesisRaw/LakeAtRest/Dry/" +meth+"/"
 sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/LakeAtRest/" +meth+"/C1/"
 
@@ -214,7 +214,7 @@ L1Gs = []
 dxs=  []
         
         
-for ki in range(3,18):
+for ki in range(8,18):
         
         
     wdir = wdirb + str(ki) + "/"

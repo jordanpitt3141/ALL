@@ -3,9 +3,19 @@
 \label{chp:HFVMMethod}
 %introduction
 
+%Point back to goals of a method
+%Requires use of a FEM and a FVM
+% FVM was shown to work previously [hank,Zoppou] 
+
 %update method
+\cite{Pitt-2018-61}
+
+
+
+
 
 %describe grids up here
+
 \section{Notation for Numerical Grids}
 We begin by defining the numerical grid in both space and time from a starting location $x_0$ and a beginning time $t^0$. For any $j,n \in \mathbb{N}$ we have
 \begin{subequations}
@@ -176,7 +186,7 @@ b_{j+1/2} &=  \mathcal{B}_{j+1/2}\left(\vecn{b}\right) =  \frac{1}{2}\left( C_j(
 The elliptic equation that relates the conserved variables $h$ and $G$ and the bed profile $b$ to the primitive variable $u$ was given in Def \ref{defn:SerreEqnConservedQuantity1}. To form the FEM we take the weak form of Def \ref{defn:SerreEqnConservedQuantity1} with test function $\tau$ which is 
 
 \begin{equation*}
-	\int_{\Omega } G \tau \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) \tau \; dx.
+	\int_{\Omega } G \tau \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \frac{\partial b}{\partial x}^2 \right) \tau - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) \tau \; dx.
 \end{equation*}
 
 Integrating by parts with Dirichlet boundary conditions we get
@@ -543,6 +553,13 @@ These are then combined with the other element contributions in the global matri
 
 
 \section{Dry Beds}
+%Better description of what this method is trying to achieve:
+% 1. Matrix solver should be able to handle '0' values in the band, it does this by raising pivots to be a very small number, p_tol
+
+%2. Want to have h = 0 when below h_tol
+
+% 2.Introduces small error when h is large -> h_{base}
+
 Dry beds are handled adequately by all steps of our FEVM in their current form, except the FEM solution for $u$. For the FEM a dry bed presents two issues; when $h=0$ the stiffness matrix will become singular, and when $h$ is small $u$ may become quite large leading to instabilities. 
 
 In previous work \cite{Zoppou-etal-2017} direct banded matrix solvers such as the Thomas algorithm were employed to solve \eqref{eqn:usolvefromGhb}, however such methods rely on non-singular matrices and so are unsuitable for dry beds. To deal with this an LU decomposition algorithm by \citet{NumRecC-1996} was used. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting, which inserts small non-zero pivots when their value is below some tolerance value $p_{tol}$. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard $LU$ decomposition. This results in a FEM that allows for $h=0$, but still faces the problem of large $u$ values when $h$ is small. 

@@ -1,0 +1,96 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{pgfplots} 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{arrows, decorations.markings}
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{pgfplots} 
+\usetikzlibrary{calc} 
+\usepackage{sansmath}
+\sansmath 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\Large} }
+\begin{document} 
+	\begin{tikzpicture}
+	\makeatletter
+	\tikzset{
+		nomorepostaction/.code=\makeatletter\let\tikz@postactions\pgfutil@empty, % From https://tex.stackexchange.com/questions/3184/applying-a-postaction-to-every-path-in-tikz/5354#5354
+		my axis/.style={
+			postaction={
+				decoration={
+					markings,
+					mark=at position 1 with {
+						\arrow[ultra thick]{latex}
+					}
+				},
+				decorate,
+				nomorepostaction
+			},
+			thin,
+			-, % switch off other arrow tips
+			every path/.append style=my axis % this is necessary so it works both with "axis lines=left" and "axis lines=middle"
+		}
+	}
+	\makeatother
+	
+	\begin{axis}[ 
+	axis lines = left, 
+	axis line style={my axis},
+	width=15cm,
+	height = 7.5cm,
+	xtick={1,3,5,7,9}, 
+	clip=false, 
+	ytick = {\empty},
+	xticklabels ={ ,$x_1$,$x_2$,$x_3$,},
+	yticklabels ={},
+	extra x ticks={0,2,4,6,8,10},
+	extra x tick labels={,\normalsize$x_{\frac{1}{2}}$,\normalsize$x_{\frac{3}{2}}$,\normalsize$x_{\frac{5}{2}}$,\normalsize$x_{\frac{7}{2}}$,},
+	xmin=0, 
+	xmax=10, 
+	ymin =-0.25, 
+	ymax = 1,
+	xlabel=$x$, 
+	ylabel=  {$q$} ]
+	\addplot [blue,no markers, raw gnuplot,thick] gnuplot[id=poly2] {plot 'fileW1.dat' smooth  cspline; };
+	\addplot [name path=a,blue,no markers, raw gnuplot,thick,restrict x to domain=4:6] gnuplot[id=poly2] {plot 'fileW1.dat' smooth  cspline; };
+	
+	\path[name path=axis] (axis cs:4,-0.25) -- (axis cs:6,-0.25);
+	
+	\node[] at (axis cs: 5,1){\Large\color{blue}$q(x,t^0)$};
+	
+	
+	
+	\addplot [
+	thick,
+	color=blue,
+	fill=blue, 
+	fill opacity=0.3
+	] fill between[of=a and axis];
+	
+	\draw[dashed,thick] (2, -0.25  ) -- (2,1);
+	\draw[dashed,thick] (4, -0.25  ) -- (4,1);
+	\draw[dashed,thick] (6, -0.25  ) -- (6,1);
+	\draw[dashed,thick] (8, -0.25  ) -- (8,1);
+	
+	\path[->,thick] (3.5, 0.4) edge node[sloped, anchor=south east]{\Large$F_{\frac{3}{2}}^0$}  (4.5, 0.4);
+	\path[->,thick] (5.5, 0.4) edge node[sloped, anchor=south west]{\Large$F_{\frac{5}{2}}^0$}  (6.5, 0.4);
+	
+	
+%	\node[label={90:{\Large$S_2^0$}},circle,fill,inner sep=2pt] at (axis cs:5,0.) {};
+	
+	\draw [decorate,thick,decoration={brace,amplitude=10pt}]	(4,-0.5) -- (2,-0.5);
+	\draw [decorate,thick,decoration={brace,amplitude=10pt}]	(6,-0.5) -- (4,-0.5);
+	\draw [decorate,thick,decoration={brace,amplitude=10pt}]	(8,-0.5) -- (6,-0.5);
+	
+	\node[] at (axis cs: 3,-0.65){\Large$C_1$};
+	\node[] at (axis cs: 5,-0.65){\Large$C_2$};
+	\node[] at (axis cs: 7,-0.65){\Large$C_3$};
+	
+	\node[] at (axis cs: 5,0.4){\LARGE$\overline{q}_{\,2}^{ \,0}$};
+	\end{axis} 
+	
+	
+	
+	\end{tikzpicture}
+\end{document}

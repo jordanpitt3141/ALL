@@ -88,7 +88,7 @@ def LiftMax(h,h0):
     return ht
 
 a0 =0
-a1 = 0.5
+a1 = 10**-6
 a2 = 0
 a3 = 0
 a4 = 5
@@ -102,8 +102,15 @@ x,t = makevar(sx,ex,dx,0,0,1)
 t0 = 0
 
 h = ForcedbedM(x,t0,a0,a1,a2,a3,a4)
-htSWWE = SWWETransform(h,10**-8,10**-13) 
-htSWWEnorm = norm(htSWWE - h, ord = 1)/ norm(h, ord = 1)
+hcut = h*(h > 10**-12)
+u1 = ForcedbedM(x,t0,a0,a1,a2,a3,a4)
+htSWWE = SWWETransform(hcut,10**-8,10**-12) 
+htSWWEnorm = norm(htSWWE - hcut, ord = 1)/ norm(hcut, ord = 1)
+
+G1 = u1*hcut
+
+u1A = G1 / hcut
+u1tA = G1 / htSWWE
 
 """
 htLift = LiftTran(h,10**-3)

@@ -2,12 +2,50 @@
 \chapter{Experimental Validation}
 \label{chp:ExpMethodComp}
 
+%Preamble
+
 %use energy instead of hamiltonian
 
 \section{Segur}
 %Wave gauge, conservation properties
 %would improved dispersion help
 %read other writing on this 
+
+
+%Par 1: Experimental design
+%\ref{fig:SegurWT}
+
+%Par 2: What it tests, explanation
+
+%Par 3: Numerical Experiment
+
+\subsection{Results for 1cm}
+
+%Par 1: Figures
+
+%Par 2: Discussion
+	%phase and amplitude different (larger waves move faster)
+	%waves on downstroke not present, suggesting that either gradient of down stroke not as steep, or waves are diffused stronger in thge real world
+	%capture overall behaviour very well
+
+%Par 3: Conclusion
+
+%\ref{fig:Segur1cmFEVM} \ref{fig:Segur1cmFDVM}
+
+\subsection{Results for 3cm}
+
+%Par 1: Figures
+
+%Par 2: Discussion
+	%phase and amplitude different (larger waves move faster)
+	%waves on downstroke not present, suggesting that either gradient of down stroke not as steep, or waves are diffused stronger in thge real world
+	%capture overall behaviour very well
+
+%Par 3: Conclusion
+
+%\ref{fig:Segur3cmFEVM} \ref{fig:Segur3cmFDVM}
+
+
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/WaveTank.pdf}
@@ -272,9 +310,102 @@ These numerical results for the $\text{FDVM}_2$ and $\text{FEVM}_2$ agree well w
 	\label{fig:BejishWG5to7FDVM}
 \end{figure}
 
+\section{Roeber}
+%Wave gauge
+%way beyond nolinearity paramter
+%in fact this wave breaks, leading to large air entrainment
+
+%wave breaking
+%>>> 66 / (sqrt(9.81/2.46))
+%33.050420197470373
+%>>> 64 / (sqrt(9.81/2.46))
+%32.048892312698548
+
+%friction damps these trialing waves?
+
+%comment on wave breaking number for nonlinearity
+
+
+%Fillipine/Roeber also show discrepancy between numerical model and data before the appearance of the reflected waves, assumption about them having the nolinearity speed may be dubious, good agreement with leading wave
+
+
+%Par 1: Experimental Design
+	%breaking wave on a fringing reef (check)
+
+%Par 2: Explanation of Experiment and what it demonstrates
+	%can compare the behaviour of dispersion and shaoling
+	%can compare to other dispersive models (Roebers)
+
+%Par 3: Numerical Experiment Design
+
+\subsection{Results}
+
+%Par 1: Figures
+
+%Par 2: Discussion
+	%comment on wave breaking number for nonlinearity
+	%breaking wave
+	%dont have reflections
+
+%Par 3: Conclusion
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/WaveTank.pdf}
+	\caption{Diagram demonstrating the water (\squareF{blue}) and the ground  (\squareF{brown!80!black}) for the Beji experiments, with the wave gauge locations marked.}
+	\label{fig:RoeberWT}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs1.pdf}
+	\caption{FEVM}
+	\label{fig:Roeber8WG1to7FEVM}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs2.pdf}
+	\caption{FEVM}
+	\label{fig:Roeber8WG7to14FEVM}
+\end{figure}          
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs1.pdf}
+	\caption{FEVM}
+	\label{fig:Roeber8WG1to7FDVM}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs2.pdf}
+	\caption{FEVM}
+	\label{fig:Roeber8WG7to14FDVM}
+\end{figure} 
+
 \section{Synolakis}
 %only pointwise comparison, and H1 and C1 as wave is well defined
 %comment on wave breaking number for nonlinearity
+
+
+%Par 1: Experimental Design
+	%nonbreaking wave shoaling
+
+%Par 2: Explanation of Experiment and what it demonstrates
+	%standard runup test
+
+%Par 3: Numerical Experiment Design
+
+\subsection{Results}
+
+%Par 1: Figures
+
+%Par 2: Discussion
+
+%Par 3: Conclusion
+
+
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -328,52 +459,3 @@ These numerical results for the $\text{FDVM}_2$ and $\text{FEVM}_2$ agree well w
 \end{figure}
 
 
-\section{Roeber}
-%Wave gauge
-%way beyond nolinearity paramter
-%in fact this wave breaks, leading to large air entrainment
-
-%wave breaking
-%>>> 66 / (sqrt(9.81/2.46))
-%33.050420197470373
-%>>> 64 / (sqrt(9.81/2.46))
-%32.048892312698548
-
-%friction damps these trialing waves?
-
-
-%Fillipine/Roeber also show discrepancy between numerical model and data before the appearance of the reflected waves, assumption about them having the nolinearity speed may be dubious, good agreement with leading wave
-
-
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/WaveTank.pdf}
-	\caption{Diagram demonstrating the water (\squareF{blue}) and the ground  (\squareF{brown!80!black}) for the Beji experiments, with the wave gauge locations marked.}
-	\label{fig:RoeberWT}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs1.pdf}
-	\caption{FEVM}
-	\label{fig:Roeber8WG1to7FEVM}
-\end{figure}
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs2.pdf}
-	\caption{FEVM}
-	\label{fig:Roeber8WG7to14FEVM}
-\end{figure}          
-
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs1.pdf}
-	\caption{FEVM}
-	\label{fig:Roeber8WG1to7FDVM}
-\end{figure}
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs2.pdf}
-	\caption{FEVM}
-	\label{fig:Roeber8WG7to14FDVM}
-\end{figure} 

@@ -188,7 +188,27 @@ For the second-order methods we find that $\text{FDVM}_2$ consistently produces 
 
 \section{Analytic Solution for Variable Bathymetry}
 
+To verify the validity of our numerical methods for the Serre equations with variable bathymetry \eqref{eqn:FullSerreNonCon} and assess the well balancing method employed we use the lake at rest analytic solution \eqref{eqn:LARdefhub}. 
+
+The lake at rest solution \eqref{eqn:LARdefhub} associated with the bed profile
+\begin{equation}
+b(x) = a_1 \sin\left(a_2 x\right)
+\end{equation}
+was chosen to ensure that all terms with derivatives of the bed were tested. In particular the chosen parameters for our initial conditions of the numerical method were $a_0 = 0m$, $a_1 = 1m$ and $a_2 = 2 \pi / 50 $. This ensured that our lake at rest solution contained both wet and dry elements to demonstrate that the inclusion of both did not cause problems for the numerical method.
+
+For the numerical solutions the spatial domain was $x \in \left[-112.5 m,87.5 m\right]$ and the final time was $t=10s$, with the standard gravitational acceleration $g= 9.81 m/s^2$. The spatial resolution of the method was varied like so $\Delta x = 100 / 2^k m$ with $k \in \left[4,17\right]$ and the CFL condition \eqref{eqn:CFLcond} was satisfied by having $\Delta t = Cr / \sqrt{g}$ with condition number $Cr = 0.5$. While the standard limiting parameter $\theta = 1.2$ was used for both the $\text{FEVM}_2$ and $\text{FDVM}_2$ in the generalised minmod limiter \eqref{eqn:slopehGrecon}. Dirichlet boundary conditions were used at both ends as the analytic solution is stationary. 
+
+To assess the capability of the technique employed to achieve well balancing we compare two versions of the numerical methods $\text{FEVM}_2$ and $\text{FDVM}_2$; one with the well balancing and one without it. These are the only methods developed in this thesis that include variable bathymetry, allow dry beds and are well balanced and so these are the only numerical methods studied here.   
+
 \subsection{Results for Lake at Rest}
+Example numerical solutions with $\Delta x = 100/2^{10}$ at $t=10s$ for all versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:LakeAtRestEx}. The analytic solution and the numerical solution in these figures are indistinguishable at this scale, suggesting that both methods have recovered the analytic lake at rest solution.  
+
+Closer examination of the $L_1$ errors depicted in Figure \ref{fig:LakeAtRestEL1} reveals a completely different picture for the two versions of each method. For both well balanced versions the errors in $h$ are consistently at round off level, while for both $G$ and $u$ the $L_1$ errors begin at round-off level and increases as $\Delta x$ decreases. The errors in $G$ and $u$ increase away from round-off due to accumulation of round of errors as the number of cells and time steps increases; thus creating an increase that is second-order. This accumulation of errors in $u$ and $G$ is a result of the finite difference methods employed in the source term approximation. 
+
+Without well balancing the $\text{FEVM}_2$ and $\text{FDVM}_2$ lose second-order accuracy of $L_1$ error in $u$ and $G$ as the bed terms are not properly cancelled for the lake at rest stationary solution. The $L_1$ error in $h$ maintains the expected second-order convergence as the errors in $u$ and $G$ in this range of $\Delta x$ are too small to significantly contribute to the $L_1$ error of $h$ yet.
+
+These results demonstrate the need for the well-balancing to be included in both numerical methods, as it is only with their inclusion that the lake at rest steady state can be accurately reproduced. 
+
 
 %C1, H1 and L1
 
@@ -214,7 +234,7 @@ For the second-order methods we find that $\text{FDVM}_2$ consistently produces 
 		\subcaption{$\text{FDVM}_2$ not well balanced}
 		\vspace{0.5cm}
 	\end{subfigure}
-	\caption{Comparison of the analytic solution ({\color{blue} \solidrule}) and numerical solution with $\Delta x = {200} / {2^{10}}m$ ({\color{red} $\bullet$}) for the lake at rest problem at $t=10s$ for all methods.}
+	\caption{Comparison of the analytic solution ({\color{red} \solidrule}) and numerical solution with $\Delta x = {100} / {2^{10}}m$ ({\color{blue} \solidrule}) for the lake at rest problem at $t=10s$ for all methods.}
 	\label{fig:LakeAtRestEx}
 \end{figure}
 
@@ -260,8 +280,31 @@ For the second-order methods we find that $\text{FDVM}_2$ consistently produces 
 %	\label{fig:LakeAtRestEC1}
 %\end{figure}
 
-\section{Forced Solution For Finite Water Depth}
+\section{Forced Solutions}
 %only L1
+There are currently no known analytic solutions for the Serre equations that possess varying bathymetry and non-zero velocities. Therefore, the previous analytic solution comparisons do not provide a stringent test of all terms present in the Serre equations. To remedy this we use forced solutions which were introduced in Chapter \ref{chp:Serreeqns}. Since the source terms in the modified Serre equations \eqref{eqn:FullSerreConForced} can be determined and accounted for analytically, the only source of error in such numerical solutions are the numerical methods themselves and thus we should recover the theoretical second-order accuracy for $\text{FEVM}_2$ and $\text{FDVM}_2$. 
+
+We performed validation tests for two forced solutions; one with a finite water depth everywhere and the other with a dry bed to validate both situations and to facilitate a comparison of the behaviour of our numerical solutions for both situations. To ensure that all terms of the Serre equations were accurately approximated in the numerical method the functions
+\begin{subequations}
+\begin{align}
+\label{eqn:ForcedSolutionxt}
+h^*(x,t) &= a_0 + a_1 \exp\left(-\dfrac{\left[\left(x - a_2 t\right) - a_3\right]^2}{2 a_4}\right), \\
+u^*(x,t) &= a_5 \exp\left(-\dfrac{\left[\left(x - a_2 t\right) - a_3\right]^2}{2 a_4}\right), \\
+b^*(x) &= a_6 \sin\left(a_7 x\right)
+\end{align}
+\end{subequations}
+for the primitive variables were chosen, as for nontrivial choices of the parameters $a_i$ all terms in the Serre equations vary in space and time. 
+
+Both validation studies used $a_1 = 0.5$, $a_2 = 2 \pi / \left(10 a_7\right)$, $a_3 = - 3\pi/ \left(2 a_7\right)$, $a_4 = \pi / 16 a_7$, $a_5 = 0.5$, $a_6 = 1.0$ and $a_7 = \pi / 25$ with $a_0= 1$ for the finite water depth forced solution and $a_0=0$ for the dry bed forced solution. 
+
+
+\subsection{Results for Finite Water Depth} 
+%a_0 = 1
+For the finite water depth case $a_0 = 1m$ was chosen in equation \eqref{eqn:ForcedSolutionxt}. An example of the various quantities of the numerical solutions of  $\text{FEVM}_2$ and $\text{FDVM}_2$ for these forced solutions are given in Figures \ref{fig:ForcedWetFEVMP2PExAll} and \ref{fig:ForcedWetFDVMP2PExAll} for $\Delta x = $ [].
+
+The numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ with $\Delta x = $ [] and the forced solutions are identical for at these scales, reproducing the forced solution as it travels from peak to peak.
+
+The $L_1$ error of $h$, $u$, $uh$ and $G$ for the $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:L1convergenceforcedWet}. Both methods demonstrate the expected second-order accuracy. Since the source term of the modified Serre equations is added analytically and all terms must be accurately approximated by the methods for this forced solution, these results demonstrate that our scheme is completely second-order accurate for completely wet beds.
 
 \begin{figure}
 	\centering
@@ -330,40 +373,28 @@ For the second-order methods we find that $\text{FDVM}_2$ consistently produces 
 		\vspace{0.5cm}
 	\end{subfigure}
 	\caption{Convergence plots as measured by the $L_1$ norm for $h$ (\trianglet{blue}), $u$ (\squaret{black}),  $uh$ ({\color{green!60!black}$\times$})  and $G$ (\circlet{red}) for the forced solution problem for FEVM and FDVM at $t=10s$.}
+	\label{fig:L1convergenceforcedWet}
 \end{figure}
 
 
-\section{Forced Solution with Dry Beds}
+\subsection{Results with Dry Beds} 
+%a_0 = 0
+%mention the tolerance values
+To demonstrate the capability of the methods to handle the wetting and drying of beds, we conducted a series of numerical simulations with \eqref{eqn:ForcedSolutionxt} where $a_0 = 0m$ for $\text{FEVM}_2$ and $\text{FDVM}_2$. 
+
+An example numerical simulation demonstrating the evolution fo the wave is given in Figures \ref{fig:ForcedFEVMP2PExAll} and \ref{fig:ForcedFDVMP2PExAll} for $\text{FEVM}_2$ and $\text{FDVM}_2$ with $\Delta x = $[]. The methods both do very well at accurately reproducing the analytic solution for the stage $w$, $h$ and $G$. However, both fail to accurately reproduce $u$ as $h \rightarrow 0$, particularly behind the wave. 
+
+%[explain why, also why its ok and expected]
 
 
-%With $a_0 = 1$ or $a_0 = 0$.
-%$a_1 = 0.5$
-%$a_2 = 1$
-%$a3 = -20$
-%$a4 = 1$
-%$a5 = a1$
-%$a6 = 1$
-%$a7 = 0.1$
-%$x \in \left[- \frac{\pi}{a_9} , 0\right]$
-%$Cr = 0.5$
-%$\Delta t = \frac{Cr}{a_5 + \sqrt{g \left(a_0 + a_1\right)}} \Delta x$
-%$et = 1$
 
-% Give the source terms for these functions
+The $L_1$ errors for both methods are given over the whole domain in Figure \ref{fig:ForcedSolDryL1}. Both methods are still displaying second-order convergence in all the quantities except $u$, as the large $u$ errors are only present for small $h$ and so are not captured by either $G$ or $uh$ for which $u$ is only ever multiplied by $h$, hiding the errors in $u$. Indeed if we restrict the domain to [] where $h$ is [] then we get that the convergence in $u$ is second-order as can be seen for both methods in Figure \ref{fig:ForcedSolDryL1restrict}.
 
-%Equation for G
+Since the evolution of $h$ and $G$ only requires $u$ when it is multiplied by $h$, our result is a method that is second-order accurate for the conserved quantities even in the presence of dry beds.
 
-% Give the source terms for these functions
+Therefore this method can accurately handle the dry bed problem, although in such cases just studying the velocity will be misleading. 
 
-%ht
 
-%Gt
-
-%fluxh
-
-%fluxG
-
-%Source G
 
 \begin{figure}
 	\centering
@@ -432,6 +463,7 @@ For the second-order methods we find that $\text{FDVM}_2$ consistently produces 
 		\vspace{0.5cm}
 	\end{subfigure}
 	\caption{Convergence plots as measured by the $L_1$ norm for $h$ (\trianglet{blue}), $u$ (\squaret{black}),  $uh$ ({\color{green!60!black}$\times$})  and $G$ (\circlet{red}) for the forced solution problem for FEVM and FDVM at $t=10s$.}
+	\label{fig:ForcedSolDryL1}
 \end{figure}
 
 \begin{figure}
@@ -448,4 +480,5 @@ For the second-order methods we find that $\text{FDVM}_2$ consistently produces 
 		\vspace{0.5cm}
 	\end{subfigure}
 	\caption{Convergence plots as measured by the $L_1$ norm around the peak for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\circlet{red}) for the forced solution problem for FEVM and FDVM at $t=10s$.}
+	\label{fig:ForcedSolDryL1restrict}
 \end{figure}

@@ -1,7 +1,7 @@
-\documentclass[]{article} 
+\documentclass[]{standalone} 
 \usepackage{pgfplots} 
-\usepgfplotslibrary{external} 
-\tikzexternalize 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
 \usepackage{tikz} 
 \usepackage{amsmath} 
 \usepackage{pgfplots} 
@@ -25,11 +25,7 @@
 	ymax = 0.3,
 	xlabel=\Large$x \; (m)$, 
 	ylabel=\Large$G \; (m^2/s)$ ]
-	\addplot [blue,no markers,ultra thick] table {G0.0s.dat };
-	\addplot [red,no markers,ultra thick] table {G2.5s.dat };
-	\addplot [violet!80!white,no markers,ultra thick] table {G5.0s.dat };
-	\addplot [orange,no markers,ultra thick] table {G7.5s.dat };
-	\addplot [black,no markers,ultra thick] table {G10.0s.dat };
+	\addplot [black,no markers,ultra thick] table {G0.0s.dat };
 
 	\end{axis} 
 	

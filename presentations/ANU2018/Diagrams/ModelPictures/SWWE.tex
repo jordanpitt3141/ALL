@@ -1,7 +1,7 @@
-\documentclass[]{article} 
+\documentclass[]{standalone} 
 \usepackage{pgfplots} 
-\usepgfplotslibrary{external} 
-\tikzexternalize 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{arrows, decorations.markings}
 \usepackage{tikz} 
@@ -59,8 +59,12 @@
 	
 	\draw[->,thick] (5, 0.0) -- (7, 0.0);
 	
+	\draw[->,thick] (3, 0.6) -- (3, 0);
+	\node[left] at (3,0.3) {\Large$\xi(x,z,t)$};
+	
 	\node[above] at (6,0.0) {\Large$u(x,t)$};
-	\node[above] at (5,0.6) {\Large$v(x,z,t) = 0$};
+	%\node[above] at (5,0.6) {\Large$v(x,z,t) = 0$};
+	%\node[below] at (5,-0.5) {\Large$p(x,z,t) = g\left(\left[h(x,t) + b(x)\right] - z\right)$};
 	\node[left] at (5,0.2) {\Large$h(x,t)$};
 	\node[left] at (1.5,-0.75) {\Large$b(x)$};
 	

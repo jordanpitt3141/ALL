@@ -1,16 +1,19 @@
-\documentclass[]{article} 
+\documentclass[]{standalone} 
 \usepackage{pgfplots} 
-\usepgfplotslibrary{external} 
-\tikzexternalize 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{arrows, decorations.markings}
 \usepackage{tikz} 
 \usepackage{amsmath} 
-\usepackage{pgfplots} 
+\usepackage{pgfplots}
+\usepackage{sansmath}
+\sansmath 
 \usetikzlibrary{calc} 
 \pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\Large} }
 \begin{document} 
 	\begin{tikzpicture}
+	\fontfamily{cmss}
 	\makeatletter
 	\tikzset{
 		nomorepostaction/.code=\makeatletter\let\tikz@postactions\pgfutil@empty, % From https://tex.stackexchange.com/questions/3184/applying-a-postaction-to-every-path-in-tikz/5354#5354
@@ -54,13 +57,18 @@
 	\addplot [name path=a,blue,no markers, raw gnuplot] gnuplot[id=poly2] {plot 'fileW.dat' smooth  cspline; };
 
 
+	\node[above] at (1,0.7) {\Large$\rho$};
+
 	\draw[<->,thick] (1.5, -4.7642078e-01  ) -- (1.5,-1);
 	\draw[<->,red,ultra thick] (5.00, 5.0314933e-01) -- (5.0, -0.50143427);
 	
 	\draw[->,thick] (5, 0.0) -- (7, 0.0);
 	
+		\draw[->,thick] (3, 0.6) -- (3, 0);
+		\node[left] at (3,0.3) {\Large$\alpha(x,z,t)$};
+	
 	\node[above] at (6,0.0) {\Large$u(x,t)$};
-	\node[above] at (5,0.6) {\Large$v(x,z,t) = u \frac{\partial b}{\partial x} - (z - b) \frac{\partial u}{\partial x}$};
+	%\node[above] at (5,0.6) {\Large$v(x,z,t) = u \frac{\partial b}{\partial x} - (z - b) \frac{\partial u}{\partial x}$};
 	\node[left] at (5,0.2) {\Large$h(x,t)$};
 	\node[left] at (1.5,-0.75) {\Large$b(x)$};
 	

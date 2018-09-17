@@ -1,0 +1,81 @@
+\documentclass[pdf]{standalone}
+\usepackage{pgfplots} 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
+\usetikzlibrary{arrows, decorations.markings}
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{sansmath}
+\sansmath 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\Large} }
+\begin{document} 
+	\begin{tikzpicture}
+	\makeatletter
+	\tikzset{
+		nomorepostaction/.code=\makeatletter\let\tikz@postactions\pgfutil@empty, % From https://tex.stackexchange.com/questions/3184/applying-a-postaction-to-every-path-in-tikz/5354#5354
+		my axis/.style={
+			postaction={
+				decoration={
+					markings,
+					mark=at position 1 with {
+						\arrow[ultra thick]{latex}
+					}
+				},
+				decorate,
+				nomorepostaction
+			},
+			thin,
+			-, % switch off other arrow tips
+			every path/.append style=my axis % this is necessary so it works both with "axis lines=left" and "axis lines=middle"
+		}
+	}
+	\makeatother
+	
+	\begin{axis}[ 
+	axis lines = left, 
+	axis line style={my axis},
+	width=15cm,
+	height = 7.5cm,
+	clip=false, 
+	xtick={1,3,5,7,9},  
+	ytick = {\empty},
+	xticklabels ={,$x_1$,$x_2$,$x_3$,},
+	yticklabels ={},
+		extra x ticks={0,2,4,6,8,10},
+		%extra x tick style={xticklabels=\empty},
+		extra x tick labels={,\normalsize$x_{\frac{1}{2}}$,\normalsize$x_{\frac{3}{2}}$,\normalsize$x_{\frac{5}{2}}$,\normalsize$x_{\frac{7}{2}}$,	},
+	xmin=0, 
+	xmax=10, 
+	ymin =-0.25, 
+	ymax = 1,
+	xlabel=$x$, 
+	ylabel={$\hat{q}$} ]
+		
+	\draw[dashed,thick] (2, -0.25  ) -- (2,1);
+	\draw[dashed,thick] (4, -0.25  ) -- (4,1);
+	\draw[dashed,thick] (6, -0.25  ) -- (6,1);
+	\draw[dashed,thick] (8, -0.25  ) -- (8,1);
+		
+	\addplot[domain=0:2,samples=25, smooth, thick,red] gnuplot[id=poly1]{-0.2*(x-1)*(x-1) + 0.5};
+	\addplot[domain=2:4,samples=25, smooth, thick,red] gnuplot[id=poly2]{0.1*(x-2)*(x-2.5) + 0.3};
+	\addplot[domain=4:6,samples=25, smooth, thick,red] gnuplot[id=poly3]{-0.1*(x-4)*(x-4.5) + 0.6};
+	\addplot[domain=6:8,samples=25, smooth, thick,red] gnuplot[id=poly4]{-0.05*(x-6)*(x-5) + 0.3};
+	\addplot[domain=8:10,samples=25, smooth, thick,red] gnuplot[id=poly5]{0.1*(x-8)*(x-8.5)};
+	
+	\node[label={90:{\Large$\hat{q}_1(x)$}}] at (axis cs:3,0.8) {};
+	\node[label={90:{\Large$\hat{q}_2(x)$}}] at (axis cs:5,0.8) {};
+	\node[label={90:{\Large$\hat{q}_3(x)$}}] at (axis cs:7,0.8) {};
+	
+	
+			\draw [decorate,thick,decoration={brace,amplitude=10pt}]	(4,-0.5) -- (2,-0.5);
+			\draw [decorate,thick,decoration={brace,amplitude=10pt}]	(6,-0.5) -- (4,-0.5);
+			\draw [decorate,thick,decoration={brace,amplitude=10pt}]	(8,-0.5) -- (6,-0.5);
+			
+			\node[] at (axis cs: 3,-0.65){\Large$C_1$};
+			\node[] at (axis cs: 5,-0.65){\Large$C_2$};
+			\node[] at (axis cs: 7,-0.65){\Large$C_3$};			
+		
+	\end{axis} 
+	\end{tikzpicture} 
+\end{document}

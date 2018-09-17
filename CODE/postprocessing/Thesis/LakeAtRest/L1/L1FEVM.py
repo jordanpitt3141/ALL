@@ -214,7 +214,7 @@ L1Gs = []
 dxs=  []
         
         
-for ki in range(3,16):
+for ki in range(8,18):
         
         
     wdir = wdirb + str(ki) + "/"
@@ -277,21 +277,22 @@ for ki in range(3,16):
     
     hA,uA,GA,bA,wA = LakeAtRest(x,a0,a1,a2,g,dx)
     
-    hnorm1 = norm(h -hA,ord=1) /n
-    unorm1 = norm(u -uA,ord=1) /n
-    Gnorm1 = norm(G -GA,ord=1) /n 
+    hnorm1 = norm(h -hA,ord=1)/ norm(hA,ord=1)
+    unorm1 = norm(u -uA,ord=1)
+    Gnorm1 = norm(G -GA,ord=1) 
     
 
-    s = sdir + "hL1dn.dat"
+    s = sdir + "hL1.dat"
     with open(s,'a') as file1:
             s ="%3.8f%5s%1.20f\n" %(dx," ",hnorm1)
             file1.write(s) 
 
-    s = sdir + "uL1dn.dat"
+    s = sdir + "uL1.dat"
     with open(s,'a') as file1:
             s ="%3.8f%5s%1.20f\n" %(dx," ",unorm1)
-            file1.write(s)    
-    s = sdir + "GL1dn.dat"
+            file1.write(s)  
+            
+    s = sdir + "GL1.dat"
     with open(s,'a') as file1:
             s ="%3.8f%5s%1.20f\n" %(dx," ",Gnorm1)
             file1.write(s) 
