@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+\section{Numerical Method Break Down}
+Our conservative update is, for our equations is
+\[\bar{q}_j^{n+1} = \bar{q}_j^{n} - \frac{\Delta t}{\Delta x} \left[F_{j + \frac{1}{2}} - F_{j - \frac{1}{2}} \right] \]
+This converts to (both analytical and numerical)
+
+\[\mathcal{M}q_j^{n+1} = \mathcal{M}q_j^{n} - \frac{\Delta t}{\Delta x} \left[\mathcal{F}^{q,v}v_{j} + \mathcal{F}^{q,q}q_{j} - \mathcal{F}^{q,v}v_{j-1} - \mathcal{F}^{q,q}q_{j-1} \right] \]
+
+\[\mathcal{M}q_j^{n+1} = \mathcal{M}q_j^{n} - \frac{\Delta t}{\Delta x} \left[\mathcal{F}^{q,v}v_{j} + \mathcal{F}^{q,q}q_{j} - \mathcal{F}^{q,v}e^{-ik\Delta x}v_{j} - \mathcal{F}^{q,q}e^{-ik\Delta x}q_{j} \right] \]
+
+Defining $\mathcal{D}_x = 1 - e^{-ik\Delta x} $
+
+\[\mathcal{M}q_j^{n+1}  = \mathcal{M}q_j^{n}   - \frac{\Delta t}{\Delta x} \left[ \mathcal{D}_x\mathcal{F}^{q,v}v_{j} + \mathcal{D}_x\mathcal{F}^{q,q}q_{j}\right] \]
+So we have
+
+\[q_j^{n+1}  = q_j^{n}   - \frac{\mathcal{D}_x\Delta t}{\mathcal{M}\Delta x} \left[ \mathcal{F}^{q,v}v_{j} + \mathcal{F}^{q,q}q_{j}\right] \]
+
+Thus we have
+
+\[\left[\begin{array}{c}
+h \\ \mathcal{G}u
+\end{array}\right]^{n+1}_j = \left[\begin{array}{c}
+h \\ \mathcal{G}u
+\end{array}\right]^{n}_j - \frac{\mathcal{D}_x\Delta t}{\mathcal{M}\Delta x}\left[\begin{array}{c c}
+\mathcal{F}^{h,h} & \mathcal{F}^{h,u} \\ \mathcal{F}^{u,h} & \mathcal{F}^{u,u} 
+\end{array}\right]\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j - \frac{\mathcal{D}_x\Delta t}{\mathcal{M}\Delta x}\left[\begin{array}{c c}
+\mathcal{F}^{h,h} & \mathcal{F}^{h,u} \\ \frac{1}{\mathcal{G}}\mathcal{F}^{u,h} &  \frac{1}{\mathcal{G}}\mathcal{F}^{u,u} 
+\end{array}\right]\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+Lets define
+
+\[\boldsymbol{\mathcal{F}} = \frac{\mathcal{D}_x}{\mathcal{M}\Delta x}\left[\begin{array}{c c}
+\mathcal{F}^{h,h} & \mathcal{F}^{h,u} \\ \frac{1}{\mathcal{G}}\mathcal{F}^{u,h} &  \frac{1}{\mathcal{G}}\mathcal{F}^{u,u} 
+\end{array}\right] \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j - \Delta t\boldsymbol{\mathcal{F}}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j = \left(\boldsymbol{I} - \Delta t\boldsymbol{\mathcal{F}} \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+
+\[\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n+1}_j - \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  = - \Delta t\boldsymbol{\mathcal{F}}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[e^{i\omega \Delta t}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j - \left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  = - \Delta t\boldsymbol{\mathcal{F}}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\left(e^{i\omega \Delta t} - 1 \right)\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j   = - \Delta t\boldsymbol{\mathcal{F}}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+\[\frac{e^{i\omega \Delta t} - 1}{\Delta t}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j   = - \boldsymbol{\mathcal{F}}\left[\begin{array}{c}
+h \\ u
+\end{array}\right]^{n}_j  \]
+
+
+
+
+
+
+
+
+\end{document}

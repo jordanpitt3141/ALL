@@ -699,6 +699,7 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     //enforcing B.Cs at cell edges now
 
     double idx = 1.0/ dx;
+   // double ep = pow(dx,4);
     //double *uais = malloc((m-2)*sizeof(double));
     //double *ubis = malloc((m-1)*sizeof(double));
     //double *ucis = malloc((m)*sizeof(double));
@@ -764,8 +765,8 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]* (hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]* (hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+    hjphm=sqrt( pow(hbc[3*(i) + 2],4) + fmax(pow(hbc[3*(i) + 2],4),htol)) / (sqrt(2)*hbc[3*(i) + 2]);
+    hjmhp=sqrt( pow(hbc[3*(i)],4) + fmax(pow(hbc[3*(i)],4),htol)) / (sqrt(2)*hbc[3*(i)]); 
 
     Gjphm= Gbc[3*(i) + 2];
     Gjmhp= Gbc[3*(i)];
@@ -906,8 +907,8 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
         bjph = bbc[3*i + 3];
 
 
-        hjphm=  hbc[3*(i) + 2]* (hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-        hjmhp=  hbc[3*(i)]* (hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+    hjphm=sqrt( pow(hbc[3*(i) + 2],4) + fmax(pow(hbc[3*(i) + 2],4),htol)) / (sqrt(2)*hbc[3*(i) + 2]);
+    hjmhp=sqrt( pow(hbc[3*(i)],4) + fmax(pow(hbc[3*(i)],4),htol)) / (sqrt(2)*hbc[3*(i)]); 
 
         Gjphm= Gbc[3*(i) + 2];
         Gjmhp= Gbc[3*(i)];
@@ -1060,8 +1061,8 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]* (hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]* (hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+    hjphm=sqrt( pow(hbc[3*(i) + 2],4) + fmax(pow(hbc[3*(i) + 2],4),htol)) / (sqrt(2)*hbc[3*(i) + 2]);
+    hjmhp=sqrt( pow(hbc[3*(i)],4) + fmax(pow(hbc[3*(i)],4),htol)) / (sqrt(2)*hbc[3*(i)]); 
 
     Gjphm= Gbc[3*(i) + 2];
     Gjmhp= Gbc[3*(i)];

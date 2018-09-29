@@ -1,0 +1,58 @@
+\chapter{Finite Element Integrals}
+\label{app:FEMIntegrals}
+We now provide some of the details left out of Chapter \ref{chp:HFVMMethod}; the definitions for the basis functions in the $\xi$ space and the other finite element matrices. 
+
+%also put the basis funcitons
+\section{Basis Functions}
+$\psi$
+\begin{align}
+\psi^+_{j-1/2} &= \left\lbrace \begin{array}{c c}
+\frac{1}{2}\left(1 - \xi\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise}
+\end{array} \right. \\
+\psi^-_{j+1/2} &= \left\lbrace \begin{array}{c c}
+\frac{1}{2}\left(1 + \xi\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise}
+\end{array} \right. 
+\end{align}
+
+$\phi$
+\begin{align}
+\phi_{j-1/2} &= \left\lbrace \begin{array}{c c}
+2 \left(\xi + \frac{3}{2}\right)\left(\xi + 2\right) & -2 \le \xi \le -1\\
+\frac{1}{2}\xi(\xi - 1) & -1 \le \xi \le 1\\
+0 & \text{otherwise}\end{array} \right. \\
+\phi_{j} &= \left\lbrace \begin{array}{c c}
+-\left(\xi - 1\right)\left(\xi + 1\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise}
+\end{array} \right. \\ 
+\phi_{j+1/2} &= \left\lbrace \begin{array}{c c}
+\frac{1}{2}\xi(\xi + 1) & -1 \le \xi \le 1\\
+2\left(\xi - 2\right)\left(\xi - \frac{3}{2} \right) & 1 \le \xi \le 2\\
+0 & \text{otherwise}
+\end{array} \right. \\ 
+\end{align}
+
+$\gamma$
+\begin{align}
+\gamma_{j-1/2} &= \left\lbrace \begin{array}{c c}
+\frac{9}{2}\left(\xi + \frac{4}{3}\right)\left(\xi + \frac{5}{3}\right)\left(\xi + 2\right) & -2 \le \xi \le -1\\
+\frac{9}{16}\left(\xi - 1\right)\left(\xi - \frac{1}{3}\right)\left(\xi  + \frac{1}{3}\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise} 
+\end{array} \right. \\
+\gamma_{j-1/6} &= \left\lbrace \begin{array}{c c}
+\frac{27}{16}\left(\xi - 1\right)\left(\xi - \frac{1}{3}\right)\left(\xi + 1\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise} 
+\end{array} \right. \\
+\gamma_{j+1/6} &= \left\lbrace \begin{array}{c c}
+-\frac{27}{16}\left(\xi - 1\right)\left(\xi + \frac{1}{3}\right)\left(\xi + 1\right) & -1 \le \xi \le 1\\
+0 & \text{otherwise} 
+\end{array} \right. \\
+\gamma_{j-1/2} &= \left\lbrace \begin{array}{c c}
+\frac{9}{16}\left(\xi + 1\right)\left(\xi - \frac{1}{3}\right)\left(\xi  + \frac{1}{3}\right) & -1 \le \xi \le 1\\
+-\frac{9}{2}\left(\xi - \frac{4}{3}\right)\left(\xi - \frac{5}{3}\right)\left(\xi - 2\right) & 1 \le \xi \le 2\\
+0 & \text{otherwise} 
+\end{array} \right.
+\end{align}
+
+

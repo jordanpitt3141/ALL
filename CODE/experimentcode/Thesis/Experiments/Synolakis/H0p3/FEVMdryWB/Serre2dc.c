@@ -49,7 +49,7 @@ const double E = 2.7182818284590452353602874713526624977572470936999595749669676
 #define TINY 1.0e-20
 #define div_0 1.0e-20
 
-#define htol 1.0e-12
+#define htol 1.0e-8
 #define hbase 1.0e-8
 
 #define RegTol 30
@@ -751,6 +751,7 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     //enforcing B.Cs at cell edges now
 
     double idx = 1.0/ dx;
+    double ep = dx*dx*dx*dx;
     //double *uais = malloc((m-2)*sizeof(double));
     //double *ubis = malloc((m-1)*sizeof(double));
     //double *ucis = malloc((m)*sizeof(double));
@@ -815,9 +816,11 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     bjps = bbc[3*i + 2];
     bjph = bbc[3*i + 3];
 
-
-    hjphm=  hbc[3*(i) + 2]*(hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]*(hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+	double hjphm4 = hbc[3*(i) + 2]*hbc[3*(i) + 2]*hbc[3*(i) + 2]*hbc[3*(i) + 2];
+	double hjmhp4 = hbc[3*(i)]*hbc[3*(i)]*hbc[3*(i)]*hbc[3*(i)];
+	
+    hjphm= sqrt(hjphm4 + fmax(hjphm4,htol)) / (sqrt(2)*fmax(hbc[3*(i) + 2],htol));
+    hjmhp= sqrt(hjmhp4 + fmax(hjmhp4,htol)) / (sqrt(2)*fmax(hbc[3*(i)],htol));
 
     Gjphm= Gbc[3*(i) + 2];
     Gjmhp= Gbc[3*(i)];
@@ -958,8 +961,12 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
         bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]* (hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]* (hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+	hjphm4 = hbc[3*(i) + 2]*hbc[3*(i) + 2]*hbc[3*(i) + 2]*hbc[3*(i) + 2];
+	hjmhp4 = hbc[3*(i)]*hbc[3*(i)]*hbc[3*(i)]*hbc[3*(i)];
+	
+    hjphm= sqrt(hjphm4 + fmax(hjphm4,htol)) / (sqrt(2)*fmax(hbc[3*(i) + 2],htol));
+    hjmhp= sqrt(hjmhp4 + fmax(hjmhp4,htol)) / (sqrt(2)*fmax(hbc[3*(i)],htol));
+    
 
         Gjphm= Gbc[3*(i) + 2];
         Gjmhp= Gbc[3*(i)];
@@ -1112,8 +1119,11 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]* (hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]* (hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+	hjphm4 = hbc[3*(i) + 2]*hbc[3*(i) + 2]*hbc[3*(i) + 2]*hbc[3*(i) + 2];
+	hjmhp4 = hbc[3*(i)]*hbc[3*(i)]*hbc[3*(i)]*hbc[3*(i)];
+	
+    hjphm= sqrt(hjphm4 + fmax(hjphm4,htol)) / (sqrt(2)*fmax(hbc[3*(i) + 2],htol));
+    hjmhp= sqrt(hjmhp4 + fmax(hjmhp4,htol)) / (sqrt(2)*fmax(hbc[3*(i)],htol));
 
     Gjphm= Gbc[3*(i) + 2];
     Gjmhp= Gbc[3*(i)];

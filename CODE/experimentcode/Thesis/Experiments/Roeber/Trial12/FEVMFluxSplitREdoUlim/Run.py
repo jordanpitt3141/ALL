@@ -234,125 +234,60 @@ def find_nearestidx(array1, value1):
 
 
 #Roeber Problem    
-expdir = "../../../../../../../../data/Experimental/HIreef/Trial12/"
-wdir = "../../../../../../../../data/raw/Thesis/Experiment/Roeber/Trial12/FEVM/run6/"  
-
+expdir = "/home/jp/Documents/PhD/project/data/Experimental/Roeber/Out/Trial12/"
+#wdir = "/home/jp/Documents/PhD/project/data/ThesisRaws/Experiment/Roeber/Trial8/FDVM/r1/"  
+wdir = "/home/jp/Documents/PhD/project/data/test/"  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-s = expdir + "bed.txt"
+s = expdir + "bed.dat"
 with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
     xexp = []
     bedexp = []
     for row in readfile:       
             xexp.append(float(row[0]))
-            bedexp.append(float(row[4]))
+            bedexp.append(float(row[1]))
             
-s = expdir + "WG1.txt"
+s = expdir + "WGs.dat"
 with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
     texp = []
     WG1exp = []
-    for row in readfile:       
-            texp.append(float(row[0]))
-            WG1exp.append(float(row[4]))
-            
-s = expdir + "WG2.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG2exp = []
-    for row in readfile:       
-            WG2exp.append(float(row[4]))
-            
-s = expdir + "WG3.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG3exp = []
-    for row in readfile:       
-            WG3exp.append(float(row[4]))
-            
-s = expdir + "WG4.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG4exp = []
-    for row in readfile:       
-            WG4exp.append(float(row[4]))
-            
-s = expdir + "WG5.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG5exp = []
-    for row in readfile:       
-            WG5exp.append(float(row[4]))
-            
-s = expdir + "WG6.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG6exp = []
-    for row in readfile:       
-            WG6exp.append(float(row[4]))
-
-s = expdir + "WG7.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG7exp = []
-    for row in readfile:       
-            WG7exp.append(float(row[4]))
- 
-s = expdir + "WG8.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG8exp = []
-    for row in readfile:       
-            WG8exp.append(float(row[4]))
-            
-s = expdir + "WG9.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG9exp = []
-    for row in readfile:       
-            WG9exp.append(float(row[4]))
-            
-s = expdir + "WG10.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG10exp = []
-    for row in readfile:       
-            WG10exp.append(float(row[4]))
-            
-s = expdir + "WG11.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG11exp = []
-    for row in readfile:       
-            WG11exp.append(float(row[4]))
-            
-s = expdir + "WG12.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG12exp = []
-    for row in readfile:       
-            WG12exp.append(float(row[4]))
-
-s = expdir + "WG13.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG13exp = []
-    for row in readfile:       
-            WG13exp.append(float(row[4]))
-
-s = expdir + "WG14.txt"
-with open(s,'r') as file1:
-    readfile = csv.reader(file1, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WG14exp = []
     for row in readfile:       
-            WG14exp.append(float(row[4]))
-            
-s = expdir + "wavegauagelocations.txt"
+            texp.append(float(row[0]))
+            WG1exp.append(float(row[1]))    
+            WG2exp.append(float(row[2]))
+            WG3exp.append(float(row[3]))    
+            WG4exp.append(float(row[4]))            
+            WG5exp.append(float(row[5]))    
+            WG6exp.append(float(row[6]))
+            WG7exp.append(float(row[7]))    
+            WG8exp.append(float(row[8]))
+            WG9exp.append(float(row[9]))    
+            WG10exp.append(float(row[10]))            
+            WG11exp.append(float(row[11]))    
+            WG12exp.append(float(row[12]))
+            WG13exp.append(float(row[13]))    
+            WG14exp.append(float(row[14]))
+
+s = expdir + "WGLoc.dat"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     WGloc = []
@@ -374,7 +309,7 @@ theta = 1
 sx = -50 - 0.5*dx
 ex = 150
 st = 25
-et = st + 10.15
+et = st + 11
 x0 = WGloc[0] - (texp[1389] - st)*sqrt(g*(a0 + a1))
 solwidth = 80
 
@@ -403,7 +338,6 @@ wg11i = find_nearestidx(x, WGloc[10])
 wg12i = find_nearestidx(x, WGloc[11])
 wg13i = find_nearestidx(x, WGloc[12])
 wg14i = find_nearestidx(x, WGloc[13])
-
 n = len(x) 
 
 nGhhbc = 3*n + 2*(GhnBC)

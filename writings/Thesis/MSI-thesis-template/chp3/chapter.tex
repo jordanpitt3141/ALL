@@ -560,6 +560,8 @@ These are then combined with the other element contributions in the global matri
 
 % 2.Introduces small error when h is large -> h_{base}
 
+%de singularise, Kurganov
+
 Dry beds are handled adequately by all steps of our FEVM in their current form, except the FEM solution for $u$. For the FEM a dry bed presents two issues; when $h=0$ the stiffness matrix will become singular, and when $h$ is small $u$ may become quite large leading to instabilities. 
 
 In previous work \cite{Zoppou-etal-2017} direct banded matrix solvers such as the Thomas algorithm were employed to solve \eqref{eqn:usolvefromGhb}, however such methods rely on non-singular matrices and so are unsuitable for dry beds. To deal with this an LU decomposition algorithm by \citet{NumRecC-1996} was used. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting, which inserts small non-zero pivots when their value is below some tolerance value $p_{tol}$. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard $LU$ decomposition. This results in a FEM that allows for $h=0$, but still faces the problem of large $u$ values when $h$ is small. 

@@ -147,7 +147,7 @@ def close(t,ts,dt):
     return var
 
 #Forcing Problem    
-wdir = "/home/jp/Documents/PhD/project/data/ThesisRaws/Experiment/Synolakis/H0p0185/FEVM/run/"  
+wdir = "/home/jp/Documents/PhD/project/data/ThesisRaws/Experiment/Synolakis/H0p0185/FEVM/run12/"  
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -168,7 +168,7 @@ ex = endx
 
 startt = 0.0
 st = startt
-endt = 71
+endt = 70
 et = endt
 dx = 0.05
 l =  0.1
@@ -195,6 +195,13 @@ hMend ,uMend ,GMend ,bta,wMend = ForcedbedM(xhuMend,t,beta,d,H,x1)
 
 hta,uta,Gta,bMbeg,wta = ForcedbedM(xhuMbeg,t,beta,d,H,x1)
 hta,uta,Gta,bMend,wta = ForcedbedM(xhuMend,t,beta,d,H,x1)
+
+b = b + 1
+w = w + 1
+bMbeg = bMbeg + 1
+bMend = bMend + 1
+wMbeg = wMbeg + 1
+wMend = wMend + 1
 
 n = len(x)
 hnBC = 3

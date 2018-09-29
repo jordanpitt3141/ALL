@@ -1,0 +1,93 @@
+\documentclass[pdf]{article}
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round},every non boxed x axis/.append style={x axis line style=-}, every non boxed y axis/.append style={y axis line style=-}}
+\begin{document} 
+	\begin{tikzpicture} 
+	\begin{axis}[ 
+	width = 14cm,
+	height = 7cm,
+	axis lines=left, 
+	xticklabels=\empty,
+	y axis line style={draw=none},
+	ytick=\empty,
+	xtick = \empty,
+	clip mode=individual,
+	xmin=-1, 
+	xmax=5, 
+	ymin = 0, 
+	ymax = 1]
+
+%axis
+		\draw[thin] (axis cs:-1,0.05) -- (axis cs:-1,-0.05);
+		\draw[thin] (axis cs:-0.5,0) -- (axis cs:-0.5,-0.05);	
+		
+		\draw[thin] (axis cs:0,0.05) -- (axis cs:0,-0.05);
+		\draw[thin] (axis cs:0.5,0) -- (axis cs:0.5,-0.05);
+		
+		\draw[thin] (axis cs:1,0.05) -- (axis cs:1,-0.05);
+		\draw[thin] (axis cs:1.5,0) -- (axis cs:1.5,-0.05);
+		\draw[thin] (axis cs:2,0.05) -- (axis cs:2,-0.05);
+
+		\draw[thin] (axis cs:2.5,0) -- (axis cs:2.5,-0.05);
+		\draw[thin] (axis cs:3,0.05) -- (axis cs:3,-0.05);
+
+		\draw[thin] (axis cs:3.5,0) -- (axis cs:3.5,-0.05);
+		\draw[thin] (axis cs:4,0.05) -- (axis cs:4,-0.05);	
+		
+		\draw[thin] (axis cs:4.5,0) -- (axis cs:4.5,-0.05);
+		\draw[thin] (axis cs:5,0.05) -- (axis cs:5,-0.05);	
+
+
+		\node[below] at (-1,-0.05) {$x_{j-5/2}$};
+		%\node[below] at (-0.5,-0.05) {$x_{j-2}$};		
+		
+		\node[below] at (0,-0.05) {$x_{j-3/2}$};
+		%\node[below] at (0.5,-0.05) {$x_{j-1}$};
+		
+		\node[below] at (1,-0.05) {$x_{j-1/2}$};
+		%\node[below] at (1.5,-0.05) {$x_{j}$};
+		\node[below] at (2,-0.05) {$x_{j+1/2}$};
+		
+		%\node[below] at (2.5,-0.05) {$x_{j+1}$};
+		\node[below] at (3,-0.05) {$x_{j+3/2}$};
+
+		%\node[below] at (3.5,-0.05) {$x_{j+2}$};
+		\node[below] at (4,-0.05) {$x_{j+5/2}$};
+		
+		\node[below] at (5,-0.05) {$x_{j+7/2}$};
+
+%points
+
+		\node[] at (-1,0.2) {\LARGE\color{red}$\left(\frac{\partial b}{\partial x}\right)^-_{j+1/2}$};
+		\node[] at (5,0.2) {\LARGE\color{red}$\left(\frac{\partial b}{\partial x}\right)^+_{j+1/2}$};
+		
+		\node[] at (-1,0.4) {\LARGE\color{blue}$\left(\frac{\partial u}{\partial x}\right)_{j+1/2}$};	
+		
+		\node[] at (-1,0.6) {\LARGE$u_{j+1/2}$};	
+		
+		\node[] at (4.1,0.2) {\color{red}$\boldsymbol{+}$};
+		\node[] at (3.1,0.2) {\color{red}$\boldsymbol{+}$};
+		\node[] at (2.1,0.2) {\color{red}$\boldsymbol{+}$};
+		
+		\node[] at (-.1,0.2) {\color{red}$\boldsymbol{-}$};
+		\node[] at (0.9,0.2) {\color{red}$\boldsymbol{-}$};
+		\node[] at (1.9,0.2) {\color{red}$\boldsymbol{-}$};	
+	
+		\node[] at (3.5,0.4) {\color{blue}$\boldsymbol{\circ}$};
+		\node[] at (2.5,0.4) {\color{blue}$\boldsymbol{\circ}$};
+		\node[] at (1.5,0.4) {\color{blue}$\boldsymbol{\circ}$};	
+		\node[] at (0.5,0.4) {\color{blue}$\boldsymbol{\circ}$};
+		
+		\node[] at (3.5,0.6) {$\boldsymbol{\circ}$};
+		\node[] at (2.5,0.6) {$\boldsymbol{\circ}$};
+		\node[] at (1.5,0.6) {$\boldsymbol{\circ}$};	
+		\node[] at (0.5,0.6) {$\boldsymbol{\circ}$};
+		
+	\end{axis} 
+	\end{tikzpicture} 
+\end{document}

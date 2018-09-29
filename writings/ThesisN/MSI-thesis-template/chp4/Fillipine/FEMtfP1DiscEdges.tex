@@ -1,0 +1,308 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Elliptic Equation}
+The linearised elliptic equation is
+
+\[G = Hu - \frac{H^3}{3}u_{xx}\]
+
+Want to find out the FEM approximation factor $\mathcal{G}_{FE_1}$ such that
+
+\[G = \mathcal{G}_{FE_1} u\]
+
+To do so we begin by first multiplying by an arbitrary test function $v$ so that
+
+\[Gv = Huv - \frac{H^3}{3}u_{xx}v\]
+
+and then we integrate over the entire domain to get 
+\[\int_\Omega Gv dx = \int_\Omega Huv dx - \int_\Omega \frac{H^3}{3}u_{xx}vdx\]
+
+for all $v$
+
+We then make use of integration by parts, with Dirchlet boundaries to get
+
+\[\int_\Omega Gv dx = \int_\Omega Huv dx + \int_\Omega \frac{H^3}{3}u_{x}v_xdx\]
+
+For $u$ we are going to use $x_{j + 1/2}$ as the nodes, which generate the basis functions $\phi_{j + 1/2}$, which for us will be the space of continuous linear elements. While for $G$ we will choose basis functions $w$ that are linear from $[x_{j-1/2}, x_{j+1/2}]$ but discontinuous at the edges.
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} Gv dx = \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}}  Huv dx + \sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} \frac{H^3}{3}u_{x}v_{x}dx\]
+
+
+for all v
+
+\section{P1 FEM}
+We are going to cordinate tranform from x space the interval $[x_{j-1/2},x_{j+1/2} ,x_{j+3/2}]$ to the $\xi$ space interval $[-1,0,1]$. To accomplish this we have the following relation
+
+$$x = \xi\Delta x + x_{j+1/2}$$
+
+Taking the derivatives we see
+
+
+$dx = d\xi\Delta x$ , $\frac{dx}{d\xi} = \Delta x$ , $\frac{d\xi}{dx} = \frac{1}{\Delta x}$ . \\ \\ We can describe the basis functions in the $\xi$ space
+
+\begin{equation}
+\phi_{j+1/2} = \left\lbrace \begin{array}{c c}
+1 + \xi & \xi < 0 \\
+1 - \xi & \xi > 0\\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+\phi_{j-1/2} = \left\lbrace \begin{array}{c c}
+-\xi & \xi < 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+\phi_{j+3/2} = \left\lbrace \begin{array}{c c}
+\xi & \xi > 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+While the descriptions for $w$'s is
+\begin{equation}
+w^+_{j+1/2} = \left\lbrace \begin{array}{c c}
+1-\xi & \xi > 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+w^-_{j+1/2} = \left\lbrace \begin{array}{c c}
+1+\xi & \xi < 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+w^+_{j-1/2} = \left\lbrace \begin{array}{c c}
+-\xi & \xi < 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+\begin{equation}
+w^-_{j+3/2} = \left\lbrace \begin{array}{c c}
+\xi & \xi > 0 \\
+0 & \text{otherwise}
+\end{array} 
+\right.
+\end{equation}
+
+We now replace our functions by our approximations to them
+
+\[G \approx G' = \sum_{j}G_{j+1/2}w_{j+1/2}\]
+\[u \approx u' = \sum_{j}u_{j+1/2}\phi_{j+1/2}\]
+
+\[\sum_{j}\int_{x_{j-1/2}}^{x_{j+3/2}} G'\phi_{j+1/2} dx - H\int_{x_{j-1/2}}^{x_{j+3/2}} u'\phi_{j+1/2} dx -  \frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+3/2}}u'_{x}(\phi_{x})_{j+1/2}dx = 0 \]
+
+For all $\phi_{j+1/2}$. For this analysis we choose a particular basis function $\phi_{j+1/2}$ and we look at all the integrals. Begining from the right
+
+\[\int_{x_{j-1/2}}^{x_{j+3/2}} G'(x)\phi_{j+1/2} dx = \int_{-1}^{1} G'(\xi)\phi_{j+1/2}(\xi) \frac{d x}{d\xi}d\xi\]
+
+\[= \Delta x \int_{-1}^{1} \left(G^+_{j- 1/2}w^+_{j - 1/2} + G^-_{j+ 1/2}w^-_{j + 1/2} + G^+_{j+ 1/2}w^+_{j + 1/2} + G^-_{j- 3/2}w^-_{j - 3/2}     \right)\phi_{j+1/2} d\xi\]
+
+\begin{multline}
+= \Delta x [G^+_{j- 1/2} \int_{-1}^{1} w^+_{j - 1/2}\phi_{j+1/2} d\xi + G^-_{j+ 1/2} \int_{-1}^{1} w^-_{j + 1/2}\phi_{j+1/2} d\xi  \\+ G^+_{j+ 1/2} \int_{-1}^{1} w^+_{j + 1/2}\phi_{j+1/2} d\xi + G^-_{j+ 3/2} \int_{-1}^{1} w^-_{j + 3/2}\phi_{j+1/2} d\xi ]
+\end{multline}
+
+
+We have that
+
+\[\int_{-1}^{1} w^+_{j - 1/2}\phi_{j+1/2} d\xi = \int_{-1}^{1} w^-_{j + 3/2}\phi_{j+1/2} d\xi  = \frac{1}{6}\]
+
+and 
+
+\[\int_{-1}^{1} w^-_{j + 1/2}\phi_{j+1/2} d\xi = \int_{-1}^{1} w^+_{j + 1/2}\phi_{j+1/2} d\xi = \frac{1}{3} \]
+
+So
+
+\[= \Delta x \left[\frac{1}{6}G^+_{j- 1/2} +  \frac{1}{3}G^-_{j+ 1/2} +  \frac{1}{3}G^+_{j+ 1/2}  +  \frac{1}{6}G^-_{j+ 3/2}\right]\]
+
+\[= \frac{\Delta x}{6}  \left[G^+_{j- 1/2} +  2G^-_{j+ 1/2} +  2G^+_{j+ 1/2}  +  G^-_{j+ 3/2}\right]\]
+
+%(same as taking the avergae approximation)
+ Taking the next integral
+
+\[H\int_{x_{j-1/2}}^{x_{j+3/2}} u'\phi_{j+1/2} dx = H \Delta x \int_{-1}^{1} u'(\xi)\phi_{j+1/2}(\xi) d\xi\]
+
+\[= H\Delta x \int_{-1}^{1} \left(u_{j- 1/2}\phi_{j - 1/2} + u_{j+1/2}\phi_{j+1/2} +u_{j+ 3/2}\phi_{j+ 3/2} \right)\phi_{j + 1/2} d\xi\]
+
+\[= H\Delta x \left[u_{j- 1/2}\int_{-1}^{1}\phi_{j - 1/2}\phi_{j + 1/2} d\xi + u_{j+1/2}\int_{-1}^{1} \phi_{j+1/2} \phi_{j + 1/2} d\xi + u_{j+3/2}\int_{-1}^{1} \phi_{j+3/2} \phi_{j + 1/2} d\xi \right] \]
+
+we have that 
+
+\[\int_{-1}^{1} \phi_{j - 1/2}\phi_{j+1/2} d\xi =  \int_{-1}^{1} \phi_{j + 1/2}\phi_{j+3/2} d\xi = \frac{1}{6}\]
+
+\[\int_{-1}^{1} \phi_{j + 1/2}\phi_{j+1/2} d\xi= \frac{2}{3}\] 
+
+Then we have 
+
+\[=  \frac{H\Delta x}{6} \left[u_{j- 1/2} + 4u_{j+1/2} + u_{j+3/2}\right] \]
+
+For the third integral we have 
+
+\[\frac{H^3}{3}\int_{x_{j-1/2}}^{x_{j+3/2}}u'_{x}(\phi_{j+1/2})_{x}dx = -\frac{H^3}{3}\int_{-1}^{1}u'_{\xi}\frac{d \xi }{dx}(\phi_{\xi})_{j+1/2}\frac{d \xi }{dx} \frac{d x}{d\xi} d\xi   \]
+
+\[= \frac{H^3}{3\Delta x}\int_{-1}^{1}u'_{\xi}(\phi_{\xi})_{j+1/2} d\xi   \]
+
+We will now use $'$ to denote derivative
+\[= \frac{H^3}{3\Delta x}\int_{-1}^{1}\left(u_{j- 1/2}'\phi_{j - 1/2}' + u_{j+1/2}'\phi_{j+1/2}' +u_{j+ 3/2}'\phi_{j+ 3/2}' \right)\phi_{j+1/2}' d\xi   \]
+
+\[= \frac{H^3}{3\Delta x}\left[u_{j- 1/2} \int_{-1}^{1} \phi_{j - 1/2}'\phi_{j+1/2}' d\xi + u_{j+1/2} \int_{-1}^{1} \phi_{j+1/2}'\phi_{j+1/2}' d\xi +  u_{j+3/2} \int_{-1}^{1} \phi_{j  +3/2}'\phi_{j+1/2}' d\xi\right]   \]
+
+We have that 
+
+\[\int_{-1}^{1} \phi_{j-1/2}'\phi_{j+1/2}' d\xi = -1 = \int_{-1}^{1} \phi_{j+3/2}'\phi_{j+1/2}' d\xi \]
+
+\[\int_{-1}^{1} \phi_{j+1/2}'\phi_{j+1/2}' d\xi = 2\]
+
+Therefore
+
+\[= \frac{H^3}{3\Delta x}\left[-u_{j- 1/2}  + 2u_{j+1/2} -  u_{j+3/2} \right]   \]
+
+Then our equation becomes
+
+\begin{multline}
+\frac{\Delta x}{6}  \left[G^+_{j- 1/2} +  2G^-_{j+ 1/2} +  2G^+_{j+ 1/2}  +  G^-_{j+ 3/2}\right] = \\ \frac{H\Delta x}{6} \left[u_{j- 1/2} + 4u_{j+1/2} + u_{j+3/2}\right] +  \frac{H^3}{3\Delta x}\left[-u_{j- 1/2}  + 2u_{j+1/2} -  u_{j+3/2} \right]
+\end{multline}
+
+\begin{multline}
+\left[G^+_{j- 1/2} +  2G^-_{j+ 1/2} +  2G^+_{j+ 1/2}  +  G^-_{j+ 3/2}\right] = \\ H\left[u_{j- 1/2} + 4u_{j+1/2} + u_{j+3/2}\right] +  \frac{2H^3}{\Delta x^2}\left[-u_{j- 1/2}  + 2u_{j+1/2} -  u_{j+3/2} \right]
+\end{multline}
+
+%This formula is correct for $u= 1,x,x^2$
+ 
+
+We now assume the following form for $u$ and $G$.
+
+Let quantity $q$ is given by so that
+$q(x,t) = q(0,0) e^{i\left(\omega t + kx\right)}$. The use of this comes when we use our uniform grid in space, so that $q(x_j,t) = q_j$ then $q_{j \pm l} = q_j e^{\pm ik l\Delta x} $. With reconstructions from the previous dispersion analysis
+
+Then we have 
+
+\begin{multline}
+\left[ G_je^{- ik\Delta x} \mathcal{R}^+ +  2G_j \mathcal{R}^- +  2G_j \mathcal{R}^+  +  G_je^{ik\Delta x} \mathcal{R}^-\right] = \\ H\left[u_{j}e^{- ik\Delta x/2} + 4u_{j}e^{ ik\Delta x/2} + u_{j}e^{ 3ik\Delta x/2}\right] +  \frac{2H^3}{\Delta x^2}\left[-u_{j}e^{- ik\Delta x/2}  + 2u_{j}e^{ ik\Delta x/2} -  u_{j}e^{ 3ik\Delta x/2} \right]
+\end{multline}
+
+\begin{multline}
+\left[e^{- ik\Delta x} \mathcal{R}^+ +  2 \mathcal{R}^- +  2 \mathcal{R}^+  +  e^{ik\Delta x} \mathcal{R}^-\right] G_j = \\ H\left[e^{- ik\Delta x} + 4 + e^{ ik\Delta x}\right] u_{j}e^{ ik\Delta x/2} +  \frac{2H^3}{\Delta x^2}\left[-e^{ik\Delta x}  + 2 -  e^{ik\Delta x} \right] u_{j}e^{ ik\Delta x/2}
+\end{multline}
+
+\begin{multline}
+\left[e^{- ik\Delta x} \mathcal{R}^+ +  2 \mathcal{R}^- +  2 \mathcal{R}^+  +  e^{ik\Delta x} \mathcal{R}^-\right] G_j = \\ H\left[2 \cos \left(k\Delta x\right) + 4 \right] u_{j}e^{ ik\Delta x/2} +  \frac{2H^3}{\Delta x^2}\left[ 2 -  2\cos \left(k\Delta x\right) \right] u_{j}e^{ ik\Delta x/2}
+\end{multline}
+
+From the previous dispersion analysis we know that 
+
+\[\mathcal{R}^- = 1  + \frac{i\sin\left(k\Delta x\right)}{2}\]
+\[\mathcal{R}^+ = e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\]
+
+ So we have 
+ 
+ \begin{multline}
+ [\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right) +  2 \left[1  + \frac{i\sin\left(k\Delta x\right)}{2}\right] \\+  2 \left[e^{ik\Delta x}\left(1  - \frac{i\sin\left(k\Delta x\right)}{2} \right)\right]  +  e^{ik\Delta x} \left[1  + \frac{i\sin\left(k\Delta x\right)}{2}\right] ] G_j = \\ H\left[2 \cos \left(k\Delta x\right) + 4 \right] u_{j}e^{ ik\Delta x/2} +  \frac{2H^3}{\Delta x^2}\left[ 2 -  2\cos \left(k\Delta x\right) \right] u_{j}e^{ ik\Delta x/2}
+ \end{multline}
+ 
+ \begin{multline}
+  \left[3   + \frac{i\sin\left(k\Delta x\right)}{2} + e^{ik\Delta x}\left(3   - \frac{i\sin\left(k\Delta x\right)}{2}\right)  \right] G_j = \\ H\left[2 \cos \left(k\Delta x\right) + 4 \right] u_{j}e^{ ik\Delta x/2} +  \frac{2H^3}{\Delta x^2}\left[ 2 -  2\cos \left(k\Delta x\right) \right] u_{j}e^{ ik\Delta x/2}
+  \end{multline}
+
+\begin{multline}
+G_j = \\ 2H e^{ ik\Delta x/2} \frac{\cos \left(k\Delta x\right) + 2}{3   + \frac{i\sin\left(k\Delta x\right)}{2} + e^{ik\Delta x}\left(3   - \frac{i\sin\left(k\Delta x\right)}{2}\right)} u_{j}  \\+  \frac{4H^3}{\Delta x^2} e^{ ik\Delta x/2}\frac{ 1 -  \cos \left(k\Delta x\right)}{3   + \frac{i\sin\left(k\Delta x\right)}{2} + e^{ik\Delta x}\left(3   - \frac{i\sin\left(k\Delta x\right)}{2}\right)} u_{j}
+\end{multline}
+
+\begin{multline}
+G_j = \\ H2 e^{ ik\Delta x/2} \frac{\cos \left(k\Delta x\right) + 2}{3   + \frac{i\sin\left(k\Delta x\right)}{2} + e^{ik\Delta x}\left(3   - \frac{i\sin\left(k\Delta x\right)}{2}\right)} u_{j}  \\+ \frac{H^3}{3} \frac{12}{\Delta x^2} e^{ ik\Delta x/2}\frac{ 1 -  \cos \left(k\Delta x\right)}{3   + \frac{i\sin\left(k\Delta x\right)}{2} + e^{ik\Delta x}\left(3   - \frac{i\sin\left(k\Delta x\right)}{2}\right)} u_{j}
+\end{multline}
+
+We want something like
+
+\[1 \approx 2e^{ ik\Delta x/2} \frac{\cos \left(k\Delta x\right) + 2}{3   + \frac{i\sin\left(k\Delta x\right)}{2} + e^{ik\Delta x}\left(3   - \frac{i\sin\left(k\Delta x\right)}{2}\right)}\]
+
+and 
+
+\[k^2 \approx  \frac{12}{\Delta x^2} e^{ ik\Delta x/2}\frac{ 1 -  \cos \left(k\Delta x\right)}{3   + \frac{i\sin\left(k\Delta x\right)}{2} + e^{ik\Delta x}\left(3   - \frac{i\sin\left(k\Delta x\right)}{2}\right)}\]
+
+and we want to compare it to the FD approximation
+
+\[k^2 \approx  \frac{2}{\Delta x^2}\left(1  -\cos\left(k \Delta x\right)\right)\]
+
+and 
+\[1 \approx 1\]
+
+For the FEM we have the taylor series
+
+\begin{multline}
+ \frac{12}{\Delta x^2} e^{ ik\Delta x/2}\frac{ 1 -  \cos \left(k\Delta x\right)}{3   + \frac{i\sin\left(k\Delta x\right)}{2} + e^{ik\Delta x}\left(3   - \frac{i\sin\left(k\Delta x\right)}{2}\right)} = \\ k^2 - \frac{k^4 \Delta x^2}{24} + \frac{91k^6 \Delta x^4}{5760} - \frac{1259k^{8} \Delta x^{6}}{967680} + \frac{44327k^{10} \Delta x^{8}}{1454828800} + O(\Delta x^{10})
+\end{multline}
+
+
+For the FD
+\begin{multline}
+\frac{2}{\Delta x^2}\left(1  -\cos\left(k \Delta x\right)\right) = \\ k^2 - \frac{k^4 \Delta x^2}{12} + \frac{k^6 \Delta x^4}{360} - \frac{k^8 \Delta x^6}{20160} - \frac{k^{10} \Delta x^{8}}{1814400} + O(\Delta x^{10})
+\end{multline}
+
+
+We also have for the FEM
+
+\begin{multline}
+2e^{ ik\Delta x/2} \frac{\cos \left(k\Delta x\right) + 2}{3   + \frac{i\sin\left(k\Delta x\right)}{2} + e^{ik\Delta x}\left(3   - \frac{i\sin\left(k\Delta x\right)}{2}\right)} = \\ 1 - \frac{k^2 \Delta x^2}{8} + \frac{3k^4 \Delta x^4}{128} - \frac{121 k^{6} \Delta x^{6}}{46080} + \frac{14227k^{8} \Delta x^{8}}{30965760} + O(\Delta x^{10})
+\end{multline}
+
+In our experiments we set $H = 1$ and so our expression for the $\mathcal{G}$ factor is analytically 
+
+\[1 + \frac{k^3}{3}\]
+
+For our FEM this is approximated by (taylor expansion)
+
+\begin{multline}
+1 - \frac{k^2 \Delta x^2}{8} + \frac{3k^4 \Delta x^4}{128} - \frac{121 k^{6} \Delta x^{6}}{46080} + \frac{14227k^{8} \Delta x^{8}}{30965760} + O(\Delta x^{10}) + \\
+\frac{1}{3}\left(k^2 - \frac{k^4 \Delta x^2}{24} + \frac{91k^6 \Delta x^4}{5760} - \frac{1259k^{8} \Delta x^{6}}{967680} + \frac{44327k^{10} \Delta x^{8}}{1454828800} + O(\Delta x^{10})\right)
+\end{multline}
+
+\begin{multline}
+1 - \frac{k^2 \Delta x^2}{8} + \frac{3k^4 \Delta x^4}{128} - \frac{121 k^{6} \Delta x^{6}}{46080} + \frac{14227k^{8} \Delta x^{8}}{30965760} + O(\Delta x^{10}) + \\
+\frac{k^2}{3} - \frac{k^4 \Delta x^2}{72} + \frac{91k^6 \Delta x^4}{17280} - \frac{1259k^{8} \Delta x^{6}}{2903040} + \frac{44327k^{10} \Delta x^{8}}{4364486400} + O(\Delta x^{10})
+\end{multline}
+
+\begin{multline}
+1 + \frac{k^2}{3} - \frac{ (k^4+9k^2) \Delta x^2}{72} + \frac{(91k^6 + 405k^4) \Delta x^4}{17280} - \frac{(1259k^{8} + 7623 k^{6}) \Delta x^{6}}{2903040}  + O(\Delta x^{8})
+\end{multline}
+
+For our FD this is approximated by (taylor expansion)
+
+
+\begin{multline}
+1 + \frac{k^2}{3} - \frac{k^4 \Delta x^2}{36} + \frac{k^6 \Delta x^4}{1080} - \frac{k^8 \Delta x^6}{60480} + O(\Delta x^{80})
+\end{multline}
+
+Taking $k = 0.5$
+
+then we have 
+
+\[\frac{ (k^4+9k^2) \Delta x^2}{72} = 0.03211805555 > 0.00173611111 = \frac{k^4 \Delta x^2}{36} \]
+
+And for $k = 2.5$ we have 
+
+\[\frac{ (k^4+9k^2) \Delta x^2}{72} = 1.323784722 > 0.17361111111 = \frac{k^4 \Delta x^2}{36} \]
+
+So our FEM is worse
+
+
+
+
+
+\end{document}

@@ -1,0 +1,163 @@
+
+\chapter{Finite Difference Methods}
+\label{chp:NumMethod}
+In Chapter [] we described the methods of interest for numerically solving the Serre equations based around decomposing them into elliptic and conservation equations. In this chapter we describe the finite difference methods that will be used as a benchmark for our numerical methods. The main aims of which are to justify the extra effort in using these methods by demonstrating that our numerical methods are superior to these finite difference methods. Additionally by using a variety of numerical methods we can demonstrate that our numerical solutions are consistent across a variety of methods, and are therefore most likely representative of true solutions of the Serre equations. 
+
+We have chosen two finite difference methods for these reasons. Firstly, because finite difference methods are simple to implement allowing us to compare our numerical methods which require greater effort to produce to a naive numerical method one would initially attempt. Secondly because the finite difference and hybrid methods are so different, the agreement of their numerical solutions is strong evidence towards the numerical solutions being correct. The numerical solutions of one of these methods was also used by \cite{El-etal-2006} to study the behaviour of undular bores and we wish to replicate and extend their results.
+
+We will develop these finite difference methods for the Serre equations for horizontal beds. Firstly, because robustly handling the bed terms with the finite difference methods would require too much effort when their sole purpose is comparison and two because the effects we are most interested in investigating with the finite difference methods are not a result from variations in the bed and so we neglect them.
+
+The two finite difference methods we describe are the naive second-order finite difference method $\mathcal{D}$ and the Lax-Wendroff method $\mathcal{W}$. Both of these methods use the centred second-order finite difference approximation to the momentum equation \eqref{eqn:FullSerreNonConMomeHorizbed}, denoted as $\mathcal{D}_u$. While for the mass equation \eqref{eqn:FullSerreNonConHorizbed} the numerical method $\mathcal{W}$ uses the two step Lax-Wendroff method, denoted as $\mathcal{W}_h$ whereas $\mathcal{D}$ uses a centred second-order finite difference approximation, denoted as $\mathcal{D}_h$. 
+
+We begin by describing the numerical method for the momentum equation $\mathcal{D}_u$, used in both of our finite difference methods. We then describe the distinguishing features of the two methods, their different methods $\mathcal{D}_h$ and $\mathcal{W}_h$ for approximating the mass equation. Finally we provide how these two methods are combined to get the full methods $\mathcal{D}$ and $\mathcal{W}$.
+
+\section{Naive Second Order Finite Difference Approximation to the Momentum Equation}
+The momentum equation of the Serre equations for flat beds \eqref{eqn:FullSerreNonConMomeHorizbed} is given here to remind the reader
+\begin{equation*}
+\dfrac{\partial (uh)}{\partial t} + \dfrac{\partial}{\partial x} \left ( u^2h + \dfrac{gh^2}{2} + \dfrac{h^3}{3}{ \Phi }  \right ) = 0,
+\end{equation*}
+where 
+\begin{equation*}
+ { \Phi }  = \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} -u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t}.
+\end{equation*}
+This equation is difficult to develop numerical methods for due to the mixed derivative term $\dfrac{\partial^2 u}{\partial x \partial t}$ as many standard numerical methods such as finite volumes are built for equations in which there are no mixed derivative terms. For this reason both of our finite difference methods will just use the naive finite difference approximation to this equation.
+
+For the naive finite difference method we begin by expanding all the derivative terms so that we are left with only derivatives of the primitive variables $h$ and $u$. We then replace all these derivatives with their finite difference approximation, and rearrange it into an explicit update formula to get our method $\mathcal{D}_u$.  
+
+Expanding the momentum equation we get that
+\begin{equation*}
+h\dfrac{\partial u}{\partial t} - h^2\frac{\partial^2 u}{\partial x \partial t} - \frac{h^3}{3}\frac{\partial^3 u}{\partial x^2 \partial t}  = -X 
+\label{eq:expandedu}
+\end{equation*}
+where $X$ contains only spatial derivatives and is
+\begin{equation*}
+X = uh\frac{\partial u}{\partial x} + gh\frac{\partial h}{\partial x} + h^2\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} + \frac{h^3}{3}\frac{\partial u}{\partial x}\frac{\partial^2 u}{\partial x^2} - h^2u\frac{\partial^2 u}{\partial x^2}- \frac{h^3}{3}u\frac{\partial^3 u}{\partial x^3} .
+\end{equation*}
+
+Now that all derivatives are of primitive variables, we approximate them by second-order centred finite difference approximations on a uniform grid in space and time. By rearranging this finite difference approximation so that values at the the next time $t^{n+1}$ are on the left hand side while values at the previous times $t^{n}$ and $t^{n-1}$ are on the right hand side we obtain
+%
+\begin{equation}
+h^{n}_ju^{n+1}_j - \left(h^{n}_j\right)^2 \left(\frac{-u^{n+1}_{j-1}+u^{n+1}_{j+1} }{2 \Delta x}\right) - \frac{\left(h^{n}_j\right)^3}{3}\left(\frac{u^{n+1}_{j-1} - 2u^{n+1}_{j}  +u^{n+1}_{j+1} }{\Delta x^2}\right) = - Y^n_j.
+\label{eq:expandedutdisc3}
+\end{equation}
+%
+Where $Y_j^n$ depends only on the values of $h$ and $u$ at previous times $t^n$ and $t^n-1$ and is given by
+%
+\begin{equation*}
+Y_j^n = 2\Delta tX_j^{n} - h_j^{n}u_j^{n-1} + \left(h_j^{n}\right)^2\left(\frac{-u^{n-1}_{j-1}+u^{n-1}_{j+1}  }{2 \Delta x}\right) + \frac{\left(h_j^{n}\right)^3}{3}\left(\frac{u^{n-1}_{j-1} - 2u^{n-1}_{j} + u^{n-1}_{j+1} }{\Delta x^2}\right)
+\label{eq:expandfactor Xp}
+\end{equation*}
+%
+with
+%
+\begin{multline*}
+X_j^n = u_j^nh_j^n\frac{-u^{n}_{j-1} + u^{n}_{j+1} }{2 \Delta x} + gh^n_j\frac{-h^{n}_{j-1} + h^{n}_{j+1} }{2 \Delta x} + \left(h^n_j\right)^2\left(\frac{-u^{n}_{j-1} + u^{n}_{j+1} }{2 \Delta x} \right)^2  \\ + \frac{\left(h^n_j\right)^3}{3}\frac{-u^{n}_{j-1} + u^{n}_{j+1} }{2 \Delta x}\frac{u^{n}_{j-1} - 2u^{n}_{j} + u^{n}_{j+1} }{\Delta x^2} - \left(h^n_j\right)^2u_j^n\frac{u^{n}_{j-1} - 2u^{n}_{j} + u^{n}_{j+1} }{\Delta x^2} \\- \frac{\left(h^n_j\right)^3}{3}u^n_j \frac{- u^{n}_{j-2} + 2u^{n}_{j-1} - 2u^{n}_{j+1} + u^{n}_{j+2}}{2\Delta x^3}.
+\end{multline*}
+%
+Equation \eqref{eq:expandedutdisc3} can be rearranged into an explicit update scheme $\mathcal{D}_u$ for $u$ given its current and previous values, so that
+%
+\begin{equation}
+\boldsymbol{u}^{n+ 1}
+= A^{-1} \left[\begin{array}{c}
+-Y^n_0 \\
+\vdots \\
+-Y^n_m \end{array}\right] =: \mathcal{D}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1}, \Delta x, \Delta t \right)
+\label{eq:FDcentforu}
+\end{equation}
+%
+where $A$ is a tridiagonal matrix with the diagonals given by
+\begin{align}
+	&A_{j,j-1} = \frac{\left(h^n_j\right)^2}{2\Delta x}\frac{- h^n_{j-1}+ h^n_{j+1}}{2\Delta x} - \frac{\left(h^n_j\right)^3}{3 \Delta x^2}  ,\\
+	&A_{j,j} = h^n_j + \frac{2 h^n_j}{3 \Delta x^2}, \\
+	&A_{j,j+1} = -\frac{\left(h^n_j\right)^2}{2\Delta x}\frac{- h^n_{j-1} + h^n_{j+1}}{2\Delta x} - \frac{\left(h^n_j\right)^3}{3 \Delta x^2}.
+\end{align}
+
+
+\section{Numerical Methods for the Mass Equation}
+The mass equation of the Serre equations for flat beds \eqref{eqn:FullSerreNonConMassHorizbed} is given here to remind the reader
+\begin{equation*}
+\frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0.
+\end{equation*}
+This equation is much easier to handle numerically, and because it is in conservative form their are a variety of numerical techniques that can be employed. In this thesis we describe the Lax-Wendroff method and the naive second-order finite difference approximation to this equation. This is because using the Lax-Wendroff together with $\mathcal{D}_h$ we can replicate the numerical solutions of \cite{El-etal-2006}. While we wish to have a fully naive second-order scheme, as it is the simplest higher order numerical method and is therefore the first higher-order method one would attempt.
+
+We begin with the Lax-Wendroff method $\mathcal{W}_h$ for the conservation of mass equation.
+
+\subsection{Lax-Wendroff Method}
+The two step Richtmeyer extension of the Lax-Wendroff update $\mathcal{W}_h$ for the mass equation is
+
+	\begin{equation*}
+	h^{n + 1/2}_{j+ 1/2} = \frac{1}{2}\left(h^{n}_{j+1} + h^{n}_j\right) - \frac{\Delta t}{2\Delta x}\left(u^n_{j+1}h^n_{j+1} - h^n_{j}u^n_{j}\right),
+	\end{equation*}
+	\begin{equation*}
+	h^{n + 1/2}_{j- 1/2} = \frac{1}{2}\left(h^{n}_{j} + h^{n}_{j-1}\right) - \frac{\Delta t}{2\Delta x}\left(u^n_{j}h^n_{j} - h^n_{j-1}u^n_{j-1}\right)
+	\end{equation*}
+	and
+	\begin{equation*}
+	h^{n+1}_j = h^{n}_j - \frac{\Delta t}{\Delta x}\left(u^{n + 1/2}_{j+ 1/2}h^{n + 1/2}_{j+ 1/2} - u^{n + 1/2}_{j- 1/2}h^{n + 1/2}_{j- 1/2}\right).
+	\label{eq:LW4h}
+	\end{equation*}
+In this equation $h^{n + 1/2}_{j- 1/2}$ and $h^{n + 1/2}_{j + 1/2}$ can be calculated with ease, as we possess all values of $h$ and $u$ at previous times. However, we do not have a way to calculate $u^{n + 1/2}_{j- 1/2}$ and $u^{n + 1/2}_{j+ 1/2}$ from the scheme itself. Instead we do this by using our numerical method $\mathcal{D}_u$ to calculate $\boldsymbol{u}^{n+1}$ from $\boldsymbol{u}^{n}$ at all the $x_j$ values. Then we can calculate $u^{n + 1/2}_{j \pm 1/2}$ by linearly interpolating $\boldsymbol{u}^{n+1}$ and $\boldsymbol{u}^{n}$ in space and time to give 
+
+	\begin{equation*}
+	u^{n + 1/2}_{j+ 1/2} = \frac{ u^{n}_{j} + u^{n}_{j+1} + u^{n+1}_{j} +   u^{n+1}_{j+1}  }{4}
+	\end{equation*}
+	and
+	\begin{equation*}
+	u^{n + 1/2}_{j- 1/2} = \frac{u^{n}_{j-1}  + u^{n}_{j}+ u^{n+1}_{j-1} + u^{n+1}_{j}   }{4}.
+	\end{equation*}
+
+Thus we have the following update scheme $\mathcal{W}_h$ for \eqref{eqn:FullSerreNonConMass}
+
+	\begin{equation}
+	\boldsymbol{h}^{n+1} = \mathcal{W}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n,\boldsymbol{u}^{n+1}, \Delta x, \Delta t \right). 
+	\label{eq:LWupdateh}
+	\end{equation}
+
+\subsection{Second Order Finite Difference Approximation}
+Expanding the spatial derivative of momentum in the mass equation we get that	\begin{equation*}
+\frac{\partial h}{\partial t} + u\dfrac{\partial h}{\partial x} + h\dfrac{\partial u}{\partial x} = 0.
+\end{equation*}
+Approximating all these derivative by their second-order centered finite difference approximations we get that
+
+	\begin{equation*}
+	\frac{h^{n+1}_j -h^{n-1}_j} {2 \Delta t} + \left(u^{n}_{j}\frac{ - h^{n}_{j-1} + h^{n}_{j+1}}{2 \Delta x} + h^{n}_{j}\frac{- u^{n}_{j-1} + u^{n}_{j+1}}{2\Delta x}\right) = 0.
+	\end{equation*}
+Rearranging this equation into an explicit update formula we get that		
+	\begin{equation*}
+	h^{n+1}_j = h^{n-1}_j - \Delta t \left(u^{n}_{j}\frac{ - h^{n}_{j-1} + h^{n}_{j+1}}{\Delta x} + h^{n}_{j}\frac{- u^{n}_{j-1} + u^{n}_{j+1}}{\Delta x}\right).
+	\end{equation*}
+
+Thus we have an update scheme $\mathcal{D}_h$ for all $j$
+
+	\begin{equation}
+	\label{eq:secondFDappformass}
+	\boldsymbol{h}^{n+1} = \mathcal{D}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n,\boldsymbol{h}^{n-1} ,\Delta x, \Delta t \right).
+	\end{equation}
+
+
+
+\section{Complete Method}
+The method $\mathcal{W}$ is the combination of \eqref{eq:LWupdateh} for \eqref{eqn:FullSerreNonConMass} and \eqref{eq:FDcentforu} for \eqref{eqn:FullSerreNonConMome} in the following way
+
+	\begin{equation}
+	\left.
+	\begin{array}{l l}
+	\boldsymbol{u}^{n+1}&=\mathcal{D}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1}, \Delta x, \Delta t \right) \\
+	\boldsymbol{h}^{n+1}&=\mathcal{W}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n,\boldsymbol{u}^{n+1}, \Delta x, \Delta t \right)
+	\end{array} \right\rbrace \mathcal{W}\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1},\boldsymbol{h}^{n-1}, \Delta x, \Delta t \right).	 
+	\label{eq:Wnumdef}
+	\end{equation}
+
+
+The method $\mathcal{D}$ is the combination of \eqref{eq:secondFDappformass} for \eqref{eqn:FullSerreNonConMass} and \eqref{eq:FDcentforu} for \eqref{eqn:FullSerreNonConMome} in the following way
+
+	\begin{equation}
+	\left.
+	\begin{array}{l l}
+	\boldsymbol{h}^{n+1}&=\mathcal{D}_h\left(\boldsymbol{u}^n,\boldsymbol{h}^n,\boldsymbol{h}^{n-1} \Delta x, \Delta t \right) \\
+	\boldsymbol{u}^{n+1}&=\mathcal{D}_u\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1}, \Delta x, \Delta t \right)
+	\end{array} \right\rbrace \mathcal{D}\left(\boldsymbol{u}^n,\boldsymbol{h}^n, \boldsymbol{u}^{n-1},\boldsymbol{h}^{n-1}, \Delta x, \Delta t \right).
+	\label{eq:Dnumdef}
+	\end{equation}
+
+

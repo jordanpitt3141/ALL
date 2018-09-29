@@ -1,0 +1,271 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\usepackage{mathtools}
+\usepackage{adjustbox}
+
+  \newcommand{\matr}[1]{\mathbf{#1}}
+  \newcommand{\vecn}[1]{\boldsymbol{#1}}
+  
+\begin{document}
+\section{$\mathcal{M}$} 
+We will demonstrate how the tables for $\mathcal{M}$, $\mathcal{R}^-$, $\mathcal{R}^+$ and $\mathcal{G}$ are constructed by using $\mathcal{M}$ as an example and then just present the tables for the other factors. First we calculate the analytic value for $\mathcal{M}$. For a general quantity $q$ we have by definition [] that
+\begin{equation*}
+\overline{q}_j = \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q \; dx.
+\end{equation*}
+Assuming $q$ is a Fourier mode by \eqref{eqn:FourierNode} we have that
+\begin{align*}
+\overline{q}_j &= \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q(0,0) e^{i\left(\omega t + kx\right)} \; dx = \frac{q(0,0)e^{i \omega  t}}{\Delta x} \left[\frac{1}{ik} e^{ikx}\right]_{x_{j-1/2}}^{x_{j+1/2}} \\
+&= \frac{q(0,0)e^{i \omega  t}}{\Delta x} \frac{1}{ik} e^{ikx_j} \left[ e^{ik\frac{\Delta x}{2}} - e^{-ik\frac{\Delta x}{2}}\right] = \frac{q(0,0)e^{i \left(\omega  t + kx_j \right)}}{\Delta x} \frac{1}{ik} \left[ 2 i \sin \left(k\frac{\Delta x}{2}\right)\right]\\
+&=  \frac{2}{k\Delta x} \sin \left(k\frac{\Delta x}{2}\right) q_j.
+\end{align*}
+Therefore,
+\begin{equation}
+q_j =  \frac{k\Delta x}{2 \sin \left(k\frac{\Delta x}{2}\right)  } \overline{q}_j = \mathcal{M}  \overline{q}_j.
+\end{equation}
+This is the analytic value of $\mathcal{M}$ with which we want to compare the derived $\mathcal{M}$ from our numerical methods. To compare them we take their Taylor series expansion and compare those to get the lowest order term of the error. For the analytic value we have
+\begin{equation}
+\mathcal{M} = \frac{k\Delta x}{2 \sin \left(k\frac{\Delta x}{2}\right)  } = 1 + \frac{1}{24} k^2 \Delta x^2 + \frac{7}{5760}k^4\Delta x ^4 + \cdots.
+\end{equation}
+Since our value for $\mathcal{M}$ for the second-order FEVM is $1$ \eqref{eqn:Mfactorfourier} we can see that the lowest order term of the error between the second-order FEVM and the analytical value is $-\frac{1}{24} k^2 \Delta x^2$. These results have been summarised in Table~\ref{tab:Mfactor} for all FDVM and the FEVM. 
+
+\section{$\mathcal{R}^-$ and $\mathcal{R}^+$} 
+For both $\mathcal{R}^-$ and $\mathcal{R}^+$ we are approximating the value of the quantity at $x_{j+1/2}$ in terms of the cell average. Now from [] we have that
+\begin{equation*}
+q_{j+1/2} = e^{i {k\Delta x}/{2}}q_{j}
+\end{equation*}
+and from above we have [], so we have
+\begin{equation*}
+q_{j+1/2} = e^{i {k\Delta x}/{2}}\mathcal{M}\overline{q}_j = \mathcal{R}^- \overline{q}_j = \mathcal{R}^+ \overline{q}_j
+\end{equation*}
+where for the analytic solution we have that $\mathcal{R}^-=\mathcal{R}^+$ .
+\section{$\mathcal{G}$}
+For $\mathcal{G}$ we desire a relation between the cell average values $\overline{\eta}_j$ and $\overline{G}_j$ to the cell edge value $\upsilon_{j+1/2}$. Equation [] holds for all $x$ values and so in particular we have 
+\begin{equation}
+G_{j+1/2} = UH + U \eta_{j+1/2} + \left(H  + \frac{H^3}{3}k^2\right)\upsilon_{j+1/2}
+\end{equation}
+From [] we have
+\begin{equation}
+e^{i {k\Delta x}/{2}}\mathcal{M}\overline{G}_j +  UH + U e^{i {k\Delta x}/{2}}\mathcal{M}\overline{\eta}_j = \left(H  + \frac{H^3}{3}k^2\right)\upsilon_{j+1/2}
+\end{equation}
+So
+\begin{align}
+\upsilon_{j+1/2} &=\dfrac{ e^{i {k\Delta x}/{2}}\mathcal{M}}{H  + \frac{H^3}{3}k^2} \overline{G}_j +  \dfrac{UH}{H  + \frac{H^3}{3}k^2} +  \dfrac{U e^{i {k\Delta x}/{2}}\mathcal{M}}{H  + \frac{H^3}{3}k^2}\overline{\eta}_j \\
+& = \mathcal{G}^G \overline{G}_j + \mathcal{G}^\eta \overline{\eta}_j + \mathcal{G}^c
+\end{align}
+
+\section{$F$}
+For a Finite volume method we have that
+\begin{equation}
+F^n_{j+1/2} = \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}}f(x_{j+1/2},t) dt
+\end{equation}
+
+\subsection{$\eta$}
+
+For $\eta$ we have 
+\[f(x_{j+1/2},t) = H\upsilon_{j+1/2} + U \eta_{j+1/2}\]
+
+Since we desire our fluxes to be written in terms of the cell averages of the conserved variables $\eta$ and $G$ we use [] and [] to rewrite this as
+
+\begin{align}
+f(x_{j+1/2},t) &= H\left(\mathcal{G}^G \overline{G}_j + \mathcal{G}^\eta \overline{\eta}_j + \mathcal{G}^c\right) + U e^{i {k\Delta x}/{2}}\mathcal{M} \overline{\eta}_j \\ &= H\mathcal{G}^G \overline{G}_j + U\left(H\mathcal{G}^\eta + e^{i {k\Delta x}/{2}}\mathcal{M} \right) \overline{\eta}_j + H\mathcal{G}^c
+\end{align}
+
+\begin{equation}
+F^n_{j+1/2} = \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}}\left[ H\mathcal{G}^G \overline{G}_j + U\left(H\mathcal{G}^\eta + e^{i {k\Delta x}/{2}}\mathcal{M} \right) \overline{\eta}_j + H\mathcal{G}^c\right] dt
+\end{equation}
+
+
+for a general Fourier mode $q$ we have that
+
+\begin{align}
+\frac{1}{\Delta t} \int_{t^n}^{t^{n+1}} q(x_j,t)\; dt &= \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}} q(0,0) e^{i\left(\omega t + kx_j\right)} \; dt = \frac{q(0,0)e^{i k  x_j}}{\Delta t} \left[\frac{1}{i\omega} e^{i\omega t}\right]_{t^n}^{t^{n+1}} \\ &= \frac{q(0,0)e^{i k  x_j}}{\Delta t}  \frac{1}{i\omega} e^{i\omega t^n} \left[e^{i\omega \Delta t} -1\right] = \frac{e^{i\omega \Delta t} -1}{i\omega\Delta t} q^n_j
+\end{align}
+Substituting this into [] we have that 
+
+\begin{align}
+F^n_{j+1/2} &= \frac{e^{i\omega \Delta t} -1}{i\omega\Delta t} \left[H\mathcal{G}^G \overline{G}_j + U\left(H\mathcal{G}^\eta + e^{i {k\Delta x}/{2}} \mathcal{M} \right) \overline{\eta}_j  \right] +  H\mathcal{G}^c \\
+&= \frac{e^{i\omega \Delta t} -1}{i\omega\Delta t} H\mathcal{G}^G \overline{G}_j +  U\left(H\mathcal{G}^\eta + e^{i {k\Delta x}/{2}} \mathcal{M}\right)\frac{e^{i\omega \Delta t} -1}{i\omega\Delta t} \overline{\eta}_j  +  H\mathcal{G}^c  \\
+&=\mathcal{F}^{\eta,\eta}\overline{\eta}_j + \mathcal{F}^{\eta,G}\overline{G}_j + \mathcal{F}^{\eta,c}
+\end{align}
+
+Since $F^n_{j-1/2} $ is just $F^n_{j+1/2} $ translated by $\Delta x$ to the left we get that
+\begin{align}
+F^n_{j-1/2}  =  e^{-ik\Delta x}F^n_{j+1/2}
+\end{align}
+
+
+\subsection{$G$}
+
+For $G$ we have 
+\[f(x_{j+1/2},t) = UG_{j+1/2} + UH \upsilon_{j+1/2} + gH \eta_{j+1/2}\]
+
+Since we desire our fluxes to be written in terms of the cell averages of the conserved variables $\eta$ and $G$ we use [] and [] to rewrite this as
+
+\begin{align}
+f(x_{j+1/2},t) &= Ue^{i {k\Delta x}/{2}}\mathcal{M} \overline{G}_j + UH\left(\mathcal{G}^G \overline{G}_j + \mathcal{G}^\eta \overline{\eta}_j + \mathcal{G}^c\right) + gH e^{i {k\Delta x}/{2}}\mathcal{M} \overline{\eta}_j \\ &= \left(Ue^{i {k\Delta x}/{2}}\mathcal{M} + UH \mathcal{G}^G \right) \overline{G}_j + \left(UH\mathcal{G}^\eta + gH e^{i {k\Delta x}/{2}}\mathcal{M} \right)\overline{\eta}_j + UH\mathcal{G}^c
+\end{align}
+
+\begin{equation}
+F^n_{j+1/2} = \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}}\left[ \left(Ue^{i {k\Delta x}/{2}}\mathcal{M} + UH \mathcal{G}^G \right) \overline{G}_j + \left(UH\mathcal{G}^\eta + gH e^{i {k\Delta x}/{2}}\mathcal{M} \right)\overline{\eta}_j + UH\mathcal{G}^c\right] dt
+\end{equation}
+Using [] this reduces to
+
+
+\begin{equation}
+F^n_{j+1/2} = \frac{e^{i\omega \Delta t} -1}{i\omega\Delta t}\left[ \left(Ue^{i {k\Delta x}/{2}}\mathcal{M} + UH \mathcal{G}^G \right) \overline{G}_j + \left(UH\mathcal{G}^\eta + gH e^{i {k\Delta x}/{2}}\mathcal{M} \right)\overline{\eta}_j \right]+ UH\mathcal{G}^c
+\end{equation}
+
+Since $F^n_{j-1/2} $ is just $F^n_{j+1/2} $ translated by $\Delta x$ to the left we get that
+\begin{align}
+F^n_{j-1/2}  =  e^{-ik\Delta x}F^n_{j+1/2}
+\end{align}
+
+\section{Update}
+ From [] our update scheme is
+ \begin{align*}
+ \overline{\eta}_{j}^{\,n + 1} &=  \overline{\eta}^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(\mathcal{F}^{\eta,\eta} \overline{\eta}_j  + \mathcal{F}^{\eta,G} \overline{G}_j + \mathcal{F}^{\eta,c} \right) - \left(\mathcal{F}^{\eta,\eta} \overline{\eta}_{j-1}  + \mathcal{F}^{\eta,G} \overline{G}_{j-1} + \mathcal{F}^{\eta,c} \right)  \right], \\
+ \overline{G}^{\,n + 1}_{j} &= \overline{G}^{\,n }_{j} -\frac{\Delta t}{\Delta x}  \left[ \left(  \mathcal{F}^{G,\eta} \overline{\eta}_{j}  + \mathcal{F}^{G,G} \overline{G}_j + \mathcal{F}^{G,c} \right) - \left(  \mathcal{F}^{G,\eta} \overline{\eta}_{j-1}  + \mathcal{F}^{G,G} \overline{G}_{j-1} + \mathcal{F}^{G,c} \right) \right].
+ \end{align*}
+ 
+ \begin{align*}
+ \overline{\eta}_{j}^{\,n + 1} &=  \overline{\eta}^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{-ik\Delta x}\right) \left(\mathcal{F}^{\eta,\eta} \overline{\eta}_j  + \mathcal{F}^{\eta,G} \overline{G}_j \right) \right], \\
+ \overline{G}^{\,n + 1}_{j} &= \overline{G}^{\,n }_{j} -\frac{\Delta t}{\Delta x}  \left[ \left(1 - e^{-ik\Delta x}\right)\left(  \mathcal{F}^{G,\eta} \overline{\eta}_{j}  + \mathcal{F}^{G,G} \overline{G}_j \right) \right].
+ \end{align*}
+ 
+ 
+ This can be written in matrix form as
+ 
+ \begin{multline}
+ \label{eqn:singleEvolveStep}
+ \begin{bmatrix}
+ \overline{\eta} \\ \overline{G}
+ \end{bmatrix}^{n+1}_j = \begin{bmatrix}
+ \overline{\eta} \\ \overline{G}
+ \end{bmatrix}^{n}_j - \frac{\left(1 - e^{-ik\Delta x}\right) \Delta t}{ \Delta x}\begin{bmatrix}
+ \mathcal{F}^{\eta,\eta} & \mathcal{F}^{\eta,G} \\\mathcal{F}^{G,\eta} &\mathcal{F}^{G,G} 
+ \end{bmatrix}\begin{bmatrix}
+ \overline{\eta} \\ \overline{G}
+ \end{bmatrix}^{n}_j \\= \left(\matr{I}  - \Delta t \matr{F} \right) \begin{bmatrix}
+ \overline{\eta} \\ \overline{G}
+ \end{bmatrix}^{n}_j
+ \end{multline}
+ 
+  \begin{equation}
+  e^{i\omega \Delta t}\begin{bmatrix}
+  \overline{\eta} \\ \overline{G}
+  \end{bmatrix}^{n}_j = \left(\matr{I}  - \Delta t \matr{F} \right) \begin{bmatrix}
+  \overline{\eta} \\ \overline{G}
+  \end{bmatrix}^{n}_j
+  \end{equation}
+  
+  if $\lambda_\pm$ are the eigenvalues of $\matr{F}$ then
+\[e^{i\omega_\pm \Delta t} = 1 - \Delta t \lambda_\pm\]
+
+$\matr{F}$ is 
+\begin{align}
+\frac{\left(1 - e^{-ik\Delta x}\right) \Delta t}{ \Delta x} \begin{bmatrix}
+U\left(H\mathcal{G}^\eta + e^{i {k\Delta x}/{2}} \mathcal{M}\right)\frac{e^{i\omega \Delta t} -1}{i\omega\Delta t} & \frac{e^{i\omega \Delta t} -1}{i\omega\Delta t} H\mathcal{G}^G \\
+ \frac{e^{i\omega \Delta t} -1}{i\omega\Delta t} \left[ \left(UH\mathcal{G}^\eta + gH e^{i {k\Delta x}/{2}}\mathcal{M} \right) \right] &
+\frac{e^{i\omega \Delta t} -1}{i\omega\Delta t}\left[ \left(Ue^{i {k\Delta x}/{2}}\mathcal{M} + UH \mathcal{G}^G \right)  \right]
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+\frac{\left(1 - e^{-ik\Delta x}\right) \Delta t}{ \Delta x} \frac{e^{i\omega \Delta t} -1}{i\omega\Delta t} \begin{bmatrix}
+U\left(H\mathcal{G}^\eta + e^{i {k\Delta x}/{2}} \mathcal{M}\right) &  H\mathcal{G}^G \\
+ \left(UH\mathcal{G}^\eta + gH e^{i {k\Delta x}/{2}}\mathcal{M} \right) & \left(Ue^{i {k\Delta x}/{2}}\mathcal{M} + UH \mathcal{G}^G \right)
+\end{bmatrix}
+\end{align}
+
+
+
+\begin{align}
+\frac{\left(1 - e^{-ik\Delta x}\right) \left(e^{i\omega \Delta t} -1\right) }{ i\omega\Delta x}  \begin{bmatrix}
+U^2H\dfrac{ e^{i {k\Delta x}/{2}}\mathcal{M}}{H  + \frac{H^3}{3}k^2} + Ue^{i {k\Delta x}/{2}} \mathcal{M} &  H\dfrac{ e^{i {k\Delta x}/{2}}\mathcal{M}}{H  + \frac{H^3}{3}k^2}\\
+U^2H\dfrac{ e^{i {k\Delta x}/{2}}\mathcal{M}}{H  + \frac{H^3}{3}k^2} + gH e^{i {k\Delta x}/{2}}\mathcal{M}  &Ue^{i {k\Delta x}/{2}}\mathcal{M} + UH\dfrac{ e^{i {k\Delta x}/{2}}\mathcal{M}}{H  + \frac{H^3}{3}k^2} 
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+\frac{\left(1 - e^{-ik\Delta x}\right) \left(e^{i\omega \Delta t} -1\right) }{ i\omega\Delta x} \mathcal{M} e^{i {k\Delta x}/{2}} \begin{bmatrix}
+U^2H\dfrac{1}{H  + \frac{H^3}{3}k^2} + U &  H\dfrac{1}{H  + \frac{H^3}{3}k^2}\\
+U^2H\dfrac{ 1}{H  + \frac{H^3}{3}k^2} + gH  &U + UH\dfrac{ 1}{H  + \frac{H^3}{3}k^2} 
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+\frac{\left(e^{i {k\Delta x}/{2}} - e^{-i {k\Delta x}/{2}}\right) \left(e^{i\omega \Delta t} -1\right) }{ i\omega\Delta x} \mathcal{M}  \begin{bmatrix}
+\dfrac{U^2}{1  + \frac{H^2}{3}k^2} + U &  \dfrac{1}{1  + \frac{H^2}{3}k^2}\\\dfrac{ U^2}{1  + \frac{H^2}{3}k^2} + gH &
+U + \dfrac{ U}{1  + \frac{H^2}{3}k^2}
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+\frac{2i\sin\left(k \Delta x/2\right) \left(e^{i\omega \Delta t} -1\right) }{ i\omega\Delta x} \mathcal{M}  \begin{bmatrix}
+\dfrac{U^2}{1  + \frac{H^2}{3}k^2} + U &  \dfrac{1}{1  + \frac{H^2}{3}k^2}\\
+\dfrac{ U^2}{1  + \frac{H^2}{3}k^2} + gH & U + \dfrac{ U}{1  + \frac{H^2}{3}k^2} 
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+\frac{\left(e^{i\omega \Delta t} -1\right)  k}{\omega}  \begin{bmatrix}
+\dfrac{U^2}{1  + \frac{H^2}{3}k^2} + U &  \dfrac{1}{1  + \frac{H^2}{3}k^2}\\
+\dfrac{ U^2}{1  + \frac{H^2}{3}k^2} + gH  & U + \dfrac{ U}{1  + \frac{H^2}{3}k^2}
+\end{bmatrix}
+\end{align}
+$\lambda$ eigenvalues
+\begin{align}
+\begin{bmatrix}
+\dfrac{U^2}{1  + \frac{H^2}{3}k^2} + U  - \lambda&  \dfrac{1}{1  + \frac{H^2}{3}k^2}\\
+\dfrac{ U^2}{1  + \frac{H^2}{3}k^2} + gH & U + \dfrac{ U}{1  + \frac{H^2}{3}k^2}  - \lambda 
+\end{bmatrix}
+\end{align}
+
+Determinant is
+\begin{align}
+\left[\dfrac{U^2}{1  + \frac{H^2}{3}k^2} + U  - \lambda\right]\left[U + \dfrac{ U}{1  + \frac{H^2}{3}k^2}  - \lambda \right] - \dfrac{ U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2} - \dfrac{ gH}{1  + \frac{H^2}{3}k^2} = 0
+\end{align}
+
+\begin{align}
+\lambda^2 - \lambda \left(\dfrac{U^2}{1  + \frac{H^2}{3}k^2} + U  + U + \dfrac{ U}{1  + \frac{H^2}{3}k^2}\right) + \left(\dfrac{U^2}{1  + \frac{H^2}{3}k^2} + U\right)\left(U + \dfrac{ U}{1  + \frac{H^2}{3}k^2}\right)\\ - \dfrac{ U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2} - \dfrac{ gH}{1  + \frac{H^2}{3}k^2} = 0
+\end{align}
+
+\begin{align}
+\lambda^2 - \lambda \left(\dfrac{U^2 + U}{1  + \frac{H^2}{3}k^2} + 2U  \right) + \left(\dfrac{U^2}{1  + \frac{H^2}{3}k^2} + U\right)\left(U + \dfrac{ U}{1  + \frac{H^2}{3}k^2}\right)\\ - \dfrac{ U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2} - \dfrac{ gH}{1  + \frac{H^2}{3}k^2} = 0
+\end{align}
+
+\begin{align}
+\lambda^2 - \lambda \left(\dfrac{U^2 + U}{1  + \frac{H^2}{3}k^2} + 2U  \right) \\+ \dfrac{U^3}{1  + \frac{H^2}{3}k^2} + \dfrac{U^3}{\left(1  + \frac{H^2}{3}k^2\right)^2} + U^2 + \dfrac{U^2}{1  + \frac{H^2}{3}k^2} \\ - \dfrac{ U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2} - \dfrac{ gH}{1  + \frac{H^2}{3}k^2} = 0
+\end{align}
+
+\begin{align}
+\lambda^2 - \lambda \left(\dfrac{U^2 + U}{1  + \frac{H^2}{3}k^2} + 2U  \right) \\+ U^2 +  \dfrac{U^3 + U^2 - gH}{1  + \frac{H^2}{3}k^2} + \dfrac{U^3 - U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2}  = 0
+\end{align}
+
+$b^2 - 4ac$
+
+\begin{align}
+\left(\dfrac{U^2 + U}{1  + \frac{H^2}{3}k^2} + 2U  \right)^2 -4 U^2 -4  \dfrac{U^3 + U^2 - gH}{1  + \frac{H^2}{3}k^2} - 4\dfrac{U^3 - U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2} 
+\end{align}
+
+\begin{align}
+\left[\dfrac{U^2 + U}{1  + \frac{H^2}{3}k^2}\right]^2 + 4U \dfrac{U^2 + U}{1  + \frac{H^2}{3}k^2} + 4U^2 \\ -4 U^2 -4  \dfrac{U^3 + U^2 - gH}{1  + \frac{H^2}{3}k^2} - 4\dfrac{U^3 - U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2} 
+\end{align}
+
+
+\begin{align}
+\dfrac{U^4 + 2U^3 + U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2}  +4  \dfrac{gH}{1  + \frac{H^2}{3}k^2} - 4\dfrac{U^3 - U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2} 
+\end{align}
+
+\begin{align}
+\dfrac{U^4 - 2U^3  + 5U^2}{\left(1  + \frac{H^2}{3}k^2\right)^2} +  \dfrac{4gH}{1  + \frac{H^2}{3}k^2} 
+\end{align}
+
+\begin{align}
+U^2\dfrac{U^2 - 2U  + 5}{\left(1  + \frac{H^2}{3}k^2\right)^2} +  \dfrac{4gH}{1  + \frac{H^2}{3}k^2} 
+\end{align}
+
+\end{document}
+

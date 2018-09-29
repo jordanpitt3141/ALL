@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+	equations we are interested in some very basic equations namely
+	
+	\[u_t + a(uv)_x = 0\]
+	\[v_t + b(uv)_x = 0\]
+	
+For stability we are interested in the difference between the exact solution and the numerical solution produced by a finite precision algorithm. We are going to investigate this using Von Nuemann stability which is best for linear equations so we linearise. 
+\section{Stability of Methods for Linearised Equations}
+
+Linearising means we assume the form of $u$ and $v$ so that
+
+$u = u_0 + u_1(x,t) + \dots$,
+$v = v_0 + v_1(x,t) + \dots$
+
+where the $u_{i} >> u_{i+1}$ we then neglect all terms far smaller than $u_1$ so that
+
+	\[(u)_t + aU(v)_x + aV(u)_x = 0\]
+	\[(v)_t + bU(v)_x + bV(u)_x = 0\]
+	
+\section{Silly FDM}
+Approximating all derivatives by centered FD methods gives
+	\[u^{n+1}_j = u^{n-1}_j - a\frac{\Delta t}{\Delta x}\left(U\left[v^{n}_{j + 1} - v^{n}_{j - 1}\right] + V\left[u^{n}_{j + 1} - u^{n}_{j - 1}\right]\right)\]
+	
+		\[v^{n+1}_j = v^{n-1}_j - b\frac{\Delta t}{\Delta x}\left(U\left[v^{n}_{j + 1} - v^{n}_{j - 1}\right] + V\left[u^{n}_{j + 1} - u^{n}_{j - 1}\right]\right)\]
+
+We assume $u^n_j = u(t)e^{ikx_j}$ , $v^n_j = u(t)e^{ilx_j}$Thus 
+
+	\[u^{n+1}_j = u^{n-1}_j - a\frac{\Delta t}{\Delta x}\left(U\left[e^{il\Delta x} - e^{-il\Delta x}\right]v^{n}_{j} + V\left[e^{ik\Delta x} - e^{-ik\Delta x}\right] u^{n}_{j}\right)\]
+	
+	using trig relations
+	
+	
+		\[u^{n+1}_j = u^{n-1}_j - a\frac{\Delta t}{\Delta x}\left(U2i\sin\left(l\Delta x\right)v^{n}_{j} + V2i\sin\left(k\Delta x\right) u^{n}_{j}\right)\]
+		
+			\[u^{n+1}_j = u^{n-1}_j - \frac{2ia\Delta t}{\Delta x}\left(U\sin\left(l\Delta x\right)v^{n}_{j} + V\sin\left(k\Delta x\right) u^{n}_{j}\right)\]
+
+			\[v^{n+1}_j = v^{n-1}_j - \frac{2ib\Delta t}{\Delta x}\left(U\sin\left(l\Delta x\right)v^{n}_{j} + V\sin\left(k\Delta x\right) u^{n}_{j}\right)\]
+			
+We can write this in matrix form as
+
+\[\left[\begin{array}{c}
+u^{n+1}_j \\
+v^{n+1}_j \\
+u^{n}_j \\
+v^{n}_j \\
+\end{array} \right] = \left[\begin{array}{c c c c}
+- \frac{2ia\Delta t}{\Delta x}V\sin\left(l\Delta x\right) & - \frac{2ia \Delta t}{\Delta x}U\sin\left(k\Delta x\right) & 1 & 0 \\
+- \frac{2ib\Delta t}{\Delta x}V\sin\left(l\Delta x\right) & - \frac{2ib \Delta t}{\Delta x}U\sin\left(k\Delta x\right) & 0 & 1 \\
+1&0&0&0 \\
+0&1&0&0 \\
+\end{array} \right]\left[\begin{array}{c}
+u^{n}_j \\
+v^{n}_j \\
+u^{n-1}_j \\
+v^{n-1}_j \\
+\end{array} \right]\]
+
+The easy situation is when u and v are the same amd $a=b$ in which case
+
+\[\left[\begin{array}{c}
+u^{n+1}_j \\
+v^{n+1}_j \\
+u^{n}_j \\
+v^{n}_j \\
+\end{array} \right] = \left[\begin{array}{c c c c}
+- \frac{2ia\Delta t}{\Delta x}U\sin\left(k\Delta x\right) &- \frac{2ia\Delta t}{\Delta x}U\sin\left(k\Delta x\right) & 1 & 0 \\
+- \frac{2ia\Delta t}{\Delta x}U\sin\left(k\Delta x\right) & - \frac{2ia\Delta t}{\Delta x}U\sin\left(k\Delta x\right) & 0 & 1 \\
+1&0&0&0 \\
+0&1&0&0 \\
+\end{array} \right]\left[\begin{array}{c}
+u^{n}_j \\
+v^{n}_j \\
+u^{n-1}_j \\
+v^{n-1}_j \\
+\end{array} \right]\]
+
+Again we are interested in the 2 norm which in this case since the matrix is symmetric is the largest eigenvalue. We also have the eigenvalues for a matrix of the form
+
+\[\left[\begin{array}{c c c c}
+a &a& 1 & 0 \\
+a & a & 0 & 1 \\
+1&0&0&0 \\
+0&1&0&0 \\
+\end{array} \right]\]
+
+are $\lambda = \pm 1 , a \pm \sqrt{a^2 + 1}$
+
+But since the largest of these must be greater than or equal to 1 we are basically done, and this scheme is unconditionally unstable. We should however check that we don't have equality
+
+if
+\[ a \pm \sqrt{a^2 + 1} = 1\]
+
+then $a = 0$
+which implies $\frac{2ia\Delta t}{\Delta x}U\sin\left(k\Delta x\right)$ which is not possible by choosing $\Delta t$, $\Delta x$ for general $U$ and $a$
+ 
+\end{document}

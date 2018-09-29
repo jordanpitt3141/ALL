@@ -1,0 +1,106 @@
+Directory[]
+
+C:\Users\Jordan\Documents
+In[1]:= phi = x - a2*t
+h = a0 + a1*Exp[- (phi - a3)^2/(2*a4)]*Exp[a5*t]
+u = a6*Exp[- (phi - a3)^2/(2*a4)]*Exp[a7*t]
+b= a8*Sin[a9*x]
+Export["TravelGaussGrowh.tex",h]
+Export["TravelGaussGrowu.tex",u]
+Export["TravelGaussGrowb.tex",b]
+Out[1]= -a2 t+x
+Out[2]= a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))
+Out[3]= a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4))
+Out[4]= a8 Sin[a9 x]
+Out[5]= TravelGaussGrowh.tex
+Out[6]= TravelGaussGrowu.tex
+Out[7]= TravelGaussGrowb.tex
+In[8]:= hx = D[h,x]
+ux = D[u,x]
+uxx = D[ux,x]
+bx = D[b,x]
+bxx = D[bx,x]
+G = u*h*(1 + hx*bx+ h*bxx/2 + bx^2) - D[h^3*ux,x]/3
+Export["TravelGaussGrowG.tex",G]
+Out[8]= -((a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x))/a4)
+Out[9]= -((a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x))/a4)
+Out[10]= -((a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)))/a4)+(a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x)^2)/a4^2
+Out[11]= a8 a9 Cos[a9 x]
+Out[12]= -a8 a9^2 Sin[a9 x]
+Out[13]= 1/3 ((a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3)/a4-(3 a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x)^2)/a4^2-(a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3 (-a3-a2 t+x)^2)/a4^2)+a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) (1-(a1 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x) Cos[a9 x])/a4+a8^2 a9^2 Cos[a9 x]^2-1/2 a8 a9^2 (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) Sin[a9 x])
+Out[14]= TravelGaussGrowG.tex
+In[15]:= ht = D[h,t]
+CForm[ht]
+Export["TravelGaussGrowht.tex",ht]
+Out[15]= a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (a5+(a2 (-a3-a2 t+x))/a4)
+Out[17]= TravelGaussGrowht.tex
+a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(a5 + (a2*(-a3 - a2*t + x))/a4)
+In[18]:= Gt = D[G,t]
+CForm[Gt]
+Export["TravelGaussGrowGT.tex",Gt]
+Out[18]= 1/3 ((6 a1 a2 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x))/a4^2+(2 a2 a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3 (-a3-a2 t+x))/a4^2+(3 a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (a5+(a2 (-a3-a2 t+x))/a4))/a4-(6 a1^2 a6 E^(2 a5 t+a7 t-(3 (-a3-a2 t+x)^2)/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) (-a3-a2 t+x)^2 (a5+(a2 (-a3-a2 t+x))/a4))/a4^2-(3 a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x)^2 (a5+(a2 (-a3-a2 t+x))/a4))/a4^2+(a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3 (a7+(a2 (-a3-a2 t+x))/a4))/a4-(a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3 (-a3-a2 t+x)^2 (a7+(a2 (-a3-a2 t+x))/a4))/a4^2-(3 a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x)^2 (a5+a7+(2 a2 (-a3-a2 t+x))/a4))/a4^2)+a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (a5+(a2 (-a3-a2 t+x))/a4) (1-(a1 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x) Cos[a9 x])/a4+a8^2 a9^2 Cos[a9 x]^2-1/2 a8 a9^2 (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) Sin[a9 x])+a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) (a7+(a2 (-a3-a2 t+x))/a4) (1-(a1 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x) Cos[a9 x])/a4+a8^2 a9^2 Cos[a9 x]^2-1/2 a8 a9^2 (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) Sin[a9 x])+a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) ((a1 a2 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) Cos[a9 x])/a4-(a1 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x) (a5+(a2 (-a3-a2 t+x))/a4) Cos[a9 x])/a4-1/2 a1 a8 a9^2 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (a5+(a2 (-a3-a2 t+x))/a4) Sin[a9 x])
+Out[20]= TravelGaussGrowGT.tex
+((6*a1*a2*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*(-a3 - a2*t + x))/Power(a4,2) + 
+      (2*a2*a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),3)*(-a3 - a2*t + x))/Power(a4,2) + 
+      (3*a1*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*(a5 + (a2*(-a3 - a2*t + x))/a4))/a4 - 
+      (6*Power(a1,2)*a6*Power(E,2*a5*t + a7*t - (3*Power(-a3 - a2*t + x,2))/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Power(-a3 - a2*t + x,2)*(a5 + (a2*(-a3 - a2*t + x))/a4))/Power(a4,2) - 
+      (3*a1*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*Power(-a3 - a2*t + x,2)*(a5 + (a2*(-a3 - a2*t + x))/a4))/Power(a4,2) + 
+      (a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),3)*(a7 + (a2*(-a3 - a2*t + x))/a4))/a4 - 
+      (a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),3)*Power(-a3 - a2*t + x,2)*(a7 + (a2*(-a3 - a2*t + x))/a4))/Power(a4,2) - 
+      (3*a1*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*Power(-a3 - a2*t + x,2)*(a5 + a7 + (2*a2*(-a3 - a2*t + x))/a4))/Power(a4,2))/3. + 
+   a1*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*(a5 + (a2*(-a3 - a2*t + x))/a4)*
+    (1 - (a1*a8*a9*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(-a3 - a2*t + x)*Cos(a9*x))/a4 + Power(a8,2)*Power(a9,2)*Power(Cos(a9*x),2) - 
+      (a8*Power(a9,2)*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Sin(a9*x))/2.) + 
+   a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*(a7 + (a2*(-a3 - a2*t + x))/a4)*
+    (1 - (a1*a8*a9*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(-a3 - a2*t + x)*Cos(a9*x))/a4 + Power(a8,2)*Power(a9,2)*Power(Cos(a9*x),2) - 
+      (a8*Power(a9,2)*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Sin(a9*x))/2.) + 
+   a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*
+    ((a1*a2*a8*a9*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Cos(a9*x))/a4 - (a1*a8*a9*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(-a3 - a2*t + x)*(a5 + (a2*(-a3 - a2*t + x))/a4)*Cos(a9*x))/a4 - 
+      (a1*a8*Power(a9,2)*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(a5 + (a2*(-a3 - a2*t + x))/a4)*Sin(a9*x))/2.)
+In[21]:= Fhx = D[u*h,x]
+CForm[Fhx]
+Export["TravelGaussGrowFhx.tex",Fhx]
+Out[21]= -((a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (-a3-a2 t+x))/a4)-(a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) (-a3-a2 t+x))/a4
+Out[23]= TravelGaussGrowFhx.tex
+-((a1*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*(-a3 - a2*t + x))/a4) - (a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*(-a3 - a2*t + x))/a4
+In[24]:= FGx = D[G*u + g*h^2/2 - 2*h^3*ux*ux/3 + h^2*u*ux*bx,x]
+CForm[FGx]
+Export["TravelGaussGrowFGx.tex",FGx]
+Out[24]= -((4 a6^2 E^(2 a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3 (-a3-a2 t+x))/(3 a4^2))-(a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) g (-a3-a2 t+x))/a4+(2 a1 a6^2 E^(a5 t+2 a7 t-(3 (-a3-a2 t+x)^2)/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x)^3)/a4^3+(4 a6^2 E^(2 a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3 (-a3-a2 t+x)^3)/(3 a4^3)-(a6^2 a8 a9 E^(2 a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 Cos[a9 x])/a4+(2 a1 a6^2 a8 a9 E^(a5 t+2 a7 t-(3 (-a3-a2 t+x)^2)/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) (-a3-a2 t+x)^2 Cos[a9 x])/a4^2+(2 a6^2 a8 a9 E^(2 a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x)^2 Cos[a9 x])/a4^2+(a6^2 a8 a9^2 E^(2 a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x) Sin[a9 x])/a4-(1/a4)a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x) (1/3 ((a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3)/a4-(3 a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x)^2)/a4^2-(a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3 (-a3-a2 t+x)^2)/a4^2)+a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) (1-(a1 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x) Cos[a9 x])/a4+a8^2 a9^2 Cos[a9 x]^2-1/2 a8 a9^2 (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) Sin[a9 x]))+a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (1/3 (-((9 a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x))/a4^2)-(3 a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3 (-a3-a2 t+x))/a4^2+(6 a1^2 a6 E^(2 a5 t+a7 t-(3 (-a3-a2 t+x)^2)/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) (-a3-a2 t+x)^3)/a4^3+(9 a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x)^3)/a4^3+(a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^3 (-a3-a2 t+x)^3)/a4^3)-(a1 a6 E^(a5 t+a7 t-(-a3-a2 t+x)^2/a4) (-a3-a2 t+x) (1-(a1 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x) Cos[a9 x])/a4+a8^2 a9^2 Cos[a9 x]^2-1/2 a8 a9^2 (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) Sin[a9 x]))/a4-(a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) (-a3-a2 t+x) (1-(a1 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x) Cos[a9 x])/a4+a8^2 a9^2 Cos[a9 x]^2-1/2 a8 a9^2 (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) Sin[a9 x]))/a4+a6 E^(a7 t-(-a3-a2 t+x)^2/(2 a4)) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) (-((a1 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) Cos[a9 x])/a4)-1/2 a8 a9^3 (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) Cos[a9 x]+(a1 a8 a9 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x)^2 Cos[a9 x])/a4^2+(3 a1 a8 a9^2 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)) (-a3-a2 t+x) Sin[a9 x])/(2 a4)-2 a8^2 a9^3 Cos[a9 x] Sin[a9 x]))
+Out[26]= TravelGaussGrowFGx.tex
+(-4*Power(a6,2)*Power(E,2*a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),3)*(-a3 - a2*t + x))/(3.*Power(a4,2)) - 
+   (a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*g*(-a3 - a2*t + x))/a4 + 
+   (2*a1*Power(a6,2)*Power(E,a5*t + 2*a7*t - (3*Power(-a3 - a2*t + x,2))/(2.*a4))*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*Power(-a3 - a2*t + x,3))/Power(a4,3) + 
+   (4*Power(a6,2)*Power(E,2*a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),3)*Power(-a3 - a2*t + x,3))/(3.*Power(a4,3)) - 
+   (Power(a6,2)*a8*a9*Power(E,2*a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*Cos(a9*x))/a4 + 
+   (2*a1*Power(a6,2)*a8*a9*Power(E,a5*t + 2*a7*t - (3*Power(-a3 - a2*t + x,2))/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Power(-a3 - a2*t + x,2)*Cos(a9*x))/Power(a4,2) + 
+   (2*Power(a6,2)*a8*a9*Power(E,2*a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*Power(-a3 - a2*t + x,2)*Cos(a9*x))/Power(a4,2) + 
+   (Power(a6,2)*a8*Power(a9,2)*Power(E,2*a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*(-a3 - a2*t + x)*Sin(a9*x))/a4 - 
+   (a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(-a3 - a2*t + x)*(((a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),3))/a4 - 
+           (3*a1*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*Power(-a3 - a2*t + x,2))/Power(a4,2) - 
+           (a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),3)*Power(-a3 - a2*t + x,2))/Power(a4,2))/3. + 
+        a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*
+         (1 - (a1*a8*a9*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(-a3 - a2*t + x)*Cos(a9*x))/a4 + Power(a8,2)*Power(a9,2)*Power(Cos(a9*x),2) - 
+           (a8*Power(a9,2)*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Sin(a9*x))/2.)))/a4 + 
+   a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(((-9*a1*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*(-a3 - a2*t + x))/Power(a4,2) - 
+         (3*a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),3)*(-a3 - a2*t + x))/Power(a4,2) + 
+         (6*Power(a1,2)*a6*Power(E,2*a5*t + a7*t - (3*Power(-a3 - a2*t + x,2))/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Power(-a3 - a2*t + x,3))/Power(a4,3) + 
+         (9*a1*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*Power(-a3 - a2*t + x,3))/Power(a4,3) + 
+         (a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),3)*Power(-a3 - a2*t + x,3))/Power(a4,3))/3. - 
+      (a1*a6*Power(E,a5*t + a7*t - Power(-a3 - a2*t + x,2)/a4)*(-a3 - a2*t + x)*(1 - (a1*a8*a9*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(-a3 - a2*t + x)*Cos(a9*x))/a4 + Power(a8,2)*Power(a9,2)*Power(Cos(a9*x),2) - 
+           (a8*Power(a9,2)*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Sin(a9*x))/2.))/a4 - 
+      (a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*(-a3 - a2*t + x)*
+         (1 - (a1*a8*a9*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(-a3 - a2*t + x)*Cos(a9*x))/a4 + Power(a8,2)*Power(a9,2)*Power(Cos(a9*x),2) - 
+           (a8*Power(a9,2)*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Sin(a9*x))/2.))/a4 + 
+      a6*Power(E,a7*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*
+       (-((a1*a8*a9*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Cos(a9*x))/a4) - (a8*Power(a9,3)*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Cos(a9*x))/2. + 
+         (a1*a8*a9*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*Power(-a3 - a2*t + x,2)*Cos(a9*x))/Power(a4,2) + (3*a1*a8*Power(a9,2)*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4))*(-a3 - a2*t + x)*Sin(a9*x))/(2.*a4) - 
+         2*Power(a8,2)*Power(a9,3)*Cos(a9*x)*Sin(a9*x)))
+In[27]:= SG = h^2*u*ux*bxx/2 -h*u^2*bx*bxx + g*h*bx
+CForm[SG]
+Export["TravelGaussGrowSG.tex",FSG]
+
+Out[27]= a8 a9 (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) g Cos[a9 x]+(a6^2 a8 a9^2 E^(2 a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4)))^2 (-a3-a2 t+x) Sin[a9 x])/(2 a4)+a6^2 a8^2 a9^3 E^(2 a7 t-(-a3-a2 t+x)^2/a4) (a0+a1 E^(a5 t-(-a3-a2 t+x)^2/(2 a4))) Cos[a9 x] Sin[a9 x]
+Out[29]= TravelGaussGrowSG.tex
+a8*a9*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*g*Cos(a9*x) + (Power(a6,2)*a8*Power(a9,2)*Power(E,2*a7*t - Power(-a3 - a2*t + x,2)/a4)*Power(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)),2)*
+      (-a3 - a2*t + x)*Sin(a9*x))/(2.*a4) + Power(a6,2)*Power(a8,2)*Power(a9,3)*Power(E,2*a7*t - Power(-a3 - a2*t + x,2)/a4)*(a0 + a1*Power(E,a5*t - Power(-a3 - a2*t + x,2)/(2.*a4)))*Cos(a9*x)*Sin(a9*x)

@@ -1,0 +1,38 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\begin{multline}
+\frac{u^{n+1}_j - u^{n-1}_j}{2\Delta t} + g\frac{h^n_{j+1} -h^n_{j-1} }{2\Delta x}   + u_0\frac{u^n_{j+1} -u^n_{j-1} }{2\Delta x} \\- \frac{h_0^2}{3}\left(u_0 \frac{-u^{n}_{j-2} +2u^{n}_{j-1} -2u^{n}_{j+1} +u^{n}_{j+2}}{2\Delta x^3}  \right)  \\
+- \frac{h_0^2}{3}\frac{u^{n+1}_{j+1} -2u^{n+1}_{j} +u^{n+1}_{j-1} - u^{n-1}_{j+1} +2u^{n-1}_{j} -u^{n-1}_{j-1}}{2\Delta x^2\Delta t} 
+\\ = 0
+\end{multline}
+
+
+\begin{multline}
+\frac{\upsilon^{n+1}_j - \upsilon^{n-1}_j}{2\Delta t} + g\frac{\eta^n_{j+1} -\eta^n_{j-1} }{2\Delta x}   + U\frac{\upsilon^n_{j+1} -\upsilon^n_{j-1} }{2\Delta x} \\- \frac{H^2}{3}\left(U \frac{-\upsilon^{n}_{j-2} +2\upsilon^{n}_{j-1} -2\upsilon^{n}_{j+1} +\upsilon^{n}_{j+2}}{2\Delta x^3}  \right)  \\
+- \frac{H^2}{3}\frac{\upsilon^{n+1}_{j+1} -2\upsilon^{n+1}_{j} +\upsilon^{n+1}_{j-1} - \upsilon^{n-1}_{j+1} +2\upsilon^{n-1}_{j} -\upsilon^{n-1}_{j-1}}{2\Delta x^2\Delta t} 
+\\ = 0
+\end{multline}
+
+
+\begin{multline}
+\frac{\upsilon^{n+1}_j - \upsilon^{n-1}_j}{2\Delta t} \\
+- \frac{H^2}{3}\frac{\upsilon^{n+1}_{j+1} -2\upsilon^{n+1}_{j} +\upsilon^{n+1}_{j-1} - \upsilon^{n-1}_{j+1} +2\upsilon^{n-1}_{j} -\upsilon^{n-1}_{j-1}}{2\Delta x^2\Delta t} 
+\\ = - g\frac{\eta^n_{j+1} -\eta^n_{j-1} }{2\Delta x}   - U\frac{\upsilon^n_{j+1} -\upsilon^n_{j-1} }{2\Delta x} + \frac{H^2}{3}\left(U \frac{-\upsilon^{n}_{j-2} +2\upsilon^{n}_{j-1} -2\upsilon^{n}_{j+1} +\upsilon^{n}_{j+2}}{2\Delta x^3}  \right)  \\
+\end{multline}
+
+\begin{multline}
+\upsilon^{n+1}_j - \upsilon^{n-1}_j \\
+- \frac{H^2}{3}\frac{\upsilon^{n+1}_{j+1} -2\upsilon^{n+1}_{j} +\upsilon^{n+1}_{j-1} - \upsilon^{n-1}_{j+1} +2\upsilon^{n-1}_{j} -\upsilon^{n-1}_{j-1}}{\Delta x^2} 
+\\ =  \Delta t\left(- g\frac{\eta^n_{j+1} -\eta^n_{j-1} }{\Delta x}   - U\frac{\upsilon^n_{j+1} -\upsilon^n_{j-1} }{\Delta x} + \frac{H^2}{3}\left(U \frac{-\upsilon^{n}_{j-2} +2\upsilon^{n}_{j-1} -2\upsilon^{n}_{j+1} +\upsilon^{n}_{j+2}}{\Delta x^3}  \right)\right)  \\
+\end{multline}
+
+\begin{multline}
+\upsilon^{n+1}_j - \frac{H^2}{3}\frac{\upsilon^{n+1}_{j+1} -2\upsilon^{n+1}_{j} +\upsilon^{n+1}_{j-1} }{\Delta x^2} 
+\\ =  \upsilon^{n-1}_j - \frac{H^2}{3}\frac{\upsilon^{n-1}_{j+1} -2\upsilon^{n-1}_{j} +\upsilon^{n-1}_{j-1}}{\Delta x^2}   \\+  \Delta t\left(- g\frac{\eta^n_{j+1} -\eta^n_{j-1} }{\Delta x}   - U\frac{\upsilon^n_{j+1} -\upsilon^n_{j-1} }{\Delta x} + \frac{H^2}{3}\left(U \frac{-\upsilon^{n}_{j-2} +2\upsilon^{n}_{j-1} -2\upsilon^{n}_{j+1} +\upsilon^{n}_{j+2}}{\Delta x^3}  \right)\right)  \\
+\end{multline}
+
+\end{document}

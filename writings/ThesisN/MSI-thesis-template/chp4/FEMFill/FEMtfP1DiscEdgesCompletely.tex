@@ -1,0 +1,69 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+
+\section{Elliptic Equation}
+The linearised elliptic equation is
+
+\[G = H\upsilon -\frac{H^3}{3} \left(\frac{\partial^2 \upsilon}{\partial x^2}\right)\]
+
+Taking the weak version of this we get that
+
+\[\int_{\Omega}G  v \; dx = H \int_{\Omega} \upsilon v \; dx -\frac{H^3}{3}  \int_{\Omega} \frac{\partial^2 \upsilon}{\partial x^2} v \; dx\]
+
+\[\int_{\Omega}G  v \; dx = H \int_{\Omega} \upsilon v \; dx  + \frac{H^3}{3}  \int_{\Omega} \frac{\partial \upsilon}{\partial x} \frac{\partial v}{\partial x} \; dx\]
+
+
+We use the FEM discretisation from []
+
+\begin{equation*}
+G = \sum_j G^+_{j-1/2}\psi^+_{j-1/2}  + G^-_{j+1/2}\psi^-_{j+1/2}
+\end{equation*}
+
+and
+
+\begin{equation}
+\upsilon = \sum_j \upsilon_{j-1/2}\phi_{j-1/2} + \upsilon_{j}\phi_{j} + \upsilon_{j+1/2}\phi_{j+1/2}
+\end{equation}
+
+Now for our evolution equations we only need to to get the errors introduced from our calculation of $\upsilon_{j+1/2}$ and $\upsilon_{j}$, as we can get $\upsilon_{j-1/2}$ from just a shift. We previously demonstrated how the coefficient matrices are calculated for the FEM so we now just skip ahead to give the equations. 
+
+The FEM gives
+
+\begin{multline}
+\sum_j \frac{\Delta x}{6}\begin{bmatrix} G^+_{j -1/2} \\2 G^+_{j -1/2}+2 G^-_{j +1/2} \\ G^-_{j +1/2} \end{bmatrix} = \\\sum_j \left(H\frac{\Delta x}{30}\begin{bmatrix} 4 &2 &-1 \\2 &16 &2  \\-1 &2 &4 \end{bmatrix} + \frac{H^3 }{9\Delta x}\begin{bmatrix} 7 &-8 &1  \\-8 &16 &-8  \\1 &-8 &7  \end{bmatrix} \right) \begin{bmatrix} u_{j -1/2} \\u_{j} \\ u_{j +1/2} \end{bmatrix}
+\end{multline}
+
+\begin{multline}
+\sum_j \frac{\Delta x}{6}\begin{bmatrix} e^{-ik\Delta x} \mathcal{R}^+_2 \\2 e^{-ik\Delta x} \mathcal{R}^+_2 +2 \mathcal{R}^-_2 \\ \mathcal{R}^-_2 \end{bmatrix} G_j = \\\sum_j \left(H\frac{\Delta x}{30}\begin{bmatrix} 4 &2 &-1 \\2 &16 &2  \\-1 &2 &4 \end{bmatrix} + \frac{H^3 }{9\Delta x}\begin{bmatrix} 7 &-8 &1  \\-8 &16 &-8  \\1 &-8 &7  \end{bmatrix} \right) \begin{bmatrix} e^{-ik\frac{\Delta x}{2}} \\1 \\ e^{ik\frac{\Delta x}{2}} \end{bmatrix} u_j
+\end{multline}
+
+\begin{multline}
+\sum_j \frac{\Delta x}{6}\begin{bmatrix} e^{-ik\Delta x} \mathcal{R}^+_2 \\2 e^{-ik\Delta x} \mathcal{R}^+_2 +2 \mathcal{R}^-_2 \\ \mathcal{R}^-_2 \end{bmatrix} G_j = \\\sum_j \Bigg(H\frac{\Delta x}{30}\begin{bmatrix} 5i\sin\left(k \frac{\Delta x}{2}\right) + 3\cos\left(k \frac{\Delta x}{2}\right) + 2\\16 + 4 \cos\left(k \frac{\Delta x}{2}\right) \\ -5i\sin\left(k \frac{\Delta x}{2}\right) + 3\cos\left(k \frac{\Delta x}{2}\right) + 2 \end{bmatrix} \\+ \frac{H^3 }{9\Delta x}\begin{bmatrix} 6i\sin\left(k \frac{\Delta x}{2}\right) + 8\cos\left(k \frac{\Delta x}{2}\right) - 8 \\ - 16\cos\left(k \frac{\Delta x}{2}\right) + 16 \\ -6i\sin\left(k \frac{\Delta x}{2}\right) + 8\cos\left(k \frac{\Delta x}{2}\right) - 8 \end{bmatrix}  \Bigg) u_j
+\end{multline}
+
+For the calculation of $u_{j+ 1/2}$ we have
+
+\begin{multline}
+\frac{\Delta x}{6}\left( \mathcal{R}^-_2 + \mathcal{R}^+_2\right) G_j  = \\ \Bigg[ H \frac{\Delta x}{30} \left( -5i\sin\left(k \frac{\Delta x}{2}\right) + 3\cos\left(k \frac{\Delta x}{2}\right) + 2  + e^{i k \frac{\Delta x}{2}}\left(5i\sin\left(k \frac{\Delta x}{2}\right) + 3\cos\left(k \frac{\Delta x}{2}\right)\right) \right) \\+
+ \frac{H^3 }{9\Delta x} \left(-6i\sin\left(k \frac{\Delta x}{2}\right) + 8\cos\left(k \frac{\Delta x}{2}\right) - 8 +  e^{i k \frac{\Delta x}{2}}\left(6i\sin\left(k \frac{\Delta x}{2}\right) + 8\cos\left(k \frac{\Delta x}{2}\right) - 8\right)\right) \\\Bigg] u_j
+\end{multline}
+
+\begin{multline}
+\frac{\Delta x}{6}\left( \mathcal{R}^-_2 + \mathcal{R}^+_2\right) G_j  = \\ \Bigg[ H \frac{\Delta x}{30} \left( 4e^{-ik\frac{\Delta x}{2}} + e^{ik\frac{\Delta x}{2}} + 4 e^{ik{\Delta x}} + 1 \right) \\+
+\frac{H^3 }{9\Delta x} \left(7e^{-ik\frac{\Delta x}{2}} -7e^{ik\frac{\Delta x}{2}} + 7 e^{ik{\Delta x}} -7\right)\Bigg] u_j
+\end{multline}
+
+\begin{multline}
+\frac{\Delta x}{6}\left( \mathcal{R}^-_2 + \mathcal{R}^+_2\right) G_j  = \\ \Bigg[ H \frac{\Delta x}{30} \left( 4e^{-ik{\Delta x}} + 1 + 4 e^{ik\frac{\Delta x}{2}} + e^{-ik\frac{\Delta x}{2}} \right) \\+
+\frac{H^3 }{9\Delta x} \left(7e^{-ik{\Delta x}} -7 + 7 e^{ik\frac{\Delta x}{2}} -7e^{-ik\frac{\Delta x}{2}}\right)\Bigg] u_{j + 1/2}
+\end{multline}
+
+\begin{multline}
+\frac{\Delta x}{6}\left( \mathcal{R}^-_2 + \mathcal{R}^+_2\right) G_j  = \\ \Bigg[ H \frac{\Delta x}{30} \left( 4e^{-ik{\Delta x}} + 1 + 4 e^{ik\frac{\Delta x}{2}} + e^{-ik\frac{\Delta x}{2}} \right) \\+
+\frac{H^3 }{9\Delta x} \left(7e^{-ik{\Delta x}} -7 + 14i\sin\left(k \frac{\Delta x}{2}\right)\right)\Bigg] u_{j + 1/2}
+\end{multline}
+
+\end{document}

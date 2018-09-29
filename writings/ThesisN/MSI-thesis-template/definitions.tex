@@ -1,0 +1,48 @@
+  \usepackage{amssymb}
+  \usepackage{latexsym}
+  \usepackage{amsfonts}
+  \usepackage{amsthm}
+  \usepackage{amsmath}
+  \usepackage{tikz}
+
+
+% put your command and environment definitions here
+
+
+
+% some theorem environments
+% remove "[theorem]" if you do not want them to use the same number sequence
+
+
+  \newtheorem{theorem}{Theorem}[chapter]
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{prop}[theorem]{Proposition}
+  \newtheorem{cor}[theorem]{Corollary}
+
+  \newtheorem{conj}{Conjecture}
+  \renewcommand{\theconj}{\Alph{conj}}  % numbered A, B, C etc
+  
+  \newcommand{\matr}[1]{\mathbf{#1}}
+  \newcommand{\vecn}[1]{\boldsymbol{#1}}
+  \newcommand\solidrule[1][0.25cm]{\rule[0.5ex]{#1}{1.5pt}}
+  \newcommand\dashedrule{\mbox{%
+  		\solidrule[2mm]\hspace{2mm}\solidrule[2mm]}}
+  \DeclareRobustCommand{\squaret}[1]{\tikz{\draw[#1] (0,0) rectangle (0.2cm,0.2cm);}}
+  \DeclareRobustCommand{\circlet}[1]{\tikz{\draw[#1] (0,0) circle [radius=0.1cm];}}
+  \DeclareRobustCommand{\trianglet}[1]{\tikz{\draw[#1] (0,0) --
+  		(0.25cm,0) -- (0.125cm,0.25cm) -- (0,0);}}
+  \DeclareRobustCommand{\diamondt}[1]{\tikz{\draw[#1] (0,0) --(0.1cm,0.15cm) -- (0.2cm,0cm) -- (0.1cm,-0.15cm) -- (0,0)  ;}}
+  \DeclareRobustCommand{\squareF}[1]{\tikz{\filldraw[#1,fill opacity= 0.3] (0,0) rectangle (0.2cm,0.2cm);}}
+ 
+  
+  \newcommand{\dotrule}[1][4mm]{%
+  	\parbox{#1}{\dotfill}} 
+
+  \theoremstyle{definition}
+  \newtheorem{defn}[theorem]{Definition}
+  \newtheorem{ex}[theorem]{Example}
+  \newtheorem{exs}[theorem]{Examples}
+  \newtheorem{question}[theorem]{Question}
+  \newtheorem{remark}[theorem]{Remark}
+  \newtheorem{notn}[theorem]{Notation}
+  \newtheorem{alg}[theorem]{Algorithm}

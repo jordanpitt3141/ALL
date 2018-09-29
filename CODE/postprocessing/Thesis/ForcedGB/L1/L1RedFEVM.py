@@ -86,7 +86,7 @@ if not os.path.exists(sdir):
         os.makedirs(sdir)     
        
         
-for ki in range(3,17):
+for ki in range(10,11):
         
         
     wdir = wdirb + str(ki) + "/"
@@ -169,6 +169,7 @@ for ki in range(3,17):
     L1h = norm(rhC -rhA, ord=1)/ norm(rhA, ord=1)
     L1G = norm(rGC -rGA, ord=1)/ norm(rGA, ord=1)
     
+    """
     s = sdir + "L1h.dat"
     with open(s,'a') as file1:
             s ="%3.8f%5s%1.20f\n" %(dx," ",L1h)
@@ -183,6 +184,7 @@ for ki in range(3,17):
     with open(s,'a') as file1:
             s ="%3.8f%5s%1.20f\n" %(dx," ",L1G)
             file1.write(s)  
+    """
 
 
      

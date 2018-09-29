@@ -80,12 +80,12 @@ def close(t,ts,dt):
     return var    
 
 #Forcing Problem    
-wdir = "../../../../../../../data/2018/raw/Thesis/ForcedFin/Dry/AllNum/FEVM2/"
+wdir = "../../../../../../../dataT/2018/raw/Thesis/ForcedFin/Dry/AllNum/FEVM2/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
 
-for ki in range(10,11):
+for ki in range(12,13):
     
     wdirji = wdir + str(ki) + "/"
     if not os.path.exists(wdirji):

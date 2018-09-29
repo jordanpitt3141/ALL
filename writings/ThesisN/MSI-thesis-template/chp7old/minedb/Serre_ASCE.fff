@@ -1,0 +1,233 @@
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{pics/explainers/dbs.pdf}
+\caption{Initial conditions for the smooth dam-break problem with $h_0 = 1m$, $h_1 = 1.8m$ and $x_0 =500m$ as $\alpha$ varies.}
+\label{fig:dbsmoothinit}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{pics/explainers/SWWEana.pdf}
+\caption{Analytic solution at $t=30s$ of the shallow water wave equations for the dam-break problem with $h_0 = 1m$, $h_1=1.8m$ and $x_0=100m$.}
+\label{fig:SWWEanadiagram}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{pics/explainers/SERREex.pdf}
+\caption{Demonstration of quantities obtained by Whitham modulation for undular bores of the Serre equations.}
+\label{fig:Serreanadiagram}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{pics/results/SDB/numsols/alpha0.025/1-figure0.pdf}
+\caption{Numerical results of $\mathcal{V}_3$  at $t= 30s$ for the smooth dam-break problem with $\alpha = 40m$ for $\Delta x = 10/2^{4}m$ ({\color{black} \solidrule}).}
+\label{fig:o3a1dxlimflatexp}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/Lcon/alpha0.025/1.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/Con/1.pdf}
+\end{subfigure}
+\caption{On the left is $L_1$ for $h$ ({\color{red} $\triangle$}) and $u$ ({\color{blue} $\square$}) and on the right is $C_1$ for $h$ ({\color{red} $\triangle$}) and $\mathcal{H}$ ({\color{blue} $\circ$}) for $\mathcal{V}_3$'s solution for the smooth dam-break problem with $\alpha = 40m$.}
+\label{fig:o3a1dxlimmeasure}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.7\textwidth]{pics/results/SDB/numsols/alpha0.5/1-figure0.pdf}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/alpha0.5/2-figure0.pdf}
+\end{subfigure}
+\caption{Numerical results of $\mathcal{V}_3$  at $t= 30s$ for the smooth dam-break problem with $\alpha = 2m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}).}
+\label{fig:o3a6dxlimflatexp}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/Lcon/alpha0.5/1.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/Con/6.pdf}
+\end{subfigure}
+\caption{On the left is $L_1$ for $h$ ({\color{red} $\triangle$}) and $u$ ({\color{blue} $\square$}) and on the right is $C_1$ for $h$ ({\color{red} $\triangle$}), $uh$ ({\color{black} $\diamond$}) and $\mathcal{H}$ ({\color{blue} $\circ$}) for $\mathcal{V}_3$'s solution for the smooth dam-break problem with $\alpha = 2m$.}
+\label{fig:o3a2dxlimmeasure}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.7\textwidth]{pics/results/SDB/numsols/alpha2.5/1-figure0.pdf}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/alpha2.5/2-figure0.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/alpha2.5/3-figure0.pdf}
+\end{subfigure}
+\caption{Numerical results of $\mathcal{V}_3$  at $t= 30s$ for the smooth dam-break problem with $\alpha = 0.4m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}).}
+\label{fig:o3a9dxlimcdexp}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/Lcon/alpha2.5/1.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/Con/9.pdf}
+\end{subfigure}
+\caption{On the left is $L^*_1$ for $h$ ({\color{red} $\triangle$}) and $u$ ({\color{blue} $\square$}) and on the right is $C_1$ for $h$ ({\color{red} $\triangle$}), $uh$ ({\color{black} $\diamond$}) and $\mathcal{H}$ ({\color{blue} $\circ$}) for $\mathcal{V}_3$'s solution for the smooth dam-break problem with $\alpha = 0.4m$.}
+\label{fig:o3a3dxlimmeasure}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.7\textwidth]{pics/results/SDB/numsols/alpha10/1-figure0.pdf}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/alpha10/2-figure0.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/alpha10/3-figure0.pdf}
+\end{subfigure}
+\caption{Numerical results of $\mathcal{V}_3$  at $t= 30s$ for the smooth dam-break problem with $\alpha = 0.1m$ for $\Delta x = 10/2^{10}m$ ({\color{blue} \solidrule}), $10/2^8m$ ({\color{red} \solidrule}), $10/2^6m$ ({\color{green!60!black} \solidrule}) and $10/2^{4}m$ ({\color{black} \solidrule}).}
+\label{fig:o3a20dxlimcdexp}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/Lcon/alpha10/1.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/Con/12.pdf}
+\end{subfigure}
+\caption{On the left is $L^*_1$ for $h$ ({\color{red} $\triangle$}) and $u$ ({\color{blue} $\square$}) and on the right is $C_1$ for $h$ ({\color{red} $\triangle$}), $uh$ ({\color{black} $\diamond$}) and $\mathcal{H}$ ({\color{blue} $\circ$}) for $\mathcal{V}_3$'s solution for the smooth dam-break problem with $\alpha = 0.1m$.}
+\label{fig:o3a4dxlimmeasure}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.7\textwidth]{pics/results/SDB/numsols/modelcomppalpha10dx10/1-figure0.pdf}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/modelcomppalpha10dx10/2-figure0.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/modelcomppalpha10dx10/4-figure0.pdf}
+\end{subfigure}
+\caption{Numerical results for the smooth dam-break problem with $\alpha = 0.1m$ and $\Delta x = 10/2^{10}m$
+for $\mathcal{G}$ ({\color{blue} \solidrule}), $\mathcal{E}$ ({\color{red} \solidrule}), $\mathcal{V}_3$ ({\color{green!60!black} \solidrule}) and $\mathcal{V}_1$ ({\color{black} \solidrule}).}
+\label{fig:MODlim}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.7\textwidth]{pics/results/SDB/numsols/300s/CF0t300s.pdf}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/300s/CF1t300s.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/300s/CF2t300s.pdf}
+\end{subfigure}
+\caption{Numerical solution of smooth dam-break problem at $t=300s$ by $\mathcal{V}_3$ with $\alpha = 0.1m$ for $\Delta x = 10/2^{9}m$ ({\color{blue} \solidrule}) and $10/2^{8}m$ ({\color{red} \solidrule}).}
+\label{fig:FVcomplonga20}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=\textwidth]{pics/results/SDB/numsols/300s/evolve30s.pdf}
+\subcaption*{\hspace{10 mm}$t=30s$}
+\end{subfigure}%
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=\textwidth]{pics/results/SDB/numsols/300s/evolve100s.pdf}
+\subcaption*{\hspace{10 mm} $t=100s$}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=\textwidth]{pics/results/SDB/numsols/300s/evolve200s.pdf}
+\subcaption*{\hspace{10 mm}$t=200s$}
+\end{subfigure}%
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=\textwidth]{pics/results/SDB/numsols/300s/evolve300s.pdf}
+\subcaption*{\hspace{10 mm}$t=300s$}
+\end{subfigure}
+
+\caption{Numerical solution of the smooth dam-break problem by $\mathcal{V}_3$ with $\alpha = 0.1m$ and $\Delta x = 10/2^{9}m$ at various times.}
+\label{fig:FVlongcemt500}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/SWWCOMP/30s/0.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/SWWCOMP/30s/2.pdf}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/SWWCOMP/30s/1.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/SWWCOMP/30s/3.pdf}
+\end{subfigure}
+\caption{$h - h_2$ ({\color{blue} \solidrule}) and $u - u_2$ ({\color{red} \solidrule}) for numerical solution of the smooth dam-break by $\mathcal{V}_3$ with $\alpha = 0.1m$ and $\Delta x = 10/2^{9}m$ at $t=30s$ as in Figure \ref{fig:o3a20dxlimcdexp}.}
+\label{fig:UHSWWcomp30sall}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/SWWCOMP/300s/0.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/SWWCOMP/300s/2.pdf}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/SWWCOMP/300s/1.pdf}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/SWWCOMP/300s/3.pdf}
+\end{subfigure}
+\caption{$h - h_2$ ({\color{blue} \solidrule}) and $u - u_2$ ({\color{red} \solidrule}) for numerical solution of the smooth dam-break by  $\mathcal{V}_3$ with $\alpha = 0.1m$ and $\Delta x = 10/2^{9}m$ at $t=300s$ as in Figure \ref{fig:FVcomplonga20}.}
+\label{fig:UHSWWcomp300sall}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/CDspeed/speed.pdf}
+\caption{$u_2$ ({\color{blue} \solidrule}) and speed of the contact discontinuity ({\color{red} $\circ$})  for numerical solutions of smoothed dam-break problems with different aspect ratios ($h_1 /h_0$) by $\mathcal{V}_3$ where $\alpha = 0.1m$ and $\Delta x = 10/2^{9}m$ at $t=100s$.}
+\label{fig:CDspeed}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+    \includegraphics[width=0.5\textwidth]{pics/results/SDB/numsols/300s/a.pdf}
+\caption{Leading wave height plotted over time for the numerical solution of the smooth dam-break problem by $\mathcal{V}_3$ with $\alpha = 0.1m$ for $\Delta x = 10/2^{9}m$ ({\color{blue} \solidrule}) as in Figure \ref{fig:FVcomplonga20}.}
+\label{fig:FVlonga20aplus}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{subfigure}{\textwidth}
+\includegraphics[width=0.5\textwidth]{pics/results/SDB/H/Time/HFT-figure0.pdf}
+\includegraphics[width=0.5195\textwidth]{pics/results/SDB/H/Time/TT-figure0.pdf}
+\end{subfigure}
+\caption{Proportion of $\mathcal{H}$ made up by horizontal kinetic energy ({\color{blue} \solidrule}), vertical kinetic energy ({\color{red} \solidrule}) and gravitational potential energy ({\color{green!80!black} \solidrule}) for $\mathcal{V}_3$'s solution of the smooth dam-break problem with $\alpha = 0.1m$ and $\Delta x = 10/2^{9}m$ over time as in Figure \ref{fig:FVcomplonga20}.}
+\label{fig:PHTa12all}
+\end{figure}
+\efloatseparator
+ 

@@ -1,0 +1,152 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{ amssymb }
+\usepackage{breqn}
+\begin{document}
+\section{Nodal Values To Cell Averages}
+Definition
+\[\bar{q}_j = \mathcal{M} q_j\]
+
+Values
+\[\mathcal{M}_A = 2*sin(dx*k/2)/(dx*k) = \frac{2}{k \Delta x } \sin\left(\frac{k\Delta x}{2}\right)\]
+
+\[\mathcal{M}_1 = 1\]
+
+\[\mathcal{M}_2 = 1\]
+
+\[\mathcal{M}_3 = -cos(dx*k)/12 + 13/12 =  \frac{24}{26 - 2 \cos\left(k \Delta x\right)}\]
+
+\section{Reconstruction}
+
+
+\subsection{h and G ($\mathcal{R^+}$ and $\mathcal{R^-}$ )}
+
+Definition:
+
+\[q^+_{j+1/2} = \mathcal{R}^+ q_j\]
+
+and
+
+\[q^-_{j+1/2} = \mathcal{R}^- q_j\]
+
+Values:
+
+\[\mathcal{R}^+_A = \mathcal{R}^-_A = exp(I*dx*k/2) = e^{i k \frac{\Delta x}{2}} = \exp\left(i k \frac{\Delta x}{2}\right)\]
+
+\begin{align*}
+\mathcal{R}^+_1 &= exp(I*dx*k) = \exp\left(i k {\Delta x}\right) \\
+\mathcal{R}^-_1 &= 1  \\
+\end{align*}
+
+\begin{align*}
+\mathcal{R}^+_2 &= -exp(2*I*dx*k)/4 + exp(I*dx*k) + 1/4 = \exp\left(i k {\Delta x}\right) \left(1 - \frac{i \sin\left(k\Delta x \right)}{2} \right)  \\
+\mathcal{R}^-_2 &= I*sin(dx*k)/2 + 1 =1 +  \frac{i \sin\left(k\Delta x \right)}{2}  \\
+\end{align*}
+
+\begin{multline}
+\mathcal{R}^+_3 = (2*exp(2*I*dx*k) - 10*exp(I*dx*k) - 4)/(cos(dx*k) - 13)\\  =  \frac{2\exp\left(2ik \Delta x\right) - 10\exp\left(ik \Delta x\right) - 4}{\cos\left(k \Delta x\right) - 13}
+\end{multline}
+
+\begin{multline}
+\mathcal{R}^-_3 = 2*(-(2*exp(I*dx*k) + 5)*exp(I*dx*k) + 1)*exp(-I*dx*k) / \\
+(cos(dx*k) - 13) = \frac{2 \exp\left(-i k \Delta x\right)\left(1 - \exp\left(i k \Delta x\right)\left(5 + 2\exp\left(i k \Delta x\right) \right)\right)}{\cos\left(k \Delta x\right) - 13} \\  = \frac{2 \exp\left(-i k \Delta x\right) - 4\exp\left(i k \Delta x\right) - 10}{\cos\left(k \Delta x\right) - 13}
+\end{multline}
+
+\subsection{u ($\mathcal{R}^u$ )}
+
+Definition:
+
+\[q_{j+1/2} = \mathcal{R}^u q_j\]
+
+
+Values:
+
+\[\mathcal{R}^u_A = exp(I*dx*k/2) = e^{i k \frac{\Delta x}{2}} = \exp\left(i k \frac{\Delta x}{2}\right)\]
+
+\[R^u_1 = exp(I*dx*k)/2 + 1/2 = \frac{\exp\left(i k \Delta x\right) + 1}{2} \]
+
+\[R^u_2 = exp(I*dx*k)/2 + 1/2 = \frac{\exp\left(i k \Delta x\right) + 1}{2} \]
+
+\begin{multline}
+R^u_3 = -exp(2*I*dx*k)/16 + 9*exp(I*dx*k)/16 + 9/16 - exp(-I*dx*k)/16  \\= \frac{-\exp\left(-ik \Delta x\right) + 9 \exp\left(ik \Delta x\right) -\exp\left(2ik \Delta x\right) + 9}{16}
+\end{multline}
+
+\section{Elliptic Equation}
+
+Definition:
+
+\[G_{j} = \mathcal{G} u_j\]
+
+values
+
+\[\mathcal{G}_A = H + \frac{H^3}{3}k^2\]
+
+\[\mathcal{G}_{2FD} = -H**3*(2*cos(dx*k) - 2)/(3*dx**2) + H = H - \frac{H^3}{3}\frac{2\cos\left(k \Delta x\right) -2}{\Delta x^2}\]
+
+\begin{multline}
+\mathcal{G}_3 = -H**3*(32*cos(dx*k) - 2*cos(2*dx*k) - 30)/(36*dx**2) + H = \\ H - \frac{H^3}{3}\frac{32\cos\left(k \Delta x\right) -2\cos\left(2k \Delta x\right) - 30}{12 \Delta x^2}
+\end{multline}
+
+\begin{multline}
+\mathcal{G}_{2FEM} = (2*H**3*(exp(3*I*dx*k/2) + 14*exp(I*dx*k/2) - 8*exp(I*dx*k) - 8 \\ + exp(-I*dx*k/2))/(3*dx**2) + H*(-exp(3*I*dx*k/2) + 8*exp(I*dx*k/2) + 2*exp(I*dx*k) \\+ 2 - exp(-I*dx*k/2))/5)/(-exp(2*I*dx*k)/4 + exp(I*dx*k) + I*sin(dx*k)/2 + 5/4) \\ =  \Bigg(\frac{2 H^3}{3 \Delta x ^2} \left(\exp\left(ik \frac{3\Delta x}{2}\right) + 14 \exp\left(ik \frac{\Delta x}{2}\right) - 8 \exp\left(ik\Delta x\right) - 8 + \exp\left(-ik \frac{\Delta x}{2}\right)\right) \\ + \frac{H}{5}\left(-\exp\left(ik \frac{3\Delta x}{2}\right) + 8 \exp\left(ik \frac{\Delta x}{2}\right) + 2\exp\left(ik \Delta x\right) + 2 - \exp\left(-ik \frac{\Delta x}{2}\right)\right) \Bigg) \div \\\left( - \frac{1}{4} \exp\left(2 i \Delta x k\right) + \exp\left(i \Delta x k\right) + \frac{i}{2} \sin\left(k\Delta x\right) + \frac{5}{4} \right) 
+\end{multline}
+
+\section{Conservation Equation}
+
+ \subsection{mass flux}
+ Definition
+ \[F^{\eta}_{j+1/2} = \mathcal{F}^{\eta,\eta} \eta_j + \mathcal{F}^{\eta,\upsilon} \upsilon_j \]
+ 
+ \subsubsection{$\mathcal{F}^{\eta,\eta}$}
+ \[\mathcal{F}^{\eta,\eta}_A =  0\]
+ 
+ \[\mathcal{F}^{\eta,\eta}_g = sqrt(H*g)*(Rms - Rps)/2 = -\sqrt{gH}\frac{\mathcal{R}^+ - \mathcal{R}^-}{2}\]
+ 
+ \begin{multline*}
+ \mathcal{F}^{\eta,\eta}_3 = sqrt(H*g)*(exp(I*dx*k) - 1)*(cos(dx*k) - 13)**2*((2*exp(I*dx*k) + 5)\\*exp(I*dx*k) - (-exp(2*I*dx*k) + 5*exp(I*dx*k) + 2)\\*exp(I*dx*k) - 1)*exp(-2*I*dx*k)/(1728*dx)
+ \end{multline*}
+ 
+  \begin{multline*}
+  \mathcal{F}^{\eta,\eta}_3 = \sqrt{gH}\left(\exp\left(ik\Delta x\right) - 1\right)\left(\cos\left(k\Delta x \right) - 13\right)^2 \Bigg(\left(2\exp\left(ik\Delta x\right) + 5\right)\exp\left(ik\Delta x\right) \\- \left(-\exp\left(2ik\Delta x\right) +5 \exp\left(ik\Delta x\right) + 2\right) \exp\left(ik\Delta x\right) - 1 \Bigg)\frac{\exp\left(-2ik\Delta x\right)}{1728 \Delta x}
+  \end{multline*}
+ 
+ 
+  \subsubsection{$\mathcal{F}^{\eta,\upsilon}$}
+  \begin{multline}
+\mathcal{F}^{\eta,\upsilon}_A =  \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}} H \upsilon_{j+1/2} = \frac{1}{i \omega \Delta t}\left(\exp\left(i \omega \Delta t\right) - 1\right) H \upsilon_{j+1/2}\\ = \frac{1}{i \omega \Delta t}\left(\exp\left(i \omega \Delta t\right) - 1\right) \exp\left(i k \frac{\Delta x}{2}\right)  H \upsilon_{j}
+  \end{multline}
+
+  
+  \[\mathcal{F}^{\eta,\upsilon}_g= H*Rus = H \mathcal{R}^u\]
+ 
+ \subsection{momentum flux}
+ Definition
+ \[F^{G}_{j+1/2} = \mathcal{F}^{G,\eta} \eta_j + \mathcal{F}^{G,\upsilon} \upsilon_j \]
+ 
+  \subsubsection{$\mathcal{F}^{G,\eta}$}
+  \begin{multline}
+    \mathcal{F}^{G,\eta}_A =  \frac{1}{\Delta t} \int_{t^n}^{t^{n+1}} gH \eta_{j+1/2} = \frac{1}{i \omega \Delta t}\left(\exp\left(i \omega \Delta t\right) - 1\right) gH \eta_{j+1/2}\\ = \frac{1}{i \omega \Delta t}\left(\exp\left(i \omega \Delta t\right) - 1\right) \exp\left(i k \frac{\Delta x}{2}\right) gH \eta_{j}
+  \end{multline}
+  
+  \[\mathcal{F}^{G,\eta}_g = H*g*(Rms + Rps)/2 = gH\frac{\mathcal{R}^+ +  \mathcal{R}^-}{2}\]
+  
+  \begin{multline}
+  \mathcal{F}^{G,\eta}_3 = H*g*(1 - exp(-I*dx*k))*(-((2*exp(I*dx*k) + 5)*exp(I*dx*k) - 1)*(cos(dx*k)\\ - 13)*exp(-I*dx*k)/72 + (cos(dx*k) - 13)\\*(exp(2*I*dx*k) - 5*exp(I*dx*k) - 2)/72)\\*(-cos(dx*k)/12 + 13/12)\\/(2*dx*(-H**3*(32*cos(dx*k) - 2*cos(2*dx*k) - 30)/(36*dx**2) + H))
+  \end{multline}
+  
+\begin{multline}
+\mathcal{F}^{G,\eta}_3 = gH \left(1 - \exp(-ik\Delta x)\right)\Bigg[ -\left(\left(2\exp(ik\Delta x) + 5\right)\exp(ik\Delta x)  -1\right)\left(\cos\left(k \Delta x\right) - 13\right) \\
+\frac{\exp(-ik\Delta x)}{72} + \frac{1}{72}\left(\cos\left(k \Delta x\right) - 13\right)\left(\exp(2ik\Delta x) - 5 \exp(ik\Delta x) - 2\right)\Bigg]\left(\frac{-\cos\left(k \Delta x\right)}{12} + \frac{13}{12}\right) \\ \div \left(2 \Delta x \left(-H^3\frac{32 \cos\left(k\Delta x\right) - 2\cos\left(2 k \Delta x\right) -30}{36 \Delta x^2} + H\right)\right)
+\end{multline}
+  
+  \subsubsection{$\mathcal{F}^{G,\upsilon}$}
+  
+   \[\mathcal{F}^{G,\upsilon}_A =  0\]
+   
+   \[\mathcal{F}^{G,\eta}_g = Gs*sqrt(H*g)*(Rms - Rps)/2 = -\sqrt{gH} \frac{\mathcal{R}^+ - \mathcal{R}^-}{2}\]
+
+ 
+
+
+
+\end{document}
