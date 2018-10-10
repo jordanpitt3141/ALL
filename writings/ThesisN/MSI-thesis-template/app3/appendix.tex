@@ -1,0 +1,60 @@
+\chapter{Conservation Quantities for Analytic Solutions}
+\label{app:ConQuant}
+
+\section{Soliton}
+
+As we would like to assess the conservation properties of our numerical methods we will require the total mass, momentum, $G$ and Hamiltonian for this solution. In particular we require these totals at the initial time $t=0$, to allow for various domains we present the integrals in indefinite form 
+\begin{subequations}
+	\begin{align}
+	\int h(x,0) \; dx = {} & a_0 x + \frac{a_1}{\kappa} \tanh\left(\kappa x\right) + \text{constant}, \\
+	\int u(x,0)h(x,0) \;  dx = {} & \frac{a_1 c}{\kappa} \tanh\left(\kappa x\right)+ \text{constant}, \\  \nonumber \\
+	\begin{split}
+	\int G(x,0) \; dx = {}&  \frac{c a_1}{3 \kappa}  \Bigg(3 + 2a_0^2 \kappa^2\text{sech}^2\left(\kappa x\right)  \\ &+ 2a_0 a_1 \kappa^2 \text{sech}^4\left(\kappa x\right) \Bigg)\tanh\left(\kappa x\right)  + \text{constant} ,
+	\end{split}
+	\\  \nonumber \\
+	\begin{split}
+	\int \mathcal{H}(x,0) \; dx = {}&\frac{1}{2} \Bigg(\int g\left[h(x,0)\right]^2 \; dx + \int h(x,0)\left[u(x,0)\right]^2 \; dx  \\ &+ \int \left[h(x,0)\right]^3 \left[\frac{\partial u(x,0)}{\partial x}\right]^2 \; dx \Bigg) 
+	\end{split}
+	\end{align}
+	\label{eqn:SolitonConservation}
+\end{subequations}
+
+where the integrals of the Hamiltonian are
+
+\begin{align*}
+\begin{split}
+\int g\left[h(x,0)\right]^2 \; dx ={}& \frac{g}{12 \kappa }\text{sech}^3\left(\kappa x\right) \Bigg[9a_0^2 \kappa x \cosh\left(\kappa x\right) + 3 a_0^2 \kappa x \cosh\left(3\kappa x\right) \\ &+ 4 a_1 \left(3a_0 + 2 a_1 + \left(3a_0 + a_1\right)\cosh\left(2\kappa x\right)\right) \sinh\left(\kappa x\right)\Bigg] \\ &+ \text{constant},
+\end{split}\\ \\
+\begin{split}
+\int h(x,0)\left[u(x,0)\right]^2 \; dx = {}& \frac{\sqrt{a_1}c^2}{\kappa} \Bigg( -\frac{a0}{\sqrt{a_0 + a_1}} \text{arctanh}\left(\dfrac{\sqrt{a1} \tanh\left(\kappa x\right)}{\sqrt{a_0 + a1}}\right)\\ &+ \frac{\sqrt{a_1}}{\kappa}\tanh\left(\kappa x\right)\Bigg)  + \text{constant},
+\end{split} 
+\\ \\
+\begin{split}
+\int \left[h(x,0)\right]^3 \left[\frac{\partial u(x,0)}{\partial x}\right]^2 \; dx = {}& \frac{2a_0^2c^2 \kappa }{9 \sqrt{a_1} \left(a_0 + a_1\text{sech}^2\left(\kappa x \right) \right)}   \\ &\times\left(a_0 + 2a_1 + a_0 \cosh\left(2\kappa x\right) \right) \text{sech}^2\left(\kappa x\right) \\&\times \Bigg[-3 a_0 \sqrt{a_0 + a_1}\text{arctanh}\left(\dfrac{\sqrt{a1} \tanh\left(\kappa x\right)}{\sqrt{a_0 + a1}}\right)  \\ &+ \sqrt{a_1}\left(3a_0 + a_1 - a_1\text{sech}^2\left(\kappa x\right)\right)\tanh(\kappa x) \Bigg]+ \text{constant}.
+\end{split}
+\end{align*}
+
+Therefore, we have the analytic values of our physical variables $h$, $u$, $G$ and $b$ for all $t$ as well as the total amounts of our conserved quantities for the initial conditions when $t=0s$, as desired.
+
+\section{Lake At Rest}
+
+The total momentum and $G$ in our system is straightforward to calculate as both are zero everywhere and so we have 
+\begin{align}
+&\int u(x,0)h(x,0) \;  dx = {} 0 + \text{constant}, \\
+&\int G(x,0) \; dx = {} 0 + \text{constant}.
+\end{align}
+To calculate the total mass and Hamiltonian in our system we must break up our domain into wet regions where $b(x) < a_0$ and dry regions where $b(x) \ge a_0$. For the dry regions the total mass and energy are $0$ and so we have 
+\begin{subequations}
+	\begin{align}
+	\int h(x,0) \; dx = {} & 0 , \\
+	\int \mathcal{H}(x,0) \; dx = {} & 0
+	\end{align}
+\end{subequations}
+whilst in a wet region we have 
+\begin{subequations}
+	\begin{align}
+	\int h(x,0) \; dx = {} & a_0 x -  \int b(x) \; dx , \\  \nonumber \\
+	\int \mathcal{H}(x,0) \; dx = {} & \frac{g}{2} \left(a_0^2x  -  2a_0 \int b(x) \; dx + \int b(x)^2 \; dx \right).
+	\end{align}
+\end{subequations}
+Therefore as desired we have expressions for all the quantities in terms of the bed profile $b(x)$. 

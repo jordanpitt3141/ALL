@@ -8,7 +8,7 @@ from scipy import arange,zeros
 from pylab import plot, show, legend,xlim,ylim,savefig,title,xlabel,ylabel,clf, loglog
 import csv
 
-termname = "hbx2uv"
+termname = "h2bxuxv"
 termmult = ""
 x = Symbol('x')
 filen = termname + ".csv"

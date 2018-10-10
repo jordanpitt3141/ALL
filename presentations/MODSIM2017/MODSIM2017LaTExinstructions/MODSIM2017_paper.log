@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.24)  15 NOV 2017 14:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.1)  10 OCT 2018 10:43
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **MODSIM2017_paper.tex
 (./MODSIM2017_paper.tex
@@ -608,11 +608,14 @@ Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
+runsystem(uname -s > "MODSIM2017_paper.w18")...executed.
 
-Package ifplatform Warning: 
-    shell escape is disabled, so I can only detect \ifwindows.
 
-) (/usr/share/texlive/texmf-dist/tex/latex/filemod/filemod.sty
+(./MODSIM2017_paper.w18)
+runsystem(rm -- "MODSIM2017_paper.w18")...executed.
+
+)
+(/usr/share/texlive/texmf-dist/tex/latex/filemod/filemod.sty
 Package: filemod 2011/09/19 v1.2 Get and compare file modification times
 
 (/usr/share/texlive/texmf-dist/tex/latex/filemod/filemod-expmin.sty
@@ -742,17 +745,11 @@ File: l3pdfmode.def 2015/11/11 v6250 L3 Experimental driver: PDF mode
 \pstool@out=\write5
 \pstool@mainfile@ior=\read2
 \pstool@auxfile@ior=\read3
+runsystem(cd ""; cp -- "MODSIM2017_paper.aux" "MODSIM2017_paper.oldaux" )...exe
+cuted.
 
-
-Package pstool Warning: 
-  Package option [process=none] activated
-  because -shell-escape is not enabled.
-This warning occurred on input line 137.
-
-runsystem(cd ""; cp -- "MODSIM2017_paper.aux" "MODSIM2017_paper.oldaux" )...dis
-abled (restricted).
-
-) (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip49
 \bibsep=\skip50
@@ -1125,15 +1122,17 @@ Underfull \vbox (badness 7963) has occurred while \output is active []
 > <./SLWG2.pdf> <./SLWG3.pdf> <./SLWG4.pdf>] (./MODSIM2017_paper.bbl [5 <./soli
 tonslopeSerre1.pdf> <./solitonslopeSerre2.pdf> <./solitonslopeSerre3.pdf> <./so
 litonslopeSerre4.pdf> <./solitonslopeSerre5.pdf> <./SerreBore.pdf>])
+runsystem(cd ""; rm -- "MODSIM2017_paper.oldaux" )...executed.
+
 \Changes@OutFile=\write6
 \openout6 = `MODSIM2017_paper.soc'.
 
  [6]
 (./MODSIM2017_paper.aux) ) 
 Here is how much of TeX's memory you used:
- 31461 strings out of 494953
- 736526 string characters out of 6180977
- 845703 words of memory out of 5000000
+ 31464 strings out of 494953
+ 736572 string characters out of 6180978
+ 845799 words of memory out of 5000000
  34206 multiletter control sequences out of 15000+600000
  17003 words of font info for 37 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191

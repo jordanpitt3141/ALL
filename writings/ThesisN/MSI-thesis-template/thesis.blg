@@ -9,47 +9,59 @@ A level-1 auxiliary file: chp3/chapter.aux
 A level-1 auxiliary file: chp4/chapter.aux
 A level-1 auxiliary file: chp5/chapter.aux
 A level-1 auxiliary file: chp6/chapter.aux
+A level-1 auxiliary file: chp7/chapter.aux
 A level-1 auxiliary file: app1/appendix.aux
 A level-1 auxiliary file: app2/appendix.aux
+A level-1 auxiliary file: app3/appendix.aux
 Database file #1: bibliography.bib
-You've used 35 entries,
+You're missing a field part---line 167 of file bibliography.bib
+ :  number      = 
+ :                ,
+I'm skipping whatever remains of this entry
+Warning--string name "springer" is undefined
+--line 991 of file bibliography.bib
+Warning--empty publisher in Sorenson-2006
+Warning--empty publisher in Bradford-Sanders-2002-953
+Warning--there's a number but no series in Davis-Rabinowitz-1984
+You've used 49 entries,
             2481 wiz_defined-function locations,
-            805 strings with 10788 characters,
-and the built_in function-call counts, 12770 in all, are:
-= -- 1082
-> -- 563
-< -- 23
-+ -- 230
-- -- 160
-* -- 1006
-:= -- 2044
-add.period$ -- 106
-call.type$ -- 35
-change.case$ -- 66
-chr.to.int$ -- 35
-cite$ -- 35
-duplicate$ -- 653
-empty$ -- 1237
-format.name$ -- 215
-if$ -- 2737
+            892 strings with 13501 characters,
+and the built_in function-call counts, 18160 in all, are:
+= -- 1526
+> -- 829
+< -- 32
++ -- 334
+- -- 236
+* -- 1436
+:= -- 2892
+add.period$ -- 149
+call.type$ -- 49
+change.case$ -- 92
+chr.to.int$ -- 49
+cite$ -- 52
+duplicate$ -- 931
+empty$ -- 1750
+format.name$ -- 313
+if$ -- 3903
 int.to.chr$ -- 1
-int.to.str$ -- 36
-missing$ -- 35
-newline$ -- 183
-num.names$ -- 105
-pop$ -- 251
+int.to.str$ -- 50
+missing$ -- 52
+newline$ -- 253
+num.names$ -- 147
+pop$ -- 369
 preamble$ -- 1
-purify$ -- 35
+purify$ -- 49
 quote$ -- 0
-skip$ -- 376
+skip$ -- 535
 stack$ -- 0
-substring$ -- 646
-swap$ -- 72
-text.length$ -- 2
+substring$ -- 903
+swap$ -- 111
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 236
-warning$ -- 0
-while$ -- 99
+type$ -- 325
+warning$ -- 3
+while$ -- 138
 width$ -- 0
-write$ -- 465
+write$ -- 645
+(There was 1 error message)

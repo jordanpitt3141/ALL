@@ -1,0 +1,70 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{arrows, decorations.markings}
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{pgfplots} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\Large} }
+\begin{document} 
+	\begin{tikzpicture}
+	\makeatletter
+	\tikzset{
+		nomorepostaction/.code=\makeatletter\let\tikz@postactions\pgfutil@empty, % From https://tex.stackexchange.com/questions/3184/applying-a-postaction-to-every-path-in-tikz/5354#5354
+		my axis/.style={
+			postaction={
+				decoration={
+					markings,
+					mark=at position 1 with {
+						\arrow[ultra thick]{latex}
+					}
+				},
+				decorate,
+				nomorepostaction
+			},
+			thin,
+			-, % switch off other arrow tips
+			every path/.append style=my axis % this is necessary so it works both with "axis lines=left" and "axis lines=middle"
+		}
+	}
+	\makeatother
+	
+	\begin{axis}[ 
+	axis lines = left, 
+	axis line style={my axis},
+	width=15cm,
+	height = 7.5cm,
+	xtick={6,0,12}, 
+	clip=false, 
+	ytick = {0,0.5,1},
+	xticklabels ={$x_j$,$x_{j-1}$,$x_{j+1}$},
+	yticklabels ={$t^{n-1}$,$t^n$, $t^{n+1}$},
+	extra x ticks={3,9},
+	%extra x tick style={xticklabels=\empty},
+	extra x tick labels={\normalsize$x_{j-\frac{1}{2}}$,\normalsize$x_{j +\frac{1}{2}}$	},
+	xmin=0, 
+	xmax=12.4, 
+	ymin =0, 
+	ymax = 1.1,
+	xlabel=$x$, 
+	ylabel=$t$ ]
+	
+	\draw [decorate,thick,decoration={brace,amplitude=10pt}]	(3,0.05) -- (9,0.05);
+	\node[] at (axis cs: 6,0.2){\Large$j^{th}$ cell};
+	
+%	\draw [decorate,thick,decoration={brace,amplitude=10pt}]	(6,-0.1) -- (0,-0.1);
+%	\node[] at (axis cs: 3,-0.2){\Large$\Delta x$};
+	
+%	\draw [decorate,thick,decoration={brace,amplitude=10pt}]	(0,0) -- (0,0.5);
+	
+	\draw[dashed,thick] (0, 0.5  ) -- (12.4, 0.5);
+	\draw[dashed,thick] (0, 1  ) -- (12.4, 1);
+	\end{axis} 
+	
+	
+	
+	\end{tikzpicture}
+\end{document}
