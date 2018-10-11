@@ -415,14 +415,14 @@ def SWWEwactual(U,k,g,h0):
     return w1,w2
 
 #Dispersion Error 
-u = 100.0
+u = 0.0
 h = 1
 k = 2.5
-#k = pi/10.0
+k = pi/10.0
 wavel = (2.0*pi)/k
 g = 9.81
 
-wdir = "../../../../../data/ThesisRAW/FullDispRel/U" + str(u) + "/h" + str(h) + "/k"+ str(k) + "/"
+wdir = "/home/jp/Documents/PhD/project/data/ThesisRaw/FullDispRel/U" + str(u) + "/h" + str(h) + "/k"+ str(k) + "/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -433,7 +433,7 @@ Sw1,Sw2 = SWWEwactual(u,k,g,h)
 
 
 #this then measures the dispersion relation from the highest resolution soliton problem until 0.5
-dxs = linspace(10**(-15),wavel,num=2000)   
+dxs = linspace(10**(-15),0.2*wavel,num=500)   
 n = len(dxs)
 w1s = zeros(n)
 w2s = zeros(n) 
@@ -527,38 +527,36 @@ for i in range(n):
     
     erroW21[i] = abs(-w1  - oW21s[i])  /abs(w1)
     
-
-    """
-    s = wdir + "o1.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erro11[i])
-        file1.write(s)   
-        
-    s = wdir + "o2.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erro21[i])
-        file1.write(s) 
-        
-    s = wdir + "oD2.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erroD21[i])
-        file1.write(s) 
-        
-    s = wdir + "oW2.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erroW21[i])
-        file1.write(s) 
-        
-    s = wdir + "o2FEM.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",errof21[i])
-        file1.write(s) 
-
-    s = wdir + "o3.dat"
-    with open(s,'a') as file1:
-        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erro31[i])
-        file1.write(s)
-    """    
+#
+#    s = wdir + "o1.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erro11[i])
+#        file1.write(s)   
+#        
+#    s = wdir + "o2.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erro21[i])
+#        file1.write(s) 
+#        
+#    s = wdir + "oD2.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erroD21[i])
+#        file1.write(s) 
+#        
+#    s = wdir + "oW2.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erroW21[i])
+#        file1.write(s) 
+#        
+#    s = wdir + "o2FEM.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",errof21[i])
+#        file1.write(s) 
+#
+#    s = wdir + "o3.dat"
+#    with open(s,'a') as file1:
+#        s ="%3.8f%5s%1.15f\n" %(dxs[i]/wavel," ",erro31[i])
+#        file1.write(s)  
 
   
 

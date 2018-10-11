@@ -228,9 +228,9 @@ def o2FEM(U,k,g,h,dx,dt):
     #calculate the elementary contribution factors
     M =   1
     
-    M =   M3(k,dx)
-    Rp1 = Rpo3(k,dx)
-    Rm1 = Rmo3(k,dx)
+    #M =   M3(k,dx)
+    Rp1 = Rpo2(k,dx)
+    Rm1 = Rmo2(k,dx)
     
     GG,Gn = GNFEM(U,h,Rm1,Rp1,k,dx)
     
@@ -351,7 +351,7 @@ w1,w2 = wactual(k,g,h,u)
 v1 = w1/k
 v2 = w2/k
 
-wdir = "../../../../data/ThesisRAW/Stability/U"+ str(u)+ "/H" + str(h) + "/k"+ str(k) + "/"
+wdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/LinAnalysis/Stability/U"+ str(u)+ "/"
 
 if not os.path.exists(wdir):
     os.makedirs(wdir)
@@ -359,7 +359,7 @@ if not os.path.exists(wdir):
 
 
 #this then measures the dispersion relation from the highest resolution soliton problem until 0.5
-dxs = linspace(10**(-15),wavel,num=2000)  
+dxs = linspace(10**(-5),0.2*wavel,num=500)  
 n1 = len(dxs)
 
 Ss= []
@@ -392,7 +392,7 @@ for i in range(n1):
     Ss.append(s1)
     Bs.append(b)
     dts.append(dt)
-"""
+
     s = wdir + "o1.dat"
     with open(s,'a') as file1:
         s ="%3.8f%5s%1.15f\n" %(dx/wavel," ",p)
@@ -458,7 +458,7 @@ with open(s,'w') as file1:
     file1.write(s) 
 
 print(max(Qs))
-"""
+
 print("LW",max(Qs) - 1,min(Qs) - 1)
 print("N",max(Ms) - 1,min(Ms) - 1)
 

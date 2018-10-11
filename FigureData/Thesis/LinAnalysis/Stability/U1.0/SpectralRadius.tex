@@ -1,0 +1,39 @@
+\documentclass[]{standalone} 
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{pgfplots} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large} }
+\begin{document} 
+	\begin{tikzpicture}
+	\begin{axis}[ 
+	xtick = {0,0.05,0.1,0.15,0.2},
+	ytick = {0.8,0.9,1.0,1.1},
+	xticklabel style={yshift=-1.5mm,/pgf/number format/.cd,fixed,precision=3},
+	yticklabel style={/pgf/number format/.cd,fixed,precision=3},
+	extra x ticks={0.025,0.075,0.125,0.175},
+	extra y ticks={0.85,0.95,1.05},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=0, 
+	xmax=0.2, 
+	ymin =0.8, 
+	ymax = 1.1,
+	xlabel=\Large$ \dfrac{\Delta x}{\lambda}$, 
+	ylabel=\Large$\rho\left( \mathbf{E}\right)$ ]
+	\addplot [green!60!black,no markers,thick] table {o1.dat };
+	\addplot [red,no markers,thick] table {o2.dat };
+	\addplot [blue,no markers,thick] table {o2FEM.dat };
+	\addplot [black,no markers,thick] table {o3.dat };
+	\addplot [violet!80!white,no markers,thick] table {Naive.dat };
+	\addplot [orange,no markers,thick] table {LW.dat };
+
+	\end{axis} 
+	
+	
+	
+	\end{tikzpicture}
+\end{document}

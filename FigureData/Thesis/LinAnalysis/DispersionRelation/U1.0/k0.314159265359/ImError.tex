@@ -1,0 +1,39 @@
+\documentclass[]{standalone} 
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{pgfplots} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large} }
+\begin{document} 
+	\begin{tikzpicture}
+	\begin{axis}[ 
+	xtick = {0,0.05,0.1,0.15,0.2},
+	ytick = {0,0.1,0.2,0.3,0.4},
+	xticklabel style={yshift=-1.5mm,/pgf/number format/.cd,fixed,precision=3},
+	yticklabel style={/pgf/number format/.cd,fixed,precision=3},
+	extra x ticks={0.025,0.075,0.125,0.175},
+	extra y ticks={0.05,0.15,0.25,0.35},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=0, 
+	xmax=0.2, 
+	ymin =0, 
+	ymax = 0.4,
+	xlabel=\Large$ \dfrac{\Delta x}{\lambda}$, 
+	ylabel=\Large$\dfrac{ \left|\text{Im} \left(\tilde{\omega} \right)\right| }{\left|\omega\right|}$ ]
+	\addplot [green!60!black,no markers,thick] table {IMo1.dat };
+	\addplot [red,no markers,thick] table {IMo2.dat };
+	\addplot [blue,no markers,thick] table {IMo2FEM.dat };
+	\addplot [black,no markers,thick] table {IMo3.dat };
+	\addplot [violet!80!white,no markers,thick] table {IMoD2.dat };
+	\addplot [orange,no markers,thick] table {IMoW2.dat };
+
+	\end{axis} 
+	
+	
+	
+	\end{tikzpicture}
+\end{document}
