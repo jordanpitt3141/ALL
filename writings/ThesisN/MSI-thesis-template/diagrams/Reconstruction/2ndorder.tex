@@ -1,4 +1,4 @@
-\documentclass[pdf]{article}
+\documentclass[]{standalone}
 \usepackage{pgfplots} 
 \usepgfplotslibrary{external} 
 \tikzexternalize 
@@ -9,8 +9,8 @@
 \begin{document} 
 	\begin{tikzpicture} 
 	\begin{axis}[ 
-	width = 13cm,
-	height = 3.5cm,
+	width=\textwidth,
+	height = 0.3\textwidth,
 	axis lines=left, 
 	xticklabels=\empty,
 	y axis line style={draw=none},

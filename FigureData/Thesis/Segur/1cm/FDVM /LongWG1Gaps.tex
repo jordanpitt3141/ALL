@@ -1,0 +1,137 @@
+\documentclass[]{standalone} 
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},every axis plot/.append style={thick}  }
+\begin{document} 
+	\begin{tikzpicture}
+	\begin{axis}[
+	name=WG1, 
+	clip=false,
+	height = 5cm,
+	width = 14cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick={0,50,100,150,200},
+	xticklabel style = {yshift=-1.5mm},
+	ytick = {-0.1,-0.05,0,0.05,0.1},
+	extra x ticks={0,25,50,75,100,125,150,175,200},
+	extra y ticks={-0.075,-0.025,0.025,0.075},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=0, 
+	xmax=200, 
+	ymin =-0.1, 
+	ymax = 0.1,
+	ylabel=\Large$ \dfrac{3}{2} \dfrac{h - h_0}{h_0}$
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=0:200] table {./Num/wG1Num.dat };
+	\addplot [red,no markers,ultra thick,restrict x to domain=0:200] table {./Exp/fig2a.txt };
+	\node at (210, 0) {WG1};
+	\end{axis} 
+	\begin{axis}[ 
+	name=WG2,at={($(WG1.south west) + (0,-4.2cm)$)},
+	clip=false,
+	height = 5cm,
+	width = 14cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick={0,50,100,150,200},
+	xticklabel style = {yshift=-1.5mm},
+	ylabel=\Large$ \dfrac{3}{2} \dfrac{h - h_0}{h_0}$,
+	ytick = {-0.1,-0.05,0,0.05,0.1},
+	extra x ticks={0,25,50,75,100,125,150,175,200},
+	extra y ticks={-0.075,-0.025,0.025,0.075},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=0, 
+	xmax=200, 
+	ymin =-0.1, 
+	ymax = 0.1,
+	%axis x line*=bottom,
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=0:200] table {./Num/wG2Num.dat };
+	\addplot [red,no markers,ultra thick,restrict x to domain=0:200] table {./Exp/fig2b.txt };
+	\node at (210, 0) {WG2};
+	\end{axis}
+	\begin{axis}[ 
+	name=WG3,at={($(WG2.south west) + (0,-4.2cm)$)},
+	clip=false,
+	height = 5cm,
+	width = 14cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick={0,50,100,150,200},
+	xticklabel style = {yshift=-1.5mm},
+	ylabel=\Large$ \dfrac{3}{2} \dfrac{h - h_0}{h_0}$,
+	ytick = {-0.1,-0.05,0,0.05,0.1},
+	extra x ticks={0,25,50,75,100,125,150,175,200},
+	extra y ticks={-0.075,-0.025,0.025,0.075},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=0, 
+	xmax=200, 
+	ymin =-0.1, 
+	ymax = 0.1,
+	%axis x line*=bottom,
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=0:200] table {./Num/wG3Num.dat };
+	\addplot [red,no markers,ultra thick,restrict x to domain=0:200] table {./Exp/fig2c.txt };
+	\node at (210, 0) {WG3};
+	\end{axis}
+	\begin{axis}[ 
+	name=WG4,at={($(WG3.south west) + (0,-4.2cm)$)},
+	clip=false,
+	height = 5cm,
+	width = 14cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick={0,50,100,150,200},
+	xticklabel style = {yshift=-1.5mm},
+	ylabel=\Large$ \dfrac{3}{2} \dfrac{h - h_0}{h_0}$,
+	ytick = {-0.1,-0.05,0,0.05,0.1},
+	extra x ticks={0,25,50,75,100,125,150,175,200},
+	extra y ticks={-0.075,-0.025,0.025,0.075},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=0, 
+	xmax=200, 
+	ymin =-0.1, 
+	ymax = 0.1,
+	%axis x line*=bottom,
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=0:200] table {./Num/wG4Num.dat };
+	\addplot [red,no markers,ultra thick,restrict x to domain=0:200] table {./Exp/fig2d.txt };
+	\node at (210, 0) {WG4};
+	\end{axis}
+	\begin{axis}[ 
+	name=WG5,at={($(WG4.south west) + (0,-4.2cm)$)},
+	clip=false,
+	height = 5cm,
+	width = 14cm,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick={0,50,100,150,200},
+	xticklabel style = {yshift=-1.5mm},
+	ylabel=\Large$ \dfrac{3}{2} \dfrac{h - h_0}{h_0}$,
+	xlabel=\Large$t \sqrt{\dfrac{g}{h_0}} - \dfrac{x}{h_0}$, 
+	ytick = {-0.1,-0.05,0,0.05,0.1},
+	extra x ticks={0,25,50,75,100,125,150,175,200},
+	extra y ticks={-0.075,-0.025,0.025,0.075},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=0, 
+	xmax=200, 
+	ymin =-0.1, 
+	ymax = 0.1,
+	%axis x line*=bottom,
+	]
+	\addplot [blue,no markers,ultra thick,restrict x to domain=0:200] table {./Num/wG5Num.dat };
+	\addplot [red,no markers,ultra thick,restrict x to domain=0:200] table {./Exp/fig2e.txt };
+	\node at (210, 0) {WG5};
+	\end{axis}
+	\end{tikzpicture}
+\end{document}

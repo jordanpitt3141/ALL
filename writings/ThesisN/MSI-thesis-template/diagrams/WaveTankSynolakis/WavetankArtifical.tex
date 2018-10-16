@@ -1,19 +1,18 @@
 \documentclass[]{standalone} 
 \usepackage{pgfplots} 
-%\usepgfplotslibrary{external} 
-%\tikzexternalize 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
 \usepgfplotslibrary{fillbetween}
 \usepackage{tikz} 
 \usepackage{amsmath} 
 \usepackage{pgfplots} 
 \usetikzlibrary{calc} 
-\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large} }
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large}  }
 \begin{document} 
 	\begin{tikzpicture}
 	\begin{axis}[ 
-	width = 0.7\textwidth,
-	width=15cm,
-	height = 7.5cm,
+	width = \textwidth,
+	height = 0.61\textwidth,           
 	axis y line*=left,
 	axis x line*=bottom, 
 	xtick={0,19.85,-10,30},  

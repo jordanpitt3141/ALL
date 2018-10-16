@@ -157,39 +157,40 @@ These results demonstrate the need for higher-order accurate schemes to accurate
 %
 %Surprisingly the two FD methods conserve the Hamiltonian best, followed by $\text{FDVM}_2$, $\text{FEVM}_2$, $\text{FDVM}_3$ and $\text{FDVM}_1$.  All second-order methods conserve the Hamiltonian with an order of accuracy greater than $2$ while the first and third-order methods conserve the Hamiltonian at their respective order of accuracy. This suggests that even-order schemes have some advantage over odd-order schemes for the conservation of the Hamiltonian.
 %
+
 %\begin{figure}
 %	\centering
 %	\begin{subfigure}{0.5\textwidth}
 %		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FDVM1.pdf}
 %		\subcaption{$\text{FDVM}_1$}
-%		\vspace{0.5cm}
+%		\vspace{0.3cm}
 %	\end{subfigure}%
 %	\begin{subfigure}{0.5\textwidth}
 %		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FDVM2.pdf}
 %		\subcaption{$\text{FDVM}_2$}
-%		\vspace{0.5cm}
+%		\vspace{0.3cm}
 %	\end{subfigure}
 %	\begin{subfigure}{0.5\textwidth}
 %		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FEVM2.pdf}
 %		\subcaption{$\text{FEVM}_2$}
-%		\vspace{0.5cm}
+%		\vspace{0.3cm}
 %	\end{subfigure}%
 %	\begin{subfigure}{0.5\textwidth}
 %		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FDVM3.pdf}
 %		\subcaption{$\text{FDVM}_3$}
-%		\vspace{0.5cm}
+%		\vspace{0.3cm}
 %	\end{subfigure}
 %	\begin{subfigure}{0.5\textwidth}
 %		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/D.pdf}
 %		\subcaption{$\mathcal{D}$}
-%		\vspace{0.5cm}
+%		\vspace{0.3cm}
 %	\end{subfigure}%
 %	\begin{subfigure}{0.5\textwidth}
 %		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/W.pdf}
 %		\subcaption{$\mathcal{W}$}
-%		\vspace{0.5cm}
+%		\vspace{0.3cm}
 %	\end{subfigure}
-%	\caption{Conservation plots as measured by $C_1$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\diamondt{red}) and $\mathcal{H}$ (\circlet{green!60!black}) for the soliton problem for all methods.}
+%	\caption{Conservation plots as measured by $C_1$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\color{green!60!black} $\times$}) for the soliton problem for all methods.}
 %	\label{fig:SolitonC1All}
 %\end{figure}
 
@@ -248,24 +249,24 @@ These results demonstrate the need for the well-balancing to be included in both
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/L1/FEVMWB.pdf}
 		\subcaption{$\text{FEVM}_2$ well balanced}
-		\vspace{0.5cm}
+		\vspace{0.3cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/L1/FEVMnWB.pdf}
 		\subcaption{$\text{FEVM}_2$ not well balanced}
-		\vspace{0.5cm}
+		\vspace{0.3cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/L1/FDVMWB.pdf}
 		\subcaption{$\text{FDVM}_2$ well balanced}
-		\vspace{0.5cm}
+		\vspace{0.3cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/L1/FDVMnWB.pdf}
 		\subcaption{$\text{FDVM}_2$ not well balanced}
-		\vspace{0.5cm}
+		\vspace{0.3cm}
 	\end{subfigure}
-	\caption{Convergence plots as measured by the $L_1$ norm for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\diamondt{red}) for the lake at rest problem at $t=10s$ for all methods.}
+	\caption{Convergence plots as measured by the $L_1$ norm for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\circlet{red}) for the lake at rest problem at $t=10s$ for all methods.}
 	\label{fig:LakeAtRestEL1}
 \end{figure}
 
@@ -315,22 +316,22 @@ The $L_1$ error of $h$, $u$, $uh$ and $G$ for the $\text{FEVM}_2$ and $\text{FDV
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FEVMExw.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FEVMw.pdf}
 		\subcaption{$w$ and $b$ ({\color{green!60!black} \solidrule})}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FEVMExh.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FEVMh.pdf}
 		\subcaption{$h$}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FEVMExG.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FEVMG.pdf}
 		\subcaption{$G$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FEVMExu.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FEVMu.pdf}
 		\subcaption{$u$}
 		\vspace{0.5cm}
 	\end{subfigure}
@@ -341,22 +342,22 @@ The $L_1$ error of $h$, $u$, $uh$ and $G$ for the $\text{FEVM}_2$ and $\text{FDV
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FDVMExw.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FDVMw.pdf}
 		\subcaption{$w$ and $b$ ({\color{green!60!black} \solidrule})}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FDVMExh.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FDVMh.pdf}
 		\subcaption{$h$}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FDVMExG.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FDVMG.pdf}
 		\subcaption{$G$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FDVMExu.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Wet/FDVMu.pdf}
 		\subcaption{$u$}
 		\vspace{0.5cm}
 	\end{subfigure}
@@ -378,7 +379,7 @@ The $L_1$ error of $h$, $u$, $uh$ and $G$ for the $\text{FEVM}_2$ and $\text{FDV
 		\subcaption{$\text{FDVM}_2$}
 		\vspace{0.5cm}
 	\end{subfigure}
-	\caption{Convergence plots as measured by the $L_1$ norm for $h$ (\trianglet{blue}), $u$ (\squaret{black}),  $uh$ ({\color{green!60!black}$\times$})  and $G$ (\circlet{red}) for the finite water forced solution problem for FEVM and FDVM at $t=10s$.}
+	\caption{Convergence plots as measured by the $L_1$ norm for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\circlet{red}) for the finite water forced solution problem for FEVM and FDVM at $t=10s$.}
 	\label{fig:L1convergenceforcedWet}
 \end{figure}
 
@@ -400,22 +401,22 @@ Therefore these methods accurately handle the dry bed problem, even with small $
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FEVMExw.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FEVMw.pdf}
 		\subcaption{$w$ and $b$ ({\color{green!60!black} \solidrule})}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FEVMExh.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FEVMh.pdf}
 		\subcaption{$h$}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FEVMExG.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FEVMG.pdf}
 		\subcaption{$G$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FEVMExu.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FEVMu.pdf}
 		\subcaption{$u$}
 		\vspace{0.5cm}
 	\end{subfigure}
@@ -426,22 +427,22 @@ Therefore these methods accurately handle the dry bed problem, even with small $
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FDVMExw.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FDVMw.pdf}
 		\subcaption{$w$ and $b$ ({\color{green!60!black} \solidrule})}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FDVMExh.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FDVMh.pdf}
 		\subcaption{$h$}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FDVMExG.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FDVMG.pdf}
 		\subcaption{$G$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FDVMExu.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FDVMu.pdf}
 		\subcaption{$u$}
 		\vspace{0.5cm}
 	\end{subfigure}
@@ -453,13 +454,13 @@ Therefore these methods accurately handle the dry bed problem, even with small $
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FEVML1.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FEVML1.pdf}
 		\subcaption{$\text{FEVM}_2$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	%[]!!---!![]
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FDVML1.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FDVML1.pdf}
 		\subcaption{$\text{FDVM}_2$}
 		\vspace{0.5cm}
 	\end{subfigure}
@@ -470,13 +471,13 @@ Therefore these methods accurately handle the dry bed problem, even with small $
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FEVML1red.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FEVML1red.pdf}
 		\subcaption{$\text{FEVM}_2$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	%[]!!---!![]
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/P2P/FDVML1red.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FDVML1red.pdf}
 		\subcaption{$\text{FDVM}_2$}
 		\vspace{0.5cm}
 	\end{subfigure}

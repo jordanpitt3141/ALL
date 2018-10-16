@@ -1,4 +1,4 @@
-\documentclass[]{article} 
+\documentclass[]{standalone} 
 \usepackage{pgfplots} 
 \usepgfplotslibrary{external} 
 \tikzexternalize 
@@ -11,13 +11,16 @@
 \begin{document} 
 	\begin{tikzpicture}
 	\begin{axis}[ 
-	width = 0.7\textwidth,
-	width=15cm,
-	height = 7.5cm,
+	width = \textwidth,
+	height = 0.61\textwidth,
 	axis y line*=left,
 	axis x line*=bottom, 
 	xtick={0,25.9,54.2,83.7},  
 	ytick = {0,2.46,4.57}, 
+%	extra x ticks={0,20,40,60,80},
+%	extra y ticks={0,2,4},
+%	extra x tick style={xticklabels=\empty},
+%	extra y tick style={yticklabels=\empty},
 	xmin=0, 
 	xmax=83.7, 
 	ymin =0, 
@@ -54,20 +57,21 @@
 	\node[above] at (axis cs:35.9,3) {\large$3$};
 	\addplot [black,dashed] coordinates {(40.6,2.46) (40.6,3)};
 	\node[above] at (axis cs:40.6,3) {\large$4$};
-	\addplot [black,dashed] coordinates {(44.3,2.46) (44.3,3)};
-	\node[above] at (axis cs:44.3,3) {\large$5$};
+	
+	\addplot [black,dashed] coordinates {(44.3,2.46) (44.3,3.5)};
+	\node[above] at (axis cs:44.3,3.5) {\large$5$};
 	\addplot [black,dashed] coordinates {(46.1,2.46) (46.1,3)};
 	\node[above] at (axis cs:46.1,3) {\large$6$};
-	\addplot [black,dashed] coordinates {(48.2,2.46) (48.2,3)};
-	\node[above] at (axis cs:48.2,3) {\large$7$};
+	\addplot [black,dashed] coordinates {(48.2,2.46) (48.2,3.5)};
+	\node[above] at (axis cs:48.2,3.5) {\large$7$};
 	\addplot [black,dashed] coordinates {(50.4,2.46) (50.4,3)};
 	\node[above] at (axis cs:50.4,3) {\large$8$};
 	\addplot [black,dashed] coordinates {(54.4,2.46) (54.4,3)};
 	\node[above] at (axis cs:54.4,3) {\large$9$};
 	\addplot [black,dashed] coordinates {(58.0,2.46) (58.0,3)};
 	\node[above] at (axis cs:58.0,3) {\large$10$};
-	\addplot [black,dashed] coordinates {(61.7,2.46) (61.7,3)};
-	\node[above] at (axis cs:61.7,3) {\large$11$};
+	\addplot [black,dashed] coordinates {(61.7,2.46) (61.7,3.5)};
+	\node[above] at (axis cs:61.7,3.5) {\large$11$};
 	\addplot [black,dashed] coordinates {(65.4,2.46) (65.4,3)};
 	\node[above] at (axis cs:65.4,3) {\large$12$};
 	\addplot [black,dashed] coordinates {(72.7,2.46) (72.7,3)};

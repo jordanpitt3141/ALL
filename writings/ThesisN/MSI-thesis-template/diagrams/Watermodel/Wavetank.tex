@@ -1,4 +1,4 @@
-\documentclass[]{article} 
+\documentclass[]{standalone} 
 \usepackage{pgfplots} 
 \usepgfplotslibrary{external} 
 \tikzexternalize 
@@ -35,31 +35,31 @@
 	\begin{axis}[ 
 	axis lines = left, 
 	axis line style={my axis},
-	width=15cm,
-	height = 7.5cm,
+	width=0.8\textwidth,
+	height = 0.494\textwidth,
 	xtick={ -100},  
 	ytick = {0}, 
 	xmin=0, 
 	xmax=10.2, 
 	ymin =-1, 
 	ymax = 1,
-	xlabel=$x$, 
-	ylabel=$z$ ]
-	\addplot [name path=b,brown!60!black,no markers, raw gnuplot] gnuplot[id=poly1] {plot 'file.dat' smooth  cspline; };
+	xlabel=\Large $x$, 
+	ylabel=\Large $z$ ]
+	\addplot [name path=b,brown!60!black,no markers, raw gnuplot,semithick] gnuplot[id=poly1] {plot 'file.dat' smooth  cspline; };
 	\addplot [name path=b2,brown!60!black] table {Wavetankp1.dat};
 
 	
 	\path[name path=axis] (axis cs:0,-1) -- (axis cs:10,-1);
-	\addplot [name path=a,blue,no markers, raw gnuplot] gnuplot[id=poly2] {plot 'fileW.dat' smooth  cspline; };
+	\addplot [name path=a,blue,no markers, raw gnuplot,semithick] gnuplot[id=poly2] {plot 'fileW.dat' smooth  cspline; };
 	
 	
-	\draw[dashed] (axis cs:0,0) -- (axis cs:10,0);
-	\draw[<->] (1.5, -4.7642078e-01  ) -- (1.5,0);
-	\draw[<->] (5.00, 5.0314933e-01) -- (5.0, -0.50143427);
+	\draw[dashed,thick] (axis cs:0,0) -- (axis cs:10,0);
+	\draw[<->,thick] (1.5, -4.7642078e-01  ) -- (1.5,0);
+	\draw[<->,thick] (5.00, 5.0314933e-01) -- (5.0, -0.50143427);
 	
-	\draw[->] (5, 0.2) -- (7, 0.2);
+	\draw[->,thick] (5, 0.15) -- (7.5, 0.15);
 	
-	\node[above] at (6,0.2) {\Large$u(x,t)$};
+	\node[above] at (6.25,0.15) {\Large$u(x,t)$};
 	\node[left] at (5,0.2) {\Large$h(x,t)$};
 	\node[left] at (1.5,-0.25) {\Large$b(x)$};
 	

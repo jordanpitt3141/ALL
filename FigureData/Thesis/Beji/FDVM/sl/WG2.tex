@@ -1,4 +1,4 @@
-\documentclass[]{article} 
+\documentclass[]{standalone}
 \usepackage{pgfplots} 
 \usepgfplotslibrary{external} 
 \tikzexternalize 
@@ -9,7 +9,9 @@
 \pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},every axis plot/.append style={thick}  }
 \begin{document} 
 	\begin{tikzpicture}
-	\begin{axis}[ 
+	\begin{axis}[
+		width=0.8\textwidth,
+		height = 0.72\textwidth,
 	scaled ticks=false, 
 	tick label style={/pgf/number format/fixed},
 	xtick = {52,53,54,55,56},

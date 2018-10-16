@@ -1,4 +1,4 @@
-\documentclass[pdf]{article}
+\documentclass[]{standalone}
 \usepackage{pgfplots} 
 \usepgfplotslibrary{external} 
 \tikzexternalize 
@@ -9,8 +9,8 @@
 \begin{document} 
 	\begin{tikzpicture} 
 	\begin{axis}[ 
-	width = 16cm,
-	height = 7cm,
+	width=\textwidth,
+	height = 0.4\textwidth,
 	axis lines=left, 
 	xticklabels=\empty,
 	x axis line style={draw=none},
@@ -26,29 +26,29 @@
 		\draw (axis cs:3,0) -- (axis cs:0,0);
 		\draw (axis cs:0,1) -- (axis cs:0,0);
 		
-		\draw[thin] (axis cs:0,0) -- (axis cs:0,-0.4);
-		\draw[thin] (axis cs:0.5,0) -- (axis cs:0.5,-0.3);
+		\draw[thin] (axis cs:0,0) -- (axis cs:0,-0.12);
+		\draw[thin] (axis cs:0.5,0) -- (axis cs:0.5,-0.06);
 		
-		\draw[thin] (axis cs:1,0) -- (axis cs:1,-0.4);
-		\draw[thin] (axis cs:1.5,0) -- (axis cs:1.5,-0.3);
-		\draw[thin] (axis cs:2,0) -- (axis cs:2,-0.4);
+		\draw[thin] (axis cs:1,0) -- (axis cs:1,-0.12);
+		\draw[thin] (axis cs:1.5,0) -- (axis cs:1.5,-0.06);
+		\draw[thin] (axis cs:2,0) -- (axis cs:2,-0.12);
 
-		\draw[thin] (axis cs:2.5,0) -- (axis cs:2.5,-0.3);
-		\draw[thin] (axis cs:3,0) -- (axis cs:3,-0.4);
+		\draw[thin] (axis cs:2.5,0) -- (axis cs:2.5,-0.06);
+		\draw[thin] (axis cs:3,0) -- (axis cs:3,-0.12);
 		
 		\draw[thin] (axis cs:0,1) -- (axis cs:-0.05,1);
 		\draw[thin] (axis cs:0,0) -- (axis cs:-0.05,0);
 		
-		\node[left] at (-0.05,0) {$0$};
+		\node[left] at (-0.05,0) {\Large$0$};
 		
-		\node[left] at (-0.05,1) {$1$};
+		\node[left] at (-0.05,1) {\Large$1$};
 		
 		%\node[below] at (0,-0.4) {$x_{j-3/2}$};
 		%\node[below] at (0.5,-0.3) {$x_{j-1}$};
 		
-		\node[below] at (1,-0.4) {$x_{j-1/2}$};
-		\node[below] at (1.5,-0.3) {$x_{j}$};
-		\node[below] at (2,-0.4) {$x_{j+1/2}$};
+		\node[below] at (1,-0.12) {\Large$x_{j-1/2}$};
+		\node[below] at (1.5,-0.12) {\Large$x_{j}$};
+		\node[below] at (2,-0.12) {\Large$x_{j+1/2}$};
 		
 		%\node[below] at (2.5,-0.3) {$x_{j+1}$};
 		%\node[below] at (3,-0.4) {$x_{j+3/2}$};
@@ -63,8 +63,8 @@
 	%\addplot [dashed, thick,gray] coordinates { (2,1)  (3,0)};
 	
 	
-	\node[above right] at (1,1) {\color{blue}$\boldsymbol{\psi^+_{j-1/2}}$};
-	\node[above left] at (2,1) {\color{red}$\boldsymbol{\psi^-_{j+1/2}}$};
+	\node[above] at (1,1) {\Large\color{blue}$\boldsymbol{\psi^+_{j-1/2}}$};
+	\node[above] at (2,1) {\Large\color{red}$\boldsymbol{\psi^-_{j+1/2}}$};
 	
 			
 		

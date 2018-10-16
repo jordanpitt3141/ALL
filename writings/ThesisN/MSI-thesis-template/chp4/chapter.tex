@@ -1,5 +1,6 @@
 \chapter{Linear Analysis of the Numerical Methods}
 \label{chp:AnalNumMethod}
+%eigenfunctions form a basis []
 An important property of a numerical method is convergence. Convergence guarantees that as the spatial and temporal resolution of a numerical method is increased, then the numerical solution approaches the solution of the partial differential equations they approximate. 
 
 For linear partial differential equations the Lax-equivalence theorem states that a numerical method is convergent if and only if it is stable and consistent \cite{Lax-Richtmyer-1956-267}. A numerical scheme is consistent if the error introduced by the numerical method over a time step approaches zero as the spatial and temporal resolution is increased. While a numerical method is stable if the errors from previous time steps are not amplified in subsequent time steps.
@@ -71,14 +72,16 @@ To derive the evolution matrix, $\matr{E}$ we study the behaviour of \eqref{eqn:
 q(x,t) = q(0,0) e^{i\left(\omega t + kx\right)}
 \label{eqn:FourierNode}
 \end{equation}
-where $k$ is the wavenumber , $\omega$ is the frequency and $i$ is the imaginary number. A consequence of a quantity $q$ being a Fourier mode represented on a uniform temporal and spatial grid is that for any real numbers $m$ and $l$ we have
+where $k$ is the wavenumber , $\omega$ is the frequency and $i$ is the imaginary number. The Fourier modes are the eigenfunctions of these linearised Serre equations \eqref{eqn:LinSerreG}. Since the eigenfunctions form a basis of the solution space, their dispersion and convergence properties are inherited by all solutions of \eqref{eqn:LinSerreG}. Therefore, it is sufficient to only study the convergence and dispersion properties for Fourier mode solutions captured by the evolution matrix $\matr{E}$. 
+
+A consequence of a quantity $q$ being a Fourier mode represented on a uniform temporal and spatial grid is that for any real numbers $m$ and $l$ we have
 \begin{equation}
 q^{n + m}_{j + l} = q^n_j e^{ i \left(m \omega \Delta t + l k \Delta x\right)}.
 \label{eqn:fourierfactor}
 \end{equation}
 Because $\eta$ and $\upsilon$ are Fourier modes then so is $G$. Furthermore, the cell averages of these quantities $\overline{\eta}$, $\overline{\upsilon}$ and $\overline{G}$ are Fourier modes as well.
 
-When all the quantities are Fourier modes the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}$, $\mathcal{F}_{j-1/2}$ and $\mathcal{F}_{j+1/2}$ from Chapter \ref{chp:HFVMMethod} only vary with $H$, $U$, $k$, $\omega$, $\Delta x$ and $\Delta t$ and hence are independent of $j$ and $n$. By combining these operators the evolution matrix $\matr{E}$ can be derived for the second-order FEVM for the linearised Serre equations with horizontal bed. Since all of the constituent operators are independent of $j$ and $n$ then $\matr{E}$ will also be independent of $j$ and $n$, as desired. We will now derive expressions for all these operators, following the structure laid out in Section \ref{sec:StructOverview}. Since the linearised Serre equations with a horizontal bed has no Source Terms, step (iv) will be skipped.   
+When all the quantities are Fourier modes the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}$, $\mathcal{F}_{j-1/2}$ and $\mathcal{F}_{j+1/2}$ from Chapter \ref{chp:HFVMMethod} only vary with $H$, $U$, $k$, $\omega$, $\Delta x$ and $\Delta t$ and hence are independent of $j$ and $n$. By combining these operators the evolution matrix $\matr{E}$ can be derived for the second-order FEVM for the linearised Serre equations with horizontal bed. Since all of the constituent operators are independent of $j$ and $n$ then $\matr{E}$ will also be independent of $j$ and $n$, as desired. We will now derive expressions for all these operators, following the structure laid out in Section \ref{sec:StructOverview}. Since the linearised Serre equations with a horizontal bed have no source terms, step (iv) will be skipped.   
 
 \setcounter{subsection}{0}
 \renewcommand{\thesubsection}{(\roman{subsection})} 
@@ -161,7 +164,7 @@ This method has three different approximations to $F_{j+1/2}$ depending on the F
 supercritical flow to the left where $Fr < -1$, (ii) critical and subcritical flow in both directions where $-1 \le Fr \le 1$ and (iii) supercritical flow to the right where $Fr > 1$. We will derive the flux operators for each of these cases separately.
 
 \subsubsection{Left Supercritical Flow $Fr < -1$:}
-For left supercritical flow; $Fr < -1$ and therefore $U + \sqrt{g H} < 0$ so we have from \eqref{eqn:wavespeedboundslinSerre} that $a^-_{j+ 1/2} = U - \sqrt{g H}$ and $a^+_{j+ 1/2} =  0$. For these values the flux approximation for a general quantity $q$ \eqref{eqn:HLL_flux} reduces to 
+For left supercritical flow; $Fr < -1$ and therefore $U + \sqrt{g H} < 0$ so we have from \eqref{eqn:wavespeedboundslinSerre} that $a^-_{j+ 1/2} = U - \sqrt{g H}$ and $a^+_{j+ 1/2} =  0$. For these values the flux approximation for a general quantity $q$ \eqref{eqn:HLL_flux} reduces to the upwind approximation 
 \begin{equation}
 F_{j+\frac{1}{2}} = f\left(q^+_{j+\frac{1}{2}}\right).
 \label{eqn:fluxleftsupercrit}
@@ -334,7 +337,7 @@ Both the convergence and dispersion analysis then proceed by studying the proper
 \renewcommand{\thesubsection}{\thechapter.\arabic{section}.\arabic{subsection}} 
 
 \section{Convergence Analysis}
-The linearised Serre equations are linear partial differential equations and therefore we can apply the Lax-equivalence theorem to demonstrate the convergence of our numerical methods by establishing their consistency and stability. We use a Von Neumann stability analysis to demonstrate stability. Consistency is demonstrated for the Fourier modes \eqref{eqn:FourierNode} solutions of the linearised Serre equations. Together this stability and consistency condition imply convergence of the numerical method under the $L_2$ norm.
+The linearised Serre equations are linear partial differential equations and therefore we can apply the Lax-equivalence theorem to demonstrate the convergence of our numerical methods by establishing their consistency and stability. We use a Von Neumann stability analysis to demonstrate stability. Consistency is demonstrated for the Fourier modes \eqref{eqn:FourierNode} solutions which form a basis of the solution space of the linearised Serre equations. Together this stability and consistency condition imply convergence of the numerical method under the $L_2$ norm.
 
 \subsection{Stability}
 For a numerical method to be stable we must ensure that errors from previous time steps are not amplified by the current time step. To accomplish this we must ensure 
@@ -346,9 +349,9 @@ where $\rho\left(\matr{E} \right)$ is the spectral radius of $\matr{E}$. Since $
 
 We calculated $\rho\left(\matr{E} \right)$ numerically for various values of $\Delta x$, $\Delta t$, $k$, $H$ and $U$ to check if \eqref{eqn:stabilitycondition} holds. We summarised our results in Figure~\ref{fig:StabShall} which is a plot of $\rho\left(\matr{E}\right)$ against $\Delta x / \lambda$ for representative values of $k$, $H$ and $U$; where $\lambda$ is the wavelength. We used g = $9.81m/s^2$ and chose $\Delta t = 0.5 / \left(U + \sqrt{gH}\right) \Delta x$ to satisfy the CFL condition \eqref{eqn:CFLcond}. This is the common choice of $\Delta t$ in our numerical experiments.
 
-The behaviour of $\rho\left(\matr{E}\right)$ for $H=1 m$ , $k = \frac{\pi}{10} m^{-1}$ and $U = 0 m/s$ and $1 m/s$ is shown in Figure~\ref{fig:StabShall} and is representative of the behaviour for all other values of $H$, $k$ and $U$. For these $k$ and $H$ values our shallowness parameter $\sigma = \frac{1}{20}$ and so the Serre equations are applicable \cite{Barthelemy-2004-315}. 
+The behaviour of $\rho\left(\matr{E}\right)$ for $H=1 m$ , $k = \frac{\pi}{10} m^{-1}$ and $U = 0 m/s$ and $1 m/s$ is shown in Figure~\ref{fig:StabShall} and is representative of the behaviour for all other values of $H$, $k$ and $U$. For these $k$ and $H$ values the shallowness parameter $\sigma = \frac{1}{20}$ and so the Serre equations are applicable \cite{Barthelemy-2004-315}. 
 
-In Figure~\ref{fig:StabShall} it can be seen that all methods have $\rho\left(\matr{E} \right) \le 1$ for $U=0m/s$ and are therefore stable. The two finite difference methods overlap and have $\rho\left(\matr{E} \right) = 1$ for all $\Delta x$ values, while the second-order FDVM and the second-order FEVM also overlap with $\rho\left(\matr{E} \right) < 1$ . However, when $U \neq 0m/s$ $\mathcal{W}$ has $\rho\left(\matr{E} \right) > 1$ for all $\Delta x$ and is therefore unstable. While for all other methods, $\rho\left(\matr{E} \right) \le 1$ retain their stability when $U \neq 0m/s$.
+In Figure~\ref{fig:StabShall} it can be seen that all methods have $\rho\left(\matr{E} \right) \le 1$ for $U=0m/s$ and are therefore stable. The two finite difference methods overlap and have $\rho\left(\matr{E} \right) = 1$ for all $\Delta x$ values, while the second-order FDVM and the second-order FEVM also overlap with $\rho\left(\matr{E} \right) < 1$ . However, when $U \neq 0m/s$ $\mathcal{W}$ has $\rho\left(\matr{E} \right) > 1$ for all $\Delta x$ values and is therefore unstable. While for all other methods have $\rho\left(\matr{E} \right) \le 1$, retaining their stability when $U \neq 0m/s$.
 
 The analytic value of $\rho\left(\matr{E}\right)$ is given by using \eqref{eqn:fourierfactor} to write
 \begin{equation*}
@@ -369,11 +372,11 @@ We observed the same results for a wide range of $k$, $H$ and $U$, in particular
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Stabu0khShallz.pdf}\
+		\includegraphics[width=\textwidth]{./chp4/figures/New/Stabu0.pdf}\
 		\subcaption{$U=0$}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Stabu1khShallz.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/Stabu1.pdf}
 		\subcaption{$U=1$}
 	\end{subfigure}
 	\caption{Spectral radius of $\matr{E}$ for first-order FDVM ({\color{green!60!black} \solidrule}), second-order FDVM({\color{red} \solidrule}), second-order FEVM ({\color{blue} \solidrule}), third-order FDVM ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}). With $H = 1m$ and $k = \frac{\pi}{10}$.}
@@ -428,7 +431,7 @@ We observe for all the methods that the Taylor series of all the elements of $\m
  \nonumber\\ &\le  |\Delta t| \left(\left \| \matr{A}_0 \right \| + \left \| \mathcal{O}\left(\Delta t\right)\right \|\right).
 \end{align*} 
 
-Choosing a particular vector norm and its induced matrix norm ir is clear from Tables~\ref{tab:EerrFDVM1}-\ref{tab:EerrW} that $\matr{A}_0$ is independent of $\Delta t$ and finite so that as $\Delta t \rightarrow 0$ then $|\Delta t| \left(\left \| \matr{A}_0 \right \| + \left \| \mathcal{O}\left(\Delta t\right)\right \|\right)  \rightarrow 0$  and therefore  $\left \| \matr{E} -  e^{i \omega_+ \Delta t}\matr{I} \right \| \rightarrow 0$. Therefore, for all the numerical methods $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \| = 0 $ and so all the numerical methods are consistent for Fourier mode solutions as desired. 
+Choosing a particular vector norm and its induced matrix norm it is clear from Tables~\ref{tab:EerrFDVM1}-\ref{tab:EerrW} that $\matr{A}_0$ is independent of $\Delta t$ and finite so that as $\Delta t \rightarrow 0$ then $|\Delta t| \left(\left \| \matr{A}_0 \right \| + \left \| \mathcal{O}\left(\Delta t\right)\right \|\right)  \rightarrow 0$  and therefore  $\left \| \matr{E} -  e^{i \omega_+ \Delta t}\matr{I} \right \| \rightarrow 0$. Therefore, for all the numerical methods $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \| = 0 $ and so all the numerical methods are consistent for Fourier mode solutions implying consistency for all solutions as desired. 
 
 \begin{table}
 	\begin{tabular}{l  c c}
@@ -565,7 +568,7 @@ Choosing a particular vector norm and its induced matrix norm ir is clear from T
 
 
 \section{Dispersion Analysis}
-To study the dispersion of the numerical methods $\omega$ for the numerical methods must be calculated. Making use of \eqref{eqn:fourierfactor} in \eqref{eqn:evolutionmatrix} we get 
+To study the dispersion of the numerical methods, $\omega$ for the numerical methods must be calculated. Making use of \eqref{eqn:fourierfactor} in \eqref{eqn:evolutionmatrix} we get 
 \begin{equation}
 e^{i \omega \Delta t}\begin{bmatrix}
 \overline{\eta} \\ \overline{G}
@@ -606,28 +609,28 @@ From Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} we can see that all
 
 For the real part of the dispersion error the FEVM and the FDVM outperform the two finite difference methods and therefore will better approximate the speed of waves of the linearised Serre equations.  However, for the dilation of waves the roles are reversed with the two finite difference methods either dilating the waves very little ($\mathcal{W}$ for $U>0$) or not at all. When taking both effects into account with the complete error we see that the first-order FDVM has the largest dispersion error followed by $\mathcal{W}$, $\mathcal{D}$, the second-order FEVM, the second-order FDVM and finally the third-order FDVM has the lowest dispersion error. So that the size of the total dispersion error is mainly determined by the order of accuracy of the numerical scheme. These results justify choosing the hybrid methods over these finite difference methods for the Serre equations. 
 
-Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} furthermore demonstrate that the second-order FDVM is superior to the FEVM not just for the complete dispersion error, but its real and imaginary parts individually as well. Therefore, the second-order FDVM will do a better job in accurately modelling the speed and amplitude of waves than the second-order FEVM. Interestingly, for the two finite difference methods and the first-order FDVM there seems to be some trade-off between predicting the speed or amplitude of the waves very well. 
+Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} furthermore demonstrate that the second-order FDVM is superior to the FEVM not just for the complete dispersion error, but its real and imaginary parts individually as well. Therefore, the second-order FDVM will more accurately model the speed and amplitude of waves. Interestingly, for the two finite difference methods and the first-order FDVM there seems to be some trade-off between predicting the speed or the amplitude of the waves very well. 
 
 We observed similar results across a wide array of $k$, $H$ and $U$ values. However, as $kH$ is increased the distinction between the second-order FDVM and the second-order FEVM becomes less pronounced. This can be seen in Figure~\ref{fig:Dispu0Fill} where $kH = 2.5$ and $\sigma = 5/4 \pi > 1/20$ so that the water is no longer shallow.
 
 These $kH$ values are the same as those by \citet{Filippini-etal-2016-381}, and our results are similar for the real part of the dispersion error. Our FDVM and the FEVM compare favourably with the methods described and analysed by \citet{Filippini-etal-2016-381}. Furthermore, we extended their work by allowing for non-zero values of $U$, combining the spatial and temporal approximations and examining the imaginary and complete error in the dispersion relation. 
 
-Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of the dispersion error  is slightly different if we allow for non-zero values of $U$. In particular the non-zero value of $U$ changes the real part of the dispersion error for the first-order FDVM, most significantly when $kH = 2.5$. Therefore, for some methods allowing for non-zero values of $U$ can have a significant impact on the conclusions drawn from the dispersion analysis. Furthermore, taking the imaginary part of the dispersion error into account is important as $\omega$ determines not only the speed of waves but also their amplitude. In particular it is possible that a method like the first-order FDVM performs very well for the real part of the dispersion error and poorly for the imaginary part, leading to false conclusions about the accuracy of the method.
+Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of the dispersion error  is slightly different if we allow for non-zero values of $U$. In particular the non-zero value of $U$ changes the real part of the dispersion error for the first-order FDVM, most significantly when $kH = 2.5$. Therefore, for some methods allowing for non-zero values of $U$ can have a significant impact on the conclusions drawn from the dispersion analysis. Furthermore, taking the imaginary part of the dispersion error into account is important as $\omega$ determines not only the speed of waves but also their amplitude. In particular it is possible that a method like the first-order FDVM performs very well for the real part of the dispersion error and poorly for the imaginary part, leading to false conclusions about the overall accuracy of the method.
 
 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu0khShallRez.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/ReDispu0Shall.pdf}
 		\subcaption{Real Part}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu0khShallImz.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/ImDispu0Shall.pdf}
 		\subcaption{Imaginary Part}
 	\end{subfigure}
 	\par\bigskip
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu0khShallz.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/Dispu0Shall.pdf}
 		\subcaption{Real and Imaginary Parts}
 	\end{subfigure}
 	\caption{Relative dispersion error for first-order FDVM ({\color{green!60!black} \solidrule}), second-order FDVM({\color{red} \solidrule}), second-order FEVM ({\color{blue} \solidrule}), third-order FDVM ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}). With $H = 1m$, $k = \frac{\pi}{10}$ and $U = 0 m/s$.}
@@ -637,16 +640,16 @@ Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of th
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu1khShallRez.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/ReDispu1Shall.pdf}
 		\subcaption{Real part}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu1khShallImz.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/ImDispu1Shall.pdf}
 		\subcaption{Imaginary part}
 	\end{subfigure}
 	\par\bigskip
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu1khShallz.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/Dispu1Shall.pdf}
 		\subcaption{Real and Imaginary Parts}
 	\end{subfigure}
 	\caption{Relative dispersion error for first-order FDVM ({\color{green!60!black} \solidrule}), second-order FDVM({\color{red} \solidrule}), second-order FEVM ({\color{blue} \solidrule}), third-order FDVM ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}). With $H = 1m$, $k = \frac{\pi}{10}$ and $U = 1 m/s$.}
@@ -656,16 +659,16 @@ Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of th
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu0khFillRez.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/ReDispu0Fill.pdf}
 		\subcaption{Real part}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu0khFillImz.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/ImDispu0Fill.pdf}
 		\subcaption{Imaginary part}
 	\end{subfigure}
 	\par\bigskip
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu0khFillz.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/Dispu0Fill.pdf}
 		\subcaption{Real and Imaginary Parts}
 	\end{subfigure}
 	\caption{Relative dispersion error for first-order FDVM ({\color{green!60!black} \solidrule}), second-order FDVM({\color{red} \solidrule}), second-order FEVM ({\color{blue} \solidrule}), third-order FDVM ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}). With $H = 1m$, $k = 2.5$ and $U = 0m/s$.}
@@ -675,16 +678,16 @@ Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of th
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu1khFillRez.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/ReDispu1Fill.pdf}
 		\subcaption{Real part}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu1khFillImz.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/ImDispu1Fill.pdf}
 		\subcaption{Imaginary part}
 	\end{subfigure}
 	\par\bigskip
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp4/figures/Dispu1khFillz.pdf}
+		\includegraphics[width=\textwidth]{./chp4/figures/New/Dispu1Fill.pdf}
 		\subcaption{Real and Imaginary Parts}
 	\end{subfigure}
 	\caption{Relative dispersion error for first-order FDVM ({\color{green!60!black} \solidrule}), second-order FDVM({\color{red} \solidrule}), second-order FEVM ({\color{blue} \solidrule}), third-order FDVM ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}). With $H = 1m$, $k = 2.5$ and $U = 1m/s$.}
@@ -694,7 +697,7 @@ Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of th
 
 The Taylor series expansion of $\widetilde{\omega}$ was also derived for all the numerical methods. We have compiled the lowest order terms of the Taylor series for $\widetilde{\omega}_+-\omega_+$ in Table \ref{tab:Wfactor} when $ -1 \le Fr \le 1$ for the FDVM and FEVM. In Table \ref{tab:Wfactor} it is clear that these schemes estimated $\omega$ with the expected order of accuracy in both space and time.
 
-We also present the lowest order terms of the Taylor series for $\widetilde{\omega}_+~-~\omega_+$ for both $ Fr < -1$ and $ Fr > 1$ in Table~\ref{tab:Wspatfactor}. We only present the errors that are different from those reported in Table~\ref{tab:Wfactor}, this was only the case for the spatial error of the odd-order numerical methods. We can see that for all the flow scenarios that our FDVM and the FEVM have the correct order of accuracy when approximating $\omega_+$. 
+We also present the lowest order terms of the Taylor series for $\widetilde{\omega}_+~-~\omega_+$ for both $ Fr < -1$ and $ Fr > 1$ in Table~\ref{tab:Wspatfactor}. We only present the errors that are different from those reported in Table~\ref{tab:Wfactor}, this was only the case for the spatial error of the odd-order numerical methods.  From these tables it is clear that the FDVM and the FEVM have the correct order of accuracy when approximating $\omega_+$. 
 
 Finally we present the lowest order terms of the Taylor series for $\widetilde{\omega}_+~-~\omega_+$ for the finite difference methods in Table~\ref{tab:WFDspatfactor}. These methods do not change depending on the value of the physical quantities. The two finite difference methods both have the correct order of accuracy in space and time.  
 

@@ -1,4 +1,4 @@
-\documentclass[margin=1cm]{standalone}
+\documentclass[]{standalone}
 \usepackage{pgfplots}
 \usepgfplotslibrary{external}
 \tikzexternalize
@@ -92,6 +92,8 @@
 \begin{document}
 \begin{tikzpicture}
 \begin{loglogaxis}[
+	width=0.8\textwidth,
+	height = 0.72\textwidth, 
 	ylabel near ticks,
 	xlabel near ticks,
 	xminorticks=false,

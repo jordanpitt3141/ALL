@@ -60,13 +60,14 @@ Both $\text{FEVM}_2$ and $\text{FDVM}_2$ have produced visually identical result
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFEVM1cm.pdf}
-	\caption{FEVM}
+	\caption{Comparison of experimental wave gauge data ({\color{red}\solidrule}) and numerical results ({\color{blue}\solidrule}) of $\text{FEVM}_2$ for the $0.01m$ rectangular depression.}
 	\label{fig:Segur1cmFEVM}
 \end{figure}
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFDVM1cm.pdf}
 	\caption{FDVM}
+	\caption{Comparison of experimental wave gauge data ({\color{red}\solidrule}) and numerical results ({\color{blue}\solidrule}) of $\text{FDVM}_2$ for the $0.01m$ rectangular depression.}
 	\label{fig:Segur1cmFDVM}
 \end{figure} 
 
@@ -112,13 +113,13 @@ These experiments have been well replicated by the numerical methods, and given 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFEVM3cm.pdf}
-	\caption{FEVM}
+	\caption{Comparison of experimental wave gauge data ({\color{red}\solidrule}) and numerical results ({\color{blue}\solidrule}) of $\text{FEVM}_2$ for the $0.03m$ rectangular depression.}
 	\label{fig:Segur3cmFEVM}
 \end{figure}
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFDVM3cm.pdf}
-	\caption{FDVM}
+	\caption{Comparison of experimental wave gauge data ({\color{red}\solidrule}) and numerical results ({\color{blue}\solidrule}) of $\text{FDVM}_2$ for the $0.03m$ rectangular depression.}
 	\label{fig:Segur3cmFDVM}
 \end{figure}  
 %
@@ -397,7 +398,7 @@ This experiment was numerically modelled on the domain $[17.6m , 400m]$ and was 
 
 \subsection{Results}
 
-The wave gauge results comparing the numerical and experimental data are displayed in Figures \ref{fig:Roeber8WG1to7FDVM} and \ref{fig:Roeber8WG7to14FDVM} for $\text{FDVM}_2$ and \ref{fig:Roeber8WG1to7FEVM} and \ref{fig:Roeber8WG7to14FEVM} for $\text{FEVM}_2$.
+The wave gauge results comparing the numerical and experimental data are displayed in Figures \ref{fig:Roeber8WG1to5FEVM}, \ref{fig:Roeber8WG6to10FEVM} and \ref{fig:Roeber8WG11to14FEVM} for $\text{FEVM}_2$ and \ref{fig:Roeber8WG1to5FDVM} and \ref{fig:Roeber8WG6to9FDVM} for $\text{FDVM}_2$.
 
 Both methods accurately reproduce the shoaling of the solitary wave, particularly in wave gauges $1$ through $8$ which record the wave before breaking begins. The behaviour of the trailing waves is not as well replicated, with the numerical solutions overestimating their amplitude and speed as in the previous experiments. The reflected wave can also be observed in the wave gauges and since the numerical simulation did not have reflective boundaries these waves are not replicated in their solution.
 
@@ -418,27 +419,33 @@ Given the limitations of the underlying Serre equations the results for $\text{F
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs1.pdf}
-	\caption{Comparison of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) wave gauge data produced by $\text{FEVM}_2$ for gauges $1$ to $7$.}
-	\label{fig:Roeber8WG1to7FEVM}
+	\caption{Comparison of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) wave gauge data produced by $\text{FEVM}_2$ for gauges $1$ to $5$.}
+	\label{fig:Roeber8WG1to5FEVM}
 \end{figure}
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs2.pdf}
-	\caption{Comparison of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) wave gauge data produced by $\text{FEVM}_2$ for gauges $8$ to $14$.}
-	\label{fig:Roeber8WG7to14FEVM}
-\end{figure}          
+	\caption{Comparison of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) wave gauge data produced by $\text{FEVM}_2$ for gauges $6$ to $10$.}
+	\label{fig:Roeber8WG6to10FEVM}
+\end{figure}  
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs3.pdf}
+	\caption{Comparison of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) wave gauge data produced by $\text{FEVM}_2$ for gauges $11$ to $14$.}
+	\label{fig:Roeber8WG11to14FEVM}
+\end{figure}         
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs1.pdf}
 	\caption{Comparison of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) wave gauge data produced by $\text{FDVM}_2$ for gauges $1$ to $7$.}
-	\label{fig:Roeber8WG1to7FDVM}
+	\label{fig:Roeber8WG1to5FDVM}
 \end{figure}
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs2.pdf}
-	\caption{Comparison of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) wave gauge data produced by $\text{FDVM}_2$ for gauges $8$ to $14$.}
-	\label{fig:Roeber8WG7to14FDVM}
+	\caption{Comparison of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) wave gauge data produced by $\text{FDVM}_2$ for gauges $6$ to $9$.}
+	\label{fig:Roeber8WG6to9FDVM}
 \end{figure} 
 
 \section{Runup of a Solitary Wave on a Linearly Sloped Beach}
@@ -494,22 +501,27 @@ The results for both $\text{FEVM}_2$ and $\text{FDVM}_2$ are identical in these 
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/30s.pdf}
 		\subcaption{$t=30s$}
+		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/40s.pdf}
 		\subcaption{$t=40s$}
+		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/50s.pdf}
 		\subcaption{$t=50s$}
+		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/60s.pdf}
 		\subcaption{$t=60s$}
+		\vspace{0.5cm}
 			\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/70s.pdf}
 		\subcaption{$t=70s$}
+		\vspace{0.5cm}
 	\end{subfigure}
 	\caption{A comparison of the water surface profiles for the experiment (\circlet{red}) and the numerical solution ({\color{blue}\solidrule}) produced by $\text{FEVM}_2$ at various times.}
 	\label{fig:SynolakisFEVMNoBreak}
@@ -520,22 +532,27 @@ The results for both $\text{FEVM}_2$ and $\text{FDVM}_2$ are identical in these 
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/30s.pdf}
 		\subcaption{$t=30s$}
+		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/40s.pdf}
 		\subcaption{$t=40s$}
+		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/50s.pdf}
 		\subcaption{$t=50s$}
+		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/60s.pdf}
 		\subcaption{$t=60s$}
+		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/70s.pdf}
 		\subcaption{$t=70s$}
+		\vspace{0.5cm}
 	\end{subfigure}
 	\caption{A comparison of the water surface profiles for the experiment (\circlet{red}) and the numerical solution ({\color{blue}\solidrule}) produced by $\text{FDVM}_2$ at various times.}
 	\label{fig:SynolakisFDVMNoBreak}

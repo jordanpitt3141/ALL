@@ -1,7 +1,7 @@
-\documentclass[margin=1cm]{standalone}
+\documentclass[]{standalone}
 \usepackage{pgfplots}
-\usepgfplotslibrary{external}
-\tikzexternalize
+%\usepgfplotslibrary{external}
+%\tikzexternalize
 \usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{pgfplots}
@@ -92,6 +92,8 @@
 \begin{document}
 \begin{tikzpicture}
 \begin{loglogaxis}[
+	width=0.8\textwidth,
+	height = 0.72\textwidth,
 	ylabel near ticks,
 	xlabel near ticks,
 	xminorticks=false,
@@ -108,7 +110,7 @@
 	scaled y ticks=false,
 	clip mode=individual,
 	xlabel=\Large$\Delta x \; (m)$, 
-	ylabel=\Large$L_1$]
+	ylabel=\Large$C_1$]
 	
 \addplot [blue,only marks,mark =triangle,mark size =0.9mm] table {conh.dat};
 \addplot [black,only marks,mark =square,mark size =0.75mm] table {conuh.dat};

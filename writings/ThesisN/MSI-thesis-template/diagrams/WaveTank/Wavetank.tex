@@ -1,4 +1,4 @@
-\documentclass[]{article} 
+\documentclass[]{standalone} 
 \usepackage{pgfplots} 
 \usepgfplotslibrary{external} 
 \tikzexternalize 
@@ -7,17 +7,25 @@
 \usepackage{amsmath} 
 \usepackage{pgfplots} 
 \usetikzlibrary{calc} 
-\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large} }
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large}  }
 \begin{document} 
 	\begin{tikzpicture}
 	\begin{axis}[ 
-	width = 0.7\textwidth,
-	width=15cm,
-	height = 7.5cm,
+	width = \textwidth,
+	height = 0.61\textwidth,
 	axis y line*=left,
 	axis x line*=bottom, 
-	xtick={0,6,12,14,17,18.95,37.7},  
+	xtick={0,6,12,14,17,37.7},
+	extra x ticks={18.95},  
 	ytick = {0,0.3,0.4,0.75}, 
+ extra tick style={% changes for all extra ticks
+    	tick align=center,
+    	tick pos=left,
+    	grid style={dotted,black}
+ },
+    extra x tick style={% changes for extra x ticks
+    	major tick length=1.5\baselineskip
+    },
 	xmin=0, 
 	xmax=37.7, 
 	ymin =0, 

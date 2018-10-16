@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.1)  5 OCT 2018 15:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.1)  12 OCT 2018 11:29
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -573,8 +573,7 @@ LaTeX Info: Redefining \] on input line 2736.
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2013/07/15 v3.0.1a (rcs-revision 1.9)
-)
-No file Ex.aux.
+) (./Ex.aux)
 \openout1 = `Ex.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
@@ -589,7 +588,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
-ABD: EveryShipout initializing macros
+ ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count130
@@ -637,28 +636,17 @@ e
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.13}).
 
-\openout3 = `Ex-figure0.md5'.
-
-\openout3 = `Ex.auxlock'.
-
-===== 'mode=convert with system call': Invoking 'pdflatex -shell-escape -halt-o
-n-error -interaction=batchmode -jobname "Ex-figure0" "\def\tikzexternalrealjob{
-Ex}\input{Ex}"' ========
-runsystem(pdflatex -shell-escape -halt-on-error -interaction=batchmode -jobname
- "Ex-figure0" "\def\tikzexternalrealjob{Ex}\input{Ex}")...executed.
-
-\openout3 = `Ex.auxlock'.
-
+===== Image 'Ex-figure0' is up-to-date. ======
 [1
 
  <./Ex-figure0.pdf{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}>]
 (./Ex.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 33.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 33.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 35.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 35.
  ) 
 Here is how much of TeX's memory you used:
- 22110 strings out of 494953
- 573287 string characters out of 6180978
+ 22112 strings out of 494953
+ 573301 string characters out of 6180978
  723214 words of memory out of 5000000
  25012 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
@@ -666,7 +654,7 @@ Here is how much of TeX's memory you used:
  62i,5n,84p,727b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on Ex.pdf (1 page, 79193 bytes).
+Output written on Ex.pdf (1 page, 81170 bytes).
 PDF statistics:
  25 PDF objects out of 1000 (max. 8388607)
  18 compressed objects within 1 object stream

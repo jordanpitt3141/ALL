@@ -91,7 +91,9 @@
 %%% END MACRO FOR ANNOTATION OF TRIANGLE WITH SLOPE %%%.
 \begin{document}
 \begin{tikzpicture}
-\begin{loglogaxis}[
+\begin{loglogaxis}[	
+width=0.8\textwidth,
+height = 0.72\textwidth, 
 	ylabel near ticks,
 	xlabel near ticks,
 	xminorticks=false,
@@ -113,7 +115,7 @@
 \addplot [blue,only marks,mark =triangle,mark size =0.9mm] table {hL1.dat};
 \addplot [black,only marks,mark =square,mark size =0.75mm] table {uL1.dat};
 \addplot [red,only marks,mark =o,mark size =0.75mm] table {GL1.dat};
-\addplot [green!60!black,only marks,mark =x,mark size =0.8mm] table {uhL1.dat};
+%\addplot [green!60!black,only marks,mark =x,mark size =0.8mm] table {uhL1.dat};
 
 \logLogSlopeTriangle{0.6}{0.35}{0.15}{2}{black};
 
