@@ -1,9 +1,10 @@
 \chapter{Conservation Quantities for Analytic Solutions}
 \label{app:ConQuant}
+To calculate the conservation errors requires an analytic expression for the total: mass, momentum, $G$ and energy present in the initial conditions. Therefore to facilitate the validation tests against the analytic solutions described in Chapter \ref{chp:Serreeqns} we present these analytic expressions for the initial conditions of solitary travelling wave and the lake at rest solutions. To allow for the simple calculation of the integrals in a concise way for any domains we present them in indefinite form. 
 
-\section{Soliton}
-
-As we would like to assess the conservation properties of our numerical methods we will require the total mass, momentum, $G$ and Hamiltonian for this solution. In particular we require these totals at the initial time $t=0$, to allow for various domains we present the integrals in indefinite form 
+\section{Solitary Travelling Wave}
+For the solitary wave solution \eqref{eqn:Solitondefhub} with $t=0$ the integrals of all the conserved quantities are
+\allowdisplaybreaks
 \begin{subequations}
 	\begin{align}
 	\int h(x,0) \; dx = {} & a_0 x + \frac{a_1}{\kappa} \tanh\left(\kappa x\right) + \text{constant}, \\
@@ -19,7 +20,7 @@ As we would like to assess the conservation properties of our numerical methods 
 	\label{eqn:SolitonConservation}
 \end{subequations}
 
-where the integrals of the Hamiltonian are
+where these integrals of the energy $\mathcal{H}$ are
 
 \begin{align*}
 \begin{split}
@@ -34,16 +35,15 @@ where the integrals of the Hamiltonian are
 \end{split}
 \end{align*}
 
-Therefore, we have the analytic values of our physical variables $h$, $u$, $G$ and $b$ for all $t$ as well as the total amounts of our conserved quantities for the initial conditions when $t=0s$, as desired.
+Therefore, we have the analytic values of the total amounts of our conserved quantities for the solitary travelling wave solution \eqref{eqn:Solitondefhub} when $t=0s$, as desired.
 
 \section{Lake At Rest}
-
-The total momentum and $G$ in our system is straightforward to calculate as both are zero everywhere and so we have 
+For the lake at rest solution \eqref{eqn:LARdefhub} the total momentum and $G$ in the system is straightforward to calculate as both are zero everywhere and so we have 
 \begin{align}
 &\int u(x,0)h(x,0) \;  dx = {} 0 + \text{constant}, \\
 &\int G(x,0) \; dx = {} 0 + \text{constant}.
 \end{align}
-To calculate the total mass and Hamiltonian in our system we must break up our domain into wet regions where $b(x) < a_0$ and dry regions where $b(x) \ge a_0$. For the dry regions the total mass and energy are $0$ and so we have 
+To calculate the total mass and energy in the solution we must break up our domain into wet regions where $b(x) < a_0$ and dry regions where $b(x) \ge a_0$. For the dry regions the total mass and energy are $0$ and so we have 
 \begin{subequations}
 	\begin{align}
 	\int h(x,0) \; dx = {} & 0 , \\
@@ -57,4 +57,4 @@ whilst in a wet region we have
 	\int \mathcal{H}(x,0) \; dx = {} & \frac{g}{2} \left(a_0^2x  -  2a_0 \int b(x) \; dx + \int b(x)^2 \; dx \right).
 	\end{align}
 \end{subequations}
-Therefore as desired we have expressions for all the quantities in terms of the bed profile $b(x)$. 
+By summing all the wet regions in a given domain together we can readily calculate the total mass and energy in the system from these expressions, in terms of the bed profile $b(x)$, as desired. 

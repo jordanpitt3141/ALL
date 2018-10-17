@@ -373,12 +373,12 @@ double phikp(double r)
 }
 
 
-void weightsum(int a,double *x, int b, double *y, double c, int n, double *z)
+void weightsum(double a,double *x, double b, double *y, int n, double *z)
 {
     int i;
     for(i =0 ; i < n ;i++)
     {
-        z[i] = (a*x[i] + b*y[i])*c;
+        z[i] = (a*x[i] + b*y[i]);
     }
 
 }
@@ -557,8 +557,8 @@ void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *ha
     double *nGapp = malloc(n*sizeof(double));
     double *nhapp = malloc(n*sizeof(double));
 
-    weightsum(3,ha, 1,nhap,0.25,n,nhapp);
-    weightsum(3,Ga, 1,nGap,0.25,n,nGapp);
+    weightsum(0.75,ha, 0.25,nhap,n,nhapp);
+    weightsum(0.75,Ga, 0.25,nGap,n,nGapp);
 
 //######################################### THIRD ITERATION #############################
 
@@ -582,8 +582,8 @@ void evolvewrap(double *Ga, double *ha, double *Gabeg, double *Gaend, double *ha
     evolve(Gabc,habc,umbc,g,dx,dt,n,cnBC,nhappp,nGappp);
 
 // ################################### RK BUILD ###############################
-    weightsum(1,ha,3,nhappp,0.25,n,ha);
-    weightsum(1,Ga,3,nGappp,0.25,n,Ga);
+    weightsum(i3,ha,(1 - i3),nhappp,n,ha);
+    weightsum(i3,Ga,(1 - i3),nGappp,n,Ga);
     free(Gm);
     free(hm);
     free(um);
