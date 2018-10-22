@@ -105,7 +105,13 @@ For the second-order methods we find that $\text{FDVM}_2$ consistently produces 
 
 The finite difference methods produce very similar errors which are twice as large as the errors from $\text{FEVM}_2$. Additionally, the round-off effects which increase the $L_1$ error of the finite difference methods occur for larger $\Delta x$ values than the hybrid finite volume methods.
 
-These results demonstrate the need for higher-order accurate schemes to accurately approximate the Serre equations. Furthermore, they suggest that second-order accuracy is sufficient, with third-order accurate schemes showing only a slight improvement. Given these results, only $\text{FEVM}_2$ and $\text{FDVM}_2$ have been extended to allow for variable bathymetry and dry beds. Consequently, the rest of the results in this chapter and Chapter \ref{chp:ExpMethodComp} will only be for these numerical methods. 
+The error in conservation $C_1$ was calculated for all methods using the analytic expressions for the total amounts of the conserved quantities in the initial conditions given in Appendix \ref{app:ConQuant}. The error in conservation was plotted against the spatial resolution in Figure \ref{fig:SolitonC1All}. These results demonstrate that due to the use of the finite volume methods for $h$ and $G$ that both are conserved at round-off error for all the hybrid finite volume methods as expected. While the finite difference methods only conserved $h$ at round-off error because the employed finite difference method for the continuity equation \eqref{eqn:FullSerreConMass} is a conservative method. 
+
+No methods conserve the energy $\mathcal{H}$ or the momentum $uh$ at machine precision. Since none of the methods were designed to have these as conserved variables this is not surprising, although the error in conservation of all methods for these quantities does inherit the order of accuracy of the convergence of the numerical method or better, as expected. 
+
+For small $\Delta x$ values the round-off errors become dominant, particularly for the finite difference methods. Interestingly, $\text{FDVM}_3$ has an accumulation of round-off error in the conservation error for $h$ and $G$ as $\Delta x$ decreases. This was found to be caused by the Runge-Kutta coefficients \cite{Zoppou-etal-2017} which in the last step are $1/3$ and $2/3$ which cannot be exactly represented in floating point, so that every time step accumulates a small conservation errors of machine precision size leading to the observed increase as $\Delta x$ becomes small and the number of time steps increases.
+
+These results demonstrate the need for higher-order accurate schemes to accurately approximate the Serre equations. Furthermore, they suggest that second-order accuracy is sufficient, with third-order accurate schemes showing only a slight improvement. Finally they also demonstrate the utility of these hybrid FVM for conserving $h$ and $G$, as desired. Given these results, only $\text{FEVM}_2$ and $\text{FDVM}_2$ have been extended to allow for variable bathymetry and dry beds. Consequently, the rest of the results in this chapter and Chapter \ref{chp:ExpMethodComp} will only be for these numerical methods. 
 
 \begin{figure}
 	\centering
@@ -142,58 +148,42 @@ These results demonstrate the need for higher-order accurate schemes to accurate
 	\caption{Convergence plots as measured by the $L_1$ norm for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\circlet{red}) for the soliton problem for all methods.}
 	\label{fig:SolitonL1All}
 \end{figure}
-%
-%The $C_1$ norm was measured for mass ($h$), momentum ($uh$), $G$ and $\mathcal{H}$ using the analytic values [] and plotted in Figure \ref{fig:SolitonC1All}. From these plots it can be seen that all methods conserve mass at round-off error as long as $\Delta x$ is not too large, in this case requiring $\Delta x < 0.5m$. Since the FD methods perform just as well at conserving mass as the FDVM and FEVM, this suggests that using a finite volume method for the continuity equation \eqref{eqn:FullSerreConMass} is not necessary to conserve mass for this analytic solution. The $C_1$ norm suggests that $\text{FDVM}_3$ is the worst method for conservation of mass at lower $\Delta x$ values. However, this is due to the larger number of calculations required by this method leading to large accumulation of round-off errors, rather than a particular deficiency in $\text{FDVM}_3$ . 
-%
-%The conservation of momentum is significantly above round-off error, and for all numerical methods decreases at the rate determined by the order of accuracy or better. For the FDVM and the FEVM this is not surprising as $u$ is calculated from the elliptic equation, which will not necessarily conserve momentum in the system. While the FD methods which solve the momentum equation directly do not conserve momentum as finite difference methods are not necessarily conservative. Given the results for the $L_1$ norm, one might expect that the $C_1$ norm would decrease at the order of accuracy of the scheme. However, given that a quantity can be conserved and possess a large $L_1$ error, for instance translations of the solution, the fact that $C_1$ decreases faster than the order of accuracy is not surprising. 
-%
-%The second-order $\text{FEVM}_2$ performs the worst of all the methods for the conservation of momentum, even compared to the first-order $\text{FDVM}_1$. The superiority of the FDVM over the FEVM for conservation of momentum appears to be due to the use of the finite difference method to solve the elliptic equation, as both $\text{FDVM}_1$ and $\text{FDVM}_2$ use the same elliptic solver and both conserve momentum better than $\text{FEVM}_2$. 
-%%momentum at point not an integral??
-%
-%For the conservation of $G$ we see that the case is very similar to the conservation of momentum, except for $\text{FEVM}_2$ which conserves $G$ at round-off error as long as $\Delta x$ isn't large. This implies that the FD used to solve the elliptic equation while resulting in smaller $L_1$ errors and better conservation of momentum, performs worse for the conservation of $G$. Therefore, we require a FEM to solve the elliptic equation so that our scheme conserves the conservative quantities $h$ and $G$. There appears to be some trade-off here between the conservation of $G$ and the conservation of momentum, with the $\text{FEVM}_2$ improving its conservation of $G$ by worsening its conservation of momentum. 
-%
-%The FD methods conserve $G$ better than they conserve momentum, this is surprising given that their governing partial differential equations are the conservation of mass and momentum equations \eqref{eqn:FullSerreNonCon}. 
-%
-%The conservation of the Hamiltonian decreases at the rate given by the order of accuracy of the method or better for all methods. Since no methods were designed using the conservation of Hamiltonian equation, its conservation is a good indication that these numerical method are appropriate for the Serre equations.
-%
-%Surprisingly the two FD methods conserve the Hamiltonian best, followed by $\text{FDVM}_2$, $\text{FEVM}_2$, $\text{FDVM}_3$ and $\text{FDVM}_1$.  All second-order methods conserve the Hamiltonian with an order of accuracy greater than $2$ while the first and third-order methods conserve the Hamiltonian at their respective order of accuracy. This suggests that even-order schemes have some advantage over odd-order schemes for the conservation of the Hamiltonian.
-%
 
-%\begin{figure}
-%	\centering
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FDVM1.pdf}
-%		\subcaption{$\text{FDVM}_1$}
-%		\vspace{0.3cm}
-%	\end{subfigure}%
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FDVM2.pdf}
-%		\subcaption{$\text{FDVM}_2$}
-%		\vspace{0.3cm}
-%	\end{subfigure}
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FEVM2.pdf}
-%		\subcaption{$\text{FEVM}_2$}
-%		\vspace{0.3cm}
-%	\end{subfigure}%
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FDVM3.pdf}
-%		\subcaption{$\text{FDVM}_3$}
-%		\vspace{0.3cm}
-%	\end{subfigure}
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/D.pdf}
-%		\subcaption{$\mathcal{D}$}
-%		\vspace{0.3cm}
-%	\end{subfigure}%
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/W.pdf}
-%		\subcaption{$\mathcal{W}$}
-%		\vspace{0.3cm}
-%	\end{subfigure}
-%	\caption{Conservation plots as measured by $C_1$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\color{green!60!black} $\times$}) for the soliton problem for all methods.}
-%	\label{fig:SolitonC1All}
-%\end{figure}
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FDVM1.pdf}
+		\subcaption{$\text{FDVM}_1$}
+		\vspace{0.3cm}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FDVM2.pdf}
+		\subcaption{$\text{FDVM}_2$}
+		\vspace{0.3cm}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FEVM2.pdf}
+		\subcaption{$\text{FEVM}_2$}
+		\vspace{0.3cm}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/FDVM3.pdf}
+		\subcaption{$\text{FDVM}_3$}
+		\vspace{0.3cm}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/D.pdf}
+		\subcaption{$\mathcal{D}$}
+		\vspace{0.3cm}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/W.pdf}
+		\subcaption{$\mathcal{W}$}
+		\vspace{0.3cm}
+	\end{subfigure}
+	\caption{Conservation plots as measured by $C_1$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\color{green!60!black} $\times$}) for the soliton problem for all methods.}
+	\label{fig:SolitonC1All}
+\end{figure}
 
 
 \section{Analytic Solution for Variable Bathymetry}
@@ -213,6 +203,8 @@ The numerical methods are assessed by using the specified lake at rest solution 
 Example numerical solutions with $\Delta x = 100/2^{10}m$ at $t=10s$ for all versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:LakeAtRestEx}. The analytic solution and the numerical solution in these figures are indistinguishable at this scale as all methods have visually reproduced the analytic solution.  
 
 However, examination of the $L_1$ errors depicted in Figure \ref{fig:LakeAtRestEL1} reveals that only  the well balanced methods have accurately recovered the analytic solution. With both well balanced versions of the methods reproducing $h$, $G$ and $u$ precisely, accounting for round-off errors. This is most clear for the $h$ as it is consistently around the machine epsilon value. While for $G$ and $u$ their error is increasing due to an accumulation of the round-off errors in each cell for each time step; hence the second-order of the slopes. For methods without well balancing; the errors are significantly larger, yet they are converging to the analytic solution. However, the convergence of these methods has lost an order of accuracy in $u$ and $G$; with only first-order convergence in these quantities and not the expected second-order accuracy observed for $h$. 
+
+The error in conservation as measured by $C_1$ for all methods in Figure \ref{fig:LakeAtRestEC1} affirms the superiority of the well-balanced version of the methods. For the well balanced $\text{FEVM}_2$ the conservation of $h$ and $\mathcal{H}$ has zero error and so could not be represented on the log-log plot, so that all errors in conservation are at machine precision or lower. For the well-balanced $\text{FDVM}_2$ the error in $h$ vanishes when $\Delta x$ is small, although the error in $\mathcal{H}$ does not. Therefore, the well balanced version of $\text{FEVM}_2$ outperforms the $\text{FDVM}_2$ in this instance. While for the methods with no well balancing none of the quantities are conserved.   
 
 These results demonstrate the need for the well-balancing for both numerical methods, as it is only with their inclusion that the lake at rest steady state can be accurately reproduced. 
 
@@ -271,21 +263,31 @@ These results demonstrate the need for the well-balancing for both numerical met
 	\label{fig:LakeAtRestEL1}
 \end{figure}
 
-%%\begin{figure}
-%	\centering
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FEVMWB.pdf}
-%		\subcaption{$\text{FEVM}_2$ well balanced}
-%		\vspace{0.5cm}
-%	\end{subfigure}%
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FEVMnWB.pdf}
-%		\subcaption{$\text{FEVM}_2$ not well balanced}
-%		\vspace{0.5cm}
-%	\end{subfigure}
-%	\caption{Convergence plots as measured by the $L_1$ norm for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\diamondt{red}) for the lake at rest problem at $t=10s$ for all methods.}
-%	\label{fig:LakeAtRestEC1}
-%\end{figure}
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FEVMWB.pdf}
+		\subcaption{$\text{FEVM}_2$ well balanced}
+		\vspace{0.5cm}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FEVMnWB.pdf}
+		\subcaption{$\text{FEVM}_2$ not well balanced}
+		\vspace{0.5cm}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FDVMWB.pdf}
+		\subcaption{$\text{FDVM}_2$ well balanced}
+		\vspace{0.5cm}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FDVMnWB.pdf}
+		\subcaption{$\text{FDVM}_2$ not well balanced}
+		\vspace{0.5cm}
+	\end{subfigure}
+	\caption{$C_1$ error against $\Delta x$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\color{green!60!black} $\times$}) for the lake at rest problem at $t=10s$ for all methods.}
+	\label{fig:LakeAtRestEC1}
+\end{figure}
 
 \section{Forced Solutions}
 %only L1

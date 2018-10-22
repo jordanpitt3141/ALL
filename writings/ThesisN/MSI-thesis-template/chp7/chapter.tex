@@ -1,12 +1,42 @@
 
 \chapter{Conclusion}
 \label{chp:Conclusion}
-jghjghj
+
 
 %Described method
 %Performed a Linear Analysis
 %Validated against analytic, forced solutions
 %Validated against experimental results
+
+The properties of the evolution of the dam-break problem for the Serre equations was comprehensively studied using various numerical methods resulting in the observation of new behaviours and the resolution of the differences previously present in the literature.  
+
+A well balanced second-order FEVM was described for the one-dimensional Serre equations. This method makes use of a consistent polynomial representation of the quantities over the elements from which all necessary terms can be calculated locally over the cell making it a readily parrallelisable computational method. Due to the methods use of both a finite element and a finite volume method it is robust to steep gradients present in the conserved variables $h$ and $G$. 
+
+A linear analysis of the convergence and dispersion properties of all the FDM and FDVM \cite{Pitt-2018-61} was performed. The analysis demonstrated that all FDVM, the $\text{FEVM}_2$ and $\mathcal{D}$ are convergent methods, while $\mathcal{W}$ is only convergent when the mean background flow velocity is zero. This analysis extended previous work on analysis of the dispersion relationship of numerical methods by allowing non-zero mean flow and comparing both the real and imaginary errors in the dispersion relationship, which were both demonstrated to be significant for the analysis. 
+
+A comparison of the various numerical methods and the analytic solitary travelling wave solution of the Serre equations was performed. The expected order of accuracy and conservation properties of all the methods was observed. However, these results also demonstrated that the increase in accuracy achieved by a third-order method over a second-order method did not warrant the extra computational effort, justifying the further development of second-order methods over third-order methods for future work. For this reason only the second-order FDVM and FEVM were developed further to allow varying bathymetry and dry beds.
+
+The second-order FDVM and FEVM were then validated against the lake at rest steady state and the forced solutions. These results demonstrated that these methods are well balanced and accurately approximate all terms in the Serre equations in the presence of dry beds. 
+
+Finally the second-order FDVM and FEVM  were compared to experimental data; demonstrating their modelling capabilities across a wide array of physical scenarios. These results also demonstrated the greater robustness of the FEVM; as the FDVM was found to be unstable in the presence of large jumps in the water surface. 
+
+To summarise the major contributions of my research are
+\begin{itemize}
+	\item Observation and justification of a new structure of the solution of the Serre equations to the dam-break problem;
+	\item Development and description of the well balanced second-order finite element volume method that can handle dry beds and conserves $h$ and $G$;
+	\item Linear analysis of the convergence properties of the developed hybrid finite volume methods and the mentioned finite difference methods;
+	\item Analysis of the dispersion properties of the numerical methods, allowing for non-zero mean flow velocity and accounting for the total dispersion error;
+	\item Validation of the numerical method against analytic and forced solutions and experimental results; demonstrating the superiority of the finite element volume method. 
+\end{itemize}
+
+\section{Future Work}
+
+\begin{itemize}
+	\item Extension of the FEVM to the two dimensional Serre equations on unstructured meshes;
+	\item Inclusion of wave breaking in the model; 
+	\item A complete analysis of the convergence properties of these methods;
+\end{itemize}
+
 
 
 
