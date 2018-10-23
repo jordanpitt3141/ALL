@@ -2,4 +2,10 @@
 
 \addcontentsline{toc}{chapter}{Abstract}
 
-112233
+Recent research in numerical wave modelling has focused on developing computational methods for non-linear, dispersive wave equations as an extension to the well understood nonlinear shallow water wave equations. These equations contain extra terms that allow for dispersion; better modelling the behaviour of actual water waves. The most interesting example of these nonlinear dispersive equations from the viewpoint of modelling water waves are the Serre equations; striking a balance between accuracy as a model for water waves and not being much more computationally expensive to solve than the shallow water wave equations. 
+
+A numerical method for the one-dimensional Serre equations was developed that is efficient and robust. This method uses a consistent polynomial representation of the solution over the cells to approximate the Serre equations which makes it suitable for unstructured meshes and parrallelisable. This base method was extended to allow the recovery of the lake at rest steady state and dry beds.  
+
+This method's convergence and dispersion properties were analysed with a linear analysis. The method was validated against analytic and forced solutions of the Serre equations to demonstrate that it retains the expected convergence properties in its approximation to all terms of the Serre equations. Finally it was validated against experimental data for a wide array of physical scenarios, demonstrating its utility as a physical model. All these analyses and validations were conducted whilst comparing the method to previous methods to demonstrate its strengths and weaknesses. 
+
+

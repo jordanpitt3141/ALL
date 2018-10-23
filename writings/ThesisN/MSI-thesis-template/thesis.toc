@@ -1,4 +1,5 @@
-\contentsline {chapter}{Abstract}{v}{chapter*.2}
+\contentsline {chapter}{Acknowledgements}{vii}{chapter*.2}
+\contentsline {chapter}{Abstract}{ix}{chapter*.3}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Objectives of the Thesis}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}Original Contribution of the Thesis}{3}{section.1.2}
@@ -10,25 +11,25 @@
 \contentsline {subsection}{\numberline {2.2.1}Conservation Properties}{9}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Dispersion Properties}{10}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Analytic Solutions}{11}{subsection.2.2.3}
-\contentsline {subsubsection}{Solitary Travelling Wave Solution}{11}{section*.5}
-\contentsline {subsubsection}{Lake at Rest}{12}{section*.6}
+\contentsline {subsubsection}{Solitary Travelling Wave Solution}{11}{section*.6}
+\contentsline {subsubsection}{Lake at Rest}{12}{section*.7}
 \contentsline {subsection}{\numberline {2.2.4}Forced Solutions}{13}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Behaviour of Steep Gradients}{14}{subsection.2.2.5}
-\contentsline {subsubsection}{Asymptotic and Linear Results}{15}{section*.7}
-\contentsline {subsubsection}{Results of the Paper}{16}{section*.8}
+\contentsline {subsubsection}{Asymptotic and Linear Results}{15}{section*.8}
+\contentsline {subsubsection}{Results of the Paper}{16}{section*.9}
 \contentsline {chapter}{\numberline {3}Finite Element Volume Method}{19}{chapter.3}
 \contentsline {section}{\numberline {3.1}Notation for Numerical Grids}{20}{section.3.1}
 \contentsline {section}{\numberline {3.2}Structure Overview}{21}{section.3.2}
 \contentsline {subsection}{\numberline {(i)}Reconstruction}{24}{subsection.3.2.1}
-\contentsline {subsubsection}{Reconstruction of the $h$, $w$ and $G$}{24}{section*.12}
-\contentsline {subsubsection}{Reconstruction of the Bed Profile}{25}{section*.13}
+\contentsline {subsubsection}{Reconstruction of the $h$, $w$ and $G$}{24}{section*.13}
+\contentsline {subsubsection}{Reconstruction of the Bed Profile}{25}{section*.14}
 \contentsline {subsection}{\numberline {(ii)}Fluid Velocity}{26}{subsection.3.2.2}
-\contentsline {subsubsection}{Basis Function Approximations}{27}{section*.14}
-\contentsline {subsubsection}{Calculation of Element-wise Matrices}{29}{section*.18}
-\contentsline {subsubsection}{Assembly of the Global Matrix}{31}{section*.19}
+\contentsline {subsubsection}{Basis Function Approximations}{27}{section*.15}
+\contentsline {subsubsection}{Calculation of Element-wise Matrices}{29}{section*.19}
+\contentsline {subsubsection}{Assembly of the Global Matrix}{31}{section*.20}
 \contentsline {subsection}{\numberline {(iii)}Flux Across the Cell Interfaces}{31}{subsection.3.2.3}
-\contentsline {subsubsection}{Calculation of Derivatives}{33}{section*.20}
-\contentsline {subsubsection}{Well Balancing}{34}{section*.21}
+\contentsline {subsubsection}{Calculation of Derivatives}{33}{section*.21}
+\contentsline {subsubsection}{Well Balancing}{34}{section*.22}
 \contentsline {subsection}{\numberline {(iv)}Source Terms}{35}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {(v)}Update Cell Averages}{36}{subsection.3.2.5}
 \contentsline {subsection}{\numberline {(vi)}Second-Order SSP Runge-Kutta Method}{36}{subsection.3.2.6}
@@ -41,9 +42,9 @@
 \contentsline {subsection}{\numberline {(i)}Reconstruction}{46}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {(ii)}Fluid Velocity}{46}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {(iii)}Flux Across the Cell Interfaces}{49}{subsection.4.2.3}
-\contentsline {subsubsection}{Left Supercritical Flow $Fr < -1$:}{50}{section*.22}
-\contentsline {subsubsection}{Subcritical Flow $-1 \le Fr \le 1$:}{50}{section*.23}
-\contentsline {subsubsection}{Right Supercritical Flow $Fr > 1$:}{51}{section*.24}
+\contentsline {subsubsection}{Left Supercritical Flow $Fr < -1$:}{50}{section*.23}
+\contentsline {subsubsection}{Subcritical Flow $-1 \le Fr \le 1$:}{50}{section*.24}
+\contentsline {subsubsection}{Right Supercritical Flow $Fr > 1$:}{51}{section*.25}
 \contentsline {subsection}{\numberline {(v)}Update Cell Averages}{52}{subsection.4.2.5}
 \contentsline {subsection}{\numberline {(vi)}Second-Order SSP Runge-Kutta Method}{53}{subsection.4.2.6}
 \contentsline {section}{\numberline {4.3}Convergence Analysis}{53}{section.4.3}

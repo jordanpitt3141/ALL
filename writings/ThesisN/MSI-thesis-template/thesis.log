@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  22 OCT 2018 16:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  23 OCT 2018 12:24
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -798,7 +798,8 @@ Package: amsthm 2015/03/04 v2.20.2
 \c@theorem=\count151
 \c@conj=\count152
 ) (./thesis.aux
-(./titlepage.aux) (./declaration.aux) (./abstract.aux) (./chp1/chapter.aux)
+(./titlepage.aux) (./dedication.aux) (./declaration.aux)
+(./acknowledgements.aux) (./abstract.aux) (./chp1/chapter.aux)
 (./chp2/chapter.aux) (./chp3/chapter.aux) (./chp4/chapter.aux)
 (./chp5/chapter.aux) (./chp6/chapter.aux) (./chp7/chapter.aux)
 (./app3/appendix.aux) (./app1/appendix.aux) (./app2/appendix.aux)
@@ -890,7 +891,7 @@ U.eps>
 (epstopdf)             \includegraphics on input line 17.
 Package epstopdf Info: Output file is already uptodate.
 
-<ANU-eps-converted-to.pdf, id=291, 171.64125pt x 96.36pt>
+<ANU-eps-converted-to.pdf, id=295, 171.64125pt x 96.36pt>
 File: ANU-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ANU-eps-converted-to.pdf>
@@ -906,49 +907,71 @@ Non-PDF special ignored!
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./ANU-eps-converted-to.pdf
 >])
-\openout2 = `declaration.aux'.
+\openout2 = `dedication.aux'.
 
- (./declaration.tex [2
-
+ (./dedication.tex [2
 
 
 ]) [3]
-\openout2 = `abstract.aux'.
+\openout2 = `declaration.aux'.
 
- (./abstract.tex
+ (./declaration.tex
 [4
 
 
 
-]) [5] [6
+]) [5]
+\openout2 = `acknowledgements.aux'.
+
+ (./acknowledgements.tex [6
+
+
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 17.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 17.
+) [7]
+\openout2 = `abstract.aux'.
+
+ (./abstract.tex
+[8
+
+
+
+]) [9] [10
 
 
 ] (./thesis.toc
-LaTeX Font Info:    Try loading font information for U+msa on input line 3.
+LaTeX Font Info:    Try loading font information for U+msa on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 3.
+LaTeX Font Info:    Try loading font information for U+msb on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 3.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
-) [7] [8])
+) [11] [12])
 \tf@toc=\write6
 \openout6 = `thesis.toc'.
 
- [9] [10
+ [13]
+[14
 
 ]
 \openout2 = `chp1/chapter.aux'.
 
-
-(./chp1/chapter.tex
+ (./chp1/chapter.tex
 Chapter 1.
 
 Underfull \vbox (badness 1117) has occurred while \output is active []
@@ -957,31 +980,23 @@ Underfull \vbox (badness 1117) has occurred while \output is active []
 
 
 ]
-[2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 51.
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 51.
- [3]) [4]
+[2] [3]) [4]
 \openout2 = `chp2/chapter.aux'.
 
-
-(./chp2/chapter.tex
+ (./chp2/chapter.tex
 Chapter 2.
 [5
 
 
 
-] <./chp2/figures/SerreModel.pdf, id=479, 259.14116pt x 140.83014pt>
+] <./chp2/figures/SerreModel.pdf, id=514, 259.14116pt x 140.83014pt>
 File: ./chp2/figures/SerreModel.pdf Graphic file (type pdf)
 
 <use ./chp2/figures/SerreModel.pdf>
 Package pdftex.def Info: ./chp2/figures/SerreModel.pdf used on input line 24.
 (pdftex.def)             Requested size: 330.05322pt x 179.3766pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1127) has occurred while \output is active []
 
  [6 <./chp2/figures/SerreModel.pdf>] [7] [8] [9]
 Overfull \hbox (14.77773pt too wide) in paragraph at lines 129--131
@@ -995,7 +1010,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [13]
 [14] [15] [16]
-<./chp2/figures/DamBreakStruct/1.pdf, id=683, 286.28755pt x 250.7267pt>
+<./chp2/figures/DamBreakStruct/1.pdf, id=716, 286.28755pt x 250.7267pt>
 File: ./chp2/figures/DamBreakStruct/1.pdf Graphic file (type pdf)
 
 <use ./chp2/figures/DamBreakStruct/1.pdf>
@@ -1003,7 +1018,7 @@ Package pdftex.def Info: ./chp2/figures/DamBreakStruct/1.pdf used on input line
  288.
 (pdftex.def)             Requested size: 206.28247pt x 180.6608pt.
 
-<./chp2/figures/DamBreakStruct/6.pdf, id=684, 286.28755pt x 250.7267pt>
+<./chp2/figures/DamBreakStruct/6.pdf, id=717, 286.28755pt x 250.7267pt>
 File: ./chp2/figures/DamBreakStruct/6.pdf Graphic file (type pdf)
 
 <use ./chp2/figures/DamBreakStruct/6.pdf>
@@ -1011,7 +1026,7 @@ Package pdftex.def Info: ./chp2/figures/DamBreakStruct/6.pdf used on input line
  293.
 (pdftex.def)             Requested size: 206.28247pt x 180.6608pt.
 
-<./chp2/figures/DamBreakStruct/9.pdf, id=685, 286.28755pt x 250.7267pt>
+<./chp2/figures/DamBreakStruct/9.pdf, id=718, 286.28755pt x 250.7267pt>
 File: ./chp2/figures/DamBreakStruct/9.pdf Graphic file (type pdf)
 
 <use ./chp2/figures/DamBreakStruct/9.pdf>
@@ -1019,7 +1034,7 @@ Package pdftex.def Info: ./chp2/figures/DamBreakStruct/9.pdf used on input line
  298.
 (pdftex.def)             Requested size: 206.28247pt x 180.6608pt.
 
-<./chp2/figures/DamBreakStruct/20.pdf, id=686, 286.28755pt x 250.7267pt>
+<./chp2/figures/DamBreakStruct/20.pdf, id=719, 286.28755pt x 250.7267pt>
 File: ./chp2/figures/DamBreakStruct/20.pdf Graphic file (type pdf)
 
 <use ./chp2/figures/DamBreakStruct/20.pdf>
@@ -1053,7 +1068,7 @@ Underfull \vbox (badness 1117) has occurred while \output is active []
 
 
 ]
-[20] <./chp3/figures/Discretisation.pdf, id=761, 280.49394pt x 162.26823pt>
+[20] <./chp3/figures/Discretisation.pdf, id=795, 280.49394pt x 162.26823pt>
 File: ./chp3/figures/Discretisation.pdf Graphic file (type pdf)
 
 <use ./chp3/figures/Discretisation.pdf>
@@ -1071,7 +1086,7 @@ Underfull \vbox (badness 1237) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [22]
-<./chp3/figures/FEVMRecon.pdf, id=821, 427.5965pt x 84.70647pt>
+<./chp3/figures/FEVMRecon.pdf, id=854, 427.5965pt x 84.70647pt>
 File: ./chp3/figures/FEVMRecon.pdf Graphic file (type pdf)
 
 <use ./chp3/figures/FEVMRecon.pdf>
@@ -1081,21 +1096,21 @@ Package pdftex.def Info: ./chp3/figures/FEVMRecon.pdf used on input line 84.
 Underfull \vbox (badness 4967) has occurred while \output is active []
 
  [25]
-[26] <./chp3/figures/P1.pdf, id=894, 319.11623pt x 108.56259pt>
+[26] <./chp3/figures/P1.pdf, id=928, 319.11623pt x 108.56259pt>
 File: ./chp3/figures/P1.pdf Graphic file (type pdf)
 
 <use ./chp3/figures/P1.pdf>
 Package pdftex.def Info: ./chp3/figures/P1.pdf used on input line 220.
 (pdftex.def)             Requested size: 330.05322pt x 112.2895pt.
  [27]
-<./chp3/figures/P2.pdf, id=909, 319.11623pt x 115.94215pt>
+<./chp3/figures/P2.pdf, id=942, 319.11623pt x 115.94215pt>
 File: ./chp3/figures/P2.pdf Graphic file (type pdf)
 
 <use ./chp3/figures/P2.pdf>
 Package pdftex.def Info: ./chp3/figures/P2.pdf used on input line 245.
 (pdftex.def)             Requested size: 330.05322pt x 119.92241pt.
 
-<./chp3/figures/P3.pdf, id=913, 319.11623pt x 117.41766pt>
+<./chp3/figures/P3.pdf, id=946, 319.11623pt x 117.41766pt>
 File: ./chp3/figures/P3.pdf Graphic file (type pdf)
 
 <use ./chp3/figures/P3.pdf>
@@ -1162,14 +1177,14 @@ Overfull \hbox (3.3814pt too wide) in paragraph at lines 252--252
  []
 
 [52] [53] [54]
-<./chp4/figures/New/Stabu0.pdf, id=1343, 284.98471pt x 265.79pt>
+<./chp4/figures/New/Stabu0.pdf, id=1377, 284.98471pt x 265.79pt>
 File: ./chp4/figures/New/Stabu0.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/Stabu0.pdf>
 Package pdftex.def Info: ./chp4/figures/New/Stabu0.pdf used on input line 375.
 (pdftex.def)             Requested size: 206.28247pt x 192.39877pt.
 
-<./chp4/figures/New/Stabu1.pdf, id=1344, 284.98471pt x 265.79pt>
+<./chp4/figures/New/Stabu1.pdf, id=1378, 284.98471pt x 265.79pt>
 File: ./chp4/figures/New/Stabu1.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/Stabu1.pdf>
@@ -1183,7 +1198,7 @@ OML/cmm/m/it/12 x$ \OT1/cmr/m/n/12 and $^^A\OML/cmm/m/it/12 t$\OT1/cmr/m/n/12 ,
  []
 
 [56] [57] [58] [59] [60] [61] [62]
-<./chp4/figures/New/ReDispu0Shall.pdf, id=1452, 304.60501pt x 265.792pt>
+<./chp4/figures/New/ReDispu0Shall.pdf, id=1486, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/ReDispu0Shall.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/ReDispu0Shall.pdf>
@@ -1191,7 +1206,7 @@ Package pdftex.def Info: ./chp4/figures/New/ReDispu0Shall.pdf used on input lin
 e 624.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/ImDispu0Shall.pdf, id=1453, 304.60501pt x 265.792pt>
+<./chp4/figures/New/ImDispu0Shall.pdf, id=1487, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/ImDispu0Shall.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/ImDispu0Shall.pdf>
@@ -1199,7 +1214,7 @@ Package pdftex.def Info: ./chp4/figures/New/ImDispu0Shall.pdf used on input lin
 e 628.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/Dispu0Shall.pdf, id=1454, 304.60501pt x 265.792pt>
+<./chp4/figures/New/Dispu0Shall.pdf, id=1488, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/Dispu0Shall.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/Dispu0Shall.pdf>
@@ -1207,7 +1222,7 @@ Package pdftex.def Info: ./chp4/figures/New/Dispu0Shall.pdf used on input line
 633.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/ReDispu1Shall.pdf, id=1455, 304.60501pt x 265.792pt>
+<./chp4/figures/New/ReDispu1Shall.pdf, id=1489, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/ReDispu1Shall.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/ReDispu1Shall.pdf>
@@ -1215,7 +1230,7 @@ Package pdftex.def Info: ./chp4/figures/New/ReDispu1Shall.pdf used on input lin
 e 643.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/ImDispu1Shall.pdf, id=1456, 304.60501pt x 265.792pt>
+<./chp4/figures/New/ImDispu1Shall.pdf, id=1490, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/ImDispu1Shall.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/ImDispu1Shall.pdf>
@@ -1223,7 +1238,7 @@ Package pdftex.def Info: ./chp4/figures/New/ImDispu1Shall.pdf used on input lin
 e 647.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/Dispu1Shall.pdf, id=1457, 304.60501pt x 265.792pt>
+<./chp4/figures/New/Dispu1Shall.pdf, id=1491, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/Dispu1Shall.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/Dispu1Shall.pdf>
@@ -1231,7 +1246,7 @@ Package pdftex.def Info: ./chp4/figures/New/Dispu1Shall.pdf used on input line
 652.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/ReDispu0Fill.pdf, id=1458, 304.60501pt x 265.792pt>
+<./chp4/figures/New/ReDispu0Fill.pdf, id=1492, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/ReDispu0Fill.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/ReDispu0Fill.pdf>
@@ -1239,7 +1254,7 @@ Package pdftex.def Info: ./chp4/figures/New/ReDispu0Fill.pdf used on input line
  662.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/ImDispu0Fill.pdf, id=1459, 304.60501pt x 265.792pt>
+<./chp4/figures/New/ImDispu0Fill.pdf, id=1493, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/ImDispu0Fill.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/ImDispu0Fill.pdf>
@@ -1247,7 +1262,7 @@ Package pdftex.def Info: ./chp4/figures/New/ImDispu0Fill.pdf used on input line
  666.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/Dispu0Fill.pdf, id=1460, 304.60501pt x 265.792pt>
+<./chp4/figures/New/Dispu0Fill.pdf, id=1494, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/Dispu0Fill.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/Dispu0Fill.pdf>
@@ -1255,7 +1270,7 @@ Package pdftex.def Info: ./chp4/figures/New/Dispu0Fill.pdf used on input line 6
 71.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/ReDispu1Fill.pdf, id=1461, 304.60501pt x 265.792pt>
+<./chp4/figures/New/ReDispu1Fill.pdf, id=1495, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/ReDispu1Fill.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/ReDispu1Fill.pdf>
@@ -1263,7 +1278,7 @@ Package pdftex.def Info: ./chp4/figures/New/ReDispu1Fill.pdf used on input line
  681.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/ImDispu1Fill.pdf, id=1462, 304.60501pt x 265.792pt>
+<./chp4/figures/New/ImDispu1Fill.pdf, id=1496, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/ImDispu1Fill.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/ImDispu1Fill.pdf>
@@ -1271,7 +1286,7 @@ Package pdftex.def Info: ./chp4/figures/New/ImDispu1Fill.pdf used on input line
  685.
 (pdftex.def)             Requested size: 206.28247pt x 180.00208pt.
 
-<./chp4/figures/New/Dispu1Fill.pdf, id=1463, 304.60501pt x 265.792pt>
+<./chp4/figures/New/Dispu1Fill.pdf, id=1497, 304.60501pt x 265.792pt>
 File: ./chp4/figures/New/Dispu1Fill.pdf Graphic file (type pdf)
 
 <use ./chp4/figures/New/Dispu1Fill.pdf>
@@ -1306,7 +1321,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [73]
-<./chp5/figures/Analytic/Soliton/Example/FDVM1.pdf, id=1658, 286.29059pt x 250.
+<./chp5/figures/Analytic/Soliton/Example/FDVM1.pdf, id=1692, 286.29059pt x 250.
 73274pt>
 File: ./chp5/figures/Analytic/Soliton/Example/FDVM1.pdf Graphic file (type pdf)
 
@@ -1315,7 +1330,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/Example/FDVM1.pdf used
  on input line 64.
 (pdftex.def)             Requested size: 206.28247pt x 180.66516pt.
 
-<./chp5/figures/Analytic/Soliton/Example/FDVM2.pdf, id=1659, 286.29059pt x 250.
+<./chp5/figures/Analytic/Soliton/Example/FDVM2.pdf, id=1693, 286.29059pt x 250.
 73274pt>
 File: ./chp5/figures/Analytic/Soliton/Example/FDVM2.pdf Graphic file (type pdf)
 
@@ -1324,7 +1339,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/Example/FDVM2.pdf used
  on input line 69.
 (pdftex.def)             Requested size: 206.28247pt x 180.66516pt.
 
-<./chp5/figures/Analytic/Soliton/Example/FEVM2.pdf, id=1660, 286.29059pt x 250.
+<./chp5/figures/Analytic/Soliton/Example/FEVM2.pdf, id=1694, 286.29059pt x 250.
 73274pt>
 File: ./chp5/figures/Analytic/Soliton/Example/FEVM2.pdf Graphic file (type pdf)
 
@@ -1333,7 +1348,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/Example/FEVM2.pdf used
  on input line 74.
 (pdftex.def)             Requested size: 206.28247pt x 180.66516pt.
 
-<./chp5/figures/Analytic/Soliton/Example/FDVM3.pdf, id=1661, 286.29059pt x 250.
+<./chp5/figures/Analytic/Soliton/Example/FDVM3.pdf, id=1695, 286.29059pt x 250.
 73274pt>
 File: ./chp5/figures/Analytic/Soliton/Example/FDVM3.pdf Graphic file (type pdf)
 
@@ -1342,7 +1357,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/Example/FDVM3.pdf used
  on input line 79.
 (pdftex.def)             Requested size: 206.28247pt x 180.66516pt.
 
-<./chp5/figures/Analytic/Soliton/Example/D.pdf, id=1662, 286.29059pt x 250.7327
+<./chp5/figures/Analytic/Soliton/Example/D.pdf, id=1696, 286.29059pt x 250.7327
 4pt>
 File: ./chp5/figures/Analytic/Soliton/Example/D.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/Example/D.pdf>
@@ -1350,7 +1365,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/Example/D.pdf used on
 input line 84.
 (pdftex.def)             Requested size: 206.28247pt x 180.66516pt.
 
-<./chp5/figures/Analytic/Soliton/Example/W.pdf, id=1663, 286.29059pt x 250.7327
+<./chp5/figures/Analytic/Soliton/Example/W.pdf, id=1697, 286.29059pt x 250.7327
 4pt>
 File: ./chp5/figures/Analytic/Soliton/Example/W.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/Example/W.pdf>
@@ -1365,7 +1380,7 @@ LaTeX Warning: Float too large for page by 58.2473pt on input line 95.
 alytic/Soliton/Example/FDVM2.pdf> <./chp5/figures/Analytic/Soliton/Example/FEVM
 2.pdf> <./chp5/figures/Analytic/Soliton/Example/FDVM3.pdf> <./chp5/figures/Anal
 ytic/Soliton/Example/D.pdf> <./chp5/figures/Analytic/Soliton/Example/W.pdf>]
-<./chp5/figures/Analytic/Soliton/L1/FDVM1.pdf, id=1728, 295.68065pt x 249.13075
+<./chp5/figures/Analytic/Soliton/L1/FDVM1.pdf, id=1762, 295.68065pt x 249.13075
 pt>
 File: ./chp5/figures/Analytic/Soliton/L1/FDVM1.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/L1/FDVM1.pdf>
@@ -1373,7 +1388,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/L1/FDVM1.pdf used on i
 nput line 119.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/L1/FDVM2.pdf, id=1729, 295.68065pt x 249.13075
+<./chp5/figures/Analytic/Soliton/L1/FDVM2.pdf, id=1763, 295.68065pt x 249.13075
 pt>
 File: ./chp5/figures/Analytic/Soliton/L1/FDVM2.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/L1/FDVM2.pdf>
@@ -1381,7 +1396,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/L1/FDVM2.pdf used on i
 nput line 124.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/L1/FEVM2.pdf, id=1730, 295.68065pt x 249.13075
+<./chp5/figures/Analytic/Soliton/L1/FEVM2.pdf, id=1764, 295.68065pt x 249.13075
 pt>
 File: ./chp5/figures/Analytic/Soliton/L1/FEVM2.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/L1/FEVM2.pdf>
@@ -1389,7 +1404,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/L1/FEVM2.pdf used on i
 nput line 129.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/L1/FDVM3.pdf, id=1731, 295.68065pt x 249.13075
+<./chp5/figures/Analytic/Soliton/L1/FDVM3.pdf, id=1765, 295.68065pt x 249.13075
 pt>
 File: ./chp5/figures/Analytic/Soliton/L1/FDVM3.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/L1/FDVM3.pdf>
@@ -1397,7 +1412,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/L1/FDVM3.pdf used on i
 nput line 134.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/L1/D.pdf, id=1732, 295.68065pt x 249.13075pt>
+<./chp5/figures/Analytic/Soliton/L1/D.pdf, id=1766, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Analytic/Soliton/L1/D.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Analytic/Soliton/L1/D.pdf>
@@ -1405,7 +1420,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/L1/D.pdf used on input
  line 139.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/L1/W.pdf, id=1733, 295.68065pt x 249.13075pt>
+<./chp5/figures/Analytic/Soliton/L1/W.pdf, id=1767, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Analytic/Soliton/L1/W.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Analytic/Soliton/L1/W.pdf>
@@ -1417,7 +1432,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/L1/W.pdf used on input
 LaTeX Warning: Float too large for page by 37.67792pt on input line 150.
 
 
-<./chp5/figures/Analytic/Soliton/C1/FDVM1.pdf, id=1734, 295.68065pt x 249.13075
+<./chp5/figures/Analytic/Soliton/C1/FDVM1.pdf, id=1768, 295.68065pt x 249.13075
 pt>
 File: ./chp5/figures/Analytic/Soliton/C1/FDVM1.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/C1/FDVM1.pdf>
@@ -1425,7 +1440,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/C1/FDVM1.pdf used on i
 nput line 155.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/C1/FDVM2.pdf, id=1735, 295.68065pt x 249.13075
+<./chp5/figures/Analytic/Soliton/C1/FDVM2.pdf, id=1769, 295.68065pt x 249.13075
 pt>
 File: ./chp5/figures/Analytic/Soliton/C1/FDVM2.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/C1/FDVM2.pdf>
@@ -1433,7 +1448,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/C1/FDVM2.pdf used on i
 nput line 160.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/C1/FEVM2.pdf, id=1736, 295.68065pt x 249.13075
+<./chp5/figures/Analytic/Soliton/C1/FEVM2.pdf, id=1770, 295.68065pt x 249.13075
 pt>
 File: ./chp5/figures/Analytic/Soliton/C1/FEVM2.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/C1/FEVM2.pdf>
@@ -1441,7 +1456,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/C1/FEVM2.pdf used on i
 nput line 165.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/C1/FDVM3.pdf, id=1737, 295.68065pt x 249.13075
+<./chp5/figures/Analytic/Soliton/C1/FDVM3.pdf, id=1771, 295.68065pt x 249.13075
 pt>
 File: ./chp5/figures/Analytic/Soliton/C1/FDVM3.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/Soliton/C1/FDVM3.pdf>
@@ -1449,7 +1464,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/C1/FDVM3.pdf used on i
 nput line 170.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/C1/D.pdf, id=1738, 295.68065pt x 249.13075pt>
+<./chp5/figures/Analytic/Soliton/C1/D.pdf, id=1772, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Analytic/Soliton/C1/D.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Analytic/Soliton/C1/D.pdf>
@@ -1457,7 +1472,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/Soliton/C1/D.pdf used on input
  line 175.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/Soliton/C1/W.pdf, id=1739, 295.68065pt x 249.13075pt>
+<./chp5/figures/Analytic/Soliton/C1/W.pdf, id=1773, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Analytic/Soliton/C1/W.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Analytic/Soliton/C1/W.pdf>
@@ -1476,7 +1491,7 @@ iton/C1/FDVM1.pdf> <./chp5/figures/Analytic/Soliton/C1/FDVM2.pdf> <./chp5/figur
 es/Analytic/Soliton/C1/FEVM2.pdf> <./chp5/figures/Analytic/Soliton/C1/FDVM3.pdf
 > <./chp5/figures/Analytic/Soliton/C1/D.pdf> <./chp5/figures/Analytic/Soliton/C
 1/W.pdf>] [79]
-<./chp5/figures/Analytic/LakeAtRest/Example/FEVMWB.pdf, id=1964, 297.25554pt x 
+<./chp5/figures/Analytic/LakeAtRest/Example/FEVMWB.pdf, id=1998, 297.25554pt x 
 251.72946pt>
 File: ./chp5/figures/Analytic/LakeAtRest/Example/FEVMWB.pdf Graphic file (type 
 pdf)
@@ -1485,7 +1500,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/Example/FEVMWB.pdf
 used on input line 217.
 (pdftex.def)             Requested size: 206.28247pt x 174.68834pt.
 
-<./chp5/figures/Analytic/LakeAtRest/Example/FEVMnWB.pdf, id=1965, 297.25554pt x
+<./chp5/figures/Analytic/LakeAtRest/Example/FEVMnWB.pdf, id=1999, 297.25554pt x
  251.72946pt>
 File: ./chp5/figures/Analytic/LakeAtRest/Example/FEVMnWB.pdf Graphic file (type
  pdf)
@@ -1494,7 +1509,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/Example/FEVMnWB.pdf
  used on input line 222.
 (pdftex.def)             Requested size: 206.28247pt x 174.68834pt.
 
-<./chp5/figures/Analytic/LakeAtRest/Example/FDVMWB.pdf, id=1966, 297.25554pt x 
+<./chp5/figures/Analytic/LakeAtRest/Example/FDVMWB.pdf, id=2000, 297.25554pt x 
 251.72946pt>
 File: ./chp5/figures/Analytic/LakeAtRest/Example/FDVMWB.pdf Graphic file (type 
 pdf)
@@ -1503,7 +1518,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/Example/FDVMWB.pdf
 used on input line 227.
 (pdftex.def)             Requested size: 206.28247pt x 174.68834pt.
 
-<./chp5/figures/Analytic/LakeAtRest/Example/FDVMnWB.pdf, id=1967, 297.25554pt x
+<./chp5/figures/Analytic/LakeAtRest/Example/FDVMnWB.pdf, id=2001, 297.25554pt x
  251.72946pt>
 File: ./chp5/figures/Analytic/LakeAtRest/Example/FDVMnWB.pdf Graphic file (type
  pdf)
@@ -1512,7 +1527,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/Example/FDVMnWB.pdf
  used on input line 232.
 (pdftex.def)             Requested size: 206.28247pt x 174.68834pt.
 
-<./chp5/figures/Analytic/LakeAtRest/L1/FEVMWB.pdf, id=1968, 295.68065pt x 249.1
+<./chp5/figures/Analytic/LakeAtRest/L1/FEVMWB.pdf, id=2002, 295.68065pt x 249.1
 3075pt>
 File: ./chp5/figures/Analytic/LakeAtRest/L1/FEVMWB.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/LakeAtRest/L1/FEVMWB.pdf>
@@ -1520,7 +1535,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/L1/FEVMWB.pdf used
 on input line 243.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/LakeAtRest/L1/FEVMnWB.pdf, id=1969, 295.68065pt x 249.
+<./chp5/figures/Analytic/LakeAtRest/L1/FEVMnWB.pdf, id=2003, 295.68065pt x 249.
 13075pt>
 File: ./chp5/figures/Analytic/LakeAtRest/L1/FEVMnWB.pdf Graphic file (type pdf)
 
@@ -1529,7 +1544,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/L1/FEVMnWB.pdf used
  on input line 248.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/LakeAtRest/L1/FDVMWB.pdf, id=1970, 295.68065pt x 249.1
+<./chp5/figures/Analytic/LakeAtRest/L1/FDVMWB.pdf, id=2004, 295.68065pt x 249.1
 3075pt>
 File: ./chp5/figures/Analytic/LakeAtRest/L1/FDVMWB.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/LakeAtRest/L1/FDVMWB.pdf>
@@ -1537,7 +1552,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/L1/FDVMWB.pdf used
 on input line 253.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/LakeAtRest/L1/FDVMnWB.pdf, id=1971, 295.68065pt x 249.
+<./chp5/figures/Analytic/LakeAtRest/L1/FDVMnWB.pdf, id=2005, 295.68065pt x 249.
 13075pt>
 File: ./chp5/figures/Analytic/LakeAtRest/L1/FDVMnWB.pdf Graphic file (type pdf)
 
@@ -1546,7 +1561,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/L1/FDVMnWB.pdf used
  on input line 258.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/LakeAtRest/C1/FEVMWB.pdf, id=1972, 295.68065pt x 249.1
+<./chp5/figures/Analytic/LakeAtRest/C1/FEVMWB.pdf, id=2006, 295.68065pt x 249.1
 3075pt>
 File: ./chp5/figures/Analytic/LakeAtRest/C1/FEVMWB.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/LakeAtRest/C1/FEVMWB.pdf>
@@ -1554,7 +1569,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/C1/FEVMWB.pdf used
 on input line 269.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/LakeAtRest/C1/FEVMnWB.pdf, id=1973, 295.68065pt x 249.
+<./chp5/figures/Analytic/LakeAtRest/C1/FEVMnWB.pdf, id=2007, 295.68065pt x 249.
 13075pt>
 File: ./chp5/figures/Analytic/LakeAtRest/C1/FEVMnWB.pdf Graphic file (type pdf)
 
@@ -1563,7 +1578,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/C1/FEVMnWB.pdf used
  on input line 274.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/LakeAtRest/C1/FDVMWB.pdf, id=1974, 295.68065pt x 249.1
+<./chp5/figures/Analytic/LakeAtRest/C1/FDVMWB.pdf, id=2008, 295.68065pt x 249.1
 3075pt>
 File: ./chp5/figures/Analytic/LakeAtRest/C1/FDVMWB.pdf Graphic file (type pdf)
  <use ./chp5/figures/Analytic/LakeAtRest/C1/FDVMWB.pdf>
@@ -1571,7 +1586,7 @@ Package pdftex.def Info: ./chp5/figures/Analytic/LakeAtRest/C1/FDVMWB.pdf used
 on input line 279.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Analytic/LakeAtRest/C1/FDVMnWB.pdf, id=1975, 295.68065pt x 249.
+<./chp5/figures/Analytic/LakeAtRest/C1/FDVMnWB.pdf, id=2009, 295.68065pt x 249.
 13075pt>
 File: ./chp5/figures/Analytic/LakeAtRest/C1/FDVMnWB.pdf Graphic file (type pdf)
 
@@ -1600,7 +1615,7 @@ mr/m/n/12 = 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 5\OML/cmm/m/it/12 m$\OT1/cmr/m/n
 /cmr/m/n/12 3\OML/cmm/m/it/12 ^^Y= [] m$\OT1/cmr/m/n/12 ,
  []
 
-[84] <./chp5/figures/Forced/Wet/FEVMw.pdf, id=2183, 283.54733pt x 251.73248pt>
+[84] <./chp5/figures/Forced/Wet/FEVMw.pdf, id=2217, 283.54733pt x 251.73248pt>
 File: ./chp5/figures/Forced/Wet/FEVMw.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FEVMw.pdf>
@@ -1608,7 +1623,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FEVMw.pdf used on input line
  322.
 (pdftex.def)             Requested size: 206.28247pt x 183.14474pt.
 
-<./chp5/figures/Forced/Wet/FEVMh.pdf, id=2184, 289.22755pt x 251.72644pt>
+<./chp5/figures/Forced/Wet/FEVMh.pdf, id=2218, 289.22755pt x 251.72644pt>
 File: ./chp5/figures/Forced/Wet/FEVMh.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FEVMh.pdf>
@@ -1616,7 +1631,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FEVMh.pdf used on input line
  327.
 (pdftex.def)             Requested size: 206.28247pt x 179.53748pt.
 
-<./chp5/figures/Forced/Wet/FEVMG.pdf, id=2185, 299.43068pt x 251.73146pt>
+<./chp5/figures/Forced/Wet/FEVMG.pdf, id=2219, 299.43068pt x 251.73146pt>
 File: ./chp5/figures/Forced/Wet/FEVMG.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FEVMG.pdf>
@@ -1624,7 +1639,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FEVMG.pdf used on input line
  332.
 (pdftex.def)             Requested size: 206.28247pt x 173.42601pt.
 
-<./chp5/figures/Forced/Wet/FEVMu.pdf, id=2186, 298.56042pt x 251.72644pt>
+<./chp5/figures/Forced/Wet/FEVMu.pdf, id=2220, 298.56042pt x 251.72644pt>
 File: ./chp5/figures/Forced/Wet/FEVMu.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FEVMu.pdf>
@@ -1632,7 +1647,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FEVMu.pdf used on input line
  337.
 (pdftex.def)             Requested size: 206.28247pt x 173.92958pt.
 
-<./chp5/figures/Forced/Wet/FDVMw.pdf, id=2187, 283.54733pt x 251.73248pt>
+<./chp5/figures/Forced/Wet/FDVMw.pdf, id=2221, 283.54733pt x 251.73248pt>
 File: ./chp5/figures/Forced/Wet/FDVMw.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FDVMw.pdf>
@@ -1640,7 +1655,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FDVMw.pdf used on input line
  348.
 (pdftex.def)             Requested size: 206.28247pt x 183.14474pt.
 
-<./chp5/figures/Forced/Wet/FDVMh.pdf, id=2188, 289.22755pt x 251.72644pt>
+<./chp5/figures/Forced/Wet/FDVMh.pdf, id=2222, 289.22755pt x 251.72644pt>
 File: ./chp5/figures/Forced/Wet/FDVMh.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FDVMh.pdf>
@@ -1648,7 +1663,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FDVMh.pdf used on input line
  353.
 (pdftex.def)             Requested size: 206.28247pt x 179.53748pt.
 
-<./chp5/figures/Forced/Wet/FDVMG.pdf, id=2189, 299.43068pt x 251.73146pt>
+<./chp5/figures/Forced/Wet/FDVMG.pdf, id=2223, 299.43068pt x 251.73146pt>
 File: ./chp5/figures/Forced/Wet/FDVMG.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FDVMG.pdf>
@@ -1656,7 +1671,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FDVMG.pdf used on input line
  358.
 (pdftex.def)             Requested size: 206.28247pt x 173.42601pt.
 
-<./chp5/figures/Forced/Wet/FDVMu.pdf, id=2190, 298.56042pt x 251.72644pt>
+<./chp5/figures/Forced/Wet/FDVMu.pdf, id=2224, 298.56042pt x 251.72644pt>
 File: ./chp5/figures/Forced/Wet/FDVMu.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FDVMu.pdf>
@@ -1664,7 +1679,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FDVMu.pdf used on input line
  363.
 (pdftex.def)             Requested size: 206.28247pt x 173.92958pt.
 
-<./chp5/figures/Forced/Wet/FEVML1.pdf, id=2191, 295.68065pt x 249.13075pt>
+<./chp5/figures/Forced/Wet/FEVML1.pdf, id=2225, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Forced/Wet/FEVML1.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FEVML1.pdf>
@@ -1672,7 +1687,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FEVML1.pdf used on input lin
 e 375.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Forced/Wet/FDVML1.pdf, id=2192, 295.68065pt x 249.13075pt>
+<./chp5/figures/Forced/Wet/FDVML1.pdf, id=2226, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Forced/Wet/FDVML1.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Wet/FDVML1.pdf>
@@ -1680,7 +1695,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Wet/FDVML1.pdf used on input lin
 e 381.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Forced/Dry/FEVMw.pdf, id=2201, 292.68549pt x 251.73248pt>
+<./chp5/figures/Forced/Dry/FEVMw.pdf, id=2235, 292.68549pt x 251.73248pt>
 File: ./chp5/figures/Forced/Dry/FEVMw.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FEVMw.pdf>
@@ -1688,7 +1703,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FEVMw.pdf used on input line
  407.
 (pdftex.def)             Requested size: 206.28247pt x 177.42532pt.
 
-<./chp5/figures/Forced/Dry/FEVMh.pdf, id=2202, 292.68549pt x 251.72644pt>
+<./chp5/figures/Forced/Dry/FEVMh.pdf, id=2236, 292.68549pt x 251.72644pt>
 File: ./chp5/figures/Forced/Dry/FEVMh.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FEVMh.pdf>
@@ -1696,7 +1711,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FEVMh.pdf used on input line
  412.
 (pdftex.def)             Requested size: 206.28247pt x 177.42107pt.
 
-<./chp5/figures/Forced/Dry/FEVMG.pdf, id=2203, 293.55574pt x 251.73248pt>
+<./chp5/figures/Forced/Dry/FEVMG.pdf, id=2237, 293.55574pt x 251.73248pt>
 File: ./chp5/figures/Forced/Dry/FEVMG.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FEVMG.pdf>
@@ -1704,7 +1719,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FEVMG.pdf used on input line
  417.
 (pdftex.def)             Requested size: 206.28247pt x 176.89525pt.
 
-<./chp5/figures/Forced/Dry/FEVMu.pdf, id=2204, 292.68549pt x 251.73248pt>
+<./chp5/figures/Forced/Dry/FEVMu.pdf, id=2238, 292.68549pt x 251.73248pt>
 File: ./chp5/figures/Forced/Dry/FEVMu.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FEVMu.pdf>
@@ -1712,7 +1727,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FEVMu.pdf used on input line
  422.
 (pdftex.def)             Requested size: 206.28247pt x 177.42532pt.
 
-<./chp5/figures/Forced/Dry/FDVMw.pdf, id=2205, 292.68549pt x 251.73248pt>
+<./chp5/figures/Forced/Dry/FDVMw.pdf, id=2239, 292.68549pt x 251.73248pt>
 File: ./chp5/figures/Forced/Dry/FDVMw.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FDVMw.pdf>
@@ -1720,7 +1735,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FDVMw.pdf used on input line
  433.
 (pdftex.def)             Requested size: 206.28247pt x 177.42532pt.
 
-<./chp5/figures/Forced/Dry/FDVMh.pdf, id=2206, 292.68549pt x 251.72644pt>
+<./chp5/figures/Forced/Dry/FDVMh.pdf, id=2240, 292.68549pt x 251.72644pt>
 File: ./chp5/figures/Forced/Dry/FDVMh.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FDVMh.pdf>
@@ -1728,7 +1743,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FDVMh.pdf used on input line
  438.
 (pdftex.def)             Requested size: 206.28247pt x 177.42107pt.
 
-<./chp5/figures/Forced/Dry/FDVMG.pdf, id=2207, 293.55574pt x 251.73248pt>
+<./chp5/figures/Forced/Dry/FDVMG.pdf, id=2241, 293.55574pt x 251.73248pt>
 File: ./chp5/figures/Forced/Dry/FDVMG.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FDVMG.pdf>
@@ -1736,7 +1751,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FDVMG.pdf used on input line
  443.
 (pdftex.def)             Requested size: 206.28247pt x 176.89525pt.
 
-<./chp5/figures/Forced/Dry/FDVMu.pdf, id=2208, 292.68549pt x 251.73248pt>
+<./chp5/figures/Forced/Dry/FDVMu.pdf, id=2242, 292.68549pt x 251.73248pt>
 File: ./chp5/figures/Forced/Dry/FDVMu.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FDVMu.pdf>
@@ -1744,7 +1759,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FDVMu.pdf used on input line
  448.
 (pdftex.def)             Requested size: 206.28247pt x 177.42532pt.
 
-<./chp5/figures/Forced/Dry/FEVML1.pdf, id=2209, 295.68065pt x 249.13075pt>
+<./chp5/figures/Forced/Dry/FEVML1.pdf, id=2243, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Forced/Dry/FEVML1.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FEVML1.pdf>
@@ -1752,7 +1767,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FEVML1.pdf used on input lin
 e 460.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Forced/Dry/FDVML1.pdf, id=2210, 295.68065pt x 249.13075pt>
+<./chp5/figures/Forced/Dry/FDVML1.pdf, id=2244, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Forced/Dry/FDVML1.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FDVML1.pdf>
@@ -1760,7 +1775,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FDVML1.pdf used on input lin
 e 466.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Forced/Dry/FEVML1red.pdf, id=2211, 295.68065pt x 249.13075pt>
+<./chp5/figures/Forced/Dry/FEVML1red.pdf, id=2245, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Forced/Dry/FEVML1red.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FEVML1red.pdf>
@@ -1768,7 +1783,7 @@ Package pdftex.def Info: ./chp5/figures/Forced/Dry/FEVML1red.pdf used on input
 line 477.
 (pdftex.def)             Requested size: 206.28247pt x 173.8087pt.
 
-<./chp5/figures/Forced/Dry/FDVML1red.pdf, id=2212, 295.68065pt x 249.13075pt>
+<./chp5/figures/Forced/Dry/FDVML1red.pdf, id=2246, 295.68065pt x 249.13075pt>
 File: ./chp5/figures/Forced/Dry/FDVML1red.pdf Graphic file (type pdf)
 
 <use ./chp5/figures/Forced/Dry/FDVML1red.pdf>
@@ -1797,7 +1812,7 @@ FDVML1red.pdf>]
 ]
 Chapter 6.
 [93]
-<./chp6/figures/Experiment/Segur/WaveTank.pdf, id=2533, 352.35338pt x 202.51459
+<./chp6/figures/Experiment/Segur/WaveTank.pdf, id=2566, 352.35338pt x 202.51459
 pt>
 File: ./chp6/figures/Experiment/Segur/WaveTank.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Segur/WaveTank.pdf>
@@ -1814,7 +1829,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 21.
 
 [94 <./chp6/figures/Experiment/Segur/WaveTank.pdf>]
-<./chp6/figures/Experiment/Segur/LongWGsFEVM1cm.pdf, id=2561, 461.49513pt x 643
+<./chp6/figures/Experiment/Segur/LongWGsFEVM1cm.pdf, id=2594, 461.49513pt x 643
 .33752pt>
 File: ./chp6/figures/Experiment/Segur/LongWGsFEVM1cm.pdf Graphic file (type pdf
 )
@@ -1823,7 +1838,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Segur/LongWGsFEVM1cm.pdf use
 d on input line 33.
 (pdftex.def)             Requested size: 412.56496pt x 575.15034pt.
 
-<./chp6/figures/Experiment/Segur/LongWGsFDVM1cm.pdf, id=2562, 461.49513pt x 643
+<./chp6/figures/Experiment/Segur/LongWGsFDVM1cm.pdf, id=2595, 461.49513pt x 643
 .33752pt>
 File: ./chp6/figures/Experiment/Segur/LongWGsFDVM1cm.pdf Graphic file (type pdf
 )
@@ -1845,7 +1860,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 [95] [96 <./chp6/figures/Experiment/Segur/LongWGsFEVM1cm.pdf>] [97 <./chp6/figu
 res/Experiment/Segur/LongWGsFDVM1cm.pdf>]
-<./chp6/figures/Experiment/Segur/LongWGsFEVM3cm.pdf, id=2617, 461.49513pt x 643
+<./chp6/figures/Experiment/Segur/LongWGsFEVM3cm.pdf, id=2652, 461.49513pt x 643
 .34053pt>
 File: ./chp6/figures/Experiment/Segur/LongWGsFEVM3cm.pdf Graphic file (type pdf
 )
@@ -1854,7 +1869,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Segur/LongWGsFEVM3cm.pdf use
 d on input line 84.
 (pdftex.def)             Requested size: 412.56496pt x 575.15303pt.
 
-<./chp6/figures/Experiment/Segur/LongWGsFDVM3cm.pdf, id=2618, 461.49513pt x 643
+<./chp6/figures/Experiment/Segur/LongWGsFDVM3cm.pdf, id=2653, 461.49513pt x 643
 .34053pt>
 File: ./chp6/figures/Experiment/Segur/LongWGsFDVM3cm.pdf Graphic file (type pdf
 )
@@ -1877,7 +1892,7 @@ pa-tial do-main $[]$
  []
 
 
-<./chp6/figures/Experiment/Beji/BejiTank.pdf, id=2679, 362.79941pt x 217.51163p
+<./chp6/figures/Experiment/Beji/BejiTank.pdf, id=2713, 362.79941pt x 217.51163p
 t>
 File: ./chp6/figures/Experiment/Beji/BejiTank.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/BejiTank.pdf>
@@ -1885,7 +1900,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/BejiTank.pdf used on in
 put line 141.
 (pdftex.def)             Requested size: 412.56496pt x 247.35844pt.
  [102]
-<./chp6/figures/Experiment/Beji/sl/FEVMWG1.pdf, id=2698, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FEVMWG1.pdf, id=2732, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FEVMWG1.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FEVMWG1.pdf>
@@ -1893,7 +1908,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FEVMWG1.pdf used on
 input line 158.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FEVMWG2.pdf, id=2699, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FEVMWG2.pdf, id=2733, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FEVMWG2.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FEVMWG2.pdf>
@@ -1901,7 +1916,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FEVMWG2.pdf used on
 input line 163.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FEVMWG3.pdf, id=2700, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FEVMWG3.pdf, id=2734, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FEVMWG3.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FEVMWG3.pdf>
@@ -1909,7 +1924,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FEVMWG3.pdf used on
 input line 168.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FEVMWG4.pdf, id=2701, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FEVMWG4.pdf, id=2735, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FEVMWG4.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FEVMWG4.pdf>
@@ -1917,7 +1932,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FEVMWG4.pdf used on
 input line 173.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
  [103 <./chp6/figures/Experiment/Beji/BejiTank.pdf>]
-<./chp6/figures/Experiment/Beji/sl/FEVMWG5.pdf, id=2717, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FEVMWG5.pdf, id=2751, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FEVMWG5.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FEVMWG5.pdf>
@@ -1925,7 +1940,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FEVMWG5.pdf used on
 input line 184.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FEVMWG6.pdf, id=2718, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FEVMWG6.pdf, id=2752, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FEVMWG6.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FEVMWG6.pdf>
@@ -1933,7 +1948,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FEVMWG6.pdf used on
 input line 189.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FEVMWG7.pdf, id=2719, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FEVMWG7.pdf, id=2753, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FEVMWG7.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FEVMWG7.pdf>
@@ -1941,7 +1956,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FEVMWG7.pdf used on
 input line 194.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FDVMWG1.pdf, id=2720, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FDVMWG1.pdf, id=2754, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FDVMWG1.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FDVMWG1.pdf>
@@ -1949,7 +1964,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FDVMWG1.pdf used on
 input line 206.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FDVMWG2.pdf, id=2721, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FDVMWG2.pdf, id=2755, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FDVMWG2.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FDVMWG2.pdf>
@@ -1957,7 +1972,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FDVMWG2.pdf used on
 input line 211.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FDVMWG3.pdf, id=2722, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FDVMWG3.pdf, id=2756, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FDVMWG3.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FDVMWG3.pdf>
@@ -1965,7 +1980,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FDVMWG3.pdf used on
 input line 216.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FDVMWG4.pdf, id=2723, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FDVMWG4.pdf, id=2757, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FDVMWG4.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FDVMWG4.pdf>
@@ -1973,7 +1988,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FDVMWG4.pdf used on
 input line 221.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FDVMWG5.pdf, id=2724, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FDVMWG5.pdf, id=2758, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FDVMWG5.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FDVMWG5.pdf>
@@ -1981,7 +1996,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FDVMWG5.pdf used on
 input line 232.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FDVMWG6.pdf, id=2725, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FDVMWG6.pdf, id=2759, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FDVMWG6.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FDVMWG6.pdf>
@@ -1989,7 +2004,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FDVMWG6.pdf used on
 input line 237.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sl/FDVMWG7.pdf, id=2726, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sl/FDVMWG7.pdf, id=2760, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sl/FDVMWG7.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sl/FDVMWG7.pdf>
@@ -1997,7 +2012,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sl/FDVMWG7.pdf used on
 input line 242.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FEVMWG1.pdf, id=2739, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FEVMWG1.pdf, id=2773, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FEVMWG1.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FEVMWG1.pdf>
@@ -2005,7 +2020,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FEVMWG1.pdf used on
 input line 260.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FEVMWG2.pdf, id=2740, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FEVMWG2.pdf, id=2774, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FEVMWG2.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FEVMWG2.pdf>
@@ -2013,7 +2028,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FEVMWG2.pdf used on
 input line 265.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FEVMWG3.pdf, id=2741, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FEVMWG3.pdf, id=2775, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FEVMWG3.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FEVMWG3.pdf>
@@ -2021,7 +2036,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FEVMWG3.pdf used on
 input line 270.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FEVMWG4.pdf, id=2742, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FEVMWG4.pdf, id=2776, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FEVMWG4.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FEVMWG4.pdf>
@@ -2029,7 +2044,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FEVMWG4.pdf used on
 input line 275.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FEVMWG5.pdf, id=2743, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FEVMWG5.pdf, id=2777, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FEVMWG5.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FEVMWG5.pdf>
@@ -2037,7 +2052,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FEVMWG5.pdf used on
 input line 286.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FEVMWG6.pdf, id=2744, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FEVMWG6.pdf, id=2778, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FEVMWG6.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FEVMWG6.pdf>
@@ -2045,7 +2060,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FEVMWG6.pdf used on
 input line 291.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FEVMWG7.pdf, id=2745, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FEVMWG7.pdf, id=2779, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FEVMWG7.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FEVMWG7.pdf>
@@ -2053,7 +2068,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FEVMWG7.pdf used on
 input line 296.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FDVMWG1.pdf, id=2746, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FDVMWG1.pdf, id=2780, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FDVMWG1.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FDVMWG1.pdf>
@@ -2061,7 +2076,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FDVMWG1.pdf used on
 input line 308.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FDVMWG2.pdf, id=2747, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FDVMWG2.pdf, id=2781, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FDVMWG2.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FDVMWG2.pdf>
@@ -2069,7 +2084,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FDVMWG2.pdf used on
 input line 313.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FDVMWG3.pdf, id=2748, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FDVMWG3.pdf, id=2782, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FDVMWG3.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FDVMWG3.pdf>
@@ -2077,7 +2092,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FDVMWG3.pdf used on
 input line 318.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FDVMWG4.pdf, id=2749, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FDVMWG4.pdf, id=2783, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FDVMWG4.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FDVMWG4.pdf>
@@ -2085,7 +2100,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FDVMWG4.pdf used on
 input line 323.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FDVMWG5.pdf, id=2750, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FDVMWG5.pdf, id=2784, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FDVMWG5.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FDVMWG5.pdf>
@@ -2093,7 +2108,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FDVMWG5.pdf used on
 input line 334.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FDVMWG6.pdf, id=2751, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FDVMWG6.pdf, id=2785, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FDVMWG6.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FDVMWG6.pdf>
@@ -2101,7 +2116,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Beji/sh/FDVMWG6.pdf used on
 input line 339.
 (pdftex.def)             Requested size: 206.28247pt x 173.24297pt.
 
-<./chp6/figures/Experiment/Beji/sh/FDVMWG7.pdf, id=2752, 298.56143pt x 250.7327
+<./chp6/figures/Experiment/Beji/sh/FDVMWG7.pdf, id=2786, 298.56143pt x 250.7327
 4pt>
 File: ./chp6/figures/Experiment/Beji/sh/FDVMWG7.pdf Graphic file (type pdf)
  <use ./chp6/figures/Experiment/Beji/sh/FDVMWG7.pdf>
@@ -2126,7 +2141,7 @@ t/Beji/sh/FEVMWG7.pdf>] [111 <./chp6/figures/Experiment/Beji/sh/FDVMWG1.pdf> <.
 h/FDVMWG3.pdf> <./chp6/figures/Experiment/Beji/sh/FDVMWG4.pdf>] [112 <./chp6/fi
 gures/Experiment/Beji/sh/FDVMWG5.pdf> <./chp6/figures/Experiment/Beji/sh/FDVMWG
 6.pdf> <./chp6/figures/Experiment/Beji/sh/FDVMWG7.pdf>]
-<./chp6/figures/Experiment/Roeber/Trial8/WaveTank.pdf, id=3087, 362.80241pt x 2
+<./chp6/figures/Experiment/Roeber/Trial8/WaveTank.pdf, id=3120, 362.80241pt x 2
 08.513pt>
 File: ./chp6/figures/Experiment/Roeber/Trial8/WaveTank.pdf Graphic file (type p
 df)
@@ -2138,7 +2153,7 @@ sed on input line 363.
 Underfull \vbox (badness 3471) has occurred while \output is active []
 
  [113 <./chp6/figures/Experiment/Roeber/Trial8/WaveTank.pdf>]
-<./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs1.pdf, id=3105, 449.63985p
+<./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs1.pdf, id=3139, 449.63985p
 t x 480.33855pt>
 File: ./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs1.pdf Graphic file (t
 ype pdf)
@@ -2148,7 +2163,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs1.
 pdf used on input line 380.
 (pdftex.def)             Requested size: 412.56496pt x 440.74413pt.
 
-<./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs2.pdf, id=3106, 452.14018p
+<./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs2.pdf, id=3140, 452.14018p
 t x 480.33855pt>
 File: ./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs2.pdf Graphic file (t
 ype pdf)
@@ -2158,7 +2173,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs2.
 pdf used on input line 386.
 (pdftex.def)             Requested size: 412.56496pt x 438.30345pt.
 
-<./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs3.pdf, id=3107, 452.14018p
+<./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs3.pdf, id=3141, 452.14018p
 t x 389.29039pt>
 File: ./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs3.pdf Graphic file (t
 ype pdf)
@@ -2168,7 +2183,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs3.
 pdf used on input line 392.
 (pdftex.def)             Requested size: 412.56496pt x 355.22304pt.
 
-<./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs1.pdf, id=3108, 449.63985p
+<./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs1.pdf, id=3142, 449.63985p
 t x 480.33855pt>
 File: ./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs1.pdf Graphic file (t
 ype pdf)
@@ -2178,7 +2193,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs1.
 pdf used on input line 399.
 (pdftex.def)             Requested size: 412.56496pt x 440.74413pt.
 
-<./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs2.pdf, id=3109, 449.63985p
+<./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs2.pdf, id=3143, 449.63985p
 t x 389.29039pt>
 File: ./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs2.pdf Graphic file (t
 ype pdf)
@@ -2192,7 +2207,7 @@ pdf used on input line 405.
 s/Experiment/Roeber/Trial8/FEVM/LongWGs3.pdf>] [118 <./chp6/figures/Experiment/
 Roeber/Trial8/FDVM/LongWGs1.pdf>] [119 <./chp6/figures/Experiment/Roeber/Trial8
 /FDVM/LongWGs2.pdf>]
-<./chp6/figures/Experiment/Synolakis/WavetankArtifical.pdf, id=3199, 348.92961p
+<./chp6/figures/Experiment/Synolakis/WavetankArtifical.pdf, id=3233, 348.92961p
 t x 198.89407pt>
 File: ./chp6/figures/Experiment/Synolakis/WavetankArtifical.pdf Graphic file (t
 ype pdf)
@@ -2202,7 +2217,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Synolakis/WavetankArtifical.
 pdf used on input line 421.
 (pdftex.def)             Requested size: 412.56496pt x 235.18156pt.
  [120 <./chp6/figures/Experiment/Synolakis/WavetankArtifical.pdf>]
-<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/30s.pdf, id=3223, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/30s.pdf, id=3257, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/30s.pdf Graphic file (ty
 pe pdf)
@@ -2211,7 +2226,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/30s.p
 df used on input line 445.
 (pdftex.def)             Requested size: 206.28247pt x 173.53021pt.
 
-<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/40s.pdf, id=3224, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/40s.pdf, id=3258, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/40s.pdf Graphic file (ty
 pe pdf)
@@ -2220,7 +2235,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/40s.p
 df used on input line 450.
 (pdftex.def)             Requested size: 206.28247pt x 173.53021pt.
 
-<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/50s.pdf, id=3225, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/50s.pdf, id=3259, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/50s.pdf Graphic file (ty
 pe pdf)
@@ -2229,7 +2244,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/50s.p
 df used on input line 455.
 (pdftex.def)             Requested size: 206.28247pt x 173.53021pt.
 
-<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/60s.pdf, id=3226, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/60s.pdf, id=3260, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/60s.pdf Graphic file (ty
 pe pdf)
@@ -2238,7 +2253,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/60s.p
 df used on input line 460.
 (pdftex.def)             Requested size: 206.28247pt x 173.53021pt.
 
-<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/70s.pdf, id=3227, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/70s.pdf, id=3261, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/70s.pdf Graphic file (ty
 pe pdf)
@@ -2251,7 +2266,7 @@ df used on input line 465.
 LaTeX Warning: Float too large for page by 36.84245pt on input line 471.
 
 
-<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/30s.pdf, id=3228, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/30s.pdf, id=3262, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/30s.pdf Graphic file (ty
 pe pdf)
@@ -2260,7 +2275,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/30s.p
 df used on input line 476.
 (pdftex.def)             Requested size: 206.28247pt x 173.53021pt.
 
-<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/40s.pdf, id=3229, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/40s.pdf, id=3263, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/40s.pdf Graphic file (ty
 pe pdf)
@@ -2269,7 +2284,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/40s.p
 df used on input line 481.
 (pdftex.def)             Requested size: 206.28247pt x 173.53021pt.
 
-<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/50s.pdf, id=3230, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/50s.pdf, id=3264, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/50s.pdf Graphic file (ty
 pe pdf)
@@ -2278,7 +2293,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/50s.p
 df used on input line 486.
 (pdftex.def)             Requested size: 206.28247pt x 173.53021pt.
 
-<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/60s.pdf, id=3231, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/60s.pdf, id=3265, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/60s.pdf Graphic file (ty
 pe pdf)
@@ -2287,7 +2302,7 @@ Package pdftex.def Info: ./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/60s.p
 df used on input line 491.
 (pdftex.def)             Requested size: 206.28247pt x 173.53021pt.
 
-<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/70s.pdf, id=3232, 294.9419pt 
+<./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/70s.pdf, id=3266, 294.9419pt 
 x 248.11295pt>
 File: ./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/70s.pdf Graphic file (ty
 pe pdf)
@@ -2403,25 +2418,26 @@ Missing character: There is no ™ in font cmr12!
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 118.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 118.
 
-(./thesis.aux (./titlepage.aux) (./declaration.aux) (./abstract.aux)
-(./chp1/chapter.aux) (./chp2/chapter.aux) (./chp3/chapter.aux)
-(./chp4/chapter.aux) (./chp5/chapter.aux) (./chp6/chapter.aux)
-(./chp7/chapter.aux) (./app3/appendix.aux) (./app1/appendix.aux)
-(./app2/appendix.aux) (./app4/appendix.aux))
+(./thesis.aux (./titlepage.aux) (./dedication.aux) (./declaration.aux)
+(./acknowledgements.aux) (./abstract.aux) (./chp1/chapter.aux)
+(./chp2/chapter.aux) (./chp3/chapter.aux) (./chp4/chapter.aux)
+(./chp5/chapter.aux) (./chp6/chapter.aux) (./chp7/chapter.aux)
+(./app3/appendix.aux) (./app1/appendix.aux) (./app2/appendix.aux)
+(./app4/appendix.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 118.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 118.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 77F4E265ECF3C678B0D946CF948D25CA;5198.
+(rerunfilecheck)             Checksum: E71BBF10BE7DA926AFC3D63DB17B0659;5251.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 118.
  ) 
 Here is how much of TeX's memory you used:
- 30281 strings out of 494953
- 719350 string characters out of 6180976
- 897121 words of memory out of 5000000
- 32296 multiletter control sequences out of 15000+600000
+ 30324 strings out of 494953
+ 720178 string characters out of 6180976
+ 898279 words of memory out of 5000000
+ 32315 multiletter control sequences out of 15000+600000
  19193 words of font info for 76 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 69i,18n,79p,1597b,749s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,18n,79p,1603b,749s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy8.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/shar
@@ -2445,10 +2461,10 @@ blic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbol
 s/msbm10.pfb>
-Output written on thesis.pdf (155 pages, 4669950 bytes).
+Output written on thesis.pdf (159 pages, 4675133 bytes).
 PDF statistics:
- 3666 PDF objects out of 4296 (max. 8388607)
- 3318 compressed objects within 34 object streams
- 564 named destinations out of 1000 (max. 500000)
- 1221 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3701 PDF objects out of 4296 (max. 8388607)
+ 3349 compressed objects within 34 object streams
+ 574 named destinations out of 1000 (max. 500000)
+ 1229 words of extra memory for PDF output out of 10000 (max. 10000000)
 
