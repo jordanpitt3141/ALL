@@ -152,9 +152,9 @@ g = 9.81
 k = sqrt(3.0*a1) / (2.0*a0 *sqrt(a0 + a1))
 c = sqrt(g*(a0 + a1))
 
-meth = "FDVM1"
+#meth = "FDVM1"
 #meth = "FDVM2"
-#meth = "FDVM3"
+meth = "FDVM3"
 
 
 wdirb = "/home/jp/Documents/PhD/project/data/2018/raw/Thesis/SolitonAgn/" + meth+ "/" 
@@ -181,7 +181,7 @@ if not os.path.exists(sdir):
         os.makedirs(sdir)
         
         
-for ki in range(6,15):
+for ki in range(6,19):
         
         
     wdir = wdirb + str(ki) + "/"

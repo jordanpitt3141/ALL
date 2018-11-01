@@ -152,9 +152,9 @@ k = sqrt(3.0*a1) / (2.0*a0 *sqrt(a0 + a1))
 c = sqrt(g*(a0 + a1))
 
 
-meth = "FDVM1"
+#meth = "FDVM1"
 #meth = "FDVM2"
-#meth = "FDVM3"
+meth = "FDVM3"
 
 #wdir = "../../../../data/raw/NEWdata/FDredo/grim/"
 #sdir = "../../../../data/postprocessing/scFDallAE/grim/"
@@ -171,7 +171,7 @@ if not os.path.exists(sdir):
         os.makedirs(sdir)
         
         
-for ki in range(6,18):
+for ki in range(6,19):
         
         
     wdir = wdirb + str(ki) + "/"

@@ -67,7 +67,7 @@ def SolitonHam(a0,a1,c,k,xb,xe):
     husqInt = Solitonhusquare(a0,a1,c,k,xe) -Solitonhusquare(a0,a1,c,k,xb)
     hcubedusq = Solitonhcubeddusquare(a0,a1,c,k,xe) - Solitonhcubeddusquare(a0,a1,c,k,xb)
     
-    return 0.5*(hcubedusq)
+    return 0.5*(ghsqInt + husqInt + hcubedusq)
     
 
 
@@ -180,13 +180,13 @@ PFNNs=[]
 
 dxs=[]
 
-sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/Soliton/" +meth+"/TestC1/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/Soliton/" +meth+"/C1/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)
         
         
-for ki in range(11,12):
+for ki in range(6,20):
         
         
     wdir = wdirb + str(ki) + "/"
@@ -248,28 +248,6 @@ for ki in range(11,12):
     Mn = hall(xbc_c,hbc_c,n + 2*niBC,niBC,dx)
     Gcn = Gall(xbc_c,Gbc_c,n + 2*niBC,niBC,dx)
 
-    
-    hI,uI,GI  = solitoninit(n,a0,a1,g,x,0,dx)
-    
-    uI0 = uI[0]*ones(niBC)
-    uI1 = uI[-1]*ones(niBC)   
-    hI0 = hI[0]*ones(niBC)
-    hI1 = hI[-1]*ones(niBC)
-    GI0 = GI[0]*ones(niBC)
-    GI1 = GI[-1]*ones(niBC)  
-    
-    hIbc =  concatenate([hI0,hI,hI1])
-    uIbc =  concatenate([uI0,uI,uI1])
-    GIbc =  concatenate([GI0,GI,GI1])
-    
-    hIbc_c = copyarraytoC(hIbc)
-    uIbc_c = copyarraytoC(uIbc)
-    GIbc_c = copyarraytoC(GIbc)
-    
-    EIn = HankEnergyall(xbc_c,hIbc_c,uIbc_c,g,n + 2*niBC,niBC,dx)
-    PIn = uhall(xbc_c,hIbc_c,uIbc_c,n + 2*niBC,niBC,dx)
-    MIn = hall(xbc_c,hIbc_c,n + 2*niBC,niBC,dx)
-    GcIn = Gall(xbc_c,GIbc_c,n + 2*niBC,niBC,dx)
     
     xbeg = startx - 0.5*dx
     xend = endx + 0.5*dx
@@ -335,62 +313,19 @@ for ki in range(11,12):
     ubcC = copyarrayfromC(ubc_c,unbc)  
     GbcC = copyarrayfromC(Gbc_c,hnbc)  
     bbcC = copyarrayfromC(bbc_c,bnbc)
-    
 
-    hI_c = copyarraytoC(hI)
-    GI_c = copyarraytoC(GI)
-    
-    hIbc_c =  mallocPy(hnbc)
-    wIbc_c =  mallocPy(hnbc)
-    uIbc_c =  mallocPy(unbc)
-    GIbc_c =  mallocPy(hnbc)
-    bIbc_c =  mallocPy(bnbc)
-    
-    ReconandSolve(hI_c,GI_c,b_c,hMbeg_c,hMend_c,GMbeg_c,GMend_c,wMbeg_c,wMend_c,bMbeg_c,bMend_c,uMbeg_c,uMend_c,n,hnBC,hnbc,bnBC,bnMBC,bnbc,unBC,unbc,theta,dx,dt,g,GIbc_c,hIbc_c,wIbc_c,uIbc_c,bIbc_c)    
-
-    wIbcC = copyarrayfromC(wIbc_c,hnbc)  
-    hIbcC = copyarrayfromC(hIbc_c,hnbc)  
-    uIbcC = copyarrayfromC(uIbc_c,unbc)  
-    GIbcC = copyarrayfromC(GIbc_c,hnbc)  
-    bIbcC = copyarrayfromC(bIbc_c,bnbc)
-        
-    GFEMn = LinallFEM(Gbc_c,n,hnBC,dx)
-    MFEMn = LinallFEM(hbc_c,n,hnBC,dx)
-    PFEMn = uhallFEM(ubc_c,hbc_c,n,hnBC,unBC,dx)
-    EFEMn = HamFEM(ubc_c,hbc_c,bbc_c,n,hnBC,unBC,bnBC,dx,g)
-
-    GFEMIn = LinallFEM(GIbc_c,n,hnBC,dx)
-    MFEMIn = LinallFEM(hIbc_c,n,hnBC,dx)    
-    PFEMIn = uhallFEM(uIbc_c,hIbc_c,n,hnBC,unBC,dx)
-    EFEMIn = HamFEM(uIbc_c,hIbc_c,bIbc_c,n,hnBC,unBC,bnBC,dx,g)
     
     relGNumAna = abs(Gcn- Gci)/ abs(Gci)
     relMNumAna = abs(Mn- Mi)/ abs(Mi)
     relPNumAna = abs(Pn- Pi)/ abs(Pi)
     relENumAna = abs(En- Ei)/ abs(Ei)
     
-    relGNumNum = abs(Gcn- GcIn)/ abs(GcIn)
-    relMNumNum = abs(Mn- MIn)/ abs(MIn)
-    relPNumNum = abs(Pn- PIn)/ abs(PIn)
-    relENumNum = abs(En- EIn)/ abs(EIn)
-
-    relFEMGNumAna = abs(GFEMn- Gci)/ abs(Gci)
-    relFEMMNumAna = abs(MFEMn- Mi)/ abs(Mi)
-    relFEMPNumAna = abs(PFEMn- Pi)/ abs(Pi)
-    
-    relFEMGNumNum = abs(GFEMn- GFEMIn)/ abs(GFEMn)
-    relFEMMNumNum = abs(MFEMn- MFEMIn)/ abs(MFEMIn)
-    relFEMPNumNum = abs(PFEMn- PFEMIn)/ abs(PFEMIn)
-
     
     deallocPy(xbc_c)
     deallocPy(hbc_c)
     deallocPy(ubc_c)
     deallocPy(Gbc_c)
-    
-    deallocPy(hIbc_c)
-    deallocPy(uIbc_c)
-    deallocPy(GIbc_c)
+
     
     dxs.append(dx)
     
@@ -399,23 +334,10 @@ for ki in range(11,12):
     PNAs.append(relPNumAna)
     ENAs.append(relENumAna)
 
-    GNNs.append(relGNumNum)
-    MNNs.append(relMNumNum)
-    PNNs.append(relPNumNum)
-    ENNs.append(relENumNum)
-
-    GFNAs.append(relFEMGNumAna)
-    MFNAs.append(relFEMMNumAna)
-    PFNAs.append(relFEMPNumAna)
-
-    GFNNs.append(relFEMGNumNum)
-    MFNNs.append(relFEMMNumNum)
-    PFNNs.append(relFEMPNumNum)
 
 
+n= len(dxs)
 
-nn= len(dxs)
-"""
 s = sdir + "conG.dat"
 with open(s,'w') as file1:
     for i in range(n):
@@ -433,13 +355,13 @@ with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",PNAs[i])
         file1.write(s)  
-        
+       
 s = sdir + "conH.dat"
 with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",ENAs[i])
         file1.write(s) 
-
+"""
 s = sdir + "conGN.dat"
 with open(s,'w') as file1:
     for i in range(n):
@@ -500,5 +422,5 @@ s = sdir + "conuhFN.dat"
 with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.20f\n" %(dxs[i]," ",PFNNs[i])
-        file1.write(s)  
-"""        
+        file1.write(s)
+"""
