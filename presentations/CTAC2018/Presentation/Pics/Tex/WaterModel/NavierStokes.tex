@@ -1,0 +1,97 @@
+\documentclass[]{standalone} 
+\usepackage{pgfplots} 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{arrows, decorations.markings}
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{pgfplots} 
+\usepackage{sansmath}
+\sansmath
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\Large} }
+\begin{document} 
+	\begin{tikzpicture}
+	\fontfamily{cmss}
+	\makeatletter
+	\tikzset{
+		nomorepostaction/.code=\makeatletter\let\tikz@postactions\pgfutil@empty, % From https://tex.stackexchange.com/questions/3184/applying-a-postaction-to-every-path-in-tikz/5354#5354
+		my axis/.style={
+			postaction={
+				decoration={
+					markings,
+					mark=at position 1 with {
+						\arrow[ultra thick]{latex}
+					}
+				},
+				decorate,
+				nomorepostaction
+			},
+			thin,
+			-, % switch off other arrow tips
+			every path/.append style=my axis % this is necessary so it works both with "axis lines=left" and "axis lines=middle"
+		}
+	}
+	\makeatother
+	
+	\begin{axis}[ 
+	axis lines = left, 
+	axis line style={my axis},
+	width=15cm,
+	height = 7.5cm,
+	xtick={ -100},  
+	ytick = {-1},
+	yticklabels ={0},
+	xmin=0, 
+	xmax=10.2, 
+	ymin =-1, 
+	ymax = 1,
+	xlabel=$x$, 
+	ylabel=$z$ ]
+	\addplot [name path=b,brown!60!black,no markers, raw gnuplot] gnuplot[id=poly1] {plot 'file.dat' smooth  cspline; };
+	\addplot [name path=b2,brown!60!black] table {Wavetankp1.dat};
+	\addplot [red,only marks,mark=*] coordinates {(3,0.0)};
+
+	\path[name path=axis] (axis cs:0,-1) -- (axis cs:10,-1);
+	\addplot [name path=a,blue,no markers, raw gnuplot] gnuplot[id=poly2] {plot 'fileW.dat' smooth  cspline; };
+
+
+	\draw[<->,thick] (1.5, -4.7642078e-01  ) -- (1.5,-1);
+	%\draw[<->,red,ultra thick] (5.00, 5.0314933e-01) -- (5.0, -0.50143427);
+	
+	\path[->,thick] (3, 0.0) edge node[sloped, anchor=center, below]{\Large$\left(\tilde{u}(x,z,t) ,\tilde{v}(x,z,t)\right)$}  (6.5, 0.5);
+	
+	\path[->,thick] (3, 0.0) edge node[anchor=east]{\Large$g$}  (3, -0.35);
+	
+	\node[above] at (3,0.1) {\Large$\tilde{p}(x,z,t)$};
+	
+	\node[above] at (1,0.7) {\Large$\rho$};
+	
+	%\node[above] at (5,0.15) {\Large$(u(x,z,t) ,v(x,z,t))$};
+	\node[right] at (1.5,-0.75) {\Large$b(x)$};
+	
+	\draw[<->,thick] (0.6, -0.6) -- (0.6,0.45);
+	\node[right] at (0.6,0 ) {\Large$h(x,t)$};
+	
+		\addplot [
+		thick,
+		color=brown!60!black,
+		fill=brown!60!black, 
+		fill opacity=0.3
+		] fill between[of=b and axis];
+		
+	\addplot [
+	thick,
+	color=blue,
+	fill=blue, 
+	fill opacity=0.3
+	] fill between[of=a and b2];
+	
+	
+	\end{axis} 
+	
+	
+	
+	\end{tikzpicture}
+\end{document}

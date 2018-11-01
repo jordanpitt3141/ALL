@@ -1,0 +1,31 @@
+ \documentclass[]{standalone} 
+ \usepackage{pgfplots} 
+ \usepgfplotslibrary{fillbetween} 
+ \usepackage{tikz} 
+ \usepackage{amsmath} 
+ \usepackage{pgfplots}  
+ \usepackage{sansmath} 
+ \sansmath 
+ \usetikzlibrary{calc} \pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Huge},every tick label/.append style={font=\Huge} }
+\begin{document}  
+	\begin{tikzpicture}
+\fontfamily{cmss} 
+	\begin{axis}[ 
+ width=40cm, 
+ height = 20cm, 
+	xtick={-10,0,10,20,30,40,50,60}, 
+	ytick = {0.9,0.95,1,1.05,1.1}, 
+xmin=-10, 
+ xmax=60, 
+ ymin =0.9, 
+ ymax = 1.1,
+  xlabel=$x'$, 
+	ylabel=$z'$ ]
+\node[label={\Huge$t'=101.7$}] at (axis cs:55,1.07) {}; 
+	\addplot [name path=s,blue,no markers,ultra thick] table {../Data/ht=101.7.dat }; 
+ \addplot [name path=b,brown!60!black,no markers,ultra thick] table {../Data/b.dat };  \path[name path=a] (axis cs:-30,-0.1) -- (axis cs:150,-0.1);
+\addplot [thick,color=brown!60!black,fill=brown!60!black, fill opacity=0.3] fill between[of=b and a]; 
+ \addplot [thick,color=blue,	fill=blue,fill opacity=0.3] fill between[of=s and b]; 
+\end{axis} 
+ \end{tikzpicture} 
+ \end{document}

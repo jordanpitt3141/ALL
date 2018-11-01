@@ -1,0 +1,12 @@
+#1. Generate dat files and tex files
+#2. Make all pdfs
+#3. Convert to png
+	
+	mogrify -background white -alpha remove -format png *.pdf
+
+#4. Make video
+
+	ffmpeg -r 100 -i h%d.png  -c:v libx264 -r 60 -pix_fmt yuv420p video.mp4
+	
+
+
