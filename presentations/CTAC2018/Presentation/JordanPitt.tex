@@ -30,8 +30,9 @@
 %Method: in terms of polynomial representation, FEM, FVM
 %Validation: Present results of linear analysis: stability and dispersion analysis, then numerical solution comparisons
  
-\begin{frame}{Introduction}
+\begin{frame}{Outline}
 \begin{itemize}
+	\pause
 	\item Motivation
 	\pause
 	\item Method
@@ -41,7 +42,8 @@
 \end{frame}
 \section{Motivation}
 \subsection{Motivation}
-\begin{frame}<1>[label=MotivationFrame]{Ocean Wave Hazards}
+\begin{frame}<1-2>[label=MotivationFrame]{Ocean Wave Hazards}
+	\pause
 	\begin{itemize}
 		\item Tsunamis
 		\pause
@@ -54,7 +56,7 @@
 		\caption{Sulawesi Tsunami (Indonesia, 2018).}
 	\end{figure}
 \end{frame}
-\againframe<2>{MotivationFrame}
+\againframe<3>{MotivationFrame}
 \begin{frame}{Storm Surge of Hurricane Florence and Michael}
 	\begin{figure}
 		\centering
@@ -92,16 +94,18 @@
 
 \begin{frame}{Assumptions}
 	\bigbreak
+	\pause
 	\begin{tabular}{l | c }
 		Quantity& Serre Equations\\
 		\hline \\
-		Particle: $\tilde{v}(x,z,t)$ & $u\frac{\partial b}{\partial x} - (h - \alpha)\frac{\partial b}{\partial x}$ \\ &  \\ 
-		Particle: $\tilde{p}(x,z,t)$& $g \rho \alpha + \rho \alpha{ \color{green!50!black}\Psi } + \frac{1}{2} \rho \alpha \left(2h - \alpha\right) { \color{blue} \Phi }$ \\ & \\ \hline
+		Particle: $\tilde{u}(x,z,t)$ & $u(x,t)$ \\ &  \\ 
+		\pause
+		Particle: $\tilde{v}(x,z,t)$ & $u\frac{\partial b}{\partial x} - (z - b)\frac{\partial b}{\partial x}$ \\ &  \\ 
+		\pause
+		Particle: $\tilde{p}(x,z,t)$& $g \rho \left[h + b - z\right] + \rho \left[h + b - z\right] { \color{green!50!black}\Psi } $ \\& \\ & $+ \frac{1}{2} \rho \left(h^2 - \left[z - b \right]^2\right) { \color{blue} \Phi }$  \\ \hline
 	\end{tabular}
 	\bigbreak
-	where $$\alpha(x,z,t) = (h(x,t) + b(x)) - z$$ 
-	\bigskip
-	and
+	where
 	\begin{align*}
 	&{ \color{green!50!black}\Psi }  = \dfrac{\partial b}{\partial x}\left(\dfrac{\partial u}{\partial t} + u\dfrac{\partial u}{\partial x} \right)  + u^2\dfrac{\partial^2 b}{\partial x^2}, &
 	{ \color{blue} \Phi }  = \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} -u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t} .
@@ -145,9 +149,9 @@
 
 \againframe<1>{FVM}
 
-\begin{frame}{Conservation Law Form}
+\begin{frame}[label=ConLawForm]{Conservation Law Form}
 	\begin{equation*}
-	{\frac{\partial q}{\partial t}} +  {\frac{\partial}{\partial x}} \left[ f\left(q,{\frac{\partial q}{\partial x}}, {\frac{\partial^2 q}{\partial x^2}}, \dots,{\frac{\partial^n q}{\partial x^n}}\right)\right] + s\left(q,{\frac{\partial q}{\partial x}}, {\frac{\partial^2 q}{\partial x^2}}, \dots,{\frac{\partial^n q}{\partial x^n}}\right) = 0
+	{\frac{\partial q}{\partial t}} +  {\frac{\partial}{\partial x}} \left[ f\left(q,{\frac{\partial q}{\partial x}}, {\frac{\partial^2 q}{\partial x^2}}, \dots,{\frac{\partial^n q}{\partial x^n}}\right)\right] + s\left(q,{\frac{\partial q}{\partial x}}, {\frac{\partial^2 q}{\partial x^2}}, \dots,{\frac{\partial^m q}{\partial x^m}}\right) = 0
 	\end{equation*}
 \end{frame}
 
@@ -201,11 +205,7 @@
 \end{frame}
 
 \againframe<2>{FVM}
-\begin{frame}{Conservation Law Form}
-	\begin{equation*}
-	{\frac{\partial q}{\partial t}} +  {\frac{\partial}{\partial x}} \left[ f\left(q,{\frac{\partial q}{\partial x}}, {\frac{\partial^2 q}{\partial x^2}}, \dots,{\frac{\partial^n q}{\partial x^n}}\right)\right] + s\left(q,{\frac{\partial q}{\partial x}}, {\frac{\partial^2 q}{\partial x^2}}, \dots,{\frac{\partial^n q}{\partial x^n}}\right) = 0
-	\end{equation*}
-\end{frame}
+\againframe{ConLawForm}
 \begin{frame}{Finite Volume Method}
 	\begin{figure}
 		\includegraphics[width=\textwidth]{./Pics/Tex/FVM/Function.pdf}
@@ -231,7 +231,7 @@
 	%Since $b(x)$ is constant in time its omitted
 \end{frame}
 
-\begin{frame}{Require velocity to calculate flux}
+\begin{frame}{Require velocity to calculate flux and source}
 	However to calculate the flux and source terms we require $u$
 	\pause	
 	\begin{align*}
@@ -422,6 +422,19 @@
 	\begin{figure}
 		\includegraphics[width=0.75\textwidth]{./Pics/Synolakis/t=70s.pdf}
 	\end{figure}
+\end{frame}
+
+\begin{frame}{Conclusion}
+	Finite Element Volume Method for The Serre Equations
+	\begin{itemize}
+		\item Second-order accurate
+		\pause 
+		\item Conservative
+		\pause
+		\item Reproduces analytic solutions
+		\pause
+		\item Reproduces experimental results
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{}

@@ -24,7 +24,7 @@ text width=8em, text centered, rounded corners, minimum height=4em]
  \node [right of= CP, node distance=4cm](CC) {$F^{n}_{j\pm 1/2}, S^n_j$};
  \path [line] (PP) -> (MM) node[pos=0.5,above,sloped] {Reconstruction};
  \path [color=red,line] (MM) -> (CP) node[pos=0.5,above,sloped, align=center] {Calculate \\ Velocity};
- \path [line] (CP) -> (CC) node[pos=0.5,above,sloped, align=center] {Flux \\ Approximation};
+ \path [line] (CP) -> (CC) node[pos=0.5,above,sloped, align=center] {Flux and Source \\ Approximation};
  \path [line] (CC) -- ($ (CC) + (0,-1) $) --  ($ (PP) + (0,-1) $) ->  (PP) ;
  \node (a) at ($(MM)  + (0,-1.2) $){};
  \node (b) at ($(CP)  + (0,-1.2) $){};
