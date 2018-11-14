@@ -35,13 +35,13 @@
 	\begin{axis}[ 
 	axis lines = left, 
 	axis line style={my axis},
-	width=0.8\textwidth,
-	height = 0.494\textwidth,
+	width=\textwidth,
+	height = 0.61\textwidth,
 	xtick={ -100},  
 	ytick = {0}, 
 	xmin=0, 
 	xmax=10.2, 
-	ymin =-1, 
+	ymin =-0.7, 
 	ymax = 1,
 	xlabel=\Large $x$, 
 	ylabel=\Large $z$ ]
@@ -54,14 +54,20 @@
 	
 	
 	\draw[dashed,thick] (axis cs:0,0) -- (axis cs:10,0);
-	\draw[<->,thick] (1.5, -4.7642078e-01  ) -- (1.5,0);
-	\draw[<->,thick] (5.00, 5.0314933e-01) -- (5.0, -0.50143427);
+	\draw[<->,thick] (4.5, -0.5  ) -- (4.5,0);
+	\draw[<->,thick] (5.5, 0.56) -- (5.5, -0.46);
 	
-	\draw[->,thick] (5, 0.15) -- (7.5, 0.15);
+	\draw[<->,thick] (3, 0.6 ) -- (3,0);
 	
-	\node[above] at (6.25,0.15) {\Large$u(x,t)$};
-	\node[left] at (5,0.2) {\Large$h(x,t)$};
-	\node[left] at (1.5,-0.25) {\Large$b(x)$};
+	\draw[->,thick] (5.5, 0.15) -- (7.5, 0.15);
+	
+	\draw[o->,thick] (2.5,-0.1) -- (2.5, -0.35);
+	\node[left] at (2.5,-0.2) {\Large$v(x,z,t)$};
+	
+	\node[above] at (6.5,0.15) {\Large$u(x,t)$};
+	\node[left] at (5.5,0.2) {\Large$h(x,t)$};
+	\node[left] at (3,0.3) {\Large$w(x,t)$};
+	\node[left] at (4.5,-0.25) {\Large$b(x)$};
 	
 		\addplot [
 		thick,

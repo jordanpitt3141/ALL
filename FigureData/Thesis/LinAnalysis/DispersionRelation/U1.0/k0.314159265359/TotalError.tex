@@ -1,7 +1,7 @@
 \documentclass[]{standalone} 
 \usepackage{pgfplots} 
-\usepgfplotslibrary{external} 
-\tikzexternalize 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
 \usepackage{tikz} 
 \usepackage{amsmath} 
 \usepackage{pgfplots} 
@@ -10,8 +10,8 @@
 \begin{document} 
 	\begin{tikzpicture}
 	\begin{axis}[ 
-			width=0.8\textwidth,
-			height = 0.72\textwidth,
+	width=0.8\textwidth,
+	height = 0.72\textwidth,
 	xtick = {0,0.05,0.1,0.15,0.2},
 	ytick = {0,0.1,0.2,0.3,0.4},
 	xticklabel style={yshift=-1.5mm,/pgf/number format/.cd,fixed,precision=3},
@@ -25,7 +25,7 @@
 	ymin =0, 
 	ymax = 0.4,
 	xlabel=\Large$ \dfrac{\Delta x}{\lambda}$, 
-	ylabel=\Large$\dfrac{ \left|\tilde{\omega} - \omega\right| }{\left|\omega\right|}$ ]
+	ylabel=\Large$\dfrac{ \left|\widetilde{\omega}^+ - \omega^+ \right| }{\left|\omega^+ \right|}$ ]
 	\addplot [green!60!black,no markers,thick] table {o1.dat };
 	\addplot [red,no markers,thick] table {o2.dat };
 	\addplot [blue,no markers,thick] table {o2FEM.dat };

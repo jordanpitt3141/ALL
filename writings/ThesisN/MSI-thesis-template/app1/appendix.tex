@@ -1,6 +1,9 @@
-\chapter{Finite Element Integrals}
+\chapter{Basis Function and Function Space Definitions}
 \label{app:FEMIntegrals}
-For completeness we now provide the definitions of the basis functions of the FEM used by the FEVM described in Chapter \ref{chp:HFVMMethod}. Since all integrals of the basis functions are calculated with respect to the variable $\xi$, we give these basis functions in terms of $\xi$.
+For completeness we now provide the definitions of the basis functions of the FEM used by the FEVM described in Chapter \ref{chp:HFVMMethod} and the function spaces mentioned in Chapter \ref{chp:HFVMMethod}. Beginning with the basis function definitions 
+
+\section{Basis Functions}
+Since all integrals of the basis functions are calculated with respect to the variable $\xi$, we give these basis functions in terms of $\xi$.
 
 The basis functions $\psi$ for $h$ and $G$ demonstrated in Figure \ref{fig:P1DiscBasis} are
 \begin{align}
@@ -14,7 +17,7 @@ The basis functions $\psi$ for $h$ and $G$ demonstrated in Figure \ref{fig:P1Dis
 \end{array} \right. 
 \end{align}
 
-While the basis functions $\phi$ for $u$ and the test function $\tau$ displayed in Figure \ref{fig:P2ContBasis} are given by
+While the basis functions $\phi$ for $u$ and the test function $v$ displayed in Figure \ref{fig:P2ContBasis} are given by
 \begin{align}
 \phi_{j-1/2} &= \left\lbrace \begin{array}{c c}
 2 \left(\xi + \frac{3}{2}\right)\left(\xi + 2\right) & -2 \le \xi \le -1\\
@@ -54,3 +57,15 @@ Finally the basis functions $\gamma$ for the bed profile $b$ displayed in Figure
 \end{align}
 
 The calculation of the derivatives of these basis functions with respect to $\xi$ are straightforward and hence omitted. 
+
+\section{Function Spaces}
+The function spaces mentioned in Chapter \ref{chp:HFVMMethod} are $\mathbb{L}^2(\Omega)$ and $\mathbb{W}^{1,2}(\Omega)$. To be precise the function $f(x)$ is in $\mathbb{L}^2(\Omega)$ if
+\begin{eqnarray}
+\left( \int_{\Omega} f(x)^2 \; dx \right)^{\frac{1}{2}} < \infty.
+\end{eqnarray}
+
+While $f(x)$ is in $\mathbb{W}^{1,2}(\Omega)$ if 
+\begin{eqnarray}
+\left( \int_{\Omega} f(x)^2 \; dx +  \int_{\Omega} \left[D f(x) \right]^2 \; dx  \right)^{\frac{1}{2}} < \infty.
+\end{eqnarray}
+where $D f(x)$ is the weak derivative of $f(x)$. 

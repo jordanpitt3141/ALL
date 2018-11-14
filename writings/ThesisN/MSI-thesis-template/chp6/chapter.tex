@@ -20,7 +20,7 @@ This experiment was modelled numerically using the reflected problem, with the w
 
 \subsection{Results for $0.01m$ Rectangular Depression}
 
-Plots comparing the numerical and experimental wave gauge data for the $0.01m$ rectangular depression are displayed in Figures \ref{fig:Segur1cmFEVM} and \ref{fig:Segur1cmFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. Tables \ref{tab:ConservationSegurFEVM1cm} and \ref{tab:ConservationSegurFDVM1cm} are also provided, which record the conservation of all the quantities. 
+Plots comparing the numerical and experimental wave gauge data for the $0.01m$ rectangular depression are displayed in Figures \ref{fig:Segur1cmFEVM} and \ref{fig:Segur1cmFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. We present this data using the same dimensionless scales as reported in the original paper \cite{Hammack-Segur-1978-337}. Tables \ref{tab:ConservationSegurFEVM1cm} and \ref{tab:ConservationSegurFDVM1cm} are also provided, which record the conservation of all the quantities. 
 
 The numerical solutions agree well with the experimental results; particularly the initial triangular wave and the front of the dispersive wave train. While all the conserved quantities have indeed been conserved very well by the methods.  
 
@@ -72,7 +72,7 @@ Both $\text{FEVM}_2$ and $\text{FDVM}_2$ have produced visually identical result
  
 
 \subsection{Results for $0.03m$ Rectangular Depression}
-The wave gauge data for the numerical and experimental results for the evolution of the $0.03m$ rectangular depression are displayed in Figures \ref{fig:Segur3cmFEVM} and \ref{fig:Segur3cmFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. The conservation of all the conserved quantities are given in Tables \ref{tab:ConservationSegurFEVM3cm} and \ref{tab:ConservationSegurFEVM3cm} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively.
+The wave gauge data for the numerical and experimental results for the evolution of the $0.03m$ rectangular depression are displayed in Figures \ref{fig:Segur3cmFEVM} and \ref{fig:Segur3cmFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. These results are reported using the same dimensionless scales as the original paper \cite{Hammack-Segur-1978-337}. The conservation of all the conserved quantities are given in Tables \ref{tab:ConservationSegurFEVM3cm} and \ref{tab:ConservationSegurFEVM3cm} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively.
 
 Both methods again reproduce the overall behaviour of this experiment very well. Because the rectangular wave is deeper, this experiment provides a more rigorous test for the numerical methods. However, because there is more energy and the piston has to move further to generate the wave the effects that damp the oscillations in the experiments are more significant leading to a much larger difference between the numerical and experimental results; particularly for the amplitude and speed of the waves.
 
@@ -126,6 +126,13 @@ Beji and Battjes conducted a series of experiments investigating the effect of s
 
 The experiments of \citet{Beji-Battjes-1994-1} were conducted in a wave tank $37.7m$ long, $0.8m$ wide and $0.75m$ high. A diagram of the longitudinal section of the wave tank is given in Figure \ref{fig:BejiWT}. There are seven wave gauges at the following locations; $5.7m$, $10.5m$, $12.5m$, $13.5m$, $14.5m$, $15.7m$ and $17.3m$. Waves are generated from a piston-type wave maker located at $0m$ and travel on the initially still water to the right, over the submerged trapezoidal bar towards a wave absorbing sloped beach.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Beji/BejiTank.pdf}
+	\caption{Diagram demonstrating the water (\squareF{blue}) and the ground  (\squareF{brown!80!black}) for the Beji experiments, with the wave gauge locations marked.}
+	\label{fig:BejiWT}
+\end{figure}
+
 Two sinusoidal monochromatic non-breaking wave experiments were conducted. A low frequency one with a wavelength $\lambda \approx 3.69m$ and a period of $T = 2s$, and a high frequency one with $\lambda \approx 2.05m$ and a period of $T = 1.25s$. Both experiments had a wave amplitude of $0.01m$ and so both had the same small non-linearity parameter $\epsilon = 0.01 / 0.4 = 0.025$. 
 
 We numerically simulated these experiments over the spatial domain $\left[5.7m,150m\right]$ with $\Delta x = 0.1 / 2^4 m$ and $\Delta t = Sp / 2^5$ where $Sp = 0.039$ is the experimental sampling period. These $\Delta x$ and $\Delta t$ values satisfy the CFL condition \eqref{eqn:CFLcond} for these experiments. In our numerical experiments only the submerged trapezoidal bar is present, and the sloping beach is replaced with a very long horizontal bed that ensures that we do not observe any effects from the Dirichlet boundary conditions at the downstream edge.  
@@ -136,15 +143,8 @@ u(x,t) = \sqrt{g h_0} \; \dfrac{h(x,t) - h_0}{h(x,t)}.
 \end{equation*}
 Finally the boundary conditions for $G$ were calculated using the boundary conditions for $h$ and $u$. We shall now present our numerical results for the low and high frequency experiments.
 %
-\begin{figure}
-	\centering
-		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Beji/BejiTank.pdf}
-	\caption{Diagram demonstrating the water (\squareF{blue}) and the ground  (\squareF{brown!80!black}) for the Beji experiments, with the wave gauge locations marked.}
-	\label{fig:BejiWT}
-\end{figure}
-%
 \subsection{Low Frequency Results}
-A comparison of wave heights of the experimental and numerical results are located in Figures \ref{fig:BejislWG1to4FEVM} and \ref{fig:BejislWG5to7FEVM} for $\text{FEVM}_2$ and Figures \ref{fig:BejislWG1to4FDVM} and \ref{fig:BejislWG5to7FDVM} for $\text{FDVM}_2$. These numerical schemes both produce identical results for all wave gauges and so this benchmark does not help us discriminate between these two methods. 
+A comparison of the wave heights $\eta$ of the experimental and numerical results are located in Figures \ref{fig:BejislWG1to4FEVM} and \ref{fig:BejislWG5to7FEVM} for $\text{FEVM}_2$ and Figures \ref{fig:BejislWG1to4FDVM} and \ref{fig:BejislWG5to7FDVM} for $\text{FDVM}_2$. These numerical schemes both produce identical results for all wave gauges and so this benchmark does not help us discriminate between these two methods. 
 
 These results demonstrate the ability of these numerical methods to recreate the experimental results, particularly for wave gauge $1$ to $5$ where the agreement between experimental and numerical results is best. This validates the numerical schemes for simulating shoaling of dispersive waves as these wave gauges are all located on the windward side of the submerged bar where shoaling occurs in the experiment. 
 
@@ -443,27 +443,27 @@ The results for both $\text{FEVM}_2$ and $\text{FDVM}_2$ are identical in these 
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/30s.pdf}
-		\subcaption{$t=30s$}
+		\subcaption{$t'=30$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/40s.pdf}
-		\subcaption{$t=40s$}
+		\subcaption{$t'=40$}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/50s.pdf}
-		\subcaption{$t=50s$}
+		\subcaption{$t'=50$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/60s.pdf}
-		\subcaption{$t=60s$}
+		\subcaption{$t'=60$}
 		\vspace{0.5cm}
 			\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FEVM/70s.pdf}
-		\subcaption{$t=70s$}
+		\subcaption{$t'=70$}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\caption{A comparison of the water surface profiles for the experiment (\circlet{red}) and the numerical solution ({\color{blue}\solidrule}) produced by $\text{FEVM}_2$ at various times.}
@@ -474,27 +474,27 @@ The results for both $\text{FEVM}_2$ and $\text{FDVM}_2$ are identical in these 
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/30s.pdf}
-		\subcaption{$t=30s$}
+		\subcaption{$t'=30$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/40s.pdf}
-		\subcaption{$t=40s$}
+		\subcaption{$t'=40$}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/50s.pdf}
-		\subcaption{$t=50s$}
+		\subcaption{$t'=50$}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/60s.pdf}
-		\subcaption{$t=60s$}
+		\subcaption{$t'=60$}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/H0p0185/FDVM/70s.pdf}
-		\subcaption{$t=70s$}
+		\subcaption{$t'=70$}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\caption{A comparison of the water surface profiles for the experiment (\circlet{red}) and the numerical solution ({\color{blue}\solidrule}) produced by $\text{FDVM}_2$ at various times.}

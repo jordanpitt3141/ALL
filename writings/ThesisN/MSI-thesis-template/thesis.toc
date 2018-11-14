@@ -3,54 +3,55 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Objectives of the Thesis}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}Original Contribution of the Thesis}{3}{section.1.2}
-\contentsline {section}{\numberline {1.3}Organisation of the Thesis}{3}{section.1.3}
-\contentsline {chapter}{\numberline {2}The Serre Equations}{5}{chapter.2}
-\contentsline {section}{\numberline {2.1}The Equations}{6}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Alternative form of the Serre Equations}{7}{subsection.2.1.1}
-\contentsline {section}{\numberline {2.2}Properties of the Serre Equations}{8}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Conservation Properties}{9}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Dispersion Properties}{10}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Analytic Solutions}{11}{subsection.2.2.3}
-\contentsline {subsubsection}{Solitary Travelling Wave Solution}{11}{section*.6}
-\contentsline {subsubsection}{Lake at Rest}{12}{section*.7}
-\contentsline {subsection}{\numberline {2.2.4}Forced Solutions}{13}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Behaviour of Steep Gradients}{14}{subsection.2.2.5}
-\contentsline {subsubsection}{Asymptotic and Linear Results}{15}{section*.8}
-\contentsline {subsubsection}{Results of the Paper}{16}{section*.9}
-\contentsline {chapter}{\numberline {3}Finite Element Volume Method}{19}{chapter.3}
-\contentsline {section}{\numberline {3.1}Notation for Numerical Grids}{20}{section.3.1}
-\contentsline {section}{\numberline {3.2}Structure Overview}{21}{section.3.2}
-\contentsline {subsection}{\numberline {(i)}Reconstruction}{24}{subsection.3.2.1}
-\contentsline {subsubsection}{Reconstruction of the $h$, $w$ and $G$}{24}{section*.13}
-\contentsline {subsubsection}{Reconstruction of the Bed Profile}{25}{section*.14}
-\contentsline {subsection}{\numberline {(ii)}Fluid Velocity}{26}{subsection.3.2.2}
-\contentsline {subsubsection}{Basis Function Approximations}{27}{section*.15}
-\contentsline {subsubsection}{Calculation of Element-wise Matrices}{29}{section*.19}
-\contentsline {subsubsection}{Assembly of the Global Matrix}{31}{section*.20}
-\contentsline {subsection}{\numberline {(iii)}Flux Across the Cell Interfaces}{31}{subsection.3.2.3}
-\contentsline {subsubsection}{Calculation of Derivatives}{33}{section*.21}
-\contentsline {subsubsection}{Well Balancing}{34}{section*.22}
-\contentsline {subsection}{\numberline {(iv)}Source Terms}{35}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {(v)}Update Cell Averages}{36}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {(vi)}Second-Order SSP Runge-Kutta Method}{36}{subsection.3.2.6}
-\contentsline {section}{\numberline {3.3}CFL condition}{37}{section.3.3}
-\contentsline {section}{\numberline {3.4}Boundary Conditions}{37}{section.3.4}
-\contentsline {section}{\numberline {3.5}Dry Beds}{38}{section.3.5}
-\contentsline {chapter}{\numberline {4}Linear Analysis of the Numerical Methods}{43}{chapter.4}
-\contentsline {section}{\numberline {4.1}Linearised Serre Equations with a Horizontal Bed}{44}{section.4.1}
-\contentsline {section}{\numberline {4.2}Evolution Matrix}{45}{section.4.2}
-\contentsline {subsection}{\numberline {(i)}Reconstruction}{46}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {(ii)}Fluid Velocity}{46}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {(iii)}Flux Across the Cell Interfaces}{49}{subsection.4.2.3}
-\contentsline {subsubsection}{Left Supercritical Flow $Fr < -1$:}{50}{section*.23}
-\contentsline {subsubsection}{Subcritical Flow $-1 \le Fr \le 1$:}{50}{section*.24}
-\contentsline {subsubsection}{Right Supercritical Flow $Fr > 1$:}{51}{section*.25}
-\contentsline {subsection}{\numberline {(v)}Update Cell Averages}{52}{subsection.4.2.5}
-\contentsline {subsection}{\numberline {(vi)}Second-Order SSP Runge-Kutta Method}{53}{subsection.4.2.6}
-\contentsline {section}{\numberline {4.3}Convergence Analysis}{53}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Stability}{54}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Consistency}{55}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}Dispersion Analysis}{61}{section.4.4}
+\contentsline {subsection}{\numberline {1.2.1}Publications}{3}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.3}Organisation of the Thesis}{7}{section.1.3}
+\contentsline {chapter}{\numberline {2}The Serre Equations}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}The Equations}{10}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Alternative form of the Serre Equations}{12}{subsection.2.1.1}
+\contentsline {section}{\numberline {2.2}Properties of the Serre Equations}{13}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Conservation Properties}{13}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Dispersion Properties}{14}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Analytic Solutions}{15}{subsection.2.2.3}
+\contentsline {subsubsection}{Solitary Travelling Wave Solution}{15}{section*.6}
+\contentsline {subsubsection}{Lake at Rest}{16}{section*.7}
+\contentsline {subsection}{\numberline {2.2.4}Forced Solutions}{17}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Behaviour of Steep Gradients}{18}{subsection.2.2.5}
+\contentsline {subsubsection}{Asymptotic and Linear Results}{19}{section*.8}
+\contentsline {subsubsection}{Results of the \citet {Pitt-2018-61}}{20}{section*.9}
+\contentsline {chapter}{\numberline {3}Finite Element Volume Method}{23}{chapter.3}
+\contentsline {section}{\numberline {3.1}Notation for Numerical Grids}{24}{section.3.1}
+\contentsline {section}{\numberline {3.2}Structure Overview}{26}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Reconstruction}{28}{subsection.3.2.1}
+\contentsline {subsubsection}{Reconstruction of the $h$, $w$ and $G$}{28}{section*.13}
+\contentsline {subsubsection}{Reconstruction of the Bed Profile}{29}{section*.14}
+\contentsline {subsection}{\numberline {3.2.2}Fluid Velocity}{30}{subsection.3.2.2}
+\contentsline {subsubsection}{Basis Function Approximations}{31}{section*.15}
+\contentsline {subsubsection}{Calculation of Element-wise Matrices}{33}{section*.19}
+\contentsline {subsubsection}{Assembly of the Global Matrix}{34}{section*.20}
+\contentsline {subsection}{\numberline {3.2.3}Flux Across the Cell Interfaces}{35}{subsection.3.2.3}
+\contentsline {subsubsection}{Calculation of Derivatives}{36}{section*.21}
+\contentsline {subsubsection}{Well Balancing}{37}{section*.22}
+\contentsline {subsection}{\numberline {3.2.4}Source Terms}{38}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Update Cell Averages}{39}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Second-Order SSP Runge-Kutta Method}{40}{subsection.3.2.6}
+\contentsline {section}{\numberline {3.3}CFL condition}{40}{section.3.3}
+\contentsline {section}{\numberline {3.4}Boundary Conditions}{40}{section.3.4}
+\contentsline {section}{\numberline {3.5}Dry Beds}{42}{section.3.5}
+\contentsline {chapter}{\numberline {4}Linear Analysis of the Numerical Methods}{45}{chapter.4}
+\contentsline {section}{\numberline {4.1}Linearised Serre Equations with a Horizontal Bed}{46}{section.4.1}
+\contentsline {section}{\numberline {4.2}Evolution Matrix}{47}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Reconstruction}{48}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Fluid Velocity}{48}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Flux Across the Cell Interfaces}{50}{subsection.4.2.3}
+\contentsline {subsubsection}{Left Supercritical Flow $Fr < -1$:}{51}{section*.23}
+\contentsline {subsubsection}{Subcritical Flow $-1 \le Fr \le 1$:}{51}{section*.24}
+\contentsline {subsubsection}{Right Supercritical Flow $Fr > 1$:}{52}{section*.25}
+\contentsline {subsection}{\numberline {4.2.4}Update Cell Averages}{53}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}Second-Order SSP Runge-Kutta Method}{54}{subsection.4.2.5}
+\contentsline {section}{\numberline {4.3}Convergence Analysis}{54}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Stability}{55}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Consistency}{56}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}Dispersion Analysis}{62}{section.4.4}
 \contentsline {chapter}{\numberline {5}Numerical Validation}{71}{chapter.5}
 \contentsline {section}{\numberline {5.1}Measuring Convergence and Conservation}{71}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Measure of Convergence}{72}{subsection.5.1.1}
@@ -67,7 +68,7 @@
 \contentsline {subsection}{\numberline {6.1.1}Results for $0.01m$ Rectangular Depression}{94}{subsection.6.1.1}
 \contentsline {subsection}{\numberline {6.1.2}Results for $0.03m$ Rectangular Depression}{95}{subsection.6.1.2}
 \contentsline {section}{\numberline {6.2}Periodic Waves Over A Submerged Bar}{98}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Low Frequency Results}{102}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.1}Low Frequency Results}{103}{subsection.6.2.1}
 \contentsline {subsection}{\numberline {6.2.2}High Frequency Results}{104}{subsection.6.2.2}
 \contentsline {section}{\numberline {6.3}Solitary Wave Over a Fringing Reef}{104}{section.6.3}
 \contentsline {subsection}{\numberline {6.3.1}Results}{114}{subsection.6.3.1}
@@ -78,9 +79,10 @@
 \contentsline {chapter}{\numberline {A}Expressions for the Total Amount of Conserved Quantities for the Analytic Solutions}{127}{appendix.A}
 \contentsline {section}{\numberline {A.1}Solitary Travelling Wave}{127}{section.A.1}
 \contentsline {section}{\numberline {A.2}Lake At Rest}{129}{section.A.2}
-\contentsline {chapter}{\numberline {B}Finite Element Integrals}{131}{appendix.B}
+\contentsline {chapter}{\numberline {B}Basis Function and Function Space Definitions}{131}{appendix.B}
+\contentsline {section}{\numberline {B.1}Basis Functions}{131}{section.B.1}
+\contentsline {section}{\numberline {B.2}Function Spaces}{132}{section.B.2}
 \contentsline {chapter}{\numberline {C}Linear Analysis Results}{133}{appendix.C}
 \contentsline {section}{\numberline {C.1}Evolution Matrices for the Finite Difference Volume Methods}{133}{section.C.1}
 \contentsline {section}{\numberline {C.2}Evolution Matrices for the Finite Difference Methods}{133}{section.C.2}
-\contentsline {chapter}{\numberline {D}Publications}{137}{appendix.D}
-\contentsline {chapter}{Bibliography}{141}{appendix.D}
+\contentsline {chapter}{Bibliography}{137}{equation.C.2.1}
