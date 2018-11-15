@@ -6,7 +6,9 @@ For completeness we now provide the definitions of the basis functions of the FE
 Since all integrals of the basis functions are calculated with respect to the variable $\xi$, we give these basis functions in terms of $\xi$.
 
 The basis functions $\psi$ for $h$ and $G$ demonstrated in Figure \ref{fig:P1DiscBasis} are
+\begin{subequations}
 \begin{align}
+\label{eqn:App1:PsiDef}
 \psi^+_{j-1/2} &= \left\lbrace \begin{array}{c c}
 \frac{1}{2}\left(1 - \xi\right) & -1 \le \xi \le 1\\
 0 & \text{otherwise}
@@ -16,6 +18,7 @@ The basis functions $\psi$ for $h$ and $G$ demonstrated in Figure \ref{fig:P1Dis
 0 & \text{otherwise}
 \end{array} \right. 
 \end{align}
+\end{subequations}
 
 While the basis functions $\phi$ for $u$ and the test function $v$ displayed in Figure \ref{fig:P2ContBasis} are given by
 \begin{align}
