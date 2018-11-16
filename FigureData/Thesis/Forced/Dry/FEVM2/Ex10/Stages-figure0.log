@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.8.1)  12 OCT 2018 14:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  16 NOV 2018 10:39
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -485,7 +485,24 @@ gfsupp_tikzexternalshared.code.tex)))
 No auxiliary output files.
 
 \w@pgfexternal@auxout=\write4
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.fi
+llbetween.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfcontrib/tikzlibraryfillb
+etween.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryintersections.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersection
+s.code.tex
+\pgf@intersect@solutions=\count118
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfcontrib/tikzlibrarydecor
+ations.softclip.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfcontrib/pgflibraryfillbe
+tween.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.de
+corations.softclip.code.tex)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/
+amsmath.sty
 Package: amsmath 2016/03/03 v2.15a AMS math features
 \@mathmargin=\skip43
 For additional information on amsmath, use the `?' option.
@@ -501,13 +518,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 ) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
-\inf@bad=\count118
+\inf@bad=\count119
 LaTeX Info: Redefining \frac on input line 199.
-\uproot@=\count119
-\leftroot@=\count120
+\uproot@=\count120
+\leftroot@=\count121
 LaTeX Info: Redefining \overline on input line 297.
-\classnum@=\count121
-\DOTSCASE@=\count122
+\classnum@=\count122
+\DOTSCASE@=\count123
 LaTeX Info: Redefining \ldots on input line 394.
 LaTeX Info: Redefining \dots on input line 397.
 LaTeX Info: Redefining \cdots on input line 518.
@@ -516,15 +533,15 @@ LaTeX Info: Redefining \cdots on input line 518.
 \big@size=\dimen167
 LaTeX Font Info:    Redeclaring font encoding OML on input line 630.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
-\macc@depth=\count123
-\c@MaxMatrixCols=\count124
+\macc@depth=\count124
+\c@MaxMatrixCols=\count125
 \dotsspace@=\muskip10
-\c@parentequation=\count125
-\dspbrk@lvl=\count126
+\c@parentequation=\count126
+\dspbrk@lvl=\count127
 \tag@help=\toks33
-\row@=\count127
-\column@=\count128
-\maxfields@=\count129
+\row@=\count128
+\column@=\count129
+\maxfields@=\count130
 \andhelp@=\toks34
 \eqnshift@=\dimen168
 \alignsep@=\dimen169
@@ -544,31 +561,31 @@ zlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2013/07/15 v3.0.1a (rcs-revision 1.9)
 )
 No file Stages-figure0.aux.
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
 ABD: EveryShipout initializing macros (/usr/share/texlive/texmf-dist/tex/contex
 t/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count130
+\scratchcounter=\count131
 \scratchdimen=\dimen174
 \scratchbox=\box42
-\nofMPsegments=\count131
-\nofMParguments=\count132
+\nofMPsegments=\count132
+\nofMParguments=\count133
 \everyMPshowfont=\toks37
-\MPscratchCnt=\count133
+\MPscratchCnt=\count134
 \MPscratchDim=\dimen175
-\MPnumerator=\count134
-\makeMPintoPDFobject=\count135
+\MPnumerator=\count135
+\makeMPintoPDFobject=\count136
 \everyMPtoPDFconversion=\toks38
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -608,7 +625,7 @@ Missing character: There is no x in font nullfont!
 Package pgfplots Warning: You requested to open table 'Stage0.0s.dat ', but the
 re is also a 'Stage0.0s.dat .tex'. TeX will automatically append the suffix '.t
 ex', so I will now open 'Stage0.0s.dat .tex'. Please make sure you don't accide
-ntally load TeX files - this may produce unrecoverable errors. on input line 30
+ntally load TeX files - this may produce unrecoverable errors. on input line 31
 .
 
 PGFPlots: reading {Stage0.0s.dat }
@@ -623,7 +640,7 @@ Missing character: There is no x in font nullfont!
 Package pgfplots Warning: You requested to open table 'Stage2.5s.dat ', but the
 re is also a 'Stage2.5s.dat .tex'. TeX will automatically append the suffix '.t
 ex', so I will now open 'Stage2.5s.dat .tex'. Please make sure you don't accide
-ntally load TeX files - this may produce unrecoverable errors. on input line 31
+ntally load TeX files - this may produce unrecoverable errors. on input line 32
 .
 
 PGFPlots: reading {Stage2.5s.dat }
@@ -632,10 +649,22 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no x in font nullfont!
 
+Package pgfplots Warning: You requested to open table 'Stage0.0s.dat ', but the
+re is also a 'Stage0.0s.dat .tex'. TeX will automatically append the suffix '.t
+ex', so I will now open 'Stage0.0s.dat .tex'. Please make sure you don't accide
+ntally load TeX files - this may produce unrecoverable errors. on input line 34
+.
+
+PGFPlots: reading {Stage0.0s.dat }
+Missing character: There is no . in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no x in font nullfont!
+
 Package pgfplots Warning: You requested to open table 'Stage5.0s.dat ', but the
 re is also a 'Stage5.0s.dat .tex'. TeX will automatically append the suffix '.t
 ex', so I will now open 'Stage5.0s.dat .tex'. Please make sure you don't accide
-ntally load TeX files - this may produce unrecoverable errors. on input line 32
+ntally load TeX files - this may produce unrecoverable errors. on input line 35
 .
 
 PGFPlots: reading {Stage5.0s.dat }
@@ -644,13 +673,37 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no x in font nullfont!
 
+Package pgfplots Warning: You requested to open table 'Stage0.0s.dat ', but the
+re is also a 'Stage0.0s.dat .tex'. TeX will automatically append the suffix '.t
+ex', so I will now open 'Stage0.0s.dat .tex'. Please make sure you don't accide
+ntally load TeX files - this may produce unrecoverable errors. on input line 37
+.
+
+PGFPlots: reading {Stage0.0s.dat }
+Missing character: There is no . in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no x in font nullfont!
+
 Package pgfplots Warning: You requested to open table 'Stage7.5s.dat ', but the
 re is also a 'Stage7.5s.dat .tex'. TeX will automatically append the suffix '.t
 ex', so I will now open 'Stage7.5s.dat .tex'. Please make sure you don't accide
-ntally load TeX files - this may produce unrecoverable errors. on input line 33
+ntally load TeX files - this may produce unrecoverable errors. on input line 38
 .
 
 PGFPlots: reading {Stage7.5s.dat }
+Missing character: There is no . in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no x in font nullfont!
+
+Package pgfplots Warning: You requested to open table 'Stage0.0s.dat ', but the
+re is also a 'Stage0.0s.dat .tex'. TeX will automatically append the suffix '.t
+ex', so I will now open 'Stage0.0s.dat .tex'. Please make sure you don't accide
+ntally load TeX files - this may produce unrecoverable errors. on input line 40
+.
+
+PGFPlots: reading {Stage0.0s.dat }
 Missing character: There is no . in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -660,9 +713,21 @@ Package pgfplots Warning: You requested to open table 'Stage10.0s.dat ', but th
 ere is also a 'Stage10.0s.dat .tex'. TeX will automatically append the suffix '
 .tex', so I will now open 'Stage10.0s.dat .tex'. Please make sure you don't acc
 identally load TeX files - this may produce unrecoverable errors. on input line
- 34.
+ 41.
 
 PGFPlots: reading {Stage10.0s.dat }
+Missing character: There is no . in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no x in font nullfont!
+
+Package pgfplots Warning: You requested to open table 'Stage0.0s.dat ', but the
+re is also a 'Stage0.0s.dat .tex'. TeX will automatically append the suffix '.t
+ex', so I will now open 'Stage0.0s.dat .tex'. Please make sure you don't accide
+ntally load TeX files - this may produce unrecoverable errors. on input line 43
+.
+
+PGFPlots: reading {Stage0.0s.dat }
 Missing character: There is no . in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -671,27 +736,50 @@ Missing character: There is no x in font nullfont!
 Package pgfplots Warning: You requested to open table 'Bed0.0s.dat ', but there
  is also a 'Bed0.0s.dat .tex'. TeX will automatically append the suffix '.tex',
  so I will now open 'Bed0.0s.dat .tex'. Please make sure you don't accidentally
- load TeX files - this may produce unrecoverable errors. on input line 35.
+ load TeX files - this may produce unrecoverable errors. on input line 45.
 
 PGFPlots: reading {Bed0.0s.dat }
+Package pgfplots info on input line 49: fill between: found 'clip=true'. Prepar
+ing pgfplotsextra instruction with clip path for layer 'pre main'...
+Package pgfplots info on input line 56: fill between: activating layered graphi
+cs
+\pgf@layerbox@axis background=\box43
+\pgf@layerboxsaved@axis background=\box44
+\pgf@layerbox@axis grid=\box45
+\pgf@layerboxsaved@axis grid=\box46
+\pgf@layerbox@axis ticks=\box47
+\pgf@layerboxsaved@axis ticks=\box48
+\pgf@layerbox@axis lines=\box49
+\pgf@layerboxsaved@axis lines=\box50
+\pgf@layerbox@axis tick labels=\box51
+\pgf@layerboxsaved@axis tick labels=\box52
+\pgf@layerbox@pre main=\box53
+\pgf@layerboxsaved@pre main=\box54
+\pgf@layerbox@axis descriptions=\box55
+\pgf@layerboxsaved@axis descriptions=\box56
+\pgf@layerbox@axis foreground=\box57
+\pgf@layerboxsaved@axis foreground=\box58
+Package pgfplots info on input line 56: Setting layers 'axis background,axis gr
+id,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis 
+foreground'...
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 42.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 42.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 61.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 61.
  ) 
 Here is how much of TeX's memory you used:
- 22620 strings out of 494953
- 588189 string characters out of 6180978
- 1544644 words of memory out of 5000000
- 25508 multiletter control sequences out of 15000+600000
+ 23141 strings out of 494953
+ 604510 string characters out of 6180976
+ 1474148 words of memory out of 5000000
+ 26007 multiletter control sequences out of 15000+600000
  8414 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 63i,11n,100p,767b,1903s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,8n,107p,767b,1817s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Stages-figure0.pdf (1 page, 39490 bytes).
+Output written on Stages-figure0.pdf (1 page, 44170 bytes).
 PDF statistics:
  23 PDF objects out of 1000 (max. 8388607)
  16 compressed objects within 1 object stream

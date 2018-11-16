@@ -2,6 +2,7 @@
 \usepackage{pgfplots} 
 \usepgfplotslibrary{external} 
 \tikzexternalize 
+\usepgfplotslibrary{fillbetween}
 \usepackage{tikz} 
 \usepackage{amsmath} 
 \usepackage{pgfplots} 
@@ -10,8 +11,8 @@
 \begin{document} 
 	\begin{tikzpicture}
 	\begin{axis}[ 
-			width=0.8\textwidth,
-			height = 0.72\textwidth,
+	width=0.8\textwidth,
+	height = 0.72\textwidth,
 	scaled ticks=false, 
 	tick label style={/pgf/number format/fixed},
 	xtick = {-5,0,5,10,15,20},
@@ -27,10 +28,13 @@
 	ymax = 0.08,
 	xlabel=\Large$x'$, 
 	ylabel=\Large$z'$ ]
-	\addplot [green!60!black,no markers,ultra thick,restrict x to domain=-5:20] table {./Data/b30.0.dat };
-	\addplot [blue,no markers,ultra thick,restrict x to domain=-5:20] table {./Data/w40.0.dat };
+	\addplot [name path=b,brown!60!black,no markers,ultra thick,restrict x to domain=-5:20] table {./Data/b30.0.dat };
+	\addplot [name path=s,blue,no markers,ultra thick,restrict x to domain=-5:20] table {./Data/w40.0.dat };
 	\addplot [red,only marks,mark=o,mark size =0.75mm,restrict x to domain=-5:20] table {./Data/t=40.dat };
-
+	\path[name path=a] (axis cs:-5,-0.1) -- (axis cs:20,-0.1);
+	\addplot [thick,color=brown!60!black,fill=brown!60!black, fill opacity=0.3] fill between[of=b and a]; 
+	\addplot [thick,color=blue,	fill=blue,fill opacity=0.3] fill between[of=s and b]; 
+	
 	\end{axis} 
 	
 	

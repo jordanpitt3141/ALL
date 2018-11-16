@@ -2,6 +2,7 @@
 \usepackage{pgfplots} 
 \usepgfplotslibrary{external} 
 \tikzexternalize 
+\usepgfplotslibrary{fillbetween}
 \usepackage{tikz} 
 \usepackage{amsmath} 
 \usepackage{pgfplots} 
@@ -10,8 +11,8 @@
 \begin{document} 
 	\begin{tikzpicture}
 	\begin{axis}[ 
-			width=0.8\textwidth,
-			height = 0.72\textwidth,
+		width=0.8\textwidth,
+		height = 0.72\textwidth,
 	scaled ticks=false, 
 	tick label style={/pgf/number format/fixed},
 	xtick = {-50,-25,0,25},
@@ -27,12 +28,30 @@
 	ymax = 1.5,
 	xlabel=\Large$x \; (m)$, 
 	ylabel=\Large$z \; (m)$ ]
-	\addplot [blue,no markers,ultra thick] table {Stage0.0s.dat };
-	\addplot [red,no markers,ultra thick] table {Stage2.5s.dat };
-	\addplot [violet!80!white,no markers,ultra thick] table {Stage5.0s.dat };
-	\addplot [orange,no markers,ultra thick] table {Stage7.5s.dat };
-	\addplot [black,no markers,ultra thick] table {Stage10.0s.dat };
-	\addplot [green!60!black,no markers,ultra thick] table {Bed0.0s.dat };
+	\addplot [name path=s0s1,draw=none,restrict x to domain=-30:-20] table {Stage0.0s.dat };
+	\addplot [name path=s1,red,no markers,ultra thick,restrict x to domain=-30:-20] table {Stage2.5s.dat };
+	
+	\addplot [name path=s0s2,draw=none,restrict x to domain=-18:-7] table {Stage0.0s.dat };
+	\addplot [name path=s2,violet!80!white,no markers,ultra thick,restrict x to domain=-18:-7] table {Stage5.0s.dat };
+	
+	\addplot [name path=s0s3,draw=none,restrict x to domain=-5:5] table {Stage0.0s.dat };
+	\addplot [name path=s3,orange,no markers,ultra thick,restrict x to domain=-5:5] table {Stage7.5s.dat };
+	
+	\addplot [name path=s0s4,draw=none,restrict x to domain=7:18] table {Stage0.0s.dat };
+	\addplot [name path=s4,black,no markers,ultra thick,restrict x to domain=7:18] table {Stage10.0s.dat };
+	
+	\addplot [name path=s0,blue,no markers,ultra thick] table {Stage0.0s.dat };
+	
+	\addplot [name path=b,brown!60!black,no markers,ultra thick] table {Bed0.0s.dat };
+	
+	\path[name path=a] (axis cs:-50,-2) -- (axis cs:25,-2);
+	
+	\addplot [thick,color=brown!60!black,fill=brown!60!black, fill opacity=0.3] fill between[of=b and a]; 
+	\addplot [thick,color=blue,	fill=blue,fill opacity=0.3] fill between[of=s0 and b]; 
+	\addplot [thick,color=red,	fill=red,fill opacity=0.3] fill between[of=s1 and s0s1]; 
+	\addplot [thick,color=violet!80!white,	fill=violet!80!white,fill opacity=0.3] fill between[of=s2 and s0s2];
+	\addplot [thick,color=orange,	fill=orange,fill opacity=0.3] fill between[of=s3 and s0s3];
+	\addplot [thick,color=black,	fill=black,fill opacity=0.3] fill between[of=s4 and s0s4];
 
 	\end{axis} 
 	

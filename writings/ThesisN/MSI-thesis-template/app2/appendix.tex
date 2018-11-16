@@ -1,9 +1,9 @@
 \chapter{Linear Analysis Results}
 \label{app:LinAnal}
-In this appendix we present all the pieces one would need to calculate the Evolution matrix $\matr{E}$ for all the methods. For the hybrid FDVM given the results in Chapter \ref{chp:AnalNumMethod} for the FEVM it is enough to provide only expressions for some of the operators. While for the FD methods we just present the evolution matrix as its calculation is straightforward given their description by \citet{Zoppou-etal-2017}.  
+In this appendix we present all the components to calculate the Evolution matrix $\matr{E}$ for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. For the hybrid FDVM given the results in Chapter \ref{chp:AnalNumMethod} for the $\text{FEVM}_2$ it is enough to provide only expressions for some of the operators. While for the FD methods we just present the evolution matrix.  
 
 \section{Evolution Matrices for the Finite Difference Volume Methods}
-For the FDVM the evolution matrix can be constructed by taking the formulas for the elements of $\matr{F}$ from the FEVM and replacing the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_j$, $\mathcal{R}^-_{j+1/2}$ and $\mathcal{G}$ with the appropriate ones for the FDVM given in Tables \ref{tab:Mfactor}, \ref{tab:Rpfactor}, \ref{tab:Rmfactor} and \ref{tab:Gfactor}. From $\matr{F}$ the appropriate $\matr{E}$ is then obtained by using the appropriate formulas given by the Runge-Kutta time stepping in Table \ref{tab:RKstepfactor}. 
+For the FDVM the evolution matrix can be constructed by taking the formulas for the elements of $\matr{F}$ from the FEVM and replacing the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_j$, $\mathcal{R}^-_{j+1/2}$ and $\mathcal{G}$ with the appropriate ones for the FDVM given in Tables \ref{tab:Mfactor}, \ref{tab:Rpfactor}, \ref{tab:Rmfactor} and \ref{tab:Gfactor}. From $\matr{F}$ the evolution matrix $\matr{E}$ is then obtained by using the formulas given by the Runge-Kutta time stepping in Table \ref{tab:RKstepfactor}. 
 
 
 
@@ -65,11 +65,11 @@ For the FDVM the evolution matrix can be constructed by taking the formulas for 
 \begin{table}
 	\centering
 	\begin{tabular}{l  c}
-		Order& Formula for $\matr{E}$\\
+		Scheme& Formula for $\matr{E}$\\
 		\hline &\\
-		First& $\matr{I} - \Delta t\matr{F} $ \\
-		Second& $ \matr{I}  -\Delta t\matr{F} + \frac{1}{2}\Delta t^2\matr{F}^2$ \\
-		Third& $\matr{I} -\Delta t\matr{F} + \frac{1}{2}\Delta t^2 \matr{F}^2 - \frac{1}{6}\Delta t^3 \matr{F}^3 $ \\
+		$\text{FDVM}_1$& $\matr{I} - \Delta t\matr{F} $ \\
+		$\text{FDVM}_2$& $ \matr{I}  -\Delta t\matr{F} + \frac{1}{2}\Delta t^2\matr{F}^2$ \\
+		$\text{FDVM}_3$& $\matr{I} -\Delta t\matr{F} + \frac{1}{2}\Delta t^2 \matr{F}^2 - \frac{1}{6}\Delta t^3 \matr{F}^3 $ \\
 	\end{tabular}
 	\caption{Formula for $\matr{E}$ given $\matr{F}$ determined by the SSP Runge-Kutta timestepping method.}
 	\label{tab:RKstepfactor}

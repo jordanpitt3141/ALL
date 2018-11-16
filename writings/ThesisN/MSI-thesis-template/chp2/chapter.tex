@@ -12,7 +12,16 @@ In this chapter we present the one-dimensional Serre equations and a reformulati
 \section{The Equations}
 %[!]-----[!] DISPERSION!!!!!
 %full nonlineariy, good approximation to Euler equations up to wave breaking
-In this thesis we take the Serre equations as derived from depth-integration approach \cite{Su-Gardener-1969-536,Seabra-Santos-etal-1987-117}. Given the extent of the literature already available for the derivation of these equations we will only introduce the relevant quantities and present the equations. Under the depth-integration approach the one-dimensional Serre equations describe the behaviour of unsteady free surface fluid flow for an inviscid fluid with constant density $\rho$, neglecting wave-breaking and bottom friction. The primitive variables are the height $h(x,t)$ of the free surface above a stationary bed profile given by $b(x)$ and the depth average horizontal velocity $u(x,t)$ which are all demonstrated in Figure \ref{fig:WaterModel}. Additionally we define the stage $w(x,t) = h(x,t) + b(x)$ which gives the absolute location of the free surface. The derivation is similar to that of the Shallow Water Wave Equations (SWWE) \cite{Liggett-1994}, except for the Serre equations the vertical velocity $v(x,z,t)$ varies linearly with depth and is given by \cite{Zoppou-2014}
+In this thesis we take the Serre equations as derived from depth-integration approach \cite{Su-Gardener-1969-536,Seabra-Santos-etal-1987-117}. Given the extent of the literature already available for the derivation of these equations we will only introduce the relevant quantities and present the equations. Under the depth-integration approach the one-dimensional Serre equations describe the behaviour of unsteady free surface fluid flow for an inviscid fluid with constant density $\rho$, neglecting wave-breaking and bottom friction. The primitive variables are the height $h(x,t)$ of the free surface above a stationary bed profile given by $b(x)$ and the depth average horizontal velocity $u(x,t)$ which are all demonstrated in Figure \ref{fig:WaterModel}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{./chp2/figures/SerreModel.pdf}
+	\caption{Diagram demonstrating the quantities used to describe the fluid (\squareF{blue}) and the bed (\squareF{brown!80!black}) for the Serre equations.}
+	\label{fig:WaterModel}
+\end{figure}
+
+Additionally we define the stage $w(x,t) = h(x,t) + b(x)$ which gives the absolute location of the free surface. The derivation is similar to that of the Shallow Water Wave Equations (SWWE) \cite{Liggett-1994}, except for the Serre equations the vertical velocity $v(x,z,t)$ varies linearly with depth and is given by \cite{Zoppou-2014}
 \begin{equation}
 v(x,z,t) = u \frac{\partial b}{\partial x} - (z - b) \frac{\partial u}{\partial x}.
 \label{eqn:VertVelSerre}
@@ -30,12 +39,6 @@ where
 	\end{align}
 	\label{eqn:FullSerreNonConVarDef}
 \end{subequations}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.8\textwidth]{./chp2/figures/SerreModel.pdf}
-	\caption{Diagram demonstrating the quantities used to describe the fluid (\squareF{blue}) and the bed (\squareF{brown!80!black}) for the Serre equations.}
-	\label{fig:WaterModel}
-\end{figure}
 By depth integrating the Euler equations \cite{Su-Gardener-1969-536,Zoppou-2014} with a no-slip condition at the bed, a free surface condition at the free surface,the vertical velocity relation \eqref{eqn:VertVelSerre} and the pressure distribution \eqref{eqn:SerrePress} we obtain the depth integrated approximation of the conservation of mass and momentum equations
 \begin{subequations}
 	\begin{align}
@@ -271,7 +274,7 @@ These estimates were found to agree well with numerical simulations provided tha
 The linear analysis studies the behaviour of the linearised Serre equations to garner insights about the full nonlinear Serre equations \eqref{eqn:FullSerreNonCon}. One of the key results of linear analysis is the dispersion relation \eqref{eqn:DispersionRelation}, which was used by \citet{Dougalis-etal-2007} to argue for a separation of dispersive wave trains in the Serre equations due the separation of the negative and positive branches of the phase and group velocities. This implies that the structure of dispersive shock waves of the Serre equations should also be two separate dispersive wave trains.
 
 
-\subsubsection{Results of the \citet{Pitt-2018-61}}
+\subsubsection{Numerical Solutions for the Smoothed Dam-break Problem}
 To resolve the differences present in the literature a variety of numerical methods were used to solve the most common class of smoothed versions of the dam-break problem initial conditions \eqref{eqn:DBdefhub} which are given by
 \begin{subequations}
 	\begin{align}
@@ -283,7 +286,6 @@ To resolve the differences present in the literature a variety of numerical meth
 	\label{eqn:SDBdefhub}
 \end{subequations} 
 where $\alpha$ controls the width of the transition from $h_l$ to $h_r$ and thus the steepness of the initial gradients in the water surface. This was dubbed the smoothed dam-break problem and most of the numerical simulations were focused on the case where $h_l = 1.8m$, $h_r = 1m$ and $x_0 = 500m$ with a final time of $t=30s$. The smoothing parameter $\alpha$ and the resolution of the methods were varied to investigate their influence on the observed behaviour of the numerical solution. Four structures were observed in the numerical solutions; the non-oscillatory structure, the flat structure, the node structure and the growth structure. Example numerical solutions at $t=30s$ for the mentioned $h_l$, $h_r$ values and $x_0 = 500m$ demonstrating the observed structures are shown in Figure \ref{fig:DBExAll}. 
-
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
