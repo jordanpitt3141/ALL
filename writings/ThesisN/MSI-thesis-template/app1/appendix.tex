@@ -1,74 +1,82 @@
 \chapter{Basis Function and Function Space Definitions}
 \label{app:FEMIntegrals}
-For completeness we now provide the definitions of the basis functions of the FEM used by the FEVM described in Chapter \ref{chp:HFVMMethod} and the function spaces mentioned in Chapter \ref{chp:HFVMMethod}. Beginning with the basis function definitions 
+For completeness we now provide the definitions of the basis functions of the FEM used by the FEVM described in Chapter \ref{chp:HFVMMethod} and the function spaces mentioned in Chapter \ref{chp:HFVMMethod}. Beginning with the basis function definitions.
 
 \section{Basis Functions}
 Since all integrals of the basis functions are calculated with respect to the variable $\xi$, we give these basis functions in terms of $\xi$.
 
 The basis functions $\psi$ for $h$ and $G$ demonstrated in Figure \ref{fig:P1DiscBasis} are
 \begin{subequations}
+	\label{eqn:App1:PsiDef}
 \begin{align}
-\label{eqn:App1:PsiDef}
 \psi^+_{j-1/2} &= \left\lbrace \begin{array}{c c}
 \frac{1}{2}\left(1 - \xi\right) & -1 \le \xi \le 1\\
-0 & \text{otherwise}
-\end{array} \right. \\
+0 & \text{otherwise} ,
+\end{array} \right.  \\
 \psi^-_{j+1/2} &= \left\lbrace \begin{array}{c c}
 \frac{1}{2}\left(1 + \xi\right) & -1 \le \xi \le 1\\
-0 & \text{otherwise}
+0 & \text{otherwise} .
 \end{array} \right. 
 \end{align}
 \end{subequations}
 
 While the basis functions $\phi$ for $u$ and the test function $v$ displayed in Figure \ref{fig:P2ContBasis} are given by
+\begin{subequations}
+	\label{eqn:App1:PhiDef}
 \begin{align}
 \phi_{j-1/2} &= \left\lbrace \begin{array}{c c}
 2 \left(\xi + \frac{3}{2}\right)\left(\xi + 2\right) & -2 \le \xi \le -1\\
 \frac{1}{2}\xi(\xi - 1) & -1 \le \xi \le 1\\
-0 & \text{otherwise}\end{array} \right.  ,\\
+0 & \text{otherwise} ,\end{array} \right.  \\
 \phi_{j} &= \left\lbrace \begin{array}{c c}
 -\left(\xi - 1\right)\left(\xi + 1\right) & -1 \le \xi \le 1\\
-0 & \text{otherwise}
-\end{array} \right. , \\ 
+0 & \text{otherwise},
+\end{array} \right.  \\ 
 \phi_{j+1/2} &= \left\lbrace \begin{array}{c c}
 \frac{1}{2}\xi(\xi + 1) & -1 \le \xi \le 1\\
 2\left(\xi - 2\right)\left(\xi - \frac{3}{2} \right) & 1 \le \xi \le 2\\
-0 & \text{otherwise}
-\end{array} \right. .\\ 
+0 & \text{otherwise}.
+\end{array} \right. \\ 
 \end{align}
+\end{subequations}
 
 Finally the basis functions $\gamma$ for the bed profile $b$ displayed in Figure \ref{fig:P3ContBasis} are given by
+\begin{subequations}
+	\label{eqn:App1:GamDef}
 \begin{align}
 \gamma_{j-1/2} &= \left\lbrace \begin{array}{c c}
 \frac{9}{2}\left(\xi + \frac{4}{3}\right)\left(\xi + \frac{5}{3}\right)\left(\xi + 2\right) & -2 \le \xi \le -1\\
 \frac{9}{16}\left(\xi - 1\right)\left(\xi - \frac{1}{3}\right)\left(\xi  + \frac{1}{3}\right) & -1 \le \xi \le 1\\
-0 & \text{otherwise} 
-\end{array} \right. ,\\
+0 & \text{otherwise}, 
+\end{array} \right. \\
 \gamma_{j-1/6} &= \left\lbrace \begin{array}{c c}
 \frac{27}{16}\left(\xi - 1\right)\left(\xi - \frac{1}{3}\right)\left(\xi + 1\right) & -1 \le \xi \le 1\\
-0 & \text{otherwise} 
-\end{array} \right. ,\\
+0 & \text{otherwise}, 
+\end{array} \right. \\
 \gamma_{j+1/6} &= \left\lbrace \begin{array}{c c}
 -\frac{27}{16}\left(\xi - 1\right)\left(\xi + \frac{1}{3}\right)\left(\xi + 1\right) & -1 \le \xi \le 1\\
-0 & \text{otherwise} 
-\end{array} \right. ,\\
+0 & \text{otherwise} ,
+\end{array} \right. \\
 \gamma_{j-1/2} &= \left\lbrace \begin{array}{c c}
 \frac{9}{16}\left(\xi + 1\right)\left(\xi - \frac{1}{3}\right)\left(\xi  + \frac{1}{3}\right) & -1 \le \xi \le 1\\
 -\frac{9}{2}\left(\xi - \frac{4}{3}\right)\left(\xi - \frac{5}{3}\right)\left(\xi - 2\right) & 1 \le \xi \le 2\\
-0 & \text{otherwise} 
-\end{array} \right. .
+0 & \text{otherwise} .
+\end{array} \right. 
 \end{align}
+\end{subequations}
 
 The calculation of the derivatives of these basis functions with respect to $\xi$ are straightforward and hence omitted. 
 
 \section{Function Spaces}
-The function spaces mentioned in Chapter \ref{chp:HFVMMethod} are $\mathbb{L}^2(\Omega)$ and $\mathbb{W}^{1,2}(\Omega)$. To be precise the function $f(x)$ is in $\mathbb{L}^2(\Omega)$ if
-\begin{eqnarray}
-\left( \int_{\Omega} f(x)^2 \; dx \right)^{\frac{1}{2}} < \infty.
-\end{eqnarray}
+The function spaces mentioned in Chapter \ref{chp:HFVMMethod} are $\mathbb{L}^2(\Omega)$ and $\mathbb{W}^{k,2}(\Omega)$. To be precise we now define these spaces here. 
 
-While $f(x)$ is in $\mathbb{W}^{1,2}(\Omega)$ if 
-\begin{eqnarray}
-\left( \int_{\Omega} f(x)^2 \; dx +  \int_{\Omega} \left[D f(x) \right]^2 \; dx  \right)^{\frac{1}{2}} < \infty.
-\end{eqnarray}
-where $D f(x)$ is the weak derivative of $f(x)$. 
+A function $f(x)$ is in $\mathbb{L}^2(\Omega)$ if
+\begin{equation*}
+\left( \int_{\Omega} f(x)^2 \; dx \right)^{\frac{1}{2}} < \infty.
+\end{equation*}
+
+While $f(x)$ is in $\mathbb{W}^{k,2}(\Omega)$ if 
+\begin{equation*}
+\left( \int_{\Omega} f(x)^2 \; dx + \sum^k_{j=1}  \int_{\Omega} \left[D^j f(x) \right]^2 \; dx  \right)^{\frac{1}{2}} < \infty.
+\end{equation*}
+where $D^j f(x)$ is the $j^{th}$ weak derivative of $f(x)$. 

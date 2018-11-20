@@ -1,11 +1,12 @@
 
 \chapter{Numerical Validation}
 \label{chp:NumMethodComp}
+In this chapter analytic and forced solutions are used to validate the numerical methods. 
 
 %Analytic comparions
 %Forced solutions
 
-To verify that the numerical methods have the expected convergence and conservation properties we make use of the analytic and forced solutions described in Chapter \ref{chp:Serreeqns}. To assess these properties we first introduce the measures of convergence and conservation for a numerical solution. These measures are then used to assess all numerical methods for the solitary travelling wave solution and the lake at rest solution for $\text{FDVM}_2$ and $\text{FEVM}_2$; which are the only methods that currently incorporate varying bathymetry. 
+To verify that the numerical methods have the expected convergence and conservation properties we make use of the analytic and forced solutions described in Chapter \ref{chp:Serreeqns}. To assess these properties we first introduce the measures of convergence and conservation for a numerical solution. These measures are then used to assess all numerical methods for the solitary travelling wave solution and the lake at rest solution for $\text{FDVM}_2$ and $\text{FEVM}_2$; which are the only methods in this thesis that currently incorporate varying bathymetry. 
 
 Finally we validate $\text{FDVM}_2$ and $\text{FEVM}_2$ using forced solutions which test the accuracy of their approximations to all terms in the Serre equations. Since forced solutions introduce source terms to the Serre equations \eqref{eqn:FullSerreConForced} they no longer conserve the conserved quantities of the Serre equations in the general case. Therefore, the forced solutions are only used to assess the convergence properties of these numerical methods.
 
@@ -17,7 +18,7 @@ By measuring the relative difference between the numerical and analytic solution
 \begin{equation}
 L_1(\vecn{q},\vecn{q^*}) =  \left\lbrace \begin{array}{c r} 
 \dfrac{||\vecn{q^*} - \vecn{q}||_{1}}{||\vecn{q}||_{1}} & ||\vecn{q}||_{1} > 0 \\ \\
-{||\vecn{q^*}||_{1}} & ||\vecn{q}||_{1} = 0  \end{array}\right. . 
+{||\vecn{q^*}||_{1}} & ||\vecn{q}||_{1} = 0 . \end{array}\right. 
 \label{eqn:L1qdef} 
 \end{equation}
 
@@ -30,7 +31,7 @@ The conservation properties of the methods are established by calculating the to
 \begin{equation}
 C_1(q,\vecn{q^*}) =  \left\lbrace \begin{array}{c r} 
 \dfrac{|\mathcal{C}^*\left({\vecn{q^*}}\right) - \mathcal{C}\left({q(x,0)} \right)| }{|\mathcal{C}\left({q(x,0)} \right)|} & |\mathcal{C}\left({q(x,0)} \right)| > 0 \\ \\
-|\mathcal{C}^*\left({\vecn{q^*}}\right)| & |\mathcal{C}\left({q(x,0)} \right)| = 0  \end{array}\right. . 
+|\mathcal{C}^*\left({\vecn{q^*}}\right)| & |\mathcal{C}\left({q(x,0)} \right)| = 0  \end{array}\right. 
 \label{eqn:C1qdef} 
 \end{equation}
 where $\mathcal{C}^*\left({\vecn{q^*}}\right)$ was calculated using 3 point Gaussian quadrature over the $j^{th}$ cell and summing these cell integrals for all $j$. The three points needed to perform the Gaussian quadrature were calculated by interpolating the $j^{th}$ cell using a quartic polynomial that fits the nodal values $q_{j-2}$, $q_{j-1}$, $q_{j}$, $q_{j+1}$ and $q_{j+2}$. The Gaussian quadrature using three points is $5^{th}$ order accurate and interpolation by quartics is $5^{th}$ order accurate for the quantity $q$ and $4^{th}$ order accurate for its spatial derivative $\partial q /  \partial x$. Since all methods are third-order accurate or less, the error introduced by the calculation of $\mathcal{C}^*\left({\vecn{q^*}}\right)$ for the mass, momentum, $G$ and $\mathcal{H}$ will be dominated by the error introduced by the numerical solvers.
@@ -137,7 +138,7 @@ For the second-order methods we find that $\text{FDVM}_2$ consistently produces 
 
 The finite difference methods produce very similar errors which are twice as large as the errors from $\text{FEVM}_2$. Additionally, the round-off effects which increase the $L_1$ error of the finite difference methods occur for larger $\Delta x$ values than the hybrid finite volume methods.
 
-The error in conservation $C_1$ was calculated for all methods using the analytic expressions for the total amounts of the conserved quantities in the initial conditions given in Appendix \ref{app:ConQuant}. The error in conservation was plotted against the spatial resolution in Figure \ref{fig:SolitonC1All}. These results demonstrate that due to the use of the finite volume methods for $h$ and $G$ that both are conserved at round-off error for all the hybrid finite volume methods as expected. While the finite difference methods only conserved $h$ at round-off error because the employed finite difference method for the continuity equation \eqref{eqn:FullSerreConMass} is a conservative method. 
+The error in conservation $C_1$ was calculated for all methods using the analytic expressions for the total amounts of the conserved quantities in the initial conditions \eqref{eqn:SolitonConservation}. The error in conservation was plotted against the spatial resolution in Figure \ref{fig:SolitonC1All}. These results demonstrate that due to the use of the finite volume methods for $h$ and $G$, both are conserved at round-off error for all the hybrid finite volume methods as expected. While the finite difference methods only conserved $h$ at round-off error because the employed finite difference method for the continuity equation \eqref{eqn:FullSerreConMass} is a conservative method. 
 
 \begin{figure}
 	\centering
@@ -188,11 +189,11 @@ The particular lake at rest solution \eqref{eqn:LARdefhub} associated with the b
 \begin{equation}
 b(x) = a_1 \sin\left(a_2 x\right)
 \end{equation}
-was chosen for this validation to ensure that all terms with derivatives of the bed were tested. To demonstrate the capability of the methods in the presence of dry and wet beds the parameter values $a_0 = 0m$, $a_1 = 1m$ and $a_2 = 2 \pi / 50 $ were chosen. These parameter values result in a periodic bed where water with a constant stage submerges the troughs of the bed while the peaks are dry. 
+was chosen for this validation to ensure that all terms with derivatives of the bed were tested. To demonstrate the capability of the methods in the presence of dry and wet beds the parameter values $a_0 = 0m$, $a_1 = 1m$ and $a_2 = 2 \pi / 50 m^{-1} $ were chosen. These parameter values result in a periodic bed where water with a constant stage submerges the troughs of the bed while the peaks of the bed are dry. 
 
 For the numerical solutions the spatial domain was $x \in \left[-112.5 m,87.5 m\right]$ and the final time was $t=10s$, with the standard gravitational acceleration $g= 9.81 m/s^2$. The spatial resolution of the method was varied so that $\Delta x = 100 / 2^k m$ with $k \in \left[8, \dots  ,17\right]$ and the CFL condition \eqref{eqn:CFLcond} was satisfied by having $\Delta t = Cr \Delta x / \sqrt{g}$ with condition number $Cr = 0.5$. The standard limiting parameter $\theta = 1.2$ was used in the generalised minmod limiter, \eqref{eqn:slopehGrecon} for both $\text{FEVM}_2$ and $\text{FDVM}_2$. Dirichlet boundary conditions were used at both ends as the analytic solution is stationary.
 
-The numerical methods are assessed by using the specified lake at rest solution as initial conditions and comparing the numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ at some later time to the analytic solution, which are the initial conditions. To demonstrate the utility of the well balancing method the results from two versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are presented, where the well balancing method described in Chapter \ref{chp:HFVMMethod} is and isn't employed.   
+The numerical methods are assessed by using the specified lake at rest solution as initial conditions and comparing the numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ at $t=10s$ to the analytic solution, which are the initial conditions. To demonstrate the utility of the well balancing method the results from two versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are presented, where the well balancing method described in Chapter \ref{chp:HFVMMethod} is and isn't employed.   
 
 \subsection{Results for Lake at Rest}
 Example numerical solutions with $\Delta x = 100/2^{10}m \approx 0.0977m$ at $t=10s$ for all versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:LakeAtRestEx}. The numerical solutions in these figures are indistinguishable from the analytic solutions at this scale and so the analytic solutions have been omitted from the plots.  
@@ -222,7 +223,7 @@ Example numerical solutions with $\Delta x = 100/2^{10}m \approx 0.0977m$ at $t=
 \end{figure}
 
 %[]Expalin second order of slopes increase?
-However, examination of the $L_1$ errors depicted in Figure \ref{fig:LakeAtRestEL1} reveals that only  the well balanced methods have accurately recovered the analytic solution. With both well balanced versions of the methods reproducing $h$, $G$ and $u$ precisely, accounting for round-off errors. This is most clear for the $h$ as it is consistently around the machine epsilon value. While for $G$ and $u$ their error is increasing due to an accumulation of the round-off errors for each cell and time step; hence the second-order of the slopes.
+Examination of the $L_1$ errors depicted in Figure \ref{fig:LakeAtRestEL1} reveals that only  the well balanced methods have accurately recovered the analytic solution. With both well balanced versions of the methods reproducing $h$, $G$ and $u$ precisely, accounting for round-off errors. This is most clear for $h$ as it is consistently around the machine epsilon value. While for $G$ and $u$ their error is increasing due to an accumulation of the round-off errors for each cell and time step; hence their second-order increase as $\Delta x \rightarrow 0$.
 
 \begin{figure}
 	\centering
@@ -250,7 +251,7 @@ However, examination of the $L_1$ errors depicted in Figure \ref{fig:LakeAtRestE
 
 For methods without well balancing; the errors are significantly larger, yet they are converging to the analytic solution. However, the convergence of these methods has lost an order of accuracy in $u$ and $G$; with only first-order convergence in these quantities and not the expected second-order accuracy observed for $h$. 
 
-The error in conservation as measured by $C_1$ for all methods in Figure \ref{fig:LakeAtRestEC1} affirms the superiority of the well-balanced version of the methods. For the well balanced $\text{FEVM}_2$ the conservation of $h$ and $\mathcal{H}$ has zero error and so could not be represented on the log-log plot, so that all errors in conservation are at machine precision or lower. For the well-balanced $\text{FDVM}_2$ the error in $h$ vanishes when $\Delta x$ is small, although the error in $\mathcal{H}$ does not. Therefore, the well balanced version of $\text{FEVM}_2$ outperforms the $\text{FDVM}_2$ in this instance. While for the methods with no well balancing none of the quantities are conserved. 
+Using the expressions in Appendix \ref{app:ConQuant} for the total amounts of the conserved variables $C_1$ was calculated for all numerical solutions with the results plotted in Figure \ref{fig:LakeAtRestEC1}. The error in conservation of these methods affirms the superiority of the well-balanced version of the methods. For the well balanced $\text{FEVM}_2$ the conservation of $h$ and $\mathcal{H}$ has zero error and so could not be represented on the log-log plot, so that all errors in conservation are at machine precision or lower. For the well-balanced $\text{FDVM}_2$ the error in $h$ vanishes when $\Delta x$ is small, although the error in $\mathcal{H}$ does not. Therefore, the well balanced version of $\text{FEVM}_2$ outperforms the $\text{FDVM}_2$ in this instance. While for the methods with no well balancing none of the quantities are conserved at machine precision. 
 
 \begin{figure}
 	\centering
@@ -281,7 +282,7 @@ These results demonstrate the need for the well-balancing for both numerical met
 
 \section{Forced Solutions}
 %only L1
-There are currently no known analytic solutions for the Serre equations that possess varying bathymetry and non-zero velocities. Therefore, the previous analytic solution validations do not provide a stringent test for all terms present in the Serre equations. To remedy this the forced solutions introduced in Chapter \ref{chp:Serreeqns} were used. Since the source terms in the modified Serre equations, \eqref{eqn:FullSerreConForced} can be determined and accounted for analytically, the only source of error in the numerical solutions for the forced solutions are the numerical methods themselves and thus the theoretical second-order accuracy of $\text{FEVM}_2$ and $\text{FDVM}_2$ should be recovered. 
+There are currently no known analytic solutions for the Serre equations that possess varying bathymetry and non-zero velocities. Therefore, the previous analytic solution validations do not provide a stringent test for all terms present in the Serre equations. To remedy this the forced solutions introduced in Chapter \ref{chp:Serreeqns} were used. Since the source terms in the modified Serre equations, \eqref{eqn:FullSerreConForced} can be determined and accounted for analytically, the only source of error in the numerical solutions reproduction of the forced solutions are the numerical methods themselves and thus the theoretical second-order accuracy of $\text{FEVM}_2$ and $\text{FDVM}_2$ should be recovered. 
 
 We performed validation tests for two forced solutions; one with a finite water depth everywhere and the other with a dry bed to validate and compare the numerical solutions in both situations. To ensure that all terms of the Serre equations were accurately approximated in the numerical method the functions
 \begin{subequations}
@@ -373,7 +374,7 @@ The $L_1$ error of $h$, $u$ and $G$ for the $\text{FEVM}_2$ and $\text{FDVM}_2$ 
 %mention the tolerance values
 To demonstrate the capability of the methods to handle wetting and drying of beds, a series of numerical simulations of the forced solutions \eqref{eqn:ForcedSolutionxt} where $a_0 = 0m$ were conducted using both $\text{FEVM}_2$ and $\text{FDVM}_2$. 
 
-Example numerical solutions demonstrating the evolution of the wave is given in Figure \ref{fig:ForcedFEVMP2PExAll} for $\text{FEVM}_2$ and Figure \ref{fig:ForcedFDVMP2PExAll} $\text{FDVM}_2$ with $\Delta x = 100/ 2^{10} m \approx 0.0977m$ at various times. The methods accurately reproduce the analytic solution for the stage $w$, $h$ and $G$. However, both fail to accurately reproduce $u$ when $h$ is small, particularly behind the wave.
+Example numerical solutions demonstrating the evolution of the wave are given in Figure \ref{fig:ForcedFEVMP2PExAll} for $\text{FEVM}_2$ and Figure \ref{fig:ForcedFDVMP2PExAll} $\text{FDVM}_2$ with $\Delta x = 100/ 2^{10} m \approx 0.0977m$ at various times. The methods accurately reproduce the analytic solution for the stage $w$, $h$ and $G$. However, both fail to accurately reproduce $u$ when $h$ is small, particularly behind the wave.
 
 \begin{figure}
 	\centering
@@ -422,11 +423,11 @@ Example numerical solutions demonstrating the evolution of the wave is given in 
 	\label{fig:ForcedFDVMP2PExAll}
 \end{figure}
 
-These large errors in $u$ when $h$ is small are caused by the particular choices $h_{{base}} = 10^{-8}$ and $h_{{tol}}  = 10^{-12}$ used in the desingularisation transformation applied to the elliptic solver, \eqref{eqn:usolvefromGhb}. By choosing larger values of these quantities the errors in $u$ can be significantly damped. However, if $h_{{base}}$ and $h_{{tol}}$ are larger they dominate the $L_1$ errors for larger $\Delta x$ making the convergence less obvious. This trade-off is present in all desingularisation transforms. 
+These large errors in $u$ when $h$ is small are caused by the particular choices $h_{{base}} = 10^{-8}$ and $h_{{tol}}  = 10^{-12}$ used in the desingularisation transformation applied to the elliptic solver, \eqref{eqn:usolvefromGhb}. By choosing larger values of these quantities the errors in $u$ can be significantly damped. However, if $h_{{base}}$ and $h_{{tol}}$ are larger they dominate the $L_1$ errors for larger $\Delta x$ values making the convergence less obvious. This trade-off is present in all desingularisation transforms. 
 
 For our purposes the chosen desingularisation transform \eqref{eqn:hdrytransform} with small $h_{{base}}$ and $h_{{tol}}$ values are sufficient, resulting in large observed errors in $u$ when $h$ is small.
 
-The $L_1$ errors for $h$, $u$, $uh$ and $G$ for both methods are given in Figure \ref{fig:ForcedSolDryL1}. Both methods exhibit second-order convergence in all the quantities except $u$. this is because all the flux and source terms of the Serre equations \eqref{eqn:FullSerreCon} only depend on $u$ multiplied by some power of $h$; so that the large errors in $u$ when $h$ is small do not translate to significant errors in $G$, $h$ or $uh$. Indeed by restricting the $L_1$ errors to compare only the regions where $h > 10^{-3} m$ as in Figure \ref{fig:ForcedSolDryL1restrict}, we recover the expected second-order accuracy in all quantities.
+The $L_1$ errors for $h$, $u$, $uh$ and $G$ for both methods are given in Figure \ref{fig:ForcedSolDryL1}. Both methods exhibit second-order convergence in all the quantities except $u$. This is because all the flux and source terms of the Serre equations \eqref{eqn:FullSerreCon} only depend on $u$ multiplied by some power of $h$; so that the large errors in $u$ when $h$ is small do not translate to significant errors in $G$, $h$ or $uh$. Indeed by restricting the $L_1$ errors to compare only the regions where $h > 10^{-3} m$ as in Figure \ref{fig:ForcedSolDryL1restrict}, we recover the expected second-order accuracy in all quantities.
 
 Therefore, these methods can accurately handle the dry bed problem, even with small $h_{{base}}$ and $h_{{tol}}$ values, although in such cases the velocity may have large errors in regions where $h$ is small. 
 
@@ -460,3 +461,6 @@ Therefore, these methods can accurately handle the dry bed problem, even with sm
 	\caption{Convergence plots for regions where $h > 10^{-3}m$ as measured by the $L_1$ norm for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\circlet{red}) for the dry bed forced solution problem for FEVM and FDVM at $t=10s$.}
 	\label{fig:ForcedSolDryL1restrict}
 \end{figure}
+
+\medskip
+In this chapter the analytic and forced solutions were used to assess the numerical methods. It was found that the hybrid finite volume methods performed better than the finite difference methods and that second-order methods were sufficient to accurately reproduce the analytic and forced solutions of the Serre equations.

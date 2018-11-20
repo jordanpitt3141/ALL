@@ -1,6 +1,8 @@
 
 \chapter{The Serre Equations}
 \label{chp:Serreeqns}
+In this chapter the Serre equations are introduced and their relevant properties are presented.
+
 The Serre equations are a system of partial differential equations that describe the free-surface waves of fluids. They are an approximation to the Euler equations \cite{Euler-1755-274}; describing waves in shallow water when the characteristic depth of the water $h_0$ is far smaller than the characteristic wavelength of the waves $\lambda_0$ so that the shallowness parameter $ \sigma = h_0 / \lambda_0  \ll 1 $. Typically, water is considered to be shallow when $\sigma  \le  1/ 20$ \cite{Sorenson-2006}.  
 
 The Serre equations for one-dimensional flows over horizontal beds were first derived by \citet{Serre-F-1953-857} using asymptotic expansion then later derived using depth integration by \citet{Su-Gardener-1969-536}; they are equivalent to the Green-Naghdi equations \cite{Green-Naghdi-1976-237} derived using the theory of directed fluid sheets. The Serre equations were then extended to spatially varying bathymetry by \citet{Seabra-Santos-etal-1987-117}. 
@@ -198,7 +200,7 @@ The lake at rest solution is a rudimentary stationary solution of the Serre equa
 	\end{align}
 	\label{eqn:LARdefhub}
 \end{subequations}
-It represents a quiescent body of water with a horizontal water surface or stage $w(x,t) = h(x,t) + b(x)$ over any bathymetry. The maximum function is included for the water depth to allow for dry regions of the bed when $b(x) > a_0$. We write these quantities in terms of $b(x)$ as this solution holds for all bed profiles, the corresponding total amounts of the conserved quantities in the system are given in Appendix \ref{app:ConQuant} for reference. 
+It represents a quiescent body of water with a horizontal water surface or stage $w(x,t) = h(x,t) + b(x)$ over any bathymetry. The maximum function is included for the water depth to allow for dry regions of the bed when $b(x) > a_0$. We write these quantities in terms of $b(x)$ as this solution holds for all bed profiles. The corresponding total amounts of $h$ and $\mathcal{H}$ can be calculated from \eqref{eqn:AppLARhdry} and \eqref{eqn:AppLARhwet}. While the total amounts of $u$ and $G$ are given by \eqref{eqn:AppLARu}. 
 
 Since $w(x,t)$ is constant when $h> 0$ then $\partial w / \partial x = \partial h / \partial x + \partial b / \partial x = 0 $ and $u=0$ so that the Serre equations \eqref{eqn:FullSerreCon} reduce to
 \begin{align*}
@@ -318,3 +320,6 @@ The differences in the observed structures are primarily driven by the different
 
 The amplitude of waves at the centre of the growth structure decay over time, resulting in the observation of the flat structure  when $t$ is large. These results agree with the linear argument put forth by \citet{Dougalis-etal-2007}. This indicates that for smaller times the nonlinear terms of the Serre equations play a significant role in the evolution of steep gradients, while for long times the linear terms are dominant and thus a separation of the dispersive wave trains is observed. 
 
+\medskip
+
+In this chapter the Serre equations and their relevant properties were given together with a summary of the main results about evolution of steep gradients in the free surface. 

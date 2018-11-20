@@ -1,5 +1,7 @@
 \chapter{Finite Element Volume Method}
 \label{chp:HFVMMethod}
+In this chapter the finite element volume method is described in detail. 
+
 %Mention the other numerical methods!!! YES
 %Leveque - Bousclaw is for Boussinesq equations
 %Simon Clarke - KDV equations, some numerical methods
@@ -7,26 +9,26 @@ A variety of numerical methods have been used to solve the Serre equations; from
 
 For the purposes of development of a numerical method for the two-dimensional Serre equations with variable bathymetry methods that make use of the conservation law form of the Serre equations \eqref{eqn:FullSerreCon} \cite{Hank-etal-2010-2034,Li-2014-169,Zoppou-etal-2017} are the most promising. The primary reason for this is that these methods are robust and extend well to unstructured meshes with complex geometries which are the meshes most desirable for modelling physical scenarios. Secondly, to properly handle the elliptic operator produced by the nonlinear and dispersive splitting requires overly restrictive assumptions about the smoothness of the physical quantities, particularly the water depth. 
 
-I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order Finite Element Volume Method (FEVM) which will be referred to as $\text{FEVM}_2$ was a main objective of the Thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is robust in the presence of discontinuities in the free surface \cite{Pitt-2018-61}, robust during the wetting and drying of beds, has a consistent polynomial representation over the cells and finally all the terms of the finite volume method can be calculated only knowing the quantities inside the cell. These last two points mean that this method is the best suited of the variant hybrid finite volume methods \cite{Zoppou-etal-2017} to solve the two-dimensional Serre equations on unstructured triangular meshes with parallelised code.  
+I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order Finite Element Volume Method (FEVM) which will be referred to as $\text{FEVM}_2$ was a main objective of the Thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is robust in the presence of discontinuities in the free surface \cite{Pitt-2018-61}, robust during the wetting and drying of beds, has a consistent polynomial representation over the cells and finally all the terms of the finite volume method can be calculated only knowing the quantities inside the cell. These last two points mean that this method is the best suited of the variant hybrid finite volume methods \cite{Zoppou-etal-2017} to solve the two-dimensional Serre equations on unstructured meshes with parallelised code.  
  
 %[]
-In addition to the $\text{FEVM}_2$ the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced, these methods will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore the third-order extension $\text{FDVM}_3$ was implemented during my research. I have also reproduced the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006}; which I refer to as $\mathcal{D}$ and $\mathcal{W}$ respectively. Descriptions of these methods have already been published \cite{Zoppou-etal-2017,Pitt-2018-61} and so are omitted from the Thesis.  
+In addition to the $\text{FEVM}_2$ the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced, these methods will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore the third-order extension $\text{FDVM}_3$ was implemented during my research. I have also reproduced the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006}; which I refer to as $\mathcal{D}$ and $\mathcal{W}$ respectively. Descriptions of these methods have already been published \cite{Zoppou-etal-2017,Pitt-2018-61} and so are omitted from the thesis.  
 
-In this chapter we introduce the notation for the numerical grids and then describe the Finite Element Volume Method in detail.
+In this chapter we introduce the notation for the numerical grids and then describe the second-order Finite Element Volume Method $\text{FEVM}_2$ in detail.
 
 \section{Notation for Numerical Grids}
 
-For the purposes of the FEVM, time and space will be discretised in different ways; time is broken up into time levels separated by constant durations $\Delta t$ and space is broken up into cells of constant width $\Delta x$. The notation for time is quite simple; from an initial time $t^0$ we define the $n^{th}$ time level where $n \in \mathbb{N}$ to be
+To produce $\text{FEVM}_2$, time and space will be discretised in different ways; time is broken up into time levels separated by constant durations $\Delta t$ and space is broken up into cells of constant width $\Delta x$. The FEVM can be extended to allow for varying $\Delta t$ and $\Delta x$ values, with this description restricted to the constant case for simplicity. The notation for time is quite simple; from an initial time $t^0$ we define the $n^{th}$ time level where $n \in \mathbb{N}$ to be
 \begin{align*}
 t^n &= t^0 + n \Delta t.
 \end{align*}
-The method $\text{FEVM}_2$ can be extended to varying $\Delta t$ and we restrict ourselves to constant $\Delta t$ for simplicity. The goal of the FEVM is to update the quantities at the current time level $t^n$ to the next time level $t^{n+1}$, solving the equations. 
+The goal of $\text{FEVM}_2$ is to update the quantities at the current time level $t^n$ to the next time level $t^{n+1}$, solving the equations. 
 
 The notation for space is a bit more complicated; as we require definitions of multiple locations inside the cells. The cells are defined by their midpoints; which are given from a starting location $x_0$, so that the midpoint of the $j^{th}$ cell where $j \in \mathbb{N}$ is
 \begin{align*}
 x_j &= x_0 + j \Delta x.
 \end{align*}
-The method described here can be extended to cells of varying widths and we have restricted ourselves to the constant case for simplicity. Other points inside the $j^{th}$ cell can be defined in relation to the midpoint so that 
+Other points inside the $j^{th}$ cell can be defined in relation to the midpoint so that 
 \begin{align*}
 x_{j + s} &= x_j + s \Delta x
 \end{align*}
@@ -73,7 +75,7 @@ The evolution step proceeds by reconstructing the quantities over the cell, calc
 		\label{fig:ReconLocs}
 	\end{figure}
 	
-	So that for a generic quantity $q$ and the bed $b$ we have
+	So that for a generic quantity $q$ representing $h$, $w$ and $G$ and the bed $b$ we have
 	\begin{align*}
 	&q^\pm_{j\pm 1/2} = \mathcal{R}^\pm_{j \pm1/2} \left(\overline{\vecn{q}}^n\right), &&b_{j\pm 1/2} = \mathcal{B}_{j\pm 1/2} \left(\vecn{b}\right),  \\
 	&q_{j} = \mathcal{R}_{j} \left(\overline{\vecn{q}}^n\right), &&b_{j\pm 1/6} = \mathcal{B}_{j\pm 1/6}  \left(\vecn{b}\right).
@@ -140,11 +142,11 @@ The minmod function
 \end{equation*}
 takes a list of $a_i \in \mathbb{R}$. If all elements have the same sign then minmod returns the element with smallest absolute value, otherwise it returns zero. 
 \end{defn}
-The nonlinear limiting used to calculate $d_j$ ensures that the reconstruction of $h$, $w$ and $G$ inside the cell is Total Variation Diminishing (TVD) \cite{Harten-1983-357}, hence it does not introduce non-physical oscillations. The TVD property of this reconstruction is achieved by constraining the slope $d_j$ to zero near local extrema, resulting in piecewise constant reconstruction which is TVD. Away from local extrema $d_j$ will be the gradient with the smallest absolute value, making our reconstruction second-order accurate.
+The nonlinear limiting used to calculate $d_j$ ensures that the reconstruction of $h$, $w$ and $G$ inside the cell is Total Variation Diminishing (TVD) \cite{Harten-1983-357}, hence it does not introduce non-physical oscillations. The TVD property of this reconstruction is achieved by constraining the slope $d_j$ to zero near local extrema, resulting in a piecewise constant reconstruction which is TVD. Away from local extrema $d_j$ will be the gradient with the smallest absolute value, making our reconstruction second-order accurate.
 
 The reconstruction operator $\mathcal{R}_{j} $ is second-order accurate regardless of the presence of local extrema. This can be seen through the error analysis of the midpoint quadrature rule \cite{Davis-Rabinowitz-1984} for which we have that
 \begin{equation}
-\overline{q} = \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q \; dx = q_j + \mathcal{O}\left(\Delta x^2\right).
+\overline{q}_j = \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q \; dx = q_j + \mathcal{O}\left(\Delta x^2\right).
 \end{equation}
 
 \subsubsection{Reconstruction of the Bed Profile}
@@ -189,7 +191,7 @@ b_{j+1/2} &=  \mathcal{B}_{j+1/2}\left(\vecn{b}\right) =  \frac{1}{2}\left( C_j(
 
 \subsection{Fluid Velocity}
 \label{subsec:FluidVelocity}
-The elliptic equation that relates the conserved variables $h$ and $G$ and the bed profile $b$ to the primitive variable $u$ was given in \eqref{defn:SerreEqnConservedQuantity1}. For the FEM we begin with the weak form of \eqref{defn:SerreEqnConservedQuantity1} with test function $v$ over the spatial domain $\Omega$ which is 
+The elliptic equation that relates the conserved variables $h$ and $G$ and the bed profile $b$ to the primitive variable $u$ was given in \eqref{defn:SerreEqnConservedQuantity1}. For the FEM we begin with the weak form of \eqref{defn:SerreEqnConservedQuantity1} with a test function $v$ over the spatial domain $\Omega$ which is 
 
 \begin{equation*}
 	\int_{\Omega } G v \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} +  \left[\frac{\partial b}{\partial x}\right]^2 \right) v - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) v \; dx.
@@ -202,7 +204,7 @@ Integrating by parts with zero Dirichlet boundary conditions we get
 \int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}v \; dx.
 \label{eqn:WeakFormDomain}
 \end{multline}
-By assuming that time is fixed, making all the functions only functions in space, this formulation implies that by ensuring that $G$, $h$, $b$ and $\partial b / \partial x$ have finite integrals over $\Omega$, then $u$ and $\partial u / \partial x$ must have finite integrals too. Since we require $\partial u / \partial x$ to be well defined to approximate the fluxes and the source term \eqref{eqn:FullSerreCon} and thus have finite integrals we will assume that for each time $t$ that $h,G \in \mathbb{L}^2(\Omega)$ and $b \in\mathbb{W}^{1,2}(\Omega)$ so that $u \in \mathbb{W}^{1,2}(\Omega)$. 
+By assuming that time is fixed, making all the functions only functions in space, this formulation implies that by ensuring that $G$, $h$, $b$ and $\partial b / \partial x$ have finite integrals over $\Omega$, then $u$ and $\partial u / \partial x$ must have finite integrals too. Since we require $\partial u / \partial x$ to be well defined to approximate the fluxes and the source term \eqref{eqn:FullSerreCon} and thus have finite integrals we will assume that for each time $t$ that $h,G \in \mathbb{L}^2(\Omega)$ and $b \in\mathbb{W}^{1,2}(\Omega)$ so that $u \in \mathbb{W}^{1,2}(\Omega)$. See Appendix \ref{app:FEMIntegrals} for a precise definition of $\mathbb{L}^2(\Omega)$ and $\mathbb{W}^{1,2}(\Omega)$.
 
 We simplify \eqref{eqn:WeakFormDomain} by performing the integration over the cells and then summing the integrals together to get the equation for the entire domain
 \begin{multline}
@@ -227,7 +229,7 @@ From the basis functions $\psi$ we have the following representation for $h$ and
 q &= \sum_j \left( q^+_{j-1/2}\psi^+_{j-1/2}  + q^-_{j+1/2}\psi^-_{j+1/2}, \right).
 \end{align}
 
-To calculate the flux and source terms in \eqref{eqn:Serreconsconmom} we require a locally  calculated second-order approximation to the first derivative of $u$. To do this we require a quadratic representation of $u$ in each cell and since we desire $u\in\mathbb{W}^{1,2}(\Omega)$, this representation will be continuous across the cell edges $x_{j \pm 1/2}$. Therefore, we use the continuous quadratic basis functions $\phi_{j\pm1/2} $ and $\phi_{j} $ depicted in Figure \ref{fig:P2ContBasis}.
+To calculate the flux and source terms in \eqref{eqn:Serreconsconmom} we require a locally  calculated second-order approximation to the first derivative of $u$. To do this we require a quadratic representation of $u$ in each cell and since we desire $u\in\mathbb{W}^{1,2}(\Omega)$, this representation will be continuous across the cell edges $x_{j \pm 1/2}$. Therefore, we use the continuous quadratic basis functions $\phi_{j\pm1/2} $ and $\phi_{j} $ \eqref{eqn:App1:PhiDef} depicted in Figure \ref{fig:P2ContBasis}.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P2.pdf}
@@ -241,7 +243,7 @@ u = u_{-1/2}\phi_{-1/2} + \sum_j \left( u_{j}\phi_{j} + u_{j+1/2}\phi_{j+1/2} \r
 \label{eqn:FEapproxtou}
 \end{equation}
 
-For the source term of the evolution of $G$ equation \eqref{eqn:Serreconsconmom} we require a local approximation to the second derivative of the bed that is also second-order accurate. To allow for an appropriate second derivative of the bed profile, $b$ must be a member of $\mathbb{W}^{2,2}(\Omega)$ which is smoother than required by the elliptic equation \eqref{eqn:WeakFormDomain}. We choose the cubic basis functions $\gamma$ which are continuous across the cell edges, as the bed profile will be continuous. These basis functions are shown in Figure \ref{fig:P3ContBasis} and from them we get our basis function approximation to $b$
+For the source term of the evolution of $G$ equation \eqref{eqn:Serreconsconmom} we require a local approximation to the second derivative of the bed that is also second-order accurate. To allow for an appropriate second derivative of the bed profile, $b$ must be a member of $\mathbb{W}^{2,2}(\Omega)$ which is smoother than required by the elliptic equation \eqref{eqn:WeakFormDomain}. We choose the cubic basis functions $\gamma$ \eqref{eqn:App1:GamDef} which are continuous across the cell edges, as the bed profile will be continuous. These basis functions are shown in Figure \ref{fig:P3ContBasis} and from them we get our basis function approximation to $b$
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P3.pdf}
@@ -329,7 +331,7 @@ Only the calculation of the flux term $F_{j+1/2}$ is demonstrated as the process
 \begin{equation}\label{eqn:HLL_flux}
 F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left(  q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right)
 \end{equation}
-where $a^+_{j+\frac{1}{2}}$ and $a^-_{j+\frac{1}{2}}$ are given by bounds on the wave speed. Applying the wave speed bounds \eqref{eqn:WaveVelocitiesBound} we obtain
+where $a^+_{j+\frac{1}{2}}$ and $a^-_{j+\frac{1}{2}}$ are given by bounds on the wave speed. Applying the wave speed bounds  \eqref{eqn:WaveVelocitiesBound} we obtain
 
 \begin{align}
 a^-_{j+\frac{1}{2}} &= \min\left\lbrace 0\;,\;  u^-_{j + 1/2} - \sqrt{g h^-_{j + 1/2}}  \;,\;u^+_{j + 1/2} - \sqrt{g h^+_{j + 1/2}} \right\rbrace  ,\\
@@ -344,7 +346,7 @@ f\left(h^\pm_{j+\frac{1}{2}}\right) &= u^\pm_{j + 1/2}  h^\pm_{j + 1/2}.
 
 For the evolution of $G$ equation \eqref{eqn:Serreconsconmom} we have 
 \begin{align}
-f\left(G^\pm_{j+\frac{1}{2}}\right) &=  u^\pm_{j + 1/2} G^\pm_{j + 1/2}  + \frac{g}{2}\left(h^\pm_{j + 1/2} \right)^2 - \frac{2}{3}\left(h^\pm_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2} \right]^2 \nonumber\\ &+ \left(h^\pm_{j + 1/2}\right)^2 u^\pm_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^\pm_{j + 1/2}
+f\left(G^\pm_{j+\frac{1}{2}}\right) &=  u^\pm_{j + 1/2} G^\pm_{j + 1/2}  + \frac{g}{2}\left(h^\pm_{j + 1/2} \right)^2 - \frac{2}{3}\left(h^\pm_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2} \right]^2 \nonumber\\ &+ \left(h^\pm_{j + 1/2}\right)^2 u^\pm_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^\pm_{j + 1/2} .
 \label{eqn:FluxIrrotNum}
 \end{align}
 
@@ -392,7 +394,7 @@ This gives a second-order approximation to the derivative of $u$ and $b$ at $x_{
 Therefore, we possess all the terms needed to calculate the approximation to the flux \eqref{eqn:HLL_flux} for both $h$ and $G$, as desired. However, to ensure that the FEVM is well balanced and recovers the lake at rest steady state solution, these fluxes must be modified.
 
 \subsubsection{Well Balancing}
-To recover the lake at rest steady state solution we follow the work of \citet{Klein-etal-2004-2050}, who accomplished this for the SWWE. Earlier we have demonstrated that this process could also be extended to the Serre equations \cite{Pitt-J-2014}. To enforce well balancing the reconstruction of $h$ is modified at the cell edges in the following way; first calculate
+To recover the lake at rest steady state solution we follow the work of \citet{Klein-etal-2004-2050}, who accomplished this for the SWWE. Earlier we have demonstrated that this process can be extended to the Serre equations \cite{Pitt-J-2014}. To enforce well balancing the reconstruction of $h$ is modified at the cell edges in the following way; first calculate
 \begin{align}
 \dot{b}^-_{j+1/2} = w^-_{j+1/2} - h^-_{j+1/2} & &\text{and}& &\dot{b}^+_{j+1/2} = w^+_{j+1/2} - h^+_{j+1/2}.
 \label{eqn:BedReDefWmH}
@@ -423,7 +425,7 @@ for the evolution of $h$ and $G$ equations as desired.
 \subsection{Source Terms}
 To evolve the Serre equations \eqref{eqn:FullSerreCon} to the next time level, we require an approximation to the source term at the cell centre $x_j$ which we denote as $S_j$. Equation \eqref{eqn:FullSerreConMass} has no source term, therefore we just present the calculation of the source term for equation \eqref{eqn:Serreconsconmom}.
 
-Following the work of \citet{Klein-etal-2004-2050}, we split our approximation to $S^n_j$ into the centred source term $S_{ci}$ and the corrective interface source terms $S^{-}_{j + \frac{1}{2}}$ and $S^{+}_{j + \frac{1}{2}}$.
+Following the work of \citet{Klein-etal-2004-2050}, we split our approximation to $S^n_j$ into the centred source term $S_{ci}$ and the corrective interface source terms $S^{-}_{j + \frac{1}{2}}$ and $S^{+}_{j + \frac{1}{2}}$
 \begin{equation*}
 S^n_j =  S^{-}_{j + \frac{1}{2}} + \Delta x S_{ci} + S^{+}_{j - \frac{1}{2}}.
 \end{equation*}
@@ -461,7 +463,7 @@ Applying a forward Euler approximation with our approximation to the flux and so
 \overline{q}^{n+1}_j &= \overline{q}^{n}_j + \frac{\Delta t}{\Delta x} \left(F^n_{j+\frac{1}{2}} - F^n_{j-\frac{1}{2}} + S^n_j\right)
 \label{eqn:UpdateMethod}
 \end{align}
-where $F^n_{j+\frac{1}{2}}$, $F^n_{j-\frac{1}{2}}$ and $S^n_j$ are all calculated using the quantities at time $t^n$. This update formula is second-order in space and first-order in time.
+where $F^n_{j+\frac{1}{2}}$, $F^n_{j-\frac{1}{2}}$ and $S^n_j$ are all calculated using the quantities at time $t^n$. This update formula is first-order in time.
 
 
 \subsection{Second-Order SSP Runge-Kutta Method}
@@ -507,7 +509,7 @@ b_{m+1/2} \\ b_{m+5/6} \\ b_{m+7/6} \\ b_{m+3/2} \BM\end{bmatrix}&, &\vecn{\hat{
 b_{m+3/2} \\ b_{m+11/6} \\ b_{m+13/6} \\ b_{m+5/2} \BM\end{bmatrix}.
 \end{align*}
 
-To ensure that the solution of $u$ by \eqref{eqn:usolvefromGhb} agrees with the boundary conditions $\vecn{\hat{u}}_{-1}$ and $\vecn{\hat{u}}_{m}$ in the element matrices $\matr{A}_0$ and $\matr{A}_m$ and vectors $\vecn{g}_0$ and $\vecn{g}_m$ must be modified in the following way 
+To ensure that the solution of $u$ by \eqref{eqn:usolvefromGhb} agrees with the boundary conditions $\vecn{\hat{u}}_{-1}$ and $\vecn{\hat{u}}_{m}$ the element-wise stiffness matrices $\matr{A}_0$ and $\matr{A}_m$ and vectors $\vecn{g}_0$ and $\vecn{g}_m$ must be modified in the following way 
 
 \begin{align}
 \matr{A}_{0} = 
@@ -531,7 +533,7 @@ g_1 \\
 u_{m+1/2} \BM
 \end{bmatrix}.
 \end{align}
-These are then combined with the other element contributions in the global matrix \eqref{eqn:FEMElemMatrixJ}.
+These are then assembled with the other element contributions in the global stiffness matrix $\matr{A}$ and right hand side vector $\vecn{g}$ in \eqref{eqn:FEMElemMatrixJ}.
 
 \section{Dry Beds}
 Dry beds are handled adequately by all steps of the FEVM in their current form, except the FEM for $u$. For the elliptic solver the dry bed presents two issues; when $h$ and $G$ are small then small errors in $h$ and $G$ can produce large errors in $u$ leading to instabilities and when $h=0$ the stiffness matrix $\matr{A}$ \eqref{eqn:usolvefromGhb} becomes singular.
@@ -557,7 +559,7 @@ This transformation is ill-defined when $h = 0$ so we also add in a  small term 
 \begin{subequations}
 	\begin{align}
 	h^+_{j-1/2} & = h^+_{j-1/2} \left(\frac{ h^+_{j-1/2}  + h_{base}}{h^+_{j-1/2} + h_{tol}}\right) , \\ \nonumber\\
-	h^-_{j+1/2} & = h^-_{j+1/2} \left(\frac{ h^-_{j+1/2}  + h_{base}}{h^-_{j+1/2} + h_{tol}}\right).
+	h^-_{j+1/2} & = h^-_{j+1/2} \left(\frac{ h^-_{j+1/2}  + h_{base}}{h^-_{j+1/2} + h_{tol}}\right)
 	\end{align} 
 	\label{eqn:hdrytransform}
 \end{subequations}
@@ -576,3 +578,7 @@ Finally, after solving \eqref{eqn:usolvefromGhb} using the LU decomposition algo
  & 	u_{j+1/2}  = 0  &\text{if}& &h_{j+1} \le h_{tol}
 \end{align*}
 this drying procedure occurs after the solution of \eqref{eqn:usolvefromGhb}. In the numerical experiments the typical values used were $h_{tol} = 10^{-12}$ and $h_{base} = 10^{-8}$.
+
+\medskip
+
+In this chapter $\text{FEVM}_2$ was described, including the details for the well balancing and dry bed handling procedures. 

@@ -1,75 +1,90 @@
 \chapter{Linear Analysis Results}
 \label{app:LinAnal}
-In this appendix we present all the components to calculate the Evolution matrix $\matr{E}$ for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. For the hybrid FDVM given the results in Chapter \ref{chp:AnalNumMethod} for the $\text{FEVM}_2$ it is enough to provide only expressions for some of the operators. While for the FD methods we just present the evolution matrix.  
+In this appendix we present all the components to calculate the evolution matrix $\matr{E}$ for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. For the hybrid FDVM given the results in Chapter \ref{chp:AnalNumMethod} for the $\text{FEVM}_2$ it is enough to provide only expressions for some of the operators. While for the FD methods we just present the evolution matrix.  
 
 \section{Evolution Matrices for the Finite Difference Volume Methods}
-For the FDVM the evolution matrix can be constructed by taking the formulas for the elements of $\matr{F}$ from the FEVM and replacing the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_j$, $\mathcal{R}^-_{j+1/2}$ and $\mathcal{G}$ with the appropriate ones for the FDVM given in Tables \ref{tab:Mfactor}, \ref{tab:Rpfactor}, \ref{tab:Rmfactor} and \ref{tab:Gfactor}. From $\matr{F}$ the evolution matrix $\matr{E}$ is then obtained by using the formulas given by the Runge-Kutta time stepping in Table \ref{tab:RKstepfactor}. 
-
-
+For the FDVM the evolution matrix can be constructed by taking the formulas for the elements of $\matr{F}$ from the FEVM and replacing the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_j$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}^\eta$ and $\mathcal{G}^G$  with the appropriate ones for the FDVM given in Tables \ref{tab:Mfactor}, \ref{tab:Rpfactor}, \ref{tab:Rmfactor}, \ref{tab:Gnfactor} and \ref{tab:GGfactor}. From $\matr{F}$ the evolution matrix $\matr{E}$ is then obtained by using the formulas given by the Runge-Kutta time stepping in Table \ref{tab:RKstepfactor}. Since $\mathcal{G}^c$ makes no contribution to the evolution matrix, it is omitted.
 
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c}
-		Scheme& Expression& Lowest Order Term of Error \\
-		\hline && \\
-		$\text{FDVM}_1$ & $1$ & $-\dfrac{1}{24}k^2 \Delta x^2$ \\ & & \\
-		$\text{FDVM}_2$ and $\text{FEVM}_2$& $1$ & $-\dfrac{1}{24}k^2 \Delta x^2$ \\ & & \\
-		$\text{FDVM}_3$& $\dfrac{26 - 2 \cos\left(k \Delta x\right)}{24}$ & $-\dfrac{3}{640}k^4 \Delta x^4$ \\ & & \\
-	\end{tabular}
-	\caption{Factor $\mathcal{R}_j$ from transformation between nodal and cell average values. Where the analytic value is $\mathcal{R}_j = \dfrac{k\Delta x}{2 \sin \left(k\frac{\Delta x}{2}\right)  }$.}
+		Method& Expression& Lowest Order Term of Error  \T\B \\
+		\hline 
+		$\text{FDVM}_1$ & $1$ & $-\dfrac{1}{24}k^2 \Delta x^2$ \T \B \\
+		$\text{FDVM}_2$ and $\text{FEVM}_2$& $1$ & $-\dfrac{1}{24}k^2 \Delta x^2$ \T \B \\
+		$\text{FDVM}_3$& $\dfrac{26 - 2 \cos\left(k \Delta x\right)}{24}$ & $-\dfrac{3}{640}k^4 \Delta x^4$ \T \B  \\
+		\hline	\end{tabular}
+	\caption{Factor $\mathcal{R}_j$ from reconstructing the nodal value at the midpoint for each method. Where the analytic value is $\mathcal{R}_j = \dfrac{k\Delta x}{2 \sin \left(k\frac{\Delta x}{2}\right)  }$.}
 	\label{tab:Mfactor}
 \end{table}
-%have to update table
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c}
-		Scheme& Formula& Lowest Order Term of Error\\
-		\hline && \\
-		$\text{FDVM}_1$ & $1$ & $\dfrac{i}{2}k \Delta x$ \\ & & \\
-		$\text{FDVM}_2$ and $\text{FEVM}_2$& $ \left(1 - \dfrac{i \sin\left(k\Delta x \right)}{2} \right)$ & $\dfrac{1}{12}k^2 \Delta x^2$ \\ & & \\
-		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 + 2e^{-i k {\Delta x}} - e^{i k {\Delta x}}} \right)$ & $\dfrac{i}{12}k^3 \Delta x^3$ \\ & & \\
+		Method & Formula& Lowest Order Term of Error\\
+		\hline
+		$\text{FDVM}_1$ & $1$ & $\dfrac{i}{2}k \Delta x$ \T\B \\
+		$\text{FDVM}_2$ and $\text{FEVM}_2$& $ \left(1 - \dfrac{i \sin\left(k\Delta x \right)}{2} \right)$ & $\dfrac{1}{12}k^2 \Delta x^2$  \T\B\\
+		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 + 2e^{-i k {\Delta x}} - e^{i k {\Delta x}}} \right)$ & $\dfrac{i}{12}k^3 \Delta x^3$  \T\B \\
+		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{R}^+_{j-1/2}$ from reconstruction of $\eta$ and $G$ at $x^+_{j+1/2}$. Where the analytic value is $\mathcal{R}^+_{j-1/2} =e^{-i k \Delta x/2}\dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$. }
+	\caption{Factor $\mathcal{R}^+_{j-1/2}$ from reconstruction of $\eta$ and $G$ at $x^+_{j+1/2}$ for each method. Where the analytic value is $\mathcal{R}^+_{j-1/2} =e^{-i k \Delta x/2}\dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$. }
 	\label{tab:Rpfactor}
 \end{table}
-
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c}
-		Scheme& Expression& Lowest Order Term of Error\\
-		\hline && \\
-		$\text{FDVM}_1$& $1$ & $-\dfrac{i}{2}k \Delta x$ \\ & & \\
-		$\text{FDVM}_2$ and $\text{FEVM}_2$& $1 +  \dfrac{i \sin\left(k\Delta x \right)}{2}$ & $\dfrac{1}{12}k^2 \Delta x^2$ \\ & & \\
-		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 - e^{-i k {\Delta x}} +2 e^{i k {\Delta x}}} \right)$ & $-\dfrac{i}{12}k^3 \Delta x^3$ \\ & & \\
+		Method& Expression& Lowest Order Term of Error  \T\B \\
+		\hline
+		$\text{FDVM}_1$& $1$ & $-\dfrac{i}{2}k \Delta x$  \T\B \\
+		$\text{FDVM}_2$ and $\text{FEVM}_2$& $1 +  \dfrac{i \sin\left(k\Delta x \right)}{2}$ & $\dfrac{1}{12}k^2 \Delta x^2$  \T\B \\
+		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 - e^{-i k {\Delta x}} +2 e^{i k {\Delta x}}} \right)$ & $-\dfrac{i}{12}k^3 \Delta x^3$  \T\B \\
+		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{R}^-_{j+1/2}$ from reconstruction of $\eta$ and $G$ at $x^-_{j+1/2}$. Where the analytic value is $\mathcal{R}^-_{j+1/2} =e^{i k \Delta x/2} \dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$.}
+	\caption{Factor $\mathcal{R}^-_{j+1/2}$ from reconstruction of $\eta$ and $G$ at $x^-_{j+1/2}$ for each method. Where the analytic value is $\mathcal{R}^-_{j+1/2} =e^{i k \Delta x/2} \dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$.}
 	\label{tab:Rmfactor}
 \end{table}
-%
 %TABLE TOO BIG
+%LandScape it
+\begin{landscape}
+	\begin{table}
+		%\centering   
+		\begin{tabular}{l  c  c}
+			Method& Expression& Lowest Order Term of Error \T \B\\
+			\hline  \\
+			$\text{FDVM}_1$& $\dfrac{-3 U\Delta x^2 \left(\dfrac{1 + e^{ik\Delta x}}{2}\right)}{3 \Delta x^2 H - H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}Uk^2 \Delta x^2$  \\ \\
+			$\text{FDVM}_2$& $\dfrac{-3U \Delta x^2 \left(\dfrac{1 + e^{ik\Delta x}}{2}\right)}{3 \Delta x^2 H - H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}Uk^2 \Delta x^2$  \\ \\
+			& $\dfrac{-U\Delta x}{6} \left(1 + \dfrac{i \sin\left(k \Delta x\right)}{2} + e^{ik\Delta x}\left(1 - \dfrac{i \sin\left(k \Delta x\right)}{2}\right) \right)$ & \\  $\text{FEVM}_2$ & $\div  \Bigg( H\dfrac{\Delta x}{30} \left(4\cos\left(\dfrac{k \Delta x}{2}\right) - 2\cos\left({k \Delta x}\right) + 8\right) $  & $-\dfrac{12 + 5H^2k^2}{40H \left(3 + H^2k^2\right)^2}Uk^2 \Delta x^2$ \\ &$+ \dfrac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right)    \Bigg)$ & \\ \\
+			$\text{FDVM}_3$&  $\dfrac{-36U \Delta x^2 \left(\dfrac{-e^{-ik\Delta x} + 9e^{ik\Delta x} - e^{2ik\Delta x} + 9}{16}\right)}{36 \Delta x^2H - H^3\left(32\cos\left(k \Delta x\right) -2\cos\left(2k \Delta x\right) - 30\right)}$ & $\dfrac{243 + 49H^2k^2}{960H\left(3 + H^2k^2\right)^2}Uk^4 \Delta x^4$  \\ \\ 
+			\hline
+		\end{tabular}
+		\caption{Factor $\mathcal{G}^\eta$ from solving the elliptic equation \eqref{eqn:LinConSerreGu0} for $\upsilon_{j+1/2}$ for each method. Where the analytic value is  $\mathcal{G}^\eta = \dfrac{-3U }{3H + H^3k^2} \dfrac{1}{e^{-ik\Delta x/2}} \dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$.}
+		\label{tab:Gnfactor} 
+	\end{table}
 \begin{table}
-	\centering   
+	%\centering   
 	\begin{tabular}{l  c  c}
-		Scheme& Expression& Lowest Order Term of Error\\
-		\hline && \\
-		$\text{FDVM}_1$& $\dfrac{3 \Delta x^2 \left(\frac{1 + e^{ik\Delta x}}{2}\right)}{3 \Delta x^2 H - H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $-\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$ \\ & & \\
-		$\text{FDVM}_2$& $\dfrac{3 \Delta x^2 \left(\frac{1 + e^{ik\Delta x}}{2}\right)}{3 \Delta x^2 H - H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $-\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$ \\ & & \\
-		& $\left(\frac{\Delta x}{6} \left(1 + \frac{i \sin\left(k \Delta x\right)}{2} + e^{ik\Delta x}\left(1 - \frac{i \sin\left(k \Delta x\right)}{2}\right) \right)\right)$ & \\  $\text{FEVM}_2$ & $\div  \Bigg(H\frac{\Delta x}{30} \left( 2\left(2\cos\left(\frac{k \Delta x}{2}\right) - \cos\left({k \Delta x}\right) + 4\right)  \right)$  & $\dfrac{12 + 5H^2k^2}{40H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$ \\ &$+ \frac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right)    \Bigg)$ & \\ & & \\
-		$\text{FDVM}_3$&  $\dfrac{36 \Delta x^2 \left(\frac{-e^{-ik\Delta x} + 9e^{ik\Delta x} - e^{2ik\Delta x} + 9}{16}\right)}{36 \Delta x^2H - H^3\left(32\cos\left(k \Delta x\right) -2\cos\left(2k \Delta x\right) - 30\right)}$ & $-\dfrac{243 + 49H^2k^2}{960H\left(3 + H^2k^2\right)^2}k^4 \Delta x^4$ \\ & & \\ 
+		Method& Expression& Lowest Order Term of Error \T \B\\
+		\hline  \\
+		$\text{FDVM}_1$& $\dfrac{3 \Delta x^2 \left(\dfrac{1 + e^{ik\Delta x}}{2}\right)}{3 \Delta x^2 H - H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $-\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$  \\ \\
+		$\text{FDVM}_2$& $\dfrac{3 \Delta x^2 \left(\dfrac{1 + e^{ik\Delta x}}{2}\right)}{3 \Delta x^2 H - H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $-\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$  \\ \\
+		& $\dfrac{\Delta x}{6} \left(1 + \dfrac{i \sin\left(k \Delta x\right)}{2} + e^{ik\Delta x}\left(1 - \dfrac{i \sin\left(k \Delta x\right)}{2}\right) \right)$ & \\  $\text{FEVM}_2$ & $\div  \Bigg( H\dfrac{\Delta x}{30} \left(4\cos\left(\dfrac{k \Delta x}{2}\right) - 2\cos\left({k \Delta x}\right) + 8\right) $  & $\dfrac{12 + 5H^2k^2}{40H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$ \\ &$+ \dfrac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right)    \Bigg)$ & \\ \\
+		$\text{FDVM}_3$&  $\dfrac{36 \Delta x^2 \left(\dfrac{-e^{-ik\Delta x} + 9e^{ik\Delta x} - e^{2ik\Delta x} + 9}{16}\right)}{36 \Delta x^2H - H^3\left(32\cos\left(k \Delta x\right) -2\cos\left(2k \Delta x\right) - 30\right)}$ & $-\dfrac{243 + 49H^2k^2}{960H\left(3 + H^2k^2\right)^2}k^4 \Delta x^4$  \\ \\ 
+		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{G}$ from solving the elliptic equation \eqref{eqn:LinConSerreGu0} for $\upsilon_{j+1/2}$. Where the analytic value is  $\mathcal{G} = \dfrac{3}{3H + H^3k^2} \dfrac{1}{e^{-ik\Delta x/2}} \dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$.}
-	\label{tab:Gfactor} 
+	\caption{Factor $\mathcal{G}^G$ from solving the elliptic equation \eqref{eqn:LinConSerreGu0} for $\upsilon_{j+1/2}$ for each method. Where the analytic value is  $\mathcal{G}^G = \dfrac{3}{3H + H^3k^2} \dfrac{1}{e^{-ik\Delta x/2}} \dfrac{k\Delta x}{2 \sin\left(\frac{k \Delta x}{2}\right)}$.}
+	\label{tab:GGfactor} 
 \end{table}
-
-
+\end{landscape}
+%
 \begin{table}
 	\centering
 	\begin{tabular}{l  c}
-		Scheme& Formula for $\matr{E}$\\
-		\hline &\\
-		$\text{FDVM}_1$& $\matr{I} - \Delta t\matr{F} $ \\
-		$\text{FDVM}_2$& $ \matr{I}  -\Delta t\matr{F} + \frac{1}{2}\Delta t^2\matr{F}^2$ \\
-		$\text{FDVM}_3$& $\matr{I} -\Delta t\matr{F} + \frac{1}{2}\Delta t^2 \matr{F}^2 - \frac{1}{6}\Delta t^3 \matr{F}^3 $ \\
+		Method & Formula for $\matr{E}$  \T\B \\
+		\hline 
+		$\text{FDVM}_1$& $\matr{I} - \Delta t\matr{F} $  \T\B \\
+		$\text{FDVM}_2$& $ \matr{I}  -\Delta t\matr{F} + \frac{1}{2}\Delta t^2\matr{F}^2$  \T\B \\
+		$\text{FDVM}_3$& $\matr{I} -\Delta t\matr{F} + \frac{1}{2}\Delta t^2 \matr{F}^2 - \frac{1}{6}\Delta t^3 \matr{F}^3 $  \T\B \\
+		\hline
 	\end{tabular}
 	\caption{Formula for $\matr{E}$ given $\matr{F}$ determined by the SSP Runge-Kutta timestepping method.}
 	\label{tab:RKstepfactor}
@@ -79,26 +94,40 @@ For the FDVM the evolution matrix can be constructed by taking the formulas for 
 
 %FD matrices
 By using \eqref{eqn:fourierfactor} all the derivative approximations in the finite difference methods $\mathcal{D}$ and $\mathcal{W}$ can be written as operators that are constant in $j$ and $n$ as was done for the hybrid methods. Doing this we get that the evolution matrix for $\mathcal{D}$ is 
-\begin{equation*}
+\begin{equation}
+\label{eqn:AppEvolD}
 \matr{E} = \begin{bmatrix}
--  \dfrac{2 i\Delta t }{\Delta x} U\sin\left(k \Delta x\right)  & -  \dfrac{2 i\Delta t}{\Delta x} H \sin\left(k \Delta x\right)  & 1 &0 \\ \\
--\dfrac{6 gi \Delta x\Delta t}{3 \Delta x^2 -2{H^2} \left( \cos\left(k \Delta x\right) - 1 \right)}{ \sin\left(k \Delta x\right)}  & -\dfrac{2i \Delta t }{\Delta x} U \sin\left(k \Delta x\right)  & 0 &1 \\
+{E}_{0,0} & {E}_{0,1}  & 1 &0 \\ \\
+{E}_{1,0} & {E}_{1,1}  & 0 &1 \\
 1  & 0  &0 &0 \\
 0  & 1  &0 &0 
-\end{bmatrix} .
-\end{equation*}
-While for $\mathcal{W}$ we get that evolution matrix is 
+\end{bmatrix} 
+\end{equation}
+with
+\begin{align*}
+&{E}_{0,0} = -  \dfrac{2 i\Delta t }{\Delta x} U\sin\left(k \Delta x\right) , \\
+&{E}_{0,1} = -  \dfrac{2 i\Delta t}{\Delta x} H \sin\left(k \Delta x\right),\\
+& {E}_{1,0} =-\dfrac{6 gi \Delta x\Delta t}{3 \Delta x^2 -2{H^2} \left( \cos\left(k \Delta x\right) - 1 \right)}{ \sin\left(k \Delta x\right)}, \\
+& {E}_{1,1} =-\dfrac{2i \Delta t }{\Delta x} U \sin\left(k \Delta x\right).
+\end{align*}
+
+
+
+While for $\mathcal{W}$ the evolution matrix is 
 \begin{equation}
+\label{eqn:AppEvolW}
 \matr{E} = \begin{bmatrix}
-{E}_{0,0} & {E}_{0,1} & 0 & - \dfrac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2} \\
-{E}_{1,0} & -\dfrac{2i \Delta t }{\Delta x} U \sin\left(k \Delta x\right)&0 & 1 \\
+{E}_{0,0} & {E}_{0,1} & 0 & E_{0,3} \\
+{E}_{1,0} & E_{1,1} &0 & 1 \\
 1&0&0&0\\
 0&1&0&0
 \end{bmatrix}
 \end{equation}
 with
 \begin{align*}
-&{E}_{0,0} = 1 - \frac{\Delta t}{\Delta x}\left(-\dfrac{6 gi \Delta x\Delta t}{3 \Delta x^2 -2{H^2} \left( \cos\left(k \Delta x\right) - 1 \right)}{ \sin\left(k \Delta x\right)}\right)H\frac{i\sin\left(k\Delta x\right)}{2} \\ &- \frac{\Delta t}{\Delta x}U\left(\left(i\sin\left(k\Delta x\right)\right) - \frac{\Delta t}{\Delta x}U\left(\cos\left(k\Delta x\right) - 1\right)\right), \\
-&{E}_{0,1} = - \frac{\Delta t}{\Delta x} \left[H\frac{i\sin\left(k\Delta x\right)}{2}\left( 1 -\dfrac{2i \Delta t }{\Delta x} U \sin\left(k \Delta x\right) \right)   -U\left(\frac{\Delta t}{\Delta x}H\left(\cos\left(k\Delta x\right) - 1\right)\right) \right],\\
-& {E}_{1,0} =-\dfrac{6 gi \Delta x\Delta t}{3 \Delta x^2 -2{H^2} \left( \cos\left(k \Delta x\right) - 1 \right)}{ \sin\left(k \Delta x\right)}.
+&{E}_{0,0} = 1 - \frac{\Delta t}{\Delta x}\left(-\dfrac{6 gi \Delta x\Delta t}{3 \Delta x^2 -2{H^2} \left( \cos\left(k \Delta x\right) - 1 \right)}{ \sin\left(k \Delta x\right)}\right)H\frac{i\sin\left(k\Delta x\right)}{2} \\ &- \frac{\Delta t}{\Delta x}U\left(i\sin\left(k\Delta x\right) - \frac{\Delta t}{\Delta x}U\left(\cos\left(k\Delta x\right) - 1\right)\right), \\
+&{E}_{0,1} = - \frac{\Delta t}{\Delta x} \left(H\frac{i\sin\left(k\Delta x\right)}{2}\left[ 1 -\dfrac{2i \Delta t }{\Delta x} U \sin\left(k \Delta x\right) \right]   -U\left[\frac{\Delta t}{\Delta x}H\left(\cos\left(k\Delta x\right) - 1\right)\right] \right),\\
+& E_{0,3} = - \dfrac{\Delta t}{\Delta x}H\frac{i\sin\left(k\Delta x\right)}{2},  \\
+& {E}_{1,0} =-\dfrac{6 gi \Delta x\Delta t}{3 \Delta x^2 -2{H^2} \left( \cos\left(k \Delta x\right) - 1 \right)}{ \sin\left(k \Delta x\right)}, \\
+& {E}_{1,1} =-\dfrac{2i \Delta t }{\Delta x} U \sin\left(k \Delta x\right).
 \end{align*}

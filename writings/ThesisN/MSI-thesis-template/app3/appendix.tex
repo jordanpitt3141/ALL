@@ -1,6 +1,6 @@
 \chapter{Expressions for the Total Amount of Conserved Quantities for the Analytic Solutions}
 \label{app:ConQuant}
-To calculate the conservation errors requires an analytic expression for the total: mass, momentum, $G$ and energy present in the initial conditions. Therefore to facilitate the validation tests against the analytic solutions described in Chapter \ref{chp:Serreeqns} we present these analytic expressions for the initial conditions of solitary travelling wave and the lake at rest solutions. To allow for the simple calculation of the integrals in a concise way for any domains we present them in indefinite form. 
+To calculate the conservation errors requires an analytic expression for the total amount of $h$, $uh$, $G$ and $\mathcal{H}$ present in the initial conditions. Therefore to facilitate the validation tests against the analytic solutions described in Chapter \ref{chp:Serreeqns} we present these analytic expressions for the initial conditions of solitary travelling wave and the lake at rest solutions. To allow for the simple calculation of the integrals in a concise way for any domains we present them in indefinite form. 
 
 \section{Solitary Travelling Wave}
 For the solitary wave solution \eqref{eqn:Solitondefhub} with $t=0$ the integrals of all the conserved quantities are
@@ -20,7 +20,7 @@ For the solitary wave solution \eqref{eqn:Solitondefhub} with $t=0$ the integral
 	\label{eqn:SolitonConservation}
 \end{subequations}
 
-where these integrals of the energy $\mathcal{H}$ are
+where these integrals making up $\mathcal{H}$ are
 
 \begin{align*}
 \begin{split}
@@ -39,12 +39,16 @@ Therefore, we have the analytic values of the total amounts of our conserved qua
 
 \section{Lake At Rest}
 For the lake at rest solution \eqref{eqn:LARdefhub} the total momentum and $G$ in the system is straightforward to calculate as both are zero everywhere and so we have 
+\begin{subequations}
+	\label{eqn:AppLARu}
 \begin{align}
 &\int u(x,0)h(x,0) \;  dx = {} 0 + \text{constant}, \\
 &\int G(x,0) \; dx = {} 0 + \text{constant}.
 \end{align}
-To calculate the total mass and energy in the solution we must break up our domain into wet regions where $b(x) < a_0$ and dry regions where $b(x) \ge a_0$. For the dry regions the total mass and energy are $0$ and so we have 
+\end{subequations}
+To calculate the total mass and energy in the solution we must break up our domain into wet regions where $b(x) < a_0$ and dry regions where $b(x) \ge a_0$. For the dry regions the total amount of $h$ and $\mathcal{H}$ are $0$ and so we have 
 \begin{subequations}
+	\label{eqn:AppLARhdry}
 	\begin{align}
 	\int h(x,0) \; dx = {} & 0 , \\
 	\int \mathcal{H}(x,0) \; dx = {} & 0
@@ -52,9 +56,10 @@ To calculate the total mass and energy in the solution we must break up our doma
 \end{subequations}
 whilst in a wet region we have 
 \begin{subequations}
+	\label{eqn:AppLARhwet}
 	\begin{align}
 	\int h(x,0) \; dx = {} & a_0 x -  \int b(x) \; dx , \\  \nonumber \\
 	\int \mathcal{H}(x,0) \; dx = {} & \frac{g}{2} \left(a_0^2x  -  2a_0 \int b(x) \; dx + \int b(x)^2 \; dx \right).
 	\end{align}
 \end{subequations}
-By summing all the wet regions in a given domain together we can readily calculate the total mass and energy in the system from these expressions, in terms of the bed profile $b(x)$, as desired. 
+By summing all the wet regions in a given domain together we can calculate the total amount of $h$ and $\mathcal{H}$ in the system from these expressions, in terms of the bed profile $b(x)$, as desired. 

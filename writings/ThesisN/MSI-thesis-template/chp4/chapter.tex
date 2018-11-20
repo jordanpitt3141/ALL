@@ -1,14 +1,15 @@
 \chapter{Linear Analysis of the Numerical Methods}
 \label{chp:AnalNumMethod}
 %eigenfunctions form a basis []
+In this chapter a linear analysis is used to study the convergence and dispersion properties of the numerical methods. 
+
 An important property of a numerical method is convergence. Convergence guarantees that as the spatial and temporal resolution of a numerical method is increased, then the numerical solution approaches the solution of the partial differential equations they approximate. 
 
 For linear partial differential equations the Lax-equivalence theorem states that a numerical method is convergent if and only if it is stable and consistent \cite{Lax-Richtmyer-1956-267}. A numerical scheme is consistent if the error introduced by the numerical method over a time step approaches zero as the spatial and temporal resolution increases. A numerical method is stable if the errors from previous time steps are not amplified by subsequent time steps.
 
 Another important attribute of a numerical method modelling dispersive wave equations, such as the Serre equations is its dispersion properties. The dispersion relation of a system determines the phase and group velocity of travelling waves in that system. The Serre equations possess a dispersion relation that well approximates the dispersion relation given by linear theory for water waves \cite{Barthelemy-2004-315}. Therefore, how well the dispersion relation of a numerical method approximates the dispersion relation of the Serre equations is of particular interest.
 
-We analysed the convergence and the dispersion properties of our numerical methods for the linearised Serre equations with a horizontal bed. The effect of variations in the bed and nonlinear terms are important when studying the convergence properties of our methods for solving the full Serre equations. However, these effects greatly increase the complexity of the convergence analysis. We therefore, restrict ourselves to the study of the linearised Serre with a horizontal bed to offer some insight into the convergence properties of the complete numerical methods without having to deal with this additional complexity. In general, we would expect that a numerical method that has poor convergence properties for the linearised Serre equations with a horizontal bed will also have poor convergence properties when the bed and nonlinear terms are included. The dispersion properties are derived from the linearised Serre equations with a horizontal bed \cite{Zoppou-etal-2017}, therefore the presented analysis of the dispersion properties of the numerical methods is a complete analysis including both the spatial and temporal approximations simultaneously.
-
+We analysed the convergence and the dispersion properties of the complete numerical methods for the linearised Serre equations with a horizontal bed; simultaneously analysing the spatial and temporal approximations. The effect of variations in the bed and nonlinear terms are important when studying the convergence properties of our methods for solving the full Serre equations. However, these effects greatly increase the complexity of the convergence analysis. We therefore, restrict ourselves to the study of the linearised Serre with a horizontal bed to offer some insight into the convergence properties of the complete numerical methods without having to deal with this additional complexity. In general, we would expect that a numerical method that has poor convergence properties for the linearised Serre equations with a horizontal bed will also have poor convergence properties when the bed and nonlinear terms are included. The dispersion properties of the Serre equations are derived from the linearised Serre equations with a horizontal bed \cite{Zoppou-etal-2017}, therefore the presented analysis of the dispersion properties of the numerical methods is a complete analysis.
 
 The linear analyses of convergence and dispersion properties rely on establishing a relationship of the form
 
@@ -22,7 +23,7 @@ h \\G
 \end{equation}
  where $\matr{E}$ is the evolution matrix relating the conserved quantities $h$ and $G$ at time level $t^n$ with the conserved quantities at time level $t^{n+1}$, which is independent of $n$ and $j$. The evolution matrix $\matr{E}$ is obtained in the analyses by propagating Fourier modes through the numerical scheme. By analysing the properties of $\matr{E}$ we can determine the convergence and dispersion properties of its associated numerical method.
  
- We derive $\matr{E}$ in \eqref{eqn:linearanalaim} for $\text{FEVM}_2$ and perform the convergence and dispersion analysis. We will then present the results of these analyses for all the other numerical methods in this thesis.
+ We derive $\matr{E}$ in \eqref{eqn:linearanalaim} for $\text{FEVM}_2$ and perform the convergence and dispersion analysis. We then present the results of these analyses for all the other numerical methods named in this thesis.
  
 \section{Linearised Serre Equations with a Horizontal Bed}
 The Serre equations with a horizontal bed \eqref{eqn:FullSerreNonConHorizbed} are linearised by considering waves as small perturbations $\delta\times\eta(x,t)$ and $\delta \times\mu(x,t)$ on a flow with a mean height $H$ and a mean velocity $U$ respectively. So we have
@@ -80,10 +81,10 @@ q^{n + m}_{j + l} = q^n_j e^{ i \left(m \omega^\pm \Delta t + l k \Delta x\right
 \end{equation}
 Because $\eta$ and $\mu$ are Fourier modes then so is $G$. Furthermore, the cell averages of these quantities $\overline{\eta}$, $\overline{\mu}$ and $\overline{G}$ are Fourier modes as well.
 
-In additional, the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}$, $\mathcal{F}_{j-1/2}$ and $\mathcal{F}_{j+1/2}$ from Chapter \ref{chp:HFVMMethod} will only vary with $H$, $U$, $k$, $\omega^\pm$, $\Delta x$ and $\Delta t$ and hence be independent of $j$ and $n$. By combining these operators the evolution matrix $\matr{E}$ can be derived for $\text{FEVM}_2$ for the linearised Serre equations with horizontal bed. Since all of the constituent operators are independent of $j$ and $n$ then $\matr{E}$ will also be independent of $j$ and $n$, as desired. We will now derive expressions for all these operators, following the structure laid out in Section \ref{sec:StructOverview}. Since the linearised Serre equations with a horizontal bed have no source terms, and so the step (iv), which approximates the source terms will be skipped.   
+In addition, the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}$, $\mathcal{F}_{j-1/2}$ and $\mathcal{F}_{j+1/2}$ from Chapter \ref{chp:HFVMMethod} will only vary with $H$, $U$, $k$, $\omega^\pm$, $\Delta x$ and $\Delta t$ and hence be independent of $j$ and $n$. By combining these operators the evolution matrix $\matr{E}$ can be derived for $\text{FEVM}_2$ for the linearised Serre equations with a horizontal bed. Since all the constituent operators of $\matr{E}$ are independent of $j$ and $n$ then $\matr{E}$ will also be independent of $j$ and $n$, as desired. We will now derive expressions for all these operators, following the structure of the method laid out in Section \ref{sec:StructOverview}. Since the linearised Serre equations with a horizontal bed have no source terms step (iv), which approximates the source terms will be skipped.   
 
 \subsection{Reconstruction}
-Given $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ at $t^n$ the first step of our numerical method is to reconstruct $\eta$ and $G$ inside the $j^{th}$ cell at $x_{j-1/2}$, $x_j$ and $x_{j+1/2}$ using $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ from \eqref{eqn:ReconforhwG}. Since, $\eta$ and $G$ are Fourier modes and therefore smooth we do not require non-linear limiters to ensure our scheme is TVD and so we use the slope $d_j = \left({-\bar{q}_{j-1} +\bar{q}_{j+1}}\right)/ \left({2\Delta x} \right)$ in the reconstruction. Applying \eqref{eqn:fourierfactor} to the reconstructions \eqref{eqn:ReconforhwG} with the centred slope approximation we obtain 
+Given $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ at $t^n$ the first step of our numerical method is to reconstruct $\eta$ and $G$ inside the $j^{th}$ cell at $x_{j-1/2}$, $x_j$ and $x_{j+1/2}$ using $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ from \eqref{eqn:ReconforhwG}. Since $\eta$ and $G$ are Fourier modes and therefore smooth we do not require non-linear limiters to ensure our scheme is TVD and so we use the slope $d_j = \left({-\bar{q}_{j-1} +\bar{q}_{j+1}}\right)/ \left({2\Delta x} \right)$ in the reconstruction. Applying \eqref{eqn:fourierfactor} to the reconstructions \eqref{eqn:ReconforhwG} with the centred slope approximation we obtain 
 
 \begin{subequations}
 	\label{eqn:RpmfactorFDVM}
@@ -102,17 +103,17 @@ To calculate $\mu_{j+1/2}$ we use a second-order FEM. We begin our FEM for \eqre
 \begin{equation*}
 \int_{\Omega}G v \; dx = UH\int_{\Omega} v \; dx + U \int_{\Omega} \eta v \; dx +   H\int_{\Omega} \mu v \; dx  + \frac{H^3}{3} \int_{\Omega} \frac{\partial \mu}{\partial x } \frac{\partial v}{\partial x }\; dx.
 \end{equation*}
-The FEM then proceeds for \eqref{eqn:LinSerreG} as in Chapter \ref{chp:HFVMMethod} for the nonlinear Serre equations with a horizontal bed \eqref{eqn:FullSerreConHorizBed}. So that $G$ has the basis functions $\psi^+_{j - 1/2}$ and $\psi^-_{j + 1/2}$ defined in Appendix \ref{app:FEMIntegrals}, which means our approximation to $G$ is linear inside a cell with discontinuous jumps at the cell edges. For $v$ and $\mu$ the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ defined in Appendix \ref{app:FEMIntegrals} are used so that $v$ and our approximation to $\mu$ are quadratic polynomials inside a cell and are continuous across the cell edges.
+The FEM then proceeds for \eqref{eqn:LinSerreG} as in Chapter \ref{chp:HFVMMethod} for the nonlinear Serre equations with a horizontal bed \eqref{eqn:FullSerreConHorizBed}. So that $G$ has the basis functions $\psi^+_{j - 1/2}$ and $\psi^-_{j + 1/2}$ \eqref{eqn:App1:PsiDef}, which means our approximation to $G$ is linear inside a cell with discontinuous jumps at the cell edges. For $v$ and $\mu$ the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ \eqref{eqn:App1:PhiDef} are used so that $v$ and our approximation to $\mu$ are quadratic polynomials inside a cell and are continuous across the cell edges.
 
-Given the detailed description of the method in Chapter \ref{chp:HFVMMethod}, we will just present the element wise matrix $\matr{A}_j$ and vector $\vecn{g}_j$ 
+Given the detailed description of the method in Chapter \ref{chp:HFVMMethod}, we will just present the element wise matrix $\matr{A}_j$ and vector $\vecn{g}_j$ for \eqref{eqn:LinSerreG} 
 \begin{align*}
 \matr{A}_j &= H \frac{\Delta x}{30 } \begin{bmatrix} \TM 4 &2 &-1 \\2 &16 &2  \\-1 &2 &4 \BM \end{bmatrix} +  \frac{H^3 }{9\Delta x}\begin{bmatrix} \TM 7 &-8 &1  \\-8 &16 &-8  \\1 &-8 &7 \BM \end{bmatrix}, \\
 \vecn{g}_j &=  \frac{\Delta x}{6} \left(\begin{bmatrix} \TM G^+_{j -1/2} \\2 G^+_{j -1/2}+2 G^-_{j +1/2} \\ G^-_{j +1/2} \BM \end{bmatrix} - UH\begin{bmatrix} \TM 1 \\4 \\ 1  \BM\end{bmatrix} - U\begin{bmatrix} \TM \eta^+_{j -1/2} \\2 \eta^+_{j -1/2}+2 \eta^-_{j +1/2} \\ \eta^-_{j +1/2} \end{bmatrix} \BM \right).
 \end{align*}
-To calculate the intercell flux we require $\mu$ at $x_{j+1/2}$, and therefore we only need to solve the FEM approximation that relates all the quantities at $x_{j+1/2}$. From the element wise matrices and vectors for the $j$ and $\left(j+1\right)^{th}$ cells the equations that relates all the quantities at $x_{j+1/2}$ is
+To calculate the intercell flux we require $\mu$ at $x_{j+1/2}$, and therefore we only need to solve the FEM approximation that relates all the quantities at $x_{j+1/2}$. From the element wise matrices and vectors for the $j$ and $\left(j+1\right)^{th}$ cells the equation that relates all the quantities at $x_{j+1/2}$ is
 \begin{multline*}
 \frac{\Delta x}{6} \left(G^-_{j +1/2} + G^+_{j +1/2} \right)= \\
-\frac{\Delta x}{6} 2UH   + \frac{\Delta x}{6} U \left(\eta^-_{j +1/2} + \eta^+_{j +1/2} \right) \\ +   \Bigg(H\frac{\Delta x}{30} \Bigg[ -\mu_{j-1/2} +  2\mu_{j} + 8\mu_{j+1/2}  +  2 \mu_{j+1}  - \mu_{j+3/2}\Bigg]   \\ + \frac{H^3 }{9\Delta x} \Bigg[  \mu_{j-1/2} -8\mu_{j} + 14 \mu_{j+1/2} -8\mu_{j+1} + \mu_{j+3/2}  \Bigg]    \Bigg) 
+\frac{\Delta x}{6} 2UH   + \frac{\Delta x}{6} U \left(\eta^-_{j +1/2} + \eta^+_{j +1/2} \right) \\ +   \Bigg(H\frac{\Delta x}{30} \Bigg[ -\mu_{j-1/2} +  2\mu_{j} + 8\mu_{j+1/2}  +  2 \mu_{j+1}  - \mu_{j+3/2}\Bigg]   \\ + \frac{H^3 }{9\Delta x} \Bigg[  \mu_{j-1/2} -8\mu_{j} + 14 \mu_{j+1/2} -8\mu_{j+1} + \mu_{j+3/2}  \Bigg]    \Bigg).
 \end{multline*}
 Using \eqref{eqn:RpmfactorFDVM} and \eqref{eqn:fourierfactor}, we obtain
 \begin{multline*}
@@ -161,11 +162,11 @@ Using the FEM for $\mu_{j+1/2}$ \eqref{eqn:2ndFEMutoG} and the reconstruction \e
 \begin{align*}
 F^\eta_{j+\frac{1}{2}} &= H \left(\mathcal{G}^G \overline{G}_{j} + \mathcal{G}^{\eta} \overline{\eta}_{j} + \mathcal{G}^c\right) + U \eta^+_{j+1/2} \nonumber \\ &= \left(H \mathcal{G}^{\eta} + U \mathcal{R}^+_{j+1/2} \right)  \overline{\eta}_{j} + H \mathcal{G}^G \overline{G}_{j} + H\mathcal{G}^c 
 \end{align*}
-This can be written as coefficients for $\eta$ and $G$ like so
+This can be written as coefficients for $\overline{\eta}_{j}$ and $\overline{G}_{j}$ like so
 \begin{subequations}
 	\label{eqn:Fluxfactorsupercritetaleft}
 \begin{align}
-F^\eta_{j+\frac{1}{2}} &= \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}}.
+F^\eta_{j+\frac{1}{2}} &= \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}}
 \end{align}
 where
 \begin{align}
@@ -213,7 +214,7 @@ F^\eta_{j+\frac{1}{2}} &= \frac{U}{2 \sqrt{gH}} \left( H\mu_{j+1/2} + U\eta^-_{j
 Using the reconstruction factors \eqref{eqn:RpmfactorFDVM} and the FEM solver factors \eqref{eqn:2ndFEMutoG} and rearranging we get
 \begin{subequations}
 	\begin{align}
-	F^\eta_{j+\frac{1}{2}} = \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}} .
+	F^\eta_{j+\frac{1}{2}} = \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}}
 	\end{align}
 	where
 	\begin{align}
@@ -256,7 +257,7 @@ Substituting in the flux function into \eqref{eqn:LinContG} and \eqref{eqn:LineM
 \begin{subequations}
 	\label{eqn:Fluxfactorsupercritetaright}
 	\begin{align}
-	F^\eta_{j+\frac{1}{2}} &= \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}}.
+	F^\eta_{j+\frac{1}{2}} &= \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}}
 	\end{align}
 	where
 	\begin{align}
@@ -368,10 +369,11 @@ which is in the desired form of \eqref{eqn:linearanalaim}.
 
 This is the evolution matrix $\matr{E}$ for $\text{FEVM}_2$. The matrix $\matr{E}$ is dependent on the flux matrix $\matr{F}$ and therefore will depend on the Froude number. The Froude number is constant over time in this analysis and so we can investigate supercritical, subcritical and critical flow individually.
 
-Both the convergence and dispersion analysis then proceed by studying the properties of the evolution matrix $\matr{E}$. We begin with the convergence analysis.
+Both the convergence and dispersion analysis then proceed by studying the properties of the evolution matrix $\matr{E}$ for $\text{FEVM}_2$, $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. The evolution matrices for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$ can be derived following the derivation of the evolution matrix of $\text{FEVM}_2$ using the expressions for its constituent operators in Appendix \ref{app:LinAnal}. For $\mathcal{D}$ and $\mathcal{W}$ the evolution matrices are \eqref{eqn:AppEvolD} and \eqref{eqn:AppEvolW} respectively. We begin with the convergence analysis.
 
 \section{Convergence Analysis}
-We apply the Lax-equivalence theorem to demonstrate the convergence of our numerical methods by establishing their consistency and stability. We use a Von Neumann stability analysis to demonstrate stability. Consistency is demonstrated for the Fourier modes \eqref{eqn:FourierNode} solutions which form a basis of the solution space of the linearised Serre equations. Together this stability and consistency condition imply convergence of the numerical method under the $L_2$ norm.
+We apply the Lax-equivalence theorem to demonstrate the convergence of our numerical methods by establishing their consistency and stability. We use a Von Neumann stability analysis to demonstrate stability. Consistency is demonstrated for the Fourier modes \eqref{eqn:FourierNode} solutions which form a basis of the solution space of the linearised Serre equations. Together these stability and consistency conditions imply convergence of the numerical method under the $L_2$ norm. 
+%Whereto find the evolution matrix for each method!
 
 \subsection{Stability}
 For a numerical method to be stable we must ensure that errors from previous time steps are not amplified by the current time step. To accomplish this we must ensure 
@@ -416,7 +418,7 @@ In Figure~\ref{fig:StabShall} it can be seen that all methods have $\rho\left(\m
 %\end{align}
 %Thus numerical methods with $\rho\left(\matr{E}\right)$ closer to $1$ are closer to the analytic value. In this sense the two finite difference methods are best, although $\mathcal{W}$ is unstable for $U \neq 0m/s$. As expected higher-order FDVM better approximate the analytic value of the growth factor and $\lim_{\Delta x \rightarrow 0}\rho\left(\matr{E}\right) = 1$ for all numerical methods.
 
-We observed the same results for a wide range of $k$, $H$ and $U$, in particular all methods except $\mathcal{W}$ were stable for any combination of these variables. While $\mathcal{W}$ was only stable when $U = 0m/s$.
+We observed the same results for a wide range of $k$, $H$ and $U$ values in particular, all methods except $\mathcal{W}$ were stable for any combination of these variables. While $\mathcal{W}$ was only stable when $U = 0m/s$.
 
 
 
@@ -449,7 +451,7 @@ Using the matrix norm induced by the vector norm we have that
 \end{equation}
 Since $\overline{\eta}^n_j$ and  $\overline{G}^n_j$ are finite and independent of $\Delta x$ and $\Delta t$, if $ \lim_{\Delta x,\Delta t \rightarrow 0} \left\| \matr{E} -  e^{i \omega^\pm \Delta t}\matr{I} \right\| = 0 $ then $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \| = 0 $ as desired.
 
-We calculated the Taylor series of $\matr{E} -  e^{i \omega^\pm \Delta t}\matr{I}$ for all the numerical methods for all flow scenarios; subcritical, critical and supercritical flows. Since the results are the same for $\omega^+$ and $\omega^-$ we only report the results for $\omega^+$. We have reported the lowest order $\Delta x$ and $\Delta t$ terms of the Taylor series in Tables~\ref{tab:EerrFDVM1dxerror} ~and~\ref{tab:EerrFDVM1dterror}  for $\text{FDVM}_1$, Table~\ref{tab:EerrFDVM2} for $\text{FDVM}_2$, Table~\ref{tab:EerrFEVM2} for the $\text{FEVM}_2$, Tables~\ref{tab:EerrFDVM3dxerror} ~and~\ref{tab:EerrFDVM3dterror} for $\text{FDVM}_3$, Table~\ref{tab:EerrD} for $\mathcal{D}$ and Table~\ref{tab:EerrW} for $\mathcal{W}$. To be concise, the temporal and spatial errors for supercritical flow is only reported where it is different from the errors when $-1 \le Fr \le 1$, this only occurred for the spatial errors of the first- and third-order FDVM. 
+We calculated the Taylor series of $\matr{E} -  e^{i \omega^\pm \Delta t}\matr{I}$ for all the numerical methods for all flow scenarios; subcritical, critical and supercritical flows. Since the results are the same for $\omega^+$ and $\omega^-$ we only report the results for $\omega^+$. We have reported the lowest order $\Delta x$ and $\Delta t$ terms of the Taylor series in Tables~\ref{tab:EerrFDVM1dxerror} ~and~\ref{tab:EerrFDVM1dterror}  for $\text{FDVM}_1$, Table~\ref{tab:EerrFDVM2} for $\text{FDVM}_2$, Table~\ref{tab:EerrFEVM2} for the $\text{FEVM}_2$, Tables~\ref{tab:EerrFDVM3dxerror} ~and~\ref{tab:EerrFDVM3dterror} for $\text{FDVM}_3$, Table~\ref{tab:EerrD} for $\mathcal{D}$ and Table~\ref{tab:EerrW} for $\mathcal{W}$. 
 
 We observe for all the methods that the Taylor series of all the elements of $\matr{E} -  e^{i \omega^+ \Delta t}\matr{I}$ have a factor of $\Delta t$. So that for all methods 
 
@@ -459,7 +461,7 @@ We observe for all the methods that the Taylor series of all the elements of $\m
 \end{align*} 
 where $\matr{M}_0$ is some matrix.
 
-Choosing a particular vector norm and its induced matrix norm it is clear from Tables~\ref{tab:EerrFDVM1}-\ref{tab:EerrW} that $\matr{M}_0$ is independent of $\Delta t$ and finite so that as $\Delta t \rightarrow 0$ then $|\Delta t| \left(\left \| \matr{M}_0 \right \| + \left \| \mathcal{O}\left(\Delta t\right)\right \|\right)  \rightarrow 0$  and therefore  $\left \| \matr{E} -  e^{i \omega^+ \Delta t}\matr{I} \right \| \rightarrow 0$. Therefore, for all the numerical methods $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \| = 0 $ and so all the numerical methods are consistent for Fourier mode solutions implying consistency for all solutions as desired. 
+Choosing a particular vector norm and its induced matrix norm it is clear from Tables~\ref{tab:EerrFDVM1dxerror}-\ref{tab:EerrW} that $\matr{M}_0$ is independent of $\Delta t$ and finite so that as $\Delta t \rightarrow 0$ then $|\Delta t| \left(\left \| \matr{M}_0 \right \| + \left \| \mathcal{O}\left(\Delta t\right)\right \|\right)  \rightarrow 0$  and therefore  $\left \| \matr{E} -  e^{i \omega^+ \Delta t}\matr{I} \right \| \rightarrow 0$. Therefore, for all the numerical methods $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \| = 0 $ and so all the numerical methods are consistent for Fourier mode solutions implying consistency for all solutions as desired. 
 
 \begin{table}
 	\begin{tabular}{l c c c}
@@ -584,7 +586,7 @@ Choosing a particular vector norm and its induced matrix norm it is clear from T
 \end{table}
 
 \section{Dispersion Analysis}
-To study the dispersion properties of the numerical method, we must calculate the dispersion relation  that relates the frequency $\omega^\pm$ to the wavenumber $k$. Making use of \eqref{eqn:fourierfactor} in \eqref{eqn:evolutionmatrix} we get that for an exact method 
+To study the dispersion properties of the numerical method, we must calculate the dispersion relation of the numerical method  that relates the frequency $\widetilde{\omega}^\pm$ to the wavenumber $k$. Making use of \eqref{eqn:fourierfactor} in \eqref{eqn:evolutionmatrix} we get that for an exact method 
 \begin{equation}\matr{E}\begin{bmatrix}
 \overline{\eta} \\ \overline{G}
 \end{bmatrix}^{n}_j = 
@@ -593,15 +595,15 @@ e^{i \omega^\pm \Delta t}\begin{bmatrix}
 \end{bmatrix}^{n}_j.
 \label{eqn:dispanalomeganum1}
 \end{equation}
-Therefore, the evolution matrix $\matr{E}$ of an exact method has the eigenvalues $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ where $\omega^\pm$ are the positive and negative branches of the dispersion relation \eqref{eqn:DispersionRelation}. For approximate numerical methods the dispersion relation denoted $\widetilde{\omega}^\pm$ can then be calculated by taking the eigenvalues of its evolution matrix $\lambda^\pm$ like so
+Therefore, the evolution matrix $\matr{E}$ of an exact method has the eigenvalues $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ where $\omega^\pm$ are the positive and negative branches of the dispersion relation of the linearised Serre equautions \eqref{eqn:DispersionRelation}. For approximate numerical methods the dispersion relation denoted $\widetilde{\omega}^\pm$ can be calculated by taking the eigenvalues of its evolution matrix $\lambda^\pm$ like so
 \begin{equation*}
 \widetilde{\omega}^\pm = \frac{1}{i \Delta t} \log\left[ \lambda^\pm\right].
 \end{equation*}
-By comparing $\widetilde{\omega}^\pm$ with the analytic $\omega^\pm$ given by the linearised Serre equations \eqref{eqn:DispersionRelation} we can determine the error in the dispersion relation for the numerical method. The real part of $\widetilde{\omega}^\pm$ determines the speed of a wave, while the imaginary part determines the change in amplitude. For the frequency of the linearised Serre equations $\omega^\pm$ the imaginary part is zero and so the amplitude of waves are constant in time. We only present the results for the positive branch of the dispersion relation giving$\widetilde{\omega}^+$ and $\omega^+$ as the behaviour of the negative branch is very similar. 
+By comparing $\widetilde{\omega}^\pm$ with the analytic $\omega^\pm$ given by the linearised Serre equations \eqref{eqn:DispersionRelation} we can determine the error in the dispersion relation for the numerical method. The real part of $\widetilde{\omega}^\pm$ determines the speed of a wave, while the imaginary part determines the change in amplitude. For the frequency of the linearised Serre equations $\omega^\pm$ the imaginary part is zero and so the amplitude of waves are constant in time. We only present the results for the positive branch of the dispersion relation comparing $\widetilde{\omega}^+$ and $\omega^+$ as the behaviour of the negative branch is very similar. 
 
 The relative error in the dispersion relation was plotted against $\Delta x / \lambda$ for representative values of $H$, $U$ and $k$. Where $\lambda = 2 \pi / k$ is the wavelength of the wave with wave number $k$. We used $g = 9.81m/s^2$ and chose $\Delta t = 0.5 / \left(U + \sqrt{gH}\right) \Delta x$ to satisfy the CFL condition \eqref{eqn:CFLcond}.
 
-In Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} we present the plots for $kH = \pi / 10$ for shallow water as $\sigma = kH / 2\pi =  1 / 20$ and therefore, the Serre equations are appropriate. We present the real and imaginary errors separately to isolate the errors in the speed and amplitude of the wave for the numerical method. The total error is also reported as a measure of the overall error in the dispersion relation of the numerical method. 
+In Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} we present the plots for $kH = \pi / 10$ for shallow water as $\sigma = kH / 2\pi =  1 / 20$ and so the Serre equations are appropriate. We present the real and imaginary errors separately to isolate the errors in the speed and amplitude of the wave for the numerical method. The total error is also reported as a measure of the overall error in the dispersion relation of the numerical method. 
 
 \begin{figure}
 	\centering
@@ -642,11 +644,11 @@ In Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} we present the plots 
 
 From Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} we can see that all methods approximate the dispersion relation of the Serre equations well with the approximation improving as $\Delta x \rightarrow 0$, as expected.
 
-For the real part of the dispersion error the FEVM and the FDVM outperform the two finite difference methods and therefore will better approximate the speed of waves of the linearised Serre equations.  However, for the dilation of waves the roles are reversed with the two finite difference methods either dilating the waves very little ($\mathcal{W}$ for $U>0$) or not at all. When taking both effects into account with the complete error we see that the $\text{FDVM}_1$ has the largest dispersion error followed by $\mathcal{W}$, $\mathcal{D}$, $\text{FEVM}_2$, $\text{FDVM}_2$ and finally $\text{FDVM}_3$ has the lowest dispersion error. So that the size of the total dispersion error is mainly determined by the order of accuracy of the numerical scheme. With hybrid methods performing better than finite difference methods of the same order for the Serre equations. 
+For the real part of the dispersion error the FEVM and the FDVM outperform the two finite difference methods and therefore will better approximate the speed of waves of the linearised Serre equations.  However, for the amplitude of waves the roles are reversed with the two finite difference methods either dilating the waves very little or not at all. When taking both effects into account with the total error we see that the $\text{FDVM}_1$ has the largest dispersion error followed by $\mathcal{W}$, $\mathcal{D}$, $\text{FEVM}_2$, $\text{FDVM}_2$ and finally $\text{FDVM}_3$ has the lowest dispersion error. So that the size of the total dispersion error is mainly determined by the order of accuracy of the numerical scheme. Whilst hybrid methods perform better than finite difference methods of the same order. 
 
-Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} furthermore demonstrate that $\text{FDVM}_2$ is superior to $\text{FEVM}_2$ not just for the complete dispersion error, but its real and imaginary parts individually as well. Therefore, $\text{FDVM}_2$ will more accurately model the speed and amplitude of waves.
+Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} furthermore demonstrate that $\text{FDVM}_2$ is superior to $\text{FEVM}_2$ not just for the complete dispersion error, but its real and imaginary parts individually as well. Therefore, $\text{FDVM}_2$ should more accurately model the speed and amplitude of waves.
 
-We observed similar results across a wide array of $k$, $H$ and $U$ values. However, as $kH$ is increased the distinction between $\text{FDVM}_2$ and $\text{FEVM}_2$ becomes less pronounced. This can be seen in Figure~\ref{fig:Dispu0Fill} where $kH = 2.5$ and $\sigma = 5/4 \pi > 1/20$ so that the water is no longer shallow.
+We observed similar results across a wide array of $k$, $H$ and $U$ values. However, as $kH$ is increased the distinction between $\text{FDVM}_2$ and $\text{FEVM}_2$ becomes less pronounced. This can be seen in Figure~\ref{fig:Dispu0Fill} where $kH = 2.5$ and $\sigma = 5/4 \pi > 1/20$ where the water is no longer shallow.
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -669,7 +671,7 @@ We observed similar results across a wide array of $k$, $H$ and $U$ values. Howe
 %Bring to intro as well
 These $kH$ values are the same as those by \citet{Filippini-etal-2016-381}, and our results are similar for the real part of the dispersion error. Our FDVM and the FEVM compare favourably with the methods described and analysed by \citet{Filippini-etal-2016-381}. Furthermore, we extended their work by allowing for non-zero values of $U$, combining the spatial and temporal approximations and examining the imaginary and complete error in the dispersion relation. 
 
-Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of the dispersion error  is slightly different if we allow for non-zero values of $U$. In particular the non-zero value of $U$ changes the real part of the dispersion error for $\text{FDVM}_1$ when $kH = 2.5$. Therefore, for some methods allowing for non-zero values of $U$ can have a significant impact on the conclusions drawn from the dispersion analysis. Furthermore, taking the imaginary part of the dispersion error into account is important as $\omega^\pm$ determines not only the speed of waves but also their amplitude. For instance the $\text{FDVM}_1$ performs very well for the real part of the dispersion error and poorly for the imaginary part, and so false conclusions about the accuracy of the method could be drawn from only considering the real part of the dispersion error.
+Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of the dispersion error  is slightly different if we allow for non-zero values of $U$. For example the non-zero value of $U$ significantly changes the real part of the dispersion error for $\text{FDVM}_1$ when $kH = 2.5$. Therefore, for some methods allowing for non-zero values of $U$ can have a significant impact on the conclusions drawn from the dispersion analysis. Furthermore, taking the imaginary part of the dispersion error into account is important as $\omega^\pm$ determines not only the speed of waves but also their amplitude. For instance the $\text{FDVM}_1$ performs very well for the real part of the dispersion error and poorly for the imaginary part, and so false conclusions about the accuracy of the method could be drawn from only considering the real part of the dispersion error.
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -691,9 +693,9 @@ Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of th
 
 The Taylor series expansion of $\widetilde{\omega}^\pm$ was also derived for all the numerical methods. We have compiled the lowest order terms of the Taylor series for $\widetilde{\omega}^+-\omega^+$ in Table \ref{tab:Wfactor} when $ -1 \le Fr \le 1$ for the FDVM and FEVM. In Table \ref{tab:Wfactor} it is clear that these schemes estimated $\omega^+$ with the expected order of accuracy in both space and time. This was also the case for $\omega^-$.
 
-We also present the lowest order terms of the Taylor series for $\widetilde{\omega}^+~-~\omega^+$ for both $ Fr < -1$ and $ Fr > 1$ in Table~\ref{tab:Wspatfactor}. We only present the errors that are different from those reported in Table~\ref{tab:Wfactor}, this was only the case for the spatial error of the first- and third--order numerical methods. From these tables it is clear that the FDVM and the FEVM have the correct order of accuracy when approximating~$\omega^+$, this was also the case for $\omega^-$. 
+We also present the lowest order terms of the Taylor series for $\widetilde{\omega}^+~-~\omega^+$ for both $ Fr < -1$ and $ Fr > 1$ in Table~\ref{tab:Wspatfactor}. We only present the errors that are different from those reported in Table~\ref{tab:Wfactor}, this was only the case for the spatial error of the first- and third--order numerical methods. From these tables it is clear that the FDVM and the FEVM retain their order of accuracy when approximating~$\omega^+$, this was also the case for $\omega^-$. 
 
-Finally we present the lowest order terms of the Taylor series for $\widetilde{\omega}^+~-~\omega^+$ for the finite difference methods in Table~\ref{tab:WFDspatfactor}. These methods do not change depending on the value of the physical quantities. The two finite difference methods both have the correct order of accuracy in space and time.  
+Finally we present the lowest order terms of the Taylor series for $\widetilde{\omega}^+~-~\omega^+$ for the finite difference methods in Table~\ref{tab:WFDspatfactor}. These methods do not change depending on the value of the physical quantities. The two finite difference methods retain their order of accuracy in space and time when approximating~$\omega^+$.  
 
 Because all methods were demonstrated to have the expected order of accuracy in approximating $\omega^\pm$ for the linearised Serre equations this implies that for small $\Delta x$ values the order of accuracy will be the primary driver of the dispersion error.
 
@@ -742,3 +744,7 @@ Because all methods were demonstrated to have the expected order of accuracy in 
 	\label{tab:WFDspatfactor} 
 \end{table}
  %W x orig :  \dfrac{gH\left( 4 + H^2k^2\right)}{2 \beta \sqrt{3gH\beta}}
+ 
+ \medskip
+ 
+ In this chapter the convergence and dispersion properties of the numerical methods were studied using a linear analysis. The results of this analysis demonstrated the superiority of the higher-order accurate hybrid finite volume methods over the finite difference methods.
