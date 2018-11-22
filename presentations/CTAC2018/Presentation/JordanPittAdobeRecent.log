@@ -2,8 +2,8 @@ This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
-**JordanPitt.tex
-(./JordanPitt.tex
+**JordanPittAdobeRecent.tex
+(./JordanPittAdobeRecent.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamer.cls
@@ -710,38 +710,256 @@ Package: beamercolorthemewhale 2010/06/17  (rcs-revision d02a7cf4d8ae)
 )) (/usr/share/texlive/texmf-dist/tex/generic/bibtex/apalike.sty
 \bibhang=\skip57
 )
-(/usr/share/texlive/texmf-dist/tex/latex/movie15/movie15.sty
-Package: movie15 2012/05/16
+(/usr/share/texlive/texmf-dist/tex/latex/media9/media9.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2016/01/19 v6377 L3 programming layer (loader) 
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+Package: expl3 2016/01/19 v6377 L3 programming layer (code)
+L3 Module: l3bootstrap 2016/01/01 v6339 L3 Bootstrap code
+L3 Module: l3names 2015/12/21 v6328 L3 Namespace for primitives
+L3 Module: l3basics 2015/11/22 v6315 L3 Basic definitions
+L3 Module: l3expan 2015/09/10 v5983 L3 Argument expansion
+L3 Module: l3tl 2015/09/29 v6121 L3 Token lists
+L3 Module: l3str 2016/01/03 v6357 L3 Strings
+L3 Module: l3seq 2015/08/05 v5777 L3 Sequences and stacks
+L3 Module: l3int 2016/01/05 v6366 L3 Integers
+\c_max_int=\count153
+\l_tmpa_int=\count154
+\l_tmpb_int=\count155
+\g_tmpa_int=\count156
+\g_tmpb_int=\count157
+L3 Module: l3quark 2015/08/17 v5855 L3 Quarks
+L3 Module: l3prg 2015/11/01 v6216 L3 Control structures
+\g__prg_map_int=\count158
+L3 Module: l3clist 2015/09/02 v5901 L3 Comma separated lists
+L3 Module: l3token 2015/11/11 v6249 L3 Experimental token manipulation
+L3 Module: l3prop 2016/01/05 v6366 L3 Property lists
+L3 Module: l3msg 2015/09/28 v6113 L3 Messages
+L3 Module: l3file 2015/12/03 v6317 L3 File and I/O operations
+\l_iow_line_count_int=\count159
+\l__iow_target_count_int=\count160
+\l__iow_current_line_int=\count161
+\l__iow_current_word_int=\count162
+\l__iow_current_indentation_int=\count163
+L3 Module: l3skip 2016/01/05 v6366 L3 Dimensions and skips
+\c_zero_dim=\dimen188
+\c_max_dim=\dimen189
+\l_tmpa_dim=\dimen190
+\l_tmpb_dim=\dimen191
+\g_tmpa_dim=\dimen192
+\g_tmpb_dim=\dimen193
+\c_zero_skip=\skip58
+\c_max_skip=\skip59
+\l_tmpa_skip=\skip60
+\l_tmpb_skip=\skip61
+\g_tmpa_skip=\skip62
+\g_tmpb_skip=\skip63
+\c_zero_muskip=\muskip12
+\c_max_muskip=\muskip13
+\l_tmpa_muskip=\muskip14
+\l_tmpb_muskip=\muskip15
+\g_tmpa_muskip=\muskip16
+\g_tmpb_muskip=\muskip17
+L3 Module: l3keys 2015/11/17 v6284 L3 Key-value interfaces
+\g__keyval_level_int=\count164
+\l_keys_choice_int=\count165
+L3 Module: l3fp 2015/08/25 v5890 L3 Floating points
+\c__fp_leading_shift_int=\count166
+\c__fp_middle_shift_int=\count167
+\c__fp_trailing_shift_int=\count168
+\c__fp_big_leading_shift_int=\count169
+\c__fp_big_middle_shift_int=\count170
+\c__fp_big_trailing_shift_int=\count171
+\c__fp_Bigg_leading_shift_int=\count172
+\c__fp_Bigg_middle_shift_int=\count173
+\c__fp_Bigg_trailing_shift_int=\count174
+L3 Module: l3box 2015/08/09 v5822 L3 Experimental boxes
+\c_empty_box=\box53
+\l_tmpa_box=\box54
+\l_tmpb_box=\box55
+\g_tmpa_box=\box56
+\g_tmpb_box=\box57
+L3 Module: l3coffins 2015/08/06 v5789 L3 Coffin code layer
+\l__coffin_internal_box=\box58
+\l__coffin_internal_dim=\dimen194
+\l__coffin_offset_x_dim=\dimen195
+\l__coffin_offset_y_dim=\dimen196
+\l__coffin_x_dim=\dimen197
+\l__coffin_y_dim=\dimen198
+\l__coffin_x_prime_dim=\dimen199
+\l__coffin_y_prime_dim=\dimen256
+\c_empty_coffin=\box59
+\l__coffin_aligned_coffin=\box60
+\l__coffin_aligned_internal_coffin=\box61
+\l_tmpa_coffin=\box62
+\l_tmpb_coffin=\box63
+\l__coffin_display_coffin=\box64
+\l__coffin_display_coord_coffin=\box65
+\l__coffin_display_pole_coffin=\box66
+\l__coffin_display_offset_dim=\dimen257
+\l__coffin_display_x_dim=\dimen258
+\l__coffin_display_y_dim=\dimen259
+L3 Module: l3color 2014/08/23 v5354 L3 Experimental color support
+L3 Module: l3sys 2015/09/25 v6087 L3 Experimental system/runtime functions
+L3 Module: l3candidates 2016/01/14 v6376 L3 Experimental additions to l3kernel
+\l__box_top_dim=\dimen260
+\l__box_bottom_dim=\dimen261
+\l__box_left_dim=\dimen262
+\l__box_right_dim=\dimen263
+\l__box_top_new_dim=\dimen264
+\l__box_bottom_new_dim=\dimen265
+\l__box_left_new_dim=\dimen266
+\l__box_right_new_dim=\dimen267
+\l__box_internal_box=\box67
+\l__coffin_bounding_shift_dim=\dimen268
+\l__coffin_left_corner_dim=\dimen269
+\l__coffin_right_corner_dim=\dimen270
+\l__coffin_bottom_corner_dim=\dimen271
+\l__coffin_top_corner_dim=\dimen272
+\l__coffin_scaled_total_height_dim=\dimen273
+\l__coffin_scaled_width_dim=\dimen274
+L3 Module: l3luatex 2015/11/11 v6250 L3 Experimental LuaTeX-specific functions
 )
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/ifdraft.sty
-Package: ifdraft 2008/08/11 v1.3 Detect class options draft and final (HO)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
+File: l3pdfmode.def 2015/11/11 v6250 L3 Experimental driver: PDF mode
+\l__driver_color_stack_int=\count175
+))
+(/usr/share/texlive/texmf-dist/tex/latex/l3experimental/l3str/l3regex.sty
+Package: l3regex 2016/01/19 v6377 L3 Experimental regular expressions
+
+(/usr/share/texlive/texmf-dist/tex/latex/l3experimental/l3str/l3tl-build.sty
+Package: l3tl-build 2016/01/19 v6377 L3 Experimental token list construction
+\l__tl_build_start_index_int=\count176
+\l__tl_build_index_int=\count177
 )
-\@MXV@page=\count153
-\@MXV@adict=\count154
-\@MXV@aadict=\count155
-\@MXV@includes=\count156
-\@MXV@players=\count157
-\@MXV@links=\count158
-\@MXV@width=\dimen188
-\@MXV@height=\dimen189
-\@MXV@depth=\dimen190
-\@MXV@totalheight=\dimen191
-\@MXV@@boxdepth=\dimen192
-\@MXV@traiselen=\dimen193
-\@MXV@braiselen=\dimen194
-\@MXV@start=\dimen195
-\@MXV@end=\dimen196
-\@MXV@textbox=\box53
+(/usr/share/texlive/texmf-dist/tex/latex/l3experimental/l3str/l3tl-analysis.sty
+Package: l3tl-analysis 2015/11/09 v6244 L3 Experimental token lists analysis
+\l__tl_analysis_normal_int=\count178
+\l__tl_analysis_index_int=\count179
+\l__tl_analysis_nesting_int=\count180
+\l__tl_analysis_type_int=\count181
+) (/usr/share/texlive/texmf-dist/tex/latex/l3experimental/l3str/l3flag.sty
+Package: l3flag 2016/01/19 v6377 L3 Experimental flags
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3experimental/l3str/l3str-convert.sty
+Package: l3str-convert 2015/09/26 v6106 L3 Experimental string encoding convers
+ions
+\l__str_internal_int=\count182
+\c__str_replacement_char_int=\count183
+)
+\l__regex_internal_a_int=\count184
+\l__regex_internal_b_int=\count185
+\l__regex_internal_c_int=\count186
+\l__regex_balance_int=\count187
+\l__regex_group_level_int=\count188
+\l__regex_mode_int=\count189
+\l__regex_catcodes_int=\count190
+\l__regex_default_catcodes_int=\count191
+\c__regex_catcode_D_int=\count192
+\c__regex_catcode_S_int=\count193
+\c__regex_catcode_L_int=\count194
+\c__regex_catcode_O_int=\count195
+\c__regex_catcode_A_int=\count196
+\c__regex_all_catcodes_int=\count197
+\l__regex_show_lines_int=\count198
+\l__regex_min_state_int=\count199
+\l__regex_max_state_int=\count266
+\l__regex_left_state_int=\count267
+\l__regex_right_state_int=\count268
+\l__regex_capturing_group_int=\count269
+\l__regex_min_pos_int=\count270
+\l__regex_max_pos_int=\count271
+\l__regex_current_pos_int=\count272
+\l__regex_start_pos_int=\count273
+\l__regex_success_pos_int=\count274
+\l__regex_current_char_int=\count275
+\l__regex_current_catcode_int=\count276
+\l__regex_last_char_int=\count277
+\l__regex_case_changed_char_int=\count278
+\l__regex_current_state_int=\count279
+\l__regex_step_int=\count280
+\l__regex_min_active_int=\count281
+\l__regex_max_active_int=\count282
+\l__regex_replacement_csnames_int=\count283
+\l__regex_match_count_int=\count284
+\l__regex_submatch_int=\count285
+\l__regex_zeroth_submatch_int=\count286
+) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2016/01/19 v6377 LaTeX2e option processing using LaTeX3 keys
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2016/01/19 v6377 L3 Experimental document command parser
+\l__xparse_current_arg_int=\count287
+\l__xparse_m_args_int=\count288
+\l__xparse_mandatory_args_int=\count289
+\l__xparse_processor_int=\count290
+\l__xparse_v_nesting_int=\count291
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/atenddvi.sty
+Package: atenddvi 2007/04/17 v1.1 At end DVI hook (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/zref-abspage.sty
+Package: zref-abspage 2012/04/04 v2.24 Module abspage for zref (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/zref-base.sty
+Package: zref-base 2012/04/04 v2.24 Module base for zref (HO)
+Package zref Info: New property list: main on input line 759.
+Package zref Info: New property: default on input line 760.
+Package zref Info: New property: page on input line 761.
+)
+\c@abspage=\count292
+Package zref Info: New property: abspage on input line 62.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/zref-lastpage.sty
+Package: zref-lastpage 2012/04/04 v2.24 Module lastpage for zref (HO)
+Package zref Info: New property list: LastPage on input line 55.
+))
+Package: media9 2016/03/11 v0.67 acrobat-9/X compatible media
+\g_mix_pkgresizeflag_int=\count293
+
+(/usr/share/texlive/texmf-dist/tex/latex/media9/pdfbase.sty
+Package: pdfbase 2016/03/11 v0.7 driver independent access to low-level PDF fea
+tures
+\g_pbs_oc_int=\count294
+)
+(/usr/share/texlive/texmf-dist/tex/latex/ocgx2/ocgbase.sty
+Package: ocgbase 2016/03/11 v0.6 support package for ocgx2.sty
+)
+\l_mix_poster_box=\box68
+\g_mix_wd_dim=\dimen275
+\g_mix_ht_dim=\dimen276
+\g_mix_dp_dim=\dimen277
+\g_mix_rmcnt_int=\count295
+\l_mix_viewcnt_int=\count296
+\g@mix@page@int=\count297
+\g_mix_resizeflag_int=\count298
+\l_mix_lineno_int=\count299
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \addmediapath with sig. 'm' on line 818.
+.................................................
+\l_mix_pbtn_box=\box69
+\mix@btn@dim=\dimen278
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \includemedia with sig. 'O{}mm' on line 1210.
+.................................................
+\g_mix_mbtncnt_int=\count300
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \mediabutton with sig. 'O{}m' on line 2416.
+.................................................
 )
 (/usr/share/texlive/texmf-dist/tex/latex/mwe/mwe.sty
 Package: mwe 2012/05/15 v0.3 Package to support minimal working examples (MWE)
 
 (/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
 Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
-\c@lips@count=\count159
+\c@lips@count=\count301
 )
 (/usr/share/texlive/texmf-dist/tex/latex/blindtext/blindtext.sty
 Package: blindtext 2012/01/06 V2.0 blindtext-Package
@@ -749,24 +967,24 @@ Package: blindtext 2012/01/06 V2.0 blindtext-Package
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
-\c@blindtext=\count160
-\c@Blindtext=\count161
-\c@blind@countparstart=\count162
-\blind@countxx=\count163
-\blindtext@numBlindtext=\count164
-\blind@countyy=\count165
-\c@blindlist=\count166
-\c@blindlistlevel=\count167
-\c@blindlist@level=\count168
-\blind@listitem=\count169
-\c@blind@listcount=\count170
-\c@blind@levelcount=\count171
-\blind@mathformula=\count172
-\blind@Mathformula=\count173
-\c@blind@randomcount=\count174
-\c@blind@randommax=\count175
-\c@blind@pangramcount=\count176
-\c@blind@pangrammax=\count177
+\c@blindtext=\count302
+\c@Blindtext=\count303
+\c@blind@countparstart=\count304
+\blind@countxx=\count305
+\blindtext@numBlindtext=\count306
+\blind@countyy=\count307
+\c@blindlist=\count308
+\c@blindlistlevel=\count309
+\c@blindlist@level=\count310
+\blind@listitem=\count311
+\c@blind@listcount=\count312
+\c@blind@levelcount=\count313
+\blind@mathformula=\count314
+\blind@Mathformula=\count315
+\c@blind@randomcount=\count316
+\c@blind@randommax=\count317
+\c@blind@pangramcount=\count318
+\c@blind@pangrammax=\count319
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
@@ -774,15 +992,15 @@ Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
-\pgfnodeparttextbox=\box54
+\pgfnodeparttextbox=\box70
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
 .sty
 Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
-\pgf@nodesepstart=\dimen197
-\pgf@nodesepend=\dimen198
+\pgf@nodesepstart=\dimen279
+\pgf@nodesepend=\dimen280
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
 .sty
@@ -796,8 +1014,8 @@ Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
 Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
-\pgffor@iter=\dimen199
-\pgffor@skip=\dimen256
+\pgffor@iter=\dimen281
+\pgffor@skip=\dimen282
 \pgffor@stack=\toks43
 \pgffor@toks=\toks44
 ))
@@ -807,31 +1025,31 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
 .code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
-\pgf@plot@mark@count=\count178
-\pgfplotmarksize=\dimen257
+\pgf@plot@mark@count=\count320
+\pgfplotmarksize=\dimen283
 )
-\tikz@lastx=\dimen258
-\tikz@lasty=\dimen259
-\tikz@lastxsaved=\dimen260
-\tikz@lastysaved=\dimen261
-\tikzleveldistance=\dimen262
-\tikzsiblingdistance=\dimen263
-\tikz@figbox=\box55
-\tikz@figbox@bg=\box56
-\tikz@tempbox=\box57
-\tikz@tempbox@bg=\box58
-\tikztreelevel=\count179
-\tikznumberofchildren=\count180
-\tikznumberofcurrentchild=\count181
-\tikz@fig@count=\count182
+\tikz@lastx=\dimen284
+\tikz@lasty=\dimen285
+\tikz@lastxsaved=\dimen286
+\tikz@lastysaved=\dimen287
+\tikzleveldistance=\dimen288
+\tikzsiblingdistance=\dimen289
+\tikz@figbox=\box71
+\tikz@figbox@bg=\box72
+\tikz@tempbox=\box73
+\tikz@tempbox@bg=\box74
+\tikztreelevel=\count321
+\tikznumberofchildren=\count322
+\tikznumberofcurrentchild=\count323
+\tikz@fig@count=\count324
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count183
-\pgfmatrixcurrentcolumn=\count184
-\pgf@matrix@numberofcolumns=\count185
+\pgfmatrixcurrentrow=\count325
+\pgfmatrixcurrentcolumn=\count326
+\pgf@matrix@numberofcolumns=\count327
 )
-\tikz@expandcount=\count186
+\tikz@expandcount=\count328
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarytopaths.code.tex
@@ -843,21 +1061,21 @@ Package: overpic 2010/09/13 v0.53  Overwriting graphics
 Package: overpic v0.53 <2010/09/13> (RN)
 (/usr/share/texlive/texmf-dist/tex/latex/eepic/epic.sty
 Enhancements to Picture Environment. Version 1.2 - Released June 1, 1986
-\@@multicnt=\count187
-\d@lta=\count188
-\@delta=\dimen264
-\@@delta=\dimen265
-\@gridcnt=\count189
-\@joinkind=\count190
-\@dotgap=\dimen266
-\@ddotgap=\dimen267
-\@x@diff=\count191
-\@y@diff=\count192
-\x@diff=\dimen268
-\y@diff=\dimen269
-\@dotbox=\box59
-\num@segments=\count193
-\num@segmentsi=\count194
+\@@multicnt=\count329
+\d@lta=\count330
+\@delta=\dimen290
+\@@delta=\dimen291
+\@gridcnt=\count331
+\@joinkind=\count332
+\@dotgap=\dimen292
+\@ddotgap=\dimen293
+\@x@diff=\count333
+\@y@diff=\count334
+\x@diff=\dimen294
+\y@diff=\dimen295
+\@dotbox=\box75
+\num@segments=\count335
+\num@segmentsi=\count336
 \@datafile=\read2
 )
 overpic: relative positioning in percent
@@ -870,28 +1088,28 @@ Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen270
-\captionmargin@=\dimen271
-\captionwidth=\dimen272
-\caption@tempdima=\dimen273
-\caption@indent=\dimen274
-\caption@parindent=\dimen275
-\caption@hangindent=\dimen276
+\captionmargin=\dimen296
+\captionmargin@=\dimen297
+\captionwidth=\dimen298
+\caption@tempdima=\dimen299
+\caption@indent=\dimen300
+\caption@parindent=\dimen301
+\caption@hangindent=\dimen302
 )
-\c@ContinuedFloat=\count195
+\c@ContinuedFloat=\count337
 Package caption Info: beamer document class.
 Package caption Info: hyperref package is loaded.
 Package caption Info: Hyperref support is turned off
 (caption)             because hyperref has stopped early.
 )
-\c@subfigure=\count196
-\c@subtable=\count197
+\c@subfigure=\count338
+\c@subtable=\count339
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 13.
+(hyperref)                removing `\\' on input line 14.
 
-(./JordanPitt.aux
+(./JordanPittAdobeRecent.aux
 
 LaTeX Warning: Label `FVM<1>' multiply defined.
 
@@ -917,22 +1135,22 @@ LaTeX Warning: Label `valid' multiply defined.
 LaTeX Warning: Label `valid<2>' multiply defined.
 
 )
-\openout1 = `JordanPitt.aux'.
+\openout1 = `JordanPittAdobeRecent.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -970,16 +1188,16 @@ LaTeX Font Info:    ... okay on input line 21.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count198
-\scratchdimen=\dimen277
-\scratchbox=\box60
-\nofMPsegments=\count199
-\nofMParguments=\count266
+\scratchcounter=\count340
+\scratchdimen=\dimen303
+\scratchbox=\box76
+\nofMPsegments=\count341
+\nofMParguments=\count342
 \everyMPshowfont=\toks45
-\MPscratchCnt=\count267
-\MPscratchDim=\dimen278
-\MPnumerator=\count268
-\makeMPintoPDFobject=\count269
+\MPscratchCnt=\count343
+\MPscratchDim=\dimen304
+\MPnumerator=\count344
+\makeMPintoPDFobject=\count345
 \everyMPtoPDFconversion=\toks46
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -997,8 +1215,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 ABD: EveryShipout initializing macros
-\AtBeginShipoutBox=\box61
-Package hyperref Info: Link coloring OFF on input line 21.
+\AtBeginShipoutBox=\box77
+Package hyperref Info: Link coloring OFF on input line 22.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1006,58 +1224,58 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count270
+\c@section@level=\count346
 )
-LaTeX Info: Redefining \ref on input line 21.
-LaTeX Info: Redefining \pageref on input line 21.
-LaTeX Info: Redefining \nameref on input line 21.
+LaTeX Info: Redefining \ref on input line 22.
+LaTeX Info: Redefining \pageref on input line 22.
+LaTeX Info: Redefining \nameref on input line 22.
 
-(./JordanPitt.out) (./JordanPitt.out)
+(./JordanPittAdobeRecent.out) (./JordanPittAdobeRecent.out)
 \@outlinefile=\write5
-\openout5 = `JordanPitt.out'.
+\openout5 = `JordanPittAdobeRecent.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 21.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 22.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 21.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 22.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 21.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 21.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 21.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 21.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 22.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 21.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 21.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 21.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 22.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 21.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 21.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 21.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 22.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 21.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 21.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 22.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 21.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 22.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 21.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmr/bx/n on input line 21.
+(Font)                  OT1/cmss/bx/n --> OT1/cmr/bx/n on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/bx/n on input line 21.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/bx/n on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 21.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 21.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 22.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 21.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 22.
 
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-bas
 ic-dictionary/translator-basic-dictionary-English.dict
@@ -1083,23 +1301,24 @@ Dictionary: translator-numbers-dictionary, Language: English
 orem-dictionary/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \includegraphics on input line 21.
+LaTeX Info: Redefining \includegraphics on input line 22.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
- (./JordanPitt.nav)
+
+(./JordanPittAdobeRecent.nav)
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 25.
+(Font)              size <5> substituted on input line 26.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 42.
+LaTeX Font Info:    Try loading font information for U+msa on input line 43.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 42.
+LaTeX Font Info:    Try loading font information for U+msb on input line 43.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1120,7 +1339,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: ./Pics/Web/SualwesiTsunami.jpg Graphic file (type jpg)
 
 <use ./Pics/Web/SualwesiTsunami.jpg>
-Package pdftex.def Info: ./Pics/Web/SualwesiTsunami.jpg used on input line 58.
+Package pdftex.def Info: ./Pics/Web/SualwesiTsunami.jpg used on input line 59.
 (pdftex.def)             Requested size: 215.10196pt x 143.4016pt.
  [8
 
@@ -1131,7 +1350,7 @@ Package pdftex.def Info: ./Pics/Web/SualwesiTsunami.jpg used on input line 58.
 File: ./Pics/Web/HurricaneFlorence.jpg Graphic file (type jpg)
 
 <use ./Pics/Web/HurricaneFlorence.jpg>
-Package pdftex.def Info: ./Pics/Web/HurricaneFlorence.jpg used on input line 74
+Package pdftex.def Info: ./Pics/Web/HurricaneFlorence.jpg used on input line 75
 .
 (pdftex.def)             Requested size: 138.2795pt x 74.80547pt.
 
@@ -1139,7 +1358,7 @@ Package pdftex.def Info: ./Pics/Web/HurricaneFlorence.jpg used on input line 74
 File: ./Pics/Web/HurricanMichael.jpg Graphic file (type jpg)
 
 <use ./Pics/Web/HurricanMichael.jpg>
-Package pdftex.def Info: ./Pics/Web/HurricanMichael.jpg used on input line 74.
+Package pdftex.def Info: ./Pics/Web/HurricanMichael.jpg used on input line 75.
 (pdftex.def)             Requested size: 138.2795pt x 77.77695pt.
  [10
 
@@ -1149,7 +1368,7 @@ File: ./Pics/Tex/WaterModel/FressSurface.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/WaterModel/FressSurface.pdf>
 Package pdftex.def Info: ./Pics/Tex/WaterModel/FressSurface.pdf used on input l
-ine 80.
+ine 81.
 (pdftex.def)             Requested size: 307.28987pt x 137.46893pt.
  [11
 
@@ -1159,7 +1378,7 @@ File: ./Pics/Tex/WaterModel/NavierStokes.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/WaterModel/NavierStokes.pdf>
 Package pdftex.def Info: ./Pics/Tex/WaterModel/NavierStokes.pdf used on input l
-ine 87.
+ine 88.
 (pdftex.def)             Requested size: 307.28987pt x 137.46893pt.
  [12
 
@@ -1168,31 +1387,31 @@ ine 87.
 File: ./Pics/Tex/WaterModel/Serre.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/WaterModel/Serre.pdf>
-Package pdftex.def Info: ./Pics/Tex/WaterModel/Serre.pdf used on input line 93.
+Package pdftex.def Info: ./Pics/Tex/WaterModel/Serre.pdf used on input line 94.
 
 (pdftex.def)             Requested size: 307.28987pt x 137.46893pt.
  [13
 
  <./Pics/Tex/WaterModel/Serre.pdf>]
-Overfull \vbox (5.79237pt too high) detected at line 113
+Overfull \vbox (5.79237pt too high) detected at line 114
  []
 
 [14
 
 ]
-Overfull \vbox (5.79237pt too high) detected at line 113
+Overfull \vbox (5.79237pt too high) detected at line 114
  []
 
 [15
 
 ]
-Overfull \vbox (5.79237pt too high) detected at line 113
+Overfull \vbox (5.79237pt too high) detected at line 114
  []
 
 [16
 
 ]
-Overfull \vbox (5.79237pt too high) detected at line 113
+Overfull \vbox (5.79237pt too high) detected at line 114
  []
 
 [17
@@ -1213,16 +1432,16 @@ Overfull \vbox (5.79237pt too high) detected at line 113
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.150 \againframe<1>{FVM}
+l.151 \againframe<1>{FVM}
                          pdfTeX warning (ext4): destination with the same ident
 ifier (name{FVM}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.150 \againframe<1>{FVM}
+l.151 \againframe<1>{FVM}
                           [24
 
 ]
-Overfull \hbox (11.55704pt too wide) detected at line 156
+Overfull \hbox (11.55704pt too wide) detected at line 157
 [] \OT1/cmss/m/n/10.95 + [] [] + \OT1/cmss/m/it/10.95 s [] \OT1/cmss/m/n/10.95 
 = 0
  []
@@ -1241,21 +1460,21 @@ Overfull \hbox (11.55704pt too wide) detected at line 156
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.207 \againframe<2>{FVM}
+l.208 \againframe<2>{FVM}
                           [30
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{ConLawForm<1
 >}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.208 \againframe{ConLawForm}
+l.209 \againframe{ConLawForm}
                              pdfTeX warning (ext4): destination with the same i
 dentifier (name{ConLawForm}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.208 \againframe{ConLawForm}
+l.209 \againframe{ConLawForm}
                              
-Overfull \hbox (11.55704pt too wide) detected at line 208
+Overfull \hbox (11.55704pt too wide) detected at line 209
 [] \OT1/cmss/m/n/10.95 + [] [] + \OT1/cmss/m/it/10.95 s [] \OT1/cmss/m/n/10.95 
 = 0
  []
@@ -1266,7 +1485,7 @@ Overfull \hbox (11.55704pt too wide) detected at line 208
 File: ./Pics/Tex/FVM/Function.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/FVM/Function.pdf>
-Package pdftex.def Info: ./Pics/Tex/FVM/Function.pdf used on input line 213.
+Package pdftex.def Info: ./Pics/Tex/FVM/Function.pdf used on input line 214.
 (pdftex.def)             Requested size: 307.28987pt x 149.52267pt.
  [32
 
@@ -1275,10 +1494,10 @@ Package pdftex.def Info: ./Pics/Tex/FVM/Function.pdf used on input line 213.
 File: ./Pics/Tex/FVM/Cells.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/FVM/Cells.pdf>
-Package pdftex.def Info: ./Pics/Tex/FVM/Cells.pdf used on input line 219.
+Package pdftex.def Info: ./Pics/Tex/FVM/Cells.pdf used on input line 220.
 (pdftex.def)             Requested size: 307.28987pt x 184.9259pt.
 
-Overfull \vbox (10.423pt too high) detected at line 219
+Overfull \vbox (10.423pt too high) detected at line 220
  []
 
 [33
@@ -1289,10 +1508,10 @@ File: ./Pics/Tex/FVM/TotalFluxInOutSource.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/FVM/TotalFluxInOutSource.pdf>
 Package pdftex.def Info: ./Pics/Tex/FVM/TotalFluxInOutSource.pdf used on input 
-line 225.
+line 226.
 (pdftex.def)             Requested size: 307.28987pt x 190.70709pt.
 
-Overfull \vbox (16.2042pt too high) detected at line 225
+Overfull \vbox (16.2042pt too high) detected at line 226
  []
 
 [34
@@ -1302,7 +1521,7 @@ Overfull \vbox (16.2042pt too high) detected at line 225
 File: ./Pics/Tex/FlowCharts/FVM.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/FlowCharts/FVM.pdf>
-Package pdftex.def Info: ./Pics/Tex/FlowCharts/FVM.pdf used on input line 232.
+Package pdftex.def Info: ./Pics/Tex/FlowCharts/FVM.pdf used on input line 233.
 (pdftex.def)             Requested size: 307.28987pt x 81.87485pt.
  [35
 
@@ -1315,7 +1534,7 @@ Package pdftex.def Info: ./Pics/Tex/FlowCharts/FVM.pdf used on input line 232.
 File: ./Pics/Tex/FlowCharts/FEVM.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/FlowCharts/FEVM.pdf>
-Package pdftex.def Info: ./Pics/Tex/FlowCharts/FEVM.pdf used on input line 249.
+Package pdftex.def Info: ./Pics/Tex/FlowCharts/FEVM.pdf used on input line 250.
 
 (pdftex.def)             Requested size: 307.28987pt x 59.65323pt.
  [38
@@ -1326,14 +1545,14 @@ Package pdftex.def Info: ./Pics/Tex/FlowCharts/FEVM.pdf used on input line 249.
 ] [40
 
 ]
-Overfull \hbox (31.26508pt too wide) in paragraph at lines 270--270
+Overfull \hbox (31.26508pt too wide) in paragraph at lines 271--271
 [][]  
  []
 
 [41
 
 ]
-Overfull \hbox (31.26508pt too wide) in paragraph at lines 270--270
+Overfull \hbox (31.26508pt too wide) in paragraph at lines 271--271
 [][]  
  []
 
@@ -1344,16 +1563,16 @@ File: ./Pics/Tex/Reconstructions/P1.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/Reconstructions/P1.pdf>
 Package pdftex.def Info: ./Pics/Tex/Reconstructions/P1.pdf used on input line 2
-75.
+76.
 (pdftex.def)             Requested size: 307.28987pt x 185.81972pt.
 
-Overfull \vbox (11.31682pt too high) detected at line 275
+Overfull \vbox (11.31682pt too high) detected at line 276
  []
 
 [43
 
  <./Pics/Tex/Reconstructions/P1.pdf>]
-Overfull \hbox (31.26508pt too wide) in paragraph at lines 276--276
+Overfull \hbox (31.26508pt too wide) in paragraph at lines 277--277
 [][]  
  []
 
@@ -1364,16 +1583,16 @@ File: ./Pics/Tex/Reconstructions/P2.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/Reconstructions/P2.pdf>
 Package pdftex.def Info: ./Pics/Tex/Reconstructions/P2.pdf used on input line 2
-81.
+82.
 (pdftex.def)             Requested size: 307.28987pt x 177.77019pt.
 
-Overfull \vbox (3.26729pt too high) detected at line 281
+Overfull \vbox (3.26729pt too high) detected at line 282
  []
 
 [45
 
  <./Pics/Tex/Reconstructions/P2.pdf>]
-Overfull \hbox (31.26508pt too wide) in paragraph at lines 282--282
+Overfull \hbox (31.26508pt too wide) in paragraph at lines 283--283
 [][]  
  []
 
@@ -1384,10 +1603,10 @@ File: ./Pics/Tex/Reconstructions/P3.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/Reconstructions/P3.pdf>
 Package pdftex.def Info: ./Pics/Tex/Reconstructions/P3.pdf used on input line 2
-87.
+88.
 (pdftex.def)             Requested size: 307.28987pt x 174.83215pt.
 
-Overfull \vbox (0.32925pt too high) detected at line 287
+Overfull \vbox (0.32925pt too high) detected at line 288
  []
 
 [47
@@ -1402,7 +1621,7 @@ File: ./Pics/Tex/FlowCharts/FEVMblack.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/FlowCharts/FEVMblack.pdf>
 Package pdftex.def Info: ./Pics/Tex/FlowCharts/FEVMblack.pdf used on input line
- 299.
+ 300.
 (pdftex.def)             Requested size: 307.28987pt x 59.65323pt.
  [50
 
@@ -1414,12 +1633,12 @@ Package pdftex.def Info: ./Pics/Tex/FlowCharts/FEVMblack.pdf used on input line
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.309 \againframe<1>{valid}
+l.310 \againframe<1>{valid}
                            pdfTeX warning (ext4): destination with the same ide
 ntifier (name{valid}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.309 \againframe<1>{valid}
+l.310 \againframe<1>{valid}
                             [53
 
 ]
@@ -1428,20 +1647,22 @@ File: ./Pics/Init/SolitonAnalytict=0s.pdf Graphic file (type pdf)
 
 <use ./Pics/Init/SolitonAnalytict=0s.pdf>
 Package pdftex.def Info: ./Pics/Init/SolitonAnalytict=0s.pdf used on input line
- 317.
+ 318.
 (pdftex.def)             Requested size: 307.28987pt x 149.68053pt.
  [54
 
- <./Pics/Init/SolitonAnalytict=0s.pdf>] [55
+ <./Pics/Init/SolitonAnalytict=0s.pdf>]
+\g__file_internal_ior=\read3
+<<VPlayer.swf>><<./Video/SolitonAnalytic.mp4>> [55
 
-<<./Video/SolitonAnalytic.mp4>>]
-Overfull \vbox (4.18523pt too high) detected at line 342
+]
+Overfull \vbox (4.18523pt too high) detected at line 350
  []
 
 [56
 
 ]
-Overfull \vbox (4.18523pt too high) detected at line 342
+Overfull \vbox (4.18523pt too high) detected at line 350
  []
 
 [57
@@ -1450,34 +1671,33 @@ Overfull \vbox (4.18523pt too high) detected at line 342
 File: ./Pics/Init/SolitonAnalytict=0s.pdf Graphic file (type pdf)
  <use ./Pics/Init/SolitonAnalytict=0s.pdf>
 Package pdftex.def Info: ./Pics/Init/SolitonAnalytict=0s.pdf used on input line
- 349.
+ 357.
 (pdftex.def)             Requested size: 307.28987pt x 149.68053pt.
  [58
 
-] [59
+]<<./Video/SolitonNumerical.mp4>> [59
 
-<<./Video/SolitonNumerical.mp4>>] <./Pics/Tex/Soliton/L1/L1.pdf, id=3967, 257.6
-7667pt x 203.47418pt>
+] <./Pics/Tex/Soliton/L1/L1.pdf, id=3981, 257.67667pt x 203.47418pt>
 File: ./Pics/Tex/Soliton/L1/L1.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/Soliton/L1/L1.pdf>
-Package pdftex.def Info: ./Pics/Tex/Soliton/L1/L1.pdf used on input line 366.
+Package pdftex.def Info: ./Pics/Tex/Soliton/L1/L1.pdf used on input line 381.
 (pdftex.def)             Requested size: 230.46739pt x 181.98871pt.
 
-Overfull \vbox (7.48581pt too high) detected at line 366
+Overfull \vbox (7.48581pt too high) detected at line 381
  []
 
 [60
 
  <./Pics/Tex/Soliton/L1/L1.pdf>]
-<./Pics/Tex/Soliton/C1/C1.pdf, id=4049, 257.51707pt x 203.47418pt>
+<./Pics/Tex/Soliton/C1/C1.pdf, id=4063, 257.51707pt x 203.47418pt>
 File: ./Pics/Tex/Soliton/C1/C1.pdf Graphic file (type pdf)
 
 <use ./Pics/Tex/Soliton/C1/C1.pdf>
-Package pdftex.def Info: ./Pics/Tex/Soliton/C1/C1.pdf used on input line 371.
+Package pdftex.def Info: ./Pics/Tex/Soliton/C1/C1.pdf used on input line 386.
 (pdftex.def)             Requested size: 230.46739pt x 182.10048pt.
 
-Overfull \vbox (7.59758pt too high) detected at line 371
+Overfull \vbox (7.59758pt too high) detected at line 386
  []
 
 [61
@@ -1486,96 +1706,95 @@ Overfull \vbox (7.59758pt too high) detected at line 371
 e identifier (name{valid<2>}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.372 \againframe<2>{valid}
+l.387 \againframe<2>{valid}
                             [62
 
 ]
-<./Pics/Synolakis/WavetankArtificalPres.pdf, id=4191, 345.62425pt x 197.55005pt
+<./Pics/Synolakis/WavetankArtificalPres.pdf, id=4205, 345.62425pt x 197.55005pt
 >
 File: ./Pics/Synolakis/WavetankArtificalPres.pdf Graphic file (type pdf)
  <use ./Pics/Synolakis/WavetankArtificalPres.pdf>
 Package pdftex.def Info: ./Pics/Synolakis/WavetankArtificalPres.pdf used on inp
-ut line 378.
+ut line 393.
 (pdftex.def)             Requested size: 307.28987pt x 175.65318pt.
 
-Overfull \vbox (1.15028pt too high) detected at line 378
+Overfull \vbox (1.15028pt too high) detected at line 393
  []
 
 [63
 
  <./Pics/Synolakis/WavetankArtificalPres.pdf>]
-<./Pics/Init/Synolakist=0s.pdf, id=4264, 441.74937pt x 211.5885pt>
+<./Pics/Init/Synolakist=0s.pdf, id=4278, 441.74937pt x 211.5885pt>
 File: ./Pics/Init/Synolakist=0s.pdf Graphic file (type pdf)
 
 <use ./Pics/Init/Synolakist=0s.pdf>
-Package pdftex.def Info: ./Pics/Init/Synolakist=0s.pdf used on input line 383.
+Package pdftex.def Info: ./Pics/Init/Synolakist=0s.pdf used on input line 398.
 (pdftex.def)             Requested size: 307.28987pt x 147.194pt.
  [64
 
- <./Pics/Init/Synolakist=0s.pdf>]
-[65
+ <./Pics/Init/Synolakist=0s.pdf>]<<./Video/SynolakisNumerical.mp4>> [65
 
-<<./Video/SynolakisNumerical.mp4>>]
-<./Pics/Synolakis/t=30s.pdf, id=4351, 258.94342pt x 206.90399pt>
+]
+<./Pics/Synolakis/t=30s.pdf, id=4368, 258.94342pt x 206.90399pt>
 File: ./Pics/Synolakis/t=30s.pdf Graphic file (type pdf)
 
 <use ./Pics/Synolakis/t=30s.pdf>
-Package pdftex.def Info: ./Pics/Synolakis/t=30s.pdf used on input line 401.
+Package pdftex.def Info: ./Pics/Synolakis/t=30s.pdf used on input line 423.
 (pdftex.def)             Requested size: 230.46739pt x 184.15343pt.
 
-Overfull \vbox (9.65053pt too high) detected at line 401
+Overfull \vbox (9.65053pt too high) detected at line 423
  []
 
 [66
 
  <./Pics/Synolakis/t=30s.pdf>]
-<./Pics/Synolakis/t=40s.pdf, id=4429, 258.94342pt x 206.90399pt>
+<./Pics/Synolakis/t=40s.pdf, id=4446, 258.94342pt x 206.90399pt>
 File: ./Pics/Synolakis/t=40s.pdf Graphic file (type pdf)
 
 <use ./Pics/Synolakis/t=40s.pdf>
-Package pdftex.def Info: ./Pics/Synolakis/t=40s.pdf used on input line 407.
+Package pdftex.def Info: ./Pics/Synolakis/t=40s.pdf used on input line 429.
 (pdftex.def)             Requested size: 230.46739pt x 184.15343pt.
 
-Overfull \vbox (9.65053pt too high) detected at line 407
+Overfull \vbox (9.65053pt too high) detected at line 429
  []
 
 [67
 
  <./Pics/Synolakis/t=40s.pdf>]
-<./Pics/Synolakis/t=50s.pdf, id=4506, 258.94342pt x 206.90399pt>
+<./Pics/Synolakis/t=50s.pdf, id=4523, 258.94342pt x 206.90399pt>
 File: ./Pics/Synolakis/t=50s.pdf Graphic file (type pdf)
 
 <use ./Pics/Synolakis/t=50s.pdf>
-Package pdftex.def Info: ./Pics/Synolakis/t=50s.pdf used on input line 413.
+Package pdftex.def Info: ./Pics/Synolakis/t=50s.pdf used on input line 435.
 (pdftex.def)             Requested size: 230.46739pt x 184.15343pt.
 
-Overfull \vbox (9.65053pt too high) detected at line 413
+Overfull \vbox (9.65053pt too high) detected at line 435
  []
 
 [68
 
  <./Pics/Synolakis/t=50s.pdf>]
-<./Pics/Synolakis/t=60s.pdf, id=4582, 258.94342pt x 206.90399pt>
+<./Pics/Synolakis/t=60s.pdf, id=4599, 258.94342pt x 206.90399pt>
 File: ./Pics/Synolakis/t=60s.pdf Graphic file (type pdf)
 
 <use ./Pics/Synolakis/t=60s.pdf>
-Package pdftex.def Info: ./Pics/Synolakis/t=60s.pdf used on input line 419.
+Package pdftex.def Info: ./Pics/Synolakis/t=60s.pdf used on input line 441.
 (pdftex.def)             Requested size: 230.46739pt x 184.15343pt.
 
-Overfull \vbox (9.65053pt too high) detected at line 419
+Overfull \vbox (9.65053pt too high) detected at line 441
  []
 
 [69
 
  <./Pics/Synolakis/t=60s.pdf>]
-<./Pics/Synolakis/t=70s.pdf, id=4657, 258.94342pt x 206.90399pt>
+<./Pics/Synolakis/t=70s.pdf, id=4674, 258.94342pt x 206.90399pt>
 File: ./Pics/Synolakis/t=70s.pdf Graphic file (type pdf)
 
 <use ./Pics/Synolakis/t=70s.pdf>
-Package pdftex.def Info: ./Pics/Synolakis/t=70s.pdf used on input line 425.
+Package pdftex.def Info: ./Pics/Synolakis/t=70s.pdf used on input line 447.
 (pdftex.def)             Requested size: 230.46739pt x 184.15343pt.
 
-Overfull \vbox (9.65053pt too high) detected at line 425
+Overfull \vbox (9.65053pt too high) detected at line 447
  []
 
 [70
@@ -1588,31 +1807,27 @@ Overfull \vbox (9.65053pt too high) detected at line 425
 
 ] [74
 
-] [75
+]
+Package atenddvi Info: Last page = 75.
+ [75
 
 ]
 \tf@nav=\write6
-\openout6 = `JordanPitt.nav'.
+\openout6 = `JordanPittAdobeRecent.nav'.
 
 \tf@toc=\write7
-\openout7 = `JordanPitt.toc'.
+\openout7 = `JordanPittAdobeRecent.toc'.
 
 \tf@snm=\write8
-\openout8 = `JordanPitt.snm'.
+\openout8 = `JordanPittAdobeRecent.snm'.
 
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 466.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 466.
 
-
-Package movie15 Warning: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-(movie15)                @@ Package `movie15' is obsolete and @@
-(movie15)                @@ superseded by `media9'.           @@
-(movie15)                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 444.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 444.
-(./JordanPitt.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 444.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 444.
-Package rerunfilecheck Info: File `JordanPitt.out' has not changed.
+(./JordanPittAdobeRecent.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 466.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 466.
+Package rerunfilecheck Info: File `JordanPittAdobeRecent.out' has not changed.
 (rerunfilecheck)             Checksum: DD655D6933CE53089798C2184DE2C853;659.
 
 
@@ -1622,16 +1837,16 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 444.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 466.
  ) 
 Here is how much of TeX's memory you used:
- 22180 strings out of 494953
- 435194 string characters out of 6180976
- 678526 words of memory out of 5000000
- 24762 multiletter control sequences out of 15000+600000
+ 30507 strings out of 494953
+ 612555 string characters out of 6180976
+ 794298 words of memory out of 5000000
+ 33040 multiletter control sequences out of 15000+600000
  15532 words of font info for 58 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 48i,19n,57p,517b,759s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,19n,60p,10383b,1089s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texl
@@ -1650,10 +1865,10 @@ cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on JordanPitt.pdf (75 pages, 2207783 bytes).
+Output written on JordanPittAdobeRecent.pdf (75 pages, 2694177 bytes).
 PDF statistics:
- 5130 PDF objects out of 5155 (max. 8388607)
- 4895 compressed objects within 49 object streams
- 182 named destinations out of 1000 (max. 500000)
- 352 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5149 PDF objects out of 5155 (max. 8388607)
+ 4903 compressed objects within 50 object streams
+ 179 named destinations out of 1000 (max. 500000)
+ 432 words of extra memory for PDF output out of 10000 (max. 10000000)
 

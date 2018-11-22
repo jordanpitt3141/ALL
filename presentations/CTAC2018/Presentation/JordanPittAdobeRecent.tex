@@ -3,7 +3,8 @@
 \usetheme{Dresden}
 \usepackage{apalike}
 \usepackage{graphicx}
-\usepackage{movie15}
+%\usepackage{movie15}
+\usepackage{media9}
 \usepackage{mwe,tikz}
 \usepackage[percent]{overpic}
 \beamertemplatenavigationsymbolsempty
@@ -320,10 +321,17 @@
  	\begin{tikzpicture}[remember picture,overlay]
  	\node[anchor=north east, inner sep=0pt] at (current page.north east) {%
  		%\movie[height = 0.97\paperheight, width = \paperwidth, loop,showcontrols] {}{./Video/SolitonAnalytic.avi}%
- 		\includemovie[
- 		poster,
- 		text={}
- 		]{\paperwidth}{\paperheight}{./Video/SolitonAnalytic.mp4}
+ 		% 		\includemovie[
+ 		% 		poster,
+ 		% 		text={}
+ 		% 		]{\paperwidth}{\paperheight}{./Video/SolitonAnalytic.mp4}
+ 		\includemedia[
+ 		width=\paperwidth,
+ 		height=\paperheight,
+ 		activate=pageopen,
+ 		addresource=./Video/SolitonAnalytic.mp4,
+ 		flashvars={source=./Video/SolitonAnalytic.mp4}
+ 		]{}{VPlayer.swf}
  	};
  	\end{tikzpicture}
  \end{frame}
@@ -351,10 +359,17 @@
  	\begin{tikzpicture}[remember picture,overlay]
  	\node[anchor=north east, inner sep=0pt] at (current page.north east) {%
  		%\movie[height = 0.97\paperheight, width = \paperwidth, loop,showcontrols] {}{./Video/SolitonNumerical.avi}
- 		 			\includemovie[
- 		 			poster,
- 		 			text={}
- 		 			]{\paperwidth}{\paperheight}{./Video/SolitonNumerical.mp4}
+ 		% 		 			\includemovie[
+ 		% 		 			poster,
+ 		% 		 			text={}
+ 		% 		 			]{\paperwidth}{\paperheight}{./Video/SolitonNumerical.mp4}
+ 		\includemedia[
+ 		width=\paperwidth,
+ 		height=\paperheight,
+ 		activate=pageopen,
+ 		addresource=./Video/SolitonNumerical.mp4,
+ 		flashvars={source=./Video/SolitonNumerical.mp4}
+ 		]{}{VPlayer.swf}
  	};
  	\end{tikzpicture}
  \end{frame}
@@ -386,10 +401,17 @@
  	\begin{tikzpicture}[remember picture,overlay]
  	\node[anchor=north east, inner sep=0pt] at (current page.north east) {%
  		%\movie[height = 0.99\paperheight, width = \paperwidth, loop,showcontrols] {}{./Video/SynolakisNumerical.avi}%
- 			\includemovie[
- 			poster,
- 			text={}
- 			]{\paperwidth}{\paperheight}{./Video/SynolakisNumerical.mp4}
+ 		% 			%\includemovie[
+ 		% 			poster,
+ 		% 			text={}
+ 		% 			]{\paperwidth}{\paperheight}{./Video/SynolakisNumerical.mp4}
+ 		\includemedia[
+ 		width=\paperwidth,
+ 		height=\paperheight,
+ 		activate=pageopen,
+ 		addresource=./Video/SynolakisNumerical.mp4,
+ 		flashvars={source=./Video/SynolakisNumerical.mp4}
+ 		]{}{VPlayer.swf}
  	};
  	\end{tikzpicture}
  \end{frame}
