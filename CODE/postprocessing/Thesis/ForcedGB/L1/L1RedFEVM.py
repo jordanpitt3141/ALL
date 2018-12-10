@@ -80,13 +80,13 @@ L1us = []
 L1Gs = []
 dxs=  []
 
-sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/Forced/" +meth1+"/L1Red/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/Forced/" +meth1+"/L1RedA/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)     
        
         
-for ki in range(10,11):
+for ki in range(3,18):
         
         
     wdir = wdirb + str(ki) + "/"
@@ -169,7 +169,7 @@ for ki in range(10,11):
     L1h = norm(rhC -rhA, ord=1)/ norm(rhA, ord=1)
     L1G = norm(rGC -rGA, ord=1)/ norm(rGA, ord=1)
     
-    """
+
     s = sdir + "L1h.dat"
     with open(s,'a') as file1:
             s ="%3.8f%5s%1.20f\n" %(dx," ",L1h)
@@ -184,7 +184,7 @@ for ki in range(10,11):
     with open(s,'a') as file1:
             s ="%3.8f%5s%1.20f\n" %(dx," ",L1G)
             file1.write(s)  
-    """
+
 
 
      

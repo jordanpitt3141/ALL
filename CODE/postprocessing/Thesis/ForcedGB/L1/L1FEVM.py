@@ -69,8 +69,8 @@ def IterateIn(list1,word):
             break
     return l
 
-meth = "FEVM"
-meth1 = "FEVM2"
+meth = "FDVM"
+meth1 = "FDVM2"
 
 #wdir = "../../../../data/raw/NEWdata/FDredo/grim/"
 #sdir = "../../../../data/postprocessing/scFDallAE/grim/"

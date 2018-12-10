@@ -196,6 +196,11 @@ For the numerical solutions the spatial domain was $x \in \left[-112.5 m,87.5 m\
 The numerical methods are assessed by using the specified lake at rest solution as initial conditions and comparing the numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ at $t=10s$ to the analytic solution, which are the initial conditions. To demonstrate the utility of the well balancing method the results from two versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are presented, where the well balancing method described in Chapter \ref{chp:HFVMMethod} is and isn't employed.   
 
 \subsection{Results for Lake at Rest}
+%%%% changed C1 errors, write new results section!!!!
+%%%
+%%%
+%%
+%% []
 Example numerical solutions with $\Delta x = 100/2^{10}m \approx 0.0977m$ at $t=10s$ for all versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:LakeAtRestEx}. The numerical solutions in these figures are indistinguishable from the analytic solutions at this scale and so the analytic solutions have been omitted from the plots.  
 
 \begin{figure}
@@ -253,29 +258,54 @@ For methods without well balancing; the errors are significantly larger, yet the
 
 Using the expressions in Appendix \ref{app:ConQuant} for the total amounts of the conserved variables $C_1$ was calculated for all numerical solutions with the results plotted in Figure \ref{fig:LakeAtRestEC1}. The error in conservation of these methods affirms the superiority of the well-balanced version of the methods. For the well balanced $\text{FEVM}_2$ the conservation of $h$ and $\mathcal{H}$ has zero error and so could not be represented on the log-log plot, so that all errors in conservation are at machine precision or lower. For the well-balanced $\text{FDVM}_2$ the error in $h$ vanishes when $\Delta x$ is small, although the error in $\mathcal{H}$ does not. Therefore, the well balanced version of $\text{FEVM}_2$ outperforms the $\text{FDVM}_2$ in this instance. While for the methods with no well balancing none of the quantities are conserved at machine precision. 
 
+%mention hamilton
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FEVMWB.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Ana/FEVM2WB.pdf}
 		\subcaption{$\text{FEVM}_2$ well balanced}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FEVMnWB.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Ana/FEVM2nWB.pdf}
 		\subcaption{$\text{FEVM}_2$ not well balanced}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FDVMWB.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Ana/FDVM2WB.pdf}
 		\subcaption{$\text{FDVM}_2$ well balanced}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/FDVMnWB.pdf}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Ana/FDVM2nWB.pdf}
 		\subcaption{$\text{FDVM}_2$ not well balanced}
 	\end{subfigure}
 	\caption{$C_1$ error against $\Delta x$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\color{green!60!black} \crosst{green!60!black}}) for the lake at rest problem at $t=10s$ for all methods.}
 	\label{fig:LakeAtRestEC1}
-\end{figure}  
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Num/FEVM2WB.pdf}
+		\subcaption{$\text{FEVM}_2$ well balanced}
+		\vspace{0.5cm}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Num/FEVM2nWB.pdf}
+		\subcaption{$\text{FEVM}_2$ not well balanced}
+		\vspace{0.5cm}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Num/FDVM2WB.pdf}
+		\subcaption{$\text{FDVM}_2$ well balanced}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Num/FDVM2nWB.pdf}
+		\subcaption{$\text{FDVM}_2$ not well balanced}
+	\end{subfigure}
+	\caption{$C^*_1$ error against $\Delta x$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\color{green!60!black} \crosst{green!60!black}}) for the lake at rest problem at $t=10s$ for all methods.}
+	\label{fig:LakeAtRestEC*1}
+\end{figure}   
 
 These results demonstrate the need for the well-balancing for both numerical methods, as it is only with their inclusion that the lake at rest steady state can be accurately reproduced. 
 
@@ -297,7 +327,7 @@ for the primitive variables were chosen. These functions produce an $a_1$ high G
 
 Both validation studies used $a_1 = 0.5m$, $a_2 = 2 \pi / \left(10 a_7\right) m/s$, $a_3 = - 3\pi/ \left(2 a_7\right) m$, $a_4 = \pi / (16 a_7) m$, $a_5 = 0.5 m/s$, $a_6 = 1.0 m$ and $a_7 = \pi / 25 m^{-1}$ with $a_0= 1m$ for the finite water depth forced solution and $a_0=0m$ for the dry bed forced solution. These parameter values results in a Gaussian bump that has a width much smaller than the wavelength of the bed profile and travels precisely one wavelength in $10s$.
 
-The domain of the numerical solutions was $x \in \left[-112.5 m,87.5 m\right]$ with $t \in \left[0s,10s\right]$. The standard gravitational acceleration $g= 9.81 m/s^2$ was used. The spatial resolution of numerical methods was varied like so $\Delta x = 100 / 2^k m$ with $k \in \left[8,\dots,16\right]$. To satisfy the CFL condition, \eqref{eqn:CFLcond} the temporal resolution
+The domain of the numerical solutions was $x \in \left[-112.5 m,87.5 m\right]$ with $t \in \left[0s,10s\right]$. The standard gravitational acceleration $g= 9.81 m/s^2$ was used. The spatial resolution of numerical methods was varied like so $\Delta x = 100 / 2^k m$ with $k \in \left[8,\dots,17\right]$. To satisfy the CFL condition, \eqref{eqn:CFLcond} the temporal resolution
 $\Delta t = Cr \Delta x / \left(a_2 + a_5 + \sqrt{g\left(a_0 + a_1\right)}\right)$ was chosen with condition number $Cr = 0.5$. The value $\theta = 1.2$ was used in the generalised minmod limiter \eqref{eqn:slopehGrecon} for both $\text{FEVM}_2$ and $\text{FDVM}_2$ and Dirichlet boundary conditions were applied at the boundaries of the domain. 
 
 

@@ -1,20 +1,19 @@
 \chapter{Finite Element Volume Method}
 \label{chp:HFVMMethod}
-In this chapter the finite element volume method is described in detail. 
+In this chapter we introduce the notation for the numerical grids and then describe the second-order Finite Element Volume Method in detail.
 
 %Mention the other numerical methods!!! YES
 %Leveque - Bousclaw is for Boussinesq equations
 %Simon Clarke - KDV equations, some numerical methods
 A variety of numerical methods have been used to solve the Serre equations; from complete finite difference methods \cite{Cienfuegos-etal-2006-1217,El-etal-2006} and finite element methods \cite{Mitsotakis-etal-2014,Li-2014-169,Mitsotakis-etal-2017} to combinations of finite difference and finite volume methods \cite{Hank-etal-2010-2034,Zoppou-etal-2017}. Splitting techniques have also been employed, most commonly to split the Serre equations into their nonlinear and dispersive parts; resulting in an elliptic operator for the dispersive part and the SWWE for the nonlinear part \cite{Bradford-Sanders-2002-953,Dutykh-etal-2013-761,Filippini-etal-2016-381}. 
 
-For the purposes of development of a numerical method for the two-dimensional Serre equations with variable bathymetry methods that make use of the conservation law form of the Serre equations \eqref{eqn:FullSerreCon} \cite{Hank-etal-2010-2034,Li-2014-169,Zoppou-etal-2017} are the most promising. The primary reason for this is that these methods are robust and extend well to unstructured meshes with complex geometries which are the meshes most desirable for modelling physical scenarios. Secondly, to properly handle the elliptic operator produced by the nonlinear and dispersive splitting requires overly restrictive assumptions about the smoothness of the physical quantities, particularly the water depth. 
+Numerical methods that make use of the conservation law form of the Serre equations \eqref{eqn:FullSerreCon} \cite{Hank-etal-2010-2034,Li-2014-169,Zoppou-etal-2017} are the most promising for the two dimensional Serre equations with variable bathymetry. The primary reason for this is that these methods are robust and extend well to unstructured meshes with complex geometries which are the meshes most desirable for modelling physical scenarios. Secondly, to properly handle the elliptic operator produced by the nonlinear and dispersive splitting requires overly restrictive assumptions about the smoothness of the physical quantities, particularly the water depth. 
 
-I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order Finite Element Volume Method (FEVM) which will be referred to as $\text{FEVM}_2$ was a main objective of the Thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is robust in the presence of discontinuities in the free surface \cite{Pitt-2018-61}, robust during the wetting and drying of beds, has a consistent polynomial representation over the cells and finally all the terms of the finite volume method can be calculated only knowing the quantities inside the cell. These last two points mean that this method is the best suited of the variant hybrid finite volume methods \cite{Zoppou-etal-2017} to solve the two-dimensional Serre equations on unstructured meshes with parallelised code.  
+I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order Finite Element Volume Method (FEVM) which will be referred to as $\text{FEVM}_2$ was a main objective of the thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is robust in the presence of discontinuities in the free surface \cite{Pitt-2018-61}, robust during the wetting and drying of beds, has a consistent polynomial representation over the cells and finally all the terms of the finite volume method can be calculated only knowing the quantities inside the cell. These last two points mean that this method is the best suited of the variant hybrid finite volume methods \cite{Zoppou-etal-2017} to solve the two-dimensional Serre equations on unstructured meshes with parallelised code.  
  
 %[]
 In addition to the $\text{FEVM}_2$ the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced, these methods will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore the third-order extension $\text{FDVM}_3$ was implemented during my research. I have also reproduced the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006}; which I refer to as $\mathcal{D}$ and $\mathcal{W}$ respectively. Descriptions of these methods have already been published \cite{Zoppou-etal-2017,Pitt-2018-61} and so are omitted from the thesis.  
 
-In this chapter we introduce the notation for the numerical grids and then describe the second-order Finite Element Volume Method $\text{FEVM}_2$ in detail.
 
 \section{Notation for Numerical Grids}
 
@@ -32,7 +31,7 @@ Other points inside the $j^{th}$ cell can be defined in relation to the midpoint
 \begin{align*}
 x_{j + s} &= x_j + s \Delta x
 \end{align*}
-where $s \in \left[-\frac{1}{2} , \frac{1}{2}\right]  \subset\mathbb{R}$, although for our purposes we restrict ourselves to rational values of $s$. Using this notation the $j^{th}$ cell spans $\left[x_{j -1/2},x_{j + 1/2}\right]$. These discretisations in space and time result in the grids displayed in Figure \ref{fig:NumericalGrid}
+where $s \in \left[-\frac{1}{2} , \frac{1}{2}\right]  \subset\mathbb{R}$, although for our purposes we restrict ourselves to rational values of $s$. Using this notation the $j^{th}$ cell spans $\left[x_{j -1/2},x_{j + 1/2}\right]$. These discretisations in space and time result in the grids displayed in Figure \ref{fig:NumericalGrid}.
 
 \begin{figure}
 	\centering
@@ -150,7 +149,7 @@ The reconstruction operator $\mathcal{R}_{j} $ is second-order accurate regardle
 \end{equation}
 
 \subsubsection{Reconstruction of the Bed Profile}
-For the bed profile we require a reconstruction that is at least second-order for $b$, $\partial b / \partial x$ and $\partial^2 b / \partial x^2$. To accomplish this $b$ is reconstructed with a cubic polynomial $C_j(x)$ centred around $x_j$
+For the bed profile we require a reconstruction that is at least second-order accurate for $b$, $\partial b / \partial x$ and $\partial^2 b / \partial x^2$. To accomplish this $b$ is reconstructed with a cubic polynomial $C_j(x)$ centred around $x_j$
 \begin{equation}
 C_j(x) = c_0 \left(x - x_j\right)^3 + c_1 \left(x - x_j\right)^2 + c_2 \left(x - x_j\right) + c_3.
 \label{eqn:cubicforbedrecon}
@@ -177,7 +176,7 @@ c_2 &=  \dfrac{b_{j-2} - 8b_{j-1} + 8 b_{j+1} - b_{j+2}}{12 \Delta x},\\ \\
 c_3 &=  \dfrac{-b_{j-2}  + 4b_{j-1} + 4 b_{j+1} - b_{j+2}}{6}.
 \end{align*}
 %Do require average as from jth cell depends on bj-2, bj-1,bj+1 bj + 2, but from j+1 cell depends on bj-1, bj,bj+2,bj+3
-We require a continuous bed profile across the cell edges and so we average the two reconstructions from the adjacent cells. Therefore, our reconstruction of the bed profile in the $j^{th}$ cell is the cubic which takes these values
+We require a continuous bed profile and so we average the two reconstructions at the cell edge from the adjacent cells. Therefore, our reconstruction of the bed profile in the $j^{th}$ cell is the cubic which takes these values
 \begin{subequations}
 \begin{align}
 b_{j-1/2} &=  \mathcal{B}_{j-1/2}\left(\vecn{b}\right) =  \frac{1}{2}\left( C_j(x_{j-1/2}) + C_{j-1}(x_{j-1/2})\right),\\
@@ -219,7 +218,7 @@ For $h$ and $G$ we use the basis functions $\psi$ \eqref{eqn:App1:PsiDef} which 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P1.pdf}
-	\caption{Discontinuous linear basis functions over a cell.}
+	\caption{Support of the discontinuous linear basis functions over a cell.}
 	\label{fig:P1DiscBasis}
 \end{figure}
 
@@ -229,11 +228,11 @@ From the basis functions $\psi$ we have the following representation for $h$ and
 q &= \sum_j \left( q^+_{j-1/2}\psi^+_{j-1/2}  + q^-_{j+1/2}\psi^-_{j+1/2}, \right).
 \end{align}
 
-To calculate the flux and source terms in \eqref{eqn:Serreconsconmom} we require a locally  calculated second-order approximation to the first derivative of $u$. To do this we require a quadratic representation of $u$ in each cell and since we desire $u\in\mathbb{W}^{1,2}(\Omega)$, this representation will be continuous across the cell edges $x_{j \pm 1/2}$. Therefore, we use the continuous quadratic basis functions $\phi_{j\pm1/2} $ and $\phi_{j} $ \eqref{eqn:App1:PhiDef} depicted in Figure \ref{fig:P2ContBasis}.
+To calculate the flux and source terms in \eqref{eqn:Serreconsconmom} we require a locally  calculated second-order accurate approximation to the first derivative of $u$. To do this we require a quadratic representation of $u$ in each cell and since we desire $u\in\mathbb{W}^{1,2}(\Omega)$, this representation will be continuous across the cell edges $x_{j \pm 1/2}$. Therefore, we use the continuous quadratic basis functions $\phi_{j\pm1/2} $ and $\phi_{j} $ \eqref{eqn:App1:PhiDef} depicted in Figure \ref{fig:P2ContBasis}.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P2.pdf}
-	\caption{Continuous piecewise quadratic basis functions over a cell.}
+	\caption{Support of the continuous piecewise quadratic basis functions over a cell.}
 	\label{fig:P2ContBasis}
 \end{figure}
 
@@ -247,7 +246,7 @@ For the source term of the evolution of $G$ equation \eqref{eqn:Serreconsconmom}
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P3.pdf}
-	\caption{Continuous piecewise cubic basis functions over a cell.}
+	\caption{Support of the continuous piecewise cubic basis functions over a cell.}
 	\label{fig:P3ContBasis}
 \end{figure}
 \begin{equation}
@@ -303,7 +302,7 @@ Calculating the integrals of all the basis function combinations we get
 \begin{multline}
 \frac{\Delta x}{2}\int_{-1 }^{1}  uh \begin{bmatrix} \TM
 \phi_{j-1/2}\\\phi_j \\\phi_{j+1/2} \BM
-\end{bmatrix} d\xi =  \\  \frac{\Delta x}{60} \begin{bmatrix} \TM
+\end{bmatrix} d\xi =  \\ \frac{\Delta x}{60}  \begin{bmatrix} \TM
 7 h^+_{j-1/2} + h^-_{j+1/2} & 4 h^+_{j-1/2}   & - h^+_{j-1/2} - h^-_{j+1/2}\\ 4 h^+_{j-1/2} & 16 h^+_{j-1/2} + 16 h^-_{j+1/2}& 4 h^-_{j+1/2}\\ - h^+_{j-1/2} - h^-_{j+1/2} &  4 h^-_{j+1/2} &  h^+_{j-1/2} + 7 h^-_{j+1/2} \BM
 \end{bmatrix}  \begin{bmatrix} \TM
 u_{j-1/2}\\u_j \\u _{j+1/2} \BM
@@ -327,7 +326,7 @@ as desired.
 
 We use the method of \citet{Kurganov-etal-2001-707} to calculate the flux across a cell interface. This method was employed because it can handle discontinuities across the cell boundary and only requires an estimate of the maximum and minimum wave speeds. This is precisely the situation for the Serre equations which do not have a known expression for the characteristics but do possess estimates on the maximum and minimum wave speeds \eqref{eqn:WaveVelocitiesBound}.
 
-Only the calculation of the flux term $F_{j+1/2}$ is demonstrated as the process to calculate the flux term $F_{j-1/2}$ is identical but with different cells. For a general quantity $q$ the method of \citet{Kurganov-etal-2001-707} is
+Only the calculation of the flux term $F_{j+1/2}$ is demonstrated as the process to calculate the flux term $F_{j-1/2}$ is identical but with different cells. For a general quantity $q$ the approximation of the flux term given by \citet{Kurganov-etal-2001-707} is
 \begin{equation}\label{eqn:HLL_flux}
 F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left(  q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right)
 \end{equation}
@@ -391,10 +390,10 @@ This gives a second-order approximation to the derivative of $u$ and $b$ at $x_{
 	\label{eqn:dbduRecon}
 \end{subequations}
 
-Therefore, we possess all the terms needed to calculate the approximation to the flux \eqref{eqn:HLL_flux} for both $h$ and $G$, as desired. However, to ensure that the FEVM is well balanced and recovers the lake at rest steady state solution, these fluxes must be modified.
+Therefore, we possess all the terms needed to calculate the approximation to the flux \eqref{eqn:HLL_flux} for $h$ and $G$, as desired. However, to ensure that the FEVM is well balanced and recovers the lake at rest steady state solution, these fluxes must be modified.
 
 \subsubsection{Well Balancing}
-To recover the lake at rest steady state solution we follow the work of \citet{Klein-etal-2004-2050}, who accomplished this for the SWWE. Earlier we have demonstrated that this process can be extended to the Serre equations \cite{Pitt-J-2014}. To enforce well balancing the reconstruction of $h$ is modified at the cell edges in the following way; first calculate
+To recover the lake at rest steady state solution we follow the work of \citet{Klein-etal-2004-2050}, who accomplished this for the SWWE. Previously, we demonstrated that this process can be extended to the Serre equations \cite{Pitt-J-2014}. To enforce well balancing the reconstruction of $h$ is modified at the cell edges in the following way; first calculate
 \begin{align}
 \dot{b}^-_{j+1/2} = w^-_{j+1/2} - h^-_{j+1/2} & &\text{and}& &\dot{b}^+_{j+1/2} = w^+_{j+1/2} - h^+_{j+1/2}.
 \label{eqn:BedReDefWmH}
@@ -415,7 +414,7 @@ This generates the vector $\vecn{\ddot{h}}$
 \vecn{\ddot{h}}= \begin{bmatrix} \TM
 \ddot{h}^+_{-1/2} \\ h_0 \\ \ddot{h}^-_{1/2} \\ \vdots  \\ \ddot{h}^-_{m + 1/2}  \BM \end{bmatrix}
 \end{equation*}
-which we use to calculate the flux term $F_{j+1/2}$ in \eqref{eqn:HLL_flux} for $h$ and $G$. Applying the same process but with different cells we obtain $F_{j-1/2}$ and we have
+which we use to calculate the flux term $F_{j+1/2}$ in \eqref{eqn:HLL_flux} for $h$ and $G$ instead of $\vecn{\hat{h}}$. Applying the same process but with different cells we obtain $F_{j-1/2}$ and we have
 \begin{align}	
 F^n_{j\pm 1/2} &=\mathcal{F}_{j\pm1/2} \left(\vecn{\ddot{h}}, \vecn{\hat{G}},\vecn{\hat{b}}, \vecn{\hat{u}}  \right).
 \label{eqn:FluxFEVM}
@@ -566,7 +565,7 @@ This transformation is ill-defined when $h = 0$ so we also add in a  small term 
 where on the right hand side are the reconstructed values of $h$ from \eqref{eqn:ReconforhwG} and the left hand side are the values of $h$ used to defined the basis functions of the finite element method \eqref{eqn:FEapproxtohG}. This transformation is applied to all terms in the FEM avoiding the singularity as $h \rightarrow 0$; and in the case where $G = uh$ the transformation is equivalent to \eqref{eqn:calculationofugivenuhandh} for the SWWE.
 
 Even with the transform \eqref{eqn:hdrytransform}, the matrix $\matr{A}$ can become singular.
-The methods of \citet{Zoppou-etal-2017} made use of direct banded matrix solvers such as the Thomas algorithm \cite{Conte-DeBoor-1980} to solve \eqref{eqn:usolvefromGhb} which rely on non-singular matrices and so are unsuitable when $h = 0$. This was resolved by employing an LU decomposition algorithm described by \citet{NumRecC-1996}. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting, which inserts small non-zero pivots when the pivots value is below some tolerance value $p_{tol}$. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard $LU$ decomposition. Typically we set $p_{tol} = 10^{-20}$ allowing the matrix solver to accurately invert $\matr{A}$ and thus solve \eqref{eqn:usolvefromGhb} when $h = 0$. 
+The methods of \citet{Zoppou-etal-2017} made use of direct banded matrix solvers such as the Thomas algorithm \cite{Conte-DeBoor-1980} to solve \eqref{eqn:usolvefromGhb} which rely on non-singular matrices making them unsuitable when $h = 0$. This was resolved by employing an LU decomposition algorithm described by \citet{NumRecC-1996}. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting, which inserts small non-zero pivots when the pivots value is below some tolerance value $p_{tol}$. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard $LU$ decomposition. Typically we set $p_{tol} = 10^{-20}$ allowing the matrix solver to accurately invert $\matr{A}$ and thus solve \eqref{eqn:usolvefromGhb} when $h = 0$. 
 
 Finally, after solving \eqref{eqn:usolvefromGhb} using the LU decomposition algorithm of \citet{NumRecC-1996} where the transformation \eqref{eqn:hdrytransform} has been applied to the reconstructed values of $h$ we possess an approximation to $u$ in the presence of dry beds. Additionally to avoid numerical errors becoming dominant when $h$ is very small we place a cut-off on $h$ past which $h=G= u = 0$ and the cells are properly dry; this is given by $h_{tol}$. This drying of the cells is performed for the whole cell based on the cell average value of $h$ so that if $\overline{h}_j \le h_{tol}$ then
 \begin{align*}

@@ -14,6 +14,8 @@ from numpy import ones
 
 from numpy import tanh
 
+from Hamil import *
+
 def copyarraytoC(a):
     n = len(a)
     b = mallocPy(n)
@@ -200,9 +202,9 @@ def LakeAtRest(x,a0,a1,a2,g,dx):
        
     return h,u,G,b,w
 
-meth = "FEVM2WB"
+meth = "FDVM2WB"
 wdirb = "/home/jp/Documents/PhD/project/data/ThesisRaw/LakeAtRest/Dry/" +meth+"/"
-sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/LakeAtRest/" +meth+"/C1/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/LakeAtRestCalc/" +meth+"/C1/"
 
 
 if not os.path.exists(sdir):
@@ -212,6 +214,12 @@ L1hs = []
 L1us = []
 L1Gs = []
 dxs=  []
+
+
+a0 = 1.0
+a1 = 2*pi/50.0
+a2 = 0.0
+g = 9.81
         
         
 for ki in range(8,18):
@@ -234,6 +242,7 @@ for ki in range(8,18):
                 dx = float(row[0])
                 dt = float(row[1])
                 t = float(row[2])
+                """
                 En = float(row[3])
                 Mn = float(row[4])
                 Pn = float(row[5])
@@ -242,6 +251,7 @@ for ki in range(8,18):
                 Mni = float(row[8])
                 Pni = float(row[9])
                 Gni = float(row[10])
+                """
 
              j = j + 1  
 
@@ -252,32 +262,62 @@ for ki in range(8,18):
          j = -1
          x = []
          h = []
+         G= []
+         u = []
          for row in readfile:  
              if (j >= 0):
                 x.append( float(row[0]))
                 h.append( float(row[1]))
+                G.append( float(row[2]))
+                u.append( float(row[3]))
     
              j = j + 1  
         
     n = len(x)
-
-    """
-    a0 = 1.0
-    a1 = 2*pi/50.0
-    a2 = 0.0
-    g = 9.81
+    niBC = 4
+    startx = x[0]
+    endx = x[-1]
     
-    HnA = HamIntNum(a0,a1,a2,g,x,h)
-    MnA = MassIntNum(a0,a1,a2,x,h)
+    xbeg = arange(startx - niBC*dx,startx,dx)
+    xend = arange(endx + dx,endx + (niBC+1)*dx,dx) 
+    
+    u0 = u[0]*ones(niBC)
+    u1 = u[-1]*ones(niBC)   
+    h0 = h[0]*ones(niBC)
+    h1 = h[-1]*ones(niBC)
+    G0 = G[0]*ones(niBC)
+    G1 = G[-1]*ones(niBC)
+
+    xbc =  concatenate([xbeg,x,xend])
+    hbc =  concatenate([h0,h,h1])
+    ubc =  concatenate([u0,u,u1])
+    Gbc =  concatenate([G0,G,G1])
+    
+    xbc_c = copyarraytoC(xbc)
+    hbc_c = copyarraytoC(hbc)
+    ubc_c = copyarraytoC(ubc)
+    Gbc_c = copyarraytoC(Gbc)
+    
+    #hi,ui = solitoninit(n,1,1,9.81,x,0,dx)
+
+    En = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+    Pn = uhall(xbc_c,hbc_c,ubc_c,n + 2*niBC,niBC,dx)
+    Mn = hall(xbc_c,hbc_c,n + 2*niBC,niBC,dx)
+    Gcn = Gall(xbc_c,Gbc_c,n + 2*niBC,niBC,dx)
+    
+
+    
+    #HnA = HamIntNum(a0,a1,a2,g,x,h)
+    #MnA = MassIntNum(a0,a1,a2,x,h)
 
     MA = MassInt(a0,a1,a2,x[-1] + 0.5*dx,x[0] - 0.5*dx)
-    HA = HamInt(a0,a1,a2,g,x[-1] + 0.5*dx,x[0] - 0.5*dx)
-    """
+    HA = abs(HamInt(a0,a1,a2,g,x[-1] + 0.5*dx,x[0] - 0.5*dx))
 
-    hC1v =abs(Mn - Mni)/abs(Mni)
-    EC1v = abs(En - Eni)/abs(Eni)
-    GC1v = abs(Gn - Gni)
-    uhC1v = abs(Pn - Pni)
+
+    hC1v =abs(Mn -MA)/abs(MA)
+    EC1v = abs(En - HA)/abs(HA)
+    GC1v = abs(Gcn)
+    uhC1v = abs(Pn)
     
 
     s = sdir + "hC1.dat"

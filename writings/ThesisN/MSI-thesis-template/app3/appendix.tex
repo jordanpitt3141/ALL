@@ -7,14 +7,14 @@ For the solitary wave solution \eqref{eqn:Solitondefhub} with $t=0$ the integral
 \allowdisplaybreaks
 \begin{subequations}
 	\begin{align}
-	\int h(x,0) \; dx = {} & a_0 x + \frac{a_1}{\kappa} \tanh\left(\kappa x\right) + \text{constant}, \\
-	\int u(x,0)h(x,0) \;  dx = {} & \frac{a_1 c}{\kappa} \tanh\left(\kappa x\right)+ \text{constant}, \\  \nonumber \\
+	\int h(x,0) \; dx = {} & a_0 x + \frac{a_1}{\kappa} \tanh\left(\kappa x\right) + \text{constant}, \label{eqn:SolitonConservationh} \\
+	\int u(x,0)h(x,0) \;  dx = {} & \frac{a_1 c}{\kappa} \tanh\left(\kappa x\right)+ \text{constant}, \label{eqn:SolitonConservationuh} \\  \nonumber \\
 	\begin{split}
 	\int G(x,0) \; dx = {}&  \frac{c a_1}{3 \kappa}  \Bigg(3 + 2a_0^2 \kappa^2\text{sech}^2\left(\kappa x\right)  \\ &+ 2a_0 a_1 \kappa^2 \text{sech}^4\left(\kappa x\right) \Bigg)\tanh\left(\kappa x\right)  + \text{constant} ,
-	\end{split}
+	\end{split} \label{eqn:SolitonConservationG}
 	\\  \nonumber \\
 	\begin{split}
-	\int \mathcal{H}(x,0) \; dx = {}&\frac{1}{2} \Bigg(\int g\left[h(x,0)\right]^2 \; dx + \int h(x,0)\left[u(x,0)\right]^2 \; dx  \\ &+ \int \left[h(x,0)\right]^3 \left[\frac{\partial u(x,0)}{\partial x}\right]^2 \; dx \Bigg) 
+	\int \mathcal{H}(x,0) \; dx = {}&\frac{1}{2} \Bigg(\int g\left[h(x,0)\right]^2 \; dx + \int h(x,0)\left[u(x,0)\right]^2 \; dx  \\ &+ \int \left[h(x,0)\right]^3 \left[\frac{\partial u(x,0)}{\partial x}\right]^2 \; dx \Bigg) \label{eqn:SolitonConservationH}
 	\end{split}
 	\end{align}
 	\label{eqn:SolitonConservation}
