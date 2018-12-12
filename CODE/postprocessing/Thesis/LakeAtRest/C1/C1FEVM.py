@@ -202,9 +202,9 @@ def LakeAtRest(x,a0,a1,a2,g,dx):
        
     return h,u,G,b,w
 
-meth = "FDVM2WB"
+meth = "FEVM2WB"
 wdirb = "/home/jp/Documents/PhD/project/data/ThesisRaw/LakeAtRest/Dry/" +meth+"/"
-sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/LakeAtRestCalc/" +meth+"/C1/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/LakeAtRestCalcNum1/" +meth+"/C1/"
 
 
 if not os.path.exists(sdir):
@@ -264,12 +264,14 @@ for ki in range(8,18):
          h = []
          G= []
          u = []
+         b= []
          for row in readfile:  
              if (j >= 0):
                 x.append( float(row[0]))
                 h.append( float(row[1]))
                 G.append( float(row[2]))
                 u.append( float(row[3]))
+                b.append( float(row[4]))
     
              j = j + 1  
         
@@ -281,37 +283,35 @@ for ki in range(8,18):
     xbeg = arange(startx - niBC*dx,startx,dx)
     xend = arange(endx + dx,endx + (niBC+1)*dx,dx) 
     
-    u0 = u[0]*ones(niBC)
-    u1 = u[-1]*ones(niBC)   
-    h0 = h[0]*ones(niBC)
-    h1 = h[-1]*ones(niBC)
-    G0 = G[0]*ones(niBC)
-    G1 = G[-1]*ones(niBC)
+    h0,u0,G0,b0,w0 = LakeAtRest(xbeg,a0,a1,a2,g,dx)
+    h1,u1,G1,b1,w1 = LakeAtRest(xend,a0,a1,a2,g,dx)
 
     xbc =  concatenate([xbeg,x,xend])
     hbc =  concatenate([h0,h,h1])
     ubc =  concatenate([u0,u,u1])
+    bbc =  concatenate([b0,b,b1])
     Gbc =  concatenate([G0,G,G1])
     
     xbc_c = copyarraytoC(xbc)
     hbc_c = copyarraytoC(hbc)
     ubc_c = copyarraytoC(ubc)
+    bbc_c = copyarraytoC(bbc)
     Gbc_c = copyarraytoC(Gbc)
     
     #hi,ui = solitoninit(n,1,1,9.81,x,0,dx)
 
-    En = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+    En = GNall(xbc_c,hbc_c,ubc_c,bbc_c,g,n + 2*niBC,niBC,dx) 
     Pn = uhall(xbc_c,hbc_c,ubc_c,n + 2*niBC,niBC,dx)
     Mn = hall(xbc_c,hbc_c,n + 2*niBC,niBC,dx)
     Gcn = Gall(xbc_c,Gbc_c,n + 2*niBC,niBC,dx)
     
 
     
-    #HnA = HamIntNum(a0,a1,a2,g,x,h)
-    #MnA = MassIntNum(a0,a1,a2,x,h)
+    HA = HamIntNum(a0,a1,a2,g,x,h)
+    MA = MassIntNum(a0,a1,a2,x,h)
 
-    MA = MassInt(a0,a1,a2,x[-1] + 0.5*dx,x[0] - 0.5*dx)
-    HA = abs(HamInt(a0,a1,a2,g,x[-1] + 0.5*dx,x[0] - 0.5*dx))
+    #MA = MassInt(a0,a1,a2,x[-1] + 0.5*dx,x[0] - 0.5*dx)
+    #HA = HamInt(a0,a1,a2,g,x[-1] + 0.5*dx,x[0] - 0.5*dx)
 
 
     hC1v =abs(Mn -MA)/abs(MA)

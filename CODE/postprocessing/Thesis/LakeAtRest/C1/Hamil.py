@@ -138,6 +138,10 @@ uhallFEM = _Hamil.uhallFEM
 def HamFEM(ubc, hbc, bbc, n, hnBC, unBC, bnBC, dx, g):
     return _Hamil.HamFEM(ubc, hbc, bbc, n, hnBC, unBC, bnBC, dx, g)
 HamFEM = _Hamil.HamFEM
+
+def GNall(x, h, u, b, g, n, nBC, dx):
+    return _Hamil.GNall(x, h, u, b, g, n, nBC, dx)
+GNall = _Hamil.GNall
 # This file is compatible with both classic and new-style classes.
 
 

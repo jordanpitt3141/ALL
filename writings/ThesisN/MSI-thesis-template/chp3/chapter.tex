@@ -11,7 +11,7 @@ Numerical methods that make use of the conservation law form of the Serre equati
 
 I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order Finite Element Volume Method (FEVM) which will be referred to as $\text{FEVM}_2$ was a main objective of the thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is robust in the presence of discontinuities in the free surface \cite{Pitt-2018-61}, robust during the wetting and drying of beds, has a consistent polynomial representation over the cells and finally all the terms of the finite volume method can be calculated only knowing the quantities inside the cell. These last two points mean that this method is the best suited of the variant hybrid finite volume methods \cite{Zoppou-etal-2017} to solve the two-dimensional Serre equations on unstructured meshes with parallelised code.  
  
-%[]
+ 
 In addition to the $\text{FEVM}_2$ the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced, these methods will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore the third-order extension $\text{FDVM}_3$ was implemented during my research. I have also reproduced the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006}; which I refer to as $\mathcal{D}$ and $\mathcal{W}$ respectively. Descriptions of these methods have already been published \cite{Zoppou-etal-2017,Pitt-2018-61} and so are omitted from the thesis.  
 
 
@@ -59,7 +59,7 @@ To describe the FEVM we first present an overview of the evolution step and then
 \begin{align*} \overline{\vecn{h}}^n = \begin{bmatrix} \TM
 \overline{h}_0^n \\\overline{h}_1^n \\ \vdots \\ \overline{h}_m^n \BM\end{bmatrix} &,& \overline{\vecn{w}}^n = \begin{bmatrix} \TM
 \overline{w}_0^n \\\overline{w}_1^n \\ \vdots \\ \overline{w}_m^n \BM \end{bmatrix} &,&  \overline{\vecn{G}}^n = \begin{bmatrix} \TM
-\overline{G}_0^n \\\overline{G}_1^n \\ \vdots \\ \overline{G}_m^n \BM \end{bmatrix}& &\text{and}& & \vecn{b} = \begin{bmatrix} \TM
+\overline{G}_0^n \\\overline{G}_1^n \\ \vdots \\ \overline{G}_m^n \BM \end{bmatrix}& , & \vecn{b} = \begin{bmatrix} \TM
 b_{0} \\ b_{1} \\ \vdots \\b_{m} \BM
 \end{bmatrix}. \\
 \end{align*}
@@ -85,7 +85,7 @@ The evolution step proceeds by reconstructing the quantities over the cell, calc
 	\vecn{\hat{w}} = \begin{bmatrix} \TM
 	w^+_{-1/2} \\ w_0 \\ w^-_{1/2}  \\ \vdots  \\ w^-_{m+1/2} \BM \end{bmatrix} &,& \vecn{\hat{G}} = \begin{bmatrix} \TM
 	G^+_{-1/2} \\ G_0 \\ G^-_{1/2}  \\ \vdots \\ G^-_{m+1/2} \BM
-	\end{bmatrix} & &\text{and}& & \vecn{\hat{b}} = \begin{bmatrix} \TM
+	\end{bmatrix} & , & \vecn{\hat{b}} = \begin{bmatrix} \TM
 	b_{-1/2} \\ b_{-1/6} \\ b_{1/6}  \\b_{1/2}  \\ \vdots \\ b_{m+1/2} \BM
 	\end{bmatrix}.
 	\end{align*}	
@@ -117,9 +117,9 @@ We reconstruct $h$, $w$ and $G$ with piecewise linear functions over a cell from
 %cite someone 
 \begin{subequations}
 	\begin{align}
-	q^+_{j-1/2} & = \mathcal{R}^+_{j-1/2} \left(\overline{\vecn{q}}\right) = \bar{q} - \dfrac{\Delta x}{2} d_j, \\
-	q_{j} &= \mathcal{R}_{j} \left(\overline{\vecn{q}}\right) =\bar{q} ,\\
-	q^-_{j+1/2} &= \mathcal{R}^-_{j+1/2} \left(\overline{\vecn{q}}\right) = \bar{q} + \dfrac{\Delta x}{2} d_j
+	q^+_{j-1/2} & = \mathcal{R}^+_{j-1/2} \left(\overline{\vecn{q}}\right) = \overline{q}_j - \dfrac{\Delta x}{2} d_j, \\
+	q_{j} &= \mathcal{R}_{j} \left(\overline{\vecn{q}}\right) =\overline{q}_j ,\\
+	q^-_{j+1/2} &= \mathcal{R}^-_{j+1/2} \left(\overline{\vecn{q}}\right) = \overline{q}_j + \dfrac{\Delta x}{2} d_j
 	\end{align}
 	\label{eqn:ReconforhwG}
 \end{subequations}
@@ -150,10 +150,10 @@ The reconstruction operator $\mathcal{R}_{j} $ is second-order accurate regardle
 
 \subsubsection{Reconstruction of the Bed Profile}
 For the bed profile we require a reconstruction that is at least second-order accurate for $b$, $\partial b / \partial x$ and $\partial^2 b / \partial x^2$. To accomplish this $b$ is reconstructed with a cubic polynomial $C_j(x)$ centred around $x_j$
-\begin{equation}
+\begin{equation*}
 C_j(x) = c_0 \left(x - x_j\right)^3 + c_1 \left(x - x_j\right)^2 + c_2 \left(x - x_j\right) + c_3.
 \label{eqn:cubicforbedrecon}
-\end{equation}
+\end{equation*}
 
 By forcing $C_j(x)$ to pass through the nodal values $b_{j-2}$, $b_{j-1}$, $b_{j+1}$ and $b_{j+2}$ we get
 \begin{equation*}
@@ -177,15 +177,12 @@ c_3 &=  \dfrac{-b_{j-2}  + 4b_{j-1} + 4 b_{j+1} - b_{j+2}}{6}.
 \end{align*}
 %Do require average as from jth cell depends on bj-2, bj-1,bj+1 bj + 2, but from j+1 cell depends on bj-1, bj,bj+2,bj+3
 We require a continuous bed profile and so we average the two reconstructions at the cell edge from the adjacent cells. Therefore, our reconstruction of the bed profile in the $j^{th}$ cell is the cubic which takes these values
-\begin{subequations}
-\begin{align}
+\begin{align*}
 b_{j-1/2} &=  \mathcal{B}_{j-1/2}\left(\vecn{b}\right) =  \frac{1}{2}\left( C_j(x_{j-1/2}) + C_{j-1}(x_{j-1/2})\right),\\
 b_{j-1/6} &=  \mathcal{B}_{j-1/6}\left(\vecn{b}\right) =  C_j(x_{j-1/6}),\\
 b_{j+1/6} &=  \mathcal{B}_{j+1/6}\left(\vecn{b}\right) =  C_j(x_{j+1/6}),\\
 b_{j+1/2} &=  \mathcal{B}_{j+1/2}\left(\vecn{b}\right) =  \frac{1}{2}\left( C_j(x_{j+1/2}) + C_{j+1}(x_{j+1/2})\right).
-\end{align}
-\label{eqn:FEVMbedrecon}
-\end{subequations}
+\end{align*}
 
 
 \subsection{Fluid Velocity}
@@ -199,7 +196,7 @@ The elliptic equation that relates the conserved variables $h$ and $G$ and the b
 Integrating by parts with zero Dirichlet boundary conditions we get
 \begin{multline}
 \int_{\Omega } G v \; dx = \int_{\Omega } uh \left(1 + \left[\frac{\partial b}{\partial x}\right]^2 \right) v \; dx +  \int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial v}{\partial x} \; dx  \\ - 
-\int_{\Omega }   \frac{1}{2} u h^2\frac{\partial b}{\partial x}  \frac{\partial v }{\partial x}\; dx. - 
+\int_{\Omega }   \frac{1}{2} u h^2\frac{\partial b}{\partial x}  \frac{\partial v }{\partial x}\; dx - 
 \int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}v \; dx.
 \label{eqn:WeakFormDomain}
 \end{multline}
@@ -218,7 +215,7 @@ For $h$ and $G$ we use the basis functions $\psi$ \eqref{eqn:App1:PsiDef} which 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P1.pdf}
-	\caption{Support of the discontinuous linear basis functions over a cell.}
+	\caption{Support of the discontinuous linear basis functions $\psi$ over a cell.}
 	\label{fig:P1DiscBasis}
 \end{figure}
 
@@ -232,7 +229,7 @@ To calculate the flux and source terms in \eqref{eqn:Serreconsconmom} we require
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P2.pdf}
-	\caption{Support of the continuous piecewise quadratic basis functions over a cell.}
+	\caption{Support of the continuous piecewise quadratic basis functions $\phi$ over a cell.}
 	\label{fig:P2ContBasis}
 \end{figure}
 
@@ -246,7 +243,7 @@ For the source term of the evolution of $G$ equation \eqref{eqn:Serreconsconmom}
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P3.pdf}
-	\caption{Support of the continuous piecewise cubic basis functions over a cell.}
+	\caption{Support of the continuous piecewise cubic basis functions $\gamma$ over a cell.}
 	\label{fig:P3ContBasis}
 \end{figure}
 \begin{equation}
@@ -299,7 +296,7 @@ u_{j-1/2}\\u_j \\u _{j+1/2} \BM
 
 Calculating the integrals of all the basis function combinations we get
 
-\begin{multline}
+\begin{multline*}
 \frac{\Delta x}{2}\int_{-1 }^{1}  uh \begin{bmatrix} \TM
 \phi_{j-1/2}\\\phi_j \\\phi_{j+1/2} \BM
 \end{bmatrix} d\xi =  \\ \frac{\Delta x}{60}  \begin{bmatrix} \TM
@@ -307,9 +304,9 @@ Calculating the integrals of all the basis function combinations we get
 \end{bmatrix}  \begin{bmatrix} \TM
 u_{j-1/2}\\u_j \\u _{j+1/2} \BM
 \end{bmatrix}.
-\label{eqn:FEMutermexample}
-\end{multline}
-%[]HMMMM
+%\label{eqn:FEMutermexample}
+\end{multline*}
+
 \subsubsection{Assembly of the Global Matrix}
 By combining all the matrices generated by the integral of each of the $u$ terms we get the contribution of the $j^{th}$ cell to the stiffness matrix $\matr{A}_j$. Likewise all the integrals of the remaining term $Gv$ in \eqref{eq:elementwiseint} generate the element wise vector $\vecn{g}_{j}$. These element wise matrices and vectors are then assembled into the global stiffness matrix $\matr{A}$ and the global right hand-side term  $\vecn{g}$ thus \eqref{eq:elementwiseint} is rewritten as
 \begin{equation}
@@ -349,7 +346,7 @@ f\left(G^\pm_{j+\frac{1}{2}}\right) &=  u^\pm_{j + 1/2} G^\pm_{j + 1/2}  + \frac
 \label{eqn:FluxIrrotNum}
 \end{align}
 
-The quantities $h^+_{j - 1/2}$, $h^-_{j + 1/2}$, $G^+_{j - 1/2}$, $G^-_{j + 1/2}$ were calculated during the reconstruction and the FEM provided $u^\pm_{j+1/2} = u_{j+1/2}$ as $u$ is continuous across the cell boundaries.
+The quantities $h^+_{j - 1/2}$, $h^-_{j + 1/2}$, $G^+_{j - 1/2}$ and $G^-_{j + 1/2}$ were calculated during the reconstruction and the FEM provided $u^\pm_{j+1/2} = u_{j+1/2}$ as $u$ is continuous across the cell boundaries.
 
 Approximations to $\left(\dfrac{\partial {b}}{\partial x} \right)^\pm_{j + 1/2}$ and $\left(\dfrac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2}$ are now required to calculate the flux \eqref{eqn:FluxIrrotNum}. 
 
@@ -358,7 +355,7 @@ To calculate the derivatives in $u$ and $b$ we use the basis function approximat
 \begin{subequations}
 	\begin{align}
 	P^u_j(x) &= p^u_0 \left(x - x_j\right)^2 + p^u_1 \left(x - x_j\right) + p^u_2, \\
-	P^b_j(x) &= p^b_0 \left(x - x_j\right)^3 + p^b_1 \left(x - x_j\right)^2 + p^b_2 \left(x - x_j\right)  + p^b_3,
+	P^b_j(x) &= p^b_0 \left(x - x_j\right)^3 + p^b_1 \left(x - x_j\right)^2 + p^b_2 \left(x - x_j\right)  + p^b_3.
 	\end{align}
 	\label{eqn:Polyforuandbcell}
 \end{subequations}
@@ -381,21 +378,18 @@ Taking the derivative of the polynomials \eqref{eqn:Polyforuandbcell} we get
 	\frac{\partial }{\partial x}P^b_j(x) &= 3p^b_0 \left(x - x_j\right)^2 + 2p^b_1 \left(x - x_j\right) + p^b_2.
 	\end{align*}
 This gives a second-order approximation to the derivative of $u$ and $b$ at $x_{j+1/2}$ for the $j^{th}$ cell. The process for the $(j+1)^{th}$ cell is the same and we get 
-\begin{subequations}
-	\begin{align}
+	\begin{align*}
 	\left(\dfrac{\partial {u}}{\partial x} \right)^-_{j + 1/2} &= \frac{\partial }{\partial x}P^u_j(x_{j+1/2}),  \\
 	\left(\dfrac{\partial {u}}{\partial x} \right)^+_{j + 1/2} &= \frac{\partial }{\partial x}P^u_{j+1}(x_{j+1/2}),  \\
 	\left(\dfrac{\partial {b}}{\partial x} \right)^-_{j + 1/2} &= \frac{\partial }{\partial x}P^b_j(x_{j+1/2}), \\
-	\left(\dfrac{\partial {b}}{\partial x} \right)^+_{j + 1/2} &= \frac{\partial }{\partial x}P^b_{j+1}(x_{j+1/2}). 	\end{align}
-	\label{eqn:dbduRecon}
-\end{subequations}
+	\left(\dfrac{\partial {b}}{\partial x} \right)^+_{j + 1/2} &= \frac{\partial }{\partial x}P^b_{j+1}(x_{j+1/2}). 	\end{align*}
 
 Therefore, we possess all the terms needed to calculate the approximation to the flux \eqref{eqn:HLL_flux} for $h$ and $G$, as desired. However, to ensure that the FEVM is well balanced and recovers the lake at rest steady state solution, these fluxes must be modified.
 
 \subsubsection{Well Balancing}
 To recover the lake at rest steady state solution we follow the work of \citet{Klein-etal-2004-2050}, who accomplished this for the SWWE. Previously, we demonstrated that this process can be extended to the Serre equations \cite{Pitt-J-2014}. To enforce well balancing the reconstruction of $h$ is modified at the cell edges in the following way; first calculate
 \begin{align}
-\dot{b}^-_{j+1/2} = w^-_{j+1/2} - h^-_{j+1/2} & &\text{and}& &\dot{b}^+_{j+1/2} = w^+_{j+1/2} - h^+_{j+1/2}.
+\dot{b}^-_{j+1/2} = w^-_{j+1/2} - h^-_{j+1/2} &, &\dot{b}^+_{j+1/2} = w^+_{j+1/2} - h^+_{j+1/2}.
 \label{eqn:BedReDefWmH}
 \end{align}
 Find the maximum
@@ -415,10 +409,9 @@ This generates the vector $\vecn{\ddot{h}}$
 \ddot{h}^+_{-1/2} \\ h_0 \\ \ddot{h}^-_{1/2} \\ \vdots  \\ \ddot{h}^-_{m + 1/2}  \BM \end{bmatrix}
 \end{equation*}
 which we use to calculate the flux term $F_{j+1/2}$ in \eqref{eqn:HLL_flux} for $h$ and $G$ instead of $\vecn{\hat{h}}$. Applying the same process but with different cells we obtain $F_{j-1/2}$ and we have
-\begin{align}	
+\begin{align*}	
 F^n_{j\pm 1/2} &=\mathcal{F}_{j\pm1/2} \left(\vecn{\ddot{h}}, \vecn{\hat{G}},\vecn{\hat{b}}, \vecn{\hat{u}}  \right).
-\label{eqn:FluxFEVM}
-\end{align}
+\end{align*}
 for the evolution of $h$ and $G$ equations as desired.
 
 \subsection{Source Terms}
@@ -435,14 +428,11 @@ We calculate the centred source term using
  S_{ci} = -\frac{1}{2}\left(h_j\right)^2 {u_j}\left( \frac{\partial {u}}{\partial x} \right)_j \left(\frac{\partial^2 b}{\partial x^2} \right)_j  + h_j \left(u_j\right)^2 \left(\frac{\partial b}{\partial x}\right)_j \left(\frac{\partial^2 b}{\partial x^2}\right)_j - gh_j\left(\frac{\partial b}{\partial x}\right)_j.
 \end{equation*}
 Where we use $h_j$ from the reconstruction process \eqref{eqn:ReconforhwG} and $u_j$ from the solution of the elliptic equation \eqref{eqn:usolvefromGhb}. To calculate the derivatives we employ our polynomial representations of $u$ and $b$ inside a cell \eqref{eqn:Polyforuandbcell}. However, to ensure that the terms cancel properly for a lake at rest we modify our approximation to $\dfrac{\partial b}{\partial x}$ to use $\dot{b}^-_{j+1/2}$ and $\dot{b}^+_{j+1/2}$ from \eqref{eqn:BedReDefWmH}. Therefore, the following approximations are used to calculate $S_{ci}$
-\begin{subequations}
-	\begin{align}
+	\begin{align*}
 	\left(\dfrac{\partial {u}}{\partial x} \right)_{j} &= \frac{\partial }{\partial x}P^u_j(x_{j}),  \\
 \left(\dfrac{\partial {b}}{\partial x} \right)_{j} &=  \frac{\dot{b}^-_{j+1/2} - \dot{b}^+_{j-1/2}}{\Delta x} , \\	
 	\left(\dfrac{\partial^2 {b}}{\partial x^2} \right)_{j} &= \frac{\partial^2 }{\partial x^2}P^b_j(x_{j}).
-	\end{align}
-	\label{eqn:dbduReconSource}
-\end{subequations}
+	\end{align*}
 
 To ensure well balancing the corrective interface source terms
 	\begin{align*}
@@ -450,10 +440,9 @@ To ensure well balancing the corrective interface source terms
 	  S^{+}_{j - \frac{1}{2}} &=  \frac{g}{2} \left(h^{+}_{j - \frac{1}{2}}\right)^2 - \frac{g}{2}\left(\ddot{h}^{+}_{j - \frac{1}{2}}\right)^2 
 	\end{align*}
 are also added. These corrective terms make use of $h^{-}_{j + \frac{1}{2}}$ and $h^{+}_{j + \frac{1}{2}}$ obtained from the reconstruction \eqref{eqn:ReconforhwG} and the modified values $\ddot{h}^{-}_{j + \frac{1}{2}}$ and $\ddot{h}^{+}_{j + \frac{1}{2}}$ from \eqref{eqn:ModifiedHValue}. Combining the centred and interface source terms our approximation to the source term for $G$ is 
-\begin{equation}
+\begin{equation*}
 S^n_j = \mathcal{S}_j\left( \vecn{\hat{h}},\vecn{\ddot{h}},\vecn{\hat{w}},\vecn{\hat{b}}, \vecn{\hat{u}}  \right)=   S^{-}_{j + \frac{1}{2}} + \Delta x S_{ci} + S^{+}_{j - \frac{1}{2}}.
-\label{eqn:SourceTerm}
-\end{equation}
+\end{equation*}
 
 
 \subsection{Update Cell Averages}
@@ -510,7 +499,7 @@ b_{m+3/2} \\ b_{m+11/6} \\ b_{m+13/6} \\ b_{m+5/2} \BM\end{bmatrix}.
 
 To ensure that the solution of $u$ by \eqref{eqn:usolvefromGhb} agrees with the boundary conditions $\vecn{\hat{u}}_{-1}$ and $\vecn{\hat{u}}_{m}$ the element-wise stiffness matrices $\matr{A}_0$ and $\matr{A}_m$ and vectors $\vecn{g}_0$ and $\vecn{g}_m$ must be modified in the following way 
 
-\begin{align}
+\begin{align*}
 \matr{A}_{0} = 
 \begin{bmatrix}
 \TM 1 &0 &0 \\
@@ -531,7 +520,7 @@ a_{21} & a_{22} & a_{23} \\
 g_1 \\
 u_{m+1/2} \BM
 \end{bmatrix}.
-\end{align}
+\end{align*}
 These are then assembled with the other element contributions in the global stiffness matrix $\matr{A}$ and right hand side vector $\vecn{g}$ in \eqref{eqn:FEMElemMatrixJ}.
 
 \section{Dry Beds}

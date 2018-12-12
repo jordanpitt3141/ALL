@@ -7,13 +7,11 @@ The Serre equations are a system of partial differential equations that describe
 
 The Serre equations for one-dimensional flows over horizontal beds were first derived by \citet{Serre-F-1953-857} using asymptotic expansion then later derived using depth integration by \citet{Su-Gardener-1969-536}; they are equivalent to the Green-Naghdi equations \cite{Green-Naghdi-1976-237} derived using the theory of directed fluid sheets. The Serre equations were then extended to spatially varying bathymetry by \citet{Seabra-Santos-etal-1987-117}. 
 
-The Serre equations are fully nonlinear and thus applicable across the entire range of characteristic wave amplitudes $a_0$ which are usually summarised using the nonlinearity parameter $\epsilon = a_0 / h_0$. The fluid described by the Serre equations possesses a non hydrostatic pressure distribution and is dispersive in nature, as are real fluids. Furthermore, the dispersion relationship of linear waves of the Serre equations well approximates the linear wave theory for the Euler equations \cite{Barthelemy-2004-315}. For these reasons the Serre equations are considered one of the best approximate water wave models \cite{Bonneton-Lannes-2009-16601,Bonneton-etal-2011-1479}. 
+The Serre equations are fully nonlinear and thus applicable across the entire range of characteristic wave amplitudes $a_0$ which are usually summarised using the nonlinearity parameter $\epsilon = a_0 / h_0$. The fluid described by the Serre equations possesses a non-hydrostatic pressure distribution and is dispersive in nature, as are real fluids. Furthermore, the dispersion relationship of linear waves of the Serre equations well approximates the linear wave theory for the Euler equations \cite{Barthelemy-2004-315}. For these reasons the Serre equations are considered one of the best approximate water wave models \cite{Bonneton-Lannes-2009-16601,Bonneton-etal-2011-1479}. 
 
 In this chapter we present the one-dimensional Serre equations and a reformulation of these equations into conservation law form. We then present the relevant properties of the Serre equations that will be used to assess the validity of the developed numerical methods, ending with the contribution of my research to understanding the behaviour of steep gradients in the free-surface. 
 
 \section{The Equations}
-%[!]-----[!] DISPERSION!!!!!
-%full nonlineariy, good approximation to Euler equations up to wave breaking
 In this thesis we take the Serre equations as derived from the depth-integration approach \cite{Su-Gardener-1969-536,Seabra-Santos-etal-1987-117}. Given the extent of the literature already available for the derivation of these equations we will only introduce the relevant quantities and present the equations. The one-dimensional Serre equations describe the behaviour of unsteady free surface fluid flow for an inviscid fluid with constant density $\rho$, neglecting wave-breaking and bottom friction. The primitive variables are the height $h(x,t)$ of the free surface above a stationary bed profile given by $b(x)$ and the depth average horizontal velocity $u(x,t)$ which are all demonstrated in Figure \ref{fig:WaterModel}. 
 
 \begin{figure}
@@ -36,7 +34,8 @@ Unlike the SWWE the vertical velocity of the Serre equations is not zero through
 where
 \begin{subequations}
 	\begin{align}
-	{ \Psi }  &= \dfrac{\partial b}{\partial x}\left(\dfrac{\partial u}{\partial t} + u\dfrac{\partial u}{\partial x} \right)  + u^2\dfrac{\partial^2 b}{\partial x^2}, \label{eqn:SerreeqnPsi} \\ \nonumber \\
+	{ \Psi }  &= \dfrac{\partial b}{\partial x}\left(\dfrac{\partial u}{\partial t} + u\dfrac{\partial u}{\partial x} \right)  + u^2\dfrac{\partial^2 b}{\partial x^2}, \label{eqn:SerreeqnPsi} 
+	\\ \nonumber \\
 	{ \Phi }  &= \dfrac{\partial u }{\partial x} \dfrac{\partial u}{\partial x} -u \dfrac{\partial^2 u}{\partial x^2}  - \dfrac{\partial^2 u}{\partial x \partial t} . \label{eqn:SerreeqnPhi} 
 	\end{align}
 	\label{eqn:FullSerreNonConVarDef}
@@ -45,7 +44,7 @@ By depth integrating the Euler equations \cite{Su-Gardener-1969-536,Zoppou-2014}
 \begin{subequations}
 	\begin{align}
 	&\frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0,  \label{eqn:FullSerreNonConMass} \\ \nonumber \\
-	&\dfrac{\partial (uh)}{\partial t} + \dfrac{\partial}{\partial x} \left ( u^2h + \dfrac{gh^2}{2} + \dfrac{h^2}{2}{\Psi} + \dfrac{h^3}{3}{ \Phi }  \right )  +  \dfrac{\partial b}{\partial x} \left (gh +   h \Psi + \dfrac{h^2}{2}{ \Phi }  \right ) = 0	\label{eqn:FullSerreNonConMome}
+	&\dfrac{\partial (uh)}{\partial t} + \dfrac{\partial}{\partial x} \left ( u^2h + \dfrac{gh^2}{2} + \dfrac{h^2}{2}{\Psi} + \dfrac{h^3}{3}{ \Phi }  \right )  +  \dfrac{\partial b}{\partial x} \left (gh +   h \Psi + \dfrac{h^2}{2}{ \Phi }  \right ) = 0.	\label{eqn:FullSerreNonConMome}
 	\end{align}
 	\label{eqn:FullSerreNonCon}
 \end{subequations}
@@ -65,7 +64,7 @@ For a horizontal bed $\partial b / \partial x = 0$, $\Psi = 0$ and so the Serre 
 \end{subequations}	
 For a horizontal bed the Serre equations are more challenging to solve analytically and numerically than the SWWE. 
 
-\subsection{Alternative form of the Serre Equations}
+\subsection{Alternative Form}
 A major hurdle for developing numerical methods for the Serre equations is the presence of the temporal derivative in $\Phi$ and $\Psi$ \eqref{eqn:FullSerreNonConVarDef}. By rewriting the Serre equations and introducing a new conserved quantity $G$ \cite{Hank-etal-2010-2034,Zoppou-2014,Li-2014-169} the Serre equations can be written in conservation law form with a source term
 \begin{subequations}
 	\label{eqn:FullSerreCon}
@@ -100,7 +99,7 @@ For a horizontal bed $\partial b / \partial x = 0$ the conservation law form of 
 \end{subequations}
 
 
-\section{Properties of the Serre Equations}
+\section{Properties}
 The Serre equations possess a number of desirable properties for the modelling of water waves; in particular their conservation of fundamental quantities and dispersion relation. If a numerical method accurately approximates the Serre equations then the numerical method should reproduce the conservation and dispersion properties of the Serre equations. In this thesis these properties and the analytic solutions of the Serre equations are used to assess the veracity of numerical methods. 
 
 To complement the available analytic solutions, the Serre equations are modified to force certain solutions using a source term, which are called forced solutions. These forced solutions will be used to assess the validity of the numerical methods for a wider array of flow scenarios then possible given the limited number of analytic solutions currently available for the Serre equations.
@@ -119,10 +118,10 @@ A quantity is conserved if the total amount of a quantity $q$ in a closed system
 Using this notation conservation of a quantity $q$ means that $\mathcal{C}_{q}(0) = \mathcal{C}_{q}(t)$ for all $t$. 
 
 Integrating the Serre equations in both non-conservation law form \eqref{eqn:FullSerreNonCon} and conservation law form \eqref{eqn:FullSerreCon} for a closed system we get that $h$, $uh$ and $G$ are conserved by the Serre equations. Additionally, the Green-Naghdi equations \cite{Green-Naghdi-1976-237} which are equivalent to the Serre equations for one dimensional flows were derived by conserving the energy
-\begin{equation}
+\begin{equation*}
 	\mathcal{H}(x,t) = \frac{1}{2} \left( gh\left(h + 2b\right) + hu^2  + \frac{h^3}{3} \left[\frac{\partial u}{\partial x}\right]^2 + u^2h\left[\frac{\partial b}{\partial x}\right]^2 - uh^2 \frac{\partial u}{\partial x} \frac{\partial b}{\partial x}  \right).
 	\label{eqn:Hamildef}
-\end{equation}
+\end{equation*}
 Therefore, the one dimensional Serre equations should also conserve $\mathcal{H}$. The energy $\mathcal{H}$ is the sum of the gravitational potential energy, the horizontal kinetic energy and the vertical kinetic energy which integrated over the depth of water are
 \begin{align*}
 & \frac{1}{2}\int_{b}^{h +b} gz \; dx = \frac{1}{2}gh\left(h + 2b\right), \\
@@ -144,17 +143,14 @@ where $U$ and $H$ are the mean velocity and height of the fluid respectively and
 
 
 From the dispersion relation \eqref{eqn:DispersionRelation} the phase velocity $v_p^\pm = \omega^\pm / k$  and the group velocity $v_g^\pm = \partial \omega^\pm / \partial  k$ can be written in terms of the wave number as
-\begin{subequations}
-	\label{eqn:WaveVelocities}
-	\begin{equation}
+	\begin{equation*}
 	\label{eqn:WaveVelocitiesPhase}
 	v_p^\pm = U \pm \sqrt{gH}\sqrt{\frac{3}{\left(kH\right)^2 + 3}},
-	\end{equation}
-	\begin{equation}
+	\end{equation*}
+	\begin{equation*}
 	\label{eqn:WaveVelocitiesGroup}
 	v_g^\pm = U \pm \sqrt{gH} \left(\sqrt{\frac{3}{\left(kH\right)^2 + 3}} \mp \left(kH\right)^2 \sqrt{\frac{3}{\left(\left[kH\right]^2 + 3 \right)^3}}\right).
-	\end{equation}
-\end{subequations}
+	\end{equation*}
 Since both the phase and group velocities depend on the wave number, waves of different wavelengths travel at different speeds meaning the Serre equations describe dispersive waves.
 
 Fortunately, the phase velocity and the group velocity of waves are bounded, since as $k \rightarrow 0$ then $v_p^\pm$ and $v_g^\pm \rightarrow U \pm \sqrt{gH}$ and as $k \rightarrow \infty$ then $v_p^\pm$ and $v_g^\pm \rightarrow U$. Therefore, we have that
@@ -206,8 +202,7 @@ It represents a quiescent body of water with a horizontal water surface or stage
 
 Since $w(x,t)$ is constant when $h> 0$ then $\partial w / \partial x = \partial h / \partial x + \partial b / \partial x = 0 $ and $u=0$ so that the Serre equations \eqref{eqn:FullSerreCon} reduce to
 \begin{align*}
-& \frac{\partial h}{\partial t}  = 0 , \\  \nonumber \\
-&\frac{\partial G}{\partial t}  = 0.
+& \frac{\partial h}{\partial t}  = 0,  &\frac{\partial G}{\partial t}  = 0.
 \end{align*}
 Therefore, $G$ and $h$ are constant in time and so is $u$ and thus the solution is stationary.
 
@@ -244,8 +239,8 @@ To ensure that the developed numerical methods are robust, their capability to h
 	\begin{align}
 	&h(x,0) =\left\lbrace \begin{array}{l r}
 	h_l & x < x_0 \\
-	h_r & x \ge x_0
-	\end{array} \right., \\
+	h_r & x \ge x_0,
+	\end{array} \right. \\
 	&u(x,0) = 0 , \\
 	&G(x,0) = 0 , \\
 	&b(x) = 0.
@@ -270,9 +265,9 @@ The asymptotic analysis of \citet{El-etal-2006} used Whitham modulation to study
 	\label{eqn:ELWhitMod}	
 \end{subequations}
 where
-\begin{equation}
-\Delta = \frac{\left(\sqrt{\dfrac{h_l}{h_r}} + 1\right)^2}{4 h_r}.
-\end{equation}
+\begin{equation*}
+\Delta = \frac{1}{4 h_r}\left(\sqrt{\dfrac{h_l}{h_r}} + 1\right)^2.
+\end{equation*}
 These estimates were found to agree well with numerical simulations provided that $\Delta < 1.43$ \cite{El-etal-2006}.
 
 The linear analysis studies the behaviour of the linearised Serre equations to garner insights about the full nonlinear Serre equations \eqref{eqn:FullSerreNonCon}. One of the key results of the linear analysis is the dispersion relation \eqref{eqn:DispersionRelation}, which was used by \citet{Dougalis-etal-2007} to argue for a separation of dispersive wave trains in the Serre equations due to the separation of the negative and positive branches of the phase and group velocities \eqref{eqn:WaveVelocitiesBound}. This implies that the structure of dispersive shock waves of the Serre equations should be two separate dispersive wave trains.
@@ -280,21 +275,18 @@ The linear analysis studies the behaviour of the linearised Serre equations to g
 
 \subsubsection{Numerical Solutions for the Smoothed Dam-break Problem}
 To resolve the differences present in the literature a variety of numerical methods were used to solve the most common class of smoothed versions of the dam-break problem initial conditions \eqref{eqn:DBdefhub} which are given by
-\begin{subequations}
-	\begin{align}
+	\begin{align*}
 	&h(x,0) = h_r + \dfrac{h_l - h_r}{2} \left(1 +  \tanh\left(\dfrac{x_0 - x}{\alpha}\right) \right), \\
 	&u(x,0) = 0 , \\
 	&G(x,0) = 0 , \\
 	&b(x) = 0
-	\end{align}
-	\label{eqn:SDBdefhub}
-\end{subequations} 
+	\end{align*}
 where $\alpha$ controls the width of the transition from $h_l$ to $h_r$ and thus the steepness of the initial gradients in the water surface. This was dubbed the smoothed dam-break problem and most of the numerical simulations were focused on the case where $h_l = 1.8m$, $h_r = 1m$ and $x_0 = 500m$ with a final time of $t=30s$. The smoothing parameter $\alpha$ and the resolution of the methods were varied to investigate their influence on the observed behaviour of the numerical solution. Four structures were observed in the numerical solutions; the non-oscillatory structure, the flat structure, the node structure and the growth structure. Numerical solutions at $t=30s$ for the mentioned $h_l$, $h_r$ and $x_0$ values demonstrating examples of the observed structures are shown in Figure \ref{fig:DBExAll}. 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp2/figures/DamBreakStruct/1.pdf}
-		\subcaption{Non-oscillatory Structure}
+		\subcaption{Non-Oscillatory Structure}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
@@ -312,7 +304,7 @@ where $\alpha$ controls the width of the transition from $h_l$ to $h_r$ and thus
 		\subcaption{Growth Structure}
 		\vspace{0.5cm}
 	\end{subfigure}
-	\caption{Examples of the different structures observed in numerical solutions displayed by \citet{Pitt-2018-61}.}
+	\caption{Examples of the different structures observed in numerical solutions to the smoothed dam-break problem displayed by \citet{Pitt-2018-61}.}
 	\label{fig:DBExAll}
 \end{figure}
 

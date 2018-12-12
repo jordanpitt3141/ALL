@@ -264,12 +264,14 @@ for ki in range(8,18):
          h = []
          G= []
          u = []
+         b= []
          for row in readfile:  
              if (j >= 0):
                 x.append( float(row[0]))
                 h.append( float(row[1]))
                 G.append( float(row[2]))
                 u.append( float(row[3]))
+                b.append( float(row[4]))
     
              j = j + 1  
         
@@ -281,26 +283,24 @@ for ki in range(8,18):
     xbeg = arange(startx - niBC*dx,startx,dx)
     xend = arange(endx + dx,endx + (niBC+1)*dx,dx) 
     
-    u0 = u[0]*ones(niBC)
-    u1 = u[-1]*ones(niBC)   
-    h0 = h[0]*ones(niBC)
-    h1 = h[-1]*ones(niBC)
-    G0 = G[0]*ones(niBC)
-    G1 = G[-1]*ones(niBC)
+    h0,u0,G0,b0,w0 = LakeAtRest(xbeg,a0,a1,a2,g,dx)
+    h1,u1,G1,b1,w1 = LakeAtRest(xend,a0,a1,a2,g,dx)
 
     xbc =  concatenate([xbeg,x,xend])
     hbc =  concatenate([h0,h,h1])
     ubc =  concatenate([u0,u,u1])
+    bbc =  concatenate([b0,b,b1])
     Gbc =  concatenate([G0,G,G1])
     
     xbc_c = copyarraytoC(xbc)
     hbc_c = copyarraytoC(hbc)
     ubc_c = copyarraytoC(ubc)
     Gbc_c = copyarraytoC(Gbc)
+    bbc_c = copyarraytoC(bbc)
     
     #hi,ui = solitoninit(n,1,1,9.81,x,0,dx)
 
-    En = HankEnergyall(xbc_c,hbc_c,ubc_c,g,n + 2*niBC,niBC,dx)
+    En = GNall(xbc_c,hbc_c,ubc_c,bbc_c,g,n + 2*niBC,niBC,dx) 
     Pn = uhall(xbc_c,hbc_c,ubc_c,n + 2*niBC,niBC,dx)
     Mn = hall(xbc_c,hbc_c,n + 2*niBC,niBC,dx)
     Gcn = Gall(xbc_c,Gbc_c,n + 2*niBC,niBC,dx)
@@ -315,12 +315,8 @@ for ki in range(8,18):
 
     hI,uI,GI,bI,wI = LakeAtRest(x,a0,a1,a2,g,dx)
     
-    uI0 = uI[0]*ones(niBC)
-    uI1 = uI[-1]*ones(niBC)   
-    hI0 = hI[0]*ones(niBC)
-    hI1 = hI[-1]*ones(niBC)
-    GI0 = GI[0]*ones(niBC)
-    GI1 = GI[-1]*ones(niBC)
+    hI0,uI0,GI0,bI0,wI0 = LakeAtRest(xbeg,a0,a1,a2,g,dx)
+    hI1,uI1,GI1,bI1,wI1 = LakeAtRest(xend,a0,a1,a2,g,dx)
 
     hIbc =  concatenate([hI0,hI,hI1])
     uIbc =  concatenate([uI0,uI,uI1])
@@ -332,7 +328,7 @@ for ki in range(8,18):
     
     #hi,ui = solitoninit(n,1,1,9.81,x,0,dx)
 
-    EnI = HankEnergyall(xbc_c,hIbc_c,uIbc_c,g,n + 2*niBC,niBC,dx)
+    EnI = GNall(xbc_c,hIbc_c,uIbc_c,bbc_c,g,n + 2*niBC,niBC,dx)
     PnI = uhall(xbc_c,hIbc_c,uIbc_c,n + 2*niBC,niBC,dx)
     MnI = hall(xbc_c,hIbc_c,n + 2*niBC,niBC,dx)
     GcnI = Gall(xbc_c,GIbc_c,n + 2*niBC,niBC,dx)
@@ -346,20 +342,20 @@ for ki in range(8,18):
 
     s = sdir + "hC1.dat"
     with open(s,'a') as file1:
-            s ="%3.8f%5s%1.20f\n" %(dx," ",hC1v)
+            s ="%3.8f%5s%1.30f\n" %(dx," ",hC1v)
             file1.write(s) 
     
     s = sdir + "HC1.dat"
     with open(s,'a') as file1:
-            s ="%3.8f%5s%1.20f\n" %(dx," ",EC1v)
+            s ="%3.8f%5s%1.30f\n" %(dx," ",EC1v)
             file1.write(s)     
 
     s = sdir + "uhC1.dat"
     with open(s,'a') as file1:
-            s ="%3.8f%5s%1.20f\n" %(dx," ",uhC1v)
+            s ="%3.8f%5s%1.30f\n" %(dx," ",uhC1v)
             file1.write(s) 
     
     s = sdir + "GC1.dat"
     with open(s,'a') as file1:
-            s ="%3.8f%5s%1.20f\n" %(dx," ",GC1v)
+            s ="%3.8f%5s%1.30f\n" %(dx," ",GC1v)
             file1.write(s)     

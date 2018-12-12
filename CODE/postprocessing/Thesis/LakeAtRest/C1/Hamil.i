@@ -15,6 +15,7 @@
  extern double LinallFEM(double *qbc,int n, int qnBC,double dx);
  extern double uhallFEM(double *ubc,double *hbc,int n,int hnBC,int unBC,double dx);
  extern double HamFEM(double *ubc,double *hbc,double *bbc,int n,int hnBC,int unBC,int bnBC,double dx, double g);
+ extern double GNall(double *x,double *h,double *u, double *b,double g,int n, int nBC,double dx);
   
  %} 
  extern double *mallocPy(int n);
@@ -30,3 +31,4 @@
  extern double LinallFEM(double *qbc,int n, int qnBC,double dx);
  extern double uhallFEM(double *ubc,double *hbc,int n,int hnBC,int unBC,double dx);
  extern double HamFEM(double *ubc,double *hbc,double *bbc,int n,int hnBC,int unBC,int bnBC,double dx, double g);
+ extern double GNall(double *x,double *h,double *u, double *b,double g,int n, int nBC,double dx);

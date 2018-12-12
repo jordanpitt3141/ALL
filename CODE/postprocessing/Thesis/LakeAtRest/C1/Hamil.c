@@ -185,6 +185,76 @@ double uhacrosscell(double *x,double *h,double *u,int j,double dx)
 }
 
 
+double GNacrosscell(double *x,double *h,double *u, double *b,double g,int j,double dx)
+{
+    //so we have h,u at midpoints
+    //epsilon and sigma are everywhere
+
+	double *ucoeff = malloc(5*sizeof(double));
+	double *hcoeff = malloc(5*sizeof(double));
+	double *bcoeff = malloc(5*sizeof(double));
+	
+
+    //jth cell
+    interpquartcoeff(u,ucoeff,j,dx);
+    interpquartcoeff(h,hcoeff,j,dx);
+    interpquartcoeff(b,bcoeff,j,dx);
+    
+    //first gauss point
+    double fgp = 0.5*dx*sqrt(3.0/5.0) + x[j];
+    double fgph = interpquarticval(hcoeff,x[j],fgp);
+    double fgpu = interpquarticval(ucoeff,x[j],fgp);
+    double fgpux = interpquarticgrad(ucoeff,x[j],fgp);
+	double fgpb = interpquarticval(bcoeff,x[j],fgp);
+	double fgpbx = interpquarticval(bcoeff,x[j],fgp);
+    
+    double fgpe = fgph*fgpu*fgpu + 2*g*fgph*(0.5*fgph + fgpb) + i12*(fgph*fgph*fgph)*fgpux*fgpux 
+				+ fgph*(fgpu*fgpbx - 0.5*fgpux*fgph)*(fgpu*fgpbx - 0.5*fgpux*fgph);
+        
+    //second gauss point
+    double sgp = x[j];
+    double sgph = interpquarticval(hcoeff,x[j],sgp);
+    double sgpu = interpquarticval(ucoeff,x[j],sgp);
+    double sgpux = interpquarticgrad(ucoeff,x[j],sgp);
+	double sgpb = interpquarticval(bcoeff,x[j],sgp);
+	double sgpbx = interpquarticval(bcoeff,x[j],sgp);
+    
+    double sgpe = sgph*sgpu*sgpu + 2*g*sgph*(0.5*sgph + sgpb) + i12*(sgph*sgph*sgph)*sgpux*sgpux 
+				+ sgph*(sgpu*sgpbx - 0.5*sgpux*sgph)*(sgpu*sgpbx - 0.5*sgpux*sgph);
+
+    //third gauss point
+    double tgp = -0.5*dx*sqrt(3.0/5.0) + x[j];
+    double tgph = interpquarticval(hcoeff,x[j],tgp);
+    double tgpu = interpquarticval(ucoeff,x[j],tgp);
+    double tgpux = interpquarticgrad(ucoeff,x[j],tgp);
+	double tgpb = interpquarticval(bcoeff,x[j],tgp);
+	double tgpbx = interpquarticval(bcoeff,x[j],tgp);
+    
+    double tgpe = tgph*tgpu*tgpu + 2*g*tgph*(0.5*tgph + tgpb) + i12*(tgph*tgph*tgph)*tgpux*tgpux 
+				+ tgph*(tgpu*tgpbx - 0.5*tgpux*tgph)*(tgpu*tgpbx - 0.5*tgpux*tgph);
+
+	free(ucoeff);
+	free(hcoeff);
+	free(bcoeff);
+    
+    return 0.5*dx*( (5.0/9.0)*fgpe + (8.0/9.0)*sgpe + (5.0/9.0)*tgpe);
+}
+    
+double GNall(double *x,double *h,double *u, double *b,double g,int n, int nBC,double dx)
+{
+	//include approximations to H(a)u(a) + p(a)u(a) - H(b)u(b) - p(b)u(b) (a end, b beg)
+    double sum1 = 0.0;
+	int i;
+	for(i = nBC; i < n - nBC;i++)
+	{
+       sum1 = sum1 + GNacrosscell(x,h,u,b,g,i,dx);
+	}
+	sum1 = 0.5*sum1;
+
+    return sum1; 
+
+}
+
     
 double HankEnergyacrosscell(double *x,double *h,double *u,double g,int j,double dx)
 {

@@ -1,6 +1,5 @@
-\chapter{Linear Analysis of the Numerical Methods}
+\chapter{Linear Analysis}
 \label{chp:AnalNumMethod}
-%eigenfunctions form a basis []
 In this chapter a linear analysis is used to study the convergence and dispersion properties of the numerical methods. 
 
 An important property of a numerical method is convergence. Convergence guarantees that as the spatial and temporal resolution of a numerical method is increased, then the numerical solution approaches the solution of the partial differential equations they approximate. 
@@ -23,9 +22,9 @@ h \\G
 \end{equation}
  where $\matr{E}$ is the evolution matrix relating the conserved quantities $h$ and $G$ at time level $t^n$ with the conserved quantities at time level $t^{n+1}$, which is independent of $n$ and $j$. The evolution matrix $\matr{E}$ is obtained in the analyses by propagating Fourier modes through the numerical scheme. By analysing the properties of $\matr{E}$ we can determine the convergence and dispersion properties of its associated numerical method.
  
- We derive $\matr{E}$ in \eqref{eqn:linearanalaim} for $\text{FEVM}_2$ and perform the convergence and dispersion analysis. We then present the results of the analyses for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$.
+ We derive $\matr{E}$ in \eqref{eqn:linearanalaim} for $\text{FEVM}_2$ and perform the convergence and dispersion analysis. We then present the results of the analyses for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. These results extend those published by \cite{Zoppou-etal-2017} which I produced by including more methods, analysing the convergence properties and allowing non-zero background mean velocities.
  
-\section{Linearised Serre Equations with a Horizontal Bed}
+\section{Linearised Serre Equations}
 The Serre equations with a horizontal bed \eqref{eqn:FullSerreNonConHorizbed} are linearised by considering waves as small perturbations $\delta\times\eta(x,t)$ and $\delta \times\mu(x,t)$ on a flow with a mean height $H$ and a mean velocity $U$ respectively. So we have
 \begin{subequations}
 	\label{eq:pertubation}
@@ -98,7 +97,6 @@ Note that these reconstructions operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_
 
 
 \subsection{Fluid Velocity}
-%[][][][][][]
 To calculate $\mu_{j+1/2}$ we use a second-order FEM. We begin our FEM for \eqref{eqn:LinConSerreG} with its weak formulation, obtained by multiplying \eqref{eqn:LinConSerreG} by a test function $v$ and integrating over the spatial domain $\Omega$
 \begin{equation*}
 \int_{\Omega}G v \; dx = UH\int_{\Omega} v \; dx + U \int_{\Omega} \eta v \; dx +   H\int_{\Omega} \mu v \; dx  + \frac{H^3}{3} \int_{\Omega} \frac{\partial \mu}{\partial x } \frac{\partial v}{\partial x }\; dx.
@@ -127,17 +125,21 @@ Rearranging the equation we have that
 \end{align}
 where
 \begin{align*}
-\mathcal{G}^\eta &=  \dfrac{-U\dfrac{\Delta x}{6} \left(\mathcal{R}^-_{j +1/2} + \mathcal{R}^+_{j +1/2} \right)}{H\frac{\Delta x}{30} \left(4\cos\left(\frac{k \Delta x}{2}\right) - 2\cos\left({k \Delta x}\right) + 8\right) + \frac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right)   }, \\ \\
-\mathcal{G}^G &=  \dfrac{\dfrac{\Delta x}{6} \left(\mathcal{R}^-_{j +1/2} + \mathcal{R}^+_{j +1/2} \right)}{H\frac{\Delta x}{30} \left(4\cos\left(\frac{k \Delta x}{2}\right) - 2\cos\left({k \Delta x}\right) + 8\right) + \frac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right)   }, \\ \\
-\mathcal{G}^c &=  \dfrac{-2UH\dfrac{\Delta x}{6}}{H\frac{\Delta x}{30} \left(4\cos\left(\frac{k \Delta x}{2}\right) - 2\cos\left({k \Delta x}\right) + 8\right) + \frac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right)  } \\
+\mathcal{G}^\eta &=  -\dfrac{\Delta x}{6\mathcal{G}_D } U \left(\mathcal{R}^-_{j +1/2} + \mathcal{R}^+_{j +1/2} \right), \\ \\
+\mathcal{G}^G &= \dfrac{\Delta x}{6\mathcal{G}_D } \left(\mathcal{R}^-_{j +1/2} + \mathcal{R}^+_{j +1/2} \right), \\ \\
+\mathcal{G}^c &=  -\dfrac{\Delta x}{3\mathcal{G}_D }UH
 \end{align*}
-which do not depend on $n$ or $j$ as desired.
+and the common divisor $\mathcal{G}_D$ is
+\begin{multline*}
+\mathcal{G}_D = H\frac{\Delta x}{30} \left(4\cos\left(\frac{k \Delta x}{2}\right) - 2\cos\left({k \Delta x}\right) + 8\right) \\ + \frac{H^3 }{9\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right).
+\end{multline*}
+So that the factors $\mathcal{G}^\eta$, $\mathcal{G}^G$ $\mathcal{G}^c$ do not depend on $n$ or $j$ as desired.
 
 \subsection{Flux Across the Cell Interfaces}
 %LIST THE FACTORS FIRST!!!!
 The average intercell flux $F_{j+1/2}$ is approximated using \eqref{eqn:HLL_flux}. For the linearised Serre equations we have the wave speed bounds \eqref{eqn:WaveVelocitiesBound}, so that
 \begin{align}
-a^-_{j+ 1/2} = \min \left\lbrace 0,  U - \sqrt{g H} \right \rbrace& &\text{and}& &a^+_{j+ 1/2} =  \max \left\lbrace 0, U + \sqrt{g H} \right \rbrace .
+a^-_{j+ 1/2} = \min \left\lbrace 0,  U - \sqrt{g H} \right \rbrace&, &a^+_{j+ 1/2} =  \max \left\lbrace 0, U + \sqrt{g H} \right \rbrace .
 \label{eqn:wavespeedboundslinSerre}
 \end{align}
 
@@ -163,18 +165,15 @@ Using the FEM for $\mu_{j+1/2}$ \eqref{eqn:2ndFEMutoG} and the reconstruction \e
 F^\eta_{j+\frac{1}{2}} &= H \left(\mathcal{G}^G \overline{G}_{j} + \mathcal{G}^{\eta} \overline{\eta}_{j} + \mathcal{G}^c\right) + U \eta^+_{j+1/2} \nonumber \\ &= \left(H \mathcal{G}^{\eta} + U \mathcal{R}^+_{j+1/2} \right)  \overline{\eta}_{j} + H \mathcal{G}^G \overline{G}_{j} + H\mathcal{G}^c .
 \end{align*}
 This can be written as coefficients for $\overline{\eta}_{j}$ and $\overline{G}_{j}$ like so
-\begin{subequations}
-	\label{eqn:Fluxfactorsupercritetaleft}
-\begin{align}
+\begin{align*}
 F^\eta_{j+\frac{1}{2}} &= \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}}
-\end{align}
+\end{align*}
 where
-\begin{align}
+\begin{align*}
 \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} &=  H \mathcal{G}^G,\\
 \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} &=  H \mathcal{G}^{\eta} + U \mathcal{R}^+_{j+1/2},\\
 \mathcal{F}^{\eta, c}_{j+\frac{1}{2}} &=  H\mathcal{G}^c.
-\end{align}
-\end{subequations}
+\end{align*}
 
 Substituting the flux function for the $G$ equation \eqref{eqn:LineMomeG} into the flux approximation \eqref{eqn:fluxleftsupercrit} we obtain
 \begin{equation*}
@@ -185,18 +184,15 @@ Using the FEM \eqref{eqn:2ndFEMutoG} to calculate $\mu_{j+1/2}$ and our interfac
 F^G_{j+\frac{1}{2}} &=  U G^+_{j+1/2} + UH \left(\mathcal{G}^G \overline{G}_{j} + \mathcal{G}^{\eta} \overline{\eta}_{j} + \mathcal{G}^c\right) + gH \eta^+_{j+1/2}
 \end{align*}
 which can be rewritten as
-\begin{subequations}
-\label{eqn:FluxfactorsupercritGleft}
-\begin{align}
+\begin{align*}
 F^G_{j+\frac{1}{2}} &= \mathcal{F}^{G, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{G, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{G, c}_{j+\frac{1}{2}}
-\end{align}
+\end{align*}
 where
-\begin{align}
+\begin{align*}
 \mathcal{F}^{G, G}_{j+\frac{1}{2}} &=  U\mathcal{R}^+_{j+1/2}  +  UH \mathcal{G}^G, \\
 \mathcal{F}^{G, \eta}_{j+\frac{1}{2}} &=  UH \mathcal{G}^{\eta} + gH \mathcal{R}^+_{j+1/2},\\
 \mathcal{F}^{G, c}_{j+\frac{1}{2}} &=  UH\mathcal{G}^c.
-\end{align}
-\end{subequations}
+\end{align*}
 
 
 \subsubsection{Subcritical Flow $-1 \le Fr \le 1$:}
@@ -212,73 +208,57 @@ Substituting in the flux function for $\eta$ given by \eqref{eqn:LinContG} we ge
 F^\eta_{j+\frac{1}{2}} &= \frac{U}{2 \sqrt{gH}} \left( H\mu_{j+1/2} + U\eta^-_{j+\frac{1}{2}} -  H\mu_{j+1/2} - U \eta^+_{j+\frac{1}{2}} \right)   \nonumber \\ & \quad + \frac{1}{2}\left(H\mu_{j+1/2} + U\eta^-_{j+\frac{1}{2}} +  H\mu_{j+1/2} + U \eta^+_{j+\frac{1}{2}}\right) \nonumber \\ &\quad + \dfrac{U^2 - gH}{2\sqrt{g H}} \left (\eta^+_{j+\frac{1}{2}} - \eta^-_{j+\frac{1}{2}} \right).
 \end{align*}
 Using the reconstruction factors \eqref{eqn:RpmfactorFDVM} and the FEM solver factors \eqref{eqn:2ndFEMutoG} and rearranging we get
-\begin{subequations}
-	\begin{align}
+	\begin{align*}
 	F^\eta_{j+\frac{1}{2}} = \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}}
-	\end{align}
+	\end{align*}
 	where
-	\begin{align}
+	\begin{align*}
 	\mathcal{F}^{\eta, G}_{j+\frac{1}{2}} &=  H \mathcal{G}^G\\
 	\mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} &=  H\mathcal{G}^{\eta}  + \frac{U}{2}\left[ \mathcal{R}^-_{j+1/2} +  \mathcal{R}^+_{j+1/2}\right]- \dfrac{\sqrt{gH}}{2} \left [ \mathcal{R}^+_{j+1/2} - \mathcal{R}^-_{j+1/2} \right ]\\
 	\mathcal{F}^{\eta, c}_{j+\frac{1}{2}} &=  H\mathcal{G}^c
-	\end{align}
-	\label{eqn:Fluxfactorsubcriteta}
-\end{subequations}
+	\end{align*}
 
 For the flux function of $G$ \eqref{eqn:LineMomeG} the flux approximation \eqref{eqn:fluxsubcrit} becomes
 \begin{align*}
 F^G_{j+\frac{1}{2}} &= \frac{U}{2 \sqrt{gH}} \left(UG^-_{j+\frac{1}{2}} + UH \mu_{j+1/2} + gH\eta^-_{j+\frac{1}{2}} - UG^+_{j+\frac{1}{2}} - UH \mu_{j+1/2} - gH\eta^+_{j+\frac{1}{2}}  \right)   \nonumber \\ & \quad + \frac{1}{2}\left(UG^-_{j+\frac{1}{2}} + UH \mu_{j+1/2} + gH\eta^-_{j+\frac{1}{2}} + UG^+_{j+\frac{1}{2}} + UH \mu_{j+1/2} + gH\eta^+_{j+\frac{1}{2}}\right) \nonumber \\ & \quad+ \dfrac{U^2 - gH}{2\sqrt{g H}} \left ( G^+_{j+\frac{1}{2}} - G^-_{j+\frac{1}{2}} \right ).
 \end{align*}
 By using the reconstruction factors \eqref{eqn:RpmfactorFDVM} and the elliptic solver \eqref{eqn:2ndFEMutoG} we get
-\begin{subequations}
-	\begin{align}
+	\begin{align*}
 	F^G_{j+\frac{1}{2}} = \mathcal{F}^{G, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{G, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{G, c}_{j+\frac{1}{2}}
-	\end{align}
+	\end{align*}
 	where
-	\begin{align}
+	\begin{align*}
 	\mathcal{F}^{G, G}_{j+\frac{1}{2}} &=  UH\mathcal{G}^{G} + + \frac{U}{2} \left[ \mathcal{R}^-_{j+1/2} +\mathcal{R}^+_{j+1/2} \right] - \dfrac{\sqrt{g H}}{2} \left [\mathcal{R}^+_{j+1/2} - \mathcal{R}^-_{j+1/2} \right ],  \\
 	\mathcal{F}^{G, \eta}_{j+\frac{1}{2}} &=  \frac{U\sqrt{gH}}{2} \left[ \mathcal{R}^-_{j+1/2} - \mathcal{R}^+_{j+1/2}  \right] + UH\mathcal{G}^{\eta} + \frac{gH}{2} \left[ \mathcal{R}^-_{j+1/2} +\mathcal{R}^+_{j+1/2} \right], \\
 	\mathcal{F}^{G, c}_{j+\frac{1}{2}} &=  UH\mathcal{G}^c.
-	\end{align}
-	\label{eqn:FluxfactorsubcritG}
-\end{subequations}
-
-
-
+	\end{align*}
 
 
 \subsubsection{Right Supercritical Flow $Fr > 1$:}
 When the flow is flowing to the right and supercritical we have $ Fr > 1 $, which means that $a^-_{j+ 1/2} = 0$ and $a^+_{j+ 1/2} =  U + \sqrt{g H}$. This is very similar to the left supercritical case, except instead of $\mathcal{R}^+_{j+1/2}$ we have $\mathcal{R}^-_{j+1/2}$ in our flux approximation for a general quantity \eqref{eqn:HLL_flux} which reduces to
-\begin{equation}
+\begin{equation*}
 F_{j+\frac{1}{2}} = f\left(q^-_{j+\frac{1}{2}}\right).
-\label{eqn:fluxsupercritright}
-\end{equation}
+\end{equation*}
 Substituting in the flux function into \eqref{eqn:LinContG} and \eqref{eqn:LineMomeG} we obtain
-\begin{subequations}
-	\label{eqn:Fluxfactorsupercritetaright}
-	\begin{align}
+	\begin{align*}
 	F^\eta_{j+\frac{1}{2}} &= \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}}
-	\end{align}
+	\end{align*}
 	where
-	\begin{align}
+	\begin{align*}
 	\mathcal{F}^{\eta, G}_{j+\frac{1}{2}} &=  H \mathcal{G}^G,\\
 	\mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} &=  H \mathcal{G}^{\eta} + U \mathcal{R}^-_{j+1/2},\\
 	\mathcal{F}^{\eta, c}_{j+\frac{1}{2}} &=  H\mathcal{G}^c
-	\end{align}
-\end{subequations}
+	\end{align*}
 and
-\begin{subequations}
-	\label{eqn:FluxfactorsupercritGright}
-	\begin{align}
+	\begin{align*}
 	F^G_{j+\frac{1}{2}} &= \mathcal{F}^{G, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{G, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{G, c}_{j+\frac{1}{2}}
-	\end{align}
+	\end{align*}
 	where
-	\begin{align}
+	\begin{align*}
 	\mathcal{F}^{G, G}_{j+\frac{1}{2}} &=  U\mathcal{R}^+_{j+1/2}  +  UH \mathcal{G}^G, \\
 	\mathcal{F}^{G, \eta}_{j+\frac{1}{2}} &=  UH \mathcal{G}^{\eta} + gH \mathcal{R}^-_{j+1/2},\\
 	\mathcal{F}^{G, c}_{j+\frac{1}{2}} &=  UH\mathcal{G}^c.
-	\end{align}
-\end{subequations}
+	\end{align*}
 
 
 
@@ -295,7 +275,7 @@ Since $\mathcal{F}^{\eta,\eta}_{j-\frac{1}{2}} = e^{-ik\Delta x} \mathcal{F}^{\e
 \overline{G}^{\,n + 1}_{j} &= \overline{G}^{\,n }_{j} -\frac{\Delta t}{\Delta x}  \left( \left[1 - e^{-ik\Delta x}\right]\left[  \mathcal{F}_{j+\frac{1}{2}}^{G,\eta} \overline{\eta}_{j}  + \mathcal{F}_{j+\frac{1}{2}}^{G,G} \overline{G}_j \right] \right).
 \end{align*}
 
-This can be written in matrix form as
+This can be written in matrix form using the identity matrix $\matr{I}$ as
 
 \begin{align}
 \label{eqn:singleEvolveStep}
@@ -399,7 +379,7 @@ In Figure~\ref{fig:StabShall} it can be seen that all methods have $\rho\left(\m
 		\includegraphics[width=\textwidth]{./chp4/figures/New/Stabu1.pdf}
 		\subcaption{$U=1$}
 	\end{subfigure}
-	\caption{Spectral radius of $\matr{E}$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FDVM}_3$({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}). With $H = 1m$ and $k = \frac{\pi}{10}$.}
+	\caption{Spectral radius of $\matr{E}$ against $\Delta x / \lambda$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$ ({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FDVM}_3$ ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}). With $H = 1m$ and $k = \frac{\pi}{10}$.}
 	\label{fig:StabShall}
 \end{figure}
 
@@ -419,9 +399,6 @@ In Figure~\ref{fig:StabShall} it can be seen that all methods have $\rho\left(\m
 %Thus numerical methods with $\rho\left(\matr{E}\right)$ closer to $1$ are closer to the analytic value. In this sense the two finite difference methods are best, although $\mathcal{W}$ is unstable for $U \neq 0m/s$. As expected higher-order FDVM better approximate the analytic value of the growth factor and $\lim_{\Delta x \rightarrow 0}\rho\left(\matr{E}\right) = 1$ for all numerical methods.
 
 We observed the same results for a wide range of $k$, $H$ and $U$ values in particular, all methods except $\mathcal{W}$ were stable for any combination of these variables. While $\mathcal{W}$ was only stable when $U = 0m/s$.
-
-
-
 
 
 \subsection{Consistency}
@@ -476,7 +453,7 @@ Choosing a particular vector norm and its induced matrix norm it is clear from T
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $ \dfrac{1}{2} k^2 U \Delta t \Delta x$  &$ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$ & $- \dfrac{1}{2} k^2 U \Delta t \Delta x$  \T\B  \\
 		\hline
 	\end{tabular}
-	\caption{Lowest order $\Delta x$ term of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$. Here $\beta = 3 + k^2 H^2$.}
+	\caption{Lowest order $\Delta x$ term of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_1$. Here $\beta = 3 + k^2 H^2$.}
 	\label{tab:EerrFDVM1dxerror} 
 \end{table}
 \begin{table}
@@ -490,7 +467,7 @@ Choosing a particular vector norm and its induced matrix norm it is clear from T
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $\dfrac{\sqrt{3gH \beta} - 3U}{\beta} ik \Delta t$ \T \B  \\
 		\hline
 	\end{tabular}
-	\caption{Lowest order $\Delta t$ term of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
+	\caption{Lowest order $\Delta t$ term of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_1$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
 	\label{tab:EerrFDVM1dterror} 
 \end{table}
 \begin{table}
@@ -506,7 +483,7 @@ Choosing a particular vector norm and its induced matrix norm it is clear from T
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $ \dfrac{-9 + H^2k^2\beta}{\beta^2} \dfrac{k^3}{12} i U \Delta t\Delta x^2$ & $\dfrac{\sqrt{3gH \beta} - 3U}{\beta} ik \Delta t$ \T \B  \\
 		\hline 
 	\end{tabular}
-	\caption{Lowest order terms of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
+	\caption{Lowest order terms of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_2$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
 	\label{tab:EerrFDVM2} 
 \end{table}
 \begin{table}
@@ -521,7 +498,7 @@ Choosing a particular vector norm and its induced matrix norm it is clear from T
 		$E_{1,0}$& $ -\left(gH - \dfrac{15U^2}{\beta} + \dfrac{9U^2}{\beta}\right)  \dfrac{k^3}{120}\Delta t\Delta x^2$ &  $ \left(-gH + \dfrac{3U^2}{\beta}\right)ik \Delta t$ \T \B  \\
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $ \dfrac{126 + 75H^2 k^2 + 10 H^4 k^4}{\beta^2} \dfrac{k^3}{120} i U \Delta t\Delta x^2$ & $\dfrac{\sqrt{3gH \beta} - 3U}{\beta} ik \Delta t$ \T \B  \\\hline
 	\end{tabular}
-	\caption{Lowest order terms of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
+	\caption{Lowest order terms of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FEVM}_2$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
 	\label{tab:EerrFEVM2} 
 \end{table}
 \begin{table}
@@ -537,7 +514,7 @@ Choosing a particular vector norm and its induced matrix norm it is clear from T
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $ \frac{1}{12} k^4 U \Delta t \Delta x^3$  &$ - \frac{1}{12} \sqrt{gH} k^4 \Delta t\Delta x^3$ & $ -\frac{1}{12} k^4 U \Delta t \Delta x^3$ \T \B  \\ 
 		\hline
 	\end{tabular}
-	\caption{Lowest order $\Delta x$ term of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$. Here $\beta = 3 + k^2 H^2$.}
+	\caption{Lowest order $\Delta x$ term of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_3$. Here $\beta = 3 + k^2 H^2$.}
 	\label{tab:EerrFDVM3dxerror} 
 \end{table}
 \begin{table}
@@ -566,7 +543,7 @@ Choosing a particular vector norm and its induced matrix norm it is clear from T
 		$E_{1,0}$& $ \dfrac{ig \left(3 + \beta\right)}{2\beta^2} k^3\Delta t \Delta x^2$ &  $ -\dfrac{6igk}{\beta} \Delta t$ \T \B  \\
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $\dfrac{ik^3}{3} U \Delta t \Delta x^2$ & $ \sqrt{\dfrac{3gH}{\beta}} 2ik \Delta t $ \T \B  \\  \hline
 	\end{tabular}
-	\caption{Lowest order terms of the Taylor series for the elements of $\matr{E} - e^{i \omega^\pm \Delta t} \matr{I}$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
+	\caption{Lowest order terms of the Taylor series for the elements of $\matr{E} - e^{i \omega^\pm \Delta t} \matr{I}$ for $\mathcal{D}$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
 	\label{tab:EerrD} 
 \end{table}
 \begin{table}
@@ -581,7 +558,7 @@ Choosing a particular vector norm and its induced matrix norm it is clear from T
 		$E_{1,0}$& $ \dfrac{ig \left(3 + \beta\right)}{2\beta^2} k^3\Delta t \Delta x^2$ &  $ -\dfrac{6igk}{\beta} \Delta t$ \T \B  \\
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $\dfrac{ik^3}{3} U \Delta t \Delta x^2$ & $ \sqrt{\dfrac{3gH}{\beta}} 2ik \Delta t $ \T \B  \\  \hline
 	\end{tabular}
-	\caption{Lowest order terms of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
+	\caption{Lowest order terms of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\mathcal{W}$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
 	\label{tab:EerrW} 
 \end{table}
 
@@ -620,7 +597,7 @@ In Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} we present the plots 
 		\includegraphics[width=\textwidth]{./chp4/figures/New/Dispu0Shall.pdf}
 		\subcaption{Real and Imaginary Parts}
 	\end{subfigure}
-	\caption{Relative dispersion error when $H = 1m$, $k = \frac{\pi}{10}$ and $U = 0 m/s$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FDVM}_3$ ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}).}
+	\caption{Relative dispersion error against $\Delta x / \lambda$ when $H = 1m$, $k = \frac{\pi}{10}$ and $U = 0 m/s$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$ ({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FDVM}_3$ ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}).}
 	\label{fig:Dispu0Shall}
 \end{figure}
 \begin{figure}
@@ -638,7 +615,7 @@ In Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} we present the plots 
 		\includegraphics[width=\textwidth]{./chp4/figures/New/Dispu1Shall.pdf}
 		\subcaption{Real and Imaginary Parts}
 	\end{subfigure}
-	\caption{Relative dispersion error when $H = 1m$, $k = \frac{\pi}{10}$ and $U = 1 m/s$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FDVM}_3$ ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}).}
+	\caption{Relative dispersion error against $\Delta x / \lambda$ when $H = 1m$, $k = \frac{\pi}{10}$ and $U = 1 m/s$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$ ({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FDVM}_3$ ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}).}
 	\label{fig:Dispu1Shall}
 \end{figure}
 
@@ -664,7 +641,7 @@ We observed similar results across a wide array of $k$, $H$ and $U$ values. Howe
 		\includegraphics[width=\textwidth]{./chp4/figures/New/Dispu0Fill.pdf}
 		\subcaption{Real and Imaginary Parts}
 	\end{subfigure}
-	\caption{Relative dispersion error when $H = 1m$, $k = 2.5$ and $U = 0m/s$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FDVM}_3$ ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}).}
+	\caption{Relative dispersion error against $\Delta x / \lambda$ when $H = 1m$, $k = 2.5$ and $U = 0m/s$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$ ({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FDVM}_3$ ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}).}
 	\label{fig:Dispu0Fill}
 \end{figure}
 
@@ -687,7 +664,7 @@ Figure~\ref{fig:Dispu1Fill} demonstrates that the results of the real part of th
 		\includegraphics[width=\textwidth]{./chp4/figures/New/Dispu1Fill.pdf}
 		\subcaption{Real and Imaginary Parts}
 	\end{subfigure}
-	\caption{Relative dispersion error when $H = 1m$, $k = 2.5$ and $U = 1m/s$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FEVM}_3$ ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}).}
+	\caption{Relative dispersion error against $\Delta x / \lambda$ when $H = 1m$, $k = 2.5$ and $U = 1m/s$ for $\text{FDVM}_1$ ({\color{green!60!black} \solidrule}), $\text{FDVM}_2$ ({\color{red} \solidrule}), $\text{FEVM}_2$ ({\color{blue} \solidrule}), $\text{FEVM}_3$ ({\solidrule}), $\mathcal{D}$ ({\color{violet!80!white} \solidrule}) and $\mathcal{W}$ ({\color{orange} \solidrule}).}
 	\label{fig:Dispu1Fill}
 \end{figure}
 
@@ -711,7 +688,7 @@ Because all methods were demonstrated to have the expected order of accuracy in 
 		$\text{FEVM}_2$& $\left(U   + \dfrac{\left(42 + 15 k^2H^2\right) \sqrt{3gH \beta}}{20\beta^2}  \right) \dfrac{k^3}{12 } \Delta x^2$ &  $- \dfrac{\left(\omega^+\right)^3}{6 }  \Delta t^2$ \T\B \\
 		$\text{FDVM}_3$& $-\left({2\sqrt{gH} - \sqrt{3\beta}U }\right) \dfrac{ik^4}{24} \Delta x^3$ & $-\dfrac{i\left(\omega^+\right)^4}{24 } \Delta t^3$ \T\B  \\ \hline
 	\end{tabular}
-	\caption{Lowest order terms for $\widetilde{\omega}^+-\omega^+$ for all FDVM and the FEVM. With $  -1 \le Fr \le 1$ and $\beta = 3 + H^2 k^2 $. }
+	\caption{Lowest order terms for Taylor series of $\widetilde{\omega}^+-\omega^+$ for all FDVM and the FEVM. With $  -1 \le Fr \le 1$ and $\beta = 3 + H^2 k^2 $. }
 	\label{tab:Wfactor} 
 \end{table}
 
@@ -726,7 +703,7 @@ Because all methods were demonstrated to have the expected order of accuracy in 
 		$\text{FDVM}_3$& $-\left(2U + \sqrt{\dfrac{3gH}{\beta}} \right) \dfrac{ik^4}{24} \Delta x^3$ & $\left(2U + \sqrt{\dfrac{3gH}{\beta}} \right) \dfrac{ik^4}{24} \Delta x^3$  \T\B  \\
 		\hline
 	\end{tabular}
-	\caption{Lowest order $\Delta x$ term for $\widetilde{\omega}^+-\omega^+$ for all FDVM and the FEVM for supercritical Froude numbers where different from Table \ref{tab:Wfactor}. With $\beta = 3 + H^2 k^2 $. }
+	\caption{Lowest order $\Delta x$ term for Taylor series of $\widetilde{\omega}^+-\omega^+$ for all FDVM for supercritical Froude numbers where different from Table \ref{tab:Wfactor}. With $\beta = 3 + H^2 k^2 $. }
 	\label{tab:Wspatfactor} 
 \end{table}
 	
@@ -740,7 +717,7 @@ Because all methods were demonstrated to have the expected order of accuracy in 
 	$\mathcal{D}$& $- \left(U + \dfrac{\left( 4 + H^2k^2\right)\sqrt{3gH\beta}}{4 \beta^2}\right)\dfrac{k^3}{3 }\Delta x^2$  &$ -\dfrac{\left(\omega^+\right)^3}{3}\Delta t^2$ \T\B  \\
 	$\mathcal{W}$& $\left(U + \dfrac{\left( 4 + H^2k^2\right)\sqrt{3gH\beta}}{4 \beta^2}\right)\dfrac{k^3}{3 }\Delta x^2$  &$ \Bigg( \beta U^2\left[9\sqrt{3gH \beta} + 4 \beta U\right]  $  \T\B \\ & & $+ 3gH^2\left[\sqrt{3gH \beta} + 6 \beta U\right] \Bigg) \dfrac{k^3}{18 \beta^2}\Delta t^2$ \T\B  \\ \hline
 \end{tabular}
-	\caption{Lowest order terms of $\widetilde{\omega}^+-\omega^+$ for $\mathcal{D}$ and $\mathcal{W}$. }
+	\caption{Lowest order terms of the Taylor series of $\widetilde{\omega}^+-\omega^+$ for $\mathcal{D}$ and $\mathcal{W}$. }
 	\label{tab:WFDspatfactor} 
 \end{table}
  %W x orig :  \dfrac{gH\left( 4 + H^2k^2\right)}{2 \beta \sqrt{3gH\beta}}
