@@ -38,7 +38,8 @@
 	width=\textwidth,
 	height = 0.61\textwidth,
 	xtick={ -100},  
-	ytick = {0}, 
+	ytick = {-0.7}, 
+	yticklabels = {0}, 
 	xmin=0, 
 	xmax=10.2, 
 	ymin =-0.7, 
@@ -53,21 +54,23 @@
 	\addplot [name path=a,blue,no markers, raw gnuplot,semithick] gnuplot[id=poly2] {plot 'fileW.dat' smooth  cspline; };
 	
 	
-	\draw[dashed,thick] (axis cs:0,0) -- (axis cs:10,0);
-	\draw[<->,thick] (4.5, -0.5  ) -- (4.5,0);
+	%\draw[dashed,thick] (axis cs:0,0) -- (axis cs:10,0);
+	\draw[<->,thick] (9, -0.7  ) -- (9, 0.5);
 	\draw[<->,thick] (5.5, 0.56) -- (5.5, -0.46);
 	
-	\draw[<->,thick] (3, 0.6 ) -- (3,0);
+	\draw[<->,thick] (0.3, 0.47 ) -- (0.3,-0.7);
 	
 	\draw[->,thick] (5.5, 0.15) -- (7.5, 0.15);
 	
-	\draw[o->,thick] (2.5,-0.1) -- (2.5, -0.35);
-	\node[left] at (2.5,-0.2) {\Large$v(x,z,t)$};
+	\draw[o->,thick] (2.7,0.3) -- (2.7, 0);
+	\draw[->,thick] (2.8,0.27) -- (5,0.27);
+	\node[left] at (2.7,0.15) {\Large$v'(x,z,t)$};
+	\node[above] at (3.8,0.27) {\Large$u'(x,z,t)$};
 	
 	\node[above] at (6.5,0.15) {\Large$u(x,t)$};
-	\node[left] at (5.5,0.2) {\Large$h(x,t)$};
-	\node[left] at (3,0.3) {\Large$w(x,t)$};
-	\node[left] at (4.5,-0.25) {\Large$b(x)$};
+	\node[left] at (5.5,-0.1) {\Large$h(x,t)$};
+	\node[right] at (0.3,-0.1) {\Large$w(x,t)$};
+	\node[right] at (9,-0.1) {\Large$b(x)$};
 	
 		\addplot [
 		thick,

@@ -1,4 +1,4 @@
-\begin{thebibliography}{58}
+\begin{thebibliography}{61}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -20,7 +20,7 @@ A.J. Chorin.
 
 \bibitem[Taylor and Hood(1973)]{Taylor-Hood-1973-73}
 C.~Taylor and P.~Hood.
-\newblock numerical solution of the {N}avier-{S}tokes equations using the
+\newblock Numerical solution of the {N}avier-{S}tokes equations using the
   finite element technique.
 \newblock \emph{Computers \& Fluids}, 1:\penalty0 73--100, 1973.
 
@@ -35,8 +35,7 @@ F.~Bassi and S.~Rebay.
 D.~Lannes and P.~Bonneton.
 \newblock Derivation of asymptotic two-dimensional time-dependent equations for
   surface water wave propagation.
-\newblock \emph{Physics of Fluids}, 21\penalty0 (1):\penalty0 16601--16610,
-  2009.
+\newblock \emph{Physics of Fluids}, 21\penalty0 (1):\penalty0 16601, 2009.
 
 \bibitem[Team(2018)]{ClawPack}
 The Clawpack~Development Team.
@@ -50,15 +49,16 @@ Xiaoming Wang.
 
 \bibitem[Roberts(2018)]{ANUGA}
 Stephen Roberts.
-\newblock Anuga, 2018.
+\newblock {ANUGA}, 2018.
 \newblock URL \url{https://anuga.anu.edu.au/}.
 
 \bibitem[Grue et~al.(2008)Grue, Pelinovsky, Fructus, Talipova, and
   Kharif]{Grue-etal-2008-113}
 J.~Grue, E.N. Pelinovsky, D.~Fructus, T.~Talipova, and C.~Kharif.
 \newblock Formation of undular bores and solitary waves in the strait of
-  {M}alacca caused by the 26 {D}ecember 2004 {I}ndian ocean tsunami.
-\newblock \emph{Journal of Geophysical Research: Oceans}, 113, 2008.
+  {M}alacca caused by the 26 {D}ecember 2004 {I}ndian {O}cean tsunami.
+\newblock \emph{Journal of Geophysical Research: Oceans}, 113\penalty0 (C5),
+  2008.
 
 \bibitem[Kirby et~al.(2013)Kirby, Shi, Tehranirad, Harris, and
   Grilli]{Kirby-etal-2013-39}
@@ -88,9 +88,9 @@ C.~Zoppou, J.~Pitt, and S.~Roberts.
 \newblock \emph{Applied Mathematical Modelling}, 48:\penalty0 70--95, 2017.
 
 \bibitem[Sorensen(2006)]{Sorenson-2006}
-R.M. Sorensen.
-\newblock \emph{Basic Coastal Engineering}.
-\newblock Springer, 3 edition, 2006.
+Robert~M. Sorensen.
+\newblock \emph{Basic coastal engineering}.
+\newblock New York, NY Springer, 3rd edition, 2006.
 
 \bibitem[Serre(1953)]{Serre-F-1953-857}
 F.~Serre.
@@ -136,7 +136,8 @@ P.~Bonneton, F.~Chazel, D.~Lannes, F.~Marche, and M.~Tissier.
 \bibitem[Liggett(1994)]{Liggett-1994}
 J.A Liggett.
 \newblock \emph{Fluid Mechanics}.
-\newblock McGraw-Hill Inc., 1994.
+\newblock McGraw-Hill civil engineering series. McGraw-Hill Inc., New York,
+  1994.
 
 \bibitem[Le~M\'{e}tayer et~al.(2010)Le~M\'{e}tayer, Gavrilyuk, and
   Hank]{Hank-etal-2010-2034}
@@ -163,12 +164,6 @@ J.D Carter and R.~Cienfuegos.
   of the {S}erre equations.
 \newblock \emph{European Journal of Mechanics-B/Fluids}, 30\penalty0
   (3):\penalty0 259--268, 2011.
-
-\bibitem[Pitt et~al.(2017)Pitt, Zoppou, and Roberts]{Pitt-2017-1725}
-J.~Pitt, C.~Zoppou, and S.G Roberts.
-\newblock Importance of dispersion for shoaling waves.
-\newblock \emph{Modelling and Simulation Society of Australia and New Zealand},
-  22\penalty0 (1):\penalty0 1725--1730, 2017.
 
 \bibitem[Li(2002)]{Li-Y-2002}
 Y.~A. Li.
@@ -223,8 +218,8 @@ V.A Dougalis, A.~Duran, M.A. Lopez-Marcos, and D.E. Mitsotakis.
   Bonneton]{Cienfuegos-etal-2006-1217}
 R.~Cienfuegos, E.~Barth{\'e}lemy, and P.~Bonneton.
 \newblock A fourth-order compact finite volume scheme for fully nonlinear and
-  weakly dispersive {B}oussinesq-type equations. part {I}: model development
-  and analysis.
+  weakly dispersive {B}oussinesq-type equations. {P}art {I}: {m}odel
+  development and analysis.
 \newblock \emph{International Journal for Numerical Methods in Fluids},
   51\penalty0 (11):\penalty0 1217--1253, 2006.
 
@@ -244,10 +239,21 @@ A.~G. Filippini, M.~Kazolea, and M.~Ricchiuto.
 
 \bibitem[Pitt(2014)]{Pitt-J-2014}
 J.~Pitt.
-\newblock A second order well balanced hybrid finite volume and finite
-  difference method for the {S}erre equations.
-\newblock {Honour's} thesis, Australian National University, Canberra,
-  Australia, 2014.
+\newblock \emph{A Second Order Well Balanced Hybrid Finite Volume and Finite
+  Difference Method for the {S}erre Equations}.
+\newblock {Honour's} thesis, Australian National University, Mathematical
+  Sciences Institute, College of Physical and Mathematical Sciences, Australian
+  National University, Canberra, ACT 2600, Australia, 2014.
+
+\bibitem[Prenter(1975)]{Preneter-1975}
+P.M. Prenter.
+\newblock \emph{Splines and Variational Methods}.
+\newblock A Wiley-Interscience publication. Wiley, New York, 1975.
+
+\bibitem[Atkinson(1989)]{atkinson-1978}
+K.E. Atkinson.
+\newblock \emph{An introduction to numerical analysis}.
+\newblock John Wiley {\&} Sons, Canada, 2nd edition, 1989.
 
 \bibitem[Roe(1986)]{Roe-1986-337}
 P.L Roe.
@@ -257,7 +263,7 @@ P.L Roe.
 
 \bibitem[Leer(1977)]{VanLeer-1977-276}
 B.~Van Leer.
-\newblock Towards the ultimate conservative difference scheme. {I}{V}. a new
+\newblock Towards the ultimate conservative difference scheme. {I}{V}. {A} new
   approach to numerical convection.
 \newblock \emph{Journal of Computational Physics}, 23\penalty0 (3):\penalty0
   276--299, 1977.
@@ -270,14 +276,15 @@ A.~Harten.
 
 \bibitem[Davis and Rabinowitz(1984)]{Davis-Rabinowitz-1984}
 P.J Davis and P.~Rabinowitz.
-\newblock \emph{Methods of Numerical Integration}, volume~2.
-\newblock Blaisdell Publishing Company, 1984.
+\newblock \emph{Methods of Numerical Integration}.
+\newblock Computer science and applied mathematics. Academic Press, London, 2nd
+  edition, 1984.
 
-\bibitem[Press et~al.(1996)Press, Teukolsky, Vetterling, and
+\bibitem[Press et~al.(1992)Press, Teukolsky, Vetterling, and
   Flannery]{NumRecC-1996}
 W.H Press, S.A Teukolsky, W.T Vetterling, and B.P Flannery.
-\newblock \emph{Numerical Recipes in C}, volume~2.
-\newblock Cambridge University Press, 1996.
+\newblock \emph{Numerical Recipes in C}.
+\newblock Cambridge University Press, Melbourne, 2nd edition, 1992.
 
 \bibitem[Kurganov et~al.(2002)Kurganov, Noelle, and
   Petrova]{Kurganov-etal-2001-707}
@@ -317,9 +324,9 @@ A.~Kurganov and G.~Petrova.
 
 \bibitem[Conte and De~Boor(1980)]{Conte-DeBoor-1980}
 S.~D. Conte and C.~De~Boor.
-\newblock \emph{Elementary numerical analysis: an algorithmic approach},
-  volume~3.
-\newblock McGraw-Hill Inc., 1980.
+\newblock \emph{Elementary numerical analysis: an algorithmic approach}.
+\newblock International Series in Pure and Applied Mathematics. McGraw-Hill
+  Inc., New York, 3rd edition, 1980.
 
 \bibitem[Lax and Richtmyer(1956)]{Lax-Richtmyer-1956-267}
 P.~Lax and R.~Richtmyer.
@@ -333,9 +340,14 @@ A.T. Ippen and G.~Kulin.
 \newblock \emph{Coastal Engineering Proceedings}, 1\penalty0 (5):\penalty0 4,
   1954.
 
+\bibitem[Higham(1996)]{higham2002}
+N.J. Higham.
+\newblock \emph{Accuracy and Stability of Numerical Algorithms}.
+\newblock Society for Industrial and Applied Mathematics, Philadelphia, 1996.
+
 \bibitem[Hammack and Segur(1978)]{Hammack-Segur-1978-337}
 J.~L. Hammack and H.~Segur.
-\newblock The {K}orteweg-de {V}ries equation and water waves. part 3.
+\newblock The {K}orteweg-de {V}ries equation and water waves. {P}art 3.
   oscillatory waves.
 \newblock \emph{Journal of Fluid Mechanics}, 84\penalty0 (2):\penalty0
   337--358, 1978.
@@ -353,8 +365,14 @@ S~Beji and J.A. Battjes.
 \bibitem[Lannes(2013)]{Lannes-2013}
 D.~Lannes.
 \newblock \emph{The Water Waves Problem: Mathematical Analysis and
-  Asymptotics}, volume~1 of \emph{American Mathematical Society}.
-\newblock Mathematical Surveys and Monographs, 2013.
+  Asymptotics}, volume 188 of \emph{American Mathematical Society}.
+\newblock Mathematical Surveys and Monographs, Providence, 2013.
+
+\bibitem[Pitt et~al.(2017)Pitt, Zoppou, and Roberts]{Pitt-2017-1725}
+J.~Pitt, C.~Zoppou, and S.G Roberts.
+\newblock Importance of dispersion for shoaling waves.
+\newblock \emph{Modelling and Simulation Society of Australia and New Zealand},
+  22\penalty0 (1):\penalty0 1725--1730, 2017.
 
 \bibitem[Zhang et~al.(2013)Zhang, Kennedy, Panda, Dawson, and
   Westerink]{Zhang-2013-13}
@@ -366,7 +384,8 @@ Y.~Zhang, A.B. Kennedy, N.~Panda, C.~Dawson, and J.J. Westerink.
 V.~Roeber.
 \newblock \emph{{B}oussinesq-type mode for nearshore wave processes in fringing
   reef environment}.
-\newblock PhD thesis, University of Hawaii, Manoa, Honolulu, HI, U.S.A, 2010.
+\newblock PhD thesis, Department of Ocean and Resource Engineering, University
+  of Hawaii, Manoa, Honolulu, HI, U.S.A, 2010.
 
 \bibitem[Synolakis(1987)]{Synolakis-1987-523}
 C.~E. Synolakis.

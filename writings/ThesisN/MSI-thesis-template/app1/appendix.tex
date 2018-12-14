@@ -3,9 +3,12 @@
 For completeness we now provide the definitions of the basis functions of the finite element method used by $\text{FEVM}_2$ described in Chapter \ref{chp:HFVMMethod} and the function spaces mentioned in Chapter \ref{chp:HFVMMethod}. Beginning with the basis function definitions.
 
 \section{Basis Functions}
-Since all integrals of the basis functions are calculated with respect to the variable $\xi$, we give these basis functions in terms of $\xi$.
+Since all integrals of the basis functions are calculated with respect to the variable $\xi$, we give these basis functions in terms of $\xi$. The mapping from the $x$-space for our grid to the canonical $\xi$-space where $\xi \in \left[-1,1\right]$ is
+\begin{equation*}
+x = x_j + \xi \frac{\Delta x}{2}.
+\end{equation*}
 
-The basis functions $\psi$ for $h$ and $G$ demonstrated in Figure \ref{fig:P1DiscBasis} are
+The basis functions $\psi$ for $h$ and $G$ shown in Figure \ref{fig:P1DiscBasisAPP} are
 \begin{subequations}
 	\label{eqn:App1:PsiDef}
 \begin{align}
@@ -20,7 +23,14 @@ The basis functions $\psi$ for $h$ and $G$ demonstrated in Figure \ref{fig:P1Dis
 \end{align}
 \end{subequations}
 
-While the basis functions $\phi$ for $u$ and the test function $v$ displayed in Figure \ref{fig:P2ContBasis} are given by
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{./chp3/figures/P1.pdf}
+	\caption{Support of the discontinuous linear basis functions $\psi$ over a cell.}
+	\label{fig:P1DiscBasisAPP}
+\end{figure}
+
+While the basis functions $\phi$ for $u$ and the test function $v$ displayed in Figure \ref{fig:P2ContBasisAPP} are given by
 \begin{subequations}
 	\label{eqn:App1:PhiDef}
 \begin{align}
@@ -39,6 +49,12 @@ While the basis functions $\phi$ for $u$ and the test function $v$ displayed in 
 \end{array} \right. \\ 
 \end{align}
 \end{subequations}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{./chp3/figures/P2.pdf}
+	\caption{Support of the continuous piecewise quadratic basis functions $\phi$ over a cell.}
+	\label{fig:P2ContBasisAPP}
+\end{figure}
 
 Finally the basis functions $\gamma$ for the bed profile $b$ displayed in Figure \ref{fig:P3ContBasis} are given by
 \begin{subequations}
@@ -64,6 +80,13 @@ Finally the basis functions $\gamma$ for the bed profile $b$ displayed in Figure
 \end{array} \right. 
 \end{align}
 \end{subequations}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{./chp3/figures/P3.pdf}
+	\caption{Support of the continuous piecewise cubic basis functions $\gamma$ over a cell.}
+	\label{fig:P3ContBasisAPP}
+\end{figure}
 
 The calculation of the derivatives of these basis functions with respect to $\xi$ are straightforward and hence omitted. 
 

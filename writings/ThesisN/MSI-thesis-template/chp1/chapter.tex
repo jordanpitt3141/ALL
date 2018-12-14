@@ -1,37 +1,32 @@
 \chapter{Introduction}
 \label{chp:Introduction}
 
-A significant portion of the world's people and critical infrastructure is located near the coast, with shipping being the dominant method of trade in our globalised society. While the ocean provides many opportunities it also poses significant hazards, for instance; tsunamis and storm surges. Furthermore, the dynamics of ocean waves significantly impacts our understanding of other physical phenomena; such as the breakup of sea-ice and the erosion of beaches. Therefore, accurate modelling of ocean waves is important to our society. 
+A significant portion of the world's people and critical infrastructure is located near the coast. While the ocean provides many opportunities it also poses significant hazards from tsunamis and storm surges. Furthermore, the dynamics of ocean waves significantly impacts our understanding of other physical phenomena; such as the breakup of sea-ice and the erosion of beaches. Therefore, accurate modelling of ocean waves is important to our society. 
 
-The physics of water is well understood being an application of Newtons second law; with their governing partial differential equations initially presented by \citet{Euler-1755-274}. These equations were then extended to include viscosity, producing the full Navier-Stokes equations. Numerical methods \cite{Chorin-1967-928,Taylor-Hood-1973-73,Bassi-1997-267} have been developed to solve these full water equations; however due to the complexity of these partial differential equations such methods can only accurately resolve fluid behaviour over small scales and not the scales required to model tsunamis. 
+The physics of water can be described using Newton's second law. From which the partial differential equations initially presented by Euler in 1757 \cite{Euler-1755-274} can be derived. The Euler equations were then extended to include viscosity, producing the full Navier-Stokes equations [][]. Numerical methods \cite{Chorin-1967-928,Taylor-Hood-1973-73,Bassi-1997-267} have been developed to solve the Euler equations; however due to their complexity these methods can only accurately resolve fluid behaviour over small scales and not the scales required to model tsunamis along a coastline. 
 
-For this reason the central focus of water wave modelling has been simplified water wave theories that approximate the behaviour of the free surface of water governed by the Euler equations. The most popular class of these approximate water wave theories are the shallow water wave theories where the characteristic water depth $h_0$ is far smaller than the characteristic wave length $\lambda_0$, so that $\sigma = h_0 / \lambda_0 \ll 1$. Neglecting all terms of order $\mathcal{O}\left(\sigma ^2\right)$ the full Euler equations reduce to the Shallow Water Wave Equations (SWWE) \cite{Bonneton-Lannes-2009-16601} which describe fully nonlinear non-dispersive waves. Retaining higher powers of $\sigma$ leads to a class of equations known as `Boussinesq-type' equations. Boussinesq-type equations are then classified by the powers of $\sigma$ they retain and their retained nonlinearity; which is based on the size of $\epsilon= a_0 / h_0$ which measures the characteristic amplitude of the waves $a_0$ against $h_0$. These wave models form a spectrum with the SWWE being the simplest and most restrictive model and the Boussinesq-type models retaining the highest powers of $\sigma$ and largest $\epsilon$ being the most complex and least restrictive. The Serre equations are one particular Boussniesq-type equation that retains all terms of order $\mathcal{O}\left(\sigma ^4\right)$ and makes no assumption on the size of $\epsilon$ \cite{Bonneton-Lannes-2009-16601} and is thus the most appropriate model for water waves for the $\mathcal{O}\left(\sigma ^4\right)$ class of Boussinesq-type equations. 
+For this reason the central focus of water wave modelling has been simplified water wave theories that approximate the behaviour of the free surface of water governed by the Euler equations. The most popular class of these approximate water wave theories are the shallow water wave theories where the characteristic water depth $h_0$ is far smaller than the characteristic wave length $\lambda_0$, so that $\sigma = h_0 / \lambda_0 \ll 1$. Neglecting all terms of order $\mathcal{O}\left(\sigma ^2\right)$ the full Euler equations reduce to the Shallow Water Wave Equations (SWWE) \cite{Bonneton-Lannes-2009-16601} which describe fully nonlinear non-dispersive waves. Retaining higher powers of $\sigma$ leads to a class of equations known as `Boussinesq-type' equations. Boussinesq-type equations are then classified by the powers of $\sigma$ they retain and their retained nonlinearity; which is based on the size of $\epsilon= a_0 / h_0$ which compares the characteristic amplitude of the waves $a_0$ ro the water depth $h_0$. These wave models form a spectrum with the SWWE being the simplest and most restrictive model and the Boussinesq-type models retaining the highest powers of $\sigma$ and largest $\epsilon$ being the most complex and least restrictive. The Serre equations are one particular Boussinesq-type equation that retains all terms of order $\mathcal{O}\left(\sigma ^4\right)$ and makes no assumption on the size of $\epsilon$ \cite{Bonneton-Lannes-2009-16601}. This allows the Serre equations to better model water waves in intermediate depths closer to the coastline where $\sigma^2$ terms can be significant but $\sigma^4$ are not. Since the Serre equations allow arbitrary wave height they are the most appropriate model for water waves for the $\mathcal{O}\left(\sigma ^4\right)$ class of Boussinesq-type equations. 
 
-There has previously been a significant amount of research into developing large scale, efficient and robust computational methods for the SWWE \cite{ClawPack,Comcot,ANUGA}. The SWWE neglect all terms of order $\mathcal{O}\left(\sigma ^2\right)$ in the Euler equations and so do not capture all water wave behaviour; in particular dispersion. Recent research \cite{Grue-etal-2008-113,Kirby-etal-2013-39} has highlighted the need for dispersive wave models for the evolution of tsunamis. For the purposes of ocean wave modelling the Serre equations are the best placed \cite{Bonneton-Lannes-2009-16601}; retaining high-order $\sigma$ terms and allowing for any size of $\epsilon$. Hence the overarching goal of our research is the development of large-scale, efficient and robust computational models for the Serre equations for the purposes of ocean wave modelling.
+There has previously been a significant amount of research into developing large scale, efficient and robust computational methods for the SWWE \cite{ClawPack,Comcot,ANUGA}. The SWWE neglect all terms of order $\mathcal{O}\left(\sigma ^2\right)$ in the Euler equations and so do not capture all water wave behaviour; in particular dispersion. Recent research \cite{Grue-etal-2008-113,Kirby-etal-2013-39} has highlighted the need for dispersive wave models for the evolution of tsunamis. For the purposes of ocean wave modelling the Serre equations are the best placed \cite{Bonneton-Lannes-2009-16601}; retaining high-order $\sigma$ terms and allowing arbitrary wave amplitude. Hence the overarching goal of our research is the development of large-scale, efficient and robust computational models for the Serre equations for the purposes of wave modelling.
 
 \section{Objectives of the Thesis}
-In view of the overarching goal, the primary motivation of this thesis was the development of a numerical method for the one-dimensional Serre equations that is robust to steep gradients in the free surface and dry beds and can be readily extended to the two dimensional Serre equations using unstructured meshes. 
+In view of the overarching goal, the primary motivation of this thesis was the development of a numerical method for solving the one-dimensional Serre equations that is robust to steep gradients in the free surface, can handle dry beds and can be readily extended to the two-dimensional Serre equations using unstructured meshes. 
 
-This goal was achieved through the improvement of the method described by \citet{Zoppou-2014}. This method was extended to adequately handle dry beds and its finite difference method was replaced with a finite element method, making the method more suitable for unstructured meshes. 
+Some of these goal were achieved through the development of the Finite Element Volume Method (FEVM). The FEVM is an improvement of the Finite Difference Volume Methods described by \citet{Zoppou-2014}. The FEVM can adequately handle dry beds and uses finite element method instead of a finite difference method, making it more suitable for unstructured meshes. 
 
-This method was then assessed with a linear analysis, a validation against analytic and forced solutions and finally with a validation against experimental results. At all stages of this assessment the method is compared to at least one other method; demonstrating its strengths and weaknesses. Overall, the method is found to be superior to the others and satisfies all the desired properties constituting the main goal of the thesis.
+The FEVM was assessed with a linear analysis, a validation against analytic and forced solutions and experimental results. At all stages of this assessment the method is compared to at least one other method to demonstrate its strengths and weaknesses. Overall, the method is found to be superior to others and satisfies all the objectives of the thesis.
 
 \section{Original Contribution of the Thesis}
-%The FEVM method, a third order FDVM
-%Steep gradient review of literature and new result
-%full linear analysis
-%Serre model with dry beds validated against forced solutions and experiments
-
 My research made the following original contributions to the field:
 \begin{itemize}
-	\item Observation and justification of a new structure in the solution of the Serre equations to the dam-break problem.
-	\item Development and description of the well balanced second-order finite element volume method that can handle dry beds.
-	\item Extension of the second-order finite difference volume method to allow for dry beds.
 	\item Implementation of the third-order finite difference volume method.
-	\item A linear analysis of convergence for all developed hybrid finite volume methods and some finite difference methods.
-	\item An analysis of the dispersion properties of all named methods extending previous work by allowing for non-zero mean fluid velocity and analysing the total dispersion error.
-	\item Validation of the method using forced solutions where all terms of the Serre equations are present for wet and dry beds.
-	\item Comparison of numerical solutions of the Serre equations and experimental results in the presence of dry beds and with wave breaking. 
+	\item Observation and justification of a new structure in the solution of the Serre equations in the presence of steep gradients in the free surface.
+	\item Extension of the second-order finite difference volume method to allow for dry beds.
+	\item Development and description of the well-balanced second-order finite element volume method that can handle dry beds.
+	\item A linear analysis of convergence for all developed hybrid finite volume methods as well as some finite difference methods.
+	\item The analysis of the dispersion properties extended previous work by allowing for non-zero mean fluid velocity and considers the total dispersion error of the method.
+	\item Validation of the method using forced solutions where all terms of the Serre equations are present for both wet and dry beds.
+	\item Comparison of numerical solutions of the Serre equations with experimental results in the presence of dry beds and with wave breaking. 
 \end{itemize}
 
 \subsection{Publications}
@@ -39,7 +34,7 @@ My research contributed to the following publications in chronological order.
 
 \begin{center}
 	\textbf{
-		\Large A SOLUTION OF THE CONSERVATION LAW FORM OF THE SERRE EQUATIONS}
+		\Large A Solution of the Conservation Law Form of the Serre Equations}
 	
 	\vspace*{\baselineskip}
 	
@@ -48,17 +43,13 @@ My research contributed to the following publications in chronological order.
 	{C. Zoppou, S.G. Roberts and J. Pitt}
 	\vspace*{0.5\baselineskip}
 \end{center}
-\textbf{Abstract:}
-
-The nonlinear and weakly dispersive Serre equations contain higher-order dispersive terms. These include mixed spatial and temporal derivative flux terms which are difficult to handle numerically. These terms can be replaced by an alternative combination of equivalent temporal and spatial terms, so that the Serre equations can be written in conservation law form. The water depth and new conserved quantities are evolved using a second-order finite-volume scheme. The remaining primitive variable, the depth-averaged horizontal velocity, is obtained by solving a second-order elliptic equation using simple finite differences. Using an analytical solution and simulating the dam-break problem, the proposed scheme is shown to be accurate, simple to implement and stable for a range of problems, including flows with steep gradients. It is only slightly more computationally expensive than solving the shallow water wave equations. \\
 \textbf{My Contribution:}
-
-The greater computational cost was calculated from my numerical methods.  
+I validated the results of my coauthors with my own implementation of the methods. These methods were created to be consistent with a SWWE solver allowing the greater computational cost of solving the Serre equations over the SWWE to be calculated.  
 \vspace*{\baselineskip}
 \begin{center}
 	\textbf{
-		\Large Numerical solution of the fully non-linear weakly dispersive
-		serre equations for steep gradient flows}
+		\Large Numerical Solution of the Fully Non-Linear Weakly Dispersive
+		Serre Equations for Steep Gradient Flows}
 	
 	\vspace*{\baselineskip}
 	
@@ -67,11 +58,6 @@ The greater computational cost was calculated from my numerical methods.
 	{C. Zoppou, J. Pitt and S.G. Roberts}
 	\vspace*{0.5\baselineskip}
 \end{center}
-\textbf{Abstract:}
-
-We demonstrate a numerical approach for solving the one-dimensional non-linear weakly dispersive Serre equations. By introducing a new conserved quantity the Serre equations can be written in conservation law form, where the velocity is recovered from the conserved quantities at each time step by solving an auxiliary elliptic equation. Numerical techniques for solving equations in conservative law form can then be applied to solve the	Serre equations. We demonstrate how this is achieved. The system of conservation equations are solved using the finite volume method and the associated elliptic equation for the velocity is solved using a finite difference method. This robust approach allows us to accurately solve problems with steep gradients in the flow, such as those generated by discontinuities in the initial conditions.
-
-The method is shown to be accurate, simple to implement and stable for a range of problems including flows with steep gradients and variable bathymetry. \\
 \textbf{My Contribution:}
 
 The methods, linear dispersion analysis and numerical solutions were all produced by me; these results were then written up into this paper by my coauthors. 
@@ -88,16 +74,6 @@ The methods, linear dispersion analysis and numerical solutions were all produce
 	{J. Pitt, C. Zoppou and S.G. Roberts}
 	\vspace*{0.5\baselineskip}
 \end{center}
-\textbf{Abstract:}
-
-A tsunami has four main stages of its evolution; in the first stage the tsunami is generated, most commonly by seismic activity near subduction zones. The second stage is the tsunamis propagation through the ocean far from the coast, where variation in bathymetry is slight and gradual. The third stage is the shoaling and interaction of the tsunami with bathymetry as it approaches the coastline. Finally the tsunami reaches and inundates the shore. For our purposes the hydrodynamic models we are interested in deal with the final three stages of the evolution of a tsunami.
-
-The propagation of a tsunami with wavelength $\lambda$ through water that is $H$ deep is well understood when $\lambda / H \le 1/ 20$, which we call shallow water as noted by Sorensen (2006). The wavelengths for tsunamis range from a few to hundreds of kilometres, while the maximum water depth is $11km$ at the Marianas trench, so that most tsunamis occur in shallow water. This stage of tsunami behaviour is adequately modelled using the shallow water wave equations. Current research into tsunamis focuses around more complex approximations to the Euler equations for the third and fourth stages. In this paper we focused on the Serre equations as they are considered a very good model for fluid behaviour up to the shoreline, and they reduce to the shallow water wave equations for large wavelengths. 
-
-Although more complicated, the Serre equations provide a better description of the fluid behaviour than the shallow water wave equations and are therefore more computationally expensive to solve numerically. In particular for the methods of this work, we find that the Serre equations have a run-time $50\%$ longer than our equivalent finite volume method for the shallow water wave equations in the one dimensional case. To simulate tsunamis as efficiently as possible it is important to know when using the more complicated Serre equations leads to more accurate predictions of the evolution of a tsunami than the shallow water wave equations. To investigate this we have numerically simulated a laboratory experiment of periodic waves propagating over a submerged bar, and the propagation of a small amplitude wave up a gradual linear slope using both the Serre and the shallow water wave equations.
-
-The results of these simulations demonstrated that the Serre and shallow water wave equations produce similar results for shoaling waves when the wavelength is large compared to the water depth. This is not surprising as this is the regime under which the shallow water wave equations are derived. However, outside this regime the shallow water wave equations are a poor model for wave shoaling and propagation, poorly approximating the shape and maximum height of waves. Furthermore we demonstrate that for steep waves generated by shoaling, the shallow water wave equations can underestimate the arrival time and amplitude of an incoming wave. These results suggest that for a tsunami it is sufficient to use the shallow water wave equations in stages two and some of stage three, even for large changes in bathymetry. Although dispersive equations such as the Serre equations are required to accurately capture fluid behaviour in stages three and four nearer to the coastline, particularly when wavelengths are short or waves are steep. Since the Serre equations represent only a moderate increase in run-times this suggests that our inundation models should be based on them.
- \\
  \textbf{My Contribution:}
  
  This paper was produced by me with the support of my coauthors based on my own work.
@@ -106,8 +82,7 @@ The results of these simulations demonstrated that the Serre and shallow water w
  
  \begin{center}
  	\textbf{
- 		\Large Behaviour of the Serre equations in the presence of steep
- 		gradients revisited}
+ 		\Large Behaviour of the Serre Equations in the Presence of Steep Gradients Revisited}
  	
  	\vspace*{\baselineskip}
  	
@@ -116,35 +91,17 @@ The results of these simulations demonstrated that the Serre and shallow water w
  	{J.P.A. Pitt, C. Zoppou and S.G. Roberts}
  	\vspace*{0.5\baselineskip}
  \end{center}
- \textbf{Abstract:}
- 
- We use numerical methods to study the short term behaviour of the Serre equations in
- the presence of steep gradients because there are no known analytical solutions for these
- problems. In keeping with the literature we study a class of initial condition problems that
- are a smooth approximation to the initial conditions of the dam-break problem. This class
- of initial condition problems allow us to observe the behaviour of the Serre equations
- with varying steepness of the initial conditions. The numerical solutions of the Serre
- equations are justified by demonstrating that as the resolution increases they converge
- to a solution with little error in conservation of mass, momentum and energy independent
- of the numerical method. We observe and justify four different structures of the converged
- numerical solutions depending on the steepness of the initial conditions. Two of these
- structures were observed in the literature, with the other two not being commonly found
- in the literature. The numerical solutions are then used to assess how well the analytical
- solution of the shallow water wave equations captures the mean behaviour of the solution
- of the Serre equations for the dam-break problem in the short term. Lastly the numerical
- solutions are compared to asymptotic results in the literature to approximate the depth
- and location of the front of an undular bore. \\
  \textbf{My Contribution:}
  
  This paper was produced by me with the support of my coauthors based on my own work.
 
 \section{Organisation of the Thesis}
-Chapter \ref{chp:Serreeqns} proceeds by presenting the one-dimensional Serre equations in conservation law form with a source term, describing their dispersion and conservation properties and then summarising the main results of my investigation into the behaviour of the Serre equations in the presence of steep gradients in the free surface \cite{Pitt-2018-61}.
+Chapter \ref{chp:Serreeqns} proceeds by presenting the one-dimensional Serre equations in conservation law form with a source term. It's dispersion and conservation properties are also presented. Followed by a summary of the main results of my investigation into the behaviour of the Serre equations in the presence of steep gradients in the free surface \cite{Pitt-2018-61}.
 
-This is followed by Chapter \ref{chp:HFVMMethod} which describes in detail the developed method. In this thesis the results of other numerical methods are also provided; descriptions of these methods can be found in the literature \cite{Zoppou-etal-2017,Pitt-2018-61}. However, since the developed method is the preferred method only its description is provided in this thesis. 
+This is followed by Chapter \ref{chp:HFVMMethod} which describes in detail the FEVM. In this thesis the results of other numerical methods are also provided. Descriptions of these methods can be found in the literature \cite{Zoppou-etal-2017,Pitt-2018-61}. 
 
-Chapter \ref{chp:AnalNumMethod} provides a linear analysis of the convergence and dispersion properties of the developed finite element volume method in detail. The analysis begins with the linearised Serre equations over a horizontal bed and then derives the evolution matrix; from which the convergence and dispersion properties of the methods can be studied. The results of the linear analysis are also provided for all the methods used by \citet{Pitt-2018-61}.
+Chapter \ref{chp:AnalNumMethod} provides a linear analysis of the convergence and dispersion properties of the developed finite element volume method in detail. The analysis begins with the linearised Serre equations over a horizontal bed and then derives the evolution matrix; from which the convergence and dispersion properties of the methods can be studied. The results of the linear analysis are also provided for all the methods used by \citet{Pitt-2018-61} for comparison.
 
-The convergence and conservation properties of the numerical methods of \citet{Pitt-2018-61} are then assessed in Chapter \ref{chp:NumMethodComp} using analytic and forced solutions of the Serre equations. While Chapter \ref{chp:ExpMethodComp} validates the numerical methods against experimental results.
+The convergence and conservation properties of the numerical methods of \citet{Pitt-2018-61} are then assessed in Chapter \ref{chp:NumMethodComp} using analytic and forced solutions of the Serre equations. While Chapter in \ref{chp:ExpMethodComp} the numerical methods are validated against experimental results.
 
-Finally, Chapter \ref{chp:Conclusion} summarises the major contributions and findings of the thesis and provides ideas for future work based on the developed method. 
+Finally, Chapter \ref{chp:Conclusion} summarises the major contributions and findings of the thesis and provides ideas for future work. 

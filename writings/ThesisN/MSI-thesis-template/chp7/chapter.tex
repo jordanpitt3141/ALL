@@ -8,7 +8,7 @@
 %Validated against analytic, forced solutions
 %Validated against experimental results
 
-The evolution of the dam-break problem for the Serre equations was comprehensively studied using various numerical methods resulting in the observation of new behaviours and the resolution of the differences previously reported in the literature.  
+The evolution of the dam-break problem for the Serre equations was comprehensively studied using various numerical methods resulting in the observation of new behaviours and the resolution of differences previously reported in the literature.  
 
 A well balanced second-order FEVM was described for the one-dimensional Serre equations. This method makes use of a consistent polynomial representation of the quantities over the cells from which all necessary terms can be calculated locally over the cell; making it a readily parrallelisable computational method. The method uses a finite element and a finite volume method and thus is robust to steep gradients present in the conserved variables $h$ and $G$. 
 
@@ -18,7 +18,7 @@ A comparison of the various numerical methods and the analytic solitary travelli
 
 The second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were then validated against the lake at rest steady state and the forced solutions. These results demonstrated that these methods are well balanced and accurately approximate all terms in the Serre equations in the presence of dry beds. 
 
-Finally the second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were compared to experimental data; demonstrating their modelling capabilities across a wide array of physical scenarios. These results established the greater robustness of $\text{FEVM}_2$; as $\text{FDVM}_2$ was found to be unstable in the presence of large jumps in the water surface. 
+Finally the second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were compared to experimental data; demonstrating their modelling capabilities across a wide array of physical scenarios. These results established the greater robustness of $\text{FEVM}_2$; as $\text{FDVM}_2$ was found to be unstable for the solitary wave over a fringing reef experiment due to the presence of large jumps in the water surface as the wave moved into shallow water. 
 
 To summarise the major contributions of my research are
 \begin{itemize}
@@ -35,9 +35,9 @@ Following the work conducted in this thesis; some natural extensions are
 	\item Inclusion of wave breaking in the model; 
 	\item Implementation of different boundary conditions;
 	\item Incorporation of discontinuous bed profiles;
-	\item Incorporation of bed friction;
-	\item A complete analysis of the convergence properties of these methods;
-	\item Extension of the FEVM to the two dimensional Serre equations on unstructured meshes.
+	\item Incorporation of bed friction in the method;
+	\item A complete analysis of the convergence properties of the FEVM;
+	\item Extension of the FEVM to the two-dimensional Serre equations on unstructured meshes.
 \end{itemize}
 
 

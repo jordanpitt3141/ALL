@@ -411,8 +411,7 @@ double HankEnergyacrosscell(double *x,double *h,double *u, double *b,double g,in
 	double fgpb = interpquarticval(bcoeff,x[j],fgp);
 	double fgpbx = interpquarticval(bcoeff,x[j],fgp);
     
-    double fgpe = fgph*fgpu*fgpu + 2*g*fgph*(0.5*fgph + fgpb) + i12*(fgph*fgph*fgph)*fgpux*fgpux 
-				+ fgph*(fgpu*fgpbx - 0.5*fgpux*fgph)*(fgpu*fgpbx - 0.5*fgpux*fgph);
+    double fgpe = fgph*fgpu*fgpu + g*fgph*(fgph) + i3*(fgph*fgph*fgph)*fgpux*fgpux;
         
     //second gauss point
     double sgp = x[j];
@@ -422,8 +421,7 @@ double HankEnergyacrosscell(double *x,double *h,double *u, double *b,double g,in
 	double sgpb = interpquarticval(bcoeff,x[j],sgp);
 	double sgpbx = interpquarticval(bcoeff,x[j],sgp);
     
-    double sgpe = sgph*sgpu*sgpu + 2*g*sgph*(0.5*sgph + sgpb) + i12*(sgph*sgph*sgph)*sgpux*sgpux 
-				+ sgph*(sgpu*sgpbx - 0.5*sgpux*sgph)*(sgpu*sgpbx - 0.5*sgpux*sgph);
+    double sgpe = sgph*sgpu*sgpu + g*sgph*sgph + i3*(sgph*sgph*sgph)*sgpux*sgpux;
 
     //third gauss point
     double tgp = -0.5*dx*sqrt(3.0/5.0) + x[j];
@@ -433,14 +431,13 @@ double HankEnergyacrosscell(double *x,double *h,double *u, double *b,double g,in
 	double tgpb = interpquarticval(bcoeff,x[j],tgp);
 	double tgpbx = interpquarticval(bcoeff,x[j],tgp);
     
-    double tgpe = tgph*tgpu*tgpu + 2*g*tgph*(0.5*tgph + tgpb) + i12*(tgph*tgph*tgph)*tgpux*tgpux 
-				+ tgph*(tgpu*tgpbx - 0.5*tgpux*tgph)*(tgpu*tgpbx - 0.5*tgpux*tgph);
+    double tgpe = tgph*tgpu*tgpu + g*tgph*(tgph) + i3*(tgph*tgph*tgph)*tgpux*tgpux;
 
 	free(ucoeff);
 	free(hcoeff);
 	free(bcoeff);
     
-    return 0.5*dx*( (5.0/9.0)*fgpe + (8.0/9.0)*sgpe + (5.0/9.0)*tgpe);
+    return 0.5*dx*( 5*fgpe + 8*sgpe + 5*tgpe);
 }
     
 double HankEnergyall(double *x,double *h,double *u, double *b,double g,int n, int nBC,double dx)
@@ -452,7 +449,7 @@ double HankEnergyall(double *x,double *h,double *u, double *b,double g,int n, in
        sum1 = sum1 + HankEnergyacrosscell(x,h,u,b,g,i,dx);
 		//printf("i : %d || x : %f || h : %f || u : %f \n",i,x[i],h[i],u[i]);
 	}
-    return 0.5*sum1; 
+    return 0.5*sum1 / 9.0; 
 
 }
 
@@ -816,8 +813,8 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]*(hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]*(hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+    hjphm=  hbc[3*(i) + 2]; 
+    hjmhp=  hbc[3*(i)]; 
 
     Gjphm= Gbc[3*(i) + 2];
     Gjmhp= Gbc[3*(i)];
@@ -958,9 +955,9 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
         bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]* (hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]* (hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
-
+    hjphm=  hbc[3*(i) + 2]; 
+    hjmhp=  hbc[3*(i)]; 
+    
         Gjphm= Gbc[3*(i) + 2];
         Gjmhp= Gbc[3*(i)];
 
@@ -1112,8 +1109,8 @@ void getufromG(double *hbc, double *Gbc, double *bbc, double *uMbeg, double *uMe
     bjph = bbc[3*i + 3];
 
 
-    hjphm=  hbc[3*(i) + 2]* (hbc[3*(i) + 2] +hbase)/ (hbc[3*(i) + 2] + htol); 
-    hjmhp=  hbc[3*(i)]* (hbc[3*(i)] +hbase)/ (hbc[3*(i)] + htol); 
+    hjphm=  hbc[3*(i) + 2]; 
+    hjmhp=  hbc[3*(i)]; 
 
     Gjphm= Gbc[3*(i) + 2];
     Gjmhp= Gbc[3*(i)];

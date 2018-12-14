@@ -582,8 +582,8 @@ double HankEnergyacrosscell(double *x,double *h,double *u, double *b,double g,in
 	double fgpb = interpquarticval(bcoeff,x[j],fgp);
 	double fgpbx = interpquarticval(bcoeff,x[j],fgp);
     
-    double fgpe = fgph*fgpu*fgpu + 2*g*fgph*(0.5*fgph + fgpb) + i12*(fgph*fgph*fgph)*fgpux*fgpux 
-				+ fgph*(fgpu*fgpbx - 0.5*fgpux*fgph)*(fgpu*fgpbx - 0.5*fgpux*fgph);
+    double fgpe = fgph*fgpu*fgpu + g*fgph*(fgph + 2*fgpb) + i3*(fgph*fgph*fgph)*fgpux*fgpux 
+				+ fgpu*fgpu*fgph*fgpbx*fgpbx - fgpu*fgph*fgph*fgpux*fgpbx;
         
     //second gauss point
     double sgp = x[j];
@@ -593,8 +593,8 @@ double HankEnergyacrosscell(double *x,double *h,double *u, double *b,double g,in
 	double sgpb = interpquarticval(bcoeff,x[j],sgp);
 	double sgpbx = interpquarticval(bcoeff,x[j],sgp);
     
-    double sgpe = sgph*sgpu*sgpu + 2*g*sgph*(0.5*sgph + sgpb) + i12*(sgph*sgph*sgph)*sgpux*sgpux 
-				+ sgph*(sgpu*sgpbx - 0.5*sgpux*sgph)*(sgpu*sgpbx - 0.5*sgpux*sgph);
+    double sgpe = sgph*sgpu*sgpu + g*sgph*(sgph + 2*sgpb) + i3*(sgph*sgph*sgph)*sgpux*sgpux 
+				+ sgpu*sgpu*sgph*sgpbx*sgpbx - sgpu*sgph*sgph*sgpux*sgpbx;
 
     //third gauss point
     double tgp = -0.5*dx*sqrt(3.0/5.0) + x[j];
@@ -604,8 +604,8 @@ double HankEnergyacrosscell(double *x,double *h,double *u, double *b,double g,in
 	double tgpb = interpquarticval(bcoeff,x[j],tgp);
 	double tgpbx = interpquarticval(bcoeff,x[j],tgp);
     
-    double tgpe = tgph*tgpu*tgpu + 2*g*tgph*(0.5*tgph + tgpb) + i12*(tgph*tgph*tgph)*tgpux*tgpux 
-				+ tgph*(tgpu*tgpbx - 0.5*tgpux*tgph)*(tgpu*tgpbx - 0.5*tgpux*tgph);
+    double tgpe = tgph*tgpu*tgpu + g*tgph*(tgph + 2*tgpb) + i3*(tgph*tgph*tgph)*tgpux*tgpux 
+				+ tgpu*tgpu*tgph*tgpbx*tgpbx - tgpu*tgph*tgph*tgpux*tgpbx;
 
 	free(ucoeff);
 	free(hcoeff);

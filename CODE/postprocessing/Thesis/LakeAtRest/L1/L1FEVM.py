@@ -202,7 +202,7 @@ def LakeAtRest(x,a0,a1,a2,g,dx):
 
 meth = "FEVM2WB"
 wdirb = "/home/jp/Documents/PhD/project/data/ThesisRaw/LakeAtRest/Dry/" +meth+"/"
-sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/LakeAtRest/" +meth+"/L1/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/LakeAtRest/" +meth+"/L2/"
 
 
 if not os.path.exists(sdir):
@@ -215,6 +215,7 @@ dxs=  []
         
         
 for ki in range(8,18):
+    print(ki)
         
         
     wdir = wdirb + str(ki) + "/"
@@ -277,9 +278,9 @@ for ki in range(8,18):
     
     hA,uA,GA,bA,wA = LakeAtRest(x,a0,a1,a2,g,dx)
     
-    hnorm1 = norm(h -hA,ord=1)/ norm(hA,ord=1)
-    unorm1 = norm(u -uA,ord=1)
-    Gnorm1 = norm(G -GA,ord=1) 
+    hnorm1 = norm(h -hA,ord=2)/ norm(hA,ord=2)
+    unorm1 = norm(u -uA,ord=2)
+    Gnorm1 = norm(G -GA,ord=2) 
     
 
     s = sdir + "hL1.dat"

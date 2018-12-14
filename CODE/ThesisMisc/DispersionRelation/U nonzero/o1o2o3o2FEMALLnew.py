@@ -492,6 +492,8 @@ for i in range(n):
     o21s[i] = close(o2v,-w1)    
     of21s[i] = close(of2v,-w1)    
     oD21s[i] = close(oD2v,-w1)    
+    print(oD2v)
+    print(oW2v)
     oW21s[i] = close(concatenate((oW2v,-array(oW2v))),-w1)    
     o31s[i] = close(o3v,-w1) 
 

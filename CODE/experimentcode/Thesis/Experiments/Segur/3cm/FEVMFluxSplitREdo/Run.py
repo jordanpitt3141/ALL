@@ -36,7 +36,14 @@ def makevar(sx,ex,dx,st,et,dt):
     t = arange(st, et, dt)
     
     return x,t 
+    
+def HamilA(g,a0,a1,x0,x1,x2,x3):
+    Hamil = 0.5*g*(a0**2*(x1 - x0) + a1**2*(x2 - x1) + a0**2*(x3 - x2))
+    return Hamil
 
+def MassA(g,a0,a1,x0,x1,x2,x3):
+    Hamil = (a0*(x1 - x0) + a1*(x2 - x1) + a0*(x3 - x2))
+    return Hamil
 
 def getGfromupy(h,u,bed,u0,u1,h0,h1,b0,b1,dx):
     idx = 1.0 / dx
@@ -101,7 +108,7 @@ def experiment1(x,b,h0,h1,dx):
     h = ones(n)*h1
     bed = zeros(n)
     for i in range(n):
-        if (x[i] <0 - dx and x[i] > -2*b - dx):
+        if (x[i] <0  and x[i] > -2*b):
             h[i] = h0
     
     w = h + bed
@@ -155,7 +162,7 @@ ex = endx
 
 startt = 0.0
 st = startt
-endt = 50
+endt = 0.5
 et = endt
 dx = 0.01
 Cr = 0.5
@@ -220,10 +227,10 @@ b0C = b[0]*ones(niBC)
 b1C = b[-1]*ones(niBC)
 
 
-xbcC =  concatenate([xbegC,x,xendC])
-bbcC =  concatenate([b0C,b,b1C])
-xbcC_c = copyarraytoC(xbcC)
-bbcC_c = copyarraytoC(bbcC)
+xbcC1 =  concatenate([xbegC,x,xendC])
+bbcC1 =  concatenate([b0C,b,b1C])
+xbcC1_c = copyarraytoC(xbcC1)
+bbcC1_c = copyarraytoC(bbcC1)
 
 u0C = u[0]*ones(niBC)
 u1C = u[-1]*ones(niBC)   
@@ -232,22 +239,23 @@ h1C = h[-1]*ones(niBC)
 G0C = G[0]*ones(niBC)
 G1C = G[-1]*ones(niBC)
 
-hbcC =  concatenate([h0C,h,h1C])
-ubcC =  concatenate([u0C,u,u1C])
-GbcC =  concatenate([G0C,G,G1C])
 
-hbcC_c = copyarraytoC(hbcC)
-ubcC_c = copyarraytoC(ubcC)
-GbcC_c = copyarraytoC(GbcC)
+hbcC1 =  concatenate([h0C,h,h1C])
+ubcC1 =  concatenate([u0C,u,u1C])
+GbcC1 =  concatenate([G0C,G,G1C])
 
-Eni = HankEnergyall(xbcC_c,hbcC_c,ubcC_c,bbcC_c,g,n + 2*niBC,niBC,dx)
-Pni = uhall(xbcC_c,hbcC_c,ubcC_c,n + 2*niBC,niBC,dx)
-Mni = hall(xbcC_c,hbcC_c,n + 2*niBC,niBC,dx)
-Gni = Gall(xbcC_c,GbcC_c,n + 2*niBC,niBC,dx)
+hbcC1_c = copyarraytoC(hbcC1)
+ubcC1_c = copyarraytoC(ubcC1)
+GbcC1_c = copyarraytoC(GbcC1)
 
-deallocPy(hbcC_c)
-deallocPy(ubcC_c)
-deallocPy(GbcC_c)
+Eni = HankEnergyall(xbcC1_c,hbcC1_c,ubcC1_c,bbcC1_c,g,n + 2*niBC,niBC,dx)
+Pni = uhall(xbcC1_c,hbcC1_c,ubcC1_c,n + 2*niBC,niBC,dx)
+Mni = hall(xbcC1_c,hbcC1_c,n + 2*niBC,niBC,dx)
+Gni = Gall(xbcC1_c,GbcC1_c,n + 2*niBC,niBC,dx)
+
+deallocPy(hbcC1_c)
+deallocPy(ubcC1_c)
+deallocPy(GbcC1_c)
 
 h_c = copyarraytoC(h)
 G_c = copyarraytoC(G)
@@ -315,19 +323,27 @@ wbcC = copyarrayfromC(wbc_c,hnbc)
 GbcC = copyarrayfromC(Gbc_c,hnbc)
 bbcC = copyarrayfromC(bbc_c,bnbc)
 
-hbcC =  concatenate([h0C,hC,h1C])
-ubcC =  concatenate([u0C,uC,u1C])
-GbcC =  concatenate([G0C,GC,G1C])
+hbcC1 =  concatenate([h0C,hC,h1C])
+ubcC1 =  concatenate([u0C,uC,u1C])
+GbcC1 =  concatenate([G0C,GC,G1C])
 
-hbcC_c = copyarraytoC(hbcC)
-ubcC_c = copyarraytoC(ubcC)
-GbcC_c = copyarraytoC(GbcC)
+hbcC1_c = copyarraytoC(hbcC1)
+ubcC1_c = copyarraytoC(ubcC1)
+GbcC1_c = copyarraytoC(GbcC1)
 
-En = HankEnergyall(xbcC_c,hbcC_c,ubcC_c,bbcC_c,g,n + 2*niBC,niBC,dx)
-Pn = uhall(xbcC_c,hbcC_c,ubcC_c,n + 2*niBC,niBC,dx)
-Mn = hall(xbcC_c,hbcC_c,n + 2*niBC,niBC,dx)
-Gn = Gall(xbcC_c,GbcC_c,n + 2*niBC,niBC,dx)
+En = HankEnergyall(xbcC1_c,hbcC1_c,ubcC1_c,bbcC1_c,g,n + 2*niBC,niBC,dx)
+Pn = uhall(xbcC1_c,hbcC1_c,ubcC1_c,n + 2*niBC,niBC,dx)
+Mn = hall(xbcC1_c,hbcC1_c,n + 2*niBC,niBC,dx)
+Gn = Gall(xbcC1_c,GbcC1_c,n + 2*niBC,niBC,dx)
 
+
+x0 = x[0] - 0.5*dx
+x1 = -2*blength
+x2 = 0
+x3 = x[-1] + 0.5*dx
+MA = MassA(g,h1,h0,x0,x1,x2,x3)
+HA = HamilA(g,h1,h0,x0,x1,x2,x3)
+"""
 s = wdir +  "outListLast.txt"
 with open(s,'w') as file2:
     writefile2 = csv.writer(file2, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -385,7 +401,7 @@ with open(s,'w') as file1:
     for j in range(nt):
         s ="%3.8f%5s%1.15f\n" %(tts[j]*sqrt(g/h1) - WGloc[4]/h1 ," ",1.5*((nwg5s[j] - h1)/h1))
         file1.write(s)
-
+"""
 
 
 

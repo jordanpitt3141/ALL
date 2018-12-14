@@ -3,7 +3,14 @@
 To calculate the conservation errors requires an analytic expression for the total amount of $h$, $uh$, $G$ and $\mathcal{H}$ present in the initial conditions. Therefore to facilitate the validation tests against the analytic solutions performed in Chapter \ref{chp:NumMethodComp} we present these analytic expressions for the initial conditions of solitary travelling wave and the lake at rest solutions described in Chapter \ref{chp:Serreeqns}. To allow for the simple calculation of the integrals in a concise way for any domains we present them in indefinite form. 
 
 \section{Solitary Travelling Wave}
-For the solitary wave solution \eqref{eqn:Solitondefhub} with $t=0s$ the integrals of all the conserved quantities are
+The solitary wave solution \eqref{eqn:Solitondefhub} is
+	\begin{align*}
+	&h(x,t) = a_0 + a_1\text{sech}^2\left(\kappa \left[x - ct\right]\right), \\  \nonumber \\
+	&u(x,t) = c\left(1 - \dfrac{a_0}{h(x,t)}\right), \\
+	&b(x) = 0.
+	\end{align*}
+
+When $t=0$ the indefinite spatial integrals of the conserved quantities are
 \allowdisplaybreaks
 \begin{subequations}
 	\begin{align}
@@ -37,8 +44,16 @@ where these integrals making up $\mathcal{H}$ are
 
 Therefore, we have the analytic values of the total amounts of our conserved quantities for the solitary travelling wave solution \eqref{eqn:Solitondefhub} when $t=0s$, as desired.
 
+
 \section{Lake At Rest}
-For the lake at rest solution \eqref{eqn:LARdefhub} the total momentum and $G$ in the system is straightforward to calculate as both are zero everywhere and so we have 
+The lake at rest solution \eqref{eqn:LARdefhub} for an arbitrary bed profile $b(x)$ is
+	\begin{align*}
+	&h(x,t) = \max\left\lbrace a_0 - b(x), 0 \right\rbrace, \\
+	&u(x,t) = 0 , \\
+	&G(x,t) = 0 .
+	\end{align*}
+
+From this the total $uh$ and $G$ in the system are straightforward to calculate as both are zero everywhere and so we have 
 \begin{subequations}
 	\label{eqn:AppLARu}
 \begin{align}
@@ -46,7 +61,7 @@ For the lake at rest solution \eqref{eqn:LARdefhub} the total momentum and $G$ i
 &\int G(x,0) \; dx = {} 0 + \text{constant}.
 \end{align}
 \end{subequations}
-To calculate the total mass and energy in the solution we must break up our domain into wet regions where $b(x) < a_0$ and dry regions where $b(x) \ge a_0$. For the dry regions the total amount of $h$ and $\mathcal{H}$ are $0$ and so we have 
+To calculate the total $h$ and $\mathcal{H}$ in the solution we must break up our domain into wet regions where $b(x) < a_0$ and dry regions where $b(x) \ge a_0$. For the dry regions the total amount of $h$ and $\mathcal{H}$ are $0$ and so we have 
 \begin{subequations}
 	\label{eqn:AppLARhdry}
 	\begin{align}

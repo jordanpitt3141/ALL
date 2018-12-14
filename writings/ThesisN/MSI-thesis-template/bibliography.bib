@@ -1,3 +1,12 @@
+@book{atkinson-1978,
+	title={An introduction to numerical analysis},
+	author={Atkinson, K.E.},
+	year={1989},
+	Edition= {2nd},
+	Address = {Canada},
+	publisher= {John Wiley {\&} Sons},
+}
+
 @ARTICLE{Bassi-1997-267,
 	AUTHOR      = "Bassi, F. and Rebay, S.",
 	TITLE       = "A High-Order Accurate Discontinuous Finite Element Method for the Numerical Solution of the Compressible {N}avier-{S}tokes Equations",
@@ -63,7 +72,7 @@
 	YEAR 		= 2009,
 	VOLUME		= 21,
 	NUMBER		= 1,
-	PAGES		= "16601-16610",
+	PAGES		= "16601",
 	NOTE		="",
 }
 %
@@ -174,7 +183,7 @@
 
 @ARTICLE{Cienfuegos-etal-2006-1217,
 	AUTHOR      = "Cienfuegos, R. and Barth{\'e}lemy, E. and Bonneton, P.",
-	TITLE       = "A fourth-order compact finite volume scheme for fully nonlinear and weakly dispersive {B}oussinesq-type equations. Part {I}: model development and analysis",
+	TITLE       = "A fourth-order compact finite volume scheme for fully nonlinear and weakly dispersive {B}oussinesq-type equations. {P}art {I}: {m}odel development and analysis",
 	JOURNAL     = "International Journal for Numerical Methods in Fluids",
 	YEAR        = 2006,
 	VOLUME      = 51,
@@ -198,9 +207,11 @@
 @BOOK{Conte-DeBoor-1980,
 	AUTHOR= "Conte, S. D. and De Boor, C.",
 	TITLE = "Elementary numerical analysis: an algorithmic approach",
+	Address = "New York",
+	series = "International Series in Pure and Applied Mathematics",
+	edition= {3rd},
 	YEAR = 1980,
 	PUBLISHER="McGraw-Hill Inc.",
-	VOLUME =  3,
 }
 
 @ARTICLE{Crocker-Wadhams-1989-61,
@@ -220,8 +231,10 @@
 	AUTHOR= "Davis, P.J and Rabinowitz, P.",
 	TITLE = "Methods of Numerical Integration",
 	YEAR = 1984,
-	VOLUME = 2,
-	PUBLISHER="Blaisdell Publishing Company",
+	EDITION = {2nd},
+	series={Computer science and applied mathematics},
+	address = {London},
+	PUBLISHER="Academic Press",
 }
 
 @ARTICLE{Dias-Milewski-2010-1049,
@@ -272,6 +285,9 @@
 	AUTHOR= "Evans, L.C.",
 	TITLE = "Partial Differential Equations",
 	SERIES = "Graduate Studies in Mathematics",
+	edition= {2nd},
+	volume=19,
+	address= "Providence",
 	YEAR = "1998",
 	PUBLISHER="American Mathematical Society",
 }
@@ -320,11 +336,11 @@
 
 @ARTICLE{Grue-etal-2008-113,
 	AUTHOR      = "Grue, J. and Pelinovsky, E.N. and Fructus, D. and Talipova, T. and Kharif, C.",
-	TITLE       = "Formation of undular bores and solitary waves in the Strait of {M}alacca caused by the 26 {D}ecember 2004 {I}ndian Ocean tsunami",
+	TITLE       = "Formation of undular bores and solitary waves in the Strait of {M}alacca caused by the 26 {D}ecember 2004 {I}ndian {O}cean tsunami",
 	JOURNAL     = "Journal of Geophysical Research: Oceans",
 	YEAR        = 2008,
 	VOLUME      = 113,
-	NUMBER      = 'C5',
+	NUMBER      = {C5},
 	NOTE        = "",
 }
 
@@ -332,7 +348,7 @@
 
 @ARTICLE{Hammack-Segur-1978-337,
 AUTHOR      = "Hammack, J. L. and Segur, H.",
-TITLE       = "The {K}orteweg-de {V}ries equation and water waves. part 3. oscillatory waves",
+TITLE       = "The {K}orteweg-de {V}ries equation and water waves. {P}art 3. oscillatory waves",
 JOURNAL     = "Journal of Fluid Mechanics",
 YEAR        = 1978,
 VOLUME      = 84,
@@ -361,6 +377,14 @@ NOTE        = "",
 	NUMBER      = 3,
 	PAGES       = "357-3935",
 	NOTE        = "",
+}
+
+@book{higham2002,
+	title={Accuracy and Stability of Numerical Algorithms},
+	author={Higham, N.J.},
+	address= "Philadelphia",
+	year={1996},
+	publisher={Society for Industrial and Applied Mathematics},
 }
 
 @ARTICLE{Ippen-Kulin-1954-4,
@@ -425,10 +449,11 @@ NOTE        = "",
 	AUTHOR      = "Lannes, D.",
 	EDITOR      = "",
 	TITLE       = "The Water Waves Problem: Mathematical Analysis and Asymptotics",
+	address = "Providence",
 	PUBLISHER   = "Mathematical Surveys and Monographs",
 	SERIES 		= "American Mathematical Society",
 	YEAR        = 2013,
-	VOLUME      = 1,
+	VOLUME      = 188,
 }
 
 @ARTICLE{Lax-Richtmyer-1956-267,
@@ -448,6 +473,7 @@ NOTE        = "",
 	TITLE       = "Finite volume methods for hyperbolic problems",
 	PUBLISHER   = "Cambridge University Press",
 	SERIES 		= "Cambridge Texts in Applied Mathematics",
+	address = "New York",
 	YEAR        = 2002,
 	VOLUME      = 54,
 }
@@ -477,6 +503,8 @@ NOTE        = "",
 	AUTHOR = "Liggett, J.A",
 	TITLE = "Fluid Mechanics",
 	PUBLISHER = "McGraw-Hill Inc.",
+	Address = "New York",
+	series={McGraw-Hill civil engineering series},
 	YEAR = 1994,
 }
 
@@ -503,8 +531,9 @@ NOTE        = "",
 @BOOK{NumRecC-1996,
 	AUTHOR= "Press, W.H and Teukolsky, S.A and Vetterling, W.T and Flannery, B.P",
 	TITLE = "Numerical Recipes in C",
-	VOLUME="2",
-	YEAR = "1996",
+	Edition="2nd",
+	YEAR = "1992",
+	Address ={Melbourne},
 	PUBLISHER="Cambridge University Press",
 }
 
@@ -531,16 +560,22 @@ NOTE        = "",
 	NOTE        = "",
 }
 
-
-
-@MASTERSTHESIS{Pitt-J-2014,
-	AUTHOR="J. Pitt",
-	TITLE="A Second Order Well Balanced Hybrid Finite Volume and Finite Difference Method for the {S}erre Equations",
+@PHDTHESIS{Pitt-J-2014,
+	AUTHOR      = "Pitt, J.",
+	TITLE       = "A Second Order Well Balanced Hybrid Finite Volume and Finite Difference Method for the {S}erre Equations",
 	SCHOOL     = "Australian National University",
 	YEAR        = 2014,
-	ADDRESS = "Canberra, Australia",
+	ADDRESS = "Mathematical Sciences Institute, College of Physical and Mathematical Sciences, Australian National University, Canberra, ACT 2600, Australia",
 	type     = {{Honour's} thesis}
-	
+}
+
+@book{Preneter-1975,
+	title={Splines and Variational Methods},
+	author={Prenter, P.M.},
+	series={A Wiley-Interscience publication},
+	year={1975},
+	address= {New York},
+	publisher={Wiley},
 }
 
 
@@ -578,12 +613,13 @@ NOTE        = "",
 }
 
 @BOOK{Sorenson-2006,
-	TITLE = "Basic Coastal Engineering",
-	EDITION = 3,
-	AUTHOR = "Sorensen, R.M.",
-	YEAR = 2006,
-	PUBLISHER = "Springer",
+title = { Basic coastal engineering },
+author = { Robert M. Sorensen },
+publisher = { New York, NY Springer },
+year = { 2006 },
+edition = { 3rd },
 }
+
 
 @ARTICLE{Su-Gardener-1969-536,
 	AUTHOR      = "Su, C. H. and Gardner, C. S.",
@@ -610,7 +646,7 @@ NOTE        = "",
 
 @ARTICLE{Taylor-Hood-1973-73,
 	AUTHOR      = "Taylor, C. and Hood, P.",
-	TITLE       = "numerical solution of the {N}avier-{S}tokes equations using the finite element technique",
+	TITLE       = "Numerical solution of the {N}avier-{S}tokes equations using the finite element technique",
 	JOURNAL     = "Computers \& Fluids",
 	YEAR        = 1973,
 	VOLUME      = 1,
@@ -622,7 +658,7 @@ NOTE        = "",
 @ARTICLE{VanLeer-1977-276,
 	
 	AUTHOR      = "B. Van Leer",
-	TITLE       = "Towards the Ultimate Conservative Difference scheme. {I}{V}. A New Approach to Numerical Convection",
+	TITLE       = "Towards the Ultimate Conservative Difference scheme. {I}{V}. {A} New Approach to Numerical Convection",
 	JOURNAL     = "Journal of Computational Physics",
 	YEAR        = 1977,
 	VOLUME      = 23,
@@ -655,14 +691,14 @@ NOTE        = "",
 	AUTHOR      = "Roeber, V.",
 	TITLE       = "{B}oussinesq-type mode for nearshore wave processes in fringing reef
 	environment",
-	SCHOOL     = "University of Hawaii",
+	SCHOOL     = "Department of Ocean and Resource Engineering, University of Hawaii",
 	YEAR        = 2010,
 	ADDRESS = "Manoa, Honolulu, HI, U.S.A",
 }
 
 
 @article{Zoppou-etal-2016, 
-		AUTHOR      = "Zoppou, C. and Roberts, S. and Pitt, J.",
+		AUTHOR      = "Zoppou, C. and Roberts, S.G and Pitt, J.",
 		TITLE       = "A SOLUTION OF THE CONSERVATION LAW FORM OF THE SERRE EQUATIONS",
 		VOLUME      = 57,
 		NUMBER      = 4,
@@ -700,8 +736,8 @@ NOTE        = "",
 
 @online{ANUGA,
 	author = "Stephen Roberts",
-	title = "ANUGA",
+	title = "{ANUGA}",
 	year = 2018,
 	url = {https://anuga.anu.edu.au/},
-	urldate = "13/11/2018"
+	urldate = "13/11/2018",
 }
