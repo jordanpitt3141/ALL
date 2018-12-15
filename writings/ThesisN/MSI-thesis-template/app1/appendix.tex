@@ -1,12 +1,13 @@
 \chapter{Finite Element Method Details}
 \label{app:FEMIntegrals}
-For completeness we now provide the definitions of the basis functions of the finite element method used by $\text{FEVM}_2$ described in Chapter \ref{chp:HFVMMethod} and the function spaces mentioned in Chapter \ref{chp:HFVMMethod}. Beginning with the basis function definitions.
+The definitions of the basis functions of the finite element method used by $\text{FEVM}_2$ described in Chapter \ref{chp:HFVMMethod} and the function spaces mentioned in Chapter \ref{chp:HFVMMethod} are provided here. Beginning with the basis function definitions.
 
 \section{Basis Functions}
-Since all integrals of the basis functions are calculated with respect to the variable $\xi$, we give these basis functions in terms of $\xi$. The mapping from the $x$-space for our grid to the canonical $\xi$-space where $\xi \in \left[-1,1\right]$ is
+Since all integrals of the basis functions are calculated with respect to the variable $\xi$, the basis functions are given in terms of $\xi$. The mapping from the $x$-space of the numerical grid to the canonical $\xi$-space is
 \begin{equation*}
 x = x_j + \xi \frac{\Delta x}{2}.
 \end{equation*}
+This mapping takes the $j^{th}$ cell $\left[x_{j-1/2},x_{j+1/2}\right]$ in the $x$-space to the interval $\left[-1,1\right]$ in the $\xi$-space.
 
 The basis functions $\psi$ for $h$ and $G$ shown in Figure \ref{fig:P1DiscBasisAPP} are
 \begin{subequations}
@@ -25,12 +26,12 @@ The basis functions $\psi$ for $h$ and $G$ shown in Figure \ref{fig:P1DiscBasisA
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\textwidth]{./chp3/figures/P1.pdf}
-	\caption{Support of the discontinuous linear basis functions $\psi$ over a cell.}
+	\includegraphics[width=0.8\textwidth]{./app1/Figures/P1.pdf}
+	\caption{Support of the discontinuous linear basis functions $\psi$ in the $\xi$-space.}
 	\label{fig:P1DiscBasisAPP}
 \end{figure}
 
-While the basis functions $\phi$ for $u$ and the test function $v$ displayed in Figure \ref{fig:P2ContBasisAPP} are given by
+The basis functions $\phi$ for $u$ and the test function $v$ displayed in Figure \ref{fig:P2ContBasisAPP} are given by
 \begin{subequations}
 	\label{eqn:App1:PhiDef}
 \begin{align}
@@ -46,13 +47,13 @@ While the basis functions $\phi$ for $u$ and the test function $v$ displayed in 
 \frac{1}{2}\xi(\xi + 1) & -1 \le \xi \le 1\\
 2\left(\xi - 2\right)\left(\xi - \frac{3}{2} \right) & 1 \le \xi \le 2\\
 0 & \text{otherwise}.
-\end{array} \right. \\ 
+\end{array} \right. 
 \end{align}
 \end{subequations}
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\textwidth]{./chp3/figures/P2.pdf}
-	\caption{Support of the continuous piecewise quadratic basis functions $\phi$ over a cell.}
+	\includegraphics[width=0.8\textwidth]{./app1/Figures/P2.pdf}
+	\caption{Support of the continuous piecewise quadratic basis functions $\phi$ in the $\xi$-space.}
 	\label{fig:P2ContBasisAPP}
 \end{figure}
 
@@ -83,15 +84,15 @@ Finally the basis functions $\gamma$ for the bed profile $b$ displayed in Figure
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\textwidth]{./chp3/figures/P3.pdf}
-	\caption{Support of the continuous piecewise cubic basis functions $\gamma$ over a cell.}
+	\includegraphics[width=0.8\textwidth]{./app1/Figures/P3.pdf}
+	\caption{Support of the continuous piecewise cubic basis functions $\gamma$ in the $\xi$-space.}
 	\label{fig:P3ContBasisAPP}
 \end{figure}
 
 The calculation of the derivatives of these basis functions with respect to $\xi$ are straightforward and hence omitted. 
 
 \section{Function Spaces}
-The function spaces mentioned in Chapter \ref{chp:HFVMMethod} are $\mathbb{L}^2(\Omega)$ and $\mathbb{W}^{k,2}(\Omega)$. To be precise we now define these spaces here. 
+The function spaces mentioned in Chapter \ref{chp:HFVMMethod} are the space of square integrable functions $\mathbb{L}^2(\Omega)$ and the Sobolev space $\mathbb{W}^{k,2}(\Omega)$. To be precise we now define these function spaces here. 
 
 A function $f(x)$ is in $\mathbb{L}^2(\Omega)$ if
 \begin{equation*}

@@ -1,0 +1,86 @@
+\documentclass[]{standalone}
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round},every non boxed x axis/.append style={x axis line style=-}, every non boxed y axis/.append style={y axis line style=-}}
+\begin{document} 
+	\begin{tikzpicture} 
+	\begin{axis}[ 
+	width=\textwidth,
+	height = 0.4\textwidth,
+	axis lines=left, 
+	xticklabels=\empty,
+	x axis line style={draw=none},
+	y axis line style={draw=none},
+	ytick=\empty,
+	xtick = \empty,
+	clip mode=individual,
+	xmin=0, 
+	xmax=3, 
+	ymin = -.45, 
+	ymax = 1.2]
+		
+		\draw (axis cs:3,0) -- (axis cs:0,0);
+		\draw (axis cs:0,1) -- (axis cs:0,0);
+		
+		\draw[thin] (axis cs:0,0) -- (axis cs:0,-0.4);
+		\draw[thin] (axis cs:0.33,0) -- (axis cs:0.33,-0.3);
+		\draw[thin] (axis cs:0.66,0) -- (axis cs:0.66,-0.3);
+		
+		\draw[thin] (axis cs:1,0) -- (axis cs:1,-0.4);
+		\draw[thin] (axis cs:1.33,0) -- (axis cs:1.33,-0.3);
+		\draw[thin] (axis cs:1.66,0) -- (axis cs:1.66,-0.3);
+		\draw[thin] (axis cs:2,0) -- (axis cs:2,-0.4);
+
+		\draw[thin] (axis cs:2.33,0) -- (axis cs:2.33,-0.3);
+		\draw[thin] (axis cs:2.66,0) -- (axis cs:2.66,-0.3);
+		\draw[thin] (axis cs:3,0) -- (axis cs:3,-0.4);
+		
+		\draw[thin] (axis cs:0,1) -- (axis cs:-0.05,1);
+		\draw[thin] (axis cs:0,0) -- (axis cs:-0.05,0);
+		
+		\node[left] at (-0.05,0) {\Large$0$};
+		
+		\node[left] at (-0.05,1) {\Large$1$};
+		
+		%\node[below] at (0,-0.4) {$x_{j-3/2}$};
+		%\node[below] at (0.33,-0.3) {$x_{j-7/6}$};
+		%\node[below] at (0.66,-0.3) {$x_{j-5/6}$};
+		
+		\node[below] at (1,-0.4) {$-1$};
+		\node[below] at (1.33,-0.3) {$-1/3$};
+		\node[below] at (1.66,-0.3) {$1/3$};
+		\node[below] at (2,-0.4) {$1$};
+		
+		%\node[below] at (2.33,-0.3) {$x_{j+5/6}$};
+		%\node[below] at (2.66,-0.3) {$x_{j+7/6}$};
+		%\node[below] at (3,-0.4) {$x_{j+3/2}$};
+		
+		\addplot[domain=1:2,samples=25, smooth, thick,] gnuplot[id=poly2]{-13.5*(x-1)*(x-2)*(x-1.33)};
+		\addplot[domain=1:2,samples=25, smooth, thick, green!60!black] gnuplot[id=poly2]{13.7*(x-1)*(x-2)*(x-1.66)};
+		\addplot[domain=1:2,samples=25, smooth, thick, red] gnuplot[id=poly2]{4.38*(x-1)*(x-1.33)*(x-1.66)};
+		\addplot[domain=1:2,samples=25, smooth, thick, blue] gnuplot[id=poly2]{-4.59*(x-2)*(x-1.33)*(x-1.66)};
+		
+		%\addplot[domain=2:3,samples=25, smooth, thick, gray, dashed] gnuplot[id=poly2]{-13.5*(x-2)*(x-3)*(x-2.33)};
+		%\addplot[domain=2:3,samples=25, smooth, thick, gray, dashed] gnuplot[id=poly2]{13.7*(x-2)*(x-3)*(x-2.66)};	
+		\addplot[domain=2:3,samples=25, smooth, thick , red ] gnuplot[id=poly2]{-4.59*(x-3)*(x-2.33)*(x-2.66)};	
+		%\addplot[domain=2:3,samples=25, smooth, thick, gray ,dashed] gnuplot[id=poly2]{4.38*(x-2)*(x-2.33)*(x-2.66)};
+
+		%\addplot[domain=0:1,samples=25, smooth, thick, gray , dashed] gnuplot[id=poly2]{-13.5*(x)*(x-1)*(x-0.33)};
+		%\addplot[domain=0:1,samples=25, smooth, thick, gray , dashed] gnuplot[id=poly2]{13.7*(x)*(x-1)*(x-0.66)};
+		\addplot[domain=0:1,samples=25, smooth, thick, blue] gnuplot[id=poly2]{4.38*(x)*(x-0.33)*(x-0.66)};
+		%\addplot[domain=0:1,samples=25, smooth, thick, gray , dashed] gnuplot[id=poly2]{-4.59*(x-1)*(x-0.33)*(x-0.66)};	
+		
+		
+		\node[left] at (0.95,0.8) {\Large\color{blue}$\boldsymbol{\gamma_{j-1/2}}$};
+		\node[above] at (1.25,1.1) {\Large\color{green!60!black}$\boldsymbol{\gamma_{j-1/6}}$};
+		\node[above] at (1.7,1.1) {\Large$\boldsymbol{\gamma_{j+1/6}}$};
+		\node[right] at (2.1,0.8) {\Large\color{red}$\boldsymbol{\gamma_{j+1/2}}$};
+			
+		
+	\end{axis} 
+	\end{tikzpicture} 
+\end{document}

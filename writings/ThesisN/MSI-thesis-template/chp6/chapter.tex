@@ -2,10 +2,10 @@
 \chapter{Experimental Validation}
 \label{chp:ExpMethodComp}
 
-The numerical methods $\text{FDVM}_2$ and $\text{FEVM}_2$ are experimentally validated by comparing their numerical solutions to experimental data. The chosen experiments allow the methods capability to model a variety of physical situations to be tested. These situations include the presence of steep gradients in the flow, the interaction of strong dispersive waves with varying bathymetry, shoaling and wave breaking and finally the wetting and drying of a sloping beach. Thus, the ability of these methods to robustly reproduce all the experimental results well strongly demonstrates their capability to model a variety of physical situations well. 
+The numerical methods $\text{FDVM}_2$ and $\text{FEVM}_2$ are experimentally validated by comparing their numerical solutions to experimental data. The chosen experiments allow the methods capability to model a variety of physical situations to be tested. These situations include the presence of steep gradients in the flow, the interaction of strong dispersive waves with varying bathymetry, shoaling and wave-breaking and finally the wetting and drying of a sloping beach. Thus, the ability of these methods to robustly reproduce all the experimental results well strongly demonstrates their capability to model a variety of physical situations. 
 
 \section{Evolution of a Rectangular Negative Wave}
-A series of experiments studying the evolution of negative rectangular wave in the free-surface were conducted by \citet{Hammack-Segur-1978-337}. These experiments were performed in a wave tank that was $0.394m$ wide, $31.6m$ long and $0.61m$ high. The rectangular negative waves were generated using a piston $0.61m$ long with its left edge against the wave tank wall. The $0.1m$ deep water is initially stationary with a horizontal free surface and the piston in the up position. The experiment begins when the piston suddenly moves down. This creates a sudden negative rectangular wave in the water surface, generates a dispersive wave train that is recorded at wave gauges located at $0m$, $5m$, $10m$, $15m$ and $20m$ from the right edge of the piston. A diagram of the longitudinal section of the wave-tank with the wave gauge locations is given in Figure \ref{fig:SegurWT}.
+A series of experiments studying the evolution of a negative rectangular wave in the free-surface were conducted by \citet{Hammack-Segur-1978-337}. These experiments were performed in a wave tank that was $0.394m$ wide, $31.6m$ long and $0.61m$ high. The rectangular negative waves were generated using a piston $0.61m$ long with its left edge against the wave tank wall. The $0.1m$ deep water is initially stationary with a horizontal free surface and the piston in the up position. The experiment begins when the piston suddenly moves down. This creates a sudden negative rectangular wave in the water surface generating a dispersive wave train that is recorded at wave gauges located $0m$, $5m$, $10m$, $15m$ and $20m$ away from the right edge of the piston. A diagram of the longitudinal section of the wave-tank with the wave gauge locations marked is given in Figure \ref{fig:SegurWT}.
 
 \begin{figure}
 	\centering
@@ -14,15 +14,17 @@ A series of experiments studying the evolution of negative rectangular wave in t
 	\label{fig:SegurWT}
 \end{figure} 
 
-These experiments provide a good benchmark for the capability of the numerical method to accurately model problems with steep gradients in the free surface. These experiments are affected by bed friction and viscosity and the inability of the piston and water to move vertically instantaneously and slip free. Since the Serre equations do not contain viscosity, bed friction and we use discontinuous initial conditions we expect that the numerical solutions of the Serre equations may produce many more oscillations in the dispersive wave trains than are observed experimentally \cite{Pitt-2018-61}.
+These experiments provide a good benchmark for the capability of the numerical method to accurately model problems with steep gradients in the free surface. These experiments are affected by bed friction and viscosity and the inability of the piston and water to move vertically instantaneously and slip free. Since the Serre equations do not contain viscosity, bed friction and discontinuous initial conditions are used to model the negative rectangular wave we expect that the numerical solutions of the Serre equations may produce many more oscillations in the dispersive wave train than are observed experimentally \cite{Pitt-2018-61}.
 
-\citet{Hammack-Segur-1978-337} report the results for two different initial negative wave depths $0.01m$ and $0.03m$, resulting in the nonlinearity parameters $\epsilon = 0.1$ and $\epsilon=0.3$ respectively. Since these nonlinearity parameters are relatively small there was no breaking of waves throughout the experiment. 
+\citet{Hammack-Segur-1978-337} report the results for two different initial negative wave amplitudes $0.01m$ and $0.03m$, resulting in the non-linearity parameters $\epsilon = 0.1$ and $\epsilon=0.3$ respectively. Since these non-linearity parameters are relatively small there was no breaking of waves throughout the experiment.
 
-This experiment was modelled numerically using the reflected problem, with the wall as the axis of symmetry. In the numerical experiments the domain is $[-60m,60m]$ and the experiment is run for $ 50s$ with $g = 9.81m/s^2$. For the spatial resolution we set $\Delta x = 0.01m$ to satisfy the CFL condition, \eqref{eqn:CFLcond} $\Delta t = 0.5 \Delta x / \sqrt{g \; 0.1}$. The limiting parameter $\theta = 1.2$ was used in the reconstruction in $\text{FEVM}_2$ and $\text{FDVM}_2$.
+This experiment was modelled numerically using the reflected problem, with the left wall of the wave tank as the axis of symmetry. In the numerical experiments the domain is $[-60m,60m]$ and the experiment is run for $ 50s$ with $g = 9.81m/s^2$. For the spatial resolution we set $\Delta x = 0.01m$ to satisfy the CFL condition, \eqref{eqn:CFLcond} $\Delta t = 0.5 \Delta x / \sqrt{g \; 0.1}$. The limiting parameter $\theta = 1.2$ was used in the reconstruction \eqref{eqn:slopehGrecon} in $\text{FEVM}_2$ and $\text{FDVM}_2$.
+
+These results in these experiments were published for $\text{FDVM}_2$ \cite{Zoppou-etal-2017} and have been extended here with the inclusion of the conservation error of $h$, $G$ and $uh$ in the numerical simulation of both experiments.
 
 \subsection{Results for $0.01m$ Negative Rectangular Wave}
 
-Plots comparing the numerical and experimental wave gauge data for the $0.01m$ negative rectangular wave are displayed in Figures \ref{fig:Segur1cmFEVM} and \ref{fig:Segur1cmFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. We present this data using the same dimensionless scales as reported in the original paper \cite{Hammack-Segur-1978-337}. Tables \ref{tab:ConservationSegurFEVM1cm} and \ref{tab:ConservationSegurFDVM1cm} which display the completely numerically calculated error in conservation $C^*_1$ are also provided. 
+Plots comparing the numerical and experimental wave gauge data for the $0.01m$ negative rectangular wave are displayed in Figures \ref{fig:Segur1cmFEVM} and \ref{fig:Segur1cmFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. We present this data using the same dimensionless scales as reported in the original paper \cite{Hammack-Segur-1978-337}. Tables \ref{tab:ConservationSegurFEVM1cm} and \ref{tab:ConservationSegurFDVM1cm} which display the completely numerically calculated error in conservation $C^*$ are also provided. 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFEVM1cm.pdf}
@@ -37,17 +39,18 @@ Plots comparing the numerical and experimental wave gauge data for the $0.01m$ n
 	\label{fig:Segur1cmFDVM}
 \end{figure} 
 
-The numerical solutions agree well with the experimental results; particularly for the front of the dispersive wave train. While all the conserved quantities have indeed been conserved well by the methods. These numerical solutions compare well to those of \citet{Zoppou-etal-2017} for $\text{FDVM}_2$ with $\Delta x = 0.005m$, $\Delta t = 0.2 \Delta t / \sqrt{g 0.1} s$ and $\theta = 1$.  
+The numerical solutions agree well with the experimental results; particularly for the front of the dispersive wave train. While all the conserved quantities have indeed been conserved well by the methods.  
 
-The numerical solutions produce larger and consequently faster waves and observe oscillations in the dispersive wave train which are not present in the experimental data of wave gauge $1$. Moreover, as expected the methods produce many more oscillations than were observed experimentally. These discrepancies can be attributed to the lack of viscosity and bed friction that were omitted from the Serre equations \eqref{eqn:FullSerreCon}. Furthermore, it is highly likely the experiment produced some smooth approximation to a discontinuous jump in the water depth with the down-stroke of the piston. Such a smoothing of the initial conditions will significantly attenuate the high frequency waves in the generated dispersive wave trains \cite{Pitt-2018-61}. Given these differences the numerical methods do a very good job of replicating the experimental behaviour.
+The numerical solutions produce larger and consequently faster waves and observe oscillations in the dispersive wave train which are not present in the experimental data of wave gauge $1$. Moreover, as expected the methods produce many more oscillations than were observed experimentally. These discrepancies can be attributed to the lack of viscosity and bed friction that have been omitted from the Serre equations in this thesis \eqref{eqn:FullSerreCon}. Furthermore, it is highly likely the experiment produced some smooth approximation to a discontinuous jump in the water depth with the down-stroke of the piston. Such a smoothing of the initial conditions will significantly attenuate the high frequency waves in the generated dispersive wave train \cite{Pitt-2018-61}. Given these differences the numerical methods do a very good job of replicating the experimental behaviour.
 
+These numerical solutions compare well to those of \citet{Zoppou-etal-2017} for $\text{FDVM}_2$ with $\Delta x = 0.005m$, $\Delta t = 0.2 \Delta t / \sqrt{g 0.1} s$ and $\theta = 1$. Where a higher resolution and a more diffusive value of the limiting parameter is chosen. These differences had little impact on the results at the wave gauges. While the more diffusive value of the limiting parameter negatively impacts the conservation of $\mathcal{H}$ reported by \citet{Zoppou-etal-2017}. This is because when $\theta = 1$ the reconstruction diffuses the initial steep gradient, negatively affecting the conservation of $\mathcal{H}$ \cite{Pitt-2018-61}.
 
-Both $\text{FEVM}_2$ and $\text{FDVM}_2$ have produced visually identical results at this scale and have demonstrated very good conservation of all the quantities see, Tables \ref{tab:ConservationSegurFEVM1cm} and \ref{tab:ConservationSegurFDVM1cm}. Given the extensive examination of several numerical schemes \cite{Pitt-2018-61} for steep gradient problems, this indicates that these solutions are indicative of true solutions of the Serre equations. However, these results does not demonstrate the superiority of one of these methods over the other. 
+Both $\text{FEVM}_2$ and $\text{FDVM}_2$ have produced visually identical results at this scale and have demonstrated very good conservation of all the quantities see, Tables \ref{tab:ConservationSegurFEVM1cm} and \ref{tab:ConservationSegurFDVM1cm}. Given the extensive examination of several numerical schemes for steep gradient problems \cite{Pitt-2018-61}, this indicates that these solutions are indicative of true solutions of the Serre equations. However, these results do not demonstrate the superiority of one of these methods over the other. 
 %
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c c}
-		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & $\mathcal{C}^*_1\left(\vecn{q}^0,\vecn{q}^*\right)$  \B\\
+		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & ${C}^*\left(\vecn{q}^0,\vecn{q}^*\right)$  \B\\
 		\hline
 		$h$ & $11.9888$ & $11.9888$ & $0$ \T\\
 		$uh$ & $0$ & $7.44 \times 10^{-18}$ & $7.44 \times 10^{-18}$\\
@@ -62,7 +65,7 @@ Both $\text{FEVM}_2$ and $\text{FDVM}_2$ have produced visually identical result
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c c}
-		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & $\mathcal{C}^*_1\left(\vecn{q}^0,\vecn{q}^*\right)$ \B \\
+		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & ${C}^*\left(\vecn{q}^0,\vecn{q}^*\right)$ \B \\
 		\hline
 		$h$ & $11.9888$ & $11.9888$ & $0$ \T\\
 		$uh$ & $0$ & $-1.19 \times 10^{-17}$ & $-1.19 \times 10^{-17}$\\
@@ -76,7 +79,7 @@ Both $\text{FEVM}_2$ and $\text{FDVM}_2$ have produced visually identical result
  
 
 \subsection{Results for $0.03m$ Negative Rectangular Wave}
-The wave gauge data for the numerical and experimental results for the evolution of the $0.03m$ negative rectangular wave are displayed in Figures \ref{fig:Segur3cmFEVM} and \ref{fig:Segur3cmFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. These results are reported using the same dimensionless scales as the original paper \cite{Hammack-Segur-1978-337}. The completely numerically calculated conservation error $C^*_1$ of all the conserved quantities are given in Tables \ref{tab:ConservationSegurFEVM3cm} and \ref{tab:ConservationSegurFEVM3cm} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively.
+The wave gauge data for the numerical and experimental results for the evolution of the $0.03m$ negative rectangular wave are displayed in Figures \ref{fig:Segur3cmFEVM} and \ref{fig:Segur3cmFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. These results are reported using the same dimensionless scales as in the original paper \cite{Hammack-Segur-1978-337}. The completely numerically calculated conservation error $C^*$ of all the conserved quantities are given in Tables \ref{tab:ConservationSegurFEVM3cm} and \ref{tab:ConservationSegurFEVM3cm} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFEVM3cm.pdf}
@@ -94,14 +97,14 @@ Both methods again reproduce the overall behaviour of this experiment very well.
 
 Since the negative rectangular wave is larger than in the previous example, the numerical methods have a larger error in conservation for all the quantities as compared to the $0.01m$ negative rectangular wave except mass; which is conserved exactly. For $G$ and momentum these errors are around machine epsilon and can be disregarded, so that only the conservation of energy is significantly effected. Even with this larger error, all quantities are still well conserved by the numerical methods. 
 
-These results compare well with those by \citet{Zoppou-etal-2017} for $\text{FDVM}_2$ with $\Delta x = 0.005m$, $\Delta t = 0.2 \Delta t / \sqrt{g 0.1} s$ and $\theta = 1$. With the wave gauge data of those numerical solutions and the ones displayed here being indistinguishable. The error in conservation in $\mathcal{H}$ is very similar as well, although in the numerical solutions displayed here the numerical grid is larger. This is due to the choice of the limiting parameter $\theta = 1$ which diffuses the discontinuous jump leading to poorer conservation of $\mathcal{H}$ than expected given the higher resolution of the grid.  
+These results compare well with those by \citet{Zoppou-etal-2017} for $\text{FDVM}_2$ with $\Delta x = 0.005m$, $\Delta t = 0.2 \Delta t / \sqrt{g 0.1} s$ and $\theta = 1$. The wave gauge data of those numerical solutions and the solutions displayed here are indistinguishable. The error in conservation in $\mathcal{H}$ is very similar as well, although in the numerical solutions displayed here the numerical grid is coarser. This is because the limiting parameter $\theta = 1$ diffuses the discontinuous jump, leading to poorer conservation of $\mathcal{H}$ \cite{Pitt-2018-61} than expected given the higher resolution of the grid.  
 
-These experiments have been equally well replicated by the numerical methods, and given the resolution and error in conservation and the extensive study summarised in Chapter \ref{chp:Serreeqns}; these results demonstrate the accuracy of the numerical methods in the presence of steep gradients in the free surface.     
+These experiments have been replicated equally well by the numerical methods, and given the resolution and error in conservation and the extensive study summarised in Chapter \ref{chp:Serreeqns}; these results demonstrate the accuracy of the numerical methods in the presence of steep gradients in the free surface.     
 %
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c c}
-		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & $\mathcal{C}^*_1\left(\vecn{q}^0,\vecn{q}^*\right)$ \B \\
+		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & ${C}^*\left(\vecn{q}^0,\vecn{q}^*\right)$ \B \\
 		\hline 
 		$h$ & $11.9644$ & $11.9644$ & $0$ \T\\
 		$uh$ & $0$ & $-7.75 \times 10^{-17}$ & $-7.75\times 10^{-17}$\\
@@ -116,7 +119,7 @@ These experiments have been equally well replicated by the numerical methods, an
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c c}
-		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & $\mathcal{C}^*_1\left(\vecn{q}^0,\vecn{q}^*\right)$ \B \\
+		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & ${C}^*\left(\vecn{q}^0,\vecn{q}^*\right)$ \B \\
 		\hline
 		$h$ & $11.9644$ & $11.9644$ & $0$ \T\\
 		$uh$ & $0$ & $-9.09 \times 10^{-17}$ & $-9.09 \times 10^{-17}$\\
@@ -130,6 +133,7 @@ These experiments have been equally well replicated by the numerical methods, an
 
 \section{Periodic Waves Over A Submerged Bar}
 \label{sec:PeriodicWavessubBar}
+%Paper 2 needs a mention []
 Beji and Battjes conducted a series of experiments investigating the effect of submerged bars on the propagation of periodic waves \cite{Beji-Battjes-1993-151,Beji-Battjes-1994-1}. The behaviour of these experiments were mainly driven by the dispersion properties of the waves and their interaction with variations in bathymetry. Therefore, these experiments serve as a benchmark for the ability of the numerical schemes to accurately model the interaction of variable bathymetry and dispersive waves. For our purposes we will focus on the monochromatic wave experiments of \citet{Beji-Battjes-1994-1}.
 
 The experiments of \citet{Beji-Battjes-1994-1} were conducted in a wave tank $37.7m$ long, $0.8m$ wide and $0.75m$ high. A diagram of the longitudinal section of the wave tank is given in Figure \ref{fig:BejiWT}. There are seven wave gauges at the following locations; $5.7m$, $10.5m$, $12.5m$, $13.5m$, $14.5m$, $15.7m$ and $17.3m$. Waves are generated from a piston-type wave maker located at $0m$ and travel on the initially still water $0.4m$ deep to the right, over the submerged trapezoidal bar and are absorbed by a sloping beach.
@@ -140,9 +144,9 @@ The experiments of \citet{Beji-Battjes-1994-1} were conducted in a wave tank $37
 	\label{fig:BejiWT}
 \end{figure}
 
-Two sinusoidal monochromatic non-breaking wave experiments were conducted. A low frequency one with a wavelength $\lambda \approx 3.69m$ and a period of $T = 2s$, and a high frequency one with $\lambda \approx 2.05m$ and a period of $T = 1.25s$. Both experiments had a wave amplitude of $0.01m$ and so both had the same small non-linearity parameter $\epsilon = 0.01 / 0.4 = 0.025$. 
+Two monochromatic non-breaking wave experiments were performed. A low frequency one with a wavelength $\lambda \approx 3.69m$ and a period of $T = 2s$, and a high frequency one with $\lambda \approx 2.05m$ and a period of $T = 1.25s$. Both experiments had a wave amplitude of $0.01m$ and so both had the same small non-linearity parameter $\epsilon = 0.01 / 0.4 = 0.025$. 
 
-We numerically simulated these experiments over the spatial domain $\left[5.7m,150m\right]$ with $\Delta x = 0.1 / 2^4 m \approx 0.0063m$ and $\Delta t = Sp / 2^5 s \approx 0.0012s$ where $Sp = 0.039 s$ is the experimental sampling period. These $\Delta x$ and $\Delta t$ values satisfy the CFL condition, \eqref{eqn:CFLcond}. In our numerical experiments only the submerged trapezoidal bar is present, and the sloping beach is replaced with a very long horizontal bed that ensures that we do not observe any effects from the Dirichlet boundary conditions at the downstream boundary.  
+For the numerical solutions the spatial domain was $\left[5.7m,150m\right]$ with $\Delta x = 0.1 / 2^4 m \approx 0.0063m$ and $\Delta t = Sp / 2^5 s \approx 0.0012s$ where $Sp = 0.039 s$ is the experimental sampling period. These $\Delta x$ and $\Delta t$ values satisfy the CFL condition, \eqref{eqn:CFLcond}. In our numerical experiments only the submerged trapezoidal bar is present, and the sloping beach is replaced with a very long horizontal bed that ensures that we do not observe any effects from the Dirichlet boundary conditions at the downstream boundary.  
 
 To simulate the incoming waves at the upstream boundary we used the first wave gauge as our left boundary condition together with linear extrapolation to calculate the other required $h$ values in the left ghost cell. The velocity boundary conditions were calculated from the height values in the same way as \citet{Beji-Battjes-1994-1} using
 \begin{equation*}
@@ -365,9 +369,9 @@ To study the evolution of waves on fringing reefs a series of experiments were c
 	\label{fig:RoeberWT}
 \end{figure}
 
-This experiment investigates the behaviour of waves with high nonlinearity $ \epsilon \approx 1.23/2.46 = 0.5$ as it shoals over a linear bed into a very shallow body of water. Given the high nonlinearity of this wave, it is not surprising that as it shoals it becomes a plunging breaker by $t \approx 32s$ with an elliptical air cavity observed at $t \approx 33s$ \cite{Roeber-2010}. As with other depth averaged equations, the Serre equations are only appropriate up to breaking waves so this experiment is not an entirely appropriate test of the numerical methods, particularly after $t=32s$.
+This experiment investigates the behaviour of a wave with high non-linearity $ \epsilon \approx 1.23/2.46 = 0.5$ as it shoals over a linear bed into a very shallow body of water. Given the high non-linearity of this wave, it is not surprising that as it shoals it becomes a plunging breaker by $t \approx 32s$ with an elliptical air cavity observed at $t \approx 33s$ \cite{Roeber-2010}. As with other depth averaged equations, the Serre equations are only appropriate up to breaking waves so this experiment is not an entirely appropriate test of the numerical methods, particularly after $t=32s$.
 
-This experiment was numerically modelled on the domain $[17.6m , 400m]$ and was run until $t = 60s$ after which the reflections from the downstream end of the tank become significant in the experiment. The beginning of the domain was chosen so that wave gauge $1$ could be used as the left boundary conditions, where the technique for the boundary condition in Section \ref{sec:PeriodicWavessubBar} was employed. The spatial resolution was $\Delta x = 0.025m$ and the temporal resolution was $\Delta t = Sp / 8 s = 0.0025$ where $Sp = 0.02s$ was the sampling period of the wave gauges, these spatial and temporal resolutions satisfy the CFL condition \eqref{eqn:CFLcond}. The right edge of the domain used Dirichlet boundary conditions, since the domain was so large no effects from the downstream boundary were observed throughout the numerical simulation. 
+This experiment was numerically modelled on the domain $[17.6m , 400m]$ and was run until $t = 60s$ after which the reflections from the downstream end of the tank become significant in the experiment. The beginning of the domain was chosen so that wave gauge $1$ could be used as the left boundary conditions, where the technique for the boundary condition in Section \ref{sec:PeriodicWavessubBar} was employed. The spatial resolution was $\Delta x = 0.025m$ and the temporal resolution was $\Delta t = Sp / 8 s = 0.0025$ where $Sp = 0.02s$ was the sampling period of the wave gauges, these spatial and temporal resolutions satisfy the CFL condition \eqref{eqn:CFLcond}. The right edge of the domain used Dirichlet boundary conditions, since the domain was large no effects from the downstream boundary were observed throughout the numerical simulation. 
 
 The wave gauge results comparing the numerical and experimental data are displayed in Figures \ref{fig:Roeber8WG1to5FEVM}, \ref{fig:Roeber8WG6to10FEVM} and \ref{fig:Roeber8WG11to14FEVM} for $\text{FEVM}_2$ and \ref{fig:Roeber8WG1to5FDVM} and \ref{fig:Roeber8WG6to9FDVM} for $\text{FDVM}_2$.
 \begin{figure}
@@ -408,7 +412,7 @@ When breaking begins the numerical solutions perform much worse as expected; mos
 Given the limitations of the underlying Serre equations the results for $\text{FEVM}_2$ are robust and accurately model the shoaling of the solitary wave. However, these results indicate the need for more accurate handling of breaking waves to be able to accurately model some physical situations. 
 
 \section{Run-up Experiment}
-To study the run-up of incoming waves on linear beaches a series of experiments were conducted by \citet{Synolakis-1987-523}. These experiments consisted of a number of run-up events for a wide array of breaking and non-breaking waves where snapshots of the entire water surface were taken at certain times. These experiments were all performed on the beach profile depicted in Figure \ref{fig:SynolakisWT}, where all the quantities are non-dimensionalised \cite{Synolakis-1987-523}. To assess the computational models we recreated one of these experiments, which captured the run-up of a non breaking solitary wave with a nonlinearity parameter of $\epsilon = 0.0185$.
+To study the run-up of incoming waves on linear beaches a series of experiments were conducted by \citet{Synolakis-1987-523}. These experiments consisted of a number of run-up events for a wide array of breaking and non-breaking waves where snapshots of the entire water surface were taken at certain times. These experiments were all performed on the beach profile depicted in Figure \ref{fig:SynolakisWT}, where all the quantities are non-dimensionalised \cite{Synolakis-1987-523}. To denote that a quantity is non-dimensionalised we use with the prime symbol. To assess the computational models we recreated one of these experiments, which captured the run-up of a non-breaking solitary wave with a non-linearity parameter of $\epsilon = 0.0185$.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Synolakis/WavetankArtifical.pdf}
@@ -416,11 +420,11 @@ To study the run-up of incoming waves on linear beaches a series of experiments 
 	\label{fig:SynolakisWT}
 \end{figure}
 
-This experiment allows us to compare the inundation behaviour of our numerical methods with experimental results. For this experiment the effect of dispersion on the run-up behaviour is minimal, and there is good agreement between numerical solutions of the SWWE and this particular experiment \cite{Bollermann-etal-2011-271}. Therefore, the effect of the extra dispersive terms included by the Serre equations on the inundation process is not well tested by this experiment, but it does demonstrate robustness. 
+This experiment allows us to compare the inundation behaviour of our numerical methods with experimental results. For this experiment the effect of dispersion on the run-up behaviour is minimal, and there is good agreement between numerical solutions of the SWWE and this particular experiment \cite{Bollermann-etal-2011-271}. Therefore, the effect of the extra dispersive terms included by the Serre equations on the inundation process is not well tested by this experiment. Importantly, this experiment demonstrates the methods robustness during the wetting and drying of the bed. 
 
-The numerical experiments used the normalised quantities reported by \citet{Synolakis-1987-523} to reproduce the experiment. The spatial domain was $x' \in [-30,150]$ with a resolution of $\Delta x = 0.05$ and was run until $t' = 70$ with the CFL condition \eqref{eqn:CFLcond} satisfied by setting $\Delta t = 0.1 \Delta x$. The spatial reconstruction used the input parameter $\theta = 1.2$ and gravity was normalised to match the coordinates and so $g= 1$.
+The numerical experiments used the non-dimensionalised quantities reported by \citet{Synolakis-1987-523} to reproduce the experiment. The spatial domain was $x' \in [-30,150]$ with a resolution of $\Delta x = 0.05$ and was run until $t' = 70$ with the CFL condition \eqref{eqn:CFLcond} satisfied by setting $\Delta t = 0.1 \Delta x$. The spatial reconstruction used the input parameter $\theta = 1.2$ and acceleration due to gravity $g= 1$ was chosen to match the non-dimensionalisation.
 
-The non-dimensionalised water surface data is given at the various times in Figure \ref{fig:SynolakisFDVMNoBreak} for $\text{FDVM}_2$ and \ref{fig:SynolakisFEVMNoBreak} for $\text{FEVM}_2$. The error in conservation of the $h$ and $\mathcal{H}$ as measured by $C^*_1$ are given in Tables \ref{tab:ConservationSynFEVM} and \ref{tab:ConservationSynFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. 
+The non-dimensionalised water surface data is given at the various times in Figure \ref{fig:SynolakisFDVMNoBreak} for $\text{FDVM}_2$ and \ref{fig:SynolakisFEVMNoBreak} for $\text{FEVM}_2$. The error in conservation of $h$ and $\mathcal{H}$ as measured by $C^*$ are given in Tables \ref{tab:ConservationSynFEVM} and \ref{tab:ConservationSynFDVM} for $\text{FEVM}_2$ and $\text{FDVM}_2$ respectively. 
 
 \begin{figure}
 	\centering
@@ -449,7 +453,7 @@ The non-dimensionalised water surface data is given at the various times in Figu
 		\subcaption{$t'=70$}
 		\vspace{0.5cm}
 	\end{subfigure}
-	\caption{A comparison of the water surface profiles $w(x,t)$ for the experiment (\circlet{red}) and the numerical solution (\squareF{blue}) produced by $\text{FEVM}_2$ over the bed (\squareF{brown!60!black}) at various times.}
+	\caption{A comparison of the water surface profiles $w(x',t')$ for the experiment (\circlet{red}) and the numerical solution (\squareF{blue}) produced by $\text{FEVM}_2$ over the bed (\squareF{brown!60!black}) at various times.}
 	\label{fig:SynolakisFEVMNoBreak}
 \end{figure}
 \begin{figure}
@@ -479,14 +483,14 @@ The non-dimensionalised water surface data is given at the various times in Figu
 		\subcaption{$t'=70$}
 		\vspace{0.5cm}
 	\end{subfigure}
-	\caption{A comparison of the water surface profiles $w(x,t)$ for the experiment (\circlet{red}) and the numerical solution (\squareF{blue}) produced by $\text{FDVM}_2$ over the bed (\squareF{brown!60!black}) at various times.}
+	\caption{A comparison of the water surface profiles $w(x',t')$ for the experiment (\circlet{red}) and the numerical solution (\squareF{blue}) produced by $\text{FDVM}_2$ over the bed (\squareF{brown!60!black}) at various times.}
 	\label{fig:SynolakisFDVMNoBreak}
 \end{figure}
 
-The results for $\text{FEVM}_2$ and $\text{FDVM}_2$ are indistinguishable, replicating the incoming wave properties and the maximum run-up well. The experimental wave appears to be more skewed towards the shoreline, but this shape difference has all but disappeared as the wave begins to inundate the shore. The only other noticeable difference is that the numerical solutions appear to run-down further than the experimental results. The observed larger run-down is likely caused by the lack of friction in the Serre equations.
+The results for $\text{FEVM}_2$ and $\text{FDVM}_2$ are indistinguishable, replicating the incoming wave properties and the maximum run-up well. The experimental wave appears to be more skewed towards the shoreline, but this shape difference has all but disappeared as the wave begins to inundate the shore. The only other noticeable difference is that the numerical solutions appear to run-down further than the experimental results. The observed larger run-down is likely caused by the omission of bed friction for the Serre equations in this thesis.
 
 %make sure its understandable
-Both $h$ and $\mathcal{H}$ are well conserved by the method throughout the run-up and run-down of the wave, particularly the mass. The total energy of the method is also well conserved, however the energy appears to have slightly increased in the method during the run-up process due to the handling of the dry bed problem. During this experiment kinetic energy is converted into gravitational potential energy and then back again as the wave is reflected, therefore $uh$ and $G$ will only be conserved in this experiment after the wave has completely reflected from the beach. Full reflection of the wave has not occurred by $t'=70s$ and so the conservation results for $uh$ and $G$ were omitted from Tables \ref{tab:ConservationSynFEVM} and \ref{tab:ConservationSynFDVM}.
+Both $h$ and $\mathcal{H}$ are well conserved by the method throughout the run-up and run-down of the wave, particularly $h$. The total energy $\mathcal{H}$ of the method is also well conserved, however $\mathcal{H}$ appears to have slightly increased in the method during the run-up process due to the methods handling of the dry bed problem. During this experiment kinetic energy is converted into gravitational potential energy and then back again as the wave is reflected, therefore $uh$ and $G$ will only be conserved in this experiment after the wave has completely reflected from the beach. Full reflection of the wave has not occurred by $t'=70s$ and so the conservation results for $uh$ and $G$ were omitted from Tables \ref{tab:ConservationSynFEVM} and \ref{tab:ConservationSynFDVM}.
 
 These numerical solutions demonstrate good agreement with experimental results and display the capability of the method to model the inundation of non-breaking waves.
 
@@ -494,7 +498,7 @@ These numerical solutions demonstrate good agreement with experimental results a
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c c}
-		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & $\mathcal{C}^*_1\left(\vecn{q}^0,\vecn{q}^*\right)$  \B\\
+		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & ${C}^*\left(\vecn{q}^0,\vecn{q}^*\right)$  \B\\
 		\hline 
 		$h$ & $140.4170$ & $140.4170$ & $7.65\times 10^{-12}$ \T \\
 		%$uh$ & $-0.3191$ & $0.3203$ & $0.0040$\\
@@ -502,13 +506,13 @@ These numerical solutions demonstrate good agreement with experimental results a
 		$\mathcal{H}$ & $68.3900$ & $68.3914$ & $2.16 \times 10^{-5}$ \B\\
 		\hline
 	\end{tabular}
-	\caption{Initial and final total amounts and the conservation error for $h$ and $\mathcal{H}$ for numerical solution of $\text{FEVM}_2$ for the run-up experiment.}
+	\caption{Initial and final total amounts and the conservation error for $h$ and $\mathcal{H}$ for the numerical solution of $\text{FEVM}_2$ for the run-up experiment.}
 	\label{tab:ConservationSynFEVM}
 \end{table}
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c c}
-		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & $\mathcal{C}^*_1\left(\vecn{q}^0,\vecn{q}^*\right)$ \B \\
+		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & ${C}^*\left(\vecn{q}^0,\vecn{q}^*\right)$ \B \\
 		\hline
 		$h$ & $140.4170$ & $140.4170$ & $1.11\times 10^{-7}$ \T\\
 		%$uh$ & $-0.3191$ & $0.3196$ & $0.0017$\\
@@ -516,7 +520,7 @@ These numerical solutions demonstrate good agreement with experimental results a
 		$\mathcal{H}$ & $68.3900$ & $68.3914$ & $2.16 \times 10^{-5}$ \B \\
 		\hline
 	\end{tabular}
-	\caption{Initial and final total amounts and the conservation error for $h$ and $\mathcal{H}$ for numerical solution of $\text{FDVM}_2$ for the run-up experiment.}
+	\caption{Initial and final total amounts and the conservation error for $h$ and $\mathcal{H}$ for the numerical solution of $\text{FDVM}_2$ for the run-up experiment.}
 	\label{tab:ConservationSynFDVM}
 \end{table}
 
