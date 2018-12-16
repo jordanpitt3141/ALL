@@ -45,9 +45,9 @@ To assess the ability of our numerical methods to solve the Serre equations with
 
 For the solitary wave solution all the terms in \eqref{eqn:FullSerreConHorizBed} must be adequately approximated by the numerical method to properly reproduce the analytic solution. Therefore, this analytic solution serves as a benchmark for the ability of a numerical method to accurately solve the Serre equations with a horizontal bed for smooth solutions.
 
-For our numerical tests we used the solitary travelling wave solution \eqref{eqn:Solitondefhub} with $a_0 = 1m$ , $a_1 = 0.7m$ and $g= 9.81m/s^2$ at $t=0s$ as the initial conditions. The spatial domain was $[-250m,250m]$ and the problem was solved until $t= 50s$. This was done for a range of $\Delta x$ values that had the following form; $\Delta x = 100 / 2^k m$ with $k \in  \left[6,\dots,19\right]$. The CFL condition was satisfied with CFL number $Cr = 0.5$ by setting  $\Delta t = Cr \Delta x / \sqrt{g\left(a_0 + a_1\right)}$. For $\text{FDVM}_2$ and $\text{FEVM}_2$ the limiting parameter $\theta  = 1.2$ was used in the generalised minmod limiter \eqref{eqn:slopehGrecon} employed by both methods during the reconstruction step. While $\text{FDVM}_3$ used a Koren limiter in its reconstruction \cite{Zoppou-etal-2017}, which has no limiting parameter. 
+For our numerical tests we used the solitary travelling wave solution \eqref{eqn:Solitondefhub} with $a_0 = 1m$ , $a_1 = 0.7m$ and $g= 9.81m/s^2$ at $t=0s$ as the initial conditions. The spatial domain was $[-250m,250m]$ and the problem was solved until $t= 50s$. This was done for a range of $\Delta x$ values that had the following form; $\Delta x = 100 / 2^k m$ with $k \in  \left[6,\dots,19\right]$. The CFL condition was satisfied with CFL number $Cr = 0.5$ by setting $\Delta t = Cr \Delta x / \sqrt{g\left(a_0 + a_1\right)}$. For $\text{FDVM}_2$ and $\text{FEVM}_2$ the limiting parameter $\theta  = 1.2$ was used in the generalised minmod limiter \eqref{eqn:slopehGrecon} employed by both methods during the reconstruction step. While $\text{FDVM}_3$ used a Koren limiter in its reconstruction \cite{Zoppou-etal-2017}, which has no limiting parameter. 
 
-For the parameters $a_0 = 1m$ and  $a_1 = 0.7m$ the non-linearity is $\epsilon = a_1 / a_0 = 0.7$; this is large but beneath most of the well known breaking thresholds for water waves $\epsilon \le 0.8$ \cite{Ippen-Kulin-1954-4}. Because $\epsilon$ is large the non-linear effects are large and therefore, so are the balancing dispersive effects making this particular analytic solution a rigorous test of the numerical methods. For this spatial domain and final time $t=50s$ there is no interaction of the wave with the boundary, therefore the Dirichlet boundary conditions were appropriate.
+For the parameters $a_0 = 1m$ and $a_1 = 0.7m$ the non-linearity is $\epsilon = a_1 / a_0 = 0.7$; this is large but beneath most of the well known breaking thresholds for water waves $\epsilon \le 0.8$ \cite{Ippen-Kulin-1954-4}. Because $\epsilon$ is large the non-linear effects are large and therefore, so are the balancing dispersive effects making this particular analytic solution a rigorous test of the numerical methods. For this spatial domain and final time $t=50s$ there is no interaction of the wave with the boundary, therefore the Dirichlet boundary conditions were appropriate.
 
 The results of this analytic solution validation were published by \citet{Zoppou-etal-2017} for $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$. I produced the results in that paper which have been expanded here to include an investigation of the convergence of $G$ and the conservation of $h$, $uh$ and $G$.
 
@@ -88,8 +88,7 @@ An example numerical solution with $\Delta x = {100} / {2^{11}}m \approx 0.049m$
 \end{figure}
 
 
-The $L_2$ error was calculated for $h$, $u$ and $G$ for all numerical solutions and was plotted against $\Delta x$ for all numerical methods in Figure \ref{fig:SolitonL1All}. From these plots it is clear that all numerical methods are convergent. The rate at which the numerical solutions converge to the analytic solution over $\Delta x$ is determined by the order of accuracy of the numerical scheme. All methods demonstrate the expected order of accuracy given the order of accuracy of the approximations used in the method; which agrees with the results of the linear analysis in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}.  
-
+The $L_2$ error was calculated for $h$, $u$ and $G$ for all numerical solutions and was plotted against $\Delta x$ for all numerical methods in Figure \ref{fig:SolitonL1All}. From these plots it is clear that all numerical methods are convergent. The rate at which the numerical solutions converge to the analytic solution over $\Delta x$ is determined by the order of accuracy of the numerical scheme. All methods demonstrate the expected order of accuracy given the order of accuracy of the approximations used in the method; which agrees with the results of the linear analysis in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -126,7 +125,7 @@ The $L_2$ error was calculated for $h$, $u$ and $G$ for all numerical solutions 
 
 All methods more accurately reproduced the analytic solution for $h$ than either $G$ or $u$ across all $\Delta x$ values. This is due to the simplicity of $h$'s evolution equation \eqref{eqn:FullSerreConMass} compared to the evolution equation of $G$ \eqref{eqn:Serreconsconmom}; with the error in $u$ being dominated by the error in $G$. 
 
-Increasing the order of accuracy of our numerical methods leads to smaller errors when comparing two numerical solutions for the same $\Delta x$ value, as Figure \ref{fig:SolitonL1All} clearly demonstrates. This is consistent with the example numerical solution in Figure \ref{fig:SolitonExAll}, where the lowest order accuracy scheme, $\text{FDVM}_1$ had the poorest reproduction of the analytic solution. However, there is only a slight benefit from moving from the second-order $\text{FEVM}_2$ and $\text{FDVM}_2$ to the  the third-order $\text{FDVM}_3$.
+Increasing the order of accuracy of our numerical methods leads to smaller errors when comparing two numerical solutions for the same $\Delta x$ value, as Figure \ref{fig:SolitonL1All} clearly demonstrates. This is consistent with the example numerical solution in Figure \ref{fig:SolitonExAll}, where the lowest order accuracy scheme, $\text{FDVM}_1$ had the poorest reproduction of the analytic solution. However, there is only a slight benefit from moving from the second-order $\text{FEVM}_2$ and $\text{FDVM}_2$ to the third-order $\text{FDVM}_3$.
 
 For the second-order methods we find that $\text{FDVM}_2$ consistently produces the smallest $L_2$ error followed by $\text{FEVM}_2$, $\mathcal{W}$ and $\mathcal{D}$. The difference between the $\text{FDVM}_2$ and $\text{FEVM}_2$ is significant with the errors of $\text{FEVM}_2$ being $2$ to $4$ times larger than those of $\text{FDVM}_2$. Therefore, $\text{FDVM}_2$ is reproducing the solitary wave solution more accurately than $\text{FEVM}_2$.
 
@@ -464,7 +463,7 @@ Therefore, these methods can accurately handle the dry bed problem, even with sm
 		\includegraphics[width=\textwidth]{./chp5/figures/Forced/Dry/FDVML2.pdf}
 		\subcaption{$\text{FDVM}_2$}
 	\end{subfigure}
-	\caption{Convergence as measured by the $L_2$ norm against $\Delta x$ for $h$ (\trianglet{blue}), $u$ (\squaret{black}),  $uh$ ({\crosst{green!60!black}})  and $G$ (\circlet{red}) for the dry bed forced solution problem for $\text{FEVM}_2$ and $\text{FDVM}_2$ at $t=10s$.}
+	\caption{Convergence as measured by the $L_2$ norm against $\Delta x$ for $h$ (\trianglet{blue}), $u$ (\squaret{black}), $uh$ ({\crosst{green!60!black}}) and $G$ (\circlet{red}) for the dry bed forced solution problem for $\text{FEVM}_2$ and $\text{FDVM}_2$ at $t=10s$.}
 	\label{fig:ForcedSolDryL1}
 \end{figure}
 
@@ -486,4 +485,4 @@ Therefore, these methods can accurately handle the dry bed problem, even with sm
 \end{figure}
 
 \medskip
-In this chapter the analytic and forced solutions were used to assess the numerical methods. It was found that the finite volume based methods performed better than the finite difference methods and that second-order methods were sufficient to accurately reproduce the analytic solutions. Finally the second-order accuracy of $\text{FEVM}_2$ and $\text{FDVM}_2$ was confirmed for the wetting and drying of beds using forced solutions to the Serre equations.
+In this chapter the analytic and forced solutions were used to assess the numerical methods. It was found that the finite volume based methods performed better than the finite difference methods and that second-order methods were sufficient to accurately reproduce the analytic solutions. Finally the second-order accuracy of $\text{FEVM}_2$ and $\text{FDVM}_2$ was confirmed for the wetting and drying of variable beds using forced solutions to the Serre equations.

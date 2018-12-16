@@ -30,11 +30,15 @@ The evolution matrices for the FDVM can be calculated in terms of the flux matri
 
 To calculate the flux matrix $\matr{F}$ we have from \eqref{eqn:singleEvolveStep} that
 \begin{equation*}
- \matr{F} = - \left(1 - e^{-ik\Delta x}\right)\dfrac{1}{ \Delta x}\begin{bmatrix}
+ \matr{F} = - \dfrac{\left(1 - e^{-ik\Delta x}\right)}{ \Delta x}\begin{bmatrix}
  \mathcal{F}^{\eta,\eta} & \mathcal{F}^{\eta,G} \\\mathcal{F}^{G,\eta} &\mathcal{F}^{G,G}
  \end{bmatrix}.
 \end{equation*}
-Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{\eta,G}$, $\mathcal{F}^{G,\eta} $, $\mathcal{F}^{G,G} $ depend on the Froude number $Fr = {U}/{\sqrt{gH}}$ and the constituent operators of the method. The expressions for the coefficients of $\matr{F}$ are summarised in Tables \ref{tab:Fnnfactor}-\ref{tab:FGGfactor} for all values of $Fr$ with $\mathcal{F}^{\eta,\eta}$ in Table \ref{tab:Fnnfactor}, $\mathcal{F}^{\eta,G}$ in Table \ref{tab:FnGfactor}, $\mathcal{F}^{G,\eta}$ in Table \ref{tab:FGnfactor} and $\mathcal{F}^{G,G}$ in Table \ref{tab:FGGfactor}.
+Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{G,\eta} $, $\mathcal{F}^{G,G} $ depend on the Froude number $Fr = {U}/{\sqrt{gH}}$ and the constituent operators of the method. The factor $\mathcal{F}^{\eta,G}$ in the flux matrix does not vary with the Froude number and is
+\[\mathcal{F}^{\eta,G} = H \mathcal{G}^G \]
+The expressions for the other coefficients of $\matr{F}$ are summarised in Tables \ref{tab:Fnnfactor}-\ref{tab:FGGfactor} for all values of $Fr$ with $\mathcal{F}^{\eta,\eta}$ in Table \ref{tab:Fnnfactor}, $\mathcal{F}^{G,\eta}$ in Table \ref{tab:FGnfactor} and $\mathcal{F}^{G,G}$ in Table \ref{tab:FGGfactor}.
+
+
 
 \begin{table}
 	\centering
@@ -42,25 +46,12 @@ Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{\eta,G}$, $\mathcal{F}^{G,\eta} 
 		Froude Number& $\mathcal{F}^{\eta,\eta} $ \T \B\\
 		\hline
 		$Fr < -1$ & $H \mathcal{G}^{\eta} + U \mathcal{R}^+_{j+1/2}$ \T\B \\
-		$-1 \le Fr \le 1$ & $H\mathcal{G}^{\eta}  + \dfrac{U}{2}\left[ \mathcal{R}^-_{j+1/2} +  \mathcal{R}^+_{j+1/2}\right]- \dfrac{\sqrt{gH}}{2} \left [ \mathcal{R}^+_{j+1/2} - \mathcal{R}^-_{j+1/2} \right ]$ \T\B\\
+		$-1 \le Fr \le 1$ & $H\mathcal{G}^{\eta}  + \dfrac{U}{2}\left( \mathcal{R}^-_{j+1/2} +  \mathcal{R}^+_{j+1/2}\right)- \dfrac{\sqrt{gH}}{2} \left ( \mathcal{R}^+_{j+1/2} - \mathcal{R}^-_{j+1/2} \right )$ \T\B\\
 		$1 < Fr$ & $H \mathcal{G}^{\eta} + U \mathcal{R}^-_{j+1/2}$ \T\B\\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{F}^{\eta,\eta} $ from reconstructing the nodal value at the midpoint for each FDVM and the FEVM.}
+	\caption{Factor $\mathcal{F}^{\eta,\eta} $ that multiples $\eta$ in the flux function for $\eta$ for each FDVM and the FEVM.}
 	\label{tab:Fnnfactor}
-\end{table}
-\begin{table}
-	\centering
-	\begin{tabular}{c  c }
-		Froude Number& $\mathcal{F}^{\eta,G} $ \T \B\\
-		\hline
-		$Fr < -1$ & $H \mathcal{G}^G$ \T\B \\
-		$-1 \le Fr \le 1$ & $H \mathcal{G}^G$ \T\B\\
-		$1 < Fr$ & $H \mathcal{G}^G$ \T\B\\
-		\hline
-	\end{tabular}
-	\caption{Factor $\mathcal{F}^{\eta,G} $ from reconstructing the nodal value at the midpoint for each FDVM and the FEVM.}
-	\label{tab:FnGfactor}
 \end{table}
 \begin{table}
 	\centering
@@ -68,11 +59,11 @@ Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{\eta,G}$, $\mathcal{F}^{G,\eta} 
 		Froude Number& $\mathcal{F}^{G,\eta} $ \T \B\\
 		\hline
 		$Fr < -1$ & $UH \mathcal{G}^{\eta} + gH \mathcal{R}^+_{j+1/2}$ \T\B \\
-		$-1 \le Fr \le 1$ & $ \dfrac{U\sqrt{gH}}{2} \left[ \mathcal{R}^-_{j+1/2} - \mathcal{R}^+_{j+1/2}  \right] + UH\mathcal{G}^{\eta} + \dfrac{gH}{2} \left[ \mathcal{R}^-_{j+1/2} +\mathcal{R}^+_{j+1/2} \right]$ \T\B\\
+		$-1 \le Fr \le 1$ & $ \dfrac{U\sqrt{gH}}{2} \left( \mathcal{R}^-_{j+1/2} - \mathcal{R}^+_{j+1/2}  \right) + UH\mathcal{G}^{\eta} + \dfrac{gH}{2} \left( \mathcal{R}^-_{j+1/2} +\mathcal{R}^+_{j+1/2} \right)$ \T\B\\
 		$1 < Fr$ & $UH \mathcal{G}^{\eta} + gH \mathcal{R}^-_{j+1/2}$ \T\B\\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{F}^{G,\eta} $ from reconstructing the nodal value at the midpoint for each FDVM and the FEVM.}
+	\caption{Factor $\mathcal{F}^{G,\eta} $ that multiples $\eta$ in the flux function for $G$ for each FDVM and the FEVM.}
 	\label{tab:FGnfactor}
 \end{table}
 \begin{table}
@@ -81,11 +72,11 @@ Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{\eta,G}$, $\mathcal{F}^{G,\eta} 
 		Froude Number& $\mathcal{F}^{G,G} $ \T \B\\
 		\hline
 		$Fr < -1$ & $U\mathcal{R}^+_{j+1/2}  +  UH \mathcal{G}^G$ \T\B \\
-		$-1 \le Fr \le 1$ & $ UH\mathcal{G}^{G} + + \dfrac{U}{2} \left[ \mathcal{R}^-_{j+1/2} +\mathcal{R}^+_{j+1/2} \right] - \dfrac{\sqrt{g H}}{2} \left [\mathcal{R}^+_{j+1/2} - \mathcal{R}^-_{j+1/2} \right ]$ \T\B\\
+		$-1 \le Fr \le 1$ & $ UH\mathcal{G}^{G} + + \dfrac{U}{2} \left( \mathcal{R}^-_{j+1/2} +\mathcal{R}^+_{j+1/2} \right) - \dfrac{\sqrt{g H}}{2} \left (\mathcal{R}^+_{j+1/2} - \mathcal{R}^-_{j+1/2} \right )$ \T\B\\
 		$1 < Fr$ & $U\mathcal{R}^+_{j+1/2}  +  UH \mathcal{G}^G$ \T\B\\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{F}^{G,G} $ from reconstructing the nodal value at the midpoint for each FDVM and the FEVM.}
+	\caption{Factor $\mathcal{F}^{G,G} $ that multiples $G$ in the flux function for $G$ for each FDVM and the FEVM.}
 	\label{tab:FGGfactor}
 \end{table}
 
@@ -106,7 +97,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 		$\text{FDVM}_2$ and $\text{FEVM}_2$& $1$ & $-\dfrac{1}{24}k^2 \Delta x^2$ \T \B \\
 		$\text{FDVM}_3$& $\dfrac{26 - 2 \cos\left(k \Delta x\right)}{24}$ & $-\dfrac{3}{640}k^4 \Delta x^4$ \T \B  \\
 		\hline	\end{tabular}
-	\caption{Factor $\mathcal{R}_j$ from reconstructing the nodal value at the midpoint for each finite volume based method.}
+	\caption{Factor $\mathcal{R}_j$ from reconstructing the nodal value at the midpoint and the lowest order term of the Taylor series of the factor in the method minus the exact factor for each finite volume based method.}
 	\label{tab:Mfactor}
 \end{table}
 \begin{table}
@@ -117,11 +108,11 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 		\hline \\
 		Exact & $e^{-\dfrac{ik\Delta x}{2}}\dfrac{k\Delta x}{2 \sin\left(\dfrac{k \Delta x}{2}\right)}$ & -  \\
 		$\text{FDVM}_1$ & $1$ & $\dfrac{i}{2}k \Delta x$ \T\B \\
-		$\text{FDVM}_2$ and $\text{FEVM}_2$& $ \left(1 - \dfrac{i \sin\left(k\Delta x \right)}{2} \right)$ & $\dfrac{1}{12}k^2 \Delta x^2$  \T\B\\
+		$\text{FDVM}_2$ and $\text{FEVM}_2$& $ 1 - \dfrac{i \sin\left(k\Delta x \right)}{2}$ & $\dfrac{1}{12}k^2 \Delta x^2$  \T\B\\
 		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 + 2e^{-i k {\Delta x}} - e^{i k {\Delta x}}} \right)$ & $\dfrac{i}{12}k^3 \Delta x^3$  \T\B \\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{R}^+_{j-1/2}$ from reconstruction of $\eta$ and $G$ at $x_{j+1/2}$ from the ${(j+1)^{th}}$ cell for each finite volume based method. }
+	\caption{Factor $\mathcal{R}^+_{j-1/2}$ from the reconstruction of $\eta$ and $G$ at $x_{j+1/2}$ from the ${(j+1)^{th}}$ cell and the lowest order term of the Taylor series of the factor in the method minus the exact factor for each finite volume based method. }
 	\label{tab:Rpfactor}
 \end{table}
 \begin{table}
@@ -136,7 +127,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 - e^{-i k {\Delta x}} +2 e^{i k {\Delta x}}} \right)$ & $-\dfrac{i}{12}k^3 \Delta x^3$  \T\B \\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{R}^-_{j+1/2}$ from reconstruction of $\eta$ and $G$ at $x_{j+1/2}$ from the ${j^{th}}$ cell for each finite volume based method.}
+	\caption{Factor $\mathcal{R}^-_{j+1/2}$ from the reconstruction of $\eta$ and $G$ at $x_{j+1/2}$ using the ${j^{th}}$ cell and the lowest order term of the Taylor series of the factor in the method minus the exact factor for each finite volume based method.}
 	\label{tab:Rmfactor}
 \end{table}
 %TABLE TOO BIG
@@ -154,7 +145,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 			$\text{FDVM}_3$&  $\dfrac{9 \Delta x^2 \left({-e^{-ik\Delta x} + 9e^{ik\Delta x} - e^{2ik\Delta x} + 9}\right)}{144 \Delta x^2H - 4H^3\left(32\cos\left(k \Delta x\right) -2\cos\left(2k \Delta x\right) - 30\right)}$ & $-\dfrac{243 + 49H^2k^2}{960H\left(3 + H^2k^2\right)^2}k^4 \Delta x^4$ \T \B \\
 			\hline
 		\end{tabular}
-		\caption{Factor $\mathcal{G}^G$ that multiples $\eta$ given by solving \eqref{eqn:LinConSerreGu0} for $\upsilon_{j+1/2}$ for each finite volume based method.}
+		\caption{Factor $\mathcal{G}^G$ that multiples $G$ given by solving \eqref{eqn:LinConSerreGu0} for $\upsilon_{j+1/2}$ and the lowest order term of the Taylor series of the factor in the method minus the exact factor for each finite volume based method.}
 		\label{tab:GGfactor} 
 	\end{table}
 \end{landscape}
@@ -249,14 +240,14 @@ For $\mathcal{D}$ and $\mathcal{W}$ we compare the $2\times 2$ evolution matrice
 	\centering
 	\begin{tabular}{l c c c}
 		\hline
-		Element & \multicolumn{3}{c}{Lowest Order $\Delta x$ Term of Error for $\text{FDVM}_1$} \T \B \\ 
+		Element & \multicolumn{3}{c}{Lowest Order $\Delta x$ Term of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_1$} \T \B \\ 
 		\cline{2-4}
-		& $Fr < -1$  & $-1 < Fr < 1$ & $Fr > 1$ \T \B \\ 
+		& $Fr < -1$& $-1 < Fr < 1$ & $Fr > 1$ \T \B \\ 
 		\hline
-		$E_{0,0} -  e^{i \omega^+ \Delta t} $& $ \dfrac{1}{2} k^2 U \Delta t \Delta x$& $ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$ &  $- \dfrac{1}{2} k^2 U \Delta t \Delta x$  \T \B \\
-		$E_{0,1}$& $\dfrac{1}{2}gHk^2 \Delta t \Delta x $  &$ \dfrac{3 + \beta}{4 \beta^2}i k^3\Delta  t\Delta x^2$ & $\dfrac{1}{2}gHk^2 \Delta t \Delta x $ \T \B   \\
-		$E_{1,0}$& $ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$  &$ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$ & $ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$ \T \B  \\
-		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $ \dfrac{1}{2} k^2 U \Delta t \Delta x$  &$ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$ & $- \dfrac{1}{2} k^2 U \Delta t \Delta x$  \T\B  \\
+		$E_{0,0} -  e^{i \omega^+ \Delta t} $& $ \dfrac{1}{2} k^2 U \Delta t \Delta x$& $ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$ &$- \dfrac{1}{2} k^2 U \Delta t \Delta x$\T \B \\
+		$E_{0,1}$& $\dfrac{1}{2}gHk^2 \Delta t \Delta x $&$ \dfrac{3 + \beta}{4 \beta^2}i k^3\Delta  t\Delta x^2$ & $\dfrac{1}{2}gHk^2 \Delta t \Delta x $ \T \B \\
+		$E_{1,0}$& $ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$&$ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$ & $ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$ \T \B  \\
+		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $ \dfrac{1}{2} k^2 U \Delta t \Delta x$&$ - \dfrac{1}{2} \sqrt{gH} k^2 \Delta t\Delta x$ & $- \dfrac{1}{2} k^2 U \Delta t \Delta x$  \T\B  \\
 		\hline
 	\end{tabular}
 	\caption{Lowest order $\Delta x$ term of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_1$. Here $\beta = 3 + k^2 H^2$.}
@@ -266,11 +257,11 @@ For $\mathcal{D}$ and $\mathcal{W}$ we compare the $2\times 2$ evolution matrice
 	\centering
 	\begin{tabular}{l c}
 		\hline 
-		Element & \multicolumn{1}{c}{Lowest Order $\Delta t$ Term of Error for $\text{FDVM}_1$}\T\B \\
+		Element & \multicolumn{1}{c}{Lowest Order $\Delta t$ Term of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_1$}\T\B \\
 		\hline 
 		$E_{0,0} -  e^{i \omega^+ \Delta t} $ & $\dfrac{\sqrt{3gH \beta} + 3U}{\beta} ik \Delta t$ \T \B \\
-		$E_{0,1}$&  $ - \dfrac{3}{\beta} ik\Delta t$ \T \B \\
-		$E_{1,0}$&   $ \left(-gH + \dfrac{3U^2}{\beta}\right)ik \Delta t$ \T \B  \\
+		$E_{0,1}$&$ - \dfrac{3}{\beta} ik\Delta t$ \T \B \\
+		$E_{1,0}$& $ \left(-gH + \dfrac{3U^2}{\beta}\right)ik \Delta t$ \T \B  \\
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $\dfrac{\sqrt{3gH \beta} - 3U}{\beta} ik \Delta t$ \T \B  \\
 		\hline
 	\end{tabular}
@@ -281,13 +272,13 @@ For $\mathcal{D}$ and $\mathcal{W}$ we compare the $2\times 2$ evolution matrice
 	\centering
 	\begin{tabular}{l c c}
 		\hline
-		Element & \multicolumn{2}{c}{Lowest Order Terms of Error for $\text{FDVM}_2$}\T \B  \\
+		Element & \multicolumn{2}{c}{Lowest Order Terms of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_2$}\T \B  \\
 		\cline{2-3}
 		& $\Delta x$&$\Delta t$\T \B  \\
 		\hline
 		$E_{0,0} -  e^{i \omega^+ \Delta t} $& $ -\dfrac{i \left(27 + 9H^2k^2 + H^4k^4\right)}{12\beta^2} U k^3 \Delta x^2$ & $\dfrac{\sqrt{3gH \beta} + 3U}{\beta} ik \Delta t$ \T \B  \\
-		$E_{0,1}$& $ \dfrac{3 + \beta}{4 \beta^2}i k^3\Delta  t\Delta x^2$ &  $ - \dfrac{3}{\beta} ik\Delta t$ \T \B \\
-		$E_{1,0}$& $ -\left(gH + \dfrac{3U^2}{\beta} + \dfrac{9U^2}{\beta^2}\right)  \dfrac{k^3}{12}\Delta t\Delta x^2$ &  $ \left(-gH + \dfrac{3U^2}{\beta}\right)ik \Delta t$ \T \B  \\
+		$E_{0,1}$& $ \dfrac{3 + \beta}{4 \beta^2}i k^3\Delta  t\Delta x^2$ &$ - \dfrac{3}{\beta} ik\Delta t$ \T \B \\
+		$E_{1,0}$& $ -\left(gH + \dfrac{3U^2}{\beta} + \dfrac{9U^2}{\beta^2}\right)  \dfrac{k^3}{12}\Delta t\Delta x^2$ &$ \left(-gH + \dfrac{3U^2}{\beta}\right)ik \Delta t$ \T \B  \\
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $ \dfrac{-9 + H^2k^2\beta}{\beta^2} \dfrac{k^3}{12} i U \Delta t\Delta x^2$ & $\dfrac{\sqrt{3gH \beta} - 3U}{\beta} ik \Delta t$ \T \B  \\
 		\hline 
 	\end{tabular}
@@ -299,14 +290,14 @@ For $\mathcal{D}$ and $\mathcal{W}$ we compare the $2\times 2$ evolution matrice
 	\centering
 	\begin{tabular}{l c c c}
 		\hline
-		Element & \multicolumn{3}{c}{Lowest Order $\Delta x$ Term of Error for $\text{FDVM}_3$} \T \B \\
+		Element & \multicolumn{3}{c}{Lowest Order $\Delta x$ Term of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_3$} \T \B \\
 		\cline{2-4} 
-		& $Fr < -1$  & $-1 < Fr < 1$ & $Fr > 1$ \T \B \\
+		& $Fr < -1$& $-1 < Fr < 1$ & $Fr > 1$ \T \B \\
 		\hline
-		$E_{0,0} -  e^{i \omega^+ \Delta t} $& $\dfrac{1}{12} k^4 U \Delta t \Delta x^3$& $ - \dfrac{1}{12} \sqrt{gH} k^4 \Delta t\Delta x^3$ &  $ -\dfrac{1}{12} k^4 U \Delta t \Delta x^3$  \T \B  \\
-		$E_{0,1}$& $\dfrac{1}{4 \beta}iUk^5 \Delta t^2 \Delta x^3 $  &$ \dfrac{\sqrt{gH}}{4 \beta}i k^5\Delta  t ^2\Delta x^3$ & $-\dfrac{1}{4 \beta}iUk^5 \Delta t^2 \Delta x^3 $  \T \B  \\
-		$E_{1,0}$& $\dfrac{1}{12} gHk^4 \Delta t^2 \Delta x^3 $  &$ - \dfrac{1}{12} \sqrt{gH} k^4 \Delta t\Delta x^3$ & $-\dfrac{1}{12} gHk^4 \Delta t^2 \Delta x^3 $  \T \B \\
-		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $ \dfrac{1}{12} k^4 U \Delta t \Delta x^3$  &$ - \dfrac{1}{12} \sqrt{gH} k^4 \Delta t\Delta x^3$ & $ -\dfrac{1}{12} k^4 U \Delta t \Delta x^3$ \T \B  \\ 
+		$E_{0,0} -  e^{i \omega^+ \Delta t} $& $\dfrac{1}{12} k^4 U \Delta t \Delta x^3$& $ - \dfrac{1}{12} \sqrt{gH} k^4 \Delta t\Delta x^3$ &$ -\dfrac{1}{12} k^4 U \Delta t \Delta x^3$  \T \B  \\
+		$E_{0,1}$& $\dfrac{1}{4 \beta}iUk^5 \Delta t^2 \Delta x^3 $&$ \dfrac{\sqrt{gH}}{4 \beta}i k^5\Delta  t ^2\Delta x^3$ & $-\dfrac{1}{4 \beta}iUk^5 \Delta t^2 \Delta x^3 $  \T \B  \\
+		$E_{1,0}$& $\dfrac{1}{12} gHk^4 \Delta t^2 \Delta x^3 $&$ - \dfrac{1}{12} \sqrt{gH} k^4 \Delta t\Delta x^3$ & $-\dfrac{1}{12} gHk^4 \Delta t^2 \Delta x^3 $  \T \B \\
+		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $ \dfrac{1}{12} k^4 U \Delta t \Delta x^3$&$ - \dfrac{1}{12} \sqrt{gH} k^4 \Delta t\Delta x^3$ & $ -\dfrac{1}{12} k^4 U \Delta t \Delta x^3$ \T \B  \\ 
 		\hline
 	\end{tabular}
 	\caption{Lowest order $\Delta x$ term of the Taylor series for the elements of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_3$. Here $\beta = 3 + k^2 H^2$.}
@@ -316,11 +307,11 @@ For $\mathcal{D}$ and $\mathcal{W}$ we compare the $2\times 2$ evolution matrice
 	\centering
 	\begin{tabular}{l  c}
 		\hline
-		Element & \multicolumn{1}{c}{Lowest Order $\Delta t$ Term of Error for $\text{FDVM}_3$} \T \B \\
+		Element & \multicolumn{1}{c}{Lowest Order $\Delta t$ Term of $\matr{E} - e^{i \omega^+ \Delta t} \matr{I}$ for $\text{FDVM}_3$} \T \B \\
 		\hline  
 		$E_{0,0} -  e^{i \omega^+ \Delta t} $ & $\dfrac{\sqrt{3gH \beta} + 3U}{\beta} ik \Delta t$ \T \B  \\
-		$E_{0,1}$&  $ - \dfrac{3}{\beta} ik\Delta t$ \T \B   \\
-		$E_{1,0}$&   $ \left(-gH + \dfrac{3U^2}{\beta}\right)ik \Delta t$ \T \B  \\
+		$E_{0,1}$&$ - \dfrac{3}{\beta} ik\Delta t$ \T \B   \\
+		$E_{1,0}$& $ \left(-gH + \dfrac{3U^2}{\beta}\right)ik \Delta t$ \T \B  \\
 		$E_{1,1} -  e^{i \omega^+ \Delta t}$& $\dfrac{\sqrt{3gH \beta} - 3U}{\beta} ik \Delta t$ \T \B \\ 
 		\hline
 	\end{tabular}
@@ -333,13 +324,13 @@ For $\mathcal{D}$ and $\mathcal{W}$ we compare the $2\times 2$ evolution matrice
 	\centering
 	\begin{tabular}{l  c c}
 		\hline
-		Element & \multicolumn{2}{c}{Lowest Order Terms of Error for $\mathcal{D}$} \T \B \\
+		Element & \multicolumn{2}{c}{Lowest Order Terms of $\matr{E}^{\left(2\times 2\right)} - e^{i \omega^+ \Delta t} \matr{I}$ for $\mathcal{D}$} \T \B \\
 		\cline{2-3}
 		& $\Delta x$&$\Delta t$ \T \B \\
 		\hline
-		${E}^{\left(2\times 2\right)}_{0,0} -  e^{i \omega^+ \Delta t} $&  $\dfrac{ik^3}{3} U \Delta t \Delta x^2$ & $ \sqrt{\dfrac{3gH}{\beta}} 2ik \Delta t $ \T \B  \\
-		${E}^{\left(2\times 2\right)}_{0,1}$& $\dfrac{iHk^3}{3} \Delta t \Delta x^2$ &  $-2Hi k \Delta t$ \T \B  \\
-		${E}^{\left(2\times 2\right)}_{1,0}$& $ \dfrac{ig \left(3 + \beta\right)}{2\beta^2} k^3\Delta t \Delta x^2$ &  $ -\dfrac{6igk}{\beta} \Delta t$ \T \B  \\
+		${E}^{\left(2\times 2\right)}_{0,0} -  e^{i \omega^+ \Delta t} $&$\dfrac{ik^3}{3} U \Delta t \Delta x^2$ & $ \sqrt{\dfrac{3gH}{\beta}} 2ik \Delta t $ \T \B  \\
+		${E}^{\left(2\times 2\right)}_{0,1}$& $\dfrac{iHk^3}{3} \Delta t \Delta x^2$ & $-2Hi k \Delta t$ \T \B  \\
+		${E}^{\left(2\times 2\right)}_{1,0}$& $ \dfrac{ig \left(3 + \beta\right)}{2\beta^2} k^3\Delta t \Delta x^2$ &$ -\dfrac{6igk}{\beta} \Delta t$ \T \B  \\
 		${E}^{\left(2\times 2\right)}_{1,1} -  e^{i \omega^+ \Delta t}$& $\dfrac{ik^3}{3} U \Delta t \Delta x^2$ & $ \sqrt{\dfrac{3gH}{\beta}} 2ik \Delta t $ \T \B  \\  \hline
 	\end{tabular}
 	\caption{Lowest order terms of the Taylor series for the elements of $\matr{E}^{\left(2\times 2\right)} - e^{i \omega^\pm \Delta t} \matr{I}$ for $\mathcal{D}$ for all values of $Fr$. Here $\beta = 3 + k^2 H^2$.}
@@ -349,7 +340,7 @@ For $\mathcal{D}$ and $\mathcal{W}$ we compare the $2\times 2$ evolution matrice
 	\centering
 	\begin{tabular}{l  c c}
 		\hline
-		Element & \multicolumn{2}{c}{Lowest Order Terms of Error for $\mathcal{W}$} \T \B \\
+		Element & \multicolumn{2}{c}{Lowest Order Terms of $\matr{E}^{\left(2\times 2\right)} - e^{i \omega^+ \Delta t} \matr{I}$ for $\mathcal{W}$} \T \B \\
 		\cline{2-3} 
 		& $\Delta x$&$\Delta t$ \T \B \\
 		\hline 

@@ -102,7 +102,7 @@ Note that these reconstructions operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_
 
 
 \subsection{Fluid Velocity}
-To calculate $\mu_{j+1/2}$ we use a second-order FEM. We begin with the weak formulation of \eqref{eqn:LinConSerreG}, obtained by multiplying \eqref{eqn:LinConSerreG} by a test function $v$ and integrating over the spatial domain $\Omega$
+To calculate the velocity perturbation $\mu_{j+1/2}$ we use a second-order FEM. We begin with the weak formulation of \eqref{eqn:LinConSerreG}, obtained by multiplying \eqref{eqn:LinConSerreG} by a test function $v$ and integrating over the spatial domain $\Omega$
 \begin{equation*}
 \int_{\Omega}G v \; dx = UH\int_{\Omega} v \; dx + U \int_{\Omega} \eta v \; dx +   H\int_{\Omega} \mu v \; dx  + \frac{H^3}{3} \int_{\Omega} \frac{\partial \mu}{\partial x } \frac{\partial v}{\partial x }\; dx.
 \end{equation*}
@@ -130,7 +130,7 @@ Rearranging the equation we have that
 \end{align}
 where
 \begin{align*}
-\mathcal{G}^\eta &=  -U\dfrac{\Delta x}{6\mathcal{G}_D } \left(\mathcal{R}^-_{j +1/2} + \mathcal{R}^+_{j +1/2} \right), \\ \\
+\mathcal{G}^\eta &=  -U\mathcal{G}^G, \\ \\
 \mathcal{G}^G &= \dfrac{\Delta x}{6\mathcal{G}_D } \left(\mathcal{R}^-_{j +1/2} + \mathcal{R}^+_{j +1/2} \right), \\ \\
 \mathcal{G}^c &=  -2UH \dfrac{\Delta x}{6\mathcal{G}_D }
 \end{align*}
@@ -355,7 +355,7 @@ which is in the desired form \eqref{eqn:linearanalaim}.
 
 This is the evolution matrix $\matr{E}$ for $\text{FEVM}_2$. The matrix $\matr{E}$ is dependent on the flux matrix $\matr{F}$ and therefore will depend on the Froude number. The Froude number is constant over time in this analysis and so we can investigate supercritical, subcritical and critical flow individually.
 
-The convergence and dispersion analysis then proceed by studying the properties of the evolution matrix $\matr{E}$ for $\text{FEVM}_2$. As a comparison we also provide the results for the finite difference volume methods $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ described by \citet{Zoppou-etal-2017} and the finite difference methods $\mathcal{D}$ and $\mathcal{W}$ described by \cite{Pitt-2018-61}.
+The convergence and dispersion analysis then proceed by studying the properties of the evolution matrix $\matr{E}$ for $\text{FEVM}_2$. As a comparison we also provide the results for the finite difference volume methods $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ described by \citet{Zoppou-etal-2017} and the finite difference methods $\mathcal{D}$ and $\mathcal{W}$ described by \citet{Pitt-2018-61}.
 
 The evolution matrices for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$ can be derived following the derivation of the evolution matrix of $\text{FEVM}_2$ using the expressions for its constituent operators provided in Appendix \ref{app:LinAnal}. For $\mathcal{D}$ and $\mathcal{W}$ the evolution matrices are \eqref{eqn:AppEvolD} and \eqref{eqn:AppEvolW} respectively. We now present the results of the convergence analysis.
 
@@ -439,12 +439,12 @@ Since $\overline{\eta}^n_j$ and  $\overline{G}^n_j$ are finite and independent o
 We calculated the Taylor series of $\matr{E} -  e^{i \omega^\pm \Delta t}\matr{I}$ for all the numerical methods for all flow scenarios; subcritical, critical and supercritical flows. Since the results are the same for $\omega^+$ and $\omega^-$ we only report the results for $\omega^+$. For $\text{FEVM}_2$ the lowest order $\Delta x$ and $\Delta t$ terms of the Taylor series of $\matr{E} -  e^{i \omega^+ \Delta t}\matr{I}$ can be found in Table~\ref{tab:EerrFEVM2}. From this table it can be seen that the Taylor series of all the elements of $\matr{E} -  e^{i \omega^+ \Delta t}\matr{I}$ have a factor of $\Delta t$. So that
 
 \begin{align*}
-\left \| \matr{E} -  e^{i \omega^+ \Delta t}\matr{I} \right \|_2 &=  \left \| \Delta t \left(\matr{M}_0 +  \mathcal{O}\left(\Delta t\right)\right)\right \|_2  \nonumber\\ &= |\Delta t|  \left \| \matr{M}_0 +  \mathcal{O}\left(\Delta t\right)\right \|_2
- \nonumber\\ &\le  |\Delta t| \left(\left \| \matr{M}_0 \right \|_2 + \left \| \mathcal{O}\left(\Delta t\right)\right \|_2\right)
+\left \| \matr{E} -  e^{i \omega^+ \Delta t}\matr{I} \right \|_F &=  \left \| \Delta t \left(\matr{M}_0 +  \mathcal{O}\left(\Delta t\right)\right)\right \|_F  \nonumber\\ &= |\Delta t|  \left \| \matr{M}_0 +  \mathcal{O}\left(\Delta t\right)\right \|_F
+ \nonumber\\ &\le  |\Delta t| \left(\left \| \matr{M}_0 \right \|_F + \left \| \mathcal{O}\left(\Delta t\right)\right \|_F\right)
 \end{align*} 
 where $\matr{M}_0$ is some matrix.
 
-From Tables~\ref{tab:EerrFEVM2} we have that $\matr{M}_0$ is independent of $\Delta t$ and finite so that as $\Delta t \rightarrow 0$ then $|\Delta t| \left(\left \| \matr{M}_0 \right \|_2 + \left \| \mathcal{O}\left(\Delta t\right)\right \|_2\right)  \rightarrow 0$  and therefore  $\left \| \matr{E} -  e^{i \omega^+ \Delta t}\matr{I} \right \|_F \rightarrow 0$. Therefore, for $\text{FEVM}_2$ we have $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \|_2 = 0 $ and so  $\text{FEVM}_2$ is consistent for Fourier mode solutions implying consistency for all solutions as desired. 
+From Tables~\ref{tab:EerrFEVM2} we have that $\matr{M}_0$ is independent of $\Delta t$ and finite so that as $\Delta t \rightarrow 0$ then $|\Delta t| \left(\left \| \matr{M}_0 \right \|_F + \left \| \mathcal{O}\left(\Delta t\right)\right \|_F\right)  \rightarrow 0$  and therefore  $\left \| \matr{E} -  e^{i \omega^+ \Delta t}\matr{I} \right \|_F \rightarrow 0$. Therefore, for $\text{FEVM}_2$ we have $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \|_2 = 0 $ and so  $\text{FEVM}_2$ is consistent for Fourier mode solutions implying consistency for all solutions as desired. 
 
 \begin{table}
 	\centering
@@ -466,7 +466,7 @@ From Tables~\ref{tab:EerrFEVM2} we have that $\matr{M}_0$ is independent of $\De
 All methods were found to be consistent using the same reasoning. Their Tables can be found in Appendix \ref{app:LinAnal}. In particular we have Tables~\ref{tab:EerrFDVM1dxerror}~and~\ref{tab:EerrFDVM1dterror} for $\text{FDVM}_1$, Table~\ref{tab:EerrFDVM2} for $\text{FDVM}_2$, Tables~\ref{tab:EerrFDVM3dxerror}~and~\ref{tab:EerrFDVM3dterror} for $\text{FDVM}_3$, Table~\ref{tab:EerrD} for $\mathcal{D}$ and Table~\ref{tab:EerrW} for $\mathcal{W}$. 
 
 \section{Dispersion Analysis}
-To study the dispersion properties of the numerical method, we must calculate the dispersion relation of the numerical method  that relates the frequency $\widetilde{\omega}^\pm$ to the wavenumber $k$. Making use of \eqref{eqn:fourierfactor} in \eqref{eqn:evolutionmatrix} we get
+To study the dispersion properties of the numerical method, we must calculate the dispersion relation of the numerical method that relates the frequency $\widetilde{\omega}^\pm$ to the wavenumber $k$. Making use of \eqref{eqn:fourierfactor} in \eqref{eqn:evolutionmatrix} we get
 \begin{equation}\matr{E}\begin{bmatrix}
 \overline{\eta} \\ \overline{G}
 \end{bmatrix}^{n}_j = 
@@ -524,7 +524,7 @@ In Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} we present the plots 
 
 From Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} we can see that all methods approximate the dispersion relation of the Serre equations well with the approximation improving as $\Delta x \rightarrow 0$, as expected.
 
-For the real part of the dispersion error all the FEVM and the FDVM outperform the two finite difference methods and therefore will better approximate the speed of waves of the linearised Serre equations.  However, for the amplitude of waves the roles are reversed with the two finite difference methods either scaling the waves very little or not at all. When taking both effects into account with the total error we see that the $\text{FDVM}_1$ has the largest dispersion error followed by $\mathcal{W}$, $\mathcal{D}$, $\text{FEVM}_2$, $\text{FDVM}_2$ and finally $\text{FDVM}_3$ has the lowest dispersion error. So that the size of the total dispersion error is mainly determined by the order of accuracy of the numerical scheme. Overall the methods built around a FVM perform better than the finite difference methods of the same order. 
+For the real part of the dispersion error all the FEVM and the FDVM outperform the two finite difference methods and therefore will better approximate the speed of waves of the linearised Serre equations. However, for the amplitude of waves the roles are reversed with the two finite difference methods either scaling the waves very little or not at all. When taking both effects into account with the total error we see that the $\text{FDVM}_1$ has the largest dispersion error followed by $\mathcal{W}$, $\mathcal{D}$, $\text{FEVM}_2$, $\text{FDVM}_2$ and finally $\text{FDVM}_3$ has the lowest dispersion error. So that the size of the total dispersion error is mainly determined by the order of accuracy of the numerical scheme. Overall the methods built around a FVM perform better than the finite difference methods of the same order. 
 
 Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} furthermore demonstrate that $\text{FDVM}_2$ is superior to $\text{FEVM}_2$ not just for the complete dispersion error, but its real and imaginary parts individually as well. Therefore, $\text{FDVM}_2$ should more accurately model the speed and amplitude of waves.
 
@@ -575,7 +575,7 @@ The Taylor series expansion of $\widetilde{\omega}^\pm$ was also derived for all
 
 We also present the lowest order terms of the Taylor series for ${\widetilde{\omega}^+-\omega^+}$ for both $ Fr < -1$ and $ Fr > 1$ in Table~\ref{tab:Wspatfactor}. We only present the errors that are different from those reported in Table~\ref{tab:Wfactor}, this was only the case for the spatial error of the first- and third--order numerical methods. From these tables it is clear that the FDVM and the FEVM retain their order of accuracy when approximating~$\omega^+$ for when the flow is supercritical, this was also the case for $\omega^-$. 
 
-Finally we present the lowest order terms of the Taylor series for ${\widetilde{\omega}^+-\omega^+}$ for the finite difference methods in Table~\ref{tab:WFDspatfactor}. These methods do not change depending on the value of the physical quantities. The two finite difference methods retain their order of accuracy in space and time when approximating~$\omega^+$.  
+Finally we present the lowest order terms of the Taylor series for ${\widetilde{\omega}^+-\omega^+}$ for the finite difference methods in Table~\ref{tab:WFDspatfactor}. These methods do not change depending on the value of the physical quantities. The two finite difference methods retain their order of accuracy in space and time when approximating~$\omega^+$.
 
 Because all methods were demonstrated to have the expected order of accuracy in approximating $\omega^\pm$ for the linearised Serre equations this implies that for small $\Delta x$ values the order of accuracy will be the primary driver of the dispersion error, as was observed.
 
@@ -624,7 +624,7 @@ Because all methods were demonstrated to have the expected order of accuracy in 
 	$\mathcal{W}$& $\chi\Delta x^2$  &$ \dfrac{1}{\beta^2}\Bigg( \beta U^2\left[9\sqrt{3gH \beta} + 4 \beta U\right]$ \\ & & $ + 3gH^2\left[\sqrt{3gH \beta} + 6 \beta U\right] \Bigg) \dfrac{k^3}{18 }\Delta t^2$  \T\B  \\ 
 	\hline
 \end{tabular}
-	\caption{Lowest order terms of the Taylor series of $\widetilde{\omega}^+-\omega^+$ for $\mathcal{D}$ and $\mathcal{W}$. With $\beta = 3 + H^2 k^2 $ and $\chi = \left(U + \dfrac{\left( 4 + H^2k^2\right)\sqrt{3gH\beta}}{4 \beta^2}\right)$. }
+	\caption{Lowest order terms of the Taylor series of $\widetilde{\omega}^+-\omega^+$ for $\mathcal{D}$ and $\mathcal{W}$. \\ With $\beta = 3 + H^2 k^2 $ and $\chi = \left(U + \dfrac{\left( 4 + H^2k^2\right)\sqrt{3gH\beta}}{4 \beta^2}\right)$. }
 	\label{tab:WFDspatfactor} 
 \end{table}
  %W x orig :  \dfrac{gH\left( 4 + H^2k^2\right)}{2 \beta \sqrt{3gH\beta}}

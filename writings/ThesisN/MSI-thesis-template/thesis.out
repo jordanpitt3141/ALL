@@ -3,69 +3,70 @@
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
 \BOOKMARK [1][-]{section.1.1}{Objectives of the Thesis}{chapter.1}% 4
 \BOOKMARK [1][-]{section.1.2}{Original Contribution of the Thesis}{chapter.1}% 5
-\BOOKMARK [1][-]{section.1.3}{Organisation of the Thesis}{chapter.1}% 6
-\BOOKMARK [0][-]{chapter.2}{The Serre Equations}{}% 7
-\BOOKMARK [1][-]{section.2.1}{The One-Dimensional Serre Equations}{chapter.2}% 8
-\BOOKMARK [2][-]{subsection.2.1.1}{Alternative Form}{section.2.1}% 9
-\BOOKMARK [1][-]{section.2.2}{Properties}{chapter.2}% 10
-\BOOKMARK [2][-]{subsection.2.2.1}{Conservation Properties}{section.2.2}% 11
-\BOOKMARK [2][-]{subsection.2.2.2}{Dispersion Properties}{section.2.2}% 12
-\BOOKMARK [2][-]{subsection.2.2.3}{Analytic Solutions}{section.2.2}% 13
-\BOOKMARK [1][-]{section.2.3}{Forced Solutions}{chapter.2}% 14
-\BOOKMARK [1][-]{section.2.4}{Behaviour in the Presence of Steep Gradients}{chapter.2}% 15
-\BOOKMARK [0][-]{chapter.3}{Finite Element Volume Method}{}% 16
-\BOOKMARK [1][-]{section.3.1}{Notation for Numerical Grids}{chapter.3}% 17
-\BOOKMARK [1][-]{section.3.2}{Structure Overview}{chapter.3}% 18
-\BOOKMARK [2][-]{subsection.3.2.1}{Reconstruction}{section.3.2}% 19
-\BOOKMARK [2][-]{subsection.3.2.2}{Fluid Velocity}{section.3.2}% 20
-\BOOKMARK [2][-]{subsection.3.2.3}{Flux Across the Cell Interfaces}{section.3.2}% 21
-\BOOKMARK [2][-]{subsection.3.2.4}{Source Terms}{section.3.2}% 22
-\BOOKMARK [2][-]{subsection.3.2.5}{Update Cell Averages}{section.3.2}% 23
-\BOOKMARK [2][-]{subsection.3.2.6}{Second-Order SSP Runge-Kutta Method}{section.3.2}% 24
-\BOOKMARK [1][-]{section.3.3}{CFL condition}{chapter.3}% 25
-\BOOKMARK [1][-]{section.3.4}{Boundary Conditions}{chapter.3}% 26
-\BOOKMARK [1][-]{section.3.5}{Dry Beds}{chapter.3}% 27
-\BOOKMARK [0][-]{chapter.4}{Linear Analysis}{}% 28
-\BOOKMARK [1][-]{section.4.1}{Linearised Serre Equations}{chapter.4}% 29
-\BOOKMARK [1][-]{section.4.2}{Evolution Matrix}{chapter.4}% 30
-\BOOKMARK [2][-]{subsection.4.2.1}{Reconstruction}{section.4.2}% 31
-\BOOKMARK [2][-]{subsection.4.2.2}{Fluid Velocity}{section.4.2}% 32
-\BOOKMARK [2][-]{subsection.4.2.3}{Flux Across the Cell Interfaces}{section.4.2}% 33
-\BOOKMARK [2][-]{subsection.4.2.4}{Update Cell Averages}{section.4.2}% 34
-\BOOKMARK [2][-]{subsection.4.2.5}{Second-Order SSP Runge-Kutta Method}{section.4.2}% 35
-\BOOKMARK [1][-]{section.4.3}{Convergence Analysis}{chapter.4}% 36
-\BOOKMARK [2][-]{subsection.4.3.1}{Stability}{section.4.3}% 37
-\BOOKMARK [2][-]{subsection.4.3.2}{Consistency}{section.4.3}% 38
-\BOOKMARK [1][-]{section.4.4}{Dispersion Analysis}{chapter.4}% 39
-\BOOKMARK [0][-]{chapter.5}{Numerical Validation}{}% 40
-\BOOKMARK [1][-]{section.5.1}{Measuring Convergence and Conservation}{chapter.5}% 41
-\BOOKMARK [2][-]{subsection.5.1.1}{Measure of Convergence}{section.5.1}% 42
-\BOOKMARK [2][-]{subsection.5.1.2}{Measures of Conservation}{section.5.1}% 43
-\BOOKMARK [1][-]{section.5.2}{Solitary Travelling Wave Solution}{chapter.5}% 44
-\BOOKMARK [1][-]{section.5.3}{Lake at Rest Solution}{chapter.5}% 45
-\BOOKMARK [1][-]{section.5.4}{Forced Solutions}{chapter.5}% 46
-\BOOKMARK [2][-]{subsection.5.4.1}{Results for a Wet Bed}{section.5.4}% 47
-\BOOKMARK [2][-]{subsection.5.4.2}{Results with a Dry Bed}{section.5.4}% 48
-\BOOKMARK [0][-]{chapter.6}{Experimental Validation}{}% 49
-\BOOKMARK [1][-]{section.6.1}{Evolution of a Rectangular Negative Wave}{chapter.6}% 50
-\BOOKMARK [2][-]{subsection.6.1.1}{Results for 0.01m Negative Rectangular Wave}{section.6.1}% 51
-\BOOKMARK [2][-]{subsection.6.1.2}{Results for 0.03m Negative Rectangular Wave}{section.6.1}% 52
-\BOOKMARK [1][-]{section.6.2}{Periodic Waves Over A Submerged Bar}{chapter.6}% 53
-\BOOKMARK [2][-]{subsection.6.2.1}{Low Frequency Results}{section.6.2}% 54
-\BOOKMARK [2][-]{subsection.6.2.2}{High Frequency Results}{section.6.2}% 55
-\BOOKMARK [1][-]{section.6.3}{Solitary Wave Over a Fringing Reef}{chapter.6}% 56
-\BOOKMARK [1][-]{section.6.4}{Run-up Experiment}{chapter.6}% 57
-\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 58
-\BOOKMARK [1][-]{section.7.1}{Future Work}{chapter.7}% 59
-\BOOKMARK [0][-]{appendix.A}{Additional Conservation Information}{}% 60
-\BOOKMARK [1][-]{section.A.1}{Solitary Travelling Wave Solution}{appendix.A}% 61
-\BOOKMARK [1][-]{section.A.2}{Lake At Rest Solution}{appendix.A}% 62
-\BOOKMARK [0][-]{appendix.B}{Finite Element Method Details}{}% 63
-\BOOKMARK [1][-]{section.B.1}{Basis Functions}{appendix.B}% 64
-\BOOKMARK [1][-]{section.B.2}{Function Spaces}{appendix.B}% 65
-\BOOKMARK [0][-]{appendix.C}{Linear Analysis Results}{}% 66
-\BOOKMARK [1][-]{section.C.1}{Finite Difference Volume Methods}{appendix.C}% 67
-\BOOKMARK [1][-]{section.C.2}{Finite Difference Methods}{appendix.C}% 68
-\BOOKMARK [1][-]{section.C.3}{Consistency Results}{appendix.C}% 69
-\BOOKMARK [0][-]{appendix.D}{Publications}{}% 70
-\BOOKMARK [0][-]{appendix.D}{Bibliography}{}% 71
+\BOOKMARK [2][-]{subsection.1.2.1}{Publications}{section.1.2}% 6
+\BOOKMARK [1][-]{section.1.3}{Organisation of the Thesis}{chapter.1}% 7
+\BOOKMARK [0][-]{chapter.2}{The Serre Equations}{}% 8
+\BOOKMARK [1][-]{section.2.1}{The One-Dimensional Serre Equations}{chapter.2}% 9
+\BOOKMARK [2][-]{subsection.2.1.1}{Alternative Form}{section.2.1}% 10
+\BOOKMARK [1][-]{section.2.2}{Properties}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.1}{Conservation Properties}{section.2.2}% 12
+\BOOKMARK [2][-]{subsection.2.2.2}{Dispersion Properties}{section.2.2}% 13
+\BOOKMARK [2][-]{subsection.2.2.3}{Analytic Solutions}{section.2.2}% 14
+\BOOKMARK [1][-]{section.2.3}{Forced Solutions}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.4}{Behaviour in the Presence of Steep Gradients}{chapter.2}% 16
+\BOOKMARK [0][-]{chapter.3}{Finite Element Volume Method}{}% 17
+\BOOKMARK [1][-]{section.3.1}{Notation for Numerical Grids}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.2}{Structure Overview}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.2.1}{Reconstruction}{section.3.2}% 20
+\BOOKMARK [2][-]{subsection.3.2.2}{Fluid Velocity}{section.3.2}% 21
+\BOOKMARK [2][-]{subsection.3.2.3}{Flux Across the Cell Interfaces}{section.3.2}% 22
+\BOOKMARK [2][-]{subsection.3.2.4}{Source Terms}{section.3.2}% 23
+\BOOKMARK [2][-]{subsection.3.2.5}{Update Cell Averages}{section.3.2}% 24
+\BOOKMARK [2][-]{subsection.3.2.6}{Second-Order SSP Runge-Kutta Method}{section.3.2}% 25
+\BOOKMARK [1][-]{section.3.3}{CFL condition}{chapter.3}% 26
+\BOOKMARK [1][-]{section.3.4}{Boundary Conditions}{chapter.3}% 27
+\BOOKMARK [1][-]{section.3.5}{Dry Beds}{chapter.3}% 28
+\BOOKMARK [0][-]{chapter.4}{Linear Analysis}{}% 29
+\BOOKMARK [1][-]{section.4.1}{Linearised Serre Equations}{chapter.4}% 30
+\BOOKMARK [1][-]{section.4.2}{Evolution Matrix}{chapter.4}% 31
+\BOOKMARK [2][-]{subsection.4.2.1}{Reconstruction}{section.4.2}% 32
+\BOOKMARK [2][-]{subsection.4.2.2}{Fluid Velocity}{section.4.2}% 33
+\BOOKMARK [2][-]{subsection.4.2.3}{Flux Across the Cell Interfaces}{section.4.2}% 34
+\BOOKMARK [2][-]{subsection.4.2.4}{Update Cell Averages}{section.4.2}% 35
+\BOOKMARK [2][-]{subsection.4.2.5}{Second-Order SSP Runge-Kutta Method}{section.4.2}% 36
+\BOOKMARK [1][-]{section.4.3}{Convergence Analysis}{chapter.4}% 37
+\BOOKMARK [2][-]{subsection.4.3.1}{Stability}{section.4.3}% 38
+\BOOKMARK [2][-]{subsection.4.3.2}{Consistency}{section.4.3}% 39
+\BOOKMARK [1][-]{section.4.4}{Dispersion Analysis}{chapter.4}% 40
+\BOOKMARK [0][-]{chapter.5}{Numerical Validation}{}% 41
+\BOOKMARK [1][-]{section.5.1}{Measuring Convergence and Conservation}{chapter.5}% 42
+\BOOKMARK [2][-]{subsection.5.1.1}{Measure of Convergence}{section.5.1}% 43
+\BOOKMARK [2][-]{subsection.5.1.2}{Measures of Conservation}{section.5.1}% 44
+\BOOKMARK [1][-]{section.5.2}{Solitary Travelling Wave Solution}{chapter.5}% 45
+\BOOKMARK [1][-]{section.5.3}{Lake at Rest Solution}{chapter.5}% 46
+\BOOKMARK [1][-]{section.5.4}{Forced Solutions}{chapter.5}% 47
+\BOOKMARK [2][-]{subsection.5.4.1}{Results for a Wet Bed}{section.5.4}% 48
+\BOOKMARK [2][-]{subsection.5.4.2}{Results with a Dry Bed}{section.5.4}% 49
+\BOOKMARK [0][-]{chapter.6}{Experimental Validation}{}% 50
+\BOOKMARK [1][-]{section.6.1}{Evolution of a Negative Rectangular Wave}{chapter.6}% 51
+\BOOKMARK [2][-]{subsection.6.1.1}{Results for 0.01m Negative Rectangular Wave}{section.6.1}% 52
+\BOOKMARK [2][-]{subsection.6.1.2}{Results for 0.03m Negative Rectangular Wave}{section.6.1}% 53
+\BOOKMARK [1][-]{section.6.2}{Periodic Waves Over A Submerged Bar}{chapter.6}% 54
+\BOOKMARK [2][-]{subsection.6.2.1}{Low Frequency Results}{section.6.2}% 55
+\BOOKMARK [2][-]{subsection.6.2.2}{High Frequency Results}{section.6.2}% 56
+\BOOKMARK [1][-]{section.6.3}{Solitary Wave Over a Fringing Reef}{chapter.6}% 57
+\BOOKMARK [1][-]{section.6.4}{Run-up Experiment}{chapter.6}% 58
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 59
+\BOOKMARK [1][-]{section.7.1}{Future Work}{chapter.7}% 60
+\BOOKMARK [0][-]{appendix.A}{Additional Conservation Information}{}% 61
+\BOOKMARK [1][-]{section.A.1}{Solitary Travelling Wave Solution}{appendix.A}% 62
+\BOOKMARK [1][-]{section.A.2}{Lake At Rest Solution}{appendix.A}% 63
+\BOOKMARK [0][-]{appendix.B}{Finite Element Method Details}{}% 64
+\BOOKMARK [1][-]{section.B.1}{Basis Functions}{appendix.B}% 65
+\BOOKMARK [1][-]{section.B.2}{Function Spaces}{appendix.B}% 66
+\BOOKMARK [0][-]{appendix.C}{Linear Analysis Results}{}% 67
+\BOOKMARK [1][-]{section.C.1}{Finite Difference Volume Methods}{appendix.C}% 68
+\BOOKMARK [1][-]{section.C.2}{Finite Difference Methods}{appendix.C}% 69
+\BOOKMARK [1][-]{section.C.3}{Consistency Results}{appendix.C}% 70
+\BOOKMARK [0][-]{appendix.D}{Publications}{}% 71
+\BOOKMARK [0][-]{appendix.D}{Bibliography}{}% 72

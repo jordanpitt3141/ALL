@@ -4,17 +4,18 @@
 
 The numerical methods $\text{FDVM}_2$ and $\text{FEVM}_2$ are experimentally validated by comparing their numerical solutions to experimental data. The chosen experiments allow the methods capability to model a variety of physical situations to be tested. These situations include the presence of steep gradients in the flow, the interaction of strong dispersive waves with varying bathymetry, shoaling and wave-breaking and finally the wetting and drying of a sloping beach. Thus, the ability of these methods to robustly reproduce all the experimental results well strongly demonstrates their capability to model a variety of physical situations. 
 
-\section{Evolution of a Rectangular Negative Wave}
+\section{Evolution of a Negative Rectangular Wave}
+%mention poor conservation of energy [] []
 A series of experiments studying the evolution of a negative rectangular wave in the free-surface were conducted by \citet{Hammack-Segur-1978-337}. These experiments were performed in a wave tank that was $0.394m$ wide, $31.6m$ long and $0.61m$ high. The rectangular negative waves were generated using a piston $0.61m$ long with its left edge against the wave tank wall. The $0.1m$ deep water is initially stationary with a horizontal free surface and the piston in the up position. The experiment begins when the piston suddenly moves down. This creates a sudden negative rectangular wave in the water surface generating a dispersive wave train that is recorded at wave gauges located $0m$, $5m$, $10m$, $15m$ and $20m$ away from the right edge of the piston. A diagram of the longitudinal section of the wave-tank with the wave gauge locations marked is given in Figure \ref{fig:SegurWT}.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/WaveTank.pdf}
-	\caption{Diagram showing a longitudinal section of the wave tank for the Segur experiments with the water (\squareF{blue}), the bed (\squareF{brown!80!black}) and the numbered wave gauge marked.}
+	\caption{Diagram showing a longitudinal section of the wave tank for evolution of a negative rectangular wave experiments with the water (\squareF{blue}), the bed (\squareF{brown!80!black}) and the numbered wave gauge marked.}
 	\label{fig:SegurWT}
 \end{figure} 
 
-These experiments provide a good benchmark for the capability of the numerical method to accurately model problems with steep gradients in the free surface. These experiments are affected by bed friction and viscosity and the inability of the piston and water to move vertically instantaneously and slip free. Since the Serre equations do not contain viscosity, bed friction and discontinuous initial conditions are used to model the negative rectangular wave we expect that the numerical solutions of the Serre equations may produce many more oscillations in the dispersive wave train than are observed experimentally \cite{Pitt-2018-61}.
+These experiments provide a good benchmark for the capability of the numerical method to accurately model problems with steep gradients in the free surface. These experiments are affected by bed friction and viscosity and the inability of the piston and water to move vertically instantaneously and slip free. Since the Serre equations do not contain viscosity, bed friction was neglected and discontinuous initial conditions are used to model the negative rectangular wave we expect that the numerical solutions of the Serre equations may produce many more oscillations in the dispersive wave train than are observed experimentally \cite{Pitt-2018-61}.
 
 \citet{Hammack-Segur-1978-337} report the results for two different initial negative wave amplitudes $0.01m$ and $0.03m$, resulting in the non-linearity parameters $\epsilon = 0.1$ and $\epsilon=0.3$ respectively. Since these non-linearity parameters are relatively small there was no breaking of waves throughout the experiment.
 
@@ -41,11 +42,11 @@ Plots comparing the numerical and experimental wave gauge data for the $0.01m$ n
 
 The numerical solutions agree well with the experimental results; particularly for the front of the dispersive wave train. While all the conserved quantities have indeed been conserved well by the methods.  
 
-The numerical solutions produce larger and consequently faster waves and observe oscillations in the dispersive wave train which are not present in the experimental data of wave gauge $1$. Moreover, as expected the methods produce many more oscillations than were observed experimentally. These discrepancies can be attributed to the lack of viscosity and bed friction that have been omitted from the Serre equations in this thesis \eqref{eqn:FullSerreCon}. Furthermore, it is highly likely the experiment produced some smooth approximation to a discontinuous jump in the water depth with the down-stroke of the piston. Such a smoothing of the initial conditions will significantly attenuate the high frequency waves in the generated dispersive wave train \cite{Pitt-2018-61}. Given these differences the numerical methods do a very good job of replicating the experimental behaviour.
+The numerical solutions produce larger and consequently faster waves and observe oscillations in the dispersive wave train which are not present in the experimental data of wave gauge $1$. Moreover, as expected the methods produce many more oscillations than were observed experimentally. These discrepancies can be attributed to the lack of viscosity and the omission of bed friction for the Serre equations in this thesis \eqref{eqn:FullSerreCon}. Furthermore, it is highly likely the experiment produced some smooth approximation to a discontinuous jump in the water depth with the down-stroke of the piston. Such a smoothing of the initial conditions will significantly attenuate the high frequency waves in the generated dispersive wave train \cite{Pitt-2018-61}. Given these differences the numerical methods do a very good job of replicating the experimental behaviour.
 
 These numerical solutions compare well to those of \citet{Zoppou-etal-2017} for $\text{FDVM}_2$ with $\Delta x = 0.005m$, $\Delta t = 0.2 \Delta t / \sqrt{g 0.1} s$ and $\theta = 1$. Where a higher resolution and a more diffusive value of the limiting parameter is chosen. These differences had little impact on the results at the wave gauges. While the more diffusive value of the limiting parameter negatively impacts the conservation of $\mathcal{H}$ reported by \citet{Zoppou-etal-2017}. This is because when $\theta = 1$ the reconstruction diffuses the initial steep gradient, negatively affecting the conservation of $\mathcal{H}$ \cite{Pitt-2018-61}.
 
-Both $\text{FEVM}_2$ and $\text{FDVM}_2$ have produced visually identical results at this scale and have demonstrated very good conservation of all the quantities see, Tables \ref{tab:ConservationSegurFEVM1cm} and \ref{tab:ConservationSegurFDVM1cm}. Given the extensive examination of several numerical schemes for steep gradient problems \cite{Pitt-2018-61}, this indicates that these solutions are indicative of true solutions of the Serre equations. However, these results do not demonstrate the superiority of one of these methods over the other. 
+Both $\text{FEVM}_2$ and $\text{FDVM}_2$ have produced indistinguishable results at this scale and have demonstrated very good conservation of all the quantities see, Tables \ref{tab:ConservationSegurFEVM1cm} and \ref{tab:ConservationSegurFDVM1cm}. Given the extensive examination of several numerical schemes for steep gradient problems \cite{Pitt-2018-61}, this indicates that these solutions are indicative of true solutions of the Serre equations. However, these results do not demonstrate the superiority of one of these methods over the other. 
 %
 \begin{table}
 	\centering
@@ -97,7 +98,9 @@ Both methods again reproduce the overall behaviour of this experiment very well.
 
 Since the negative rectangular wave is larger than in the previous example, the numerical methods have a larger error in conservation for all the quantities as compared to the $0.01m$ negative rectangular wave except mass; which is conserved exactly. For $G$ and momentum these errors are around machine epsilon and can be disregarded, so that only the conservation of energy is significantly effected. Even with this larger error, all quantities are still well conserved by the numerical methods. 
 
-These results compare well with those by \citet{Zoppou-etal-2017} for $\text{FDVM}_2$ with $\Delta x = 0.005m$, $\Delta t = 0.2 \Delta t / \sqrt{g 0.1} s$ and $\theta = 1$. The wave gauge data of those numerical solutions and the solutions displayed here are indistinguishable. The error in conservation in $\mathcal{H}$ is very similar as well, although in the numerical solutions displayed here the numerical grid is coarser. This is because the limiting parameter $\theta = 1$ diffuses the discontinuous jump, leading to poorer conservation of $\mathcal{H}$ \cite{Pitt-2018-61} than expected given the higher resolution of the grid.  
+These results compare well with those by \citet{Zoppou-etal-2017} for $\text{FDVM}_2$ with $\Delta x = 0.005m$, $\Delta t = 0.2 \Delta t / \sqrt{g 0.1} s$ and $\theta = 1$. The wave gauge data of those numerical solutions and the solutions displayed here are indistinguishable. The error in conservation in $\mathcal{H}$ is very similar as well, although in the numerical solutions displayed here the numerical grid is coarser. This is because the limiting parameter $\theta = 1$ diffuses the discontinuous jump, leading to poorer conservation of $\mathcal{H}$ \cite{Pitt-2018-61} than expected given the higher resolution of the grid.
+
+The conservation of $\mathcal{H}$ is difficult for numerical methods solving steep gradient problems \cite{Pitt-2018-61}. More so for this simulation where two steep gradients interact with one another over short time spans. By increasing the resolution of the numerical method the conservation error decreases as demonstrated for the analytic solutions. However, the results for the wave gauge data will be indistinguishable from the results presented here and the given resolution solutions are sufficient. 
 
 These experiments have been replicated equally well by the numerical methods, and given the resolution and error in conservation and the extensive study summarised in Chapter \ref{chp:Serreeqns}; these results demonstrate the accuracy of the numerical methods in the presence of steep gradients in the free surface.     
 %
@@ -140,7 +143,7 @@ The experiments of \citet{Beji-Battjes-1994-1} were conducted in a wave tank $37
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Beji/BejiTank.pdf}
-	\caption{Diagram showing a longitudinal section of the wave tank for the Beji experiments with the water (\squareF{blue}), the bed (\squareF{brown!80!black}) and the numbered wave gauge marked.}
+	\caption{Diagram showing a longitudinal section of the wave tank for the periodic waves over a submerged bar experiments with the water (\squareF{blue}), the bed (\squareF{brown!80!black}) and the numbered wave gauge marked.}
 	\label{fig:BejiWT}
 \end{figure}
 
@@ -157,7 +160,7 @@ Finally the boundary conditions for $G$ were calculated using the boundary value
 We shall now present our numerical results for the low and high frequency experiments.
 %
 \subsection{Low Frequency Results}
-A comparison of the wave heights $\eta$ of the experimental and numerical results are located in Figures \ref{fig:BejislWG1to4FEVM} and \ref{fig:BejislWG5to7FEVM} for $\text{FEVM}_2$ and Figures \ref{fig:BejislWG1to4FDVM} and \ref{fig:BejislWG5to7FDVM} for $\text{FDVM}_2$. These numerical schemes both produce identical results for all wave gauges and so this benchmark does not help us discriminate between these two methods. 
+A comparison of the wave heights $\eta$ of the experimental and numerical results are located in Figures \ref{fig:BejislWG1to4FEVM} and \ref{fig:BejislWG5to7FEVM} for $\text{FEVM}_2$ and Figures \ref{fig:BejislWG1to4FDVM} and \ref{fig:BejislWG5to7FDVM} for $\text{FDVM}_2$. These numerical schemes produce indistinguishable results for all wave gauges and so this benchmark does not help us discriminate between these two methods. 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -259,7 +262,7 @@ The numerical results for wave gauges $6$ and $7$ on the leeward side capture so
 The dispersion terms in the Serre equations are vital to recreating the experimental results for wave gauges $2$ to $5$, as non-dispersive equations such as the SWWE are not capable of accurately simulating this experiment \cite{Pitt-2017-1725}.
 
 \subsection{High Frequency Results}
-The wave heights of the experimental and numerical results are given in Figures \ref{fig:BejishWG1to4FEVM} and \ref{fig:BejishWG5to7FEVM} for $\text{FEVM}_2$. While the results for $\text{FDVM}_2$ are given in Figures \ref{fig:BejishWG1to4FDVM} and \ref{fig:BejishWG5to7FDVM}. As for the low frequency experiment $\text{FEVM}_2$ and $\text{FDVM}_2$ produce identical results for all wave gauges at this scale and so this benchmark does not discriminate between these two methods. 
+The wave heights of the experimental and numerical results are given in Figures \ref{fig:BejishWG1to4FEVM} and \ref{fig:BejishWG5to7FEVM} for $\text{FEVM}_2$. While the results for $\text{FDVM}_2$ are given in Figures \ref{fig:BejishWG1to4FDVM} and \ref{fig:BejishWG5to7FDVM}. As for the low frequency experiment $\text{FEVM}_2$ and $\text{FDVM}_2$ produce indistinguishable results for all wave gauges at this scale and so this benchmark does not discriminate between these two methods. 
 %
 \begin{figure}
 	\centering
