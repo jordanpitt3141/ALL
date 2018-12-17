@@ -34,9 +34,9 @@ C(q,\vecn{q^*}) =  \left\lbrace \begin{array}{c r}
 |\mathcal{C}^*\left({\vecn{q^*}}\right)| & |\mathcal{C}\left({q(x,0)} \right)| = 0  \end{array}\right. 
 \label{eqn:C1qdef} 
 \end{equation}
-where $\mathcal{C}^*\left({\vecn{q^*}}\right)$ was calculated using 3 point Gaussian quadrature over the $j^{th}$ cell and summing these cell integrals for all $j$. The value of $q$ at the three points needed to perform the Gaussian quadrature were calculated by interpolating the $j^{th}$ cell using a quartic polynomial that fits the nodal values $q_{j-2}$, $q_{j-1}$, $q_{j}$, $q_{j+1}$ and $q_{j+2}$ at the surrounding cell midpoints. The Gaussian quadrature using three points is $5^{th}$ order accurate and interpolation by quartics is $5^{th}$ order accurate for the quantity $q$ and $4^{th}$ order accurate for its spatial derivative $\partial q /  \partial x$. Since all methods are third-order accurate or less, the error introduced by the calculation of $\mathcal{C}^*\left({\vecn{q^*}}\right)$ for $h$, $uh$, $G$ and $\mathcal{H}$ will be dominated by the error introduced by the numerical solvers.
+where $\mathcal{C}^*\left({\vecn{q^*}}\right)$ was calculated using 3 point Gaussian quadrature over the $j^{th}$ cell and summing these cell integrals for all $j$. The value of $q$ at the three points needed to perform the Gaussian quadrature were calculated by interpolating the $j^{th}$ cell using a quartic polynomial that fits the nodal values $q_{j-2}$, $q_{j-1}$, $q_{j}$, $q_{j+1}$ and $q_{j+2}$ at the surrounding cell midpoints. Gaussian quadrature using three points is $5^{th}$ order accurate and interpolation by quartics is $5^{th}$ order accurate for the quantity $q$ and $4^{th}$ order accurate for its spatial derivative $\partial q /  \partial x$. Since all methods are third-order accurate or less, the error introduced by the calculation of $\mathcal{C}^*\left({\vecn{q^*}}\right)$ for $h$, $uh$, $G$ and $\mathcal{H}$ will be dominated by the error introduced by the numerical solvers.
 
-In some cases $\mathcal{C}\left({q(x,0)} \right)$ may be difficult to derive analytically. In this case we approximate $\mathcal{C}\left({q(x,0)} \right)$ with $\mathcal{C}^*\left(\vecn{q}^0\right)$ in \eqref{eqn:C1qdef}; where $\vecn{q}^0$ is the vector of the quantity at the cell midpoints used as the initial conditions of our numerical method. We denote the numerical approximation to the conservation error \eqref{eqn:C1qdef} by $C^*$.
+In some cases $\mathcal{C}\left({q(x,0)} \right)$ may be difficult to derive analytically. In this case we approximate $\mathcal{C}\left({q(x,0)} \right)$ with $\mathcal{C}^*\left(\vecn{q}^0\right)$ in \eqref{eqn:C1qdef}; where $\vecn{q}^0$ is the vector of the quantity at the cell midpoints used as the initial conditions of our numerical method. We denote the numerical approximation to the conservation error \eqref{eqn:C1qdef} by $C^*$. This conservation error will also be more enlightening in cases where the errors introduced by the discretisation are large, as these errors will be similar for $\mathcal{C}^*\left(\vecn{q}^0\right)$ and $\mathcal{C}^*\left(\vecn{q^*}\right)$. 
 
 
 \section{Solitary Travelling Wave Solution}
@@ -51,7 +51,7 @@ For the parameters $a_0 = 1m$ and $a_1 = 0.7m$ the non-linearity is $\epsilon = 
 
 The results of this analytic solution validation were published by \citet{Zoppou-etal-2017} for $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$. I produced the results in that paper which have been expanded here to include an investigation of the convergence of $G$ and the conservation of $h$, $uh$ and $G$.
 
-An example numerical solution with $\Delta x = {100} / {2^{11}}m \approx 0.049m$ from all methods was plotted in Figure \ref{fig:SolitonExAll} against the analytic solution at $t= 50s$. We have only plotted an illustrative amount of the points in the numerical solution. From these plots it is clear that $\text{FDVM}_1$ performs significantly worse than the higher-order methods at reproducing the analytic solution, even for this relatively fine grid where the wave is captured by more than $200$ cells. This is primarily due to the numerical diffusion introduced by the method, which has caused the wave in the numerical solution to decrease in amplitude and widen significantly. The higher-order numerical methods all accurately replicate the analytic solution, with insignificant visual differences in these plots due to the high resolution of the grid.
+An example numerical solution with $\Delta x = {100} / {2^{11}}m \approx 0.049m$ from all methods was plotted in Figure \ref{fig:SolitonExAll} against the analytic solution at $t= 50s$. We have only plotted an illustrative amount of the points in the numerical solution. From these plots it is clear that $\text{FDVM}_1$ performs significantly worse than the high-order methods at reproducing the analytic solution, even for this relatively fine grid where the wave is captured by more than $200$ cells. This is primarily due to the numerical diffusion introduced by the method, which has caused the wave in the numerical solution to decrease in amplitude and widen significantly. The high-order numerical methods all accurately replicate the analytic solution, with insignificant visual differences in these plots due to the high resolution of the grid.
 
 \begin{figure}
 	\centering
@@ -83,7 +83,7 @@ An example numerical solution with $\Delta x = {100} / {2^{11}}m \approx 0.049m$
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/Example/W.pdf}
 		\subcaption{$\mathcal{W}$}
 	\end{subfigure}
-	\caption{Comparison of the analytic solution ({\color{blue} \solidrule}) and numerical solution with $\Delta x = {100} / {2^{11}}m$ ({\color{red} $\bullet$}) for the soliton problem at $t=50s$ for all methods.}
+	\caption{Comparison of the analytic solution ({\color{blue} \solidrule}) and numerical solution with $\Delta x = {100} / {2^{11}}m$ ({\color{red} $\bullet$}) for the solitary travelling wave solution at $t=50s$ for all methods.}
 	\label{fig:SolitonExAll}
 \end{figure}
 
@@ -163,7 +163,7 @@ The error in conservation $C$ was calculated for all methods using the analytic 
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/Soliton/C1/W.pdf}
 		\subcaption{$\mathcal{W}$}
 	\end{subfigure}
-	\caption{Conservation error $C$ against $\Delta x$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\crosst{green!60!black}}) for the soliton problem for all methods.}
+	\caption{Conservation error $C$ against $\Delta x$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\crosst{green!60!black}}) for the solitary travelling wave solution for all methods.}
 	\label{fig:SolitonC1All}
 \end{figure}
 
@@ -171,10 +171,10 @@ No methods conserve $\mathcal{H}$ or the $uh$ within machine precision. Since no
 
 For small $\Delta x$ values the round-off errors dominate the conservation error, particularly for the finite difference methods. Interestingly, $\text{FDVM}_3$ has an accumulation of round-off error increasing the conservation error for $h$ and $G$ as $\Delta x$ decreases. This was found to be caused by the Runge-Kutta coefficients of the third-order time stepping method \cite{Zoppou-etal-2017} not being exactly represented as floating point numbers. For the third-order SSP Runge-Kutta time stepping method the coefficients in the last step are $1/3$ and $2/3$. Since these numbers are not exactly represented in floating point they are approximated with a small error that when summed does not maintain the conservation properties of $h$ and $G$. Thus, every time step accumulates a small conservation error of machine precision size leading to the observed increase as $\Delta x$ becomes small and the number of time steps increases. Remedies for this were attempted such as using the coefficients $1/3$ and $(1- 1/3)$ and bringing the common divisor out but this problem persisted. Some other numerical techniques are required to resolve this issue such as those of \citet{higham2002}. Ultimately, since the convergence of $\text{FDVM}_3$ was only slightly better than $\text{FEVM}_2$ and $\text{FDVM}_2$ \cite{Zoppou-etal-2017} it was not developed further and this issue was not resolved.
 
-These results demonstrate the need for higher-order accurate schemes to accurately approximate the Serre equations. Furthermore, they suggest that second-order accuracy is sufficient, with third-order accurate schemes showing only a slight improvement. This was also the conclusion of the analytic validation by \citet{Zoppou-etal-2017}. Finally, they demonstrate the ability of FEVM and FDVM to conserve $h$ and $G$ up to machine precision, as desired. Given these results, only $\text{FEVM}_2$ and $\text{FDVM}_2$ have been extended to allow for variable bathymetry and dry beds. Consequently, the rest of the results in this chapter and Chapter \ref{chp:ExpMethodComp} will only consider $\text{FEVM}_2$ and $\text{FDVM}_2$. 
+These results demonstrate the need for high-order accurate schemes to accurately approximate the Serre equations. Furthermore, they suggest that second-order accuracy is sufficient, with third-order accurate schemes showing only a slight improvement. This was also the conclusion of the analytic validation by \citet{Zoppou-etal-2017}. Finally, they demonstrate the ability of FEVM and FDVM to conserve $h$ and $G$ up to machine precision, as desired. Given these results, only $\text{FEVM}_2$ and $\text{FDVM}_2$ have been extended to allow for variable bathymetry and dry beds. Consequently, the rest of the results in this chapter and Chapter \ref{chp:ExpMethodComp} will only consider $\text{FEVM}_2$ and $\text{FDVM}_2$. 
 
 \section{Lake at Rest Solution}
-To verify the validity of our numerical methods for the Serre equations with variable bathymetry and assess the well balancing method we compare various numerical solutions to the lake at rest solution \eqref{eqn:LARdefhub}.
+To verify the validity of our numerical methods for the Serre equations with variable bathymetry and assess the well-balancing method we compare various numerical solutions to the lake at rest solution \eqref{eqn:LARdefhub}.
 
 The particular lake at rest solution \eqref{eqn:LARdefhub} associated with the bed profile
 \begin{equation}
@@ -184,7 +184,7 @@ was chosen for this validation to ensure that all terms with derivatives of the 
 
 For the numerical solutions the spatial domain was $x \in \left[-112.5 m,87.5 m\right]$ and the final time was $t=10s$, with the standard gravitational acceleration $g= 9.81 m/s^2$. The spatial resolution of the method was varied so that $\Delta x = 100 / 2^k m$ with $k \in \left[8, \dots  ,17\right]$ and the CFL condition \eqref{eqn:CFLcond} was satisfied by having $\Delta t = Cr \Delta x / \sqrt{g}$ with condition number $Cr = 0.5$. The standard limiting parameter $\theta = 1.2$ was used in the generalised minmod limiter, \eqref{eqn:slopehGrecon} for both $\text{FEVM}_2$ and $\text{FDVM}_2$. Dirichlet boundary conditions were used at both ends as the analytic solution is stationary.
 
-The numerical methods are assessed by using the specified lake at rest solution as initial conditions and comparing the numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ at $t=10s$ to the analytic solution, which are the initial conditions. To demonstrate the utility of the well balancing method the results from two versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are presented, where the well balancing method described in Chapter \ref{chp:HFVMMethod} is and is not employed.   
+The numerical methods are assessed by using the specified lake at rest solution as initial conditions and comparing the numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ at $t=10s$ to the analytic solution, which are the initial conditions. To demonstrate the utility of the well-balancing method the results from two versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are presented, where the well-balancing method described in Chapter \ref{chp:HFVMMethod} is and is not employed.   
 
 Example numerical solutions with $\Delta x = 100/2^{10}m \approx 0.0977m$ at $t=10s$ for all versions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:LakeAtRestEx}. The numerical solutions in these figures are indistinguishable from the analytic solutions at this scale and so the analytic solutions have been omitted from the plots.  
 
@@ -192,80 +192,80 @@ Example numerical solutions with $\Delta x = 100/2^{10}m \approx 0.0977m$ at $t=
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/Example/FEVMWB.pdf}
-		\subcaption{$\text{FEVM}_2$ well balanced}
+		\subcaption{$\text{FEVM}_2$ well-balanced}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/Example/FEVMnWB.pdf}
-		\subcaption{$\text{FEVM}_2$ not well balanced}
+		\subcaption{$\text{FEVM}_2$ not well-balanced}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/Example/FDVMWB.pdf}
-		\subcaption{$\text{FDVM}_2$ well balanced}
+		\subcaption{$\text{FDVM}_2$ well-balanced}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/Example/FDVMnWB.pdf}
-		\subcaption{$\text{FDVM}_2$ not well balanced}
+		\subcaption{$\text{FDVM}_2$ not well-balanced}
 	\end{subfigure}
 	\caption{Numerical solutions for $w$ (\squareF{blue}) and $b$ (\squareF{brown!60!black}) with $\Delta x = {100} / {2^{10}}m $ for the lake at rest problem at $t=10s$ for $\text{FEVM}_2$ and $\text{FDVM}_2$.}
 	\label{fig:LakeAtRestEx}
 \end{figure}
 
-Examination of the $L_2$ errors depicted in Figure \ref{fig:LakeAtRestEL1} reveals that only the well balanced methods have accurately recovered the analytic solution. With both well balanced versions of the methods reproducing $h$, $G$ and $u$ precisely, accounting for round-off errors. For $G$ and $u$ their error is increasing due to an accumulation of the round-off errors for each cell and time step; hence their second-order increase as $\Delta x \rightarrow 0$. The errors in $u$ produce errors in $h$ through its flux function increasing the error in $h$ as $\Delta x$ decreases. However, since $h$ is far larger than $u$ these effects have a more complicated relationship to the cell width.
+Examination of the $L_2$ errors depicted in Figure \ref{fig:LakeAtRestEL1} reveals that only the well-balanced methods have accurately recovered the analytic solution. With both well-balanced versions of the methods reproducing $h$, $G$ and $u$ precisely, accounting for round-off errors. For $G$ and $u$ their errors are increasing due to an accumulation of the round-off errors for each cell and time step; hence their second-order increase as $\Delta x \rightarrow 0$. The errors in $u$ produce errors in $h$ through its flux function increasing the error in $h$ as $\Delta x$ decreases. However, since $h$ is far larger than $u$ these effects have a more complicated relationship to the cell width.
 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/L2/FEVMWB.pdf}
-		\subcaption{$\text{FEVM}_2$ well balanced}
+		\subcaption{$\text{FEVM}_2$ well-balanced}
 		\vspace{0.3cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/L2/FEVMnWB.pdf}
-		\subcaption{$\text{FEVM}_2$ not well balanced}
+		\subcaption{$\text{FEVM}_2$ not well-balanced}
 		\vspace{0.3cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/L2/FDVMWB.pdf}
-		\subcaption{$\text{FDVM}_2$ well balanced}
+		\subcaption{$\text{FDVM}_2$ well-balanced}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/L2/FDVMnWB.pdf}
-		\subcaption{$\text{FDVM}_2$ not well balanced}
+		\subcaption{$\text{FDVM}_2$ not well-balanced}
 	\end{subfigure}
 	\caption{Convergence as measured by the $L_2$ norm against $\Delta x$ for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\circlet{red}) for the lake at rest problem at $t=10s$ $\text{FEVM}_2$ and $\text{FDVM}_2$.}
 	\label{fig:LakeAtRestEL1}
 \end{figure}
 
-For methods without well balancing; the errors are significantly larger, yet they are converging to the analytic solution. However, the order of accuracy of the convergence in $u$ and $G$ has degraded and is not the expected second-order accuracy observed for $h$. The poor convergence of $u$ and $G$ is a result of the errors in $u$ and $G$ not being damped by the method. Thus errors generated by the imbalance between the flux and source terms increase over time degrading the order of accuracy. The second-order accuracy in $h$ is retained for the presented $\Delta x$ values as these errors introduced in $u$ and $G$ are small for a single cell, although for smaller $\Delta x$ values these errors in $u$ and $G$ will begin to dominate the errors in $h$. 
+For methods without well-balancing; the errors are significantly larger, yet they are converging to the analytic solution. However, the order of accuracy of the convergence in $u$ and $G$ has degraded and is not the expected second-order accuracy observed for $h$. The poor convergence of $u$ and $G$ is a result of the errors in $u$ and $G$ not being damped by the method. Thus errors generated by the imbalance between the flux and source terms increase over time degrading the order of accuracy. The second-order accuracy in $h$ is retained for the presented $\Delta x$ values as these errors introduced in $u$ and $G$ are small for a single cell, although for smaller $\Delta x$ values these errors in $u$ and $G$ will begin to dominate the errors in $h$. 
 
 
 %%%%%%[][][][] NEW [][][][][]
-Using the expressions in Appendix \ref{app:ConQuant} for the total amounts of the conserved quantities the conservation error $C$ was calculated for $\text{FEVM}_2$ and $\text{FDVM}_2$ with the results plotted in Figure \ref{fig:LakeAtRestEC1}. The error in conservation of these methods affirms the superiority of the well-balanced version of the methods. In particular, we see that the total amounts of $uh$ and $G$ are only conserved within machine precision when well balancing is employed. Since $uh$ and $G$ are uniformly zero in the initial conditions the well balanced methods have only introduced round-off errors into these quantities, whilst without well balancing large errors in these quantities are introduced in the naive methods. 
+Using the expressions in Appendix \ref{app:ConQuant} for the total amounts of the conserved quantities the conservation error $C$ was calculated for $\text{FEVM}_2$ and $\text{FDVM}_2$ with the results plotted in Figure \ref{fig:LakeAtRestEC1}. The error in conservation of these methods affirms the superiority of the well-balanced version of the methods. In particular, we see that the total amounts of $uh$ and $G$ are only conserved within machine precision when well-balancing is employed. Since $uh$ and $G$ are uniformly zero in the initial conditions the well-balanced methods have only introduced round-off errors into these quantities, whilst without well-balancing large errors in these quantities are introduced in the naive methods. 
 
-The errors in conservation of $h$ and $\mathcal{H}$ for the well balanced methods are large, but do converge at the order of accuracy of the scheme or better. These errors are caused by the discretisation of the initial conditions, primarily the approximation of the boundaries of the wet regions by the numerical grids. This initial discretisation error can be removed by comparing the total amounts of the conserved quantities in the numerical solution to their numerically calculated total amounts in the initial conditions with $C^*$ as in Figure \ref{fig:LakeAtRestEC*1}. For the completely numerically calculated conservation error $C^*$ we observe that all the conserved quantities are conserved at machine precision for the well balanced methods. With $\mathcal{H}$ being conserved exactly for most numerical solutions, hence its disappearance from the log-log plot. The conservation error of $\mathcal{H}$ is small for the lake at rest solution since $u$ is very small. Hence, $\mathcal{H}$ is essentially the gravitational potential energy which since mass is well conserved is also well conserved.
+The errors in conservation of $h$ and $\mathcal{H}$ for the well-balanced methods are large, but do converge at the order of accuracy of the scheme or better. These errors are caused by the discretisation of the initial conditions, primarily the approximation of the boundaries of the wet regions by the numerical grids. This initial discretisation error can be removed by comparing the total amounts of the conserved quantities in the numerical solution to their numerically calculated total amounts in the initial conditions with $C^*$ as in Figure \ref{fig:LakeAtRestEC*1}. For the completely numerically calculated conservation error $C^*$ we observe that all the conserved quantities are conserved at machine precision for the well-balanced methods. With $\mathcal{H}$ being conserved exactly for most numerical solutions, hence its disappearance from the log-log plot. The conservation error of $\mathcal{H}$ is small for the lake at rest solution since $u$ is very small. Hence, $\mathcal{H}$ is essentially the gravitational potential energy which since mass is well conserved is also well conserved.
 
 %mention hamilton
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Ana/FEVM2WB.pdf}
-		\subcaption{$\text{FEVM}_2$ well balanced}
+		\subcaption{$\text{FEVM}_2$ well-balanced}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Ana/FEVM2nWB.pdf}
-		\subcaption{$\text{FEVM}_2$ not well balanced}
+		\subcaption{$\text{FEVM}_2$ not well-balanced}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Ana/FDVM2WB.pdf}
-		\subcaption{$\text{FDVM}_2$ well balanced}
+		\subcaption{$\text{FDVM}_2$ well-balanced}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Ana/FDVM2nWB.pdf}
-		\subcaption{$\text{FDVM}_2$ not well balanced}
+		\subcaption{$\text{FDVM}_2$ not well-balanced}
 	\end{subfigure}
 	\caption{Conservation error $C$ against $\Delta x$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\color{green!60!black} \crosst{green!60!black}}) for the lake at rest problem at $t=10s$ for $\text{FEVM}_2$ and $\text{FDVM}_2$.}
 	\label{fig:LakeAtRestEC1}
@@ -275,21 +275,21 @@ The errors in conservation of $h$ and $\mathcal{H}$ for the well balanced method
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Num/FEVM2WB.pdf}
-		\subcaption{$\text{FEVM}_2$ well balanced}
+		\subcaption{$\text{FEVM}_2$ well-balanced}
 		\vspace{0.5cm}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Num/FEVM2nWB.pdf}
-		\subcaption{$\text{FEVM}_2$ not well balanced}
+		\subcaption{$\text{FEVM}_2$ not well-balanced}
 		\vspace{0.5cm}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Num/FDVM2WB.pdf}
-		\subcaption{$\text{FDVM}_2$ well balanced}
+		\subcaption{$\text{FDVM}_2$ well-balanced}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/C1/Num/FDVM2nWB.pdf}
-		\subcaption{$\text{FDVM}_2$ not well balanced}
+		\subcaption{$\text{FDVM}_2$ not well-balanced}
 	\end{subfigure}
 	\caption{Conservation error using only numerical calculations $C^*$ against $\Delta x$ for $h$ (\trianglet{blue}), $uh$ (\squaret{black}), $G$ (\circlet{red}) and $\mathcal{H}$ ({\color{green!60!black} \crosst{green!60!black}}) for the lake at rest problem at $t=10s$ for $\text{FEVM}_2$ and $\text{FDVM}_2$.}
 	\label{fig:LakeAtRestEC*1}
@@ -311,7 +311,7 @@ u^*(x,t) &= a_5 \exp\left(-\dfrac{\left[\left(x - a_2 t\right) - a_3\right]^2}{2
 b^*(x) &= a_6 \sin\left(a_7 x\right)
 \end{align}
 \end{subequations}
-for the primitive variables were chosen. These functions produce an $a_1$ high Gaussian bump for $h$ and $u$ that travels at a fixed speed $a_2$ over a periodic bed. Thus the solutions $h$ and $u$ will have constant shape and be translated to the right over time. However, this is not the case for $G$ as $u$ and $h$ have constant shape but the bed is periodic. Therefore, the bed terms in $G$ \eqref{defn:SerreEqnConservedQuantity1} will change the shape of $G$ as the Gaussian bump in $h$ and $u$ encounters different bed slopes.
+for the primitive variables were chosen. These functions produce an $a_1$ high Gaussian bump for $h$ and $u$ that travels at a fixed speed $a_2$ over a periodic bed. Thus, $h$ and $u$ will have constant shape and travel to the right over time. However, this is not the case for $G$ as $u$ and $h$ have constant shape but the bed is periodic. With the bed terms in $G$ \eqref{defn:SerreEqnConservedQuantity1} changing the shape of $G$ as the Gaussian bump in $h$ and $u$ encounters different bed slopes.
 
 For non-trivial choices of the parameters $a_i$ all terms in the Serre equations vary in space and time and so all terms must be accurately approximated by the numerical method to adequately reproduce the forced solution. 
 
@@ -323,7 +323,7 @@ $\Delta t = Cr \Delta x / \left(a_2 + a_5 + \sqrt{g\left(a_0 + a_1\right)}\right
 
 \subsection{Results for a Wet Bed} 
 %a_0 = 1
-For the non-zero water depth case where $a_0 = 1m$ an example of the numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figures \ref{fig:ForcedWetFEVMP2PExAll} and \ref{fig:ForcedWetFDVMP2PExAll} respectively for $\Delta x = 100/ 2^{10} m \approx 0.0977m $ at various times. The numerical solutions and the forced solutions are distinguishable at all times for these scales, accurately reproducing the forced solution as it travels over the bed. Thus $h$ and $u$ maintain their constant shape while $G$ does not due to the influence of the periodic bed.
+For the non-zero water depth case where $a_0 = 1m$ an example of the numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figures \ref{fig:ForcedWetFEVMP2PExAll} and \ref{fig:ForcedWetFDVMP2PExAll} respectively for $\Delta x = 100/ 2^{10} m \approx 0.0977m $ at various times. The numerical solutions and the forced solutions are indistinguishable at all times for these scales, accurately reproducing the forced solution as it travels over the bed. Thus $h$ and $u$ maintain their constant shape while $G$ does not due to the influence of the periodic bed.
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -371,7 +371,7 @@ For the non-zero water depth case where $a_0 = 1m$ an example of the numerical s
 	\label{fig:ForcedWetFDVMP2PExAll}
 \end{figure}
 
-The $L_2$ error of $h$, $u$ and $G$ for the $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:L1convergenceforcedWet}. Both methods recover the expected second-order accuracy. Since the source term of the modified Serre equations is added analytically and all terms must be accurately approximated by the method for this forced solution, these results demonstrate that $\text{FEVM}_2$ and $\text{FDVM}_2$ are second-order accurate for all terms when the bed is wet everywhere, as desired.
+The $L_2$ error of $h$, $u$ and $G$ for the $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:L1convergenceforcedWet}. Both methods recover the expected second-order accuracy. Since the term of the forced Serre equations is added analytically and all terms must be accurately approximated by the method for this forced solution, these results demonstrate that $\text{FEVM}_2$ and $\text{FDVM}_2$ are second-order accurate for all terms when the bed is wet everywhere, as desired.
 
 \begin{figure}
 	\centering
@@ -445,7 +445,7 @@ Example numerical solutions demonstrating the evolution of the wave are given in
 
 These large errors in $u$ when $h$ is small are caused by the particular choices $h_{{base}} = 10^{-8}$ and $h_{{tol}}  = 10^{-12}$ used in the desingularisation transformation applied to the FEM \eqref{eqn:usolvefromGhb}. By choosing larger values of these quantities the errors in $u$ can be significantly damped. However, if $h_{{base}}$ and $h_{{tol}}$ are larger they begin to dominate the $L_2$ errors in $h$, $G$ and $uh$ making the convergence less obvious. This trade-off is present in all desingularisation transforms. 
 
-For our purposes the chosen desingularisation transform \eqref{eqn:hdrytransform} with small $h_{{base}}$ and $h_{{tol}}$ values are sufficient, resulting in large observed errors in $u$ when $h$ is small.
+For our purposes the chosen desingularisation transform \eqref{eqn:hdrytransform} with small $h_{{base}}$ and $h_{{tol}}$ values was sufficient, resulting in large observed errors in $u$ when $h$ is small.
 
 
 %%%%% [][][] NEW [][][]

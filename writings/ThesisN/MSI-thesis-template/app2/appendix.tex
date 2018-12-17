@@ -35,7 +35,7 @@ To calculate the flux matrix $\matr{F}$ we have from \eqref{eqn:singleEvolveStep
  \end{bmatrix}.
 \end{equation*}
 Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{G,\eta} $, $\mathcal{F}^{G,G} $ depend on the Froude number $Fr = {U}/{\sqrt{gH}}$ and the constituent operators of the method. The factor $\mathcal{F}^{\eta,G}$ in the flux matrix does not vary with the Froude number and is
-\[\mathcal{F}^{\eta,G} = H \mathcal{G}^G \]
+\[\mathcal{F}^{\eta,G} = H \mathcal{G}^G. \]
 The expressions for the other coefficients of $\matr{F}$ are summarised in Tables \ref{tab:Fnnfactor}-\ref{tab:FGGfactor} for all values of $Fr$ with $\mathcal{F}^{\eta,\eta}$ in Table \ref{tab:Fnnfactor}, $\mathcal{F}^{G,\eta}$ in Table \ref{tab:FGnfactor} and $\mathcal{F}^{G,G}$ in Table \ref{tab:FGGfactor}.
 
 
@@ -50,7 +50,7 @@ The expressions for the other coefficients of $\matr{F}$ are summarised in Table
 		$1 < Fr$ & $H \mathcal{G}^{\eta} + U \mathcal{R}^-_{j+1/2}$ \T\B\\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{F}^{\eta,\eta} $ that multiples $\eta$ in the flux function for $\eta$ for each FDVM and the FEVM.}
+	\caption{Factor $\mathcal{F}^{\eta,\eta} $ that multiples $\eta$ in the flux function for $\eta$ for all FDVM and the FEVM.}
 	\label{tab:Fnnfactor}
 \end{table}
 \begin{table}
@@ -63,7 +63,7 @@ The expressions for the other coefficients of $\matr{F}$ are summarised in Table
 		$1 < Fr$ & $UH \mathcal{G}^{\eta} + gH \mathcal{R}^-_{j+1/2}$ \T\B\\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{F}^{G,\eta} $ that multiples $\eta$ in the flux function for $G$ for each FDVM and the FEVM.}
+	\caption{Factor $\mathcal{F}^{G,\eta} $ that multiples $\eta$ in the flux function for $G$ for all FDVM and the FEVM.}
 	\label{tab:FGnfactor}
 \end{table}
 \begin{table}
@@ -76,11 +76,11 @@ The expressions for the other coefficients of $\matr{F}$ are summarised in Table
 		$1 < Fr$ & $U\mathcal{R}^+_{j+1/2}  +  UH \mathcal{G}^G$ \T\B\\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{F}^{G,G} $ that multiples $G$ in the flux function for $G$ for each FDVM and the FEVM.}
+	\caption{Factor $\mathcal{F}^{G,G} $ that multiples $G$ in the flux function for $G$ for all FDVM and the FEVM.}
 	\label{tab:FGGfactor}
 \end{table}
 
-Given the expressions for $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{\eta,G}$, $\mathcal{F}^{G,\eta} $ and $\mathcal{F}^{G,G} $. Replace the operators $\mathcal{R}_j$, $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}^\eta$ and $\mathcal{G}^G$ with the appropriate ones for the FDVM. The expressions for these fundamental operators of each FDVM are given in Table \ref{tab:Mfactor} for $\mathcal{R}_j$, Table \ref{tab:Rpfactor} for $\mathcal{R}^+_{j-1/2}$, Table \ref{tab:Rmfactor} for $\mathcal{R}^-_{j+1/2}$ and Table \ref{tab:GGfactor} for $\mathcal{G}^G$. Since $\mathcal{G}^\eta = -U\mathcal{G}^G $ we have only provided the table for $\mathcal{G}^G$. 
+Given the expressions for $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{\eta,G}$, $\mathcal{F}^{G,\eta} $ and $\mathcal{F}^{G,G} $. Replace the operators $\mathcal{R}_j$, $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}^\eta$ and $\mathcal{G}^G$ with the appropriate ones for the FDVM. The expressions for these fundamental operators of each FDVM are given in Table \ref{tab:Mfactor} for $\mathcal{R}_j$, Table \ref{tab:Rpfactor} for $\mathcal{R}^+_{j-1/2}$, Table \ref{tab:Rmfactor} for $\mathcal{R}^-_{j+1/2}$ and Table \ref{tab:GGfactor} for $\mathcal{G}^G$. Since $\mathcal{G}^\eta = -U\mathcal{G}^G $ we have only provided the table for $\mathcal{G}^G$. Since the perturbations are Fourier modes \eqref{eqn:FourierNode} the reconstruction operator $\mathcal{R}^+_{j+1/2}= e^{ i k\Delta x}\mathcal{R}^+_{j-1/2}$. 
 
 From this process the evolution matrix $\matr{E}$ for all FDVM for all flow scenarios is obtained as desired. 
 
@@ -97,7 +97,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 		$\text{FDVM}_2$ and $\text{FEVM}_2$& $1$ & $-\dfrac{1}{24}k^2 \Delta x^2$ \T \B \\
 		$\text{FDVM}_3$& $\dfrac{26 - 2 \cos\left(k \Delta x\right)}{24}$ & $-\dfrac{3}{640}k^4 \Delta x^4$ \T \B  \\
 		\hline	\end{tabular}
-	\caption{Factor $\mathcal{R}_j$ from reconstructing the nodal value at the midpoint and the lowest order term of the Taylor series of the factor in the method minus the exact factor for each finite volume based method.}
+	\caption{Factor $\mathcal{R}_j$ from reconstructing the nodal value at the midpoint and the lowest order term of the Taylor series of the factor in the method minus the exact factor for all finite volume based methods.}
 	\label{tab:Mfactor}
 \end{table}
 \begin{table}
@@ -112,7 +112,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 + 2e^{-i k {\Delta x}} - e^{i k {\Delta x}}} \right)$ & $\dfrac{i}{12}k^3 \Delta x^3$  \T\B \\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{R}^+_{j-1/2}$ from the reconstruction of $\eta$ and $G$ at $x_{j+1/2}$ from the ${(j+1)^{th}}$ cell and the lowest order term of the Taylor series of the factor in the method minus the exact factor for each finite volume based method. }
+	\caption{Factor $\mathcal{R}^+_{j-1/2}$ from the reconstruction of $\eta$ and $G$ at $x_{j+1/2}$ from the ${(j+1)^{th}}$ cell and the lowest order term of the Taylor series of the factor in the method minus the exact factor for all finite volume based methods. }
 	\label{tab:Rpfactor}
 \end{table}
 \begin{table}
@@ -127,7 +127,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 - e^{-i k {\Delta x}} +2 e^{i k {\Delta x}}} \right)$ & $-\dfrac{i}{12}k^3 \Delta x^3$  \T\B \\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{R}^-_{j+1/2}$ from the reconstruction of $\eta$ and $G$ at $x_{j+1/2}$ using the ${j^{th}}$ cell and the lowest order term of the Taylor series of the factor in the method minus the exact factor for each finite volume based method.}
+	\caption{Factor $\mathcal{R}^-_{j+1/2}$ from the reconstruction of $\eta$ and $G$ at $x_{j+1/2}$ using the ${j^{th}}$ cell and the lowest order term of the Taylor series of the factor in the method minus the exact factor for all finite volume based methods.}
 	\label{tab:Rmfactor}
 \end{table}
 %TABLE TOO BIG
@@ -145,7 +145,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 			$\text{FDVM}_3$&  $\dfrac{9 \Delta x^2 \left({-e^{-ik\Delta x} + 9e^{ik\Delta x} - e^{2ik\Delta x} + 9}\right)}{144 \Delta x^2H - 4H^3\left(32\cos\left(k \Delta x\right) -2\cos\left(2k \Delta x\right) - 30\right)}$ & $-\dfrac{243 + 49H^2k^2}{960H\left(3 + H^2k^2\right)^2}k^4 \Delta x^4$ \T \B \\
 			\hline
 		\end{tabular}
-		\caption{Factor $\mathcal{G}^G$ that multiples $G$ given by solving \eqref{eqn:LinConSerreGu0} for $\upsilon_{j+1/2}$ and the lowest order term of the Taylor series of the factor in the method minus the exact factor for each finite volume based method.}
+		\caption{Factor $\mathcal{G}^G$ that multiples $G$ given by solving \eqref{eqn:LinConSerreGu0} for $\upsilon_{j+1/2}$ and the lowest order term of the Taylor series of the factor in the method minus the exact factor for all finite volume based methods.}
 		\label{tab:GGfactor} 
 	\end{table}
 \end{landscape}
@@ -176,7 +176,7 @@ Because ${\eta}^{n-1}_j = e^{-i \omega^\pm \Delta t}{\eta}^{n}_j $ and ${\mu}^{n
 \end{bmatrix}^{n+1} _j = \matr{E}^{\left(2 \times 2\right)} \begin{bmatrix}{\eta} \\{\mu}
 \end{bmatrix}^{n}_j
 \end{equation}  
-where $\matr{E}^{\left(2 \times 2\right)}$ is a $2 \times 2$ matrix that depends on the elements of $\matr{E}$ in the following way
+where $\matr{E}^{\left(2 \times 2\right)}$ is a $2 \times 2$ matrix that depends on the elements of $\matr{E}$ \eqref{eqn:App4x4} in the following way
 \begin{equation}
 \label{eqn:App4x4D1}
 \matr{E}^{\left(2 \times 2\right)} = \begin{bmatrix}E_{0,0} + e^{-i \omega^{\pm }\Delta t} E_{0,2} & E_{0,1} + e^{-i \omega^{\pm }\Delta t} E_{0,3} \\
@@ -184,7 +184,7 @@ E_{1,0} + e^{-i \omega^{\pm }\Delta t} E_{1,2} & E_{1,1} + e^{-i \omega^{\pm }\D
 \end{bmatrix}.
 \end{equation}
 
-The stability analysis was then performed by finding the spectral radius of the naive evolution matrix $\matr{E}$ of the FDM \eqref{eqn:App4x4Def}. The consistency analysis was based on comparing the $2\times2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ \eqref{eqn:App4x4D1} to the exact evolution matrix $e^{i \omega^\pm \Delta t}\matr{I} $. Finally, the dispersion error was based on the eigenvalues of $\matr{E}$ \eqref{eqn:App4x4Def}, this matrix has an additional two eigenvalues beyond the ones given by $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ that we ignored. We found the methods had the same stability and dispersion properties when $\matr{E}^{\left(2 \times 2\right)}$ was investigated. We will now present the $4\times4$ evolution matrices for $\mathcal{D}$ and $\mathcal{W}$. Given these matrices the corresponding $2\times 2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ can be calculated using \eqref{eqn:App4x4D1}.
+The stability analysis was then performed by finding the spectral radius of the naive evolution matrix $\matr{E}$ of the FDM \eqref{eqn:App4x4Def}. The consistency analysis was based on comparing the $2\times2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ \eqref{eqn:App4x4D1} to the exact evolution matrix $e^{i \omega^\pm \Delta t}\matr{I} $. Finally, the dispersion error was based on the eigenvalues of $\matr{E}$ \eqref{eqn:App4x4Def}, this matrix has an additional two eigenvalues beyond the ones given by $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ that were ignored. We found the methods had the same stability and dispersion properties when $\matr{E}^{\left(2 \times 2\right)}$ was investigated. We will now present the $4\times4$ evolution matrices for $\mathcal{D}$ and $\mathcal{W}$. Given these matrices the corresponding $2\times 2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ can be calculated using \eqref{eqn:App4x4D1}.
 
 
 
@@ -232,7 +232,7 @@ E_{0,3} = &- \dfrac{\Delta t}{\Delta x}H\dfrac{i\sin\left(k\Delta x\right)}{2}, 
 
 %[][][]
 \section{Consistency Results}
-The consistency results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ are provided here. For $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ we compare the evolution matrices $\matr{E}$ given by the finding the relationship \eqref{eqn:AppDEFDVM} to the exact evolution matrix $e^{i\omega^\pm \Delta t } \matr{I}$ \eqref{eqn:consistencyTndef}. Since the results are similar for $\omega^-$ and $\omega^+$ we only give the results for $\omega^+$. These results are presented in Tables \ref{tab:EerrFDVM1dxerror} and \ref{tab:EerrFDVM1dterror} for $\text{FDVM}_1$, Table \ref{tab:EerrFDVM2} for $\text{FDVM}_2$ and Tables \ref{tab:EerrFDVM3dxerror} and \ref{tab:EerrFDVM3dterror} for $\text{FDVM}_3$.
+The consistency results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ are provided here. For $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ we compare the evolution matrices $\matr{E}$ \eqref{eqn:AppDEFDVM} to the exact evolution matrix $e^{i\omega^\pm \Delta t } \matr{I}$ \eqref{eqn:consistencyTndef}. Since the results are similar for $\omega^-$ and $\omega^+$ we only give the results for $\omega^+$. These results are presented in Tables \ref{tab:EerrFDVM1dxerror} and \ref{tab:EerrFDVM1dterror} for $\text{FDVM}_1$, Table \ref{tab:EerrFDVM2} for $\text{FDVM}_2$ and Tables \ref{tab:EerrFDVM3dxerror} and \ref{tab:EerrFDVM3dterror} for $\text{FDVM}_3$.
 
 For $\mathcal{D}$ and $\mathcal{W}$ we compare the $2\times 2$ evolution matrices $\matr{E}^{\left(2\times 2\right)}$ \eqref{eqn:App4x4D1} to the exact evolution matrix $e^{i\omega^\pm \Delta t } \matr{I}$ \eqref{eqn:consistencyTndef}. Since the results are similar for $\omega^-$ and $\omega^+$ we only give the results for $\omega^+$. The results for $\omega^+$ are presented in Table \ref{tab:EerrD} for $\mathcal{D}$ and Table \ref{tab:EerrW} for $\mathcal{W}$.
 

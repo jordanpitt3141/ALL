@@ -10,33 +10,33 @@
 
 The evolution of the dam-break problem for the Serre equations was comprehensively studied using various numerical methods resulting in the observation of new behaviours and the resolution of differences previously reported in the literature.  
 
-A well balanced second-order FEVM was described for the one-dimensional Serre equations. This method makes use of a consistent polynomial representation of the quantities over the cells from which all necessary terms can be calculated locally over the cell; making it a readily parrallelisable computational method. The method uses a finite element and a finite volume method and thus is robust to steep gradients present in the conserved variables $h$ and $G$. 
+A well-balanced second-order FEVM was described for the one-dimensional Serre equations. The method uses a finite element and a finite volume method and thus is robust to steep gradients present in the conserved variables $h$ and $G$. The use of these methods also makes the FEVM well suited to solve the two-dimensional Serre equations using unstructured meshes with parallelised code.  
 
 A linear analysis of the convergence and dispersion properties of $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\text{FEVM}_2$ , $\text{D}$ and $\text{W}$ was performed. The analysis demonstrated that $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\text{FEVM}_2$ and $\mathcal{D}$ are convergent methods, while $\mathcal{W}$ is only convergent when the mean background flow velocity is zero. The dispersion analysis demonstrated that all methods approximated the dispersion relation of the Serre equations with the expected order of accuracy. This analysis extended a previous analysis of the dispersion relationships of numerical methods \cite{Filippini-etal-2016-381} by allowing non-zero mean flow, combining the spatial and temporal analyses and comparing the real and imaginary parts of the dispersion error. 
 
 A comparison of the various numerical methods and the analytic solitary travelling wave solution of the Serre equations was performed. The expected order of accuracy and conservation properties of all the methods was observed. However, these results also demonstrated that the increase in accuracy achieved by a third-order method over a second-order method did not warrant the extra computational effort, justifying the further development of second-order methods over third-order methods for future work. For this reason only the second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were developed further to allow varying bathymetry and dry beds.
 
-The second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were then validated against the lake at rest steady state and the forced solutions. These results demonstrated that these methods are well balanced and accurately approximate all terms in the Serre equations in the presence of dry beds. 
+The second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were then validated against the lake at rest steady state and the forced solutions. These results demonstrated that these methods are well-balanced and accurately approximate all terms in the Serre equations in the presence of dry beds. 
 
-Finally the second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were compared to experimental data; demonstrating their modelling capabilities across a wide array of physical scenarios. These results established the greater robustness of $\text{FEVM}_2$; as $\text{FDVM}_2$ was found to be unstable for the solitary wave over a fringing reef experiment due to the presence of large jumps in the water surface as the wave moved into shallow water. 
+Finally the second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were compared to experimental data; demonstrating their modelling capabilities across a wide array of physical scenarios. These results established the greater robustness of $\text{FEVM}_2$; as $\text{FDVM}_2$ was found to be unstable for the solitary wave over a fringing reef experiment due to the presence of large jumps in the water surface as the wave broke. 
 
-To summarise the major contributions of my research are
+To summarise the major contributions of my research are:
 \begin{itemize}
-	\item Observation and justification of a new structure in the solution of the Serre equations to the dam-break problem;
-	\item Development and description of the well balanced second-order finite element volume method that can handle dry beds and conserves $h$ and $G$;
-	\item Linear analysis of the convergence properties of the developed finite volume based methods and the mentioned finite difference methods;
-	\item Analysis of the dispersion properties of the numerical methods, allowing for non-zero mean flow velocity and accounting for the total dispersion error;
+	\item Observation and justification of a new structure in the solution of the Serre equations to the dam-break problem.
+	\item Development and description of the well-balanced second-order finite element volume method that can handle dry beds and conserves $h$ and $G$.
+	\item Linear analysis of the convergence properties of the developed finite volume based methods and the mentioned finite difference methods.
+	\item Analysis of the dispersion properties of the numerical methods, allowing for non-zero mean flow velocity and accounting for the total dispersion error.
 	\item Validation of the numerical method against analytic and forced solutions and experimental results. 
 \end{itemize}
 
 \section{Future Work}
-Following the work conducted in this thesis; some natural extensions are
+Following the work conducted in this thesis; some natural extensions are:
 \begin{itemize}
-	\item Inclusion of wave-breaking in the model; 
-	\item Implementation of different boundary conditions;
-	\item Incorporation of discontinuous bed profiles;
-	\item Incorporation of bed friction in the method;
-	\item A complete analysis of the convergence properties of the FEVM;
+	\item Inclusion of wave-breaking in the model. 
+	\item Implementation of different boundary conditions.
+	\item Incorporation of discontinuous bed profiles.
+	\item Incorporation of bed friction in the method.
+	\item A complete analysis of the convergence properties of the FEVM.
 	\item Extension of the FEVM to the two-dimensional Serre equations on unstructured meshes.
 \end{itemize}
 

@@ -2,9 +2,6 @@
 \label{chp:HFVMMethod}
 In this chapter we introduce the notation for the numerical grids and then describe the second-order Finite Element Volume Method (FEVM) in detail.
 
-%Mention the other numerical methods!!! YES
-%Leveque - Bousclaw is for Boussinesq equations
-%Simon Clarke - KDV equations, some numerical methods
 A variety of numerical methods have been used to solve the Serre equations; from complete finite difference methods \cite{Cienfuegos-etal-2006-1217,El-etal-2006} and finite element methods \cite{Mitsotakis-etal-2014,Li-2014-169,Mitsotakis-etal-2017} to combinations of finite difference and finite volume methods \cite{Hank-etal-2010-2034,Zoppou-etal-2017}. Splitting techniques have also been employed, most commonly to split the Serre equations into their non-linear and dispersive parts; resulting in an elliptic operator for the dispersive part and the SWWE for the non-linear part \cite{Bradford-Sanders-2002-953,Dutykh-etal-2013-761,Filippini-etal-2016-381}. 
 
 Numerical methods that make use of the conservation law form of the Serre equations \eqref{eqn:FullSerreCon} \cite{Hank-etal-2010-2034,Li-2014-169,Zoppou-etal-2017} are the most promising for the two dimensional Serre equations with variable bathymetry. The primary reason for this is that these methods are robust and extend well to unstructured meshes with complex geometries which are the meshes most commonly used for modelling physical scenarios. Secondly, to properly handle the elliptic operator produced by the non-linear and dispersive splitting requires overly restrictive assumptions about the smoothness of the physical quantities, particularly the water depth. 
@@ -12,7 +9,7 @@ Numerical methods that make use of the conservation law form of the Serre equati
 I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order FEVM which will be referred to as $\text{FEVM}_2$ was a main objective of the thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is robust in the presence of steep gradients in the free surface \cite{Pitt-2018-61}, robust during the wetting and drying of beds and all the terms of the finite volume method can be calculated knowing only the quantities inside the cell. This last point indicates that this method is the ideal variant of the finite volume based methods \cite{Zoppou-etal-2017} to be extended to solve the two-dimensional Serre equations on unstructured meshes with parallelised code.
  
  
-In addition to the $\text{FEVM}_2$, the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced. These methods will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore the third-order extension $\text{FDVM}_3$ was implemented during my research. I have also reproduced the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006}; which I refer to as $\mathcal{D}$ and $\mathcal{W}$ respectively. Descriptions of these methods have already been published \cite{Zoppou-etal-2017,Pitt-2018-61} and therefore, are omitted from the thesis.
+In addition to the $\text{FEVM}_2$, the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced. These methods will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore the third-order $\text{FDVM}_3$ was implemented during my research. I have also reproduced the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006}; which I refer to as $\mathcal{D}$ and $\mathcal{W}$ respectively. Descriptions of these methods have already been published \cite{Zoppou-etal-2017,Pitt-2018-61} and therefore, are omitted from the thesis.
 
 
 \section{Notation for Numerical Grids}
@@ -50,7 +47,7 @@ These are the nodal values of $q$. Since the FEVM uses a FVM the cell averages o
 \end{equation*}
 over the $j^{th}$ cell.
 
-In the FEVM we reconstruct quantities at various points inside the cell from the cell average values. At the cell edges $x_{j\pm1/2}$, two reconstructions are possible from each of the neighbouring cells, we distinguish between the two possible reconstructions using superscripts. For example, for the cell edge $x_{j+1/2}$ and a general quantity $q$, there is the reconstructed value $q^-_{j+1/2}$ from the upwind $j^{th}$ cell and the reconstructed value $q^+_{j+1/2}$ from the downwind $(j+1)^{th}$ cell.
+In the FEVM we reconstruct quantities at various points inside the cell using the adjacent cell average values. At the cell edges $x_{j\pm1/2}$, two reconstructions are possible from each of the neighbouring cells, we distinguish between the two possible reconstructions using superscripts. For example, for the cell edge $x_{j+1/2}$ and a general quantity $q$, there is the reconstructed value $q^-_{j+1/2}$ from the $j^{th}$ cell and the reconstructed value $q^+_{j+1/2}$ from the $(j+1)^{th}$ cell.
 
 \section{Structure Overview}
 \label{sec:StructOverview}
@@ -64,7 +61,7 @@ b_{0} \\ b_{1} \\ \vdots \\b_{m} \BM
 where $q$ is a generic quantity representing the vectors for $h$, $G$ and $w$. The evolution step proceeds by (i) reconstructing the quantities over the cell, (ii) calculating the fluid velocity, (iii) approximating the flux, (iv) approximating the source term, (v) updating the cell averages and then (vi) applying second-order time stepping.
 
 \begin{enumerate}[(i)]
-	\item Reconstruction: The locations for the reconstruction of all the quantities in the $j^{th}$ cell are displayed in Figure \ref{fig:ReconLocs}. The quantities $h$, $w$ and $G$ are reconstructed at $x_{j-1/2}$, $x_{j}$ and $x_{j+1/2}$ from their cell average values using the second-order reconstruction operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ respectively. While the bed profile $b$ in the $j^{th}$ cell is reconstructed at $x_{j-1/2}$, $x_{j-1/6}$, $x_{j+1/6}$ and $x_{j+1/2}$ from its nodal values using the fourth-order reconstruction operators $\mathcal{B}_{j-1/2}$, $\mathcal{B}_{j-1/6}$, $\mathcal{B}_{j+1/6}$ and $\mathcal{B}_{j+1/2}$ respectively. 
+	\item Reconstruction: The locations for the reconstruction of all the quantities in the $j^{th}$ cell are displayed in Figure \ref{fig:ReconLocs}. For the $j^{th}$ cell the quantities $h$, $w$ and $G$ are reconstructed at $x_{j-1/2}$, $x_{j}$ and $x_{j+1/2}$ from their cell average values using the second-order reconstruction operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ respectively. While the bed profile $b$ in the $j^{th}$ cell is reconstructed at $x_{j-1/2}$, $x_{j-1/6}$, $x_{j+1/6}$ and $x_{j+1/2}$ from its nodal values using the fourth-order reconstruction operators $\mathcal{B}_{j-1/2}$, $\mathcal{B}_{j-1/6}$, $\mathcal{B}_{j+1/6}$ and $\mathcal{B}_{j+1/2}$ respectively. 
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.8\textwidth]{./chp3/figures/FEVMRecon.pdf}
@@ -134,13 +131,13 @@ The minmod function
 0 & \text{otherwise}\\
 \end{array} \right.
 \end{equation*}
-takes a list of $a_i \in \mathbb{R}$. If all elements have the same sign then minmod returns the element with smallest absolute value, otherwise it returns zero. 
+takes a list of $a_i \in \mathbb{R}$. If all the inputs have the same sign then minmod returns the input with smallest absolute value, otherwise it returns zero. 
 \end{defn}
 The non-linear limiting used to calculate $d_j$ ensures that the reconstruction of $h$, $w$ and $G$ inside the cell is Total Variation Diminishing (TVD) \cite{Harten-1983-357}, hence it does not introduce non-physical oscillations. The TVD property of this reconstruction is achieved by constraining the slope $d_j$ to zero near local extrema, resulting in a piecewise constant reconstruction which is TVD. Away from local extrema $d_j$ will be the gradient with the smallest absolute value, making our reconstruction second-order accurate.
 
 The reconstruction operator $\mathcal{R}_{j} $ is second-order accurate regardless of the presence of local extrema. This can be seen through the error analysis of the midpoint quadrature rule \cite{Davis-Rabinowitz-1984} for which we have that
 \begin{equation}
-\overline{q}_j = \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q \; dx = q_j + \mathcal{O}\left(\Delta x^2\right).
+\overline{q}^n_j = \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q(x,t^n) \; dx = q_j^n + \mathcal{O}\left(\Delta x^2\right).
 \end{equation}
 
 \subsubsection{Reconstruction of the Bed Profile}
@@ -181,7 +178,7 @@ b_{j+1/2} &=  \mathcal{B}_{j+1/2}\left(\vecn{b}\right) =  \frac{1}{2}\left( C_j(
 
 \subsection{Fluid Velocity}
 \label{subsec:FluidVelocity}
-In the FEVM we solve for the primitive variable $u$ given $h$, $G$ and $b$ using a finite element approximation to \eqref{defn:SerreEqnConservedQuantity1}. For the FEM we begin with the weak form of \eqref{defn:SerreEqnConservedQuantity1} with a test function $v$ over the spatial domain $\Omega$ which is 
+In the FEVM we solve for the primitive variable $u$ given $h$, $G$ and $b$ using a finite element approximation to \eqref{defn:SerreEqnConservedQuantity1}. For the FEM we begin with the weak form of \eqref{defn:SerreEqnConservedQuantity1} with test function $v$ over the spatial domain $\Omega$ which is 
 
 \begin{equation*}
 	\int_{\Omega } G v \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} +  \left[\frac{\partial b}{\partial x}\right]^2 \right) v - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) v \; dx.
@@ -274,7 +271,7 @@ The $uh$ term is
 \phi_{j-1/2}\\\phi_j \\\phi_{j+1/2} \BM
 \end{bmatrix} d\xi.
 \end{equation*}
-Since the integral is computed over $\left[-1,1\right]$, there are only a few non-zero contributions from the finite element approximations to $h$ and $u$, so we have
+Since the integral is computed over $\left[-1,1\right]$, there are only a few non-zero contributions from the finite element approximations to $h$ and $u$, so $uh$ term becomes
 \begin{multline*}
 \frac{\Delta x}{2}\int_{-1 }^{1}  \Bigg( \left(u_{j-1/2}\phi_{j-1/2} + u_{j}\phi_{j} + u_{j+1/2}\phi_{j+1/2}\right) \\ \times\left(h^+_{j-1/2}\psi^+_{j-1/2}  + h^-_{j+1/2}\psi^-_{j+1/2}\right) \begin{bmatrix} \TM
 \phi_{j-1/2}\\\phi_j \\\phi_{j+1/2} \BM
@@ -380,10 +377,10 @@ This gives a second-order approximation to the derivative of $u$ and $b$ at $x_{
 	\left(\dfrac{\partial {b}}{\partial x} \right)^-_{j + 1/2} &= \frac{\partial }{\partial x}P^b_j(x_{j+1/2}), \\
 	\left(\dfrac{\partial {b}}{\partial x} \right)^+_{j + 1/2} &= \frac{\partial }{\partial x}P^b_{j+1}(x_{j+1/2}). 	\end{align*}
 
-Therefore, we possess all the terms needed to calculate the approximation to the flux \eqref{eqn:HLL_flux} for $h$ and $G$, as desired. However, to ensure that the FEVM is well balanced and recovers the lake at rest steady state solution, these fluxes must be modified.
+Therefore, we possess all the terms needed to calculate the approximation to the flux \eqref{eqn:HLL_flux} for $h$ and $G$, as desired. However, to ensure that the FEVM is well-balanced and recovers the lake at rest steady state solution, these fluxes must be modified.
 
-\subsubsection{Well Balancing Modification to Flux Approximation}
-To recover the lake at rest steady state solution we follow the work of \citet{Klein-etal-2004-2050}, who accomplished this for the SWWE. Previously, we demonstrated that this process can be extended to the Serre equations \cite{Pitt-J-2014}. To enforce well balancing the reconstruction of $h$ is modified at the cell edges in the following way.
+\subsubsection{Well-Balancing Modification to Flux Approximation}
+To recover the lake at rest steady state solution we follow the work of \citet{Klein-etal-2004-2050}, who accomplished this for the SWWE. Previously, we demonstrated that this process can be extended to the Serre equations \cite{Pitt-J-2014}. To enforce well-balancing the reconstruction of $h$ is modified at the cell edges in the following way.
 
 First calculate
 \begin{align}
@@ -413,7 +410,7 @@ F^n_{j\pm 1/2} &=\mathcal{F}_{j\pm1/2} \left(\vecn{\ddot{h}}, \vecn{\hat{G}},\ve
 for the evolution of $h$ and $G$ equations as desired.
 
 \subsection{Source Terms}
-To evolve the Serre equations \eqref{eqn:FullSerreCon}, we require an approximation to the source term at the cell centre $x_j$ which we denote as $S_j$. Equation \eqref{eqn:FullSerreConMass} has no source term, therefore we just present the calculation of the source term for equation \eqref{eqn:Serreconsconmom}.
+To evolve the Serre equations \eqref{eqn:FullSerreCon}, we require an approximation to the source term at the cell centre $x_j$ which we denote as $S_j$. Equation \eqref{eqn:FullSerreConMass} has no source term, therefore we only present the calculation of the source term for equation \eqref{eqn:Serreconsconmom}.
 
 Following the work of \citet{Klein-etal-2004-2050} to produce a well-balanced method, we split our approximation to $S^n_j$ into the centred source term $S_{ci}$ and the corrective interface source terms $S^{-}_{j + \frac{1}{2}}$ and $S^{+}_{j + \frac{1}{2}}$
 \begin{equation*}
@@ -495,7 +492,7 @@ b_{m+1/2} \\ b_{m+5/6} \\ b_{m+7/6} \\ b_{m+3/2} \BM\end{bmatrix}&, &\vecn{\hat{
 b_{m+3/2} \\ b_{m+11/6} \\ b_{m+13/6} \\ b_{m+5/2} \BM\end{bmatrix}.
 \end{align*}
 
-To ensure that the solution of $u$ by \eqref{eqn:usolvefromGhb} agrees with the boundary conditions $\vecn{\hat{u}}_{-1}$ and $\vecn{\hat{u}}_{m}$ the element-wise stiffness matrices $\matr{A}_0$ and $\matr{A}_m$ and vectors $\vecn{g}_0$ and $\vecn{g}_m$ must be modified in the following way 
+To ensure that the solution of $u$ using \eqref{eqn:usolvefromGhb} agrees with the boundary conditions $\vecn{\hat{u}}_{-1}$ and $\vecn{\hat{u}}_{m}$ the element-wise stiffness matrices $\matr{A}_0$ and $\matr{A}_m$ and vectors $\vecn{g}_0$ and $\vecn{g}_m$ must be modified in the following way 
 
 \begin{align*}
 \matr{A}_{0} = 
@@ -552,7 +549,7 @@ This transformation is ill-defined when $h = 0$ so we also add in a  small term 
 where on the right hand side are the reconstructed values of $h$ from \eqref{eqn:ReconforhwG} and the left hand side are the values of $h$ used to defined the basis functions of the finite element method \eqref{eqn:FEapproxtohG}. This transformation is applied to all terms in the FEM avoiding the singularity as $h \rightarrow 0$; and in the case where $G = uh$ the transformation is equivalent to \eqref{eqn:calculationofugivenuhandh} for the SWWE.
 
 Even with the transform \eqref{eqn:hdrytransform}, the matrix $\matr{A}$ can become singular.
-The methods of \citet{Zoppou-etal-2017} made use of direct banded matrix solvers such as the Thomas algorithm \cite{Conte-DeBoor-1980} to solve \eqref{eqn:usolvefromGhb} which rely on non-singular matrices making them unsuitable when $h = 0$. This was resolved by employing an LU decomposition algorithm described by \citet{NumRecC-1996}. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting, which inserts small non-zero pivots when the pivots value is below some tolerance value $p_{tol}$. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard $LU$ decomposition. Typically we set $p_{tol} = 10^{-20}$ allowing the matrix solver to accurately invert $\matr{A}$ and thus solve \eqref{eqn:usolvefromGhb} when $h = 0$. 
+The methods of \citet{Zoppou-etal-2017} made use of direct banded matrix solvers such as the Thomas algorithm \cite{Conte-DeBoor-1980} to solve \eqref{eqn:usolvefromGhb} which rely on non-singular matrices making them unsuitable when $h = 0$. This was resolved by employing an LU decomposition algorithm described by \citet{NumRecC-1996}. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting, which inserts small non-zero pivots when the value of the pivot is below some tolerance value $p_{tol}$. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard $LU$ decomposition. Typically we set $p_{tol} = 10^{-20}$ allowing the matrix solver to accurately invert $\matr{A}$ and thus solve \eqref{eqn:usolvefromGhb} when $h = 0$. 
 
 Finally, after solving \eqref{eqn:usolvefromGhb} using the LU decomposition algorithm of \citet{NumRecC-1996} where the transformation \eqref{eqn:hdrytransform} has been applied to the reconstructed values of $h$ we possess an approximation to $u$ in the presence of dry beds. Additionally to avoid numerical errors becoming dominant when $h$ is very small we place a cut-off on $h$ past which $h=G= u = 0$ and the cells are properly dry; this is given by $h_{tol}$. This drying of the cells is performed for the whole cell based on the cell average value of $h$ so that if $\overline{h}_j \le h_{tol}$ then
 \begin{align*}
@@ -562,9 +559,9 @@ Finally, after solving \eqref{eqn:usolvefromGhb} using the LU decomposition algo
  \end{align*}
  and
  \begin{align*}
- & 	u_{j-1/2}  = 0  &\text{if}& &h_{j-1}\le h_{tol} \\
+ & 	u_{j-1/2}  = 0  &\text{if}& &\overline{h}_{j-1}\le h_{tol} \\
  & 	u_{j}  = 0 \\
- & 	u_{j+1/2}  = 0  &\text{if}& &h_{j+1} \le h_{tol}
+ & 	u_{j+1/2}  = 0  &\text{if}& &\overline{h}_{j+1} \le h_{tol}
 \end{align*}
 this drying procedure occurs after the solution of \eqref{eqn:usolvefromGhb}. In the numerical experiments the typical values used were $h_{tol} = 10^{-12}$ and $h_{base} = 10^{-8}$.
 
