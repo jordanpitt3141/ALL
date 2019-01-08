@@ -32,10 +32,13 @@ My research made the following original contributions to the field:
 \end{itemize}
 
 \subsection{Publications}
+%[][][]
 My research contributed to the following publications in chronological order.
+\newpage
 \begin{center}
+	\vbox{
 	\textbf{
-		\Large A Solution of the Conservation Law Form of the Serre Equations}
+		\large A Solution of the Conservation Law Form of the Serre Equations}
 	
 	\vspace*{\baselineskip}
 	
@@ -43,13 +46,29 @@ My research contributed to the following publications in chronological order.
 	
 	{C. Zoppou, S.G. Roberts and J. Pitt}
 	\vspace*{0.5\baselineskip}
+}
 \end{center}
-\textbf{My Contribution:}
-I validated the results of my coauthors with my own implementation of the methods. These methods were created to be consistent with a SWWE solver allowing the computational cost of solving the Serre equations and the SWWE to be compared.
+
+\vbox{
+\noindent\textbf{Summary:}
+
+A second-order finite difference volume method for the one-dimensional Serre equations with a horizontal bed is described and validated against an analytic solution. }
 \vspace*{\baselineskip}
+\vbox{
+\noindent\textbf{My Contribution:}
+
+I reproduced the results of my coauthors with my own implementation of the method. This method was consistent with a SWWE solver allowing the computational cost of solving the Serre equations and the SWWE to be compared.}
+\vspace*{\baselineskip}
+\vbox{
+\noindent\textbf{Relevance to Thesis:}
+
+The method described in this paper was extended to allow for varying bathymetry \cite{Zoppou-etal-2017} and dry beds during my research. Resulting in the second-order finite difference volume method reported in the thesis. Since the linear analysis of convergence and dispersion properties is performed for a submerged horizontal bed, the results of the linear analysis for both methods are equivalent. These linear results can be found in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The extended version of the method was validated against analytic and forced solutions in Chapter \ref{chp:NumMethodComp} and compared to experimental results in Chapter \ref{chp:ExpMethodComp}.}
+
+\newpage
 \begin{center}
+		\vbox{
 	\textbf{
-		\Large Numerical Solution of the Fully Non-Linear Weakly Dispersive
+		\large Numerical Solution of the Fully Non-Linear Weakly Dispersive
 		Serre Equations for Steep Gradient Flows}
 	
 	\vspace*{\baselineskip}
@@ -58,15 +77,32 @@ I validated the results of my coauthors with my own implementation of the method
 	
 	{C. Zoppou, J. Pitt and S.G. Roberts}
 	\vspace*{0.5\baselineskip}
+}
 \end{center}
-\textbf{My Contribution:}
 
-The methods, linear dispersion analysis and numerical solutions were all produced by me; these results were then written up into this paper by my coauthors. 
 
+\vbox{
+\noindent\textbf{Summary:}
+
+The first-, second-, and third-order finite difference volume methods for the one-dimensional Serre equations with variable bathymetry are described. The results of a linear analysis of the dispersion properties of the methods for waves on quiescent water is provided. These methods are then validated against an analytic solution. A well-balanced version of the second-order finite difference volume method is described and further validated against experimental results.}
 \vspace*{\baselineskip}
+
+\vbox{
+\noindent\textbf{My Contribution:}
+
+The methods, linear dispersion analysis and numerical solutions were all produced by me; these results were then written up into this paper by my coauthors.}
+\vspace*{\baselineskip}
+
+\vbox{
+\noindent\textbf{Relevance to Thesis:}
+
+The first-, second- and third-order methods described in this paper are the methods whose results are reported in the thesis. The results of a linear analysis of the dispersion and convergence properties of all these methods are provided in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The linear analysis of dispersion presented in this paper was extended to allow for a mean background flow in the water on which the waves occur. The results of the analytic solution validation in this paper are reproduced in Chapter \ref{chp:NumMethodComp}. This validation was extended to study the convergence and conservation properties of more quantities. The second-order finite difference volume method was then validated against forced solutions in Chapter \ref{chp:NumMethodComp} and experimental results in Chapter \ref{chp:ExpMethodComp}. The experimental results of the second-order finite difference volume method for the evolution of a negative rectangular wave \cite{Hammack-Segur-1978-337} and periodic waves over a submerged bar \cite{Beji-Battjes-1994-1} in this paper are reproduced in the thesis.}
+
+\newpage
 \begin{center}
+		\vbox{
 	\textbf{
-		\Large Importance of Dispersion for Shoaling Waves}
+		\large Importance of Dispersion for Shoaling Waves}
 	
 	\vspace*{\baselineskip}
 	
@@ -74,16 +110,32 @@ The methods, linear dispersion analysis and numerical solutions were all produce
 	
 	{J. Pitt, C. Zoppou and S.G. Roberts}
 	\vspace*{0.5\baselineskip}
+	}
 \end{center}
- \textbf{My Contribution:}
- 
- This paper was produced by me with the support of my coauthors based on my own work.
- 
- \vspace*{\baselineskip}
- 
+
+\vbox{
+\noindent\textbf{Summary:}
+
+The numerical solutions of the second-order finite difference volume method \cite{Zoppou-etal-2017} for the Serre equations are compared to the numerical solutions of ANUGA \cite{ANUGA} for the SWWE. This comparison was performed for the evolution of an artificial representative example and for the experimental results of periodic waves travelling over a submerged bar \cite{Beji-Battjes-1994-1}.}
+\vspace*{\baselineskip}
+
+\vbox{
+\noindent\textbf{My Contribution:}
+
+ This paper was produced by me with the support of my coauthors based on my own work.} 
+\vspace*{\baselineskip}
+
+\vbox{
+\noindent\textbf{Relevance to Thesis:}
+
+The experimental results of the second-order finite difference volume method for the experiments of \citet{Beji-Battjes-1994-1} are reproduced in Chapter \ref{chp:ExpMethodComp}.} 
+
+\newpage
+
  \begin{center}
+ 		\vbox{
  	\textbf{
- 		\Large Behaviour of the Serre Equations in the Presence of Steep Gradients Revisited}
+ 		\large Behaviour of the Serre Equations in the Presence of Steep Gradients Revisited}
  	
  	\vspace*{\baselineskip}
  	
@@ -91,10 +143,28 @@ The methods, linear dispersion analysis and numerical solutions were all produce
  	
  	{J.P.A. Pitt, C. Zoppou and S.G. Roberts}
  	\vspace*{0.5\baselineskip}
+ }
  \end{center}
- \textbf{My Contribution:}
  
- This paper was produced by me with the support of my coauthors based on my own work.
+\vbox{
+\noindent\textbf{Summary:}
+ 
+The first-, second- and third-order finite difference volume methods as well as two second-order finite difference methods for the Serre equations are used to numerically study the behaviour of steep gradients in the free surface. The convergence and conservation properties of many numerical solutions of all these methods are used to justify the observed behaviours. One such behaviour was not previously reported by the literature. This behaviour best represents the solution of the Serre equations in the presence of steep gradients over short time spans. }
+ \vspace*{\baselineskip}
+
+\vbox{ 
+ \noindent\textbf{My Contribution:}
+ 
+ This paper was produced by me with the support of my coauthors based on my own work.} 
+ \vspace*{\baselineskip}
+ 
+\vbox{
+ \noindent\textbf{Relevance to Thesis:}
+ 
+ The behaviours observed and justified in this paper are summarised in Chapter \ref{chp:Serreeqns}. The results of this paper demonstrate the utility of using a finite volume based method to solve the Serre equations in the presence of steep gradients.}
+
+ 
+\newpage
 
 \section{Organisation of the Thesis}
 Chapter \ref{chp:Serreeqns} proceeds by presenting the one-dimensional Serre equations in conservation law form with a source term. It's dispersion and conservation properties and known analytic solutions are also presented. The forced Serre equations and the concept of forced solutions are introduced. Followed by a summary of the main results of my investigation into the behaviour of the Serre equations in the presence of steep gradients in the free surface \cite{Pitt-2018-61}.
@@ -105,4 +175,13 @@ Chapter \ref{chp:AnalNumMethod} provides a linear analysis of the convergence an
 
 The convergence and conservation properties of the numerical methods of \citet{Pitt-2018-61} are then assessed in Chapter \ref{chp:NumMethodComp} using analytic and forced solutions of the Serre equations. While in Chapter \ref{chp:ExpMethodComp} the numerical methods are validated against experimental results.
 
-Finally, Chapter \ref{chp:Conclusion} summarises the major contributions and findings of the thesis and provides ideas for future work. 
+%%%[][][][]
+Chapter \ref{chp:Conclusion} summarises the major contributions and findings of the thesis and provides ideas for future work.
+
+Appendix \ref{app:ConQuant} provides expressions for the total amount of the conserved quantities over any domain for all of the analytic solutions described in this thesis. 
+
+The basis functions used by the second-order finite elements volume method and the precise definition of the function spaces mentioned in this thesis are provided in Appendix \ref{app:FEMIntegrals}. 
+
+Appendix \ref{app:LinAnal} provides the evolution matrix produced by the linear analysis for the finite difference volume methods and the finite difference methods. It also includes the consistency results for these methods, as they were omitted from Chapter \ref{chp:AnalNumMethod}.  
+
+Finally the publications I contributed to throughout my research and their abstracts are provided in chronological order in Appendix \ref{app:Pub}. 

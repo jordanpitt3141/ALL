@@ -1,19 +1,67 @@
 \chapter{Linear Analysis Results}
 \label{app:LinAnal}
-In this appendix we present all the components to calculate the evolution matrix $\matr{E}$ for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. Descriptions of
-$\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ were published by \citet{Zoppou-etal-2017} and descriptions of $\mathcal{D}$ and $\mathcal{W}$ were published by \citet{Pitt-2018-61}. Given the results in Chapter \ref{chp:AnalNumMethod} for $\text{FEVM}_2$ the evolution matrix for $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ can be straightforwardly calculated following the procedure outlined here. While for $\mathcal{D}$ and $\mathcal{W}$ the evolution matrix itself is provided.  
+In this appendix we provide additional details supplementing the linear analysis results reported in Chapter \ref{chp:AnalNumMethod}. We provide the evolution matrices $\matr{E}$ for all methods in the thesis, details on how to calculate the convergence and dispersion properties from the evolution matrix where appropriate and the consistency tables not already in Chapter \ref{chp:AnalNumMethod}.  
+
+The linear analysis in Chapter \ref{chp:AnalNumMethod} studies the convergence and dispersion properties of the numerical methods solving the Serre equations with a horizontal bed \eqref{eqn:FullSerreConHorizBed} linearised around a mean water depth $H$ and a mean background flow velocity $U$. With a small perturbation in the water depth $\eta$ and a small perturbation in the velocity $\mu$. The linearised Serre equations with a horizontal bed \eqref{eqn:LinAll} are
+\begin{subequations}
+	\label{appC:Lin}
+	\begin{align}
+	&\frac{\partial  \eta}{\partial  t} + H\frac{\partial \mu}{\partial  x} + U\frac{\partial  \eta}{\partial  x}  = 0, \\
+	&H\frac{\partial  \mu}{\partial  t} + gH\frac{\partial  \eta}{\partial  x} + UH\frac{\partial  \mu}{\partial  x} - \frac{H^3}{3}\left(U\frac{\partial^3  \mu}{\partial  x^3} + \frac{\partial^3  \mu}{\partial  x^2 \partial  t}  \right)  = 0
+	\end{align}	
+\end{subequations}
+which can be written in conservation law form \eqref{eqn:LinSerreG} for $\eta$ and $G$ as
+\begin{subequations}
+	\label{appC:ConLawFormLin}
+	\begin{align}
+	&\frac{\partial  \eta}{\partial  t} +\frac{\partial}{\partial  x} \left(H\mu + U \eta\right) = 0, \\
+	&\frac{\partial  G}{\partial  t} + \frac{\partial}{\partial  x}\left(UG + UH\mu + gH \eta\right) = 0
+	\end{align}
+	where
+	\begin{equation}
+	G = UH + U \eta + H \mu -\frac{H^3}{3} \frac{\partial^2 \mu }{\partial x^2}.
+	\end{equation}
+\end{subequations}
+The linear analysis assumes that $\eta$ and $\mu$ are Fourier modes \eqref{eqn:FourierNode}. A generic quantity $q$ is a Fourier mode if
+\begin{align}
+q(x,t) = q(0,0) e^{i\left(\omega^\pm t + kx\right)}
+\label{eqn:FourModeApp}
+\end{align}
+where $\omega^\pm$ is the frequency of the wave and $k$ is the wavenumber. Consequently, $G$ as well as the cell averages $\overline{\eta}$, $\overline{\mu}$ and $\overline{G}$ are also Fourier modes \eqref{eqn:FourModeApp}.
+
+Since these quantities are Fourier modes for a fixed grid such as those used by all numerical methods in this thesis we can relate the quantities at different nodal values to one another. For a generic Fourier mode $q$ we have
+\begin{equation}
+q^{n + m}_{j + l} = q^n_j e^{ i \left(m \omega^\pm \Delta t + l k \Delta x\right)}
+\label{eqn:fourfac}
+\end{equation}
+where $\Delta t$ is the length of time step and $\Delta x$ is the length of a cell. 
+
+
+Applying the numerical method to the linearised Serre equations \eqref{appC:Lin} and using \eqref{eqn:fourfac} one can derive an expression relating the quantities at the current and earlier times to the quantities at the next time via the evolution matrix $\matr{E}$ of the numerical method. This evolution matrix can then be analysed to obtain the convergence and dispersion properties of the numerical method. 
+
+This appendix will provide the results for the first-, second- and third-order Finite Difference Volume Methods (FDVM) which are named $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ respectively. Descriptions of these methods were published by \citet{Zoppou-etal-2017}. Additionally, we provide the evolution matrices for the two second-order Finite Difference Methods (FDM) $\mathcal{D}$ and $\mathcal{W}$, whose descriptions were published by \citet{Pitt-2018-61}. 
+
+The linear analysis for the second-order finite element volume method $\text{FEVM}_2$ was performed in Chapter \ref{chp:AnalNumMethod}. Given that work the evolution matrix for other finite volume based methods can be written in terms of the reconstruction operators and the velocity operators. We demonstrate this process and provide the expressions for these constituent operators. Allowing others to reproduce the evolution matrices for all finite volume based methods in this thesis.  
+
+For $\mathcal{D}$ and $\mathcal{W}$ the evolution matrix itself is provided. Since these FDM use the quantities at previous time steps, the shape of the evolution matrix is different. Hence the process to obtain the convergence and dispersion properties from these particular evolution matrices will be explained. 
+
+Finally, the consistency results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ will be provided. The results for $\text{FEVM}_2$ were provided in Chapter \ref{chp:AnalNumMethod}.  
+
 
 \section{Finite Difference Volume Methods}
-For the Finite Difference Volume Methods (FDVM) the evolution matrix is a $2\times2$ matrix that gives the following relationship \eqref{eqn:linearanalaim}
+For the FDVM the evolution matrix is a $2\times2$ matrix that gives the following relationship \eqref{eqn:linearanalaim}
 \begin{equation}
 \label{eqn:AppDEFDVM}
 \begin{bmatrix}
 \overline{\eta} \\\overline{G} 
 \end{bmatrix}^{n+1}_j = \matr{E} \begin{bmatrix}
 \overline{\eta} \\\overline{G}
-\end{bmatrix}^{n}_j
+\end{bmatrix}^{n}_j.
 \end{equation}
-The evolution matrices for the FDVM can be calculated in terms of the flux matrix $\matr{F}$  based on the order of the SSP Runge-Kutta timestepping used in the method. The expressions for $\matr{E}$ in terms of $\matr{F}$ for each FDVM are summarised in Table \ref{tab:RKstepfactor}.
+The evolution matrix $\matr{E}$ is obtained by applying the numerical method and making use of \eqref{eqn:fourfac} for all quantities.
+
+In Chapter \ref{chp:AnalNumMethod} the evolution matrix for $\text{FEVM}_2$ is given in terms of the flux matrix $\matr{F}$ obtained from the flux approximations of the method. This expression is based on the used SSP Runge-Kutta time stepping. These expressions are summarised in Table \ref{tab:RKstepfactor}. Since $\text{FDVM}_2$ and $\text{FEVM}_2$ both use second-order SSP Runge-Kutta time stepping, these expressions are the same.  
+
 \begin{table}
 	\centering
 	\begin{tabular}{l  c}
@@ -28,13 +76,16 @@ The evolution matrices for the FDVM can be calculated in terms of the flux matri
 	\label{tab:RKstepfactor}
 \end{table}
 
-To calculate the flux matrix $\matr{F}$ we have from \eqref{eqn:singleEvolveStep} that
-\begin{equation*}
+The flux matrix $\matr{F}$ from the finite volume methods approximation to the flux terms \eqref{eqn:singleEvolveStep} is
+\begin{equation}
  \matr{F} = - \dfrac{\left(1 - e^{-ik\Delta x}\right)}{ \Delta x}\begin{bmatrix}
  \mathcal{F}^{\eta,\eta} & \mathcal{F}^{\eta,G} \\\mathcal{F}^{G,\eta} &\mathcal{F}^{G,G}
  \end{bmatrix}.
-\end{equation*}
-Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{G,\eta} $, $\mathcal{F}^{G,G} $ depend on the Froude number $Fr = {U}/{\sqrt{gH}}$ and the constituent operators of the method. The factor $\mathcal{F}^{\eta,G}$ in the flux matrix does not vary with the Froude number and is
+ \label{eqn:APPFlux}
+\end{equation}
+Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{G,\eta} $, $\mathcal{F}^{G,G} $ depend on the Froude number $Fr = {U}/{\sqrt{gH}}$ and are written in terms of the constituent operators. These expressions written in terms of the constituent operators are the same for all finite volume based methods in the thesis.
+
+The factor $\mathcal{F}^{\eta,G}$ in the flux matrix does not vary with the Froude number and is
 \[\mathcal{F}^{\eta,G} = H \mathcal{G}^G. \]
 The expressions for the other coefficients of $\matr{F}$ are summarised in Tables \ref{tab:Fnnfactor}-\ref{tab:FGGfactor} for all values of $Fr$ with $\mathcal{F}^{\eta,\eta}$ in Table \ref{tab:Fnnfactor}, $\mathcal{F}^{G,\eta}$ in Table \ref{tab:FGnfactor} and $\mathcal{F}^{G,G}$ in Table \ref{tab:FGGfactor}.
 
@@ -50,7 +101,7 @@ The expressions for the other coefficients of $\matr{F}$ are summarised in Table
 		$1 < Fr$ & $H \mathcal{G}^{\eta} + U \mathcal{R}^-_{j+1/2}$ \T\B\\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{F}^{\eta,\eta} $ that multiples $\eta$ in the flux function for $\eta$ for all FDVM and the FEVM.}
+	\caption{Factor $\mathcal{F}^{\eta,\eta} $ that multiples $\eta$ in the flux function for $\eta$ for all finite volume based methods.}
 	\label{tab:Fnnfactor}
 \end{table}
 \begin{table}
@@ -63,7 +114,7 @@ The expressions for the other coefficients of $\matr{F}$ are summarised in Table
 		$1 < Fr$ & $UH \mathcal{G}^{\eta} + gH \mathcal{R}^-_{j+1/2}$ \T\B\\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{F}^{G,\eta} $ that multiples $\eta$ in the flux function for $G$ for all FDVM and the FEVM.}
+	\caption{Factor $\mathcal{F}^{G,\eta} $ that multiples $\eta$ in the flux function for $G$ for all finite volume based methods.}
 	\label{tab:FGnfactor}
 \end{table}
 \begin{table}
@@ -76,13 +127,15 @@ The expressions for the other coefficients of $\matr{F}$ are summarised in Table
 		$1 < Fr$ & $U\mathcal{R}^+_{j+1/2}  +  UH \mathcal{G}^G$ \T\B\\
 		\hline
 	\end{tabular}
-	\caption{Factor $\mathcal{F}^{G,G} $ that multiples $G$ in the flux function for $G$ for all FDVM and the FEVM.}
+	\caption{Factor $\mathcal{F}^{G,G} $ that multiples $G$ in the flux function for $G$ for all finite volume based methods}
 	\label{tab:FGGfactor}
 \end{table}
 
-Given the expressions for $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{\eta,G}$, $\mathcal{F}^{G,\eta} $ and $\mathcal{F}^{G,G} $. Replace the operators $\mathcal{R}_j$, $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}^\eta$ and $\mathcal{G}^G$ with the appropriate ones for the FDVM. The expressions for these fundamental operators of each FDVM are given in Table \ref{tab:Mfactor} for $\mathcal{R}_j$, Table \ref{tab:Rpfactor} for $\mathcal{R}^+_{j-1/2}$, Table \ref{tab:Rmfactor} for $\mathcal{R}^-_{j+1/2}$ and Table \ref{tab:GGfactor} for $\mathcal{G}^G$. Since $\mathcal{G}^\eta = -U\mathcal{G}^G $ we have only provided the table for $\mathcal{G}^G$. Since the perturbations are Fourier modes \eqref{eqn:FourierNode} the reconstruction operator $\mathcal{R}^+_{j+1/2}= e^{ i k\Delta x}\mathcal{R}^+_{j-1/2}$. 
+Using the appropriate expressions for the reconstruction operators $\mathcal{R}_j$, $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}^-_{j+1/2}$ and the velocity solve operators $\mathcal{G}^\eta$ and $\mathcal{G}^G$ used by the method, one can obtain all the terms of $\matr{F}$ \eqref{eqn:APPFlux} for the finite volume based methods.
 
-From this process the evolution matrix $\matr{E}$ for all FDVM for all flow scenarios is obtained as desired. 
+The expressions for these fundamental operators of all finite volume based methods are given in Table \ref{tab:Mfactor} for $\mathcal{R}_j$, Table \ref{tab:Rpfactor} for $\mathcal{R}^+_{j-1/2}$, Table \ref{tab:Rmfactor} for $\mathcal{R}^-_{j+1/2}$ and Table \ref{tab:GGfactor} for $\mathcal{G}^G$. Since $\mathcal{G}^\eta = -U\mathcal{G}^G $ we have only provided the table for $\mathcal{G}^G$. Since the perturbations are Fourier modes \eqref{eqn:FourierNode} the reconstruction operator $\mathcal{R}^+_{j+1/2}= e^{ i k\Delta x}\mathcal{R}^+_{j-1/2}$. 
+
+Hence all the terms of the flux matrix $\matr{F}$ \eqref{eqn:APPFlux} can be calculated from these expressions for the operators summarised in Tables \ref{tab:Mfactor} - \ref{tab:GGfactor}. Then the evolution matrix $\matr{E}$ can be calculated from $\matr{F}$ based the SSP Runge-Kutta time-stepping expressions summarised in Table \ref{tab:RKstepfactor}. Thus all the evolution matrices of the finite volume based methods can be obtained, as desired.
 
 Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\text{FEVM}_2$ summarising the work in Chapter \ref{chp:AnalNumMethod}. Additionally, the analytic value of the operators for an exact method are also provided as well as the lowest order term of the Taylor series of the difference between the operator in a method and the exact operator. The reported Taylor series results demonstrate that all methods use operators with the appropriate order of accuracy or better. 
 
@@ -106,7 +159,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 		&&Lowest Order Term of	\\
 		Method & $\mathcal{R}^+_{j-1/2}$ & Method - Exact \B\\
 		\hline \\
-		Exact & $e^{-\dfrac{ik\Delta x}{2}}\dfrac{k\Delta x}{2 \sin\left(\dfrac{k \Delta x}{2}\right)}$ & -  \\
+		Exact & $\dfrac{k\Delta x}{2 \sin\left(\dfrac{k \Delta x}{2}\right)}\; e^{-\dfrac{ik\Delta x}{2}}$ & -   \T\B\\
 		$\text{FDVM}_1$ & $1$ & $\dfrac{i}{2}k \Delta x$ \T\B \\
 		$\text{FDVM}_2$ and $\text{FEVM}_2$& $ 1 - \dfrac{i \sin\left(k\Delta x \right)}{2}$ & $\dfrac{1}{12}k^2 \Delta x^2$  \T\B\\
 		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 + 2e^{-i k {\Delta x}} - e^{i k {\Delta x}}} \right)$ & $\dfrac{i}{12}k^3 \Delta x^3$  \T\B \\
@@ -121,7 +174,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 		&&Lowest Order Term of	\\
 		Method& $\mathcal{R}^-_{j+1/2}$ &  Method - Exact\B \\
 		\hline \\
-		Exact & $e^{\dfrac{ik\Delta x}{2}} \dfrac{k\Delta x}{2 \sin\left(\dfrac{k \Delta x}{2}\right)}$ & - \B \\
+		Exact & $ \dfrac{k\Delta x}{2 \sin\left(\dfrac{k \Delta x}{2}\right)} \; e^{\dfrac{ik\Delta x}{2}}$ & - \T\B \\
 		$\text{FDVM}_1$& $1$ & $-\dfrac{i}{2}k \Delta x$  \T\B \\
 		$\text{FDVM}_2$ and $\text{FEVM}_2$& $1 +  \dfrac{i \sin\left(k\Delta x \right)}{2}$ & $\dfrac{1}{12}k^2 \Delta x^2$  \T\B \\
 		$\text{FDVM}_3$& $\dfrac{1}{6}\left({5 - e^{-i k {\Delta x}} +2 e^{i k {\Delta x}}} \right)$ & $-\dfrac{i}{12}k^3 \Delta x^3$  \T\B \\
@@ -138,7 +191,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 		\begin{tabular}{l  c  c}
 			Method& $\mathcal{G}^G$ & Lowest Order Term of Method - Exact \T \\
 			\hline \\ 
-			Exact &  $\dfrac{3 }{3H + H^3k^2} \dfrac{k\Delta x}{2 \sin\left(\dfrac{k \Delta x}{2}\right)}e^{\dfrac{ik\Delta x}{2}}$ & - \\ \\
+			Exact &  $\dfrac{3 }{3H + H^3k^2} \dfrac{k\Delta x}{2 \sin\left(\dfrac{k \Delta x}{2}\right)} \;e^{\dfrac{ik\Delta x}{2}}$ & - \\ \\
 			$\text{FDVM}_1$& $\dfrac{3\Delta x^2 \left(1 + e^{ik\Delta x}\right)}{6\Delta x^2 H - 2H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $-\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$  \\ \\
 			$\text{FDVM}_2$& $\dfrac{3 \Delta x^2 \left({1 + e^{ik\Delta x}}\right)}{6 \Delta x^2 H - 2H^3 \left(2\cos\left(k\Delta x\right) - 2\right)}$ & $-\dfrac{6 +H^2k^2}{4H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$  \\ \\
 			& $\dfrac{\Delta x}{6} \left(1 + \dfrac{i \sin\left(k \Delta x\right)}{2} + e^{ik\Delta x}\left[1 - \dfrac{i \sin\left(k \Delta x\right)}{2}\right] \right)$ & \\  $\text{FEVM}_2$ & $\div  \Bigg( H\dfrac{\Delta x}{30} \left[4\cos\left(\dfrac{k \Delta x}{2}\right) - 2\cos\left({k \Delta x}\right) + 8\right] $  & $\dfrac{12 + 5H^2k^2}{40H \left(3 + H^2k^2\right)^2}k^2 \Delta x^2$ \\ &$+ \dfrac{H^3 }{9\Delta x}\left[-16\cos\left(\dfrac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right]    \Bigg)$ & \\ \\
@@ -152,7 +205,7 @@ Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the operators for $\tex
 
 
 \section{Finite Difference Methods}
-For the Finite Difference Methods (FDM) the evolution matrix $\matr{E}$ can be thought of in two ways. Naively as a $4\times4$ matrix producing the following relationship
+The FDM solve the linearised Serre equations with a horizontal bed in their non-conservative form \eqref{appC:Lin}. The FDM rely on previous time steps as well as the current time step to update the quantities. One particular way of expressing this is with a $4\times4$ evolution matrix $\matr{E}$ producing the following relationship
 \begin{equation}
 \label{eqn:App4x4Def}
 \begin{bmatrix}
@@ -169,7 +222,7 @@ E_{1,0} & E_{1,1} & E_{1,2} & E_{1,3}\\
 0 & 1 & 0 & 0\\
 \end{bmatrix}.
 \end{equation}
-Because ${\eta}^{n-1}_j = e^{-i \omega^\pm \Delta t}{\eta}^{n}_j $ and ${\mu}^{n-1}_j = e^{-i \omega^\pm \Delta t}{\mu}^{n}_j$ as $\eta$ and $\mu$ are Fourier modes \eqref{eqn:FourierNode} then \eqref{eqn:App4x4Def} can be rewritten as
+Because ${\eta}^{n-1}_j = e^{-i \omega^\pm \Delta t}{\eta}^{n}_j $ and ${\mu}^{n-1}_j = e^{-i \omega^\pm \Delta t}{\mu}^{n}_j$ as $\eta$ and $\mu$ are Fourier modes \eqref{eqn:FourModeApp} then \eqref{eqn:App4x4Def} can be rewritten as
 \begin{equation}
 \begin{bmatrix}
 {\eta} \\{\mu}
@@ -184,7 +237,9 @@ E_{1,0} + e^{-i \omega^{\pm }\Delta t} E_{1,2} & E_{1,1} + e^{-i \omega^{\pm }\D
 \end{bmatrix}.
 \end{equation}
 
-The stability analysis was then performed by finding the spectral radius of the naive evolution matrix $\matr{E}$ of the FDM \eqref{eqn:App4x4Def}. The consistency analysis was based on comparing the $2\times2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ \eqref{eqn:App4x4D1} to the exact evolution matrix $e^{i \omega^\pm \Delta t}\matr{I} $. Finally, the dispersion error was based on the eigenvalues of $\matr{E}$ \eqref{eqn:App4x4Def}, this matrix has an additional two eigenvalues beyond the ones given by $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ that were ignored. We found the methods had the same stability and dispersion properties when $\matr{E}^{\left(2 \times 2\right)}$ was investigated. We will now present the $4\times4$ evolution matrices for $\mathcal{D}$ and $\mathcal{W}$. Given these matrices the corresponding $2\times 2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ can be calculated using \eqref{eqn:App4x4D1}.
+Since the evolution matrix can be represented in two ways, we now state whether $\matr{E}$ or $\matr{E}^{\left(2 \times 2\right)}$ where used in the convergence and dispersion analysis.   
+
+The stability analysis was performed by finding the spectral radius of the naive evolution matrix $\matr{E}$ of the FDM \eqref{eqn:App4x4Def}. The consistency analysis was based on comparing the $2\times2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ \eqref{eqn:App4x4D1} to the exact evolution matrix $e^{i \omega^\pm \Delta t}\matr{I} $. Finally, the dispersion error was based on the eigenvalues of $\matr{E}$ \eqref{eqn:App4x4Def}, this matrix has an additional two eigenvalues beyond the ones given by $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ that were ignored. We found the methods had the same stability and dispersion properties when $\matr{E}^{\left(2 \times 2\right)}$ was investigated. We will now present the $4\times4$ evolution matrices for $\mathcal{D}$ and $\mathcal{W}$. Given these matrices the corresponding $2\times 2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ can be calculated using \eqref{eqn:App4x4D1}.
 
 
 
