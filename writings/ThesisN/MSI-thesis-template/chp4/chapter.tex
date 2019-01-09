@@ -1,6 +1,6 @@
 \chapter{Linear Analysis}
 \label{chp:AnalNumMethod}
-In this chapter a linear analysis is used to study the convergence and dispersion properties of the numerical methods. 
+In this chapter a linear analysis is used to study the convergence and dispersion properties of the numerical methods. We provide the full description of the linear analysis for $\text{FEVM}_2$ as an example and then just present the results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. Supplementary details for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ can be found in Appendix \ref{app:LinAnal}.
 
 An important property of a numerical method is convergence. Convergence guarantees that as the spatial and temporal resolution of a numerical method is increased, then the numerical solution approaches the solution of the partial differential equations it approximates. 
 
@@ -25,7 +25,7 @@ The linear analyses of convergence and dispersion properties for the finite volu
 \end{equation}
 where $\matr{E}$ is the $2 \times 2$ evolution matrix relating the cell average conserved quantities $h$ and $G$ at time level $t^n$ with the cell average conserved quantities at time level $t^{n+1}$, which is independent of $n$ and $j$. The evolution matrix $\matr{E}$ is obtained in the analyses by propagating Fourier modes through the numerical scheme. By analysing the properties of $\matr{E}$ and comparing it with the exact evolution matrix we can determine the convergence and dispersion properties of its associated numerical method.
  
-We derive $\matr{E}$ in \eqref{eqn:linearanalaim} for $\text{FEVM}_2$ and perform the convergence and dispersion analysis. We then present the results of the analyses for the finite difference volume methods $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ described by \citet{Zoppou-etal-2017} and the finite difference methods $\mathcal{D}$ and $\mathcal{W}$ described by \citet{Pitt-2018-61}. These results extend those published by \citet{Zoppou-etal-2017} by including more methods, analysing the convergence properties and allowing non-zero background mean velocities.
+We derive $\matr{E}$ in \eqref{eqn:linearanalaim} for $\text{FEVM}_2$ and perform the convergence and dispersion analysis. We then present the results of the analyses for the finite difference volume methods $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ described by \citet{Zoppou-etal-2017} and the finite difference methods $\mathcal{D}$ and $\mathcal{W}$ described by \citet{Pitt-2018-61}. Greater detail for the linear analysis of $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ can be found in Appendix \ref{app:LinAnal}. These results extend those published by \citet{Zoppou-etal-2017} by including more methods, analysing the convergence properties and allowing non-zero background mean velocities.
  
 \section{Linearised Serre Equations}
 The Serre equations with a horizontal bed \eqref{eqn:FullSerreNonConHorizbed} are linearised by considering waves as small perturbations $\delta\times\eta(x,t)$ and $\delta \times\mu(x,t)$ on a flow with a mean height $H$ and a mean velocity $U$ respectively, where $\delta \ll 1$. So we have
@@ -632,4 +632,4 @@ Because all methods were demonstrated to have the expected order of accuracy in 
  
  \medskip
  
- In this chapter the convergence and dispersion properties of the numerical methods were studied using a linear analysis. The results of this analysis demonstrated the superiority of the high-order accurate FDVM and FEVM over the finite difference methods.
+ In this chapter the convergence and dispersion properties of the numerical methods were studied using a linear analysis. The results of this analysis demonstrated the superiority of the high-order accurate FDVM and FEVM over the finite difference methods. The numerical methods will now be validated against analytic and forced solutions.

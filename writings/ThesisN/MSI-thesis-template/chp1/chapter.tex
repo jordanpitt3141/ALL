@@ -1,39 +1,39 @@
 \chapter{Introduction}
 \label{chp:Introduction}
 
-A significant portion of the world's people and critical infrastructure is located near the coast. While the ocean provides many opportunities it also poses significant hazards from tsunamis and storm surges. Furthermore, the dynamics of ocean waves significantly impacts our understanding of other physical phenomena; such as the break-up of sea-ice and the erosion of beaches. Therefore, accurate modelling of ocean waves is important to our society. 
+A significant portion of the world's people and critical infrastructure is located near the coast. While the ocean provides many opportunities it also poses significant hazards from tsunamis and storm surges. Furthermore, the dynamics of ocean waves drives other physical phenomena; such as the break-up of sea-ice and the erosion of beaches. Therefore, accurate modelling of ocean waves is important to our society. 
 
 The physics of water can be described using Newton's second law. From which the partial differential equations initially presented by Euler in 1757 \cite{Euler-1755-274} can be derived. The Euler equations were then extended to include viscosity, producing the full Navier-Stokes equations \cite{navier1823,stokes1845gg}. Numerical methods \cite{Chorin-1967-928,Taylor-Hood-1973-73,Bassi-1997-267} have been developed to solve the Euler equations; however due to their complexity these methods can only accurately resolve fluid behaviour over small scales and not the scales required to model tsunamis along a coastline. 
 
 For this reason the central focus of water wave modelling has been simplified water wave theories that approximate the behaviour of the free surface of water governed by the Euler equations. The most popular class of these approximate water wave theories are the shallow water wave theories where the characteristic water depth $h_0$ is far smaller than the characteristic wave length $\lambda_0$, so that $\sigma = h_0 / \lambda_0 \ll 1$. For tsunamis and storm surges $h_0$ is typically $4km$ far from the coastline and $\lambda_0$ can be $100km$ and so $\sigma\ll 1$.
 
-Neglecting all terms of order $\mathcal{O}\left(\sigma ^2\right)$ the full Euler equations reduce to the Shallow Water Wave Equations (SWWE) \cite{Bonneton-Lannes-2009-16601} which describe fully non-linear non-dispersive waves. Retaining higher powers of $\sigma$ leads to a class of equations known as `Boussinesq-type' equations. Boussinesq-type equations are then classified by the powers of $\sigma$ they retain and their retained non-linearity; which is based on the size of $\epsilon= a_0 / h_0$ which compares the characteristic amplitude of the waves $a_0$ to the water depth $h_0$. These wave models form a spectrum with the SWWE being the simplest and most restrictive model and the Boussinesq-type models retaining the highest powers of $\sigma$ and largest $\epsilon$ being the most complex and least restrictive. The Serre equations are one particular Boussinesq-type equation that retains all terms of order $\mathcal{O}\left(\sigma ^4\right)$ and makes no assumption on the size of $\epsilon$ \cite{Bonneton-Lannes-2009-16601}. This allows the Serre equations to model water waves better than the SWWE in intermediate water depths where $\sigma^2$ terms can be significant but $\sigma^4$ terms are not. These intermediate water depths tend to occur as tsunamis and storm surges approach the coastline and interact with the varying bathymetry. Since the Serre equations allow arbitrary wave height they are the most appropriate model for water waves for the $\mathcal{O}\left(\sigma ^4\right)$ class of Boussinesq-type equations. 
+Neglecting all terms of order $\mathcal{O}\left(\sigma ^2\right)$ the full Euler equations reduce to the Shallow Water Wave Equations (SWWE) \cite{Bonneton-Lannes-2009-16601} which describe fully non-linear non-dispersive waves. Retaining higher powers of $\sigma$ leads to a class of equations known as `Boussinesq-type' equations. Boussinesq-type equations are then classified by the powers of $\sigma$ they retain and their retained non-linearity. The non-linearity $\epsilon= a_0 / h_0$ compares the characteristic amplitude of the waves $a_0$ to the water depth $h_0$. These wave models form a spectrum with the SWWE being the simplest and most restrictive model and the Boussinesq-type models retaining the highest powers of $\sigma$ and largest $\epsilon$ being the most complex and least restrictive. The Serre equations are one particular Boussinesq-type equation that retains all terms of order $\mathcal{O}\left(\sigma ^4\right)$ and makes no assumption on the size of $\epsilon$ \cite{Bonneton-Lannes-2009-16601}. This allows the Serre equations to model water waves better than the SWWE in intermediate water depths where $\sigma^2$ terms can be significant but $\sigma^4$ terms are not. These intermediate water depths tend to occur as tsunamis and storm surges approach the coastline and interact with the varying bathymetry. Since the Serre equations allow arbitrary wave height they are the most appropriate model for water waves for the $\mathcal{O}\left(\sigma ^4\right)$ class of Boussinesq-type equations. 
 
 There has previously been a significant amount of research into developing large scale, efficient and robust computational methods for the SWWE \cite{ClawPack,Comcot,ANUGA}. The SWWE neglect all terms of order $\mathcal{O}\left(\sigma ^2\right)$ in the Euler equations and so do not capture all water wave behaviour; in particular dispersion. Recent research has highlighted the need for dispersive wave models for the evolution of tsunamis \cite{Grue-etal-2008-113,Kirby-etal-2013-39}. For the purposes of ocean wave modelling the Serre equations are the best placed \cite{Bonneton-Lannes-2009-16601}; retaining high-order $\sigma$ terms and allowing arbitrary wave amplitude. Hence the overarching goal of our research is the development of large-scale, efficient and robust computational methods for the Serre equations for the purposes of wave modelling.
 
 \section{Objectives of the Thesis}
-In view of the overarching goal, the primary motivation of this thesis was the development of a numerical method for solving the one-dimensional Serre equations that is robust to steep gradients in the free surface, can handle dry beds and can be readily extended to the two-dimensional Serre equations using unstructured meshes. 
+In view of the overarching goal, the primary motivation of this thesis was the development of a numerical method for solving the one-dimensional Serre equations. This method should be robust to steep gradients in the free surface, handle dry beds and be extendable to the two-dimensional Serre equations using unstructured meshes. 
 
-Some of these goals were achieved through the development of the Finite Element Volume Method (FEVM). The FEVM is an improvement of the Finite Difference Volume Methods described by \citet{Zoppou-2014}. The FEVM can adequately handle dry beds and uses a finite element method instead of a finite difference method, making it suitable for unstructured meshes. 
+Some of these goals were achieved through the development of the Finite Element Volume Method (FEVM). The FEVM is an improvement of the Finite Difference Volume Methods (FDVM) described by \citet{Zoppou-2014}. The FEVM can adequately handle dry beds and uses a finite element method instead of a finite difference method, making it suitable for unstructured meshes. 
 
-The FEVM was assessed with a linear analysis, a validation against analytic and forced solutions and experimental results. At all stages of this assessment the method is compared to at least one other method to demonstrate its strengths and weaknesses. Overall, the method is found to be superior to others and satisfies all the objectives of the thesis.
+The FEVM was assessed with a linear analysis, a validation against analytic and forced solutions and experimental results. At all stages of this assessment the method is compared to at least one other method to demonstrate its strengths and weaknesses. Overall, the FEVM was found to be superior to other methods and satisfies all the objectives of the thesis.
 
 \section{Original Contribution of the Thesis}
 My research made the following original contributions to the field:
 \begin{itemize}
-	\item Implementation of the third-order finite difference volume method.
+	\item Implementation of the third-order FDVM.
 	\item Observation and justification of a new structure in the solution of the Serre equations in the presence of steep gradients in the free surface.
-	\item Extension of the second-order finite difference volume method to allow for dry beds.
-	\item Development and description of the well-balanced second-order finite element volume method that can handle dry beds.
+	\item Extension of the second-order FDVM to allow for dry beds.
+	\item Development and description of the well-balanced second-order FEVM that can handle dry beds.
 	\item A linear analysis of convergence for all developed finite volume based methods as well as some finite difference methods.
 	\item A complete linear analysis of the dispersion properties for all developed finite volume based methods as well as some finite difference methods.
-	\item Validation of the method using forced solutions where all terms of the Serre equations are present for both wet and dry beds.
-	\item Comparison of numerical solutions of the Serre equations with experimental results in the presence of dry beds and with wave breaking. 
+	\item Validation of FEVM and the second-order FDVM using forced solutions where all terms of the Serre equations are present for both wet and dry beds.
+	\item Comparison of the numerical solutions of FEVM and the second-order FDVM with experimental results in the presence of dry beds and with wave breaking. 
 \end{itemize}
 
 \subsection{Publications}
 %[][][]
-My research contributed to the following publications in chronological order.
+The publications generated from my research are compiled here in chronological order. A brief summary, my contribution to the paper and the relevance of the paper to this thesis are also provided. The publication list is reproduced in Appendix \ref{app:Pub} where the abstracts of the publications are also provided.
 \newpage
 \begin{center}
 	\vbox{
@@ -62,7 +62,7 @@ I reproduced the results of my coauthors with my own implementation of the metho
 \vbox{
 \noindent\textbf{Relevance to Thesis:}
 
-The method described in this paper was extended to allow for varying bathymetry \cite{Zoppou-etal-2017} and dry beds during my research. Resulting in the second-order finite difference volume method reported in the thesis. Since the linear analysis of convergence and dispersion properties is performed for a submerged horizontal bed, the results of the linear analysis for both methods are equivalent. These linear results can be found in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The extended version of the method was validated against analytic and forced solutions in Chapter \ref{chp:NumMethodComp} and compared to experimental results in Chapter \ref{chp:ExpMethodComp}.}
+The method described in this paper was extended to allow for varying bathymetry \cite{Zoppou-etal-2017} and dry beds during my research. This extended method is the second-order FDVM whose results are reported in the thesis. Since the linear analysis of convergence and dispersion properties is performed for a completely wet horizontal bed, the results of the linear analysis reported in the thesis apply to the method described in this paper. These linear results can be found in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The extended version of the method was validated against analytic and forced solutions in Chapter \ref{chp:NumMethodComp} and compared to experimental results in Chapter \ref{chp:ExpMethodComp}.}
 
 \newpage
 \begin{center}
@@ -84,7 +84,7 @@ The method described in this paper was extended to allow for varying bathymetry 
 \vbox{
 \noindent\textbf{Summary:}
 
-The first-, second-, and third-order finite difference volume methods for the one-dimensional Serre equations with variable bathymetry are described. The results of a linear analysis of the dispersion properties of the methods for waves on quiescent water is provided. These methods are then validated against an analytic solution. A well-balanced version of the second-order finite difference volume method is described and further validated against experimental results.}
+The first-, second-, and third-order finite difference volume methods for the one-dimensional Serre equations with variable bathymetry were described. The results of a linear analysis of the dispersion properties of the methods for waves on quiescent water are provided. These methods were then validated against an analytic solution. A well-balanced version of the second-order finite difference volume method is described and further validated against experimental results.}
 \vspace*{\baselineskip}
 
 \vbox{
@@ -96,7 +96,7 @@ The methods, linear dispersion analysis and numerical solutions were all produce
 \vbox{
 \noindent\textbf{Relevance to Thesis:}
 
-The first-, second- and third-order methods described in this paper are the methods whose results are reported in the thesis. The results of a linear analysis of the dispersion and convergence properties of all these methods are provided in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The linear analysis of dispersion presented in this paper was extended to allow for a mean background flow in the water on which the waves occur. The results of the analytic solution validation in this paper are reproduced in Chapter \ref{chp:NumMethodComp}. This validation was extended to study the convergence and conservation properties of more quantities. The second-order finite difference volume method was then validated against forced solutions in Chapter \ref{chp:NumMethodComp} and experimental results in Chapter \ref{chp:ExpMethodComp}. The experimental results of the second-order finite difference volume method for the evolution of a negative rectangular wave \cite{Hammack-Segur-1978-337} and periodic waves over a submerged bar \cite{Beji-Battjes-1994-1} in this paper are reproduced in the thesis.}
+The first-, second- and third-order methods described in this paper are the methods whose results are reported in the thesis. The results of a linear analysis of the dispersion and convergence properties of all these methods are provided in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The linear analysis of dispersion presented in this paper was extended to allow for a mean background flow in the water on which the waves occur. The results of the analytic solution validation in this paper are reproduced in Chapter \ref{chp:NumMethodComp}. This validation was extended to study the convergence and conservation properties of more quantities. The second-order FDVM was then validated against forced solutions in Chapter \ref{chp:NumMethodComp} and experimental results in Chapter \ref{chp:ExpMethodComp}. The experimental results of the second-order FDVM for the evolution of a negative rectangular wave \cite{Hammack-Segur-1978-337} and periodic waves over a submerged bar \cite{Beji-Battjes-1994-1} in this paper are reproduced in the thesis.}
 
 \newpage
 \begin{center}
@@ -116,7 +116,7 @@ The first-, second- and third-order methods described in this paper are the meth
 \vbox{
 \noindent\textbf{Summary:}
 
-The numerical solutions of the second-order finite difference volume method \cite{Zoppou-etal-2017} for the Serre equations are compared to the numerical solutions of ANUGA \cite{ANUGA} for the SWWE. This comparison was performed for the evolution of an artificial representative example and for the experimental results of periodic waves travelling over a submerged bar \cite{Beji-Battjes-1994-1}.}
+The numerical solutions of the second-order finite difference volume method \cite{Zoppou-etal-2017} for the Serre equations were compared to the numerical solutions of ANUGA \cite{ANUGA} for the SWWE. This comparison investigated the influence of dispersion on shoaling waves for an artificial representative example and the experiments of \citet{Beji-Battjes-1994-1}. The artificial representative example models the shoaling of a solitary wave over a fringing reef. While the experiments of \citet{Beji-Battjes-1994-1} investigate the behaviour of periodic waves travelling over a submerged bar.}
 \vspace*{\baselineskip}
 
 \vbox{
@@ -149,7 +149,7 @@ The experimental results of the second-order finite difference volume method for
 \vbox{
 \noindent\textbf{Summary:}
  
-The first-, second- and third-order finite difference volume methods as well as two second-order finite difference methods for the Serre equations are used to numerically study the behaviour of steep gradients in the free surface. The convergence and conservation properties of many numerical solutions of all these methods are used to justify the observed behaviours. One such behaviour was not previously reported by the literature. This behaviour best represents the solution of the Serre equations in the presence of steep gradients over short time spans. }
+The first-, second- and third-order finite difference volume methods as well as two second-order finite difference methods for the Serre equations were used to numerically study the behaviour of steep gradients in the free surface. The convergence and conservation properties of many numerical solutions of all these methods were used to justify the observed behaviours. One such behaviour was not previously reported by the literature. This behaviour best represents the solution of the Serre equations in the presence of steep gradients over short time spans. The effect of the used numerical method, the grid resolution and the smoothing of the initial conditions was studied. Allowing the source of the differences in the observed behaviours reported in the literature to be understood. }
  \vspace*{\baselineskip}
 
 \vbox{ 
@@ -171,17 +171,17 @@ Chapter \ref{chp:Serreeqns} proceeds by presenting the one-dimensional Serre equ
 
 This is followed by Chapter \ref{chp:HFVMMethod} which describes in detail the FEVM. In this thesis the results of other numerical methods are also provided. Descriptions of these methods can be found in the literature \cite{Zoppou-etal-2017,Pitt-2018-61}. 
 
-Chapter \ref{chp:AnalNumMethod} provides a linear analysis of the convergence and dispersion properties of the FEVM in detail. The analysis begins with the linearised Serre equations over a horizontal bed and then derives the evolution matrix; through which the convergence and dispersion properties of the methods can be studied. The results of the linear analysis are also provided for all the methods used by \citet{Pitt-2018-61} for comparison.
+Chapter \ref{chp:AnalNumMethod} provides a linear analysis of the convergence and dispersion properties of the FEVM in detail. The analysis begins with the linearised Serre equations over a horizontal bed and then derives the evolution matrix; through which the convergence and dispersion properties can be studied. The results of the linear analysis are also provided for all the methods used by \citet{Pitt-2018-61} as a comparison.
 
-The convergence and conservation properties of the numerical methods of \citet{Pitt-2018-61} are then assessed in Chapter \ref{chp:NumMethodComp} using analytic and forced solutions of the Serre equations. While in Chapter \ref{chp:ExpMethodComp} the numerical methods are validated against experimental results.
+The convergence and conservation properties of the numerical methods of \citet{Pitt-2018-61} are then assessed in Chapter \ref{chp:NumMethodComp} using analytic and forced solutions of the Serre equations. While in Chapter \ref{chp:ExpMethodComp} FEVM and the second-order FDVM are validated against experimental results.
 
 %%%[][][][]
 Chapter \ref{chp:Conclusion} summarises the major contributions and findings of the thesis and provides ideas for future work.
 
 Appendix \ref{app:ConQuant} provides expressions for the total amount of the conserved quantities over any domain for all of the analytic solutions described in this thesis. 
 
-The basis functions used by the second-order finite elements volume method and the precise definition of the function spaces mentioned in this thesis are provided in Appendix \ref{app:FEMIntegrals}. 
+The basis functions used by FEVM and the precise definition of the function spaces mentioned in this thesis are provided in Appendix \ref{app:FEMIntegrals}. 
 
-Appendix \ref{app:LinAnal} provides the evolution matrix produced by the linear analysis for the finite difference volume methods and the finite difference methods. It also includes the consistency results for these methods, as they were omitted from Chapter \ref{chp:AnalNumMethod}.  
+Appendix \ref{app:LinAnal} provides the evolution matrix produced by the linear analysis for the FDVM and the finite difference methods. It also includes the consistency results for these methods, as they were omitted from Chapter \ref{chp:AnalNumMethod}.
 
 Finally the publications I contributed to throughout my research and their abstracts are provided in chronological order in Appendix \ref{app:Pub}. 
