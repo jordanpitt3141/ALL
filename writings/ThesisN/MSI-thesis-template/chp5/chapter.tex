@@ -1,7 +1,12 @@
 
 \chapter{Numerical Validation}
 \label{chp:NumMethodComp}
-In this chapter analytic and forced solutions are used to validate the numerical methods. 
+In this chapter analytic and forced solutions are used to validate the numerical methods. These numerical methods are:
+\begin{itemize}
+	\item The second-order Finite Element Volume Method (FEVM) termed $\text{FEVM}_2$ which is described in Chapter \ref{chp:HFVMMethod}.
+	\item The first-, second- and third-order Finite Difference Volume Methods (FDVM) termed $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ respectively. Descriptions of these methods were published by \citet{Zoppou-etal-2017}. Additionally, $\text{FDVM}_2$ was extended to handle dry beds using the technique outlined in Chapter \ref{chp:HFVMMethod}. 
+	\item The second-order finite difference methods $\mathcal{D}$ and $\mathcal{W}$  whose descriptions were published by \citet{Pitt-2018-61}.
+\end{itemize} 
 
 %Analytic comparions
 %Forced solutions
@@ -14,7 +19,7 @@ Finally we validate $\text{FDVM}_2$ and $\text{FEVM}_2$ using forced solutions w
 The convergence of the numerical methods is studied by comparing their numerical solutions to the analytic solutions or the forced solutions of the Serre equations. While conservation is investigated by comparing the total amount of a conserved quantity in a numerical solution at some time with the total amount of that quantity present in the initial conditions. We introduce notation for these measures and describe their calculation here, beginning with convergence.
 
 \subsection{Measure of Convergence}
-By measuring the relative difference between the numerical and analytic solutions as $\Delta x$ varies, the convergence of the numerical methods can be investigated. To measure the relative difference we use the $L_2$ vector norm; to compare the numerical and analytic solutions at the cell midpoints $x_j$ at the end of the simulations. For a quantity $q$, the vector of its values $\vecn{q}$ at the cell midpoints $x_j$ and the corresponding numerical solution at those locations $\vecn{q^*}$; the $L_2$ norm is
+By measuring the relative difference between the numerical and analytic solutions as $\Delta x$ varies, the convergence of the numerical methods can be investigated. To measure the relative difference we use the $L_2$ vector norm to compare the numerical and analytic solutions at the cell midpoints $x_j$ at the end of the simulations. For a quantity $q$, the vector of its values $\vecn{q}$ at the cell midpoints $x_j$ and the corresponding numerical solution at those locations $\vecn{q^*}$; the $L_2$ norm is
 \begin{equation*}
 L_2(\vecn{q},\vecn{q^*}) =  \left\lbrace \begin{array}{c r} 
 \dfrac{||\vecn{q^*} - \vecn{q}||_{2}}{||\vecn{q}||_{2}} & ||\vecn{q}||_{2} > 0 \\ \\
@@ -27,16 +32,16 @@ L_2(\vecn{q},\vecn{q^*}) =  \left\lbrace \begin{array}{c r}
 
 
 \subsection{Measures of Conservation}
-The conservation properties of the methods are established by calculating the total amount of a conserved quantity in the numerical solution $\mathcal{C}^*\left({\vecn{q^*}}\right)$ at the end of the simulation and comparing it to the total amount of that quantity present in the initial conditions $\mathcal{C}\left({q(x,0)} \right)$, derived analytically. Again a relative measure is used;
+The conservation properties of the methods are established by calculating the total amount of a conserved quantity in the numerical solution $\mathcal{C}^*\left({\vecn{q^*}}\right)$ at the end of the simulation and comparing it to the total amount of that quantity present in the initial conditions $\mathcal{C}\left({q(x,0)} \right)$ derived analytically. The relative measure
 \begin{equation}
 C(q,\vecn{q^*}) =  \left\lbrace \begin{array}{c r} 
 \dfrac{|\mathcal{C}^*\left({\vecn{q^*}}\right) - \mathcal{C}\left({q(x,0)} \right)| }{|\mathcal{C}\left({q(x,0)} \right)|} & |\mathcal{C}\left({q(x,0)} \right)| > 0 \\ \\
 |\mathcal{C}^*\left({\vecn{q^*}}\right)| & |\mathcal{C}\left({q(x,0)} \right)| = 0  \end{array}\right. 
 \label{eqn:C1qdef} 
 \end{equation}
-where $\mathcal{C}^*\left({\vecn{q^*}}\right)$ was calculated using 3 point Gaussian quadrature over the $j^{th}$ cell and summing these cell integrals for all $j$. The value of $q$ at the three points needed to perform the Gaussian quadrature were calculated by interpolating the $j^{th}$ cell using a quartic polynomial that fits the nodal values $q_{j-2}$, $q_{j-1}$, $q_{j}$, $q_{j+1}$ and $q_{j+2}$ at the surrounding cell midpoints. Gaussian quadrature using three points is $5^{th}$ order accurate and interpolation by quartics is $5^{th}$ order accurate for the quantity $q$ and $4^{th}$ order accurate for its spatial derivative $\partial q /  \partial x$. Since all methods are third-order accurate or less, the error introduced by the calculation of $\mathcal{C}^*\left({\vecn{q^*}}\right)$ for $h$, $uh$, $G$ and $\mathcal{H}$ will be dominated by the error introduced by the numerical solvers.
+is used. The total amount in a numerical solution $\mathcal{C}^*\left({\vecn{q^*}}\right)$ was calculated using 3 point Gaussian quadrature over the $j^{th}$ cell and summing these cell integrals for all $j$. The value of $q$ at the three points needed to perform the Gaussian quadrature were calculated by interpolating the $j^{th}$ cell using a quartic polynomial that fits the nodal values $q_{j-2}$, $q_{j-1}$, $q_{j}$, $q_{j+1}$ and $q_{j+2}$ at the surrounding cell midpoints. Gaussian quadrature using three points is $5^{th}$ order accurate and interpolation by quartics is $5^{th}$ order accurate for the quantity $q$ and $4^{th}$ order accurate for its spatial derivative $\partial q /  \partial x$. Since all methods are third-order accurate or less, the error introduced by the calculation of $\mathcal{C}^*\left({\vecn{q^*}}\right)$ for $h$, $uh$, $G$ and $\mathcal{H}$ will be dominated by the error introduced by the numerical solvers.
 
-In some cases $\mathcal{C}\left({q(x,0)} \right)$ may be difficult to derive analytically. In this case we approximate $\mathcal{C}\left({q(x,0)} \right)$ with $\mathcal{C}^*\left(\vecn{q}^0\right)$ in \eqref{eqn:C1qdef}; where $\vecn{q}^0$ is the vector of the quantity at the cell midpoints used as the initial conditions of our numerical method. We denote the numerical approximation to the conservation error \eqref{eqn:C1qdef} by $C^*$. This conservation error will also be more enlightening in cases where the errors introduced by the discretisation are large, as these errors will be similar for $\mathcal{C}^*\left(\vecn{q}^0\right)$ and $\mathcal{C}^*\left(\vecn{q^*}\right)$. 
+In some cases $\mathcal{C}\left({q(x,0)} \right)$ may be difficult to derive analytically. In this case we approximate $\mathcal{C}\left({q(x,0)} \right)$ with $\mathcal{C}^*\left(\vecn{q}^0\right)$ in \eqref{eqn:C1qdef}; where $\vecn{q}^0$ is the vector of the quantity at the cell midpoints used as the initial conditions of our numerical method. We denote the numerical approximation to the conservation error \eqref{eqn:C1qdef} by $C^*$. Errors generated by the discretisation will be similar for $\mathcal{C}^*\left(\vecn{q}^0\right)$ and $\mathcal{C}^*\left(\vecn{q^*}\right)$ and will therefore cancel when studying $C^*$. Hence, the completely numerically calculated conservation error will useful in cases where the errors introduced by the discretisation dominate.
 
 
 \section{Solitary Travelling Wave Solution}
@@ -88,7 +93,7 @@ An example numerical solution with $\Delta x = {100} / {2^{11}}m \approx 0.049m$
 \end{figure}
 
 
-The $L_2$ error was calculated for $h$, $u$ and $G$ for all numerical solutions and was plotted against $\Delta x$ for all numerical methods in Figure \ref{fig:SolitonL1All}. From these plots it is clear that all numerical methods are convergent. The rate at which the numerical solutions converge to the analytic solution over $\Delta x$ is determined by the order of accuracy of the numerical scheme. All methods demonstrate the expected order of accuracy given the order of accuracy of the approximations used in the method; which agrees with the results of the linear analysis in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. 
+The $L_2$ error was calculated for $h$, $u$ and $G$ for all numerical solutions and was plotted against $\Delta x$ for all numerical methods in Figure \ref{fig:SolitonL1All}. From these plots it is clear that all numerical methods are convergent. The rate at which the numerical solutions converge to the analytic solution over $\Delta x$ is determined by the order of accuracy of the numerical scheme. All methods demonstrate the expected order of accuracy given the order of accuracy of the approximations used in the method. This was also true for the results of the linear analysis in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -131,7 +136,7 @@ For the second-order methods we find that $\text{FDVM}_2$ consistently produces 
 
 The finite difference methods produce very similar errors which are twice as large as the errors from $\text{FEVM}_2$. Additionally, the round-off effects dominate the $L_2$ error of the finite difference methods at larger $\Delta x$ values than for the finite volume based methods.
 
-The error in conservation $C$ was calculated for all methods using the analytic expressions for the total amounts of the conserved quantities in the initial conditions \eqref{eqn:SolitonConservation}. The error in conservation was plotted against the spatial resolution in Figure \ref{fig:SolitonC1All}. These results demonstrate that due to the use of the finite volume methods for $h$ and $G$, both are conserved at round-off error for all the finite volume based methods as expected. While the finite difference methods only conserved $h$ at round-off error because the employed finite difference method for the continuity equation \eqref{eqn:FullSerreConMass} is a conservative method. 
+The error in conservation $C$ was calculated for all methods using the analytic expressions for the total amounts of the conserved quantities in the initial conditions \eqref{eqn:SolitonConservation} provided in Appendix \ref{app:ConQuant}. The error in conservation was plotted against the spatial resolution in Figure \ref{fig:SolitonC1All}. These results demonstrate that due to the use of the finite volume methods for $h$ and $G$, both are conserved at round-off error for all the finite volume based methods as expected. While the finite difference methods only conserved $h$ at round-off error because the employed finite difference method for the continuity equation \eqref{eqn:FullSerreConMass} is a conservative method. 
 
 \begin{figure}
 	\centering
@@ -234,7 +239,7 @@ Examination of the $L_2$ errors depicted in Figure \ref{fig:LakeAtRestEL1} revea
 		\includegraphics[width=\textwidth]{./chp5/figures/Analytic/LakeAtRest/L2/FDVMnWB.pdf}
 		\subcaption{$\text{FDVM}_2$ not well-balanced}
 	\end{subfigure}
-	\caption{Convergence as measured by the $L_2$ norm against $\Delta x$ for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\circlet{red}) for the lake at rest problem at $t=10s$ $\text{FEVM}_2$ and $\text{FDVM}_2$.}
+	\caption{Convergence as measured by the $L_2$ norm against $\Delta x$ for $h$ (\trianglet{blue}), $u$ (\squaret{black}) and $G$ (\circlet{red}) for the lake at rest problem at $t=10s$ for $\text{FEVM}_2$ and $\text{FDVM}_2$.}
 	\label{fig:LakeAtRestEL1}
 \end{figure}
 
@@ -242,7 +247,7 @@ For methods without well-balancing; the errors are significantly larger, yet the
 
 
 %%%%%%[][][][] NEW [][][][][]
-Using the expressions in Appendix \ref{app:ConQuant} for the total amounts of the conserved quantities the conservation error $C$ was calculated for $\text{FEVM}_2$ and $\text{FDVM}_2$ with the results plotted in Figure \ref{fig:LakeAtRestEC1}. The error in conservation of these methods affirms the superiority of the well-balanced version of the methods. In particular, we see that the total amounts of $uh$ and $G$ are only conserved within machine precision when well-balancing is employed. Since $uh$ and $G$ are uniformly zero in the initial conditions the well-balanced methods have only introduced round-off errors into these quantities, whilst without well-balancing large errors in these quantities are introduced in the naive methods. 
+Using the expressions in Appendix \ref{app:ConQuant} for the total amounts of the conserved quantities the conservation error $C$ was calculated for $\text{FEVM}_2$ and $\text{FDVM}_2$ with the results plotted in Figure \ref{fig:LakeAtRestEC1}. The error in conservation of these methods affirms the superiority of the well-balanced version of the methods. In particular, we see that the total amounts of $uh$ and $G$ are only conserved within machine precision when well-balancing is employed. Since $uh$ and $G$ are uniformly zero in the initial conditions the well-balanced methods have only introduced round-off errors into these quantities, whilst without well-balancing large errors in these quantities are introduced in the methods. 
 
 The errors in conservation of $h$ and $\mathcal{H}$ for the well-balanced methods are large, but do converge at the order of accuracy of the scheme or better. These errors are caused by the discretisation of the initial conditions, primarily the approximation of the boundaries of the wet regions by the numerical grids. This initial discretisation error can be removed by comparing the total amounts of the conserved quantities in the numerical solution to their numerically calculated total amounts in the initial conditions with $C^*$ as in Figure \ref{fig:LakeAtRestEC*1}. For the completely numerically calculated conservation error $C^*$ we observe that all the conserved quantities are conserved at machine precision for the well-balanced methods. With $\mathcal{H}$ being conserved exactly for most numerical solutions, hence its disappearance from the log-log plot. The conservation error of $\mathcal{H}$ is small for the lake at rest solution since $u$ is very small. Hence, $\mathcal{H}$ is essentially the gravitational potential energy which since mass is well conserved is also well conserved.
 
@@ -300,7 +305,7 @@ These results demonstrate the need for well-balancing for both numerical methods
 
 \section{Forced Solutions}
 %only L1
-The previous analytic solution validations do not provide a stringent test for all terms present in the Serre equations and there are currently no known analytic solutions that do. To remedy this the forced solutions introduced in Chapter \ref{chp:Serreeqns} were used to validate the numerical methods. Since the source terms in the modified Serre equations, \eqref{eqn:FullSerreConForced} can be determined and accounted for analytically, the only source of error in the numerical solutions reproduction of the forced solutions are the numerical methods themselves and thus the theoretical second-order accuracy of $\text{FEVM}_2$ and $\text{FDVM}_2$ should be recovered. 
+The previous analytic solution validations do not provide a stringent test for all terms present in the Serre equations and there are currently no known analytic solutions that do. To remedy this the forced solutions introduced in Chapter \ref{chp:Serreeqns} were used to validate the numerical methods. Since the added terms in the modified Serre equations, \eqref{eqn:FullSerreConForced} can be determined and accounted for analytically, the only source of error in the numerical solutions reproduction of the forced solutions are the numerical methods themselves and thus the theoretical second-order accuracy of $\text{FEVM}_2$ and $\text{FDVM}_2$ should be recovered. 
 
 We performed validation tests for two forced solutions; one with a finite water depth everywhere and the other with a dry bed to validate and compare the numerical solutions in both situations. To ensure that all terms of the Serre equations were accurately approximated in the numerical method the functions
 \begin{subequations}
@@ -323,7 +328,7 @@ $\Delta t = Cr \Delta x / \left(a_2 + a_5 + \sqrt{g\left(a_0 + a_1\right)}\right
 
 \subsection{Results for a Wet Bed} 
 %a_0 = 1
-For the non-zero water depth case where $a_0 = 1m$ an example of the numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figures \ref{fig:ForcedWetFEVMP2PExAll} and \ref{fig:ForcedWetFDVMP2PExAll} respectively for $\Delta x = 100/ 2^{10} m \approx 0.0977m $ at various times. The numerical solutions and the forced solutions are indistinguishable at all times for these scales, accurately reproducing the forced solution as it travels over the bed. Thus $h$ and $u$ maintain their constant shape while $G$ does not due to the influence of the periodic bed.
+For the non-zero water depth case where $a_0 = 1m$ an example of the numerical solutions of $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figures \ref{fig:ForcedWetFEVMP2PExAll} and \ref{fig:ForcedWetFDVMP2PExAll} respectively for $\Delta x = 100/ 2^{10} m \approx 0.0977m $ at various times. The numerical solutions accurately reproduced the forced solution as it travels over the bed. Thus $h$ and $u$ maintain their constant shape while $G$ does not due to the influence of the periodic bed.
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -371,7 +376,7 @@ For the non-zero water depth case where $a_0 = 1m$ an example of the numerical s
 	\label{fig:ForcedWetFDVMP2PExAll}
 \end{figure}
 
-The $L_2$ error of $h$, $u$ and $G$ for the $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:L1convergenceforcedWet}. Both methods recover the expected second-order accuracy. Since the term of the forced Serre equations is added analytically and all terms must be accurately approximated by the method for this forced solution, these results demonstrate that $\text{FEVM}_2$ and $\text{FDVM}_2$ are second-order accurate for all terms when the bed is wet everywhere, as desired.
+The $L_2$ error of $h$, $u$ and $G$ for the $\text{FEVM}_2$ and $\text{FDVM}_2$ are given in Figure \ref{fig:L1convergenceforcedWet}. Both methods recover the expected second-order accuracy for $h$, $u$ and $G$. The additional term of the forced Serre equations is added analytically and all terms of the Serre equations must be accurately approximated by the method to reproduce this forced solution. Therefore, these results demonstrate that $\text{FEVM}_2$ and $\text{FDVM}_2$ are second-order accurate for all terms when the bed is wet everywhere, as desired.
 
 \begin{figure}
 	\centering
@@ -443,7 +448,7 @@ Example numerical solutions demonstrating the evolution of the wave are given in
 	\label{fig:ForcedFDVMP2PExAll}
 \end{figure}
 
-These large errors in $u$ when $h$ is small are caused by the particular choices $h_{{base}} = 10^{-8}$ and $h_{{tol}}  = 10^{-12}$ used in the desingularisation transformation applied to the FEM \eqref{eqn:usolvefromGhb}. By choosing larger values of these quantities the errors in $u$ can be significantly damped. However, if $h_{{base}}$ and $h_{{tol}}$ are larger they begin to dominate the $L_2$ errors in $h$, $G$ and $uh$ making the convergence less obvious. This trade-off is present in all desingularisation transforms. 
+These large errors in $u$ when $h$ is small are caused by the particular choices $h_{{base}} = 10^{-8}$ and $h_{{tol}}  = 10^{-12}$ used in the desingularisation transformation applied to the finite element method \eqref{eqn:usolvefromGhb}. By choosing larger values of these quantities the errors in $u$ can be significantly damped. However, if $h_{{base}}$ and $h_{{tol}}$ are larger they begin to dominate the $L_2$ errors in $h$, $G$ and $uh$ making the convergence less obvious. This trade-off is present in all desingularisation transforms. 
 
 For our purposes the chosen desingularisation transform \eqref{eqn:hdrytransform} with small $h_{{base}}$ and $h_{{tol}}$ values was sufficient, resulting in large observed errors in $u$ when $h$ is small.
 
@@ -451,7 +456,7 @@ For our purposes the chosen desingularisation transform \eqref{eqn:hdrytransform
 %%%%% [][][] NEW [][][]
 The $L_2$ errors for $h$, $u$, $uh$ and $G$ for both methods are given in Figure \ref{fig:ForcedSolDryL1}. Both methods exhibit second-order convergence in all the quantities except $u$. The large errors in $u$ only occur when $h$ is small. This can be seen by restricting our convergence to only compare regions where $h > 10^{-3} m$ as in Figure \ref{fig:ForcedSolDryL1restrict}. It can be seen that the expected second-order accuracy in $u$ is recovered when $h$ is not small. Since all the flux and source terms of the Serre equations \eqref{eqn:FullSerreCon} only depend on $u$ multiplied by some power of $h$; the large errors in $u$ when $h$ is small do not translate to significant errors in $G$, $h$ or $uh$. 
 
-Therefore, these methods can accurately handle the dry bed problem, even with small $h_{{base}}$ and $h_{{tol}}$ values, although in such cases the velocity may have large errors in regions where $h$ is small. For physical applications where large errors in $u$ when $h$ is small are not acceptable we recommend altering the dry bed handling of the scheme by increasing the $h_{{base}}$ and $h_{{tol}}$ values or altering the desingularisation transformation \cite{Kurganov-Petrova-2007-707}. 
+Therefore, these methods can accurately handle the dry bed problem, even with small $h_{{base}}$ and $h_{{tol}}$ values. Although, in such cases the velocity may have large errors in regions where $h$ is small. For physical applications where large errors in $u$ when $h$ is small are not acceptable we recommend altering the dry bed handling of the scheme by increasing the $h_{{base}}$ and $h_{{tol}}$ values or altering the desingularisation transformation \cite{Kurganov-Petrova-2007-707}. 
 
 \begin{figure}
 	\centering

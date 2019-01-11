@@ -1,6 +1,13 @@
 \chapter{Linear Analysis}
 \label{chp:AnalNumMethod}
-In this chapter a linear analysis is used to study the convergence and dispersion properties of the numerical methods. We provide the full description of the linear analysis for $\text{FEVM}_2$ as an example and then just present the results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. Supplementary details for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ can be found in Appendix \ref{app:LinAnal}.
+In this chapter a linear analysis is used to study the convergence and dispersion properties of:
+\begin{itemize}
+	\item $\text{FEVM}_2$ which is a second-order Finite Element Volume Method (FEVM) described in Chapter \ref{chp:HFVMMethod}.
+	\item The Finite Difference Volume Methods (FDVM) of first- ($\text{FDVM}_1$), second- ($\text{FDVM}_2$) and third-order ($\text{FDVM}_3$) described by \citet{Zoppou-etal-2017}.
+	\item The second-order finite difference methods $\mathcal{D}$ and $\mathcal{W}$ described by \citet{Pitt-2018-61}.
+\end{itemize}
+ We provide the full description of the linear analysis for $\text{FEVM}_2$ as an example and then just present the results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. Supplementary details for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ can be found in Appendix \ref{app:LinAnal}. 
+
 
 An important property of a numerical method is convergence. Convergence guarantees that as the spatial and temporal resolution of a numerical method is increased, then the numerical solution approaches the solution of the partial differential equations it approximates. 
 
@@ -12,7 +19,7 @@ We analysed the convergence and dispersion properties of the whole numerical met
 
 In general, we would expect that a numerical method that has poor convergence properties for the linearised Serre equations with a horizontal bed will also have poor convergence properties when the bed and non-linear terms are included. 
 
-The dispersion properties of the Serre equations are derived from the linearised Serre equations with a horizontal bed \cite{Zoppou-etal-2017}. Because the dispersion analysis includes the spatial and temporal approximations simultaneously the presented analysis of dispersion properties of the numerical method is a complete analysis extending the work of \citet{Filippini-etal-2016-381}.
+The dispersion properties of the Serre equations are derived from the linearised Serre equations with a horizontal bed \cite{Zoppou-etal-2017}. Because the dispersion analysis includes the spatial and temporal approximations simultaneously the presented analysis of the dispersion properties of the numerical method is a complete analysis extending the work of \citet{Filippini-etal-2016-381}.
 
 The linear analyses of convergence and dispersion properties for the finite volume based methods rely on establishing a relationship of the form
 \begin{equation}
@@ -25,7 +32,7 @@ The linear analyses of convergence and dispersion properties for the finite volu
 \end{equation}
 where $\matr{E}$ is the $2 \times 2$ evolution matrix relating the cell average conserved quantities $h$ and $G$ at time level $t^n$ with the cell average conserved quantities at time level $t^{n+1}$, which is independent of $n$ and $j$. The evolution matrix $\matr{E}$ is obtained in the analyses by propagating Fourier modes through the numerical scheme. By analysing the properties of $\matr{E}$ and comparing it with the exact evolution matrix we can determine the convergence and dispersion properties of its associated numerical method.
  
-We derive $\matr{E}$ in \eqref{eqn:linearanalaim} for $\text{FEVM}_2$ and perform the convergence and dispersion analysis. We then present the results of the analyses for the finite difference volume methods $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ described by \citet{Zoppou-etal-2017} and the finite difference methods $\mathcal{D}$ and $\mathcal{W}$ described by \citet{Pitt-2018-61}. Greater detail for the linear analysis of $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ can be found in Appendix \ref{app:LinAnal}. These results extend those published by \citet{Zoppou-etal-2017} by including more methods, analysing the convergence properties and allowing non-zero background mean velocities.
+We derive $\matr{E}$ in \eqref{eqn:linearanalaim} for $\text{FEVM}_2$ and perform the convergence and dispersion analysis. We then present the results of the analyses for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. In Appendix \ref{app:LinAnal} a process that produces the evolution matrix $\matr{E}$ for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$ is provided while for $\mathcal{D}$ and $\mathcal{W}$ the evolution matrix itself is provided. These results extend those published by \citet{Zoppou-etal-2017} by including more methods, analysing the convergence properties and allowing non-zero background mean velocities.
  
 \section{Linearised Serre Equations}
 The Serre equations with a horizontal bed \eqref{eqn:FullSerreNonConHorizbed} are linearised by considering waves as small perturbations $\delta\times\eta(x,t)$ and $\delta \times\mu(x,t)$ on a flow with a mean height $H$ and a mean velocity $U$ respectively, where $\delta \ll 1$. So we have
@@ -83,7 +90,7 @@ q^{n + m}_{j + l} = q^n_j e^{ i \left(m \omega^\pm \Delta t + l k \Delta x\right
 \end{equation}
 Because $\eta$ and $\mu$ are Fourier modes then so is $G$. Furthermore, the cell averages of these quantities $\overline{\eta}$, $\overline{\mu}$ and $\overline{G}$ are Fourier modes as well.
 
-For Fourier modes the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}$, $\mathcal{F}_{j-1/2}$ and $\mathcal{F}_{j+1/2}$ from Chapter \ref{chp:HFVMMethod} will only vary with $H$, $U$, $k$, $\omega^\pm$, $\Delta x$ and $\Delta t$ and hence are independent of $j$ and $n$. By combining these operators the evolution matrix $\matr{E}$ can be derived for $\text{FEVM}_2$ for the linearised Serre equations with a horizontal bed. Since all the constituent operators of $\matr{E}$ are independent of $j$ and $n$ then $\matr{E}$ will also be independent of $j$ and $n$, as desired. We will now derive expressions for all these operators, following the structure of the method laid out in Section \ref{sec:StructOverview}. Since the linearised Serre equations with a horizontal bed have no source terms step (iv), which approximates the source terms is not necessary.   
+For Fourier modes the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}$, $\mathcal{F}_{j-1/2}$ and $\mathcal{F}_{j+1/2}$ from Chapter \ref{chp:HFVMMethod} act as factors on their inputs. These factors vary with $H$, $U$, $k$, $\omega^\pm$, $\Delta x$ and $\Delta t$ and are independent of $j$ and $n$. By combining the factors associated with these operators the evolution matrix $\matr{E}$ can be derived for $\text{FEVM}_2$ for the linearised Serre equations with a horizontal bed. Since all the constituent factors that produce $\matr{E}$ are independent of $j$ and $n$ then $\matr{E}$ will also be independent of $j$ and $n$, as desired. We will now derive expressions for all these factors, following the structure of the method laid out in Section \ref{sec:StructOverview}. Since the linearised Serre equations with a horizontal bed have no source terms step (iv), which approximates the source terms is not necessary.   
 
 \subsection{Reconstruction}
 Given the cell averages $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ at $t^n$, the first step of our numerical method is to reconstruct $\eta$ and $G$ inside the $j^{th}$ cell at $x_{j-1/2}$, $x_j$ and $x_{j+1/2}$ using $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ from \eqref{eqn:ReconforhwG}. Since $\eta$ and $G$ are Fourier modes and therefore smooth we do not require non-linear limiters to ensure our scheme is TVD and so we use the slope $d_j = \left({-\overline{q}_{j-1} +\overline{q}_{j+1}}\right)/ \left({2\Delta x} \right)$ in the reconstruction. Applying \eqref{eqn:fourierfactor} to the reconstructions \eqref{eqn:ReconforhwG} with the centred slope approximation we obtain 
@@ -95,7 +102,7 @@ Given the cell averages $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ at $t
 	q_j &= \overline{q}_j = \mathcal{R}_{j} \overline{q}_j,\\
 	q^-_{j+\frac{1}{2}} &=\overline{q}_j + \frac{- \overline{q}_{j} e^{-ik\Delta x} + \overline{q}_{j} e^{ik\Delta x}}{4} = \left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right)\overline{q}_{j} =\mathcal{R}^-_{j+1/2} \overline{q}_{j}.
 	\end{align}
-Note that these reconstructions operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ are independent of $j$. Furthermore, from \eqref{eqn:fourierfactor} we have that reconstructions of $\eta$ and $G$ at other locations are $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ multiplied by a shift factor. In particular, we have that the reconstruction operator $\mathcal{R}^+_{j+1/2}$ for $q^+_{j+\frac{1}{2}} $ is given by
+Note that the factors given by the reconstructions operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ are independent of $j$. Furthermore, from \eqref{eqn:fourierfactor} we have that reconstructions of $\eta$ and $G$ at other locations are $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ multiplied by a shift factor. In particular, we have that the reconstruction operator $\mathcal{R}^+_{j+1/2}$ for $q^+_{j+\frac{1}{2}} $ is given by
 \begin{equation}
 	q^+_{j+\frac{1}{2}} = e^{ik\Delta x} q^+_{j-\frac{1}{2}} = e^{ik\Delta x} \mathcal{R}^+_{j-1/2}\overline{q}_{j} = \mathcal{R}^+_{j+1/2}\overline{q}_{j}.
 \end{equation}
@@ -107,7 +114,7 @@ To calculate the velocity perturbation $\mu_{j+1/2}$ we use a second-order FEM. 
 \begin{equation*}
 \int_{\Omega}G v \; dx = UH\int_{\Omega} v \; dx + U \int_{\Omega} \eta v \; dx +   H\int_{\Omega} \mu v \; dx  + \frac{H^3}{3} \int_{\Omega} \frac{\partial \mu}{\partial x } \frac{\partial v}{\partial x }\; dx.
 \end{equation*}
-The FEM then proceeds for \eqref{eqn:LinConSerreG} as in Chapter \ref{chp:HFVMMethod} for the non-linear Serre equation. So that $G$ has the basis functions $\psi^+_{j - 1/2}$ and $\psi^-_{j + 1/2}$ \eqref{eqn:App1:PsiDef}, which means our approximation to $G$ is linear inside a cell with discontinuous jumps at the cell edges. For $v$ and $\mu$ the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ \eqref{eqn:App1:PhiDef} are used so that $v$ and our approximation to $\mu$ are quadratic polynomials inside a cell and are continuous across the cell edges.
+The FEM then proceeds for \eqref{eqn:LinConSerreG} as in Chapter \ref{chp:HFVMMethod} for the non-linear Serre equation using the basis functions defined in Appendix \ref{app:FEMIntegrals}. So that $G$ has the basis functions $\psi^+_{j - 1/2}$ and $\psi^-_{j + 1/2}$ \eqref{eqn:App1:PsiDef}, which means our approximation to $G$ is linear inside a cell with discontinuous jumps at the cell edges. For $v$ and $\mu$ the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ \eqref{eqn:App1:PhiDef} are used so that $v$ and our approximation to $\mu$ are quadratic polynomials inside a cell and are continuous across the cell edges.
 
 Given the detailed description of the method in Chapter \ref{chp:HFVMMethod}, we will just present the element wise matrix $\matr{A}_j$ and vector $\vecn{g}_j$ for the finite element approximation to \eqref{eqn:LinSerreG} 
 \begin{align*}
@@ -139,7 +146,7 @@ and the common divisor $\mathcal{G}_D$ is
 \begin{multline*}
 \mathcal{G}_D = H\frac{\Delta x}{30} \left(4\cos\left(\frac{k \Delta x}{2}\right) - 2\cos\left({k \Delta x}\right) + 8\right) \\ + \frac{H^3 }{3}\frac{1}{3\Delta x}\left(-16\cos\left(\frac{k\Delta x}{2}\right) + 2 \cos\left(k \Delta x\right) + 14\right).
 \end{multline*}
-So that the factors $\mathcal{G}^\eta$, $\mathcal{G}^G$ $\mathcal{G}^c$ do not depend on $n$ or $j$ as desired.
+So that the factors $\mathcal{G}^\eta$, $\mathcal{G}^G$ $\mathcal{G}^c$ that make up the operator $\mathcal{G}$ do not depend on $n$ or $j$ as desired.
 
 \subsection{Flux Across the Cell Interfaces}
 %LIST THE FACTORS FIRST!!!!
@@ -170,7 +177,7 @@ Using the FEM for $\mu_{j+1/2}$ \eqref{eqn:2ndFEMutoG} and the reconstruction \e
 \begin{align*}
 F^\eta_{j+\frac{1}{2}} &= H \left(\mathcal{G}^{\eta} \overline{\eta}_{j} + \mathcal{G}^G \overline{G}_{j} + \mathcal{G}^c\right) + U \eta^+_{j+1/2} \nonumber \\ &= \left(H \mathcal{G}^{\eta} + U \mathcal{R}^+_{j+1/2} \right)  \overline{\eta}_{j} + H \mathcal{G}^G \overline{G}_{j} + H\mathcal{G}^c .
 \end{align*}
-This can be written as coefficients for $\overline{\eta}_{j}$ and $\overline{G}_{j}$ like so
+This can be written as factors for $\overline{\eta}_{j}$ and $\overline{G}_{j}$ like so
 \begin{align*}
 F^\eta_{j+\frac{1}{2}} &= \mathcal{F}^{\eta, \eta}_{j+\frac{1}{2}} \overline{\eta}_{j} + \mathcal{F}^{\eta, G}_{j+\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta, c}_{j+\frac{1}{2}}
 \end{align*}
@@ -376,7 +383,7 @@ We calculated $\rho\left(\matr{E} \right)$ numerically for various values of $\D
 
 The behaviour of $\rho\left(\matr{E}\right)$ for $H=1 m$ , $k = {\pi}/{10} m^{-1}$ and $U = 0 m/s$ and $1 m/s$ is shown in Figure~\ref{fig:StabShall} and is representative of the behaviour for all other values of $H$, $k$ and $U$. For these $k$ and $H$ values the shallowness parameter $\sigma = {1}/{20}$ and so the Serre equations are applicable \cite{Barthelemy-2004-315}. 
 
-In Figure~\ref{fig:StabShall} it can be seen that all methods have $\rho\left(\matr{E} \right) \le 1$ for $U=0m/s$ and are therefore stable. The two finite difference methods overlap and have $\rho\left(\matr{E} \right) = 1$ for all $\Delta x$ values, while the $\text{FDVM}_2$ and the $\text{FEVM}_2$ also overlap with $\rho\left(\matr{E} \right) < 1$ . However, when $U \neq 0m/s$ the method $\mathcal{W}$ has $\rho\left(\matr{E} \right) > 1$ for all $\Delta x$ values and is therefore unstable. All other methods have $\rho\left(\matr{E} \right) \le 1$, retaining their stability when $U \neq 0m/s$.
+In Figure~\ref{fig:StabShall} it can be seen that all methods have $\rho\left(\matr{E} \right) \le 1$ for $U=0m/s$ and are therefore stable. The two finite difference methods overlap and have $\rho\left(\matr{E} \right) = 1$ for all $\Delta x$ values, while $\text{FDVM}_2$ and $\text{FEVM}_2$ also overlap with $\rho\left(\matr{E} \right) < 1$. However, when $U \neq 0m/s$ the method $\mathcal{W}$ has $\rho\left(\matr{E} \right) > 1$ for all $\Delta x$ values and is therefore unstable. All other methods have $\rho\left(\matr{E} \right) \le 1$, retaining their stability when $U \neq 0m/s$.
 
 \begin{figure}
 	\centering
@@ -407,23 +414,24 @@ In Figure~\ref{fig:StabShall} it can be seen that all methods have $\rho\left(\m
 %\end{align}
 %Thus numerical methods with $\rho\left(\matr{E}\right)$ closer to $1$ are closer to the analytic value. In this sense the two finite difference methods are best, although $\mathcal{W}$ is unstable for $U \neq 0m/s$. As expected higher-order FDVM better approximate the analytic value of the growth factor and $\lim_{\Delta x \rightarrow 0}\rho\left(\matr{E}\right) = 1$ for all numerical methods.
 
-We observed the same results for a wide range of $k$, $H$ and $U$ values and Froude numbers. All methods except $\mathcal{W}$ were found to be stable for any combination of these variables. While $\mathcal{W}$ was only stable when $U = 0m/s$. This is different from the stability result for $\mathcal{D}$ and $\mathcal{W}$ reported by \cite{Pitt-2018-61} as that analysis assumed $U=0m/s$.
-
+We observed the same results for a wide range of $k$, $H$ and $U$ values and Froude numbers. All methods except $\mathcal{W}$ were found to be stable for any combination of these variables. While $\mathcal{W}$ was only stable when $U = 0m/s$. This is different from the stability result for $\mathcal{D}$ and $\mathcal{W}$ reported by \citet{Pitt-2018-61} as that analysis assumed $U=0m/s$.
 
 \subsection{Consistency}
 %Define identity matrix?
-For a numerical method to be consistent the error introduced by the method for a single time step must approach zero as the spatial and temporal resolution is increased. To demonstrate convergence, it is enough to demonstrate consistency for the eigenfunctions of the linearised Serre equations, which are the Fourier modes. Therefore, we can demonstrate consistency by investigating the evolution matrix $\matr{E}$. The error introduced for a single time step from $t^n$ to $t^{n+1}$, $\mathcal{T}^n$ is
+For a numerical method to be consistent the error introduced by the method for a single time step must approach zero as the spatial and temporal resolution is increased. To demonstrate convergence, it is enough to demonstrate consistency for the eigenfunctions of the linearised Serre equations, which are the Fourier modes. Therefore, we can demonstrate consistency by investigating the evolution matrix $\matr{E}$. 
+
+The error introduced for a single time step from $t^n$ to $t^{n+1}$, $\mathcal{T}^n_j$ is
 \begin{equation}
-\mathcal{T}^n =  \matr{E}\begin{bmatrix}
+\mathcal{T}^n_j =  \matr{E}\begin{bmatrix}
 \overline{\eta} \\ \overline{G}
 \end{bmatrix}^{n}_j -  \begin{bmatrix}
 \overline{\eta} \\ \overline{G}
 \end{bmatrix}^{n+1}_j.
 \label{eqn:consistencyTndef}
 \end{equation}
-To ensure consistency we must have that $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \|_2 = 0 $ for all $n$, where $\left \|  \cdot\right\|_2$ is the $L_2$ vector norm. Taking the $L_2$ norm of both sides of \eqref{eqn:consistencyTndef} and using \eqref{eqn:fourierfactor}  we obtain
+To ensure consistency we must have that $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n_j \right \|_2 = 0 $ for all $n$ and $j$, where $\left \|  \cdot\right\|_2$ is the $L_2$ vector norm. Importantly the location $x_j$ and time $t^n$ will be fixed as $\Delta x$ and $\Delta t$ vary, so that the measurement of the error $\mathcal{T}^n_j$ is consistent. Taking the $L_2$ norm of both sides of \eqref{eqn:consistencyTndef} and using \eqref{eqn:fourierfactor}  we obtain
 \begin{equation*}
-\left \|\mathcal{T}^n \right \|_2 = \left \|  \matr{E}\begin{bmatrix}
+\left \|\mathcal{T}^n_j \right \|_2 = \left \|  \matr{E}\begin{bmatrix}
 \overline{\eta} \\ \overline{G}
 \end{bmatrix}^{n}_j -  e^{i \omega^\pm \Delta t} \begin{bmatrix}
 \overline{\eta} \\ \overline{G}
@@ -431,11 +439,11 @@ To ensure consistency we must have that $ \lim_{\Delta x,\Delta t \rightarrow 0}
 \end{equation*}
 Using the matrix norm induced by $L_2$, the Frobenius norm $\left \|  \cdot\right\|_F$ we have that
 \begin{equation*}
-\left \|\mathcal{T}^n \right \|_2  \le \left \| \matr{E} -  e^{i \omega^\pm \Delta t}\matr{I} \right \|_F \left \| \begin{bmatrix}
+\left \|\mathcal{T}^n_j \right \|_2  \le \left \| \matr{E} -  e^{i \omega^\pm \Delta t}\matr{I} \right \|_F \left \| \begin{bmatrix}
 \overline{\eta} \\ \overline{G}
 \end{bmatrix}^{n}_j\right \|_2.
 \end{equation*}
-Since $\overline{\eta}^n_j$ and  $\overline{G}^n_j$ are finite and independent of $\Delta x$ and $\Delta t$, if $ \lim_{\Delta x,\Delta t \rightarrow 0} \left\| \matr{E} -  e^{i \omega^\pm \Delta t}\matr{I} \right\|_F = 0 $ then $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \|_2 = 0 $ as desired.
+Both $\overline{\eta}^n_j$ and $\overline{G}^n_j$ approach their respective midpoint values ${\eta}^n_j$ and ${G}^n_j$ as $\Delta x$ goes to zero due to the shrinking of the $j^{th}$ cell. Even though $\overline{\eta}^n_j$ and  $\overline{G}^n_j$ vary they are always finite. Therefore, if $ \lim_{\Delta x,\Delta t \rightarrow 0} \left\| \matr{E} -  e^{i \omega^\pm \Delta t}\matr{I} \right\|_F = 0 $ then $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \|\mathcal{T}^n_j \right \|_2 = 0 $ as desired.
 
 We calculated the Taylor series of $\matr{E} -  e^{i \omega^\pm \Delta t}\matr{I}$ for all the numerical methods for all flow scenarios; subcritical, critical and supercritical flows. Since the results are the same for $\omega^+$ and $\omega^-$ we only report the results for $\omega^+$. For $\text{FEVM}_2$ the lowest order $\Delta x$ and $\Delta t$ terms of the Taylor series of $\matr{E} -  e^{i \omega^+ \Delta t}\matr{I}$ can be found in Table~\ref{tab:EerrFEVM2}. From this table it can be seen that the Taylor series of all the elements of $\matr{E} -  e^{i \omega^+ \Delta t}\matr{I}$ have a factor of $\Delta t$. So that
 
@@ -445,7 +453,7 @@ We calculated the Taylor series of $\matr{E} -  e^{i \omega^\pm \Delta t}\matr{I
 \end{align*} 
 where $\matr{M}_0$ is some matrix.
 
-From Tables~\ref{tab:EerrFEVM2} we have that $\matr{M}_0$ is independent of $\Delta t$ and finite so that as $\Delta t \rightarrow 0$ then $|\Delta t| \left(\left \| \matr{M}_0 \right \|_F + \left \| \mathcal{O}\left(\Delta t\right)\right \|_F\right)  \rightarrow 0$  and therefore  $\left \| \matr{E} -  e^{i \omega^+ \Delta t}\matr{I} \right \|_F \rightarrow 0$. Therefore, for $\text{FEVM}_2$ we have $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n \right \|_2 = 0 $ and so  $\text{FEVM}_2$ is consistent for Fourier mode solutions implying consistency for all solutions as desired. 
+From Tables~\ref{tab:EerrFEVM2} we have that $\matr{M}_0$ is independent of $\Delta t$ and finite so that as $\Delta t \rightarrow 0$ then $|\Delta t| \left(\left \| \matr{M}_0 \right \|_F + \left \| \mathcal{O}\left(\Delta t\right)\right \|_F\right)  \rightarrow 0$  and therefore  $\left \| \matr{E} -  e^{i \omega^+ \Delta t}\matr{I} \right \|_F \rightarrow 0$. Therefore, for $\text{FEVM}_2$ we have $ \lim_{\Delta x,\Delta t \rightarrow 0}\left \| \mathcal{T}^n_j\right \|_2 = 0 $ for all $n$ and $j$ and so $\text{FEVM}_2$ is consistent for Fourier mode solutions implying consistency for all solutions as desired. 
 
 \begin{table}
 	\centering
