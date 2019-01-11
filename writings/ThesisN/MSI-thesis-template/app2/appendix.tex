@@ -50,15 +50,15 @@ Finally, the consistency results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FD
 
 \section{Finite Difference Volume Methods}
 For the finite volume based methods the evolution matrix is a $2\times2$ matrix that gives the following relationship \eqref{eqn:linearanalaim}
-\begin{equation}
+\begin{equation*}
 \label{eqn:AppDEFDVM}
 \begin{bmatrix}
 \overline{\eta} \\\overline{G} 
 \end{bmatrix}^{n+1}_j = \matr{E} \begin{bmatrix}
 \overline{\eta} \\\overline{G}
 \end{bmatrix}^{n}_j.
-\end{equation}
-The evolution matrix $\matr{E}$ is obtained by applying the numerical method and making use of \eqref{eqn:fourfac} for all quantities.
+\end{equation*}
+The evolution matrix $\matr{E}$ is obtained by applying the numerical method to \eqref{appC:ConLawFormLin} and making use of \eqref{eqn:fourfac} for all quantities.
 
 In Chapter \ref{chp:AnalNumMethod} the evolution matrix for $\text{FEVM}_2$ is given in terms of the flux matrix $\matr{F}$ obtained from the flux approximation of the method. This expression relating $\matr{E}$ and $\matr{F}$ comes from the employed SSP Runge-Kutta time stepping in the method. The expressions for all employed SSP Runge-Kutta time stepping schemes and their associated numerical methods are summarised in Table \ref{tab:RKstepfactor}. Since $\text{FDVM}_2$ and $\text{FEVM}_2$ both use second-order SSP Runge-Kutta time stepping, their expressions are the same.  
 

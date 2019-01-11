@@ -1,6 +1,8 @@
 \chapter{Publications}
 \label{app:Pub}
-This appendix lists the publications my research contributed to in chronological order. This list expands the earlier list in Chapter \ref{chp:Introduction} by providing the abstracts for the paper in place of the summary.
+This appendix lists the publications my research contributed to in chronological order. This list expands the earlier list in Chapter \ref{chp:Introduction} by providing the abstracts for the paper in place of the summary. My contribution to the paper and the relevance of the paper to this thesis are also provided.
+
+\vspace*{\baselineskip}
 
 \begin{center}
 	\vbox{
@@ -22,13 +24,13 @@ The nonlinear and weakly dispersive Serre equations contain higher-order dispers
 
 \noindent\textbf{My Contribution:}
 
-I reproduced the results of my coauthors with my own implementation of the method. This method was consistent with a SWWE solver allowing the computational cost of solving the Serre equations and the SWWE to be compared.
-	
+I produced an independent reproduction of the method of my coauthors, verifying their results. This method was used to compare the computational cost of solving the Serre equations and the Shallow Water Wave Equations (SWWE).
 \vspace*{\baselineskip}
 
 	\noindent\textbf{Relevance to Thesis:}
 	
-	The method described in this paper was extended to allow for varying bathymetry \cite{Zoppou-etal-2017} and dry beds during my research. Resulting in the second-order finite difference volume method reported in the thesis. Since the linear analysis of convergence and dispersion properties is performed for a submerged horizontal bed, the results of the linear analysis for both methods are equivalent. These linear results can be found in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The extended version of the method was validated against analytic and forced solutions in Chapter \ref{chp:NumMethodComp} and compared to experimental results in Chapter \ref{chp:ExpMethodComp}.
+	The method described in this paper was the foundation of the second-order finite difference volume method whose results are reported in this thesis. The main extensions of this method during my research were the inclusion of varying bathymetry \cite{Zoppou-etal-2017} and dry beds. The results of a linear analysis of the second-order finite difference volume method is provided in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. Since the linear analysis is performed for a completely submerged horizontal bed, these results apply to the method described in the paper. Finally, the second-order finite difference volume method was validated against analytic and forced solutions and experimental results in  Chapter \ref{chp:NumMethodComp} and Chapter \ref{chp:ExpMethodComp}, respectively. 
+	
  \newpage
 \begin{center}
 	\vbox{
@@ -53,12 +55,14 @@ The method is shown to be accurate, simple to implement and stable for a range o
 
 	\noindent\textbf{My Contribution:}
 	
-	The methods, linear dispersion analysis and numerical solutions were all produced by me; these results were then written up into this paper by my coauthors.
+	This paper was based on my research implementing the methods, performing the dispersion analysis and producing the numerical solutions.	These results were then written up by my coauthors.
 \vspace*{\baselineskip}
 
 	\noindent\textbf{Relevance to Thesis:}
 	
-	The first-, second- and third-order methods described in this paper are the methods whose results are reported in the thesis. The results of a linear analysis of the dispersion and convergence properties of all these methods are provided in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The linear analysis of dispersion presented in this paper was extended to allow for a mean background flow in the water on which the waves occur. The results of the analytic solution validation in this paper are reproduced in Chapter \ref{chp:NumMethodComp}. This validation was extended to study the convergence and conservation properties of more quantities. The second-order finite difference volume method was then validated against forced solutions in Chapter \ref{chp:NumMethodComp} and experimental results in Chapter \ref{chp:ExpMethodComp}. The experimental results of the second-order finite difference volume method for the evolution of a negative rectangular wave \cite{Hammack-Segur-1978-337} and periodic waves over a submerged bar \cite{Beji-Battjes-1994-1} in this paper are reproduced in the thesis.
+	The results of the first-, second- and third-order finite difference volume methods described in this paper are the methods whose are reported in the thesis. The results of a linear analysis for these methods can be found in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. While a validation of some of these methods against analytic and forced solutions and experimental results can be found in Chapter \ref{chp:NumMethodComp} and Chapter \ref{chp:ExpMethodComp}, respectively. 
+	
+	The linear analysis of the dispersion properties of the methods in this paper was extended in this thesis by allowing for a non-zero background mean flow velocity. The analytic solution validation of this paper was reproduced in this thesis and extended by studying the convergence and conservation properties of more quantities. The experimental results of the second-order finite difference volume method in this paper for the negative rectangular wave experiment \cite{Hammack-Segur-1978-337} and periodic waves over a submerged bar experiment \cite{Beji-Battjes-1994-1} were reproduced in this thesis. 
 
 \newpage
 
@@ -86,16 +90,17 @@ The propagation of a tsunami with wavelength $\lambda$ through water that is $H$
 Although more complicated, the Serre equations provide a better description of the fluid behaviour than the shallow water wave equations and are therefore more computationally expensive to solve numerically. In particular for the methods of this work, we find that the Serre equations have a run-time $50\%$ longer than our equivalent finite volume method for the shallow water wave equations in the one dimensional case. To simulate tsunamis as efficiently as possible it is important to know when using the more complicated Serre equations leads to more accurate predictions of the evolution of a tsunami than the shallow water wave equations. To investigate this we have numerically simulated a laboratory experiment of periodic waves propagating over a submerged bar, and the propagation of a small amplitude wave up a gradual linear slope using both the Serre and the shallow water wave equations.
 
 The results of these simulations demonstrated that the Serre and shallow water wave equations produce similar results for shoaling waves when the wavelength is large compared to the water depth. This is not surprising as this is the regime under which the shallow water wave equations are derived. However, outside this regime the shallow water wave equations are a poor model for wave shoaling and propagation, poorly approximating the shape and maximum height of waves. Furthermore we demonstrate that for steep waves generated by shoaling, the shallow water wave equations can underestimate the arrival time and amplitude of an incoming wave. These results suggest that for a tsunami it is sufficient to use the shallow water wave equations in stages two and some of stage three, even for large changes in bathymetry. Although dispersive equations such as the Serre equations are required to accurately capture fluid behaviour in stages three and four nearer to the coastline, particularly when wavelengths are short or waves are steep. Since the Serre equations represent only a moderate increase in run-times this suggests that our inundation models should be based on them.
+
 \vspace*{\baselineskip}
 	\noindent\textbf{My Contribution:}
 	
-	This paper was produced by me with the support of my coauthors based on my own work.
+	This paper was based on my own work and produced by me with the support of my coauthors.
 \vspace*{\baselineskip}
 
 
 	\noindent\textbf{Relevance to Thesis:}
 	
-	The experimental results of the second-order finite difference volume method for the experiments of \citet{Beji-Battjes-1994-1} are reproduced in Chapter \ref{chp:ExpMethodComp}.
+	The results of the second-order finite difference volume method for the experiments of \citet{Beji-Battjes-1994-1} studying periodic waves over a submerged bar are reproduced in Chapter \ref{chp:ExpMethodComp}.
 
 \newpage
 
@@ -134,10 +139,10 @@ and location of the front of an undular bore.
 
 	\noindent\textbf{My Contribution:}
 	
-	This paper was produced by me with the support of my coauthors based on my own work. 
+	This paper was based on my own work and produced by me with the support of my coauthors.
 \vspace*{\baselineskip}
 
 
 	\noindent\textbf{Relevance to Thesis:}
 	
-	The behaviours observed and justified in this paper are summarised in Chapter \ref{chp:Serreeqns}. The results of this paper demonstrate the utility of using a finite volume based method to solve the Serre equations in the presence of steep gradients.	
+	The results of this paper are summarised in Chapter \ref{chp:Serreeqns}. This paper demonstrates the utility of using a finite volume based method to solve the Serre equations in the presence of steep gradients. Hence, their further development in this thesis.	

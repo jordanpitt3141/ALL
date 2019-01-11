@@ -476,14 +476,14 @@ All methods were found to be consistent using the same reasoning. Their Tables c
 
 \section{Dispersion Analysis}
 To study the dispersion properties of the numerical method, we must calculate the dispersion relation of the numerical method that relates the frequency $\widetilde{\omega}^\pm$ of the numerical solution to the wavenumber $k$. Making use of \eqref{eqn:fourierfactor} in \eqref{eqn:evolutionmatrix} we get
-\begin{equation}\matr{E}\begin{bmatrix}
+\begin{equation*}\matr{E}\begin{bmatrix}
 \overline{\eta} \\ \overline{G}
 \end{bmatrix}^{n}_j = 
 e^{i \omega^\pm \Delta t}\begin{bmatrix}
 \overline{\eta} \\ \overline{G}
 \end{bmatrix}^{n}_j.
 \label{eqn:dispanalomeganum1}
-\end{equation}
+\end{equation*}
 Therefore, the evolution matrix $\matr{E}$ of an exact method has the eigenvalues $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ where $\omega^\pm$ are the positive and negative branches of the dispersion relation of the linearised Serre equations \eqref{eqn:DispersionRelation}. For approximate numerical methods the dispersion relation for $\widetilde{\omega}^\pm$ can be calculated by taking the eigenvalues of its evolution matrix $\lambda^\pm$ like so
 \begin{equation*}
 \widetilde{\omega}^\pm = \frac{1}{i \Delta t} \log\left[ \lambda^\pm\right].
