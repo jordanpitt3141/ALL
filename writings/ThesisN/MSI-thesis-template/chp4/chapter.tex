@@ -90,7 +90,7 @@ q^{n + m}_{j + l} = q^n_j e^{ i \left(m \omega^\pm \Delta t + l k \Delta x\right
 \end{equation}
 Because $\eta$ and $\mu$ are Fourier modes then so is $G$. Furthermore, the cell averages of these quantities $\overline{\eta}$, $\overline{\mu}$ and $\overline{G}$ are Fourier modes as well.
 
-For Fourier modes the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}$, $\mathcal{F}_{j-1/2}$ and $\mathcal{F}_{j+1/2}$ from Chapter \ref{chp:HFVMMethod} act as factors on their inputs. These factors vary with $H$, $U$, $k$, $\omega^\pm$, $\Delta x$ and $\Delta t$ and are independent of $j$ and $n$. By combining the factors associated with these operators the evolution matrix $\matr{E}$ can be derived for $\text{FEVM}_2$ for the linearised Serre equations with a horizontal bed. Since all the constituent factors that produce $\matr{E}$ are independent of $j$ and $n$ then $\matr{E}$ will also be independent of $j$ and $n$, as desired. We will now derive expressions for all these factors, following the structure of the method laid out in Section \ref{sec:StructOverview}. Since the linearised Serre equations with a horizontal bed have no source terms step (iv), which approximates the source terms is not necessary.   
+For Fourier modes the operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$, $\mathcal{R}^-_{j+1/2}$, $\mathcal{G}$, $\mathcal{F}_{j-1/2}$ and $\mathcal{F}_{j+1/2}$ from Chapter \ref{chp:HFVMMethod} act as factors on their inputs. These factors vary with $H$, $U$, $k$, $\omega^\pm$, $\Delta x$ and $\Delta t$ and are independent of $j$ and $n$. By combining the factors associated with these operators the evolution matrix $\matr{E}$ can be derived for $\text{FEVM}_2$ for the linearised Serre equations with a horizontal bed. Since all the constituent factors that produce $\matr{E}$ are independent of $j$ and $n$ then $\matr{E}$ will also be independent of $j$ and $n$, as desired. We will now derive expressions for all these factors, following the structure of the method laid out in Section \ref{sec:StructOverview}. Since the linearised Serre equations with a horizontal bed have no source terms step (iv), which approximates the source terms is not necessary. 
 
 \subsection{Reconstruction}
 Given the cell averages $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ at $t^n$, the first step of our numerical method is to reconstruct $\eta$ and $G$ inside the $j^{th}$ cell at $x_{j-1/2}$, $x_j$ and $x_{j+1/2}$ using $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ from \eqref{eqn:ReconforhwG}. Since $\eta$ and $G$ are Fourier modes and therefore smooth we do not require non-linear limiters to ensure our scheme is TVD and so we use the slope $d_j = \left({-\overline{q}_{j-1} +\overline{q}_{j+1}}\right)/ \left({2\Delta x} \right)$ in the reconstruction. Applying \eqref{eqn:fourierfactor} to the reconstructions \eqref{eqn:ReconforhwG} with the centred slope approximation we obtain 
@@ -106,7 +106,7 @@ Note that the factors given by the reconstructions operators $\mathcal{R}^+_{j-1
 \begin{equation}
 	q^+_{j+\frac{1}{2}} = e^{ik\Delta x} q^+_{j-\frac{1}{2}} = e^{ik\Delta x} \mathcal{R}^+_{j-1/2}\overline{q}_{j} = \mathcal{R}^+_{j+1/2}\overline{q}_{j}.
 \end{equation}
-\end{subequations}  
+\end{subequations}
 
 
 \subsection{Fluid Velocity}
@@ -277,7 +277,7 @@ respectively.
 
 
 \subsection{Update Cell Averages}
-We have obtained the operators for the flux functions for supercrticial, critical and subcritical flow. Substituting the appropriate flux approximation into the forward Euler step, \eqref{eqn:UpdateMethod} we get
+We have obtained the operators for the flux functions for supercritical, critical and subcritical flow. Substituting the appropriate flux approximation into the forward Euler step, \eqref{eqn:UpdateMethod} we get
 
 \begin{align*}
 \overline{\eta}_{j}^{\,n + 1} &=  \overline{\eta}^{\,n }_{j} - \frac{\Delta t}{\Delta x}  \left( \left[\mathcal{F}_{j+\frac{1}{2}} ^{\eta,\eta} \overline{\eta}_j  + \mathcal{F}_{j+\frac{1}{2}} ^{\eta,G} \overline{G}_j + \mathcal{F}_{j+\frac{1}{2}} ^{\eta,c} \right] - \left[\mathcal{F}^{\eta,\eta}_{j-\frac{1}{2}}  \overline{\eta}_{j}  + \mathcal{F}^{\eta,G}_{j-\frac{1}{2}} \overline{G}_{j} + \mathcal{F}^{\eta,c}_{j-\frac{1}{2}} \right]  \right), \\

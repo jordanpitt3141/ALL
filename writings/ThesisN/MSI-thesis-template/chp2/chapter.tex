@@ -24,7 +24,7 @@ The primitive variables of the Serre equations are the height $h(x,t)$ of a colu
 	\label{fig:WaterModel}
 \end{figure}
 
-The derivation is similar to that of the Shallow Water Wave Equations (SWWE) \cite{Liggett-1994}. In particular, we assume that the horizontal velocity of a particle of fluid $u'(x,z,t)$ inside a column of fluid equals the horizontal velocity of the column of fluid $u(x,t)$. By integrating the conservation of mass equation for an invscid fluid with a no-slip condition at the bed we obtain the distribution of the vertical velocity of a fluid particle throughout a column of fluid \cite{Zoppou-2014}
+The derivation is similar to that of the Shallow Water Wave Equations (SWWE) \cite{Liggett-1994}. In particular, we assume that the horizontal velocity of a particle of fluid $u'(x,z,t)$ inside a column of fluid equals the horizontal velocity of the column of fluid $u(x,t)$. By integrating the conservation of mass equation for an inviscid fluid with a no-slip condition at the bed we obtain the distribution of the vertical velocity of a fluid particle throughout a column of fluid \cite{Zoppou-2014}
 \begin{equation}
 v'(x,z,t) = u \frac{\partial b}{\partial x} - (z - b) \frac{\partial u}{\partial x}.
 \label{eqn:VertVelSerre}
@@ -246,7 +246,7 @@ Note that since the choice of the forced solutions $h^*$, $u^*$ and $b^*$ is arb
 
 %%%[][][][]
 \section{Behaviour in the Presence of Steep Gradients}
-To ensure that the developed numerical methods are robust, their capability to handle initial condition problems with quantities possessing discontinuities must be tested. One group of these initial condition problems that has been of particular interest to the water wave community is the dam-break problem \cite{El-etal-2006,Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017,doCarmo-etal-2018-404}. The dam-break problem consists of an intially still body of water with a discontinuous jump in its surface between two depth values. So that
+To ensure that the developed numerical methods are robust, their capability to handle initial condition problems with quantities possessing discontinuities must be tested. One group of these initial condition problems that has been of particular interest to the water wave community is the dam-break problem \cite{El-etal-2006,Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017,doCarmo-etal-2018-404}. The dam-break problem consists of an initially still body of water with a discontinuous jump in its surface between two depth values. So that
 
 \begin{subequations}
 	\begin{align}
@@ -328,7 +328,7 @@ where $\alpha$ controls the width of the transition from $h_l$ to $h_r$ and thus
 	\label{fig:DBExAll}
 \end{figure}
 
-The growth structure was previously not reported in the literature. The growth structure was consistently observed in numerical solutions of the smoothed dam-break problem for high-order accurate methods as $\alpha$ and the grid resolution were increased. Therefore, the growth structure represents the true structure of the solution of the Serre equations for the dam-break problem with the corresponding $h_l$ and $h_r$ values at $t=30s$. This conclusion was supported by measuring the convergence of the numerical solutions to one another and observing the conservation of the conserved quantities. 
+The growth structure was previously not reported in the literature. The growth structure was consistently observed in numerical solutions of the smoothed dam-break problem for high-order accurate methods as $\alpha$ and the grid resolution were increased. Therefore, the growth structure represents the true structure of the solution of the Serre equations for the dam-break problem with the corresponding $h_l$ and $h_r$ values at $t=30s$. This conclusion was supported by measuring the convergence of the numerical solutions to one another and observing the conservation of the conserved quantities as the resolution was increased. 
 
 The finite difference volume methods introduced diffusive errors caused by their flux approximation, so that the amplitude and number of oscillations in the dispersive wave train increased as the resolution increased. While the finite difference methods introduce dispersive errors decreasing the amplitude and number of oscillations in the dispersive wave train as the resolution was increased. Therefore, the numerical solutions of both classes of methods serve as upper and lower bounds on the amplitude and number of oscillations in the dispersive wave train. These bounds further demonstrated that the observed growth structure best represented the true solution of the Serre equations to this dam-break problem. 
 

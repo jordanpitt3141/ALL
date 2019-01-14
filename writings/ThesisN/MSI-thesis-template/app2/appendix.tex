@@ -1,8 +1,8 @@
 \chapter{Linear Analysis Results}
 \label{app:LinAnal}
-In this appendix we provide additional details supplementing the linear analysis results reported in Chapter \ref{chp:AnalNumMethod}. We provide the evolution matrices $\matr{E}$ for all methods in this thesis, details on how to calculate the convergence and dispersion properties from the evolution matrix where appropriate and the consistency tables not already in Chapter \ref{chp:AnalNumMethod}.  
+In this appendix we provide additional details supplementing the linear analysis results reported in Chapter \ref{chp:AnalNumMethod}. We provide the evolution matrices $\matr{E}$ for all methods in this thesis, details on how to calculate the convergence and dispersion properties from the evolution matrix where appropriate and the consistency tables not already in Chapter \ref{chp:AnalNumMethod}.
 
-The linear analysis in Chapter \ref{chp:AnalNumMethod} studies the convergence and dispersion properties of the numerical methods solving the Serre equations with a horizontal bed \eqref{eqn:FullSerreConHorizBed} linearised around a mean water depth $H$ and a mean background flow velocity $U$. With a small perturbation in the water depth $\eta$ and a small perturbation in the velocity $\mu$. The linearised Serre equations with a horizontal bed \eqref{eqn:LinAll} are
+The linear analysis in Chapter \ref{chp:AnalNumMethod} studies the convergence and dispersion properties of the numerical methods solving the linearised Serre equations with a horizontal bed \eqref{eqn:LinAll}. The linearisation occurs for a small perturbation $\eta$ on the mean water depth $H$ and a small perturbation $\mu$ on the mean background flow velocity $U$. The linearised Serre equations with a horizontal bed \eqref{eqn:LinAll} are
 \begin{subequations}
 	\label{appC:Lin}
 	\begin{align}
@@ -27,7 +27,7 @@ The linear analysis assumes that $\eta$ and $\mu$ are Fourier modes \eqref{eqn:F
 q(x,t) = q(0,0) e^{i\left(\omega^\pm t + kx\right)}
 \label{eqn:FourModeApp}
 \end{align}
-where $\omega^\pm$ is the frequency of the wave given by the dispersion relation \eqref{eqn:DispersionRelation}  and $k$ is the wavenumber. There are two possible frequencies of waves corresponding to upwind and downwind travelling waves these are denoted with the $-$ and $+$ superscripts respectively. Since $\eta$ and $\mu$ are Fourier modes \eqref{eqn:FourModeApp} then $G$ as well as the cell averages $\overline{\eta}$, $\overline{\mu}$ and $\overline{G}$ are also Fourier modes.
+where $\omega^\pm$ is the frequency of the wave given by the dispersion relation \eqref{eqn:DispersionRelation} and $k$ is the wavenumber. There are two possible frequencies of waves corresponding to upwind and downwind travelling waves these are denoted with the $-$ and $+$ superscripts respectively. Since $\eta$ and $\mu$ are Fourier modes \eqref{eqn:FourModeApp} then $G$ as well as the cell averages $\overline{\eta}$, $\overline{\mu}$ and $\overline{G}$ are also Fourier modes.
 
 For a fixed grid such as those used by all numerical methods in this thesis we can relate these Fourier mode quantities at different nodal values to one another. So that for a generic Fourier mode $q$ we have
 \begin{equation}
@@ -41,11 +41,11 @@ Applying the numerical method to the linearised Serre equations \eqref{appC:Lin}
 
 This appendix will provide the process to calculate $\matr{E}$ for the first-, second- and third-order Finite Difference Volume Methods (FDVM) which are named $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ respectively. Descriptions of these methods were published by \citet{Zoppou-etal-2017}. Additionally, we provide the evolution matrices for the two second-order Finite Difference Methods (FDM) $\mathcal{D}$ and $\mathcal{W}$, whose descriptions were published by \citet{Pitt-2018-61}. 
 
-The linear analysis for the second-order finite element volume method $\text{FEVM}_2$ was performed in Chapter \ref{chp:AnalNumMethod}. Given that work the evolution matrix for other finite volume based methods can be written in terms of factors given by the reconstruction operators and the velocity solve operators of the method. We demonstrate this process and provide the expressions for these factors. This allows others to reproduce the evolution matrices for all finite volume based methods in this thesis.  
+The linear analysis for the second-order finite element volume method $\text{FEVM}_2$ was performed in Chapter \ref{chp:AnalNumMethod}. Given that work the evolution matrix for other finite volume based methods can be written in terms of the factors given by the reconstruction operators and the velocity solve operators of the method. We demonstrate this process and provide the expressions for these factors. This allows others to reproduce the evolution matrices for all finite volume based methods in this thesis. 
 
 For $\mathcal{D}$ and $\mathcal{W}$ the evolution matrix itself is provided. Since these FDM use the quantities at previous time steps, the shape of the evolution matrix is different. Hence, the process to obtain the convergence and dispersion properties from these particular evolution matrices is be explained. 
 
-Finally, the consistency results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ will be provided. The results for $\text{FEVM}_2$ were provided in Chapter \ref{chp:AnalNumMethod}.  
+Finally, the consistency results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ will be provided. The results for $\text{FEVM}_2$ were provided in Chapter \ref{chp:AnalNumMethod}. 
 
 
 \section{Finite Difference Volume Methods}
@@ -58,9 +58,9 @@ For the finite volume based methods the evolution matrix is a $2\times2$ matrix 
 \overline{\eta} \\\overline{G}
 \end{bmatrix}^{n}_j.
 \end{equation*}
-The evolution matrix $\matr{E}$ is obtained by applying the numerical method to \eqref{appC:ConLawFormLin} and making use of \eqref{eqn:fourfac} for all quantities.
+This evolution matrix $\matr{E}$ is obtained by applying the numerical method to \eqref{appC:ConLawFormLin} and making use of \eqref{eqn:fourfac} for all quantities.
 
-In Chapter \ref{chp:AnalNumMethod} the evolution matrix for $\text{FEVM}_2$ is given in terms of the flux matrix $\matr{F}$ obtained from the flux approximation of the method. This expression relating $\matr{E}$ and $\matr{F}$ comes from the employed SSP Runge-Kutta time stepping in the method. The expressions for all employed SSP Runge-Kutta time stepping schemes and their associated numerical methods are summarised in Table \ref{tab:RKstepfactor}. Since $\text{FDVM}_2$ and $\text{FEVM}_2$ both use second-order SSP Runge-Kutta time stepping, their expressions are the same.  
+In Chapter \ref{chp:AnalNumMethod} the evolution matrix for $\text{FEVM}_2$ is given in terms of the flux matrix $\matr{F}$ obtained from the flux approximation of the method. This expression relating $\matr{E}$ and $\matr{F}$ comes from the employed SSP Runge-Kutta time stepping of the method. The expressions for all employed SSP Runge-Kutta time stepping schemes and their associated numerical methods are summarised in Table \ref{tab:RKstepfactor}. Since $\text{FDVM}_2$ and $\text{FEVM}_2$ both use second-order SSP Runge-Kutta time stepping, their expressions are the same. 
 
 \begin{table}
 	\centering
@@ -72,7 +72,7 @@ In Chapter \ref{chp:AnalNumMethod} the evolution matrix for $\text{FEVM}_2$ is g
 		$\text{FDVM}_3$& $\matr{I} -\Delta t\matr{F} + \dfrac{1}{2}\Delta t^2 \matr{F}^2 - \dfrac{1}{6}\Delta t^3 \matr{F}^3 $  \T\B \\
 		\hline
 	\end{tabular}
-	\caption{Formula for $\matr{E}$ given $\matr{F}$ determined by the SSP Runge-Kutta timestepping method.}
+	\caption{Formula for $\matr{E}$ given $\matr{F}$ determined by the SSP Runge-Kutta time stepping method.}
 	\label{tab:RKstepfactor}
 \end{table}
 
@@ -133,11 +133,12 @@ The expressions for the other terms of $\matr{F}$ are summarised in Tables \ref{
 
 Using the appropriate expressions for the factors generated by the reconstruction operators $\mathcal{R}_j$, $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}^-_{j+1/2}$ and the velocity solve operators $\mathcal{G}^\eta$ and $\mathcal{G}^G$ used by the method, one can obtain all the terms of $\matr{F}$ \eqref{eqn:APPFlux} for the finite volume based methods.
 
-The expressions for these fundamental factors of all finite volume based methods are given in Table \ref{tab:Mfactor} for $\mathcal{R}_j$, Table \ref{tab:Rpfactor} for $\mathcal{R}^+_{j-1/2}$, Table \ref{tab:Rmfactor} for $\mathcal{R}^-_{j+1/2}$ and Table \ref{tab:GGfactor} for $\mathcal{G}^G$. Since $\mathcal{G}^\eta = -U\mathcal{G}^G $ we have only provided the table for $\mathcal{G}^G$. Since the perturbations are Fourier modes \eqref{eqn:FourierNode} the reconstruction factor $\mathcal{R}^+_{j+1/2}= e^{ i k\Delta x}\mathcal{R}^+_{j-1/2}$. 
+The expressions for these fundamental factors of all finite volume based methods are summarised in Table \ref{tab:Mfactor} for $\mathcal{R}_j$, Table \ref{tab:Rpfactor} for $\mathcal{R}^+_{j-1/2}$, Table \ref{tab:Rmfactor} for $\mathcal{R}^-_{j+1/2}$ and Table \ref{tab:GGfactor} for $\mathcal{G}^G$. Since $\mathcal{G}^\eta = -U\mathcal{G}^G $ we have only provided the table for $\mathcal{G}^G$. Since the perturbations are Fourier modes \eqref{eqn:FourierNode} the reconstruction factor $\mathcal{R}^+_{j+1/2}= e^{ i k\Delta x}\mathcal{R}^+_{j-1/2}$. 
 
-Hence all the terms of the flux matrix $\matr{F}$ \eqref{eqn:APPFlux} can be calculated from these expressions for the factors summarised in Tables \ref{tab:Mfactor} - \ref{tab:GGfactor}. The evolution matrix $\matr{E}$ can then be calculated from $\matr{F}$ based on the SSP Runge-Kutta time-stepping expressions summarised in Table \ref{tab:RKstepfactor}. Thus all the evolution matrices of the finite volume based methods can be obtained, as desired.
+Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the factors for $\text{FEVM}_2$ summarising the work in Chapter \ref{chp:AnalNumMethod}. The analytic value of the factors for an exact method are also provided. Additionally, the lowest order term of the Taylor series of the difference between the factor from a numerical method and the exact factor are also provided. The reported Taylor series results demonstrate that all methods use approximations with the appropriate order of accuracy or better.
 
-Tables \ref{tab:Mfactor}-\ref{tab:GGfactor} also include the factors for $\text{FEVM}_2$ summarising the work in Chapter \ref{chp:AnalNumMethod}. The analytic value of the factors for an exact method are also provided. Additionally, the lowest order term of the Taylor series of the difference between the factor from a numerical method and the exact factor are also provided. The reported Taylor series results demonstrate that all methods use approximations with the appropriate order of accuracy or better. 
+The terms of the flux matrix $\matr{F}$ \eqref{eqn:APPFlux} can be calculated from these expressions for the factors summarised in Tables \ref{tab:Mfactor} - \ref{tab:GGfactor}. The evolution matrix $\matr{E}$ can then be calculated from $\matr{F}$ based on the SSP Runge-Kutta time stepping expressions summarised in Table \ref{tab:RKstepfactor}. Thus all the evolution matrices of the finite volume based methods can be obtained, as desired.
+ 
 
 \begin{table}
 	\centering
@@ -238,7 +239,7 @@ E_{1,0} + e^{-i \omega^{\pm }\Delta t} E_{1,2} & E_{1,1} + e^{-i \omega^{\pm }\D
 \end{bmatrix}.
 \end{equation}
 
-Since the evolution matrix can be represented in two ways, we now state whether $\matr{E}$ or $\matr{E}^{\left(2 \times 2\right)}$ were used in the convergence and dispersion analysis.   
+Since the evolution matrix can be represented in two ways, we now state whether $\matr{E}$ or $\matr{E}^{\left(2 \times 2\right)}$ were used in the convergence and dispersion analysis of the FDM. 
 
 Using the Lax-Equivalence theorem the convergence of the methods were analysed by analysing their stability and consistency separately. The stability analysis was performed by finding the spectral radius of the naive evolution matrix $\matr{E}$ of the FDM \eqref{eqn:App4x4Def}. The consistency analysis was based on comparing the $2\times2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ \eqref{eqn:App4x4D1} to the exact evolution matrix $e^{i \omega^\pm \Delta t}\matr{I} $ for \eqref{eqn:APPCE22}. Finally, the dispersion error was based on the eigenvalues of $\matr{E}$ \eqref{eqn:App4x4Def}, this matrix has an additional two eigenvalues beyond the ones given by $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ that were ignored. We found the methods had the same stability and dispersion properties when $\matr{E}^{\left(2 \times 2\right)}$ was investigated. We will now present the $4\times4$ evolution matrices for $\mathcal{D}$ and $\mathcal{W}$. Given these matrices the corresponding $2\times 2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ can be calculated using \eqref{eqn:App4x4D1}.
 
@@ -292,11 +293,11 @@ The consistency results for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $
 
 To demonstrate the consistency of $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ we need to demonstrate that all the lowest order terms of the Taylor series of $\matr{E}- e^{i\omega^\pm \Delta t } \matr{I}$ contain a factor of $\Delta t$. Since the results are similar for $\omega^-$ and $\omega^+$ we only give the results for $\omega^+$. All these terms are presented in Tables \ref{tab:EerrFDVM1dxerror} and \ref{tab:EerrFDVM1dterror} for $\text{FDVM}_1$, Table \ref{tab:EerrFDVM2} for $\text{FDVM}_2$ and Tables \ref{tab:EerrFDVM3dxerror} and \ref{tab:EerrFDVM3dterror} for $\text{FDVM}_3$.
 
-From Tables \ref{tab:EerrFDVM1dxerror}-\ref{tab:EerrFDVM3dterror} it is clear that all the lowest order terms of the Taylor series of $\matr{E}- e^{i\omega^\pm \Delta t } \matr{I}$ for the FDVM contain a factor of $\Delta t$. Hence, $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ are consistent numerical methods.  
+From Tables \ref{tab:EerrFDVM1dxerror}-\ref{tab:EerrFDVM3dterror} it is clear that all the lowest order terms of the Taylor series of $\matr{E}- e^{i\omega^\pm \Delta t } \matr{I}$ for the FDVM contain a factor of $\Delta t$. Hence, $\text{FDVM}_1$, $\text{FDVM}_2$ and $\text{FDVM}_3$ are consistent numerical methods.
 
 To demonstrate that $\mathcal{D}$ and $\mathcal{W}$ are consistent we need to demonstrate that all the lowest order terms of the Taylor series of $\matr{E}^{\left(2\times 2\right)}- e^{i\omega^\pm \Delta t } \matr{I}$ contain a factor of $\Delta t$. Since the results are similar for $\omega^-$ and $\omega^+$ we only give the results for $\omega^+$. The results for $\omega^+$ are presented in Table \ref{tab:EerrD} for $\mathcal{D}$ and Table \ref{tab:EerrW} for $\mathcal{W}$. Note that $\mathcal{D}$ and $\mathcal{W}$ do not depend on $Fr$.
 
-From Tables \ref{tab:EerrD} and \ref{tab:EerrW} it can be seen that all the lowest order terms of the Taylor series of $\matr{E}^{\left(2\times 2\right)}- e^{i\omega^\pm \Delta t } \matr{I}$ for the FDM contain a factor of $\Delta t$. Therefore, $\mathcal{D}$ and $\mathcal{W}$ are consistent numerical methods.  
+From Tables \ref{tab:EerrD} and \ref{tab:EerrW} it can be seen that all the lowest order terms of the Taylor series of $\matr{E}^{\left(2\times 2\right)}- e^{i\omega^\pm \Delta t } \matr{I}$ for the FDM contain a factor of $\Delta t$. Therefore, $\mathcal{D}$ and $\mathcal{W}$ are consistent numerical methods. 
 
 \begin{table}
 	\centering

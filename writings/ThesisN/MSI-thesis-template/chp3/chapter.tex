@@ -33,7 +33,7 @@ where $s \in \left[-\frac{1}{2} , \frac{1}{2}\right] \subset\mathbb{R}$, althoug
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/Discretisation.pdf}
-	\caption{Diagram of the time levels $t^{n-1}$, $t^n$ and $t^{n+1}$ at which the numerical solution of the Serre equations will be calculated. The $j^{th}$ cell with midpoint $x_{j}$ spanning $x_{j-1/2}$ to $x_{j+1/2}$ which is a volume of the FVM and an element of the FEM is also shown.}
+	\caption{Diagram of the time levels $t^{n-1}$, $t^n$ and $t^{n+1}$ at which the numerical solution of the Serre equations will be calculated. Also shown is the $j^{th}$ cell with midpoint $x_{j}$ spanning $x_{j-1/2}$ to $x_{j+1/2}$ which is a volume of the FVM and an element of the FEM.}
 	\label{fig:NumericalGrid}
 \end{figure}
 
@@ -57,7 +57,7 @@ To describe the FEVM we first present an overview of the evolution step and then
 b_{0} \\ b_{1} \\ \vdots \\b_{m} \BM
 \end{bmatrix} \\
 \end{align*}
-where $q$ is a generic quantity representing the vectors for $h$, $G$ and $w$. The evolution step proceeds by (i) reconstructing the quantities over the cell, (ii) calculating the fluid velocity, (iii) approximating the flux, (iv) approximating the source term, (v) updating the cell averages and then (vi) applying second-order SSP Runge-Kutta time stepping.
+where $q$ is a generic quantity representing the vectors for $h$, $G$ and $w$. The evolution step proceeds by (i) reconstructing the quantities over the cell, (ii) calculating the fluid velocity, (iii) approximating the flux, (iv) approximating the source term, (v) updating the cell averages and then (vi) applying second-order Strong Stability Preserving (SSP) Runge-Kutta time stepping.
 
 \begin{enumerate}[(i)]
 	\item Reconstruction: The locations for the reconstruction of all the quantities in the $j^{th}$ cell are displayed in Figure \ref{fig:ReconLocs}. For the $j^{th}$ cell the quantities $h$, $w$ and $G$ are reconstructed at $x_{j-1/2}$, $x_{j}$ and $x_{j+1/2}$ from their cell average values using the second-order reconstruction operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ respectively. While the bed profile $b$ in the $j^{th}$ cell is reconstructed at $x_{j-1/2}$, $x_{j-1/6}$, $x_{j+1/6}$ and $x_{j+1/2}$ from its nodal values using the fourth-order reconstruction operators $\mathcal{B}_{j-1/2}$, $\mathcal{B}_{j-1/6}$, $\mathcal{B}_{j+1/6}$ and $\mathcal{B}_{j+1/2}$ respectively. 
@@ -209,7 +209,7 @@ For $h$ and $G$ we use the basis functions $\psi$ \eqref{eqn:App1:PsiDef} which 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P1.pdf}
-	\caption{Support of the discontinuous linear basis functions $\psi$ over the $j^{th}$ cell.}
+	\caption{Support of the discontinuous linear basis functions $\psi$ which are non-zero over the $j^{th}$ cell.}
 	\label{fig:P1DiscBasis}
 \end{figure}
 
@@ -219,11 +219,11 @@ From the basis functions $\psi$ we have the following representation for $h$ and
 q &= \sum_{j=0}^m \left( q^+_{j-1/2}\psi^+_{j-1/2}  + q^-_{j+1/2}\psi^-_{j+1/2}, \right).
 \end{align}
 
-To calculate the flux and source terms in \eqref{eqn:Serreconsconmom} we require a locally  calculated second-order accurate approximation to the first derivative of $u$. To do this we require a quadratic representation of $u$ in each cell and since we desire $u\in\mathbb{W}^{1,2}(\Omega)$, this representation will be continuous across the cell edges $x_{j \pm 1/2}$. Therefore, we use the continuous quadratic basis functions $\phi_{j\pm1/2} $ and $\phi_{j} $ \eqref{eqn:App1:PhiDef} depicted in Figure \ref{fig:P2ContBasis}.
+To calculate the flux and source terms in \eqref{eqn:Serreconsconmom} we require a locally calculated second-order accurate approximation to the first derivative of $u$. To do this we require a quadratic representation of $u$ in each cell and since we desire $u\in\mathbb{W}^{1,2}(\Omega)$, this representation will be continuous across the cell edges $x_{j \pm 1/2}$. Therefore, we use the continuous quadratic basis functions $\phi_{j\pm1/2} $ and $\phi_{j} $ \eqref{eqn:App1:PhiDef} depicted in Figure \ref{fig:P2ContBasis}.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P2.pdf}
-	\caption{Support of the continuous piecewise quadratic basis functions $\phi$ over the $j^{th}$ cell.}
+	\caption{Support of the continuous piecewise quadratic basis functions $\phi$ which are non-zero over the $j^{th}$ cell.}
 	\label{fig:P2ContBasis}
 \end{figure}
 
@@ -237,7 +237,7 @@ For the source term of the evolution of $G$ equation \eqref{eqn:Serreconsconmom}
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp3/figures/P3.pdf}
-	\caption{Support of the continuous piecewise cubic basis functions $\gamma$ over the $j^{th}$ cell.}
+	\caption{Support of the continuous piecewise cubic basis functions $\gamma$ which are non-zero over the $j^{th}$ cell.}
 	\label{fig:P3ContBasis}
 \end{figure}
 \begin{equation}
@@ -441,7 +441,7 @@ are also added. These corrective terms make use of $h^{-}_{j + \frac{1}{2}}$ and
 \begin{equation*}
 S^n_j = \mathcal{S}_j\left( \vecn{\hat{h}},\vecn{\ddot{h}},\vecn{\hat{w}},\vecn{\hat{b}}, \vecn{\hat{u}}  \right)=   S^{-}_{j + \frac{1}{2}} + \Delta x S_{ci} + S^{+}_{j - \frac{1}{2}}.
 \end{equation*}
-The operator $\mathcal{S}_j$ is slightly different to the example given in the overview of the evolution step as it takes $\vecn{\hat{h}}$ and $\vecn{\ddot{h}}$ as inputs. This change was made to make clear that $\vecn{\ddot{h}}$ is required to calculate $S^n_j$. This would be obscured by a more consistent notation that is possible since $\vecn{\ddot{h}}$ only depends on $\vecn{\hat{h}}$, $\vecn{\hat{w}}$ and $\vecn{\hat{b}}$. 
+This operator $\mathcal{S}_j$ is slightly different to the example given in the overview of the evolution step as it takes $\vecn{\hat{h}}$ and $\vecn{\ddot{h}}$ as inputs. This change was made to make clear that $\vecn{\ddot{h}}$ is required to calculate $S^n_j$. This would be obscured by a more consistent notation that is possible since $\vecn{\ddot{h}}$ only depends on $\vecn{\hat{h}}$, $\vecn{\hat{w}}$ and $\vecn{\hat{b}}$. 
 
 
 \subsection{Update Cell Averages}
@@ -454,7 +454,7 @@ where $F^n_{j+\frac{1}{2}}$, $F^n_{j-\frac{1}{2}}$ and $S^n_j$ are all calculate
 
 
 \subsection{Second-Order SSP Runge-Kutta Method}
-To increase the order of accuracy in time we employ the strong stability preserving Runge-Kutta method \cite{Gottlieb-etal-2003-89} which is a convex combination of the first-order time steps \eqref{eqn:UpdateMethod} in the following way
+To increase the order of accuracy in time we employ the Strong Stability Preserving (SSP) Runge-Kutta method \cite{Gottlieb-etal-2003-89} which is a convex combination of the first-order time steps \eqref{eqn:UpdateMethod} in the following way
 \begin{subequations}
 \begin{align}
 \overline{q}_j^{(1)} &= \overline{q}^{n}_j + \frac{\Delta t}{\Delta x} \left(F^n_{j+\frac{1}{2}} - F^n_{j-\frac{1}{2}} + S^n_j\right),\\

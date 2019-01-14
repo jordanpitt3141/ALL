@@ -37,12 +37,11 @@ Plots comparing the numerical and experimental WG data for the $0.01m$ negative 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Segur/LongWGsFDVM1cm.pdf}
-	\caption{FDVM}
 	\caption{Time series of the experimental WG data ({\color{red}\solidrule}) and numerical results ({\color{blue}\solidrule}) of $\text{FDVM}_2$ for the $0.01m$ negative rectangular wave.}
 	\label{fig:Segur1cmFDVM}
 \end{figure} 
 
-The numerical solutions agree well with the experimental results; particularly for the front of the dispersive wave train. While all the conserved quantities have been conserved well by the methods.  
+The numerical solutions agree well with the experimental results; particularly for the front of the dispersive wave train. While all the conserved quantities have been conserved well by the methods.
 
 The numerical solutions produce larger and consequently faster waves and observe oscillations in the dispersive wave train which are not present in the experimental data of WG1. Moreover, as expected the methods produce many more oscillations than were observed experimentally. These discrepancies can be attributed to the lack of viscosity and the omission of bed friction for the Serre equations in this thesis \eqref{eqn:FullSerreCon}. Furthermore, it is highly likely the experiment produced some smooth approximation to a discontinuous jump in the water depth with the down-stroke of the piston. Such a smoothing of the initial conditions will significantly attenuate the high frequency waves in the generated dispersive wave train \cite{Pitt-2018-61}. Given these differences the numerical methods do a very good job of replicating the experimental behaviour.
 
@@ -53,7 +52,7 @@ Both $\text{FEVM}_2$ and $\text{FDVM}_2$ have produced indistinguishable results
 \begin{table}
 	\centering
 	\begin{tabular}{l  c  c c}
-		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & ${C}^*\left(\vecn{q}^0,\vecn{q}^*\right)$  \B\\
+		Quantity& $\mathcal{C}^*\left(\vecn{q}^0\right)$ & $\mathcal{C}^*\left(\vecn{q}^*\right)$ & ${C}^*\left(\vecn{q}^0,\vecn{q}^*\right)$ \B\\
 		\hline
 		$h$ & $11.9888$ & $11.9888$ & $0$ \T\\
 		$uh$ & $0$ & $7.44 \times 10^{-18}$ & $7.44 \times 10^{-18}$\\
@@ -104,7 +103,7 @@ These results compare well with those by \citet{Zoppou-etal-2017} for $\text{FDV
 
 Conserving $\mathcal{H}$ is difficult for numerical methods solving steep gradient problems \cite{Pitt-2018-61}. More so for this simulation where two steep gradients interact with one another over short time spans. Increasing the resolution of the numerical method improves the conservation of $\mathcal{H}$ as demonstrated for the analytic solutions. However, the results for the WG data for higher resolution solutions will be indistinguishable from the results presented here and so the provided solutions are sufficient. 
 
-These experiments have been replicated equally well by the numerical methods. Given the resolution and error in conservation and the extensive study summarised in Chapter \ref{chp:Serreeqns}; these results demonstrate the accuracy of the numerical methods in the presence of steep gradients in the free surface.     
+These experiments have been replicated equally well by the numerical methods. Given the resolution and error in conservation and the extensive study summarised in Chapter \ref{chp:Serreeqns}; these results demonstrate the accuracy of the numerical methods in the presence of steep gradients in the free surface.
 %
 \begin{table}
 	\centering
@@ -151,7 +150,7 @@ The experiments of \citet{Beji-Battjes-1994-1} were conducted in a wave tank $37
 
 Two monochromatic non-breaking wave experiments were performed. A low frequency one with a wavelength $\lambda \approx 3.69m$ and a period of $T = 2s$, and a high frequency one with $\lambda \approx 2.05m$ and a period of $T = 1.25s$. Both experiments had a wave amplitude of $0.01m$ and so both had the same small non-linearity parameter $\epsilon = 0.01 / 0.4 = 0.025$. 
 
-For the numerical solutions the spatial domain was $\left[5.7m,150m\right]$ with $\Delta x = 0.1 / 2^4 m \approx 0.0063m$ and $\Delta t = Sp / 2^5 s \approx 0.0012s$ where $Sp = 0.039 s$ is the experimental sampling period. These $\Delta x$ and $\Delta t$ values satisfy the CFL condition, \eqref{eqn:CFLcond}. In our numerical experiments only the submerged trapezoidal bar is present, and the sloping beach is replaced with a very long horizontal bed that ensures that we do not observe any effects from the Dirichlet boundary conditions at the downstream boundary.  
+For the numerical solutions the spatial domain was $\left[5.7m,150m\right]$ with $\Delta x = 0.1 / 2^4 m \approx 0.0063m$ and $\Delta t = Sp / 2^5 s \approx 0.0012s$ where $Sp = 0.039 s$ is the experimental sampling period. These $\Delta x$ and $\Delta t$ values satisfy the CFL condition, \eqref{eqn:CFLcond}. In our numerical experiments only the submerged trapezoidal bar is present, and the sloping beach is replaced with a very long horizontal bed that ensures that we do not observe any effects from the Dirichlet boundary conditions at the downstream boundary.
 
 To simulate the incoming waves at the upstream boundary we used WG1 as our left boundary condition together with linear extrapolation to calculate the other required $h$ values in the left ghost cell. The velocity boundary conditions were calculated from the height values in the same way as \citet{Beji-Battjes-1994-1} using
 \begin{equation*}
@@ -376,7 +375,7 @@ To study the evolution of waves on fringing reefs a series of experiments were c
 	\label{fig:RoeberWT}
 \end{figure}
 
-This experiment investigates the behaviour of a wave with high non-linearity $ \epsilon \approx 1.23/2.46 = 0.5$ as it shoals over a linear bed into a very shallow body of water. Given the high non-linearity of this wave, it is not surprising that as it shoals it becomes a plunging breaker by $t \approx 32s$ with an elliptical air cavity observed at $t \approx 33s$ \cite{Roeber-2010}. As with other depth averaged equations, the Serre equations are only appropriate up to wave-breaking so this experiment is not an entirely appropriate test of the numerical methods, particularly after $t=32s$.
+This experiment investigates the behaviour of a wave with high non-linearity $ \epsilon \approx 1.23/2.46 = 0.5$ as it shoals over a linear bed into a very shallow body of water with a depth of only $0.1m$. Given the high non-linearity of this wave, it is not surprising that as it shoals it becomes a plunging breaker by $t \approx 32s$ with an elliptical air cavity observed at $t \approx 33s$ \cite{Roeber-2010}. As with other depth averaged equations, the Serre equations are only appropriate up to wave-breaking so this experiment is not an entirely appropriate test of the numerical methods, particularly after $t=32s$.
 
 This experiment was numerically modelled on the domain $[17.6m , 400m]$ and was run until $t = 60s$ after which the reflections from the downstream end of the tank become significant in the experiment. The beginning of the domain was chosen so that WG1 could be used as the left boundary conditions. Where the technique for the incoming boundary condition in Section \ref{sec:PeriodicWavessubBar} for the periodic waves over a submerged bar experiment was employed. The spatial resolution was $\Delta x = 0.025m$ and the temporal resolution was $\Delta t = Sp / 8 s = 0.0025$ where $Sp = 0.02s$ was the sampling period of the WG, these spatial and temporal resolutions satisfy the CFL condition \eqref{eqn:CFLcond}. The right edge of the domain used Dirichlet boundary conditions, since the domain was large no effects from the downstream boundary were observed throughout the numerical simulation. 
 
@@ -392,23 +391,22 @@ The WG results comparing the numerical and experimental data are displayed in Fi
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs2.pdf}
 	\caption{Time series of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) WG data produced by $\text{FEVM}_2$ for WG6 to WG10.}
 	\label{fig:Roeber8WG6to10FEVM}
-\end{figure}  
-\begin{figure}
+\end{figure} \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FEVM/LongWGs3.pdf}
-	\caption{Time series of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) WG data produced by $\text{FEVM}_2$ for gauges WG11 to WG14.}
+	\caption{Time series of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) WG data produced by $\text{FEVM}_2$ for WG11 to WG14.}
 	\label{fig:Roeber8WG11to14FEVM}
-\end{figure}         
+\end{figure}
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs1.pdf}
-	\caption{Time series of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) WG data produced by $\text{FDVM}_2$ for gauges WG1 to WG7.}
+	\caption{Time series of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) WG data produced by $\text{FDVM}_2$ for WG1 to WG7.}
 	\label{fig:Roeber8WG1to5FDVM}
 \end{figure}
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./chp6/figures/Experiment/Roeber/Trial8/FDVM/LongWGs2.pdf}
-	\caption{Time series of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) WG data produced by $\text{FDVM}_2$ for gauges WG6 to WG9.}
+	\caption{Time series of the experimental (\circlet{red}) and numerical ({\color{blue}\solidrule}) WG data produced by $\text{FDVM}_2$ for WG6 to WG9.}
 	\label{fig:Roeber8WG6to9FDVM}
 \end{figure} 
 

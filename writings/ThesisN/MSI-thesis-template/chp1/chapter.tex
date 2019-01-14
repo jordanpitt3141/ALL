@@ -52,7 +52,7 @@ The publications generated from my research are compiled here in chronological o
 \vbox{
 \noindent\textbf{Summary:}
 
-A second-order finite difference volume method for the one-dimensional Serre equations with a horizontal bed is described and validated against an analytic solution. }
+A second-order FDVM for the one-dimensional Serre equations with a horizontal bed is described and validated against an analytic solution. }
 \vspace*{\baselineskip}
 \vbox{
 \noindent\textbf{My Contribution:}
@@ -84,7 +84,7 @@ The method described in this paper was extended during my research to allow for 
 \vbox{
 \noindent\textbf{Summary:}
 
-The first-, second-, and third-order finite difference volume methods for the one-dimensional Serre equations with variable bathymetry were described. The results of a linear analysis of the dispersion properties of the methods for waves on quiescent water are provided. These methods were then validated against an analytic solution. A well-balanced version of the second-order finite difference volume method is described and further validated against experimental results.}
+The first-, second-, and third-order FDVM for the one-dimensional Serre equations with variable bathymetry were described. The results of a linear analysis of the dispersion properties of the methods for waves on quiescent water are provided. These methods were then validated against an analytic solution. A well-balanced version of the second-order FDVM is described and further validated against experimental results.}
 \vspace*{\baselineskip}
 
 \vbox{
@@ -96,7 +96,7 @@ The methods, linear dispersion analysis and numerical solutions were all produce
 \vbox{
 \noindent\textbf{Relevance to Thesis:}
 
-The first-, second- and third-order finite difference volume methods described in this paper are the methods whose results are reported in the thesis. The results of a linear analysis of the dispersion and convergence properties of all these methods are provided in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The linear analysis of dispersion presented in this paper was extended to allow for a mean background flow in the water on which the waves occur. The results of the analytic solution validation in this paper are reproduced in Chapter \ref{chp:NumMethodComp}. This validation was extended to study the convergence and conservation properties of more quantities. The second-order FDVM was then validated against forced solutions in Chapter \ref{chp:NumMethodComp} and experimental results in Chapter \ref{chp:ExpMethodComp}. The experimental results of the second-order FDVM for the evolution of a negative rectangular wave \cite{Hammack-Segur-1978-337} and periodic waves over a submerged bar \cite{Beji-Battjes-1994-1} in this paper are reproduced in the thesis.}
+The first-, second- and third-order FDVM described in this paper are the methods whose results are reported in this thesis. The results of a linear analysis of the dispersion and convergence properties of all these methods are provided in Chapter \ref{chp:AnalNumMethod} and Appendix \ref{app:LinAnal}. The linear analysis of dispersion presented in this paper was extended to allow for a mean background flow in the water on which the waves occur. The results of the analytic solution validation in this paper are reproduced in Chapter \ref{chp:NumMethodComp}. This validation was extended to study the convergence and conservation properties of more quantities. The second-order FDVM was then validated against forced solutions in Chapter \ref{chp:NumMethodComp} and experimental results in Chapter \ref{chp:ExpMethodComp}. The results of the second-order FDVM for the negative rectangular wave experiment \cite{Hammack-Segur-1978-337} and the periodic waves over a submerged bar experiment \cite{Beji-Battjes-1994-1} in this paper are reproduced in this thesis.}
 
 \newpage
 \begin{center}
@@ -116,7 +116,7 @@ The first-, second- and third-order finite difference volume methods described i
 \vbox{
 \noindent\textbf{Summary:}
 
-The numerical solutions of the second-order finite difference volume method \cite{Zoppou-etal-2017} for the Serre equations were compared to the numerical solutions of ANUGA \cite{ANUGA} for the SWWE. This comparison investigated the influence of dispersion on shoaling waves for an artificial representative example and the experiments of \citet{Beji-Battjes-1994-1}. The artificial representative example models the shoaling of a solitary wave over a fringing reef. While the experiments of \citet{Beji-Battjes-1994-1} investigate the behaviour of periodic waves travelling over a submerged bar.}
+The numerical solutions of the second-order FDVM \cite{Zoppou-etal-2017} for the Serre equations were compared to the numerical solutions of ANUGA \cite{ANUGA} for the SWWE. This comparison investigated the influence of dispersion on shoaling waves for an artificial representative example and the experiments of \citet{Beji-Battjes-1994-1}. The artificial representative example simulates the shoaling of a solitary wave over a fringing reef. While the experiments of \citet{Beji-Battjes-1994-1} investigate the behaviour of periodic waves travelling over a submerged bar.}
 \vspace*{\baselineskip}
 
 \vbox{
@@ -128,7 +128,7 @@ The numerical solutions of the second-order finite difference volume method \cit
 \vbox{
 \noindent\textbf{Relevance to Thesis:}
 
-The experimental results of the second-order finite difference volume method for the periodic waves over a submerged bar experiments of \citet{Beji-Battjes-1994-1} are reproduced in Chapter \ref{chp:ExpMethodComp}.} 
+The experimental results of the second-order FDVM for the periodic waves over a submerged bar experiments of \citet{Beji-Battjes-1994-1} are reproduced in Chapter \ref{chp:ExpMethodComp}.} 
 
 \newpage
 
@@ -149,7 +149,7 @@ The experimental results of the second-order finite difference volume method for
 \vbox{
 \noindent\textbf{Summary:}
  
-The first-, second- and third-order finite difference volume methods as well as two second-order finite difference methods for the Serre equations were used to numerically study the behaviour of steep gradients in the free surface. The convergence and conservation properties of many numerical solutions of all these methods were used to justify the observed behaviours. One such behaviour was not previously reported by the literature. This behaviour best represents the solution of the Serre equations in the presence of steep gradients over short time spans. The effect of the used numerical method, the grid resolution and the smoothing of the initial conditions was studied. Allowing the source of the differences in the observed behaviours reported in the literature to be understood. }
+The first-, second- and third-order FDVM as well as two second-order finite difference methods for the Serre equations were used to numerically study the behaviour of steep gradients in the free surface. The convergence and conservation properties of many numerical solutions of all these methods were used to justify the observed behaviours. One such behaviour was not previously reported by the literature. This behaviour best represents the solution of the Serre equations in the presence of steep gradients over short time spans. The effect of the used numerical method, the grid resolution and the smoothing of the initial conditions was studied. Allowing the source of the differences in the observed behaviours reported in the literature to be understood. }
  \vspace*{\baselineskip}
 
 \vbox{ 
@@ -173,15 +173,15 @@ This is followed by Chapter \ref{chp:HFVMMethod} which describes in detail the F
 
 Chapter \ref{chp:AnalNumMethod} provides a linear analysis of the convergence and dispersion properties of the FEVM in detail. The analysis begins with the linearised Serre equations over a horizontal bed and then derives the evolution matrix; through which the convergence and dispersion properties can be studied. The results of the linear analysis are also provided for all the methods used by \citet{Pitt-2018-61} as a comparison.
 
-The convergence and conservation properties of the numerical methods of \citet{Pitt-2018-61} are then assessed in Chapter \ref{chp:NumMethodComp} using analytic and forced solutions of the Serre equations. While in Chapter \ref{chp:ExpMethodComp} FEVM and the second-order FDVM are validated against experimental results.
+The convergence and conservation properties of the FEVM and all the numerical methods used by \citet{Pitt-2018-61} are then assessed in Chapter \ref{chp:NumMethodComp} using analytic and forced solutions of the Serre equations. While in Chapter \ref{chp:ExpMethodComp} the FEVM and the second-order FDVM are validated against experimental results.
 
 %%%[][][][]
 Chapter \ref{chp:Conclusion} summarises the major contributions and findings of this thesis and provides ideas for future work.
 
 Appendix \ref{app:ConQuant} provides expressions for the total amount of the conserved quantities over any domain for all of the analytic solutions described in this thesis. 
 
-The basis functions used by FEVM and the precise definition of the function spaces mentioned in this thesis are provided in Appendix \ref{app:FEMIntegrals}. 
+The basis functions used by the FEVM and the precise definition of the function spaces mentioned in this thesis are provided in Appendix \ref{app:FEMIntegrals}. 
 
-Appendix \ref{app:LinAnal} provides the evolution matrix produced by the linear analysis for the FDVM and the finite difference methods. It also includes the consistency results for these methods, as they were omitted from Chapter \ref{chp:AnalNumMethod}.
+Appendix \ref{app:LinAnal} provides the evolution matrix produced by the linear analysis for the first-, second- and third-order FDVM and two second-order finite difference methods. It also includes the consistency results for these methods, as they were omitted from Chapter \ref{chp:AnalNumMethod}.
 
 Finally the publications I contributed to throughout my research and their abstracts are provided in chronological order in Appendix \ref{app:Pub}. 

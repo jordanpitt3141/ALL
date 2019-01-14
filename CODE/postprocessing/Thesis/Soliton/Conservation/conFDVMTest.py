@@ -153,8 +153,8 @@ k = sqrt(3.0*a1) / (2.0*a0 *sqrt(a0 + a1))
 c = sqrt(g*(a0 + a1))
 
 #meth = "FDVM1"
-#meth = "FDVM2"
-meth = "FDVM3"
+meth = "FDVM2"
+#meth = "FDVM3"
 
 
 wdirb = "/home/jp/Documents/PhD/project/data/2018/raw/Thesis/SolitonAgn/" + meth+ "/" 
@@ -174,14 +174,14 @@ PIns = []
 EIns = []
 GIns = []
 
-sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/SolitonFDVMRedo/" +meth+"/C1/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/SolitonFDVMRedo3rdCheck/" +meth+"/C1/"
 #sdir = "/home/jp/Documents/PhD/project/data/ThesisRaws/Analytic/Soliton/FDVM3/tC1/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)
         
         
-for ki in range(6,20):
+for ki in range(6,16):
         
         
     wdir = wdirb + str(ki) + "/"
@@ -325,6 +325,7 @@ relerrEn = abs(EIns - Ens)/ abs(EIns)
 
 
 n= len(dxs)
+
 
 s = sdir + "conh.dat"
 with open(s,'w') as file1:
