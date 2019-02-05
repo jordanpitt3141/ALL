@@ -1,0 +1,46 @@
+\documentclass[]{standalone} 
+\usepackage{pgfplots} 
+%\usepgfplotslibrary{external} 
+%\tikzexternalize 
+\usepgfplotslibrary{fillbetween}
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usepackage{pgfplots} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},every axis plot/.append style={thick}  }
+\begin{document} 
+	\begin{tikzpicture}
+	\begin{axis}[ 
+				width=0.8\textwidth,
+				height = 0.72\textwidth,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed},
+	xtick = {-112.5,-62.5,-12.5,37.5,87.5},
+	ytick = {-1.2,-0.6,0,0.6,1.2},
+	xticklabel style = {yshift=-1.5mm},
+	extra x ticks={-87.5,-37.5,12.5,62.5},
+	extra y ticks={-0.9,-0.3,0.3,0.9},
+	extra x tick style={xticklabels=\empty},
+	extra y tick style={yticklabels=\empty},
+	xmin=-112.5, 
+	xmax=87.5, 
+	ymin =-1.2, 
+	ymax = 1.2,
+	xlabel=\Large$x \; (m)$, 
+	ylabel=\Large$z \; (m)$ ]
+	\addplot [name path=b,brown!60!black,no markers,ultra thick] table {b.dat };
+	\addplot [name path=s,blue,no markers,ultra thick] table {w.dat };
+	
+%	\addplot [red,only marks,mark =*,mark size =0.5mm, each nth point=30] table {w.dat};
+	
+	\path[name path=a] (axis cs:-112.5,-2) -- (axis cs:87.5,-2);
+	
+	\addplot [thick,color=brown!60!black,fill=brown!60!black, fill opacity=0.3] fill between[of=b and a]; 
+	\addplot [thick,color=blue,	fill=blue,fill opacity=0.3] fill between[of=s and b]; 
+
+	\end{axis} 
+	
+	
+	
+	\end{tikzpicture}
+\end{document}

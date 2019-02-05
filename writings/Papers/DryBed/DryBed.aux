@@ -1,0 +1,85 @@
+\relax 
+\emailauthor{jordan.pitt@anu.edu.au }{J.P.A.~Pitt\corref {cor1}}
+\emailauthor{christopher.zoppou@anu.edu.au}{C.~Zoppou}
+\emailauthor{stephen.roberts@anu.edu.au}{S.G.~Roberts}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Diagram demonstrating a free surface flow (\squareF  {blue}) over a bed (\squareF  {brown!80!black}) where $w(x,t)$ is the absolute location of the free surface, $h(x,t)$ is the height of a column of fluid, $u(x,t)$ is the horizontal velocity of a column of fluid and $b(x)$ is the stationary bed profile.\relax }}{1}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:SerreModel}{{1}{1}}
+\Newlabel{cor1}{1}
+\Newlabel{ANU}{a}
+\citation{Green-Naghdi-1976-237}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}}
+\newlabel{intro}{{1}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Serre Equations}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Conservation Law Form}{2}}
+\newlabel{eqn:FullSerreCon}{{1}{2}}
+\newlabel{eqn:FullSerreConMass}{{1a}{2}}
+\newlabel{eqn:Serreconsconmom}{{1b}{2}}
+\newlabel{defn:SerreEqnConservedQuantity1}{{2}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Conservation Properties}{2}}
+\newlabel{eqn:Hamildef}{{2.2}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Method}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Reconstruction}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}$h$, $w$ and $G$ }{3}}
+\newlabel{eqn:ReconforhwG}{{3}{3}}
+\newlabel{eqn:slopehGrecon}{{4}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Bed Profile}{3}}
+\newlabel{eqn:cubicforbedrecon}{{3.1.2}{3}}
+\newlabel{eqn:BedReconDef}{{5}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Velocity Solve using a Finite Element Method}{4}}
+\newlabel{eqn:WeakFormDomain}{{6}{4}}
+\newlabel{eq:elementwiseint}{{7}{4}}
+\citation{NumRecC-1996}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Support of the basis functions $\psi $, $\phi $ and $\gamma $ which are non-zero over the $j^{th}$ cell.\relax }}{5}}
+\newlabel{fig:P1DiscBasis}{{2}{5}}
+\newlabel{eqn:FEapproxtohG}{{8}{5}}
+\newlabel{eqn:FEapproxtou}{{9}{5}}
+\newlabel{eqn:FEapproxtob}{{10}{5}}
+\newlabel{eqn:FEMElemMatrixJ}{{11}{5}}
+\newlabel{eqn:usolvefromGhb}{{12}{5}}
+\citation{Kurganov-etal-2001-707}
+\citation{Kurganov-etal-2001-707}
+\citation{Klein-etal-2004-2050}
+\citation{Pitt-J-2014}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Flux Approximation}{6}}
+\newlabel{eqn:HLL_flux}{{13}{6}}
+\newlabel{eqn:WaveSpeedBoundsFluxApprox}{{15}{6}}
+\newlabel{eqn:BedReDefWmH}{{16}{6}}
+\newlabel{eqn:ModifiedHValue}{{17}{6}}
+\newlabel{eqn:FluxIrrotNum}{{18}{7}}
+\citation{Klein-etal-2004-2050}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Source Term Approximation}{8}}
+\citation{Gottlieb-etal-2003-89}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Time-Stepping}{9}}
+\newlabel{eqn:SSPRKStep1}{{19}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Dry Bed Handling}{10}}
+\newlabel{eqn:hdrytransform}{{20}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Lake at Rest Solution Validation}{10}}
+\newlabel{eqn:LARdefhub}{{21}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Forced Solution Validation}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Forced Solution}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Numerical solution for $w$ (\squareF  {blue}) and $b$ (\squareF  {brown!60!black}) with $\Delta x = {100} / {2^{10}}m $ for the lake at rest problem at $t=10s$.\relax }}{11}}
+\newlabel{fig:LAR}{{3}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Convergence as measured by the $L_2$ norm against $\Delta x$ for $h$ , $u$ and $G$ for the lake at rest problem at $t=10s$.\relax }}{11}}
+\newlabel{fig:LARL1}{{4}{11}}
+\newlabel{fig:LarC}{{5b}{12}}
+\newlabel{sub@fig:LarC}{{b}{12}}
+\newlabel{eqn:FullSerreConForced}{{22}{12}}
+\newlabel{eqn:FullSerreConMassForced}{{22a}{12}}
+\newlabel{eqn:SerreconsconmomForced}{{22b}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Dry Bed Forced Solution Problem}{13}}
+\newlabel{eqn:ForcedSolutionxt}{{23a}{13}}
+\citation{Synolakis-1987-523}
+\citation{Synolakis-1987-523}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Example numerical solutions for $w$, $b$, $h$, $G$ with $\Delta x = 100 / 2^{10}m$ at various times to the dry bed forced solution problem.\relax }}{14}}
+\newlabel{fig:ExampleForcedSolutionDry}{{6}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Run-up of a Solitary Wave}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Comparison To Ritter's Dry-Bed Dam-Break Solution}{14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Convergence as measured by the $L_2$ in regions where $h > 10^{-3}m$ norm against $\Delta x$ for $h$, $u$, and $G$ for the dry bed forced solution problem at $t=10s$.\relax }}{15}}
+\newlabel{fig:L1convergenceforcedWet}{{7}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Diagram showing a longitudinal section of the wave tank for the run-up experiment with the water (\squareF  {blue}) and the bed (\squareF  {brown!80!black}) where the coordinates have been non-dimensionalised \cite  {Synolakis-1987-523}.\relax }}{15}}
+\newlabel{fig:SynolakisWT}{{8}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces A comparison of the water surface profiles $w'(x',t')$ for the experiment (\circlet  {red}) and the numerical solution (\squareF  {blue}) over the bed (\squareF  {brown!60!black}) at various times.\relax }}{16}}
+\newlabel{fig:SynolakisFEVMNoBreak}{{9}{16}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Initial and final ($t'=200$) total amounts and the conservation error for the conserved quantities in the numerical solution of the run-up experiment. Here the absolute value of the total amount of $uh$ and $G$ are taken in the error as the wave is reflected off the beach.\relax }}{17}}
+\newlabel{tab:ConservationSynFEVM}{{1}{17}}
