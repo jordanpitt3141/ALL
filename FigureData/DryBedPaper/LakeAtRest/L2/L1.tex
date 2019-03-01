@@ -102,11 +102,11 @@
         /pgf/number format/precision=5,
 	},
 	xtickten = {-4,-3,...,0},
-	ytickten = {-18,-14,...,2},
+	ytickten = {-18,-14,...,-6},
 	xmin=0.0001,
 	xmax=1.0,
 	ymin = 0.000000000000000001,
-	ymax = 100.0,
+	ymax = 0.000001,
 	scaled y ticks=false,
 	clip mode=individual,
 	xlabel=\Large$\Delta x \; (m)$, 
@@ -116,7 +116,7 @@
 \addplot [black,only marks,mark =square,mark size =0.75mm] table {uL1.dat};
 \addplot [red,only marks,mark =o,mark size =0.75mm] table {GL1.dat};
 
-\logLogSlopeTriangleLeft{0.7}{0.35}{0.15}{2}{black};
+%\logLogSlopeTriangleLeft{0.7}{0.35}{0.15}{2}{black};
 
 \addlegendentry{$h$}
 \addlegendentry{$u$}

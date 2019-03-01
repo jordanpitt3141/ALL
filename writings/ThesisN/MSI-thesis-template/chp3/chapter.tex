@@ -216,7 +216,7 @@ For $h$ and $G$ we use the basis functions $\psi$ \eqref{eqn:App1:PsiDef} which 
 From the basis functions $\psi$ we have the following representation for $h$ and $G$ in our FEM written for the generic quantity $q$
 \begin{align}
 \label{eqn:FEapproxtohG}
-q &= \sum_{j=0}^m \left( q^+_{j-1/2}\psi^+_{j-1/2}  + q^-_{j+1/2}\psi^-_{j+1/2}, \right).
+q &= \sum_{j=0}^m \left( q^+_{j-1/2}\psi^+_{j-1/2}  + q^-_{j+1/2}\psi^-_{j+1/2} \right).
 \end{align}
 
 To calculate the flux and source terms in \eqref{eqn:Serreconsconmom} we require a locally calculated second-order accurate approximation to the first derivative of $u$. To do this we require a quadratic representation of $u$ in each cell and since we desire $u\in\mathbb{W}^{1,2}(\Omega)$, this representation will be continuous across the cell edges $x_{j \pm 1/2}$. Therefore, we use the continuous quadratic basis functions $\phi_{j\pm1/2} $ and $\phi_{j} $ \eqref{eqn:App1:PhiDef} depicted in Figure \ref{fig:P2ContBasis}.
@@ -364,9 +364,9 @@ p^u_2 &=  u_j.
 While for $P^b_j(x)$ the coefficients are
 \begin{align*}
 p^b_0 &=  \dfrac{-9b_{j-1/2} + 27b_{j-1/6} - 27 b_{j+1/6} + 9b_{j+1/2}}{2 \Delta x^3},\\ \\
-p^b_0 &=  \dfrac{9b_{j-1/2} - 9b_{j-1/6} - 9b_{j+1/6} + 9b_{j+1/2}}{4 \Delta x^2},\\ \\ 
-p^b_0 &=  \dfrac{b_{j-1/2} - 27b_{j-1/6} + 27 b_{j+1/6} - b_{j+1/2}}{8 \Delta x},\\\\
-p^b_0 &=  \dfrac{-b_{j-1/2}  + 9b_{j-1/6} + 9 b_{j+1/6} - b_{j+1/2}}{16}.
+p^b_1 &=  \dfrac{9b_{j-1/2} - 9b_{j-1/6} - 9b_{j+1/6} + 9b_{j+1/2}}{4 \Delta x^2},\\ \\ 
+p^b_2 &=  \dfrac{b_{j-1/2} - 27b_{j-1/6} + 27 b_{j+1/6} - b_{j+1/2}}{8 \Delta x},\\\\
+p^b_3 &=  \dfrac{-b_{j-1/2}  + 9b_{j-1/6} + 9 b_{j+1/6} - b_{j+1/2}}{16}.
 \end{align*}
 Taking the derivative of the polynomials \eqref{eqn:Polyforucell} and \eqref{eqn:Polyforbcell} we get
 	\begin{align*}
