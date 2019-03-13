@@ -46,7 +46,7 @@
 
 \begin{document}
 
-\title{Numerical solution of the fully non-linear weakly dispersive Serre equations for flows over dry beds.}
+\title{Solving the fully non-linear weakly dispersive Serre equations for flows over dry beds.}
 
 \author[ANU]{J.P.A.~Pitt\corref{cor1}}
 \ead{jordan.pitt@anu.edu.au }
@@ -58,6 +58,13 @@
 \cortext[cor1]{Corresponding author}
 \address[ANU]{Mathematical Sciences Institute, Australian National University, Canberra, ACT 0200, Australia}
  
+ 
+%To do:
+% Abstract
+%Spelling
+%Bibliography
+%consistent equations
+%Synolakis plot t = 0 
  \begin{abstract}
 
  \end{abstract}	
@@ -76,20 +83,21 @@
 %\cite{Li-2014-169} - do dry beds as well, no convergence test though
 %\cite{Filippini-etal-2016-381} - do dry beds as well, but with wavebreaking, no convergence test though
 
-There has recently been a push from the water wave modelling community to extend the work behind the large scale wave models built around the Shallow Water Wave Equations \cite{ANUGA,Comcot,ClawPack} into deeper water where frequency dispersion becomes significant []. There are many dispersive wave equations with different dispersive properties and various assumptions on the properties of the waves \cite{Bonneton-Lannes-2009-16601}. The Serre equations is one particular dispersive wave equation that has a number of desirable properties; it is fully non-linear so that no assumption is made on the relative size of the wave and secondly its dispersion relation well approximates the dispersion relation given by the linear theory for water waves \cite{Barthelemy-2004-315}. 
+Dispersion is an important phenomena for waves in intermediate water depths; where the water depth is not far larger than the wavelengths of the waves. Our understanding of the effect of dispersion on water surface profiles is continually improving \cite{Pitt-2018-61}. However, what is not well understood is the behaviour of these waves as they approach and then inundate the coastline. 
 
-For these reasons the Serre equations have been a particular focus with many developed numerical methods for the one-dimensional case \cite{Hank-etal-2010-2034,Dutykh-etal-2013-761,Mitsotakis-etal-2014,Li-2014-169,Filippini-etal-2016-381,Zoppou-etal-2017,doCarmo-etal-2018-404}. The capabilities of these methods has been well tested for the case of completely wet horizontal beds, as this is the only scenario that currently has analytic solutions. For the case of inundation of varying bathymetry these methods remain largely untested. Although some methods \cite{Li-2014-169,Filippini-etal-2016-381} have been compared to experimental results of inundation events. However, the lack of convergence results for this situation is a significant issue. 
+In this paper we present a numerical approach that addresses these issues. This is the first successful attempt to solve the Serre equations over a dry bed that has been validated against forced solutions. With previous results in the literature only validated against experimental results \cite{Li-2014-169,Filippini-etal-2016-381}. Given the lack of analytic solutions to the Serre equations for the wetting and drying of beds, a validation against forced solutions is currently the strongest available test of a numerical method.
 
-In this paper we describe a Finite Element Volume Method (FEVM) that is well balanced and can handle dry beds. We demonstrate that it is well-balanced using the lake at rest analytic solution and demonstrate is dry bed handling capabilities using convergence results for forced solutions and the experimental results of \citet{Synolakis-1987-523}. These results provide a more thorough analysis of the method in the presence of dry beds than has been given previously in the literature \cite{Li-2014-169,Filippini-etal-2016-381}. 
+The numerical scheme described in this paper is based on the Finite Difference Volume Methods (FDVM) for the Serre equations described by \citet{Zoppou-etal-2017}. These methods have been extended here by replacing the Finite Difference Method (FDM) with a Finite Element Method (FEM), resulting in a Finite Element Volume Method (FEVM). The use of a FEM over a FDM resulted in a more robust numerical method.
 
+The described numerical scheme was validated against the lake at rest analytic solution and demonstrated to be well-balanced. The method was then validated for the wetting and drying of beds using forced solutions to the Serre equations, described in detail in this paper. Finally the numerical method is validated using the experimental results of \citet{Synolakis-1987-523} for the run-up of a solitary wave on a dry linear beach.
 
 %--------------------------------------------------------------------------------
 \section{Serre Equations}
-The Serre equations \cite{Seabra-Santos-etal-1987-117} are a system of partial differential equations that describe the free-surface waves of fluids whose motion is dominated by gravitational forces. They are a shallow-water approximation to the Euler equations \cite{Euler-1755-274}. The primitive variables of the Serre equations are the height of the free-surface $h(x,t)$ above the bed $b(x)$ and the average horizontal velocity over the depth of water $u(x,t)$. These variables are shown in Figure \ref{fig:SerreModel}. Combining the bed location and the height of the free-surface gives the absolute location of the free surface $w(x,t) = h(x,t) + b(x)$.
+The Serre equations \cite{Seabra-Santos-etal-1987-117} are a system of partial differential equations that describe the free-surface waves of fluids whose motion is dominated by gravitational forces. They are a shallow-water approximation to the Euler equations \cite{Euler-1755-274}. The primitive variables of the Serre equations are the height of the free-surface $h(x,t)$ above the bed $b(x)$ and the depth-averaged horizontal velocity of a column of water $u(x,t)$. These variables are shown in Figure \ref{fig:SerreModel}. The absolute location of the free surface is given by $w(x,t) = h(x,t) + b(x)$.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.55\textwidth]{./Figures/Diagrams/Watermodel/SerreModel.pdf}
-	\caption{Diagram demonstrating a free surface flow (\squareF{blue}) over a bed (\squareF{brown!80!black}) where $w(x,t)$ is the absolute location of the free surface, $h(x,t)$ is the height of a column of fluid, $u(x,t)$ is the horizontal velocity of a column of fluid and $b(x)$ is the stationary bed profile.}
+	\caption{Diagram demonstrating a free surface flow (\squareF{blue}) over a bed (\squareF{brown!80!black}) where $w(x,t)$ is the absolute location of the free surface, $h(x,t)$ is the height of a column of fluid, $u(x,t)$ is the depth-averaged horizontal velocity of a column of fluid and $b(x)$ is the stationary bed profile.}
 	\label{fig:SerreModel}
 \end{figure}
 
@@ -100,119 +108,157 @@ The Serre equations can be written in conservation law form with a source term \
 	& \frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0 ,\label{eqn:FullSerreConMass}  \\ \nonumber \\
 	\begin{split}
 	\label{eqn:Serreconsconmom}
-	\frac{\partial G}{\partial t}  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} - \frac{2}{3}h^3 \left[\frac{\partial {u}}{\partial x}\right]^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right) \\ \\ +  \underbrace{\frac{1}{2}h^2 {u} \frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  - h {u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2} + gh\frac{\partial b}{\partial x} } _{\text{source term}} = 0
+	\frac{\partial G}{\partial t}  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} - \frac{2h^3}{3} \left[\frac{\partial {u}}{\partial x}\right]^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right) \\ \\ +  \underbrace{\frac{uh^2}{2} \frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  - h {u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2} + gh\frac{\partial b}{\partial x} } _{\text{source term}} = 0
 	\end{split}
 	\end{align}
 \end{subequations}
 with the conserved quantity
 \begin{equation}
 \label{defn:SerreEqnConservedQuantity1}
-G =  {u}h \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \left[\frac{\partial b}{\partial x}\right]^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right).
+G =  {u}h \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{h}{2}\frac{\partial^2 b}{\partial x^2} + \left[\frac{\partial b}{\partial x}\right]^2 \right) - \frac{\partial}{\partial x}\left(\frac{h^3}{3}  \frac{\partial {u}}{\partial x}\right).
 \end{equation}
 
 \subsection{Conservation Properties}
-Since the Serre equations can be written in conservation law form for $h$ and $G$ these quantities should be conserved in a closed system. Where conservation of a quantity $q$ means that the total amount of a generic quantity $q$ in a system occurring on the interval $[a,b]$ at time $t$
+Since the Serre equations can be written in conservation law form for $h$ and $G$ these quantities should be conserved in a closed system. Where conservation of a quantity $q$ means that the total amount of $q$ in a system occurring on the interval $[a,b]$ at time $t$
 \begin{equation*}
 \mathcal{C}_q(t) = \int_{a}^{b} q(x,t)\, dx
 \end{equation*}
-is constant for all $t$. Additionally, the Serre equations conserve the momentum $uh$ and the energy
+remains constant for all $t$. Additionally, the Serre equations conserve the momentum $uh$ and the energy
 \begin{equation*}
 \mathcal{H}(x,t) = \frac{1}{2} \left( gh\left(h + 2b\right) + hu^2  + \frac{h^3}{3} \left[\frac{\partial u}{\partial x}\right]^2 + u^2h\left[\frac{\partial b}{\partial x}\right]^2 - uh^2 \frac{\partial u}{\partial x} \frac{\partial b}{\partial x}  \right).
 \label{eqn:Hamildef}
 \end{equation*}
-The conservation of $uh$ is a result of integrating the Serre equations in their non-conservative form \cite{Zoppou-etal-2017}. While the conservation of the energy $\mathcal{H}(x,t)$ is given by the derivation of the the Green-Naghdi equations \cite{Green-Naghdi-1976-237} which are equivalent to the Serre equations for one-dimensional flows. Indeed $\mathcal{H}$ is a sum of the gravitational and kinetic energy throughout the depth of water. 
+The conservation of $uh$ is a result of integrating the evolution of momentum equation for Serre equations \cite{Zoppou-etal-2017}. An equivalent set of equations in one-dimension was produced by \citet{Green-Naghdi-1976-237} through conservation of the energy $\mathcal{H}$, and hence the Serre equations conserve $\mathcal{H}$. With $\mathcal{H}$ being a sum of the gravitational potential and kinetic energy throughout the depth of water. 
 
 %--------------------------------------------------------------------------------
 \section{Method}
-To numerically approximate the Serre equations in conservation law form \eqref{eqn:FullSerreCon} the domain is partitioned into $m$ cells $\left[x_{j-1/2},x_{j+1/2}\right]$ of uniform length $\Delta x$. Our method begins given the location of the bed at the midpoints $x_j$ and all the cell average values $\overline{h}_j$ and $\overline{G}_j$  at time $t^n$.
+To numerically approximate the Serre equations in conservation law form \eqref{eqn:FullSerreCon} the domain is partitioned into $m$ cells $\left[x_{j-1/2},x_{j+1/2}\right]$ of uniform length $\Delta x$. While time is discretised into time levels $t^n$ separated by a constant duration $\Delta t$.
 
-We reconstruct $h$, $G$ and $b$ at various points inside the cells from their given values. The reconstructed values are then used with a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} for $u$ at various points inside the cells. We then employ a Finite Volume Method with a Source Term approximation to solve \eqref{eqn:FullSerreCon} obtaining a temporally first-order forward Euler time-step. Combining two first-order forward Euler steps using the second-order Strong Stability Preserving (SSP) Runge-Kutta method \cite{Gottlieb-etal-2003-89} we obtain the desired second-order accurate method. We now provide the details for all these constituent parts and the modifications to allow for dry beds.  
+Since the Serre equations are in conservation law form
+\begin{equation*}
+\frac{\partial \vecn{Q} }{\partial t} + \frac{\partial F(\vecn{Q} )}{x} + S(\vecn{Q} ) = 0
+\end{equation*}
+with the conserved quantities $\vecn{Q}  = \left[h \; \; G\right]$ they can be solved using a Finite Volume Method (FVM) with a source term approximation like so
+\begin{equation}
+\label{eqn:FVMUpdate}
+\overline{\vecn{Q} }^{n+1}_j = \overline{\vecn{Q} }^{n}_j - \frac{\Delta t}{\Delta x} \left(F^n_{j+1/2}\left(\vecn{Q} \right) - F^n_{j-1/2}\left(\vecn{Q} \right) \right) + \Delta t S^n_j\left(\vecn{Q} \right).
+\end{equation}
+Where $\overline{\vecn{Q} }^{n}_j $ is the average of the conserved quantities in the $j^{th}$ cell at time $t^n$. While $F^n_{j+1/2}\left(\vecn{Q} \right)$ and $ F^n_{j-1/2}\left(\vecn{Q} \right)$ are approximations to the flux across the right and left boundaries respectively and $S^n_j\left(\vecn{Q} \right)$ is the approximation to the source terms contribution to the cell from time $t^n$ to $t^{n+1}$. The FVM \eqref{eqn:FVMUpdate} produces a first-order time stepping method which can then be made second-order accurate using a Strong Stability Preserving Runge-Kutta method \cite{Gottlieb-etal-2003-89}.
+
+To approximate $F^n_{j+1/2}\left(\vecn{Q} \right)$ and $F^n_{j-1/2}\left(\vecn{Q} \right)$ we use the method of \citet{Kurganov-etal-2001-707}. While the source term is approximated naively with the well-balancing modifications proposed by \citet{Klein-etal-2004-2050}.
+
+To achieve a second-order accurate method using \eqref{eqn:FVMUpdate} second-order accurate approximations to $h$, $u$, $G$, $\partial u / \partial x$, $\partial b / \partial x$, $\partial^2 b / \partial x^2$ inside a cell are required. The conserved quantities $h$ and $G$ are reconstructed from their cell averages using a linear function over the cell. While $b$ is reconstructed using a cubic polynomial to ensure that the approximation to $\partial^2 b / \partial x^2$ in the source term \eqref{eqn:FullSerreCon} is second-order accurate. 
+
+The depth-averaged velocity $u$ is obtained by solving \eqref{defn:SerreEqnConservedQuantity1} with a FEM given the reconstructions of $h$, $G$ and $b$ $b$ over the cell. Thus all the required approximations are obtained allowing the use of the FVM \eqref{eqn:FVMUpdate} to solve \eqref{eqn:FullSerreCon} as desired.
+
+\subsection{Flux Approximation}
+%ddot
+We use the method of \citet{Kurganov-etal-2001-707} to calculate the flux across a cell interface. This method was employed because it can handle discontinuities across the cell boundary and only requires an estimate of the maximum and minimum wave speeds, which are known for the Serre equations \cite{Zoppou-etal-2017}.
+
+Only the calculation of the flux term $F^n_{j+1/2}\left(\vecn{Q} \right)$ is demonstrated as the process to calculate the flux term $F^n_{j-1/2}\left(\vecn{Q} \right)$ is identical but with different cells. For a general quantity $q$ the approximation of the flux term given by \citet{Kurganov-etal-2001-707} is
+\begin{equation}\label{eqn:HLL_flux}
+F^n_{j+\frac{1}{2}}(q) = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left(  q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right)
+\end{equation}
+where $a^+_{j+\frac{1}{2}}$ and $a^-_{j+\frac{1}{2}}$ are given by bounds on the wave speed. With all the quantities on the right hand side representing their respective quantities at time $t^n$. Applying the wave speed bounds \cite{Zoppou-etal-2017} we obtain
+\begin{subequations}
+\begin{align}
+a^-_{j+\frac{1}{2}} &= \min\left\lbrace 0\;,\;  u^-_{j + 1/2} - \sqrt{g  {h}^-_{j + 1/2}}  \;,\;u^+_{j + 1/2} - \sqrt{g  {h}^+_{j + 1/2}} \right\rbrace  ,\\
+a^+_{j+\frac{1}{2}} &= \max\left\lbrace 0 \;,\;  u^-_{j + 1/2} + \sqrt{g {h}^-_{j + 1/2}}  \;,\;u^+_{j + 1/2} + \sqrt{g  {h}^+_{j + 1/2}} \right\rbrace .
+\end{align}
+\label{eqn:WaveSpeedBoundsFluxApprox}
+\end{subequations}
+The flux functions $f(q^-_{j+\frac{1}{2}})$ and $f(q^+_{j+\frac{1}{2}})$ across the cell edge $x_{j+1/2}$ are evaluated using the reconstructed values $q^-_{j+\frac{1}{2}}$ from the $j^{th}$ cell and $q^+_{j+\frac{1}{2}}$ from the $(j+1)^{th}$ cell. For the continuity equation \eqref{eqn:FullSerreConMass} we have
+\begin{align}
+f\left(h^\pm_{j+\frac{1}{2}}\right) &= u^\pm_{j + 1/2}  {h}^\pm_{j + 1/2}
+\label{eqn:FluxMassNum}
+\end{align}
+and for $G$,\eqref{eqn:Serreconsconmom} we have 
+\begin{align}
+f\left(G^\pm_{j+\frac{1}{2}}\right) &=  u^\pm_{j + 1/2} G^\pm_{j + 1/2}  + \frac{g}{2}\left({h}^\pm_{j + 1/2} \right)^2 - \frac{2}{3}\left({h}^\pm_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2} \right]^2 \nonumber\\ &+ \left({h}^\pm_{j + 1/2}\right)^2 u^\pm_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^\pm_{j + 1/2} .
+\label{eqn:FluxIrrotNum}
+\end{align}
+
+The quantities ${h}^+_{j - 1/2}$, ${h}^-_{j + 1/2}$, $G^+_{j - 1/2}$, $G^-_{j + 1/2}$ and $ \left({\partial {b}}/{\partial x} \right)^\pm_{j + 1/2}$ are given by the reconstructions. While $u^\pm_{j+1/2}$ and $ \left({\partial {u}}/{\partial x} \right)^\pm_{j + 1/2}$ are given by the FEM.
 
 \subsection{Reconstruction}
-We reconstruct $h$, $w$ and $G$ with piecewise linear functions over a cell from neighbouring cell averages. While $b$ is reconstructed from neighbouring cell midpoint values with a cubic over the cell to ensure that our approximation to $\partial^2 b / \partial x^2$ is second-order accurate. Furthermore, following the method of \citet{Klein-etal-2004-2050}  applied to the Serre equations \cite{Pitt-J-2014} we produce an additional reconstruction $\ddot{h}$ for $h$ from the reconstructions of $w$ and $b$. 
+We reconstruct $h$ and $G$ with piecewise linear functions over a cell from neighbouring cell averages. While $b$ is reconstructed from neighbouring cell midpoint values with a cubic polynomial over the cell to ensure that the approximation to $\partial^2 b / \partial x^2$ in \eqref{eqn:FullSerreCon} is second-order accurate. 
 
-\subsubsection{$h$,$w$ and $G$ }
-Since $h$, $w$ and $G$ use the same reconstruction operators we demonstrate them for a general quantity $q$. We reconstruct the values of $q$ at $x_{j-1/2} $, $x_{j} $ and $x_{j+1/2}$ from the cell averages $\overline{q}_j$ using the generalised minmod limiter \cite{VanLeer-1979-101}
+\subsubsection{$h$ and $G$ }
+Since $h$ and $G$ use the same reconstruction operators they are demonstrated for a general quantity $q$. The values of $q$ are reconstructed at $x_{j-1/2} $, $x_{j} $ and $x_{j+1/2}$ from the cell averages $\overline{q}_j$ using the generalised minmod limiter \cite{VanLeer-1979-101}
 %cite someone 
-\begin{subequations}
 	\begin{align}
-	q^+_{j-1/2} = \overline{q}_j - \dfrac{\Delta x}{2} d_j &,&
-	q_{j}  =\overline{q}_j &,&
-	q^-_{j+1/2}  = \overline{q}_j + \dfrac{\Delta x}{2} d_j
+	q^+_{j-1/2} = \overline{q}^n_j - \dfrac{\Delta x}{2} d_j &,&
+	q_{j}  =\overline{q}^n_j &,&
+	q^-_{j+1/2}  = \overline{q}^n_j + \dfrac{\Delta x}{2} d_j
+		\label{eqn:ReconforhwG}
 	\end{align}
-	\label{eqn:ReconforhwG}
-\end{subequations}
 where 
 \begin{equation}
-d_j = \text{minmod}\left(\theta \dfrac{\overline{q}_j -\overline{q}_{j-1} }{\Delta x}, \dfrac{\overline{q}_{j+1} -\overline{q}_{j-1} }{2\Delta x}, \theta\dfrac{\overline{q}_{j+1} -\overline{q}_{j} }{\Delta x}\right)
+d_j = \text{minmod}\left(\theta \dfrac{\overline{q}^n_j -\overline{q}^n_{j-1} }{\Delta x}, \dfrac{\overline{q}^n_{j+1} -\overline{q}^n_{j-1} }{2\Delta x}, \theta\dfrac{\overline{q}^n_{j+1} -\overline{q}^n_{j} }{\Delta x}\right)
 \label{eqn:slopehGrecon}
 \end{equation}
 with $\theta \in \left[1,2\right]$.
 
-\subsubsection{Bed Profile}
-The reconstruction cubic for $b$ over the $j^{th}$ cell is
+\subsubsection{Bed profile }
+The interpolating cubic polynomial for $b$ over the $j^{th}$ cell 
 \begin{equation*}
-C_j(x) = c_0 \left(x - x_j\right)^3 + c_1 \left(x - x_j\right)^2 + c_2 \left(x - x_j\right) + c_3.
+C_j(x) = c_0 \left(x - x_j\right)^3 + c_1 \left(x - x_j\right)^2 + c_2 \left(x - x_j\right) + c_3
 \label{eqn:cubicforbedrecon}
 \end{equation*}
-For a uniform mesh size the cubic has the coefficients
+passing through the adjacent cell midpoint values has the coefficients
 \begin{align*}
 &c_0 =  \dfrac{-b_{j-2} + 2b_{j-1} - 2 b_{j+1} + b_{j+2}}{12 \Delta x^3}, & &
 c_1 =  \dfrac{b_{j-2} - b_{j-1} - b_{j+1} + b_{j+2}}{6 \Delta x^2},\\ \\
 &c_2 =  \dfrac{b_{j-2} - 8b_{j-1} + 8 b_{j+1} - b_{j+2}}{12 \Delta x},& &
 c_3 =  \dfrac{-b_{j-2}  + 4b_{j-1} + 4 b_{j+1} - b_{j+2}}{6}.
 \end{align*}
-To force the continuous bed profile required by the weak form of \eqref{defn:SerreEqnConservedQuantity1} we average the two reconstructions at the cell edges $x_{j-1/2}$ and $x_{j+1/2}$ from the adjacent cells. Therefore, our reconstruction of the bed profile in the $j^{th}$ cell is the cubic which takes these values
-\begin{subequations}
-	\begin{align}
-	b_{j\pm1/2} =  \frac{1}{2}\left( C_j(x_{j\pm 1/2}) + C_{j\pm 1}(x_{j\pm 1/2})\right)&,& 	b_{j\pm 1/6} =  C_j(x_{j\pm 1/6})
-	\end{align}
-	\label{eqn:BedReconDef}
-\end{subequations}
 
-\subsubsection{Well Balanced $\ddot{h}$ Reconstruction}
-To produce the additional reconstruction $\ddot{h}$ which is also second-order accurate for the cell edge values we first calculate
+For the weak form of \eqref{defn:SerreEqnConservedQuantity1} to be valid, the bed profile must be continuous. To force a continuous bed profile the two possible values for $b$ at the cell edges are averaged. Additionally, the basis functions for the bed in the FEM are equally spaced and so depend on the value of $b$ at $x_{j\pm 1/2}$ and $x_{j\pm1/6}$. Hence the reconstructing cubic for $b$ takes the following values
 \begin{align}
-\dot{b}^-_{j+1/2} = w^-_{j+1/2} - h^-_{j+1/2} &, &\dot{b}^+_{j+1/2} = w^+_{j+1/2} - h^+_{j+1/2}.
-\label{eqn:BedReDefWmH}
+\label{eqn:BedReconDef}
+b_{j\pm1/2} =  \frac{1}{2}\left( C_j(x_{j\pm 1/2}) + C_{j\pm 1}(x_{j\pm 1/2})\right)&,& 	b_{j\pm 1/6} =  C_j(x_{j\pm 1/6}).
 \end{align}
-Find the maximum
+To calculate the derivatives of the bed $\left({\partial {b}}/{\partial x} \right)^\pm_{j + 1/2}$ we use the reconstructed cubic polynomial
 \begin{align*}
-\ddot{b}_{j+1/2} = \max\left\lbrace\dot{b}^-_{j+1/2} , \dot{b}^+_{j+1/2} \right\rbrace
+P^b_j(x) = p^b_0 (x - x_j)^3 + p^b_1(x-x_j)^2 + p^b_2(x- x_j) + p^b_3
 \end{align*}
-then the reconstruction $\ddot{h}$ at the cell edges is given by
-
+which passes through the values \eqref{eqn:BedReconDef} and therefore has the following coefficients
+\begin{align*}
+&p^b_0 =  \dfrac{-9b_{j-1/2} + 27b_{j-1/6} - 27 b_{j+1/6} + 9b_{j+1/2}}{2 \Delta x^3}, 
+&p^b_1 =  \dfrac{9b_{j-1/2} - 9b_{j-1/6} - 9b_{j+1/6} + 9b_{j+1/2}}{4 \Delta x^2},\\ \\ 
+&p^b_2 =  \dfrac{b_{j-1/2} - 27b_{j-1/6} + 27 b_{j+1/6} - b_{j+1/2}}{8 \Delta x},
+&p^b_3 =  \dfrac{-b_{j-1/2}  + 9b_{j-1/6} + 9 b_{j+1/6} - b_{j+1/2}}{16}.
+\end{align*}
+So that the bed derivatives of \eqref{eqn:FluxIrrotNum} are approximated as follows
 \begin{align}
-&\ddot{h}^-_{j+1/2} = \max\left\lbrace 0, w^-_{j+1/2} - \ddot{b}_{j+1/2}  \right\rbrace, &\ddot{h}^+_{j+1/2} = \max\left\lbrace 0, w^+_{j+1/2} - \ddot{b}_{j+1/2} \right\rbrace.
-\label{eqn:ModifiedHValue}
+\label{eqn:PolyDerivb}
+&\left(\dfrac{\partial {b}}{\partial x} \right)^-_{j + 1/2} = \frac{\partial }{\partial x}P^b_j(x_{j+1/2}), 
+&\left(\dfrac{\partial {b}}{\partial x} \right)^+_{j + 1/2} = \frac{\partial }{\partial x}P^b_{j+1}(x_{j+1/2}). 
 \end{align}
 
-
-\subsection{Velocity Solve using a Finite Element Method}
-In the FEVM we solve for the primitive variable $u$ given $h$, $G$ and $b$ using a FEM for \eqref{defn:SerreEqnConservedQuantity1}. For the FEM we begin with the weak form of \eqref{defn:SerreEqnConservedQuantity1} using a test function $v$ over the spatial domain $\Omega$ which is 
-
+\subsection{Calculating $u$ and $\partial u / \partial x$}
+To calculate $u$ and $\partial u / \partial x$ a FEM is used to solve \eqref{defn:SerreEqnConservedQuantity1} for $u$ given $h$, $G$ and $b$. The FEM begins with the weak form of \eqref{defn:SerreEqnConservedQuantity1} using a test function $v$ over the spatial domain $\Omega$ resulting in
 \begin{equation*}
 \int_{\Omega } G v \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} +  \left[\frac{\partial b}{\partial x}\right]^2 \right) v - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) v \; dx.
 \end{equation*}
-
-Integrating by parts with zero Dirichlet boundary conditions we get
+Integrating by parts with zero Dirichlet boundary conditions gives
 \begin{multline}
 \int_{\Omega } G v \; dx = \int_{\Omega } uh \left(1 + \left[\frac{\partial b}{\partial x}\right]^2 \right) v \; dx +  \int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial v}{\partial x} \; dx  \\ - 
 \int_{\Omega }   \frac{1}{2} u h^2\frac{\partial b}{\partial x}  \frac{\partial v }{\partial x}\; dx - 
 \int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}v \; dx.
 \label{eqn:WeakFormDomain}
 \end{multline}
-By assuming that time is fixed so that all the functions only vary in space, this formulation implies that by ensuring that $G$, $h$, $b$ and $\partial b / \partial x$ have finite integrals over $\Omega$, then $u$ and $\partial u / \partial x$ must have finite integrals as well. We require $\partial u / \partial x$ to be well defined to approximate the flux and the source terms \eqref{eqn:FullSerreCon} and thus have finite integrals. So we will assume that for each time $t$ that $h$ and $G$ are square integrable functions and $b$ is in the Sobolev space $\mathbb{W}^{1,2}(\Omega)$ where $b$ and its first weak derivative are square integrable functions so that $u$ is also a member of $\mathbb{W}^{1,2}(\Omega)$.
+By assuming that time is fixed so that all the functions only vary in space, this formulation implies that by ensuring that $G$, $h$, $b$ and $\partial b / \partial x$ have finite integrals over $\Omega$, then $u$ and $\partial u / \partial x$ must have finite integrals as well. To approximate the flux and the source terms \eqref{eqn:FullSerreCon} requires $\partial u / \partial x$ to be well defined and thus have finite integrals. So we will assume that for each time $t$ that $h$ and $G$ are square integrable functions and $b$ is in the Sobolev space $\mathbb{W}^{1,2}(\Omega)$ where $b$ and its first weak derivative are square integrable functions so that $u$ is also a member of $\mathbb{W}^{1,2}(\Omega)$.
 
-We simplify \eqref{eqn:WeakFormDomain} by performing the integration over the cells and then summing the integrals together to get the equation for the entire domain
+To approximate \eqref{eqn:WeakFormDomain} the integration is performed over the cells and then summed together to obtain the equation for the entire domain
 \begin{multline}
 \label{eq:elementwiseint}
 \sum_{j=1}^m \Bigg(  \int_{x_{j-1/2} }^{{x_{j+1/2}}} \Bigg[  \left( uh \left(1 + \left[\frac{\partial b}{\partial x}\right]^2 \right)  - \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}  -  G \right) v   \\ +  \left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}    -     \frac{1}{2} uh^2\frac{\partial b}{\partial x}    \right) \frac{\partial v }{\partial x} \Bigg]dx \Bigg)  = 0
 \end{multline}
 which holds for all test functions $v$. The next step is to replace the functions for $h$, $G$, $b$, $v$ and $u$ with their corresponding basis function approximations.
 
-For $h$ and $G$ we use the basis functions $\psi$ which are linear inside a cell and zero elsewhere, resulting in approximations that are in the appropriate function space.
-For $u$ and $v$ we use the basis functions $\phi$ which are quadratic inside the cell and continuous across the cell edges so that our approximations are in $\mathbb{W}^{1,2}(\Omega)$. The basis functions of $u$ must be quadratics to allow for a second-order approximation to $\partial u / \partial x$. Finally, for $b$ the basis functions $\gamma$ are used, they are cubic inside the cell and continuous across the cell edges so that our approximation to $b$ is in the appropriate function space. Cubics are used for $b$ as we require a second-order approximation to $\partial^2 b / \partial x^2$. Examples of the basis functions $\psi$, $\phi$ and $\gamma$ for the $j^{th}$ cell are given in Figure \ref{fig:P1DiscBasis}, from which their equations can be straightforwardly derived.
+For $h$ and $G$ the basis functions $\psi$ are linear inside a cell and zero elsewhere, resulting in approximations that are in square integrable, as desired.
+For $u$ and $v$ the basis functions $\phi$ which are quadratic inside the cell and continuous across the cell edges are used so that the approximations are in $\mathbb{W}^{1,2}(\Omega)$. The basis functions of $u$ must be quadratics to allow for a second-order approximation to $\partial u / \partial x$ in \eqref{eqn:FluxIrrotNum}. Finally, for $b$ the basis functions $\gamma$ are used, they are cubic polynomials inside the cell and continuous across the cell edges so that the approximation to $b$ is in the appropriate function space. Cubic polynomials are used for $b$ as a second-order approximation to $\partial^2 b / \partial x^2$ is required for the source term in \eqref{eqn:FullSerreCon}. Examples of the basis functions $\psi$, $\phi$ and $\gamma$ for the $j^{th}$ cell are given in Figure \ref{fig:P1DiscBasis}, from which their equations can be derived.
 
 \begin{figure}
 	\centering
@@ -235,18 +281,18 @@ For $u$ and $v$ we use the basis functions $\phi$ which are quadratic inside the
 	\label{fig:P1DiscBasis}
 \end{figure}
 
-The basis functions approximation to $h$ and $G$ in our FEM written for a generic quantity $q$ is
+The basis function approximation to $h$ and $G$ in the FEM written for a generic quantity $q$ is
 \begin{subequations}
 \begin{equation}
 \label{eqn:FEapproxtohG}
 q = \sum_{j=1}^m \left( q^+_{j-1/2}\psi^+_{j-1/2}  + q^-_{j+1/2}\psi^-_{j+1/2} \right)
 \end{equation}
-while for $u$ we have
+while for $u$ it is
 \begin{equation}
 u = u_{1/2}\phi_{1/2} + \sum_{j=1}^m \left( u_{j}\phi_{j} + u_{j+1/2}\phi_{j+1/2} \right)
 \label{eqn:FEapproxtou}
 \end{equation}
-and finally $b$ is
+and finally for $b$ it is
 \begin{equation}
 b = b_{1/2}\gamma_{1/2} +  \sum_{j=1}^m \left(b_{j-1/6}\gamma_{j-1/6}  + b_{j+1/6}\gamma_{j+1/6} + b_{j+1/2}\gamma_{j+1/2} \right).
 \label{eqn:FEapproxtob}
@@ -254,170 +300,164 @@ b = b_{1/2}\gamma_{1/2} +  \sum_{j=1}^m \left(b_{j-1/6}\gamma_{j-1/6}  + b_{j+1/
 \label{eqn:FEapprox}
 \end{subequations}
 
-Substituting all the functions in \eqref{eq:elementwiseint} with their corresponding basis function approximations \eqref{eqn:FEapprox} the integral equation becomes a matrix equation. Assembling these matrices we get 
+Substituting all the functions in \eqref{eq:elementwiseint} with their corresponding basis function approximations \eqref{eqn:FEapprox} the integral equation becomes a matrix equation. Assembling these matrices results in 
 \begin{equation}
 \label{eqn:FEMElemMatrixJ}
 \matr{A} \vecn{\hat{u}} = \vecn{g}.
 \end{equation}
-Where $\matr{A}$ is the stiffness matrix given by the all the integrals that contain $u$, $\vecn{u}$ is the vector containing the cell edge and midpoint values of $u$ and $\vecn{g}$ is given by the integral of $Gv$. This is a penta-diagonal matrix equation which can be solved by direct banded matrix solution techniques such as those of \citet{NumRecC-1996} to obtain
+Where $\matr{A}$ is the stiffness matrix given by the integrals that contain $u$, $\vecn{\hat{u}}$ is the vector containing the cell edge and midpoint values of $u$ and $\vecn{g}$ is given by the integral of $Gv$. This is a penta-diagonal matrix equation which can be solved by direct banded matrix solution techniques such as those of \citet{NumRecC-1996} to obtain
 \begin{equation}
 \vecn{\hat{u}} =   \matr{A}^{-1}\vecn{g}
 \label{eqn:usolvefromGhb}
 \end{equation}
-as desired.
-
-\subsection{Flux Approximation}
-%ddot
-We use the method of \citet{Kurganov-etal-2001-707} to calculate the flux across a cell interface. This method was employed because it can handle discontinuities across the cell boundary and only requires an estimate of the maximum and minimum wave speeds, which are known for the Serre equations \cite{Zoppou-etal-2017}.
-
-Only the calculation of the flux term $F_{j+1/2}$ is demonstrated as the process to calculate the flux term $F_{j-1/2}$ is identical but with different cells. For a general quantity $q$ the approximation of the flux term given by \citet{Kurganov-etal-2001-707} is
-\begin{equation}\label{eqn:HLL_flux}
-F_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left(  q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right)
-\end{equation}
-where $a^+_{j+\frac{1}{2}}$ and $a^-_{j+\frac{1}{2}}$ are given by bounds on the wave speed. Applying the wave speed bounds \cite{Zoppou-etal-2017} we obtain
-
-\begin{align}
-a^-_{j+\frac{1}{2}} &= \min\left\lbrace 0\;,\;  u^-_{j + 1/2} - \sqrt{g  \ddot{h}^-_{j + 1/2}}  \;,\;u^+_{j + 1/2} - \sqrt{g  \ddot{h}^+_{j + 1/2}} \right\rbrace  ,\\
-a^+_{j+\frac{1}{2}} &= \max\left\lbrace 0 \;,\;  u^-_{j + 1/2} + \sqrt{g \ddot{h}^-_{j + 1/2}}  \;,\;u^+_{j + 1/2} + \sqrt{g  \ddot{h}^+_{j + 1/2}} \right\rbrace .
-\label{eqn:WaveSpeedBoundsFluxApprox}
-\end{align}
-Note that the reconstructed values $\ddot{h}^+_{j + 1/2}$ and $\ddot{h}^-_{j + 1/2}$ from \eqref{eqn:ModifiedHValue} are used in the flux approximations \cite{Klein-etal-2004-2050}.
-
-The flux functions $f(q^-_{j+\frac{1}{2}})$ and $f(q^+_{j+\frac{1}{2}})$ across the cell edge $x_{j+1/2}$ are evaluated using the reconstructed values $q^-_{j+\frac{1}{2}}$ from the $j^{th}$ cell and $q^+_{j+\frac{1}{2}}$ from the $(j+1)^{th}$ cell. From the continuity equation \eqref{eqn:FullSerreConMass} we have
+ and thus $u^\pm_{j+1/2}$ is obtained. Note that $u^\pm_{j+1/2} = u_{j+1/2}$ since $u$ is continuous at the cell edges.
+ 
+ To calulate $ \left({\partial {u}}/{\partial x} \right)^\pm_{j + 1/2}$ from $u_{j\pm 1/2}$ and $u_j$ the reconstruction polynomial
 \begin{align*}
-f\left(h^\pm_{j+\frac{1}{2}}\right) &= u^\pm_{j + 1/2}  \ddot{h}^\pm_{j + 1/2}.
+P^u_j(x) &= p^u_0 (x - x_j)^2 + p^u_1(x-x_j) + p^u_2
 \end{align*}
-
-For the evolution of $G$ equation \eqref{eqn:Serreconsconmom} we have 
-\begin{align}
-f\left(G^\pm_{j+\frac{1}{2}}\right) &=  u^\pm_{j + 1/2} G^\pm_{j + 1/2}  + \frac{g}{2}\left(\ddot{h}^\pm_{j + 1/2} \right)^2 - \frac{2}{3}\left(\ddot{h}^\pm_{j + 1/2}\right)^3 \left[\left(\frac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2} \right]^2 \nonumber\\ &+ \left(\ddot{h}^\pm_{j + 1/2}\right)^2 u^\pm_{j + 1/2} \left(\frac{\partial {u}}{\partial x} \right)^\pm_{j + 1/2} \left(\frac{\partial b}{\partial x} \right)^\pm_{j + 1/2} .
-\label{eqn:FluxIrrotNum}
-\end{align}
-
-The quantities $\ddot{h}^+_{j - 1/2}$, $\ddot{h}^-_{j + 1/2}$, $G^+_{j - 1/2}$ and $G^-_{j + 1/2}$ were calculated during the reconstruction and the FEM provided $u^\pm_{j+1/2} = u_{j+1/2}$ as $u$ is continuous across the cell boundaries. To calculate the derivatives $ \left({\partial {u}}/{\partial x} \right)^\pm_{j + 1/2}$ and $ \left({\partial {b}}/{\partial x} \right)^\pm_{j + 1/2}$ we use the reconstruction polynomials $P^u_j(x)$ and $P^b_j(x)$ for $u$ and $b$ respectively. These reconstruction polynomials pass through the values of $u$ and $b$ given over the $j^{th}$ cell and so
-for $P^u_j(x)$ we obtain the coefficients
+is used. This reconstruction polynomial passes through the values $u_{j\pm 1/2}$ and $u_j$ and so has the following coefficients
 \begin{align*}
-&p^u_0 =  \dfrac{u_{j-1/2} - 2u_j + u_{j+1/2}}{2 \Delta x^2}, 
-&p^u_1 =  \dfrac{-u_{j-1/2} + u_{j+1/2}}{\Delta x},\\
-&p^u_2 =  u_j.
+& p^u_0 =  \dfrac{u_{j-1/2} - 2u_j + u_{j+1/2}}{2 \Delta x^2}, 
+& p^u_1 =  \dfrac{-u_{j-1/2} + u_{j+1/2}}{\Delta x},\\
+& p^u_2 =  u_j.
 \end{align*}
-while for $P^b_j(x)$ the coefficients are
-\begin{align*}
-&p^b_0 =  \dfrac{-9b_{j-1/2} + 27b_{j-1/6} - 27 b_{j+1/6} + 9b_{j+1/2}}{2 \Delta x^3}, 
-&p^b_1 =  \dfrac{9b_{j-1/2} - 9b_{j-1/6} - 9b_{j+1/6} + 9b_{j+1/2}}{4 \Delta x^2},\\ \\ 
-&p^b_2 =  \dfrac{b_{j-1/2} - 27b_{j-1/6} + 27 b_{j+1/6} - b_{j+1/2}}{8 \Delta x},
-&p^b_3 =  \dfrac{-b_{j-1/2}  + 9b_{j-1/6} + 9 b_{j+1/6} - b_{j+1/2}}{16}.
-\end{align*}
-Taking the derivative of the polynomials $P^u_j(x)$ and $P^b_j(x)$ we get
-\begin{align*}
-\frac{\partial }{\partial x}P^u_j(x) &= 2p^u_0 \left(x - x_j\right) + p^u_1, \\
-\frac{\partial }{\partial x}P^b_j(x) &= 3p^b_0 \left(x - x_j\right)^2 + 2p^b_1 \left(x - x_j\right) + p^b_2.
-\end{align*}
-This gives a second-order approximation to the derivative of $u$ and $b$ at $x_{j+1/2}$ for the $j^{th}$ cell. The process for the $(j+1)^{th}$ cell is the same and we get 
+Allowing for the calculations of the derivatives like so 
 \begin{align}
 &\left(\dfrac{\partial {u}}{\partial x} \right)^-_{j + 1/2} = \frac{\partial }{\partial x}P^u_j(x_{j+1/2}), 
-&\left(\dfrac{\partial {u}}{\partial x} \right)^+_{j + 1/2} = \frac{\partial }{\partial x}P^u_{j+1}(x_{j+1/2}),  \\
-&\left(\dfrac{\partial {b}}{\partial x} \right)^-_{j + 1/2} = \frac{\partial }{\partial x}P^b_j(x_{j+1/2}), 
-&\left(\dfrac{\partial {b}}{\partial x} \right)^+_{j + 1/2} = \frac{\partial }{\partial x}P^b_{j+1}(x_{j+1/2}). 
-\label{eqn:PolyDeriv}	
+&\left(\dfrac{\partial {u}}{\partial x} \right)^+_{j + 1/2} = \frac{\partial }{\partial x}P^u_{j+1}(x_{j+1/2}).
+\label{eqn:PolyDerivu}
 \end{align}
 
 \subsection{Source Term Approximation}
+To evolve the Serre equations using \eqref{eqn:FVMUpdate} requires an approximation to $S^n_j\left(\vecn{Q}\right)$. Equation \eqref{eqn:FullSerreConMass} has no source term, therefore only the calculation of the source term for equation \eqref{eqn:Serreconsconmom} is presented.
 
-To evolve the Serre equations \eqref{eqn:FullSerreCon}, we require an approximation to the source terms contribution over the $j^{th}$ cell between times $t^n$ and $t^{n+1}$ which we denote as $S^n_j$. Equation \eqref{eqn:FullSerreConMass} has no source term, therefore we only present the calculation of the source term for equation \eqref{eqn:Serreconsconmom}.
-
-Following the work of \citet{Klein-etal-2004-2050} to produce a well-balanced method, we split our approximation to $S^n_j$ into the centred source term $S_{ci}$ and the corrective interface source terms $S^{-}_{j + \frac{1}{2}}$ and $S^{+}_{j + \frac{1}{2}}$
-\begin{equation*}
-S^n_j =  S^{-}_{j + \frac{1}{2}} + \Delta x S_{ci} + S^{+}_{j - \frac{1}{2}}.
-\end{equation*}
-Where $S_{ci}$ is the naive source term approximation and $S^{-}_{j + \frac{1}{2}}$ and $S^{+}_{j + \frac{1}{2}}$ are correction terms that ensure that the flux and source term cancel for the lake at rest solution. 
-
-We calculate the centred source term using
-\begin{equation*}
-S_{ci} = -\frac{1}{2}\left(h_j\right)^2 {u_j}\left( \frac{\partial {u}}{\partial x} \right)_j \left(\frac{\partial^2 b}{\partial x^2} \right)_j  + h_j \left(u_j\right)^2 \left(\frac{\partial b}{\partial x}\right)_j \left(\frac{\partial^2 b}{\partial x^2}\right)_j - gh_j\left(\frac{\partial b}{\partial x}\right)_j.
-\end{equation*}
-Where we use $h_j$ from the reconstruction process \eqref{eqn:ReconforhwG} and $u_j$ from the solution of \eqref{eqn:usolvefromGhb}. To calculate the derivatives we employ our polynomial representations of $u$ and $b$ \eqref{eqn:PolyDeriv} inside a cell. However, to ensure that the terms cancel properly for a lake at rest we modify our approximation to ${\partial b}/{\partial x}$ to use $\dot{b}^-_{j+1/2}$ and $\dot{b}^+_{j+1/2}$ from \eqref{eqn:BedReDefWmH}. Therefore, the following approximations are used to calculate $S_{ci}$
+Since \eqref{eqn:FVMUpdate} is temporally first-order accurate the source term approximation
+\begin{equation}
+S^n_j = -\frac{1}{2}\left(h^n_j\right)^2 {u^n_j}\left( \frac{\partial {u}}{\partial x} \right)^n_j \left(\frac{\partial^2 b}{\partial x^2} \right)^n_j  + h^n_j \left(u^n_j\right)^2 \left(\frac{\partial b}{\partial x}\right)^n_j \left(\frac{\partial^2 b}{\partial x^2}\right)^n_j - gh^n_j\left(\frac{\partial b}{\partial x}\right)^n_j.
+\label{eqn:SourceTermNaive}
+\end{equation}
+is sufficient. The quantities $h^n_j$ and $u^n_j$ are given by \eqref{eqn:ReconforhwG} and \eqref{eqn:usolvefromGhb} respectively. To calculate the derivatives of $b$ and $u$ the approximations outlined in \eqref{eqn:PolyDerivb} and \eqref{eqn:PolyDerivu} respectively are used to obtain
 \begin{align*}
 \left(\dfrac{\partial {u}}{\partial x} \right)_{j} = \frac{\partial }{\partial x}P^u_j(x_{j})& , &  
-\left(\dfrac{\partial {b}}{\partial x} \right)_{j} =  \frac{\dot{b}^-_{j+1/2} - \dot{b}^+_{j-1/2}}{\Delta x} &,& 	
+\left(\dfrac{\partial {b}}{\partial x} \right)_{j} = \frac{\partial }{\partial x}P^b_j(x_{j})& &,& 	
 \left(\dfrac{\partial^2 {b}}{\partial x^2} \right)_{j} = \frac{\partial^2 }{\partial x^2}P^b_j(x_{j}).
 \end{align*}
 
-To ensure well-balancing the corrective interface source terms
-\begin{align*}
-S^{-}_{j + \frac{1}{2}} =  \frac{g}{2} \left(\ddot{h}^{-}_{j + \frac{1}{2}} \right)^2 - \frac{g}{2} \left(h^{-}_{j + \frac{1}{2}} \right)^2&,&
-S^{+}_{j - \frac{1}{2}} =  \frac{g}{2} \left(h^{+}_{j - \frac{1}{2}}\right)^2 - \frac{g}{2}\left(\ddot{h}^{+}_{j - \frac{1}{2}}\right)^2 
-\end{align*}
-are also added. These corrective terms make use of $h^{-}_{j + \frac{1}{2}}$ and $h^{+}_{j + \frac{1}{2}}$ obtained from the reconstruction \eqref{eqn:ReconforhwG} and the other reconstructions $\ddot{h}^{-}_{j + \frac{1}{2}}$ and $\ddot{h}^{+}_{j + \frac{1}{2}}$ from \eqref{eqn:ModifiedHValue}. Combining the centred and interface source terms our approximation to the source term for $G$ is 
-\begin{equation*}
-S^n_j =   S^{-}_{j + \frac{1}{2}} + \Delta x S_{ci} + S^{+}_{j - \frac{1}{2}}.
-\end{equation*}
+We therefore have all the required approximations to perform the FVM \eqref{eqn:FVMUpdate} and obtain a temporally first-order approximation to \eqref{eqn:FullSerreCon}.
+
+\subsection{Courant-Frederichs-Lewy Condition}
+To ensure the stability of the FVM \eqref{eqn:FVMUpdate} the Courant-Friedrichs-Lewy (CFL) condition \cite{Courant-etal-1967-215} is used. The CFL condition is necessary for stability and ensures that time steps are small enough so that information is only transferred between neighbouring cells. For the Serre equations the CFL condition is 
+\begin{equation}
+\Delta t \le \frac{Cr }{\max_{j} \left\lbrace a^\pm_{j+1/2} \right\rbrace} \Delta x
+\label{eqn:CFLcond}
+\end{equation}
+where $a^\pm_{j+1/2} $ are the wave-speed bounds used in the flux approximation \eqref{eqn:WaveSpeedBoundsFluxApprox} and $0\le Cr \le 1$ is the Courant number. Typically, we use the conservative $Cr = 0.5$ for our numerical experiments.
 
 \subsection{Time-Stepping}
 To increase the order of accuracy in time we employ the second-order SSP Runge-Kutta method \cite{Gottlieb-etal-2003-89} which is a convex combination of first-order forward Euler time steps in the following way
 \begin{subequations}
 	\begin{align}
-	\overline{q}_j^{(1)} &= \overline{q}^{n}_j + \frac{\Delta t}{\Delta x} \left(F^n_{j+\frac{1}{2}} - F^n_{j-\frac{1}{2}} + S^n_j\right),\\
-	\overline{q}_j^{(2)} &= \overline{q}_j^{(1)} + \frac{\Delta t}{\Delta x} \left(F_{j+\frac{1}{2}}^{(1)} - F_{j-\frac{1}{2}}^{(1)}  + S_j^{(1)} \right), \\
-	\overline{q}^{n+1}_j &= \frac{1}{2} \left( \overline{q}^n_j +  \overline{q}_j^{(2)}  \right).
+\overline{\vecn{Q} }^{(1)}_j &= \overline{\vecn{Q} }^{n}_j - \frac{\Delta t}{\Delta x} \left(F^n_{j+1/2}\left(\vecn{Q} \right) - F^n_{j-1/2}\left(\vecn{Q} \right) \right) + \Delta t S^n_j\left(\vecn{Q} \right),\\
+\overline{\vecn{Q} }^{(2)}_j &= \overline{\vecn{Q} }^{(1)}_j - \frac{\Delta t}{\Delta x} \left(F^{(1)}_{j+1/2}\left(\vecn{Q} \right) - F^{(1)}_{j-1/2}\left(\vecn{Q} \right) \right) + \Delta t S^{(1)}_j\left(\vecn{Q} \right),\\
+	\overline{\vecn{Q} }^{n+1}_j &= \frac{1}{2} \left( \overline{\vecn{Q} }^n_j +  \overline{\vecn{Q} }_j^{(2)}  \right).
 	\end{align}
 	\label{eqn:SSPRKStep1}
 \end{subequations}
 %TVD no oscillations introduced by the particular method
 This results in a time stepping method that preserves the stability of the first-order method and is second-order accurate in time. Since all the spatial approximations are second-order accurate, the FEVM should be a second-order accurate solver for the Serre equations, as desired. 
 
+\subsection{Well Balancing Modifications}
+To ensure that the method is well-balanced the work of \citet{Klein-etal-2004-2050} is followed. This method was originally designed for the Shallow Water Wave Equations but was shown to apply equally well to the Serre equations \cite{Pitt-J-2014}.
 
-\subsection{Dry Bed Handling}
+The well balancing approach makes two changes to the method outlined above. The well-balancing introduces a different reconstruction of $h$ replacing the reconstructed $h$ values in the flux terms \eqref{eqn:FluxMassNum} and \eqref{eqn:FluxIrrotNum}. Additionally, correction terms are added to the source term approximation \eqref{eqn:SourceTermNaive}. These changes ensure that the numerical approximations to the hydrostatic pressure term in the flux and the forcing of a sloped bed in the source term cancel for the lake at rest problem.
+
+\subsubsection{Modified Reconstruction of $h$}
+The modified reconstruction of $h$, $\ddot{h}$ depends on the reconstructions $w^-_{j+1/2}$ and $w^+_{j+1/2}$ of $w$ at the cell edge, which is calculated from its cell average values in the same way as $h$ and $G$ \eqref{eqn:slopehGrecon}. From these reconstructions the bed values
+\begin{align}
+\dot{b}^-_{j+1/2} = w^-_{j+1/2} - h^-_{j+1/2} &, &\dot{b}^+_{j+1/2} = w^+_{j+1/2} - h^+_{j+1/2}
+\label{eqn:BedReDefWmH}
+\end{align}
+are calulated. Given the maximum of these bed values
+\begin{align*}
+\ddot{b}_{j+1/2} = \max\left\lbrace\dot{b}^-_{j+1/2} , \dot{b}^+_{j+1/2} \right\rbrace
+\end{align*}
+the reconstruction $\ddot{h}$ at the cell edges is given by
+\begin{align}
+&\ddot{h}^-_{j+1/2} = \max\left\lbrace 0, w^-_{j+1/2} - \ddot{b}_{j+1/2}  \right\rbrace, &\ddot{h}^+_{j+1/2} = \max\left\lbrace 0, w^+_{j+1/2} - \ddot{b}_{j+1/2} \right\rbrace.
+\label{eqn:ModifiedHValue}
+\end{align}
+which replaces $h^\pm_{j+1/2}$ in the flux terms  \eqref{eqn:FluxMassNum} and \eqref{eqn:FluxIrrotNum}.
+
+\subsubsection{Modified Source Term}
+Following the work of \citet{Klein-etal-2004-2050} to produce a well-balanced method, corrective interface source terms $S^{-}_{j + \frac{1}{2}}$ and $S^{+}_{j + \frac{1}{2}}$ are added to the source term approximation
+\begin{equation*}
+S^n_j =  \frac{1}{\Delta x}S^{-}_{j + \frac{1}{2}} +  S_{ci} +  \frac{1}{\Delta x}S^{+}_{j - \frac{1}{2}}.
+\end{equation*}
+Where $S_{ci}$ is the naive source term approximation given in \eqref{eqn:SourceTermNaive} with the approximation to $\partial b / \partial x$ altered to depend on $\dot{b}^-_{j+1/2}$ and $\dot{b}^+_{j-1/2}$ like so
+\begin{align*}
+\left(\dfrac{\partial {b}}{\partial x} \right)_{j} =  \frac{\dot{b}^-_{j+1/2} - \dot{b}^+_{j-1/2}}{\Delta x}.
+\end{align*}
+
+The corrective interface source terms are calculated like so
+\begin{align*}
+S^{-}_{j + \frac{1}{2}} =  \frac{g}{2} \left(\ddot{h}^{-}_{j + \frac{1}{2}} \right)^2 - \frac{g}{2} \left(h^{-}_{j + \frac{1}{2}} \right)^2&,&
+S^{+}_{j - \frac{1}{2}} =  \frac{g}{2} \left(h^{+}_{j - \frac{1}{2}}\right)^2 - \frac{g}{2}\left(\ddot{h}^{+}_{j - \frac{1}{2}}\right)^2 .
+\end{align*}
+These corrective terms make use of $h^{-}_{j + \frac{1}{2}}$ and $h^{+}_{j + \frac{1}{2}}$ obtained from the reconstruction \eqref{eqn:ReconforhwG} and the other reconstructions $\ddot{h}^{-}_{j + \frac{1}{2}}$ and $\ddot{h}^{+}_{j + \frac{1}{2}}$ from \eqref{eqn:ModifiedHValue}. 
+
+\subsection{Dry Bed Handling Modifications}
 Dry beds present two issues for the FEM; when $h$ and $G$ are small then small errors in $h$ and $G$ can produce large errors in $u$ leading to instabilities and when $h=0$ the stiffness matrix $\matr{A}$ \eqref{eqn:usolvefromGhb} becomes singular.
 
 The issue of large errors in $u$ when $h$ is small also arises when solving the SWWE; due to $u = (uh)/h $ being undefined as $u h $ and $h$ go to zero. For the Serre equations with horizontal beds when $h \ll 1$ from \eqref{defn:SerreEqnConservedQuantity1} we have
 \begin{equation}
 G = uh + \mathcal{O}\left(h^3\right).
 \end{equation}
-Since $h \ll 1$ we neglect the $\mathcal{O}\left(h^3\right)$ terms, and thus when $h$ is small $G$ is equal to the momentum $uh$, and the challenges posed by $h \rightarrow 0$ for the SWWE and the Serre equations are equivalent. Therefore, we can apply the dry bed handling techniques from the SWWE to the Serre equations; in particular a desingularisation transformation \cite{Kurganov-Petrova-2007-707}. 
+Since $h \ll 1$ the $\mathcal{O}\left(h^3\right)$ terms can be neglected, and thus when $h$ is small $G$ is approximately equal to the momentum $uh$, and the challenges posed by $h \rightarrow 0$ for the SWWE and the Serre equations are similar. Therefore, the dry bed handling techniques from the SWWE can be applied to the Serre equations; in particular a desingularisation transformation \cite{Kurganov-Petrova-2007-707}. 
 
 These desingularisation transforms act by modifying the calculation of $u$ given $h$ and $uh$ to avoid the singularity as the numerator and denominator go to zero, hence their name. The simplest such transformation is
 \begin{equation}
 u = \frac{(uh) h}{h\left(h + h_{base}\right)}
 \label{eqn:calculationofugivenuhandh}
 \end{equation}
-where $h_{base}$ is some small chosen parameter. The error introduced by this transformation is smallest when $h_{base}$ is smallest. However, as noted by \citet{Kurganov-Petrova-2007-707} small values of $h_{base}$ lead to large numerical errors in the calculation of $u$. To avoid such errors $h_{base}$ can be made larger or following \citet{Kurganov-Petrova-2007-707} different desingularisation transformations can be employed. For the forced solution validation we found the simpler transformation with small values of $h_{base}$ more useful, keeping in mind that large numerical errors in $u$ were possible for small values of $h$. 
+where $h_{base}$ is some small chosen parameter. The error introduced by this transformation is smallest when $h_{base}$ is smallest. However, as noted by \citet{Kurganov-Petrova-2007-707} small values of $h_{base}$ lead to large numerical errors in the calculation of $u$. To avoid such errors $h_{base}$ can be made larger or following \citet{Kurganov-Petrova-2007-707} different desingularisation transformations can be employed. For the validations described later, we found the simpler transformation with small values of $h_{base}$ more useful, keeping in mind that large numerical errors in $u$ were possible for small values of $h$. 
 
 To adapt the calculation of $u$ in \eqref{eqn:calculationofugivenuhandh} to \eqref{defn:SerreEqnConservedQuantity1} we view it as a transformation of the quantity $h$ which is equivalent to
 \begin{equation}
+\label{eqn:hsimpletransform}
 h \rightarrow h \left( \frac{h + h_{base}}{h} \right).
 \end{equation}
-This transformation is ill-defined when $h = 0$ so we also add in a  small term $h_{tol}$ to the denominator. This $h_{tol}$ also serves as our cut-off value with any cells with $\overline{h}_j < h_{tol}$ being considered dry. Therefore, our transformation for the reconstructed values of $h$ in the finite element method is
+This transformation is ill-defined when $h = 0$ so we also add in a  small term $h_{tol}$ to the denominator. This $h_{tol}$ also serves as our cut-off value with any cells with $\overline{h}_j < h_{tol}$ considered as dry. Therefore, our transformation for the reconstructed values of $h$ in the finite element method is
 \begin{align}
 \label{eqn:hdrytransform}
 h^+_{j-1/2}  = h^+_{j-1/2} \left(\frac{ h^+_{j-1/2}  + h_{base}}{h^+_{j-1/2} + h_{tol}}\right) &,&
 h^-_{j+1/2}  = h^-_{j+1/2} \left(\frac{ h^-_{j+1/2}  + h_{base}}{h^-_{j+1/2} + h_{tol}}\right)
 \end{align} 
-where on the right hand side are the reconstructed values of $h$ from \eqref{eqn:ReconforhwG} and the left hand side are the values of $h$ used to defined the basis functions of the FEM \eqref{eqn:FEapproxtohG}. This transformation is applied to all terms in the FEM avoiding the singularity as $h \rightarrow 0$.
+where on the right hand side are the reconstructed values of $h$ from \eqref{eqn:ReconforhwG} and the left hand side are the values of $h$ used to defined the basis functions of the FEM \eqref{eqn:FEapproxtohG}. This transformation is applied to all terms in the FEM avoiding the singularity in \eqref{eqn:hsimpletransform} as $h \rightarrow 0$.
 
-Even with the transform \eqref{eqn:hdrytransform}, the matrix $\matr{A}$ can become singular. To circumvent the non-singularity an LU decomposition with partial pivoting \cite{NumRecC-1996} was employed. Typically we set the pivot tolerance value $p_{tol} = 10^{-20}$ allowing the matrix solver to accurately invert $\matr{A}$ and thus solve \eqref{eqn:usolvefromGhb} when $h = 0$. 
+Even with the transform \eqref{eqn:hdrytransform}, the matrix $\matr{A}$ can become singular. To circumvent this an LU decomposition with partial pivoting \cite{NumRecC-1996} was employed. Typically we set the pivot tolerance value $p_{tol} = 10^{-20}$ allowing the matrix solver to accurately invert $\matr{A}$ in \eqref{eqn:usolvefromGhb} when $h = 0$. 
 
-A cell is considered dry when $\overline{h}_j \le h_{tol}$, for dry cells we set
+Finally, to avoid very large errors in $u$ we also dry cells when the cell average value of $h$ is very small. A cell is considered dry when $\overline{h}_j \le h_{tol}$. For dry cells we set
 \begin{align*}
 & 	h^+_{j-1/2}  = 0,   & 	G^+_{j-1/2}  = 0, & & 	w^+_{j-1/2}  = b_{j-1/2},   \\
 &	h_{j} = 0, & 	G_{j}  = 0,  & 	&w_{j}  = b_{j},\\
-& 	h^-_{j+1/2}  = 0,  & 	G^-_{j+1/2}  = 0, & 	&w^-_{j+1/2}  = b_{j+1/2} 
+& 	h^-_{j+1/2}  = 0,  & 	G^-_{j+1/2}  = 0, & 	&w^-_{j+1/2}  = b_{j+1/2}, \\
+& u_j = 0
 \end{align*}
-and
+and if the neighbouring cells are dry then the velocity at the cell edges vanish so that
 \begin{align*}
-& 	u_{j-1/2}  = 0  &\text{if}& &\overline{h}_{j-1}\le h_{tol}, \\
-& 	u_{j}  = 0, \\
-& 	u_{j+1/2}  = 0  &\text{if}& &\overline{h}_{j+1} \le h_{tol}
+& 	u_{j-1/2}  = 0  &\text{when}& &\overline{h}_{j-1}\le h_{tol}, \\
+& 	u_{j+1/2}  = 0  &\text{when}& &\overline{h}_{j+1} \le h_{tol}
 \end{align*}
 this drying procedure occurs after the solution of \eqref{eqn:usolvefromGhb}. In the numerical experiments the typical values used were $h_{tol} = 10^{-12}$ and $h_{base} = 10^{-8}$.
 
 %----------
 \section{Validation}
-To validate that the numerical method is the appropriate order of accuracy, well-balanced and can handle dry-beds we used three numerical experiments. Firstly, the convergence and conservation properties of the method for the lake at rest analytic solution were measured. Secondly, we measured the convergence of the numerical method to forced solutions. Finally, we compared our numerical solutions to the experimental results of \citet{Synolakis-1987-523}.
+To validate that the numerical method is the appropriate order of accuracy, well-balanced and can handle dry-beds we used an analytic solution,  forced solution and experimental results. Firstly, the convergence and conservation properties of the method for the lake at rest analytic solution were measured. Secondly, we measured the convergence of the numerical method to a forced solution of the Serre equations. Finally, we compared our numerical solutions to the experimental results of \citet{Synolakis-1987-523}.
 
 
 \subsection{Measures of Convergence and Conservation}
-We begin the validation by defining the measures of convergence and conservation for a general quantity $q$. The $L_2$ vector norm was used to measure the difference between the numerical solutions at the cell midpoints $\vecn{q^*}$ and the analytic solutions at the cell midpoints $\vecn{q}$ like so
+We begin the validation by defining the measures of convergence and conservation for a general quantity $q$. The $L_2$ vector norm was used to measure the difference between the numerical solutions at the cell midpoints $\vecn{q^*}$ and the analytic or forced solutions at the cell midpoints $\vecn{q}$ like so
 \begin{equation*}
 L_2(\vecn{q},\vecn{q^*}) =  \left\lbrace \begin{array}{c r} 
 \dfrac{||\vecn{q^*} - \vecn{q}||_{2}}{||\vecn{q}||_{2}} & ||\vecn{q}||_{2} > 0 \\ \\
@@ -432,8 +472,8 @@ C^*(\vecn{q},\vecn{q^*}) =  \left\lbrace \begin{array}{c r}
 \dfrac{|\mathcal{C}^*\left({\vecn{q^*}}\right) - \mathcal{C}^*\left({\vecn{q}}\right)| }{|\mathcal{C}^*\left({\vecn{q}}\right)|} & |\mathcal{C}^*\left({\vecn{q}}\right)| > 0 \\ \\
 |\mathcal{C}^*\left({\vecn{q^*}}\right)| & |\mathcal{C}^*\left({\vecn{q}}\right)| = 0  . \end{array}\right. 
 \end{equation*}
-Where the total amount of a quantity $\mathcal{C}^*\left({\vecn{q}}\right)$ is calculated numerically by summing the total amount of $q$ in each cell obtained by fifth-order accurate Gaussian quadrature of a quartic interpolation of $q$ over the cell using the midpoint values ${\vecn{q}}$. 
-
+Where the total amount of a quantity $\mathcal{C}^*\left({\vecn{q}}\right)$ is calculated numerically by summing the total amount of $q$ in each cell.
+With fifth-order accurate Gaussian quadrature of a quartic interpolation of $q$ using the neighbouring midpoint values used to calculate the total amount of $q$ in a cell.
 \subsection{Lake at Rest Solution Validation}
 The lake at rest is a stationary analytic solution of the Serre equations where a still lake has a horizontal water surface over any bathymetry. This solution is maintained due to the balance of the hydrostatic pressure and the forcing of the bed slope. A well-balanced numerical method should accurately reproduce this lake at rest stationary solution.
 
@@ -445,9 +485,9 @@ To test whether this method is well-balanced we chose the following lake at rest
 	\end{align}
 	\label{eqn:LARdefhub}
 \end{subequations}
-To demonstrate the capability of the method in the presence of dry and wet beds the parameter values $a_0 = 0m$, $a_1 = 1m$ and $a_2 = 2 \pi / 50 m^{-1} $ were chosen. These parameter values result in lakes with a horizontal free surface where the stage $w(x,t)= h(x,t) + b(x) =a_0= 0$ \eqref{eqn:LARdefhub} surrounded by dry beds.
+To demonstrate the capability of the method in the presence of dry and wet beds the parameter values $a_0 = 0m$, $a_1 = 1m$ and $a_2 = 2 \pi / 50 m^{-1} $ were chosen. These parameter values result in lakes with a horizontal free surface surrounded by dry beds.
 
-For the numerical solutions the spatial domain was $x \in \left[-112.5 m,87.5 m\right]$ and the final time was $t=10s$, with the standard gravitational acceleration $g= 9.81 m/s^2$. The spatial resolution of the method was varied so that $\Delta x = 100 / 2^k m$ with $k \in \left[8, \dots ,17\right]$ and the CFL condition \cite{Courant-etal-1967-215} was satisfied by having $\Delta t = Cr \Delta x / \sqrt{g}$ with condition number $Cr = 0.5$. The standard limiting parameter $\theta = 1.2$ was used in the generalised minmod limiter \eqref{eqn:slopehGrecon}. Dirichlet boundary conditions were used at both ends as the analytic solution is stationary.
+For the numerical solutions the spatial domain was $x \in \left[-112.5 m,87.5 m\right]$ and the final time was $t=10s$, with the standard gravitational acceleration $g= 9.81 m/s^2$. The spatial resolution of the method was varied so that $\Delta x = 100 / 2^k m$ with $k \in \left[8, \dots ,17\right]$ and the CFL condition \eqref{eqn:CFLcond} was satisfied by having $\Delta t = Cr \Delta x / \sqrt{g}$ with condition number $Cr = 0.5$. The standard limiter parameter $\theta = 1.2$ was used in the generalised minmod limiter \eqref{eqn:slopehGrecon}. Dirichlet boundary conditions were used at both ends as the analytic solution is stationary.
 
 The numerical method is assessed by using the specified lake at rest solution as initial conditions and comparing the numerical solution at $t=10s$ to the analytic solution, which are the initial conditions.
 
@@ -473,28 +513,28 @@ An example numerical solution with $\Delta x = 100/2^{10}m \approx 0.0977m$ at $
 		\label{fig:LARC}
 		\vspace{0.5cm}
 	\end{subfigure}
-	\caption{Convergence ($h$, $u$ and $G$) and conservation error ($h$, $u$, $G$ $\mathcal{H}$) against $\Delta x$ for the lake at rest problem at $t=10s$. }
+	\caption{Convergence ($h$, $u$ and $G$) and conservation error ($h$, $uh$, $G$ $\mathcal{H}$) against $\Delta x$ for the lake at rest problem at $t=10s$. }
 	\label{fig:LARL2C}
 \end{figure}
 
-Examination of the $L_2$ errors depicted in Figure \ref{fig:LARL1} reveals that the method reproduced $h$, $G$ and $u$ precisely, accounting for round-off errors. For $G$ and $u$ their errors are increasing due to an accumulation of the round-off errors for each cell and time step; hence their increase as $\Delta x \rightarrow 0$. The errors in $u$ produce errors in $h$ through its flux function increasing the error in $h$ as $\Delta x$ decreases. However, since $h$ is far larger than $u$ these effects have a more complicated relationship to the cell width.
+Examination of the $L_2$ errors depicted in Figure \ref{fig:LARL2C}(a) reveals that the method reproduced $h$, $G$ and $u$ precisely, accounting for round-off errors. For $h$, $G$ and $u$ their errors are increasing due to an accumulation of the round-off errors; hence they increase as $\Delta x \rightarrow 0$. 
 
-The conservation error as measured by $C^*$  for $h$, $uh$, $G$ and $\mathcal{H}$ is given in Figure \ref{fig:LARC}. The conservation error of these conserved quantities demonstrates that all quantities are conserved within machine precision. With $\mathcal{H}$ being conserved exactly for most numerical solutions, hence its disappearance from the log-log plot. The conservation error of $\mathcal{H}$ is small for the lake at rest solution since $u$ is very small. Hence, $\mathcal{H}$ is essentially the gravitational potential energy which since mass is well conserved is also well conserved.
+The conservation errors as measured by $C^*$ for $h$, $uh$, $G$ and $\mathcal{H}$ are given in Figure \ref{fig:LARL2C}(b). The conservation error of these conserved quantities demonstrates that all quantities are conserved within machine precision. With $\mathcal{H}$ being conserved exactly for most numerical solutions, hence its disappearance from the log-log plot. The conservation error of $\mathcal{H}$ is small for the lake at rest solution since $u$ and therefore the kinetic energy is very small. 
 
 These results demonstrate that the developed method has accurately reproduced the lake at rest solution and is therefore well-balanced.
 
 %--------------------------------------------------------------------------------
 \subsection{Forced Solution Validation}
-There are currently no known analytic solution of the Serre equations for varying bathymetry with dry regions where the velocities are non-zero. To test the capability of our numerical method in this environment we must used forced solutions.
+There are currently no known analytic solution of the Serre equations for the wetting and drying of variable beds. To test the capability of our numerical method in this environment we resort to a forced solution.
 
-To do this we select some particular functions for all of the primitive quantities; $h$, $u$ and $b$ which we denote $h^\#$, $u^\#$ and $b^\#$ respectively. To force these functions $h^\#$, $u^\#$ and $b^\#$ to be solutions of the Serre equations \eqref{eqn:FullSerreCon} we add the terms $S_h$ and $S_G$ to obtain the forced Serre equations
+To force a solution we select some particular functions for all of the primitive quantities; $h$, $u$ and $b$ which we denote $h^\#$, $u^\#$ and $b^\#$ respectively. To force these functions $h^\#$, $u^\#$ and $b^\#$ to be exact solutions of some modified Serre equations we add the terms $S_h$ and $S_G$ to obtain the forced Serre equations
 \begin{subequations}
 	\label{eqn:FullSerreConForced}
 	\begin{align}
 	& \frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} + S_{h}  = 0 ,\label{eqn:FullSerreConMassForced}  \\ \nonumber \\
 	\begin{split}
 	\label{eqn:SerreconsconmomForced}
-	\frac{\partial G}{\partial t}  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} - \frac{2}{3}h^3 \left[ \frac{\partial {u}}{\partial x} \right]^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right) \\ \\ + \frac{1}{2}h^2 {u} \frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  - h {u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2} + gh\frac{\partial b}{\partial x} + S_{G} = 0
+	\frac{\partial G}{\partial t}  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} - \frac{2h^3}{3} \left[ \frac{\partial {u}}{\partial x} \right]^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right) \\ \\ + \frac{uh^2 }{2}\frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  - h {u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2} + gh\frac{\partial b}{\partial x} + S_{G} = 0
 	\end{split}
 	\end{align}
 \end{subequations}
@@ -502,15 +542,15 @@ where
 \begin{align*}
 &  S_{h} = -\frac{\partial h^\#}{\partial t} - \dfrac{\partial (u^\#h^\#)}{\partial x} ,  \\ \nonumber \\
 \begin{split}
-S_{G} = -\frac{\partial G^\#}{\partial t}  - \frac{\partial}{\partial x} \left( {u}^\# G^\# + \frac{g\left[h^\#\right]^2}{2} - \frac{2}{3}\left[h^\#\right]^3 \left[\frac{\partial {u}^\#}{\partial x}\right]^2 + \left[h^\#\right]^2 {u^\#}\frac{\partial {u}^\#}{\partial x}\frac{\partial b^\#}{\partial x} \right) \\ \\ - \frac{1}{2}\left[h^\#\right]^2 {u}^\# \frac{\partial {u}^\#}{\partial x} \frac{\partial^2 b^\#}{\partial x^2}  + h^\# {\left[u^\#\right]}^2\frac{\partial b^\#}{\partial x}\frac{\partial^2 b^\#}{\partial x^2} - gh^\#\frac{\partial b^\#}{\partial x}.
+S_{G} = -\frac{\partial G^\#}{\partial t}  - \frac{\partial}{\partial x} \left( {u}^\# G^\# + \frac{g\left[h^\#\right]^2}{2} - \frac{2\left[h^\#\right]^3}{3} \left[\frac{\partial {u}^\#}{\partial x}\right]^2 + \left[h^\#\right]^2 {u^\#}\frac{\partial {u}^\#}{\partial x}\frac{\partial b^\#}{\partial x} \right) \\ \\ - \frac{{u}^\#\left[h^\#\right]^2 }{2} \frac{\partial {u}^\#}{\partial x} \frac{\partial^2 b^\#}{\partial x^2}  + h^\# {\left[u^\#\right]}^2\frac{\partial b^\#}{\partial x}\frac{\partial^2 b^\#}{\partial x^2} - gh^\#\frac{\partial b^\#}{\partial x}.
 \end{split}
 \end{align*} 
-These forced Serre equations are then numerically solved by solving the Serre equations \eqref{eqn:FullSerreCon} with the analytic values of $S_{h}$ and $S_{G}$ given $h^\#$, $u^\#$ and $b^\#$. So that, the only error present in the numerical solutions of the forced Serre equations is the error produced by the numerical methods used to solve the Serre equations.
+These forced Serre equations are then numerically solved by solving the Serre equations \eqref{eqn:FullSerreCon} with the analytic values of $S_{h}$ and $S_{G}$ given $h^\#$, $u^\#$ and $b^\#$. So that, the only error present in the numerical solutions of the forced Serre equations is the error produced by the numerical method used to solve the Serre equations.
 
 Note that since the choice of the forced solutions $h^\#$, $u^\#$ and $b^\#$ is arbitrary the solutions of the forced Serre equations need not be conservative or retain any properties of the underlying Serre equations. 
 
 \subsubsection{Dry Bed Forced Solution Problem}
-To completely test the capability of the numerical method to solve the Serre equations in all circumstances the following forced solutions
+To test the capability of the numerical method to solve the Serre equations the following forced solutions
 \begin{subequations}
 	\begin{align}
 	\label{eqn:ForcedSolutionxt}
@@ -519,11 +559,11 @@ To completely test the capability of the numerical method to solve the Serre equ
 	b^\#(x) &= a_5 \sin\left(a_6 x\right)
 	\end{align}
 \end{subequations}
-for the primitive variables were chosen. These functions produce a Gaussian bump for $h$ and $u$ that travels at a fixed speed $a_2$ over a periodic bed. Thus, $h$ and $u$ will have constant shape and travel to the right over time. However, this is not the case for $G$ as $u$ and $h$ have constant shape but the bed is periodic. With the bed terms in $G$ \eqref{defn:SerreEqnConservedQuantity1} changing the shape of $G$ as the Gaussian bump in $h$ and $u$ encounters different bed slopes.
+for the primitive variables was chosen. These functions produce a Gaussian bump for $h$ and $u$ that travels at a fixed speed $a_2$ over a dry periodic bed. Thus, $h$ and $u$ will have constant shape and travel to the right over time. However, this is not the case for $G$ as $u$ and $h$ have constant shape but the bed is periodic. With the bed terms in $G$, \eqref{defn:SerreEqnConservedQuantity1} changing the shape of $G$ as the Gaussian bump in $h$ and $u$ encounters different bed slopes.
 
-The values $a_0 = 0.5m$, $a_1 = 2 \pi / \left(10 a_7\right) m/s$, $a_2 =- 3\pi/ \left(2 a_6\right)m$, $a_3 = \pi / (16 a_6) m^2$, $a_4 = 0.5 m/s$, $a_5 = 1.0 m$ and $a_6 = \pi / 25 m^{-1}$ were used. These parameter values result in a Gaussian bump in $h$ and $u$ that has a width much smaller than the wavelength of the bed profile and travels precisely one wavelength of the bed in $10s$. This set up tests the capability of the numerical method in the most general flow scenario with varying bathymetry, non-zero velocities and dry beds. 
+The values $a_0 = 0.5m$, $a_1 = 2 \pi / \left(10 a_7\right) m/s$, $a_2 =- 3\pi/ \left(2 a_6\right)m$, $a_3 = \pi / (16 a_6) m^2$, $a_4 = 0.5 m/s$, $a_5 = 1.0 m$ and $a_6 = \pi / 25 m^{-1}$ were used. These parameter values result in a Gaussian bump in $h$ and $u$ that has a width much smaller than the wavelength of the bed profile and travels precisely one wavelength of the bed in $10s$. 
 
-The domain of the numerical solutions was $x \in \left[-112.5 m,87.5 m\right]$ with $t \in \left[0s,10s\right]$. The standard gravitational acceleration $g= 9.81 m/s^2$ was used. The spatial resolution of numerical methods was varied like so $\Delta x = 100 / 2^k m$ with $k \in \left[8,\dots,17\right]$. To satisfy the CFL condition \cite{Courant-etal-1967-215} the temporal resolution
+The domain of the numerical solutions was $x \in \left[-112.5 m,87.5 m\right]$ with $t \in \left[0s,10s\right]$. The standard gravitational acceleration $g= 9.81 m/s^2$ was used. The spatial resolution of numerical methods was varied like so $\Delta x = 100 / 2^k m$ with $k \in \left[8,\dots,17\right]$. To satisfy the CFL condition \eqref{eqn:CFLcond} the temporal resolution
 $\Delta t = Cr \Delta x / \left(a_1 + a_4 + \sqrt{g\left(a_0\right)}\right)$ was chosen with condition number $Cr = 0.5$. The value $\theta = 1.2$ was used in the generalised minmod limiter \eqref{eqn:slopehGrecon} and Dirichlet boundary conditions were applied at the boundaries of the domain. 
 \begin{figure}
 	\centering
@@ -558,23 +598,25 @@ $\Delta t = Cr \Delta x / \left(a_1 + a_4 + \sqrt{g\left(a_0\right)}\right)$ was
 \end{figure}
 %[]
 
-Plots of $w$, $h$, $u$ and $G$ are given in Figure \ref{fig:ExampleForcedSolutionDry} for the numerical solution with $\Delta x = 100 / 2^{10}m\approx 0.0977m$. The numerical solutions of $w$, $h$ and $G$ well reproduce their respective forced solutions. However, $u$ contains large errors behind the Gaussian bump which are caused by the particular choices $h_{{base}} = 10^{-8}$ and $h_{{tol}} = 10^{-12}$ used in the desingularisation transformation applied to the FEM \eqref{eqn:usolvefromGhb}. By choosing larger values of these quantities the errors in $u$ can be significantly damped. However, if $h_{{base}}$ and $h_{{tol}}$ are larger they begin to dominate the $L_2$ errors in $h$, $G$ and $uh$ making the convergence less obvious. This trade-off is present in all desingularisation transforms. 
+Plots of $w$, $h$, $u$ and $G$ are given in Figure \ref{fig:ExampleForcedSolutionDry} for the numerical solution with $\Delta x = 100 / 2^{10}m\approx 0.0977m$. The numerical solutions of $w$, $h$ and $G$ well reproduce their respective forced solutions. However, $u$ contains large errors behind the Gaussian bump which are caused by the particular choices $h_{{base}} = 10^{-8}$ and $h_{{tol}} = 10^{-12}$ used in the desingularisation transformation applied to the FEM, \eqref{eqn:usolvefromGhb}. By choosing larger values for these quantities the errors in $u$ can be significantly damped. However, if $h_{{base}}$ and $h_{{tol}}$ are larger they begin to dominate the $L_2$ errors in $h$ and $G$ making the convergence less obvious. This trade-off is present in all desingularisation transforms. 
 
 For our purposes the chosen desingularisation transform \eqref{eqn:hdrytransform} with small $h_{{base}}$ and $h_{{tol}}$ values was sufficient, resulting in large observed errors in $u$ when $h$ is small.
 
 %h > 10**-3 lowest
-The $L_2$ errors for $h$, $u$, $uh$ and $G$ in regions where $h > 10^{-3} m$ are given in Figure \ref{fig:L1convergenceforcedWet}. For these regions where $h$ is large the second-order convergence of all quantities is observed. When $h$ is small, the second-order accuracy in the approximation of $u$ is lost but the other quantities retain their second-order convergence as all flux and source terms depend on $u$ multiplied by some power of $h$. Therefore, the large errors in $u$ do not pollute the numerical approximation to the other quantities.
+The $L_2$ errors for $h$, $u$ and $G$ in regions where $h > 10^{-3} m$ are given in Figure \ref{fig:L1convergenceforcedWet}. For these regions where $h$ is large the second-order convergence of all quantities is observed. When $h$ is small, the second-order accuracy in the approximation of $u$ is lost but the other quantities retain their second-order convergence as all flux and source terms depend on $u$ multiplied by some power of $h$. Therefore, the large errors in $u$ do not pollute the numerical approximations to the other quantities.
 
 
-Therefore, this method retains second-order convergence for $h$, $G$ and $uh$ in the presence of dry beds, even with small $h_{{base}}$ and $h_{{tol}}$ values. Although, in such cases the velocity may have large errors in regions where $h$ is small. For physical applications where large errors in $u$ when $h$ is small are not acceptable we recommend altering the dry bed handling of the scheme by increasing the $h_{{base}}$ and $h_{{tol}}$ values or altering the desingularisation transformation \cite{Kurganov-Petrova-2007-707}. 
+Therefore, this method retains second-order convergence for $h$ and $G$ in the presence of dry beds, even with small $h_{{base}}$ and $h_{{tol}}$ values. Although, in such cases the velocity may have large errors in regions where $h$ is small. For physical applications where large errors in $u$ when $h$ is small are not acceptable we recommend altering the dry bed handling of the scheme by increasing the $h_{{base}}$ and $h_{{tol}}$ values or altering the desingularisation transformation \cite{Kurganov-Petrova-2007-707}. 
 
 
 %--------------------------------------------------------------------------------
 \subsection{Run-up of a Solitary Wave}
 
-To study the run-up of incoming waves on linear beaches a series of experiments were conducted by \citet{Synolakis-1987-523}. These experiments consisted of a number of run-up events for a wide array of breaking and non-breaking waves where snapshots of the entire water surface were taken at certain times. These experiments were all performed on the beach profile depicted in Figure \ref{fig:SynolakisWT}, where all the quantities are non-dimensionalised \cite{Synolakis-1987-523}. To denote that a quantity is non-dimensionalised we use a prime; for example for a generic quantity $q$ its non-dimensionalised version is $q'$. To assess the numerical method we recreated one of these experiments, which captured the run-up of a non-breaking solitary wave.
+To study the run-up of incoming waves on linear beaches a series of experiments were conducted by \citet{Synolakis-1987-523}. These experiments consisted of a number of run-up events for a wide array of breaking and non-breaking waves where snapshots of the entire water surface were taken at certain times. These experiments were all performed on the beach profile depicted in Figure \ref{fig:SynolakisWT}, where all the quantities are non-dimensionalised \cite{Synolakis-1987-523}. To denote that a quantity is non-dimensionalised we use a prime. To assess the numerical method we recreated one of these experiments, which captured the run-up of a non-breaking solitary wave.
 
-The numerical method used the non-dimensionalised quantities reported by \citet{Synolakis-1987-523} to reproduce the experiment. The spatial domain was $x' \in [-30,150]$ with a resolution of $\Delta x = 0.05$ and was run until $t' = 250$ with the CFL condition \cite{Courant-etal-1967-215} satisfied by setting $\Delta t = 0.1 \Delta x$. The spatial reconstruction used the input parameter $\theta = 1.2$ and the acceleration due to gravity $g= 1$ was chosen to match the non-dimensionalisation.
+The numerical method used the non-dimensionalised quantities reported by \citet{Synolakis-1987-523} to reproduce the experiment. The spatial domain was $x' \in [-30,150]$ with a resolution of $\Delta x = 0.05$ and was run until $t' = 250$ with the CFL condition \eqref{eqn:CFLcond} satisfied by setting $\Delta t = 0.1 \Delta x$. The spatial reconstruction used the input parameter $\theta = 1.2$ and the acceleration due to gravity $g= 1$ was chosen to match the non-dimensionalisation.
+
+The same initial conditions are used to generate this numerical experiment as those of \citet{Li-2014-169}. This was a leftward travelling solitary wave analytic solution of the Serre equations centred around $x' = 38.5$. Figure \ref{fig:SynolakisWT} demonstrates the initial water surface profile given by these initial conditions. 
 
 The non-dimensionalised water surface data is given at the various times in Figure \ref{fig:SynolakisFEVMNoBreak}. The error in conservation of $h'$, $u'h'$, $G'$ and $\mathcal{H}'$ by $t' = 250$ as measured by $C^*$ are given in Table \ref{tab:ConservationSynFEVM}. 
 
@@ -584,7 +626,12 @@ The non-dimensionalised water surface data is given at the various times in Figu
 	\caption{Diagram showing a longitudinal section of the wave tank for the run-up experiment with the water (\squareF{blue}) and the bed (\squareF{brown!80!black}) where the coordinates have been non-dimensionalised \cite{Synolakis-1987-523}.}
 	\label{fig:SynolakisWT}
 \end{figure}
-
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{./Figures/Experimental/Synolakis/nonbreaking/0s.pdf}
+	\caption{ Initial water surface profile (\squareF{blue}) over the bed (\squareF{brown!80!black}) for the run-up experiment of \citet{Synolakis-1987-523}.}
+	\label{fig:SynolakisInit}
+\end{figure}
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -611,7 +658,7 @@ The non-dimensionalised water surface data is given at the various times in Figu
 	\label{fig:SynolakisFEVMNoBreak}
 \end{figure}
 
-The numerical solutions reproduce the incoming wave properties and the maximum run-up well. The experimental wave appears to be more skewed towards the shoreline, but this shape difference has all but disappeared as the wave begins to inundate the shore. The only other noticeable difference is that the numerical solution appears to run-down further than the experimental results. The observed larger run-down is likely caused by the omission of bed friction for the Serre equations in this paper.
+The numerical solution reproduces the incoming wave properties and the maximum run-up well, and compares well to numerical solutions presented in the literature \cite{Li-2014-169,Filippini-etal-2016-381}. The experimental wave appears to be more skewed towards the shoreline, but this shape difference has all but disappeared as the wave begins to inundate the shore. The only other noticeable difference is that the numerical solution appears to receed further than the experimental results. The observed larger run-down is likely caused by the omission of bed friction for the Serre equations in this paper.
 
 
 \begin{table}
@@ -631,56 +678,11 @@ The numerical solutions reproduce the incoming wave properties and the maximum r
 
 Both $h'$ and $\mathcal{H}'$ are well conserved by the method throughout the run-up and run-down of the wave, particularly $h'$. The total energy $\mathcal{H}'$ of the method is also well conserved, however $\mathcal{H}'$ appears to have slightly increased in the method during the run-up process due to the methods handling of the dry bed problem. During this experiment kinetic energy is converted into gravitational potential energy and then back again as the wave is reflected. By $t' = 250$ the reflection of the wave is complete and so we can see that the total amount of $u'h'$ and $G'$ have changed signs, but accounting for this their errors are quite small. Given that kinetic energy and gravitational energy were exchanged and the handling of the dry bed, the conservation error of $u'h'$ and $G'$ is good. 
 
-The Serre equations have reproduced the experimental result of \citet{Synolakis-1987-523} very well. Experimentally validating the numerical methods ability to solve the Serre equations for flows over dry beds. However, the influence of dispersion during the inundation phase is not well tested here as these experimental results are also well reproduced by the SWWE \cite{Bollermann-etal-2011-271}.
-
-%\section{Comparison To Ritter's Dry-Bed Dam-Break Solution}
-%To investigate the effect of the extra terms in the Serre equations as comapred to the Shallow Water Wave Equations we will now compare the numerical solutions of the Serre equations to the analytic solution discovered by \citet{Ritter-1892} for a dam-break over a dry bed. 
-%This solution to the SWWE is given by
-%\begin{subequations}
-%\begin{equation}
-%h(x,t) = \left\lbrace  \begin{array}{l r}
-%h_0 & x < -t \sqrt{gh_0}   \B\\
-%\dfrac{4}{9g} \left(\sqrt{gh_0} -\dfrac{x}{2t} \right)^2 & -t \sqrt{gh_0} \le x \le 2t\sqrt{gh_0} \B \\
-%0 & \text{otherwise},
-%\end{array} \right.
-%\end{equation}
-%\begin{equation}
-%u(x,t) = \left\lbrace  \begin{array}{l r}
-%\dfrac{2}{3} \left(\sqrt{gh_0}  +\dfrac{x}{t} \right) & -t \sqrt{gh_0} \le x \le 2t\sqrt{gh_0} \B \\
-%0 & \text{otherwise}.
-%\end{array} \right.
-%\end{equation}
-%\label{eqn:RitterSol}
-%\end{subequations}
-%Initially the water is still with a discontinuous jump at $x= 0$ between the two depths $h_0$ and $0$. As time passes the water rushes down producing a parabolic shape with positive curvature. 
-%
-%For these experiments the initial conditions on our Serre equations will be Ritter's solution \eqref{eqn:RitterSol} at $t= 1s$ with $h_0 = 1m$.
-%
-%
-%\begin{figure}
-%	\centering
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./Figures/DryBedDB/Exh.pdf}
-%		\subcaption{$h$}
-%		\vspace{0.5cm}
-%	\end{subfigure}%
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./Figures/DryBedDB/Exu.pdf}
-%		\subcaption{$u$}
-%		\vspace{0.5cm}
-%	\end{subfigure}
-%	\begin{subfigure}{0.5\textwidth}
-%		\includegraphics[width=\textwidth]{./Figures/DryBedDB/ExG.pdf}
-%		\subcaption{$G$}
-%		\vspace{0.5cm}
-%	\end{subfigure}%
-%	\caption{A .}
-%	\label{fig:DryDB}
-%\end{figure}
+The Serre equations have reproduced the experimental result of \citet{Synolakis-1987-523} very well. Experimentally validating the numerical methods ability to solve the Serre equations for flows over dry beds.
 
 \section{Conclusion}
-A second-order FEVM was developed for the one-dimensional Serre equations with varying bathymetry. It was demonstrated to be well-balanced, second-order accurate in the presence of dry beds and compared well to experimental results. This extends the previous work in the literature by providing a convergence analysis of numerical solutions of the Serre equations in the presence of dry beds. 
-
+A second-order numerical method for the one-dimensional Serre equations with varying bathymetry was described. The method uses a FVM to solve the Serre equations in conservation law form and improves previous versions of the FVM solvers for the Serre equations \cite{Zoppou-etal-2017}, by using a FEM to solve for the depth-averaged horizontal velocity. The method is modified from a naive version to ensure that it is well-balanced for the lake at rest steady state and able to handle flows over dry beds. The numerical method was validated against the lake at rest stationary solution and shown to be well-balanced. Furthermore, it reproduced forced solutions containing the wetting and drying of variable beds with second-order accuracy, affirming its ability to adequately solve the Serre equations for flows over dry beds. Finally, a numerical solution was compared to the experimental results of \citet{Synolakis-1987-523}, demonstrating the ability of the numerical method to accurately reproduce physical results. These validation results extend those produced by other solvers of the Serre equations for flows over dry beds
+\cite{Li-2014-169,Filippini-etal-2016-381} by demonstrating convergence for forced solutions.
 
 
 \section*{References}

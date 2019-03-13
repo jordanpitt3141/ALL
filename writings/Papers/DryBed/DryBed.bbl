@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{16}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
@@ -8,56 +8,12 @@
   \urlstyle{rm}\url{#1}\endgroup}\fi
 \providecommand{\bibinfo}[2]{#2}
 
-\bibitem[{Roberts(2018)}]{ANUGA}
-\bibinfo{author}{S.~Roberts}, \bibinfo{title}{{ANUGA}},
-  \urlprefix\url{https://anuga.anu.edu.au/}, \bibinfo{year}{2018}.
-
-\bibitem[{Wang(2009)}]{Comcot}
-\bibinfo{author}{X.~Wang}, \bibinfo{title}{COMCOT},
-  \urlprefix\url{http://223.4.213.26/archive/tsunami/cornell/comcot.htm},
-  \bibinfo{year}{2009}.
-
-\bibitem[{Team(2018)}]{ClawPack}
-\bibinfo{author}{T.~C.~D. Team}, \bibinfo{title}{Clawpack Documentation},
-  \urlprefix\url{http://www.clawpack.org/}, \bibinfo{year}{2018}.
-
-\bibitem[{Lannes and Bonneton(2009)}]{Bonneton-Lannes-2009-16601}
-\bibinfo{author}{D.~Lannes}, \bibinfo{author}{P.~Bonneton},
-  \bibinfo{title}{Derivation of Asymptotic Two-Dimensional Time-Dependent
-  Equations for Surface Water Wave Propagation}, \bibinfo{journal}{Physics of
-  Fluids} \bibinfo{volume}{21}~(\bibinfo{number}{1}) (\bibinfo{year}{2009})
-  \bibinfo{pages}{16601}.
-
-\bibitem[{Barth{\'e}lemy(2004)}]{Barthelemy-2004-315}
-\bibinfo{author}{E.~Barth{\'e}lemy}, \bibinfo{title}{Nonlinear Shallow Water
-  Theories for Coastal Waves}, \bibinfo{journal}{Surveys in Geophysics}
-  \bibinfo{volume}{25}~(\bibinfo{number}{3}) (\bibinfo{year}{2004})
-  \bibinfo{pages}{315--337}.
-
-\bibitem[{Le~M\'{e}tayer et~al.(2010)Le~M\'{e}tayer, Gavrilyuk, and
-  Hank}]{Hank-etal-2010-2034}
-\bibinfo{author}{O.~Le~M\'{e}tayer}, \bibinfo{author}{S.~Gavrilyuk},
-  \bibinfo{author}{S.~Hank}, \bibinfo{title}{A numerical scheme for the
-  {G}reen-{N}aghdi model}, \bibinfo{journal}{Journal of Computational Physics}
-  \bibinfo{volume}{229}~(\bibinfo{number}{6}) (\bibinfo{year}{2010})
-  \bibinfo{pages}{2034--2045}.
-
-\bibitem[{Dutykh et~al.(2013)Dutykh, Clamond, Milewski, and
-  Mitsotakis}]{Dutykh-etal-2013-761}
-\bibinfo{author}{D.~Dutykh}, \bibinfo{author}{D.~Clamond},
-  \bibinfo{author}{P.~Milewski}, \bibinfo{author}{D.~Mitsotakis},
-  \bibinfo{title}{Finite volume and pseudo-spectral schemes for the fully
-  nonlinear 1{D} {S}erre equations}, \bibinfo{journal}{European Journal of
-  Applied Mathematics} \bibinfo{volume}{24}~(\bibinfo{number}{5})
-  (\bibinfo{year}{2013}) \bibinfo{pages}{761--787}.
-
-\bibitem[{Mitsotakis et~al.(2014)Mitsotakis, Ilan, and
-  Dutykh}]{Mitsotakis-etal-2014}
-\bibinfo{author}{D.~Mitsotakis}, \bibinfo{author}{B.~Ilan},
-  \bibinfo{author}{D.~Dutykh}, \bibinfo{title}{On the {G}alerkin/Finite-Element
-  Method for the {S}erre Equations}, \bibinfo{journal}{Journal of Scientific
-  Computing} \bibinfo{volume}{61}~(\bibinfo{number}{1}) (\bibinfo{year}{2014})
-  \bibinfo{pages}{166--195}.
+\bibitem[{Pitt et~al.(2018)Pitt, Zoppou, and Roberts}]{Pitt-2018-61}
+\bibinfo{author}{J.~Pitt}, \bibinfo{author}{C.~Zoppou},
+  \bibinfo{author}{S.~Roberts}, \bibinfo{title}{Behaviour of the {S}erre
+  equations in the presence of steep gradients revisited},
+  \bibinfo{journal}{Wave Motion} \bibinfo{volume}{76}~(\bibinfo{number}{1})
+  (\bibinfo{year}{2018}) \bibinfo{pages}{61--77}.
 
 \bibitem[{Li et~al.(2014)Li, Guyenne, Li, and Xu}]{Li-2014-169}
 \bibinfo{author}{M.~Li}, \bibinfo{author}{P.~Guyenne}, \bibinfo{author}{F.~Li},
@@ -81,14 +37,6 @@
   Non-Linear Weakly Dispersive {S}erre Equations for Steep Gradient Flows},
   \bibinfo{journal}{Applied Mathematical Modelling} \bibinfo{volume}{48}
   (\bibinfo{year}{2017}) \bibinfo{pages}{70--95}.
-
-\bibitem[{do~Carmo et~al.(2018)do~Carmo, Ferreira, Pinto, and
-  Romanazzi}]{doCarmo-etal-2018-404}
-\bibinfo{author}{J.~do~Carmo}, \bibinfo{author}{J.~Ferreira},
-  \bibinfo{author}{L.~Pinto}, \bibinfo{author}{G.~Romanazzi},
-  \bibinfo{title}{An Improved {S}erre Model: Efficient Simulation and
-  comparative evaluation}, \bibinfo{journal}{Applied Mathematical Modelling}
-  \bibinfo{volume}{56} (\bibinfo{year}{2018}) \bibinfo{pages}{404--423}.
 
 \bibitem[{Synolakis(1987)}]{Synolakis-1987-523}
 \bibinfo{author}{C.~Synolakis}, \bibinfo{title}{The runup of solitary waves},
@@ -125,6 +73,15 @@
   \bibinfo{volume}{43}~(\bibinfo{number}{1}) (\bibinfo{year}{2001})
   \bibinfo{pages}{89--112}.
 
+\bibitem[{Kurganov et~al.(2002)Kurganov, Noelle, and
+  Petrova}]{Kurganov-etal-2001-707}
+\bibinfo{author}{A.~Kurganov}, \bibinfo{author}{S.~Noelle},
+  \bibinfo{author}{G.~Petrova}, \bibinfo{title}{Semidiscrete Central-Upwind
+  Schemes for Hyperbolic Conservation Laws and {H}amilton-{J}acobi Equations},
+  \bibinfo{journal}{Journal of Scientific Computing, Society for Industrial and
+  Applied Mathematics} \bibinfo{volume}{23}~(\bibinfo{number}{3})
+  (\bibinfo{year}{2002}) \bibinfo{pages}{707--740}.
+
 \bibitem[{Audusse et~al.(2004)Audusse, Bouchut, Bristeau, Klein, and
   Perthame}]{Klein-etal-2004-2050}
 \bibinfo{author}{E.~Audusse}, \bibinfo{author}{F.~Bouchut},
@@ -135,14 +92,6 @@
   Industrial and Applied Mathematics}
   \bibinfo{volume}{25}~(\bibinfo{number}{6}) (\bibinfo{year}{2004})
   \bibinfo{pages}{2050--2065}.
-
-\bibitem[{Pitt(2014)}]{Pitt-J-2014}
-\bibinfo{author}{J.~Pitt}, \bibinfo{title}{A Second Order Well Balanced Hybrid
-  Finite Volume and Finite Difference Method for the {S}erre Equations},
-  \bibinfo{type}{{Honour's} thesis}, \bibinfo{school}{Australian National
-  University}, \bibinfo{address}{Mathematical Sciences Institute, College of
-  Physical and Mathematical Sciences, Australian National University, Canberra,
-  ACT 2600, Australia}, \bibinfo{year}{2014}.
 
 \bibitem[{Leer(1979)}]{VanLeer-1979-101}
 \bibinfo{author}{B.~V. Leer}, \bibinfo{title}{Towards the Ultimate Conservative
@@ -156,24 +105,8 @@
 \bibinfo{author}{W.~Press}, \bibinfo{author}{S.~Teukolsky},
   \bibinfo{author}{W.~Vetterling}, \bibinfo{author}{B.~Flannery},
   \bibinfo{title}{Numerical Recipes in C}, \bibinfo{publisher}{Cambridge
-  University Press}, \bibinfo{address}{Melbourne}, \bibinfo{edition}{2nd} edn.,
+  University Press}, \bibinfo{address}{London}, \bibinfo{edition}{2nd} edn.,
   \bibinfo{year}{2002}.
-
-\bibitem[{Kurganov et~al.(2002)Kurganov, Noelle, and
-  Petrova}]{Kurganov-etal-2001-707}
-\bibinfo{author}{A.~Kurganov}, \bibinfo{author}{S.~Noelle},
-  \bibinfo{author}{G.~Petrova}, \bibinfo{title}{Semidiscrete Central-Upwind
-  Schemes for Hyperbolic Conservation Laws and {H}amilton-{J}acobi Equations},
-  \bibinfo{journal}{Journal of Scientific Computing, Society for Industrial and
-  Applied Mathematics} \bibinfo{volume}{23}~(\bibinfo{number}{3})
-  (\bibinfo{year}{2002}) \bibinfo{pages}{707--740}.
-
-\bibitem[{Kurganov and Petrova(2007)}]{Kurganov-Petrova-2007-707}
-\bibinfo{author}{A.~Kurganov}, \bibinfo{author}{G.~Petrova}, \bibinfo{title}{A
-  second-order well-balanced positivity preserving central-upwind scheme for
-  the {S}aint-{V}enant system}, \bibinfo{journal}{Communications in
-  Mathematical Sciences} \bibinfo{volume}{5}~(\bibinfo{number}{1})
-  (\bibinfo{year}{2007}) \bibinfo{pages}{133--160}.
 
 \bibitem[{Courant et~al.(1967)Courant, Friedrichs, and
   Lewy}]{Courant-etal-1967-215}
@@ -183,13 +116,19 @@
   and Development} \bibinfo{volume}{11}~(\bibinfo{number}{2})
   (\bibinfo{year}{1967}) \bibinfo{pages}{215--234}.
 
-\bibitem[{Bollermann et~al.(2011)Bollermann, Noelle, and
-  Luk{\'a}{\v{c}}ov{\'a}-Medvid’ov{\'a}}]{Bollermann-etal-2011-271}
-\bibinfo{author}{A.~Bollermann}, \bibinfo{author}{S.~Noelle},
-  \bibinfo{author}{M.~Luk{\'a}{\v{c}}ov{\'a}-Medvid’ov{\'a}},
-  \bibinfo{title}{Finite volume evolution {G}alerkin methods for the shallow
-  water equations with dry beds}, \bibinfo{journal}{Communications in
-  Computational Physics} \bibinfo{volume}{10}~(\bibinfo{number}{2})
-  (\bibinfo{year}{2011}) \bibinfo{pages}{371--404}.
+\bibitem[{Pitt(2014)}]{Pitt-J-2014}
+\bibinfo{author}{J.~Pitt}, \bibinfo{title}{A Second Order Well Balanced Hybrid
+  Finite Volume and Finite Difference Method for the {S}erre Equations},
+  \bibinfo{type}{{Honour's} thesis}, \bibinfo{school}{Australian National
+  University}, \bibinfo{address}{Mathematical Sciences Institute, College of
+  Physical and Mathematical Sciences, Australian National University, Canberra,
+  ACT 2600, Australia}, \bibinfo{year}{2014}.
+
+\bibitem[{Kurganov and Petrova(2007)}]{Kurganov-Petrova-2007-707}
+\bibinfo{author}{A.~Kurganov}, \bibinfo{author}{G.~Petrova}, \bibinfo{title}{A
+  second-order well-balanced positivity preserving central-upwind scheme for
+  the {S}aint-{V}enant system}, \bibinfo{journal}{Communications in
+  Mathematical Sciences} \bibinfo{volume}{5}~(\bibinfo{number}{1})
+  (\bibinfo{year}{2007}) \bibinfo{pages}{133--160}.
 
 \end{thebibliography}
