@@ -1,0 +1,67 @@
+\documentclass[]{standalone}
+\usepackage{pgfplots} 
+\usepgfplotslibrary{external} 
+\tikzexternalize 
+\usepackage{tikz} 
+\usepackage{amsmath} 
+\usetikzlibrary{calc} 
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round},every non boxed x axis/.append style={x axis line style=-}, every non boxed y axis/.append style={y axis line style=-}}
+\begin{document} 
+	\begin{tikzpicture} 
+	\begin{axis}[ 
+	width=\textwidth,
+	height = 0.3\textwidth,
+	axis lines=left, 
+	xticklabels=\empty,
+	y axis line style={draw=none},
+	ytick=\empty,
+	xtick = \empty,
+	clip mode=individual,
+	xmin=0, 
+	xmax=4, 
+	ymin = 0, 
+	ymax = 0.5]
+
+%axis	
+		
+		\draw[thin] (axis cs:0,0.05) -- (axis cs:0,-0.05);
+		
+		\draw[thin] (axis cs:1.33,0.05) -- (axis cs:1.33,-0.05);
+		
+		\draw[thin] (axis cs:2,0.05) -- (axis cs:2,-0.05);
+		
+		\draw[thin] (axis cs:2.66,0.05) -- (axis cs:2.66,-0.05);
+
+		\draw[thin] (axis cs:4,0.05) -- (axis cs:4,-0.05);	
+			
+
+	
+		
+		\node[below] at (0,-0.05) {\LARGE$x_{j-1/2}$};	
+		\node[below] at (1.33,-0.05) {\LARGE$x_{j-1/6}$};	
+		\node[below] at (2,-0.05) {\LARGE$x_{j}$};
+		\node[below] at (2.66,-0.05) {\LARGE$x_{j+1/6}$};	
+		\node[below] at (4,-0.05) {\LARGE$x_{j+1/2}$};
+
+%points
+
+		\node[left] at (-0.2,0.4) {\color{red}\LARGE$b$};	
+		\node[] at (0,0.4) {\color{red}$\boldsymbol{\times}$};
+		\node[] at (1.33,0.4) {\color{red}$\boldsymbol{\times}$};
+		\node[] at (2.66,0.4) {\color{red}$\boldsymbol{\times}$};	
+		\node[] at (4,0.4) {\color{red}$\boldsymbol{\times}$};	
+
+		\node[left] at (-0.2,0.2) {\color{blue}\LARGE$h$ and $G$};	
+		\node[] at (0,0.2) {\color{blue}$\boldsymbol{\circ}$};
+		\node[] at (2,0.2) {\color{blue}$\boldsymbol{\circ}$};	
+		\node[] at (4,0.2) {\color{blue}$\boldsymbol{\circ}$};	
+	
+		
+		%\node[left] at (-0.2,0.2) {\color{blue}\LARGE$u$};	
+		%\node[] at (0,0.2) {\color{blue}$\boldsymbol{\circ}$};
+		%\node[] at (2,0.2) {\color{blue}$\boldsymbol{\circ}$};	
+		%\node[] at (4,0.2) {\color{blue}$\boldsymbol{\circ}$};	
+		
+	\end{axis} 
+	\end{tikzpicture} 
+\end{document}
