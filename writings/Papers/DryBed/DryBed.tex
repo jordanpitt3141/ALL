@@ -65,7 +65,7 @@
 %consistent equations
 %Synolakis plot t = 0 
  \begin{abstract}
- 	We describe a numerical method for solving the Serre equations that can model flows over dry varying beds. The method solves the Serre equations in conservation law form with a finite volume method. Where a finite element method is used to solve the auxiliary elliptic equation for the depth-averaged horizontal velocity. The numerical method is validated against the lake at rest analytic solution, demonstrating that it is well-balanced. The method is further validated and its convergence rate established using forced solutions containing the wetting and drying of varying beds. The use of forced solutions extends the validations performed for previous Serre equation solvers for flows over dry varying beds. Finally, the method is validated against experimental results for the run-up of a solitary wave on a sloped beach.
+ 	We describe a numerical method for solving the Serre equations that can model flows over dry varying beds. The method solves the Serre equations in conservation law form with a finite volume method. While a finite element method is used to solve the auxiliary elliptic equation for the depth-averaged horizontal velocity. The numerical method is validated against the lake at rest analytic solution, demonstrating that it is well-balanced. The method is further validated and its convergence rate established using forced solutions containing the wetting and drying of varying beds. The use of forced solutions extends previous validations performed for Serre equation solvers for flows over dry varying beds. Finally, the method is validated against experimental results for the run-up of a solitary wave on a sloped beach.
 
  \end{abstract}	
  
@@ -93,7 +93,7 @@ Previous work has resulted in the development of numerical methods for Serre equ
 
 Currently, there are no known analytic solutions to the Serre equations that include varying bathymetry and the wetting and drying of the bed. Hence, numerical methods in the literature have relied on experimental results to demonstrate their capability in these situations \cite{Tissier-2011,Li-2014-169,Filippini-etal-2016-381,DoCarmo-2019-125}. We extend these validation results in the literature by using forced solutions of the Serre equations. Forced solutions allow the ability of the method to accurately solve problems with varying bathymetry and the wetting and drying of the bed to be tested without analytic solutions. Furthermore, they permit a convergence analysis to demonstrate the order of accuracy of the method in these situations. 
 
-This paper also builds upon the work of \citet{Zoppou-etal-2017} on the Finite Difference Volume Methods (FDVM) for the Serre equations, describing a Finite Element Volume Method (FEVM) extension of the FDVM. In the FEVM a Finite Element Method is used to solve the auxiliary elliptic equations instead of the finite difference methods used by the FDVM, leading to a more robust numerical method.
+This paper also builds upon the work of \citet{Zoppou-etal-2017} on the Finite Difference Volume Methods (FDVM) for the Serre equations, describing a Finite Element Volume Method (FEVM) extension of the FDVM. In the FEVM a Finite Element Method (FEM) is used to solve the auxiliary elliptic equations instead of the finite difference methods used by the FDVM, leading to a more robust numerical method.
 
 The Serre equations and their conservation properties will now be presented. Followed by a description of the FEVM. The numerical scheme will be validated against the lake at rest analytic solution, demonstrating that it is well-balanced. The method will then be validated for the wetting and drying of the bed using forced solutions to the Serre equations. Finally, the numerical method is validated against the experimental results of \citet{Synolakis-1987-523} for the run-up of a solitary wave on a dry linear beach.
 
@@ -137,7 +137,7 @@ remains constant for all $t$. Additionally, the Serre equations conserve the mom
 The conservation of $uh$ is a result of integrating the evolution of momentum equation for Serre equations \cite{Zoppou-etal-2017}. An equivalent set of equations in one-dimension was produced by \citet{Green-Naghdi-1976-237} through conservation of the energy $\mathcal{H}$, and hence the Serre equations conserve $\mathcal{H}$. With $\mathcal{H}$ being a sum of the gravitational potential and kinetic energy throughout the depth of water. 
 
 %--------------------------------------------------------------------------------
-\section{Method}
+\section{Description of Numerical Method}
 To numerically approximate the Serre equations in conservation law form \eqref{eqn:FullSerreCon} the domain is partitioned into $m$ cells $\left[x_{j-1/2},x_{j+1/2}\right]$ of uniform length $\Delta x$. While time is discretised into time levels $t^n$ separated by a constant duration $\Delta t$.
 
 Since the Serre equations are in conservation law form
@@ -149,7 +149,7 @@ with the conserved quantities $\vecn{Q}  = \left[h \; \; G\right]$ they can be s
 \label{eqn:FVMUpdate}
 \overline{\vecn{Q} }^{n+1}_j = \overline{\vecn{Q} }^{n}_j - \frac{\Delta t}{\Delta x} \left(F^n_{j+1/2}\left(\vecn{Q} \right) - F^n_{j-1/2}\left(\vecn{Q} \right) \right) + \Delta t S^n_j\left(\vecn{Q} \right)
 \end{equation}
-which employs first-order forward Euler time integration. Where $\overline{\vecn{Q} }^{n}_j $ is the average of the conserved quantities in the $j^{th}$ cell at time $t^n$. While $F^n_{j+1/2}\left(\vecn{Q} \right)$ and $ F^n_{j-1/2}\left(\vecn{Q} \right)$ are approximations to the flux across the right and left boundaries respectively and $S^n_j\left(\vecn{Q} \right)$ is the approximation to the source terms contribution to the cell from time $t^n$ to $t^{n+1}$. The FVM \eqref{eqn:FVMUpdate} produces a first-order time stepping method, second-order accuracy is achieved using a Strong Stability Preserving Runge-Kutta method \cite{Gottlieb-etal-2003-89} which uses a convex combination of multiple time-steps given by \eqref{eqn:FVMUpdate}.
+which employs first-order forward Euler time integration. Where $\overline{\vecn{Q} }^{n}_j $ is the average of the conserved quantities in the $j^{th}$ cell at time $t^n$. While $F^n_{j+1/2}\left(\vecn{Q} \right)$ and $ F^n_{j-1/2}\left(\vecn{Q} \right)$ are approximations to the flux across the right and left boundaries of the cell respectively and $S^n_j\left(\vecn{Q} \right)$ is the approximation to the source terms contribution to the cell from time $t^n$ to $t^{n+1}$. The FVM \eqref{eqn:FVMUpdate} produces a first-order time stepping method, second-order accuracy is achieved using a Strong Stability Preserving Runge-Kutta method \cite{Gottlieb-etal-2003-89} which uses a convex combination of multiple time-steps given by \eqref{eqn:FVMUpdate}.
 
 To approximate the intercell fluxes $F^n_{j+1/2}\left(\vecn{Q} \right)$ and $F^n_{j-1/2}\left(\vecn{Q} \right)$ we use the method of \citet{Kurganov-etal-2001-707}. While the source term is approximated with the well-balancing modifications proposed by \citet{Klein-etal-2004-2050}.
 
@@ -277,12 +277,12 @@ For $u$ and $v$ the basis functions $\phi$ which are quadratic inside the cell a
 
 \begin{figure}
 	\centering
-		\begin{subfigure}{0.6\textwidth}
+		\begin{subfigure}{0.49\textwidth}
 			\includegraphics[width=\textwidth]{./Figures/Diagrams/FEMbasis/P1/P1NN-figure0.pdf}
 			\subcaption{$\psi$}
 			\vspace{0.5cm}
 		\end{subfigure}
-		\begin{subfigure}{0.6\textwidth}
+		\begin{subfigure}{0.49\textwidth}
 			\includegraphics[width=\textwidth]{./Figures/Diagrams/FEMbasis/P2/P2N-figure0.pdf}
 			\subcaption{$\phi$}
 			\vspace{0.5cm}
@@ -440,7 +440,7 @@ To adapt the calculation of $u$ in \eqref{eqn:calculationofugivenuhandh} to \eqr
 \label{eqn:hsimpletransform}
 h \rightarrow h \left( \frac{h + h_{base}}{h} \right).
 \end{equation}
-This transformation is ill-defined when $h = 0$ so we also add in a small term $h_{tol}$ to the denominator. This $h_{tol}$ also serves as our cut-off value with any cells with $\overline{h}_j < h_{tol}$ considered as dry. Therefore, our transformation for the reconstructed values of $h$ in the finite element method is
+This transformation is ill-defined when $h = 0$ so we also add in a small term $h_{tol}$ to the denominator. This $h_{tol}$ also serves as our cut-off value with any cells with $\overline{h}_j < h_{tol}$ considered as dry. Therefore, our transformation for the reconstructed values of $h$ in the FEM is
 \begin{align}
 \label{eqn:hdrytransform}
 h^+_{j-1/2}  = h^+_{j-1/2} \left(\frac{ h^+_{j-1/2}  + h_{base}}{h^+_{j-1/2} + h_{tol}}\right) &,&
@@ -684,11 +684,11 @@ The numerical solution reproduces the incoming wave properties and the maximum r
 
 Both $h'$ and $\mathcal{H}'$ are well conserved by the method throughout the run-up and run-down of the wave, particularly $h'$. The total energy $\mathcal{H}'$ of the method is also well conserved, however $\mathcal{H}'$ appears to have slightly increased in the method during the run-up process due to the methods handling of the dry bed problem. During this experiment kinetic energy is converted into gravitational potential energy and then back again as the wave is reflected. By $t' = 250$ the reflection of the wave is complete and so we can see that the total amount of $u'h'$ and $G'$ have changed signs, although their errors are small if this is considered. Given that kinetic energy and gravitational energy were exchanged and the handling of the dry bed, the conservation error of $u'h'$ and $G'$ is good. 
 
-The Serre equations have reproduced the experimental result of \citet{Synolakis-1987-523} very well. Experimentally validating the numerical methods ability to solve the Serre equations for flows over dry beds.
+The Serre equations have reproduced the experimental result of \citet{Synolakis-1987-523} well. Experimentally validating the numerical methods ability to solve the Serre equations for flows over dry beds.
 
 \section{Conclusion}
 A second-order numerical method for the one-dimensional Serre equations with varying bathymetry was described. The method uses a FVM to solve the Serre equations in conservation law form and improves previous versions of the FVM solvers for the Serre equations \cite{Zoppou-etal-2017}, by using a FEM to solve for the depth-averaged horizontal velocity. The method is modified to ensure that it is well-balanced, maintaining a steady state solution over an arbitrary bathymetry and able to handle flows over dry beds. The numerical method was validated against the lake at rest stationary solution and shown to be well-balanced. Furthermore, it reproduced forced solutions containing the wetting and drying of variable beds with second-order accuracy, affirming its ability to adequately solve the Serre equations for flows over dry beds. Finally, a numerical solution was compared to the experimental results of \citet{Synolakis-1987-523}, demonstrating the ability of the numerical method to accurately reproduce physical results involving wave run-up on a dry bed. These validation results extend those produced by other solvers of the Serre equations for flows over dry beds
-\cite{Tissier-2011,Li-2014-169,Filippini-etal-2016-381,DoCarmo-2019-125} by demonstrating convergence for forced solutions.
+\cite{Tissier-2011,Li-2014-169,Filippini-etal-2016-381,DoCarmo-2019-125} by demonstrating convergence to forced solutions.
 
 
 \section*{References}
