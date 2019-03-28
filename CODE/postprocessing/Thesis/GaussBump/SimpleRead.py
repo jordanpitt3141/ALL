@@ -8,16 +8,16 @@ from numpy import ones
 
 
 
-wdir = "../../../../../data/raw/Thesis/Forced2/Dry/P2P/FEVM2/10/"
+wdir = "/home/jp/Documents/PhD/project/data/ThesisRedo2019/DryForced/FEVM2NoRegTol/12/"
 
-sdir = "../../../../../data/ThesisPost/ForcedFin/P2P/Ex/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/ThesisRedo/DryForced/FEVM2/Ex/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)
 
 ts = "10.0"
-
-s = wdir + "outList"+ts+"001559239s.txt"
+gap = 8
+s = wdir + "outList"+ts+"s.txt"
 with open(s,'r') as file1:
     readfile = csv.reader(file1, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         
@@ -40,16 +40,15 @@ with open(s,'r') as file1:
             w.append(float(row[5]))
                   
         j = j + 1
+        
+    x = array(x[::gap])
+    b = array(b[::gap])
+    w = array(w[::gap])
+    h = array(h[::gap])
+    u = array(u[::gap])    
+    G = array(G[::gap])  
 
-    n = len(x)        
-    x = array(x)
-    b = array(b)
-    w = array(w)
-    h = array(h)
-    u = array(u)    
-    G = array(G)  
-
-"""
+n = len(x)
 s = sdir + "Stage"+ts+"s.dat"
 with open(s,'w') as file1:
     for i in range(n):
@@ -79,4 +78,3 @@ with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.20f\n" %(x[i]," ",G[i])
         file1.write(s)
-"""

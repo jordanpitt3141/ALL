@@ -18,6 +18,7 @@ wdir = "/home/jp/Documents/PhD/project/data/ThesisRaw/Forced/Wet/" +meth1+ "/" +
 sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/Forced/Wet/" +meth1+"/Ex"+num+"/"
 
 
+wdir = "/home/jp/Documents/PhD/project/data/ThesisRedo2019/DryForced/FEVM2/12/"
 if not os.path.exists(sdir):
         os.makedirs(sdir)
 
@@ -63,6 +64,7 @@ incr = 1
 x0 = -50
 x1 = 25
 
+"""
 x0i = int((x0 - x[0]) / dx)
 x1i = int((x1 - x[0]) / dx)
 
@@ -104,3 +106,4 @@ with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.20f\n" %(rx[i]," ",rG[i])
         file1.write(s)
+"""
