@@ -6,7 +6,7 @@
 \usepackage{amsmath}
 \usepackage{pgfplots}
 \usetikzlibrary{calc}
-\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},,every axis plot/.append style={thick}  }
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},,every axis plot/.append style={ultra thick}  }
 
 %%% START MACRO FOR ANNOTATION OF TRIANGLE WITH SLOPE %%%.
 \newcommand{\logLogSlopeTriangle}[5]
@@ -153,10 +153,10 @@
 	xlabel=\Large$\Delta x \; (m)$, 
 	ylabel=\Large$C^*$]
 	
-\addplot [blue,only marks,mark =triangle,mark size =0.9mm] table {hC1.dat};
-\addplot [black,only marks,mark =square,mark size =0.75mm] table {uhC1.dat};
-\addplot [red,only marks,mark =o,mark size =0.75mm] table {GC1.dat};
-\addplot [green!60!black,only marks,mark =x,mark size =0.8mm] table {HC1.dat};
+\addplot [blue,only marks,mark =triangle,mark size =1.5mm] table {hC1.dat};
+\addplot [black,only marks,mark =square,mark size =1.2mm] table {uhC1.dat};
+\addplot [red,only marks,mark =o,mark size =1.2mm] table {GC1.dat};
+\addplot [green!60!black,only marks,mark =x,mark size =1.3mm] table {HC1.dat};
 
 \addlegendentry{$h$}
 \addlegendentry{$uh$}

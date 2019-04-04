@@ -83,11 +83,11 @@ The flux matrix $\matr{F}$ from the finite volume methods approximation to the f
  \end{bmatrix}.
  \label{eqn:APPFlux}
 \end{equation}
-Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{G,\eta} $, $\mathcal{F}^{G,G} $ depend on the Froude number $Fr = {U}/{\sqrt{gH}}$ and are written in terms of factors given by the reconstruction and the velocity solve operators. These expressions written in terms of these factors are the same for all finite volume based methods in the thesis, as they all used the flux approximation of \citet{Kurganov-etal-2001-707}.
+Where $\mathcal{F}^{\eta,\eta} $, $\mathcal{F}^{\eta,G} $, $\mathcal{F}^{G,\eta} $, $\mathcal{F}^{G,G} $ can be written in terms of factors given by the reconstruction and the velocity solve operators. These expressions written in terms of these factors are the same for all finite volume based methods in the thesis, as they all used the flux approximation of \citet{Kurganov-etal-2001-707}.
 
-The term $\mathcal{F}^{\eta,G}$ in the flux matrix does not vary with the Froude number and is
+The term $\mathcal{F}^{\eta,G}$ in the flux matrix does depend on the Froude number $Fr = U/ gH$ and is
 \[\mathcal{F}^{\eta,G} = H \mathcal{G}^G. \]
-The expressions for the other terms of $\matr{F}$ are summarised in Tables \ref{tab:Fnnfactor}-\ref{tab:FGGfactor} for all values of $Fr$ with $\mathcal{F}^{\eta,\eta}$ in Table \ref{tab:Fnnfactor}, $\mathcal{F}^{G,\eta}$ in Table \ref{tab:FGnfactor} and $\mathcal{F}^{G,G}$ in Table \ref{tab:FGGfactor}.
+The expressions for the other terms of $\matr{F}$ which do depend on the Froude number are summarised in Tables \ref{tab:Fnnfactor}-\ref{tab:FGGfactor} for all values of $Fr$ with $\mathcal{F}^{\eta,\eta}$ in Table \ref{tab:Fnnfactor}, $\mathcal{F}^{G,\eta}$ in Table \ref{tab:FGnfactor} and $\mathcal{F}^{G,G}$ in Table \ref{tab:FGGfactor}.
 
 
 

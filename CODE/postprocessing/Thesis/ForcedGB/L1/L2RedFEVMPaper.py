@@ -74,19 +74,19 @@ meth1 = "FEVM2"
 #wdir = "../../../../data/raw/NEWdata/FDredo/grim/"
 #sdir = "../../../../data/postprocessing/scFDallAE/grim/"
 
-wdirb = "/home/jp/Documents/PhD/project/data/ThesisRaw/Forced/Dry/"+meth1+"/"
+wdirb = "/home/jp/Documents/PhD/project/data/ThesisRedo2019/DryForced/FEVM2NoRegTol/"
 L1hs = []
 L1us = []
 L1Gs = []
 dxs=  []
 
-sdir = "/home/jp/Documents/PhD/project/master/FigureData/DryBedPaper/Forcedsolution/test/Dry/" +meth1+"/L2RedA/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/ThesisRedo/DryForced/FEVM2/L2Red/"
 
 if not os.path.exists(sdir):
         os.makedirs(sdir)     
        
         
-for ki in range(9,10):
+for ki in range(8,18):
         
         
     wdir = wdirb + str(ki) + "/"

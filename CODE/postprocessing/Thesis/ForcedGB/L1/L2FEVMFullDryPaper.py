@@ -86,7 +86,7 @@ if not os.path.exists(sdir):
         os.makedirs(sdir)     
        
         
-for ki in range(8,16):
+for ki in range(8,18):
         
         
     wdir = wdirb + str(ki) + "/"

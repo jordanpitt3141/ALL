@@ -1,159 +1,137 @@
 \begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
-\providecommand{\urlprefix}{URL }
 \expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
-  \providecommand{\doi}[1]{doi:\discretionary{}{}{}\begingroup
-  \urlstyle{rm}\url{#1}\endgroup}\fi
-\providecommand{\bibinfo}[2]{#2}
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[{Pitt et~al.(2018)Pitt, Zoppou, and Roberts}]{Pitt-2018-61}
-\bibinfo{author}{J.~Pitt}, \bibinfo{author}{C.~Zoppou},
-  \bibinfo{author}{S.~Roberts}, \bibinfo{title}{Behaviour of the {S}erre
-  equations in the presence of steep gradients revisited},
-  \bibinfo{journal}{Wave Motion} \bibinfo{volume}{76}~(\bibinfo{number}{1})
-  (\bibinfo{year}{2018}) \bibinfo{pages}{61--77}.
+\bibitem[Pitt et~al.(2018)Pitt, Zoppou, and Roberts]{Pitt-2018-61}
+J.P.A. Pitt, C.~Zoppou, and S.G. Roberts.
+\newblock Behaviour of the {S}erre equations in the presence of steep gradients
+  revisited.
+\newblock \emph{Wave Motion}, 76\penalty0 (1):\penalty0 61--77, 2018.
 
-\bibitem[{Serre(1953)}]{Serre-F-1953-857}
-\bibinfo{author}{F.~Serre}, \bibinfo{title}{Contribtion \`{a} l'\'{e}tude des
-  \'{e}coulements permanents et variables dans les canaux},
-  \bibinfo{journal}{La Houille Blanche} \bibinfo{volume}{6}
-  (\bibinfo{year}{1953}) \bibinfo{pages}{830--872}.
+\bibitem[Lannes and Bonneton(2009)]{Bonneton-Lannes-2009-16601}
+D.~Lannes and P.~Bonneton.
+\newblock Derivation of asymptotic two-dimensional time-dependent equations for
+  surface water wave propagation.
+\newblock \emph{Physics of Fluids}, 21\penalty0 (1):\penalty0 16601, 2009.
 
-\bibitem[{Lannes and Bonneton(2009)}]{Bonneton-Lannes-2009-16601}
-\bibinfo{author}{D.~Lannes}, \bibinfo{author}{P.~Bonneton},
-  \bibinfo{title}{Derivation of Asymptotic Two-Dimensional Time-Dependent
-  Equations for Surface Water Wave Propagation}, \bibinfo{journal}{Physics of
-  Fluids} \bibinfo{volume}{21}~(\bibinfo{number}{1}) (\bibinfo{year}{2009})
-  \bibinfo{pages}{16601}.
+\bibitem[Serre(1953)]{Serre-F-1953-857}
+F.~Serre.
+\newblock Contribtion \`{a} l'\'{e}tude des \'{e}coulements permanents et
+  variables dans les canaux.
+\newblock \emph{La Houille Blanche}, 6:\penalty0 830--872, 1953.
 
-\bibitem[{Tissier et~al.(2011)Tissier, Bonneton, Marche, Chazel, and
-  Lannes}]{Tissier-2011}
-\bibinfo{author}{M.~Tissier}, \bibinfo{author}{P.~Bonneton},
-  \bibinfo{author}{F.~Marche}, \bibinfo{author}{F.~Chazel},
-  \bibinfo{author}{D.~Lannes}, \bibinfo{title}{{S}erre {G}reen-{N}aghdi
-  modelling of wave transformation breaking and run-up using a high-order
-  finite-volume finite-difference scheme}, \bibinfo{journal}{Coastal
-  Engineering Proceedings} \bibinfo{volume}{1}~(\bibinfo{number}{32})
-  (\bibinfo{year}{2011}) \bibinfo{pages}{1--13}.
+\bibitem[Tissier et~al.(2011)Tissier, Bonneton, Marche, Chazel, and
+  Lannes]{Tissier-2011}
+M.~Tissier, P.~Bonneton, F.~Marche, F.~Chazel, and D.~Lannes.
+\newblock {S}erre {G}reen-{N}aghdi modelling of wave transformation breaking
+  and run-up using a high-order finite-volume finite-difference scheme.
+\newblock \emph{Coastal Engineering Proceedings}, 1\penalty0 (32):\penalty0
+  1--13, 2011.
 
-\bibitem[{Li et~al.(2014)Li, Guyenne, Li, and Xu}]{Li-2014-169}
-\bibinfo{author}{M.~Li}, \bibinfo{author}{P.~Guyenne}, \bibinfo{author}{F.~Li},
-  \bibinfo{author}{L.~Xu}, \bibinfo{title}{High Order Well-Balanced
-  {C}{D}{G}-{F}{E} Methods For Shallow Water Waves by a {G}reen-{N}aghdi
-  Model}, \bibinfo{journal}{Journal of Computational Physics}
-  \bibinfo{volume}{257}~(\bibinfo{number}{1}) (\bibinfo{year}{2014})
-  \bibinfo{pages}{169--192}.
+\bibitem[Li et~al.(2014)Li, Guyenne, Li, and Xu]{Li-2014-169}
+M.~Li, P.~Guyenne, F.~Li, and L.~Xu.
+\newblock High order well-balanced {C}{D}{G}-{F}{E} methods for shallow water
+  waves by a {G}reen-{N}aghdi model.
+\newblock \emph{Journal of Computational Physics}, 257\penalty0 (1):\penalty0
+  169--192, 2014.
 
-\bibitem[{Filippini et~al.(2016)Filippini, Kazolea, and
-  Ricchiuto}]{Filippini-etal-2016-381}
-\bibinfo{author}{A.~G. Filippini}, \bibinfo{author}{M.~Kazolea},
-  \bibinfo{author}{M.~Ricchiuto}, \bibinfo{title}{A Flexible Genuinely
-  Nonlinear Approach for Nonlinear Wave Propagation, Breaking and Run-up},
-  \bibinfo{journal}{Journal of Computational Physics} \bibinfo{volume}{310}
-  (\bibinfo{year}{2016}) \bibinfo{pages}{381--417}.
+\bibitem[Filippini et~al.(2016)Filippini, Kazolea, and
+  Ricchiuto]{Filippini-etal-2016-381}
+A.~G. Filippini, M.~Kazolea, and M.~Ricchiuto.
+\newblock A flexible genuinely nonlinear approach for nonlinear wave
+  propagation, breaking and run-up.
+\newblock \emph{Journal of Computational Physics}, 310:\penalty0 381--417,
+  2016.
 
-\bibitem[{do~Carmo et~al.(2019)do~Carmo, Ferreira, and
-  Pinto}]{DoCarmo-2019-125}
-\bibinfo{author}{J.~do~Carmo}, \bibinfo{author}{J.~Ferreira},
-  \bibinfo{author}{L.~Pinto}, \bibinfo{title}{On the accurate simulation of
-  nearshore and dam break problems involving dispersive breaking waves},
-  \bibinfo{journal}{Wave Motion} \bibinfo{volume}{85} (\bibinfo{year}{2019})
-  \bibinfo{pages}{125 -- 143}.
+\bibitem[do~Carmo et~al.(2019)do~Carmo, Ferreira, and Pinto]{DoCarmo-2019-125}
+J.S.A. do~Carmo, J.A. Ferreira, and L.~Pinto.
+\newblock On the accurate simulation of nearshore and dam break problems
+  involving dispersive breaking waves.
+\newblock \emph{Wave Motion}, 85:\penalty0 125 -- 143, 2019.
 
-\bibitem[{Zoppou et~al.(2017)Zoppou, Pitt, and Roberts}]{Zoppou-etal-2017}
-\bibinfo{author}{C.~Zoppou}, \bibinfo{author}{J.~Pitt},
-  \bibinfo{author}{S.~Roberts}, \bibinfo{title}{Numerical Solution of the Fully
-  Non-Linear Weakly Dispersive {S}erre Equations for Steep Gradient Flows},
-  \bibinfo{journal}{Applied Mathematical Modelling} \bibinfo{volume}{48}
-  (\bibinfo{year}{2017}) \bibinfo{pages}{70--95}.
+\bibitem[Zoppou et~al.(2017)Zoppou, Pitt, and Roberts]{Zoppou-etal-2017}
+C.~Zoppou, J.~Pitt, and S.~Roberts.
+\newblock Numerical solution of the fully non-linear weakly dispersive {S}erre
+  equations for steep gradient flows.
+\newblock \emph{Applied Mathematical Modelling}, 48:\penalty0 70--95, 2017.
 
-\bibitem[{Synolakis(1987)}]{Synolakis-1987-523}
-\bibinfo{author}{C.~Synolakis}, \bibinfo{title}{The runup of solitary waves},
-  \bibinfo{journal}{Journal of Fluid Mechanics} \bibinfo{volume}{185}
-  (\bibinfo{year}{1987}) \bibinfo{pages}{523--545}.
+\bibitem[Synolakis(1987)]{Synolakis-1987-523}
+C.E. Synolakis.
+\newblock The runup of solitary waves.
+\newblock \emph{Journal of Fluid Mechanics}, 185:\penalty0 523--545, 1987.
 
-\bibitem[{Seabra-Santos et~al.(1981)Seabra-Santos, Renouard, and
-  Temperville}]{Seabra-Santos-etal-1987-117}
-\bibinfo{author}{F.~Seabra-Santos}, \bibinfo{author}{D.~Renouard},
-  \bibinfo{author}{A.~Temperville}, \bibinfo{title}{Numerical and experimental
-  study of the transformation of a solitary wave over a shelf or isolated
-  obstacle}, \bibinfo{journal}{Journal of Fluid Mechanics}
-  \bibinfo{volume}{176} (\bibinfo{year}{1981}) \bibinfo{pages}{117--134}.
+\bibitem[Seabra-Santos et~al.(1981)Seabra-Santos, Renouard, and
+  Temperville]{Seabra-Santos-etal-1987-117}
+F.J. Seabra-Santos, D.P. Renouard, and A.M. Temperville.
+\newblock Numerical and experimental study of the transformation of a solitary
+  wave over a shelf or isolated obstacle.
+\newblock \emph{Journal of Fluid Mechanics}, 176:\penalty0 117--134, 1981.
 
-\bibitem[{Green and Naghdi(1976)}]{Green-Naghdi-1976-237}
-\bibinfo{author}{A.~Green}, \bibinfo{author}{P.~Naghdi}, \bibinfo{title}{A
-  derivation of equations for wave propagation in water of variable depth},
-  \bibinfo{journal}{Journal of Fluid Mechanics}
-  \bibinfo{volume}{78}~(\bibinfo{number}{2}) (\bibinfo{year}{1976})
-  \bibinfo{pages}{237--246}.
+\bibitem[Green and Naghdi(1976)]{Green-Naghdi-1976-237}
+A.E. Green and P.M. Naghdi.
+\newblock A derivation of equations for wave propagation in water of variable
+  depth.
+\newblock \emph{Journal of Fluid Mechanics}, 78\penalty0 (2):\penalty0
+  237--246, 1976.
 
-\bibitem[{Gottlieb et~al.(2001)Gottlieb, Shu, and
-  Tadmor}]{Gottlieb-etal-2003-89}
-\bibinfo{author}{S.~Gottlieb}, \bibinfo{author}{C.~Shu},
-  \bibinfo{author}{E.~Tadmor}, \bibinfo{title}{Strong Stability-Preserving
-  High-order Time Discretization Methods}, \bibinfo{journal}{Review, Society
-  for Industrial and Applied Mathematics}
-  \bibinfo{volume}{43}~(\bibinfo{number}{1}) (\bibinfo{year}{2001})
-  \bibinfo{pages}{89--112}.
+\bibitem[Gottlieb et~al.(2001)Gottlieb, Shu, and Tadmor]{Gottlieb-etal-2003-89}
+S.~Gottlieb, C.~Shu, and E.~Tadmor.
+\newblock Strong stability-preserving high-order time discretization methods.
+\newblock \emph{Review, Society for Industrial and Applied Mathematics},
+  43\penalty0 (1):\penalty0 89--112, 2001.
 
-\bibitem[{Kurganov et~al.(2002)Kurganov, Noelle, and
-  Petrova}]{Kurganov-etal-2001-707}
-\bibinfo{author}{A.~Kurganov}, \bibinfo{author}{S.~Noelle},
-  \bibinfo{author}{G.~Petrova}, \bibinfo{title}{Semidiscrete Central-Upwind
-  Schemes for Hyperbolic Conservation Laws and {H}amilton-{J}acobi Equations},
-  \bibinfo{journal}{Journal of Scientific Computing, Society for Industrial and
-  Applied Mathematics} \bibinfo{volume}{23}~(\bibinfo{number}{3})
-  (\bibinfo{year}{2002}) \bibinfo{pages}{707--740}.
+\bibitem[Kurganov et~al.(2002)Kurganov, Noelle, and
+  Petrova]{Kurganov-etal-2001-707}
+A.~Kurganov, S.~Noelle, and G.~Petrova.
+\newblock Semidiscrete central-upwind schemes for hyperbolic conservation laws
+  and {H}amilton-{J}acobi equations.
+\newblock \emph{Journal of Scientific Computing, Society for Industrial and
+  Applied Mathematics}, 23\penalty0 (3):\penalty0 707--740, 2002.
 
-\bibitem[{Audusse et~al.(2004)Audusse, Bouchut, Bristeau, Klein, and
-  Perthame}]{Klein-etal-2004-2050}
-\bibinfo{author}{E.~Audusse}, \bibinfo{author}{F.~Bouchut},
-  \bibinfo{author}{M.~Bristeau}, \bibinfo{author}{R.~Klein},
-  \bibinfo{author}{B.~Perthame}, \bibinfo{title}{A Fast and Stable
-  Well--Balanced Scheme with Hydrostatic Reconstruction for Shallow Water
-  Flows}, \bibinfo{journal}{Journal of Scientific Computing, Society for
-  Industrial and Applied Mathematics}
-  \bibinfo{volume}{25}~(\bibinfo{number}{6}) (\bibinfo{year}{2004})
-  \bibinfo{pages}{2050--2065}.
+\bibitem[Audusse et~al.(2004)Audusse, Bouchut, Bristeau, Klein, and
+  Perthame]{Klein-etal-2004-2050}
+E.~Audusse, F.~Bouchut, M.~Bristeau, R.~Klein, and B.~Perthame.
+\newblock A fast and stable well--balanced scheme with hydrostatic
+  reconstruction for shallow water flows.
+\newblock \emph{Journal of Scientific Computing, Society for Industrial and
+  Applied Mathematics}, 25\penalty0 (6):\penalty0 2050--2065, 2004.
 
-\bibitem[{Leer(1979)}]{VanLeer-1979-101}
-\bibinfo{author}{B.~V. Leer}, \bibinfo{title}{Towards the Ultimate Conservative
-  Difference scheme. {I}{V}. {A} second-order sequel to {G}odunov's method},
-  \bibinfo{journal}{Journal of Computational Physics}
-  \bibinfo{volume}{32}~(\bibinfo{number}{1}) (\bibinfo{year}{1979})
-  \bibinfo{pages}{101--136}.
+\bibitem[Leer(1979)]{VanLeer-1979-101}
+B.~Van Leer.
+\newblock Towards the ultimate conservative difference scheme. {I}{V}. {A}
+  second-order sequel to {G}odunov's method.
+\newblock \emph{Journal of Computational Physics}, 32\penalty0 (1):\penalty0
+  101--136, 1979.
 
-\bibitem[{Press et~al.(2002)Press, Teukolsky, Vetterling, and
-  Flannery}]{NumRecC-1996}
-\bibinfo{author}{W.~Press}, \bibinfo{author}{S.~Teukolsky},
-  \bibinfo{author}{W.~Vetterling}, \bibinfo{author}{B.~Flannery},
-  \bibinfo{title}{Numerical Recipes in C}, \bibinfo{publisher}{Cambridge
-  University Press}, \bibinfo{address}{London}, \bibinfo{edition}{2nd} edn.,
-  \bibinfo{year}{2002}.
+\bibitem[Press et~al.(2002)Press, Teukolsky, Vetterling, and
+  Flannery]{NumRecC-1996}
+W.H. Press, S.A. Teukolsky, W.T. Vetterling, and B.P. Flannery.
+\newblock \emph{Numerical Recipes in C}.
+\newblock Cambridge University Press, London, 2nd edition, 2002.
 
-\bibitem[{Courant et~al.(1967)Courant, Friedrichs, and
-  Lewy}]{Courant-etal-1967-215}
-\bibinfo{author}{R.~Courant}, \bibinfo{author}{K.~Friedrichs},
-  \bibinfo{author}{H.~Lewy}, \bibinfo{title}{On the Partial Difference
-  Equations of Mathematical Physics}, \bibinfo{journal}{IBM Journal of Research
-  and Development} \bibinfo{volume}{11}~(\bibinfo{number}{2})
-  (\bibinfo{year}{1967}) \bibinfo{pages}{215--234}.
+\bibitem[Courant et~al.(1967)Courant, Friedrichs, and
+  Lewy]{Courant-etal-1967-215}
+R.~Courant, K.~Friedrichs, and H.~Lewy.
+\newblock On the partial difference equations of mathematical physics.
+\newblock \emph{IBM Journal of Research and Development}, 11\penalty0
+  (2):\penalty0 215--234, 1967.
 
-\bibitem[{Pitt(2014)}]{Pitt-J-2014}
-\bibinfo{author}{J.~Pitt}, \bibinfo{title}{A Second Order Well Balanced Hybrid
-  Finite Volume and Finite Difference Method for the {S}erre Equations},
-  \bibinfo{type}{{Honour's} thesis}, \bibinfo{school}{Australian National
-  University}, \bibinfo{address}{Mathematical Sciences Institute, College of
-  Physical and Mathematical Sciences, Australian National University, Canberra,
-  ACT 2600, Australia}, \bibinfo{year}{2014}.
+\bibitem[Pitt(2014)]{Pitt-J-2014}
+J.~Pitt.
+\newblock \emph{A Second Order Well Balanced Hybrid Finite Volume and Finite
+  Difference Method for the {S}erre Equations}.
+\newblock {Honour's} thesis, Australian National University, Mathematical
+  Sciences Institute, College of Physical and Mathematical Sciences, Australian
+  National University, Canberra, ACT 2600, Australia, 2014.
 
-\bibitem[{Kurganov and Petrova(2007)}]{Kurganov-Petrova-2007-707}
-\bibinfo{author}{A.~Kurganov}, \bibinfo{author}{G.~Petrova}, \bibinfo{title}{A
-  second-order well-balanced positivity preserving central-upwind scheme for
-  the {S}aint-{V}enant system}, \bibinfo{journal}{Communications in
-  Mathematical Sciences} \bibinfo{volume}{5}~(\bibinfo{number}{1})
-  (\bibinfo{year}{2007}) \bibinfo{pages}{133--160}.
+\bibitem[Kurganov and Petrova(2007)]{Kurganov-Petrova-2007-707}
+A.~Kurganov and G.~Petrova.
+\newblock A second-order well-balanced positivity preserving central-upwind
+  scheme for the {S}aint-{V}enant system.
+\newblock \emph{Communications in Mathematical Sciences}, 5\penalty0
+  (1):\penalty0 133--160, 2007.
 
 \end{thebibliography}

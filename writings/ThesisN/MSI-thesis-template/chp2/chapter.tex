@@ -12,24 +12,24 @@ The Serre equations are fully non-linear and thus applicable across the entire r
 In this chapter we present the one-dimensional Serre equations and a reformulation of these equations into conservation law form with a source term. We then present the relevant properties of the Serre equations and introduce the forced solutions which are used to assess the validity of the numerical methods. Finally, the contribution of my research \cite{Pitt-2018-61} to understanding the behaviour of steep gradients in the free-surface for the Serre equations is summarised. 
 
 \section{The One-Dimensional Serre Equations}
-In this thesis we take the Serre equations as derived from the depth-integration approach \cite{Su-Gardener-1969-536,Seabra-Santos-etal-1987-117}. Given the extent of the literature already available for the derivation of these equations we will only introduce the relevant quantities and present the equations. The one-dimensional Serre equations describe the behaviour of unsteady free surface fluid flow for an inviscid fluid with a constant density $\rho$ neglecting wave-breaking. In this thesis we will also neglect bottom friction effects as they can be incorporated into our methods after solving the Serre equations without them. 
+In this thesis we take the Serre equations as derived from the depth-integration approach \cite{Su-Gardener-1969-536,Seabra-Santos-etal-1987-117}. Given the extent of the literature already available for the derivation of these equations we will only introduce the relevant quantities and present the equations. The one-dimensional Serre equations describe the behaviour of unsteady free surface fluid flow for an inviscid fluid with a constant density $\rho$ neglecting wave-breaking. In this thesis we will neglect bottom friction effects. 
 
-The primitive variables of the Serre equations are the height $h(x,t)$ of a column of fluid above the stationary bed profile given by $b(x)$ and the horizontal velocity $u(x,t)$ of the column of fluid which are all shown in Figure \ref{fig:WaterModel}. The stage $w(x,t) = h(x,t) + b(x)$ gives the absolute location of the free surface. Additionally, to relate the primitive variables of the Serre equations to the intuitive variables of the Euler equations we introduce the horizontal velocity $u'(x,z,t)$ and the vertical velocity $v'(x,z,t)$ of a fluid particle.
+The primitive variables of the Serre equations are the height $h(x,t)$ of a column of fluid above the stationary bed profile given by $b(x)$ and the average horizontal velocity $u(x,t)$ of the column of fluid which are all shown in Figure \ref{fig:WaterModel}. The stage $w(x,t) = h(x,t) + b(x)$ gives the absolute location of the free surface. Additionally, to relate the primitive variables of the Serre equations to the intuitive variables of the Euler equations we introduce the horizontal velocity $u'(x,z,t)$ and the vertical velocity $v'(x,z,t)$ of a fluid particle.
 
 %v hat, u hat for particle
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{./chp2/figures/SerreModel.pdf}
-	\caption{Diagram demonstrating a free surface flow (\squareF{blue}) over a bed (\squareF{brown!80!black}) where $w(x,t)$ is the absolute location of the free surface, $v'(x,z,t)$ is the vertical velocity of a particle of fluid, $u'(x,z,t)$ is the horizontal velocity of a particle of fluid, $h(x,t)$ is the height of a column of fluid, $u(x,t)$ is the horizontal velocity of a column of fluid and $b(x)$ is the stationary bed profile.}
+	\caption{Diagram demonstrating a free surface flow (\squareF{blue}) over a bed (\squareF{brown!80!black}) where $w(x,t)$ is the absolute location of the free surface, $v'(x,z,t)$ is the vertical velocity of a fluid particle, $u'(x,z,t)$ is the horizontal velocity of a fluid particle, $h(x,t)$ is the height of a column of fluid, $u(x,t)$ is the average horizontal velocity of a column of fluid and $b(x)$ is the stationary bed profile.}
 	\label{fig:WaterModel}
 \end{figure}
 
-The derivation is similar to that of the Shallow Water Wave Equations (SWWE) \cite{Liggett-1994}. In particular, we assume that the horizontal velocity of a particle of fluid $u'(x,z,t)$ inside a column of fluid equals the horizontal velocity of the column of fluid $u(x,t)$. By integrating the conservation of mass equation for an inviscid fluid with a no-slip condition at the bed we obtain the distribution of the vertical velocity of a fluid particle throughout a column of fluid \cite{Zoppou-2014}
+The derivation is similar to that of the Shallow Water Wave Equations (SWWE) \cite{Liggett-1994}. In particular, we assume that the horizontal velocity of a fluid particle $u'(x,z,t)$ inside a column of fluid equals the horizontal velocity of the column of fluid $u(x,t)$. By integrating the conservation of mass equation for an inviscid fluid with a no-slip condition at the bed we obtain the distribution of the vertical velocity of a fluid particle throughout a column of fluid \cite{Zoppou-2014}
 \begin{equation}
 v'(x,z,t) = u \frac{\partial b}{\partial x} - (z - b) \frac{\partial u}{\partial x}.
 \label{eqn:VertVelSerre}
 \end{equation}
-Unlike the SWWE the vertical velocity of fluid particle in the Serre equations is not zero throughout the depth of water. This leads to a non-hydrostatic pressure distribution on the fluid particles which is derived by integrating the conservation of vertical momentum equation given by the Euler equations with a no-slip condition at the bed \cite{Zoppou-2014}
+Unlike the SWWE the vertical velocity of a fluid particle in the Serre equations is not zero throughout the depth of water. This leads to a non-hydrostatic pressure distribution on the fluid particles which is derived by integrating the conservation of vertical momentum equation of the Euler equations with a no-slip condition at the bed \cite{Zoppou-2014}
 \begin{equation}
 \label{eqn:SerrePress}
  p'(x,z,t) = \underbrace{ \rho g \left(h + b - z\right)}_{\text{hydrostatic pressure}} + \rho \left(h + b - z\right) \Psi + \frac{1}{2} \rho \left(h^2 - \left[z - b \right]^2\right) {\Phi }
@@ -43,7 +43,7 @@ where
 	\end{align}
 	\label{eqn:FullSerreNonConVarDef}
 \end{subequations}
-The hydrostatic pressure term $\rho g \left(h + b - z\right)$ is the pressure due to the weight of water above the fluid particle. The non-hydrostatic pressure terms are a consequence of the non-zero vertical velocity which modifies the underlying hydrostatic pressure distribution causing dispersion of waves in the free surface. 
+The hydrostatic pressure term $\rho g \left(h + b - z\right)$ is the pressure due to the weight of water above the fluid particle. The non-hydrostatic pressure terms are a consequence of the non-zero vertical velocity which modifies the underlying hydrostatic pressure distribution causing dispersion of waves on the free surface. 
 
 Integrating the Euler equations \cite{Su-Gardener-1969-536,Zoppou-2014} over the entire depth with a no-slip condition at the bed, a free surface condition at the free surface, the vertical velocity relation \eqref{eqn:VertVelSerre} and the pressure distribution \eqref{eqn:SerrePress} we obtain the Serre equations
 \begin{subequations}
@@ -71,7 +71,7 @@ For a horizontal bed $\partial b / \partial x = 0$, $\Psi = 0$ and so the Serre 
 For a horizontal bed the Serre equations are more challenging to solve analytically and numerically than the SWWE. 
 
 \subsection{Alternative Form}
-A major hurdle for developing numerical methods for the Serre equations is the presence of the temporal derivative in $\Phi$ and $\Psi$ \eqref{eqn:FullSerreNonConVarDef}. By rewriting the Serre equations and introducing a new conserved quantity $G$ \cite{Hank-etal-2010-2034,Zoppou-2014,Li-2014-169} the Serre equations can be written in conservation law form with a source term
+A major hurdle for developing numerical methods for the Serre equations is the presence of the temporal derivative in $\Phi$ and $\Psi$ \eqref{eqn:FullSerreNonConVarDef}. Using the quantity $G$ \cite{Hank-etal-2010-2034,Zoppou-2014,Li-2014-169} the Serre equations can be rewritten in conservation law form with a source term
 \begin{subequations}
 	\label{eqn:FullSerreCon}
 	\begin{align}
@@ -82,12 +82,12 @@ A major hurdle for developing numerical methods for the Serre equations is the p
 	\end{split}
 	\end{align}
 \end{subequations}
-with
+where
 \begin{equation}
 \label{defn:SerreEqnConservedQuantity1}
-G =  {u}h \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \left[\frac{\partial b}{\partial x}\right]^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right)
+G =  {u}h \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \left[\frac{\partial b}{\partial x}\right]^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right).
 \end{equation}
-which resembles $h$ multiplied by the irrotationality \cite{Choi-Camassa-1999-1,Carter-Cienfuegos-2011-259}.
+The introduced quantity $G$ resembles $h$ multiplied by the irrotationality \cite{Choi-Camassa-1999-1,Carter-Cienfuegos-2011-259}.
 
 This conservation law form makes the Serre equations well suited to be numerically solved using the finite volume method for the conservation of $h$ and $G$ equations, provided one can solve for the remaining primitive variable $u$ given $h$, $G$ and $b$.
 
@@ -106,7 +106,7 @@ For a horizontal bed $\partial b / \partial x = 0$ the conservation law form of 
 
 
 \section{Properties}
-The Serre equations possess a number of desirable properties for the modelling of water waves; in particular their conservation of fundamental quantities and dispersion relation. If a numerical method accurately approximates the Serre equations then the numerical method should reproduce the conservation and dispersion properties of the Serre equations. Furthermore, the numerical method should accurately reproduce the analytic solutions of the Serre equations. In this thesis the conservation and dispersion properties and the analytic solutions of the Serre equations are used to assess the veracity of numerical methods. 
+The Serre equations possess a number of desirable properties for the modelling of water waves; in particular their conservation of fundamental quantities and their dispersion relation. If a numerical method accurately approximates the Serre equations then the numerical method should reproduce the conservation and dispersion properties of the Serre equations. Furthermore, the numerical method should accurately reproduce the analytic solutions of the Serre equations. In this thesis the conservation and dispersion properties and the analytic solutions of the Serre equations are used to assess the veracity of numerical methods. 
 
 %To complement the available analytic solutions, the Serre equations are modified to force certain solutions using a source term, which are called forced solutions. These forced solutions will be used to assess the validity of the numerical methods for a wider array of flow scenarios then possible given the limited number of analytic solutions currently available for the Serre equations.
 %
@@ -205,7 +205,7 @@ The lake at rest solution is a trivial stationary solution of the Serre equation
 	\end{align}
 	\label{eqn:LARdefhub}
 \end{subequations}
-It represents a quiescent body of water with a horizontal water surface or stage $w(x,t) = h(x,t) + b(x)$ over any bathymetry. With the maximum function included in the water depth to allow for dry regions of the bed when $b(x) > a_0$. We write these quantities in terms of $b(x)$ as this solution holds for all bed profiles. The corresponding total amounts of $h$ and $\mathcal{H}$ can be calculated by summing their total amounts in wet regions \eqref{eqn:AppLARhwet}. While the total amounts of $u$ and $G$ are zero. The expressions to calculate the total amount of the conserved quantity over any domain are provided in Appendix \ref{app:ConQuant}. 
+It represents a quiescent body of water with a horizontal water surface or stage $w(x,t) = h(x,t) + b(x)$ over any bathymetry. With the maximum function included in the water depth to allow for dry regions of the bed when $b(x) > a_0$. We write these quantities in terms of $b(x)$ as this solution holds for all bed profiles. The corresponding total amounts of $h$ and $\mathcal{H}$ can be calculated by summing their total amounts in wet regions which given by the integrals \eqref{eqn:AppLARhwet}. While the total amounts of $u$ and $G$ are zero. The expressions to calculate the total amount of the conserved quantity over any domain are provided in Appendix \ref{app:ConQuant}. 
 
 Since $w(x,t)$ is constant when $h> 0$ then $\partial w / \partial x = \partial h / \partial x + \partial b / \partial x = 0 $ and $u=0$ so that the Serre equations \eqref{eqn:FullSerreCon} reduce to
 \begin{align*}
@@ -213,7 +213,7 @@ Since $w(x,t)$ is constant when $h> 0$ then $\partial w / \partial x = \partial 
 \end{align*}
 Therefore, $G$ and $h$ are constant in time and so is $u$ and thus the solution is stationary.
 
-For naive numerical methods of the Serre equations the hydrostatic pressure terms do not balance the bed slope terms. This causes the numerical solutions of an initially still lake to produce non-physical velocities, degrading their convergence to the solution. To combat this, modifications are made to the flux and source term approximations so that these terms do balance, leading to a so called `well-balanced' method. This analytic solution then provides a test for the effectiveness of these well-balancing modifications to the numerical methods.
+For naive numerical methods for the Serre equations the hydrostatic pressure terms do not balance the bed slope terms. This causes the numerical solutions of an initially still lake to produce non-physical velocities, degrading their convergence to the solution. To combat this, modifications are made to the flux and source term approximations so that these terms do balance, leading to a so called `well-balanced' method. This analytic solution then provides a test for the effectiveness of these well-balancing modifications to the numerical methods.
 
 
 \section{Forced Solutions}
@@ -246,7 +246,7 @@ Note that since the choice of the forced solutions $h^*$, $u^*$ and $b^*$ is arb
 
 %%%[][][][]
 \section{Behaviour in the Presence of Steep Gradients}
-To ensure that the developed numerical methods are robust, their capability to handle initial condition problems with quantities possessing discontinuities must be tested. One group of these initial condition problems that has been of particular interest to the water wave community is the dam-break problem \cite{El-etal-2006,Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017,doCarmo-etal-2018-404}. The dam-break problem consists of an initially still body of water with a discontinuous jump in its surface between two depth values. So that
+To ensure that the developed numerical methods are robust, their capability to handle initial condition value problems with quantities possessing discontinuities must be tested. One group of these initial condition value problems that has been of particular interest to the water wave community is the dam-break problem \cite{El-etal-2006,Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017,doCarmo-etal-2018-404}. The dam-break problem consists of an initially still body of water with a discontinuous jump in its surface between two depth values. So that
 
 \begin{subequations}
 	\begin{align}

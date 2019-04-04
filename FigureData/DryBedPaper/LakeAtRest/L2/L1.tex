@@ -6,7 +6,7 @@
 \usepackage{amsmath}
 \usepackage{pgfplots}
 \usetikzlibrary{calc}
-\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},,every axis plot/.append style={thick}  }
+\pgfplotsset{compat = newest, every axis plot post/.style={line join=round}, label style={font=\Large},every tick label/.append style={font=\large},,every axis plot/.append style={ultra thick}  }
 
 %%% START MACRO FOR ANNOTATION OF TRIANGLE WITH SLOPE %%%.
 \newcommand{\logLogSlopeTriangle}[5]
@@ -112,9 +112,9 @@
 	xlabel=\Large$\Delta x \; (m)$, 
 	ylabel=\Large$L_2$]
 	
-\addplot [blue,only marks,mark =triangle,mark size =0.9mm] table {hL1.dat};
-\addplot [black,only marks,mark =square,mark size =0.75mm] table {uL1.dat};
-\addplot [red,only marks,mark =o,mark size =0.75mm] table {GL1.dat};
+\addplot [blue,only marks,mark =triangle,mark size =1.5mm] table {hL1.dat};
+\addplot [black,only marks,mark =square,mark size =1.2mm] table {uL1.dat};
+\addplot [red,only marks,mark =o,mark size =1.2mm] table {GL1.dat};
 
 %\logLogSlopeTriangleLeft{0.7}{0.35}{0.15}{2}{black};
 

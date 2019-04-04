@@ -6,7 +6,7 @@ A variety of numerical methods have been used to solve the Serre equations; from
 
 Numerical methods that make use of the conservation law form of the Serre equations \eqref{eqn:FullSerreCon} \cite{Hank-etal-2010-2034,Li-2014-169,Zoppou-etal-2017} are the most promising for the two dimensional Serre equations with variable bathymetry. The primary reason for this is that these methods are robust and extend well to unstructured meshes with complex geometries which are the meshes most commonly used for modelling physical scenarios. Secondly, to properly handle the elliptic operator produced by the non-linear and dispersive splitting requires overly restrictive assumptions about the smoothness of the physical quantities, particularly the water depth. 
 
-I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order FEVM which will be referred to as $\text{FEVM}_2$ was a main objective of this thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is robust in the presence of steep gradients in the free surface \cite{Pitt-2018-61}, robust during the wetting and drying of beds and all the terms of the finite volume method can be calculated knowing only the quantities inside the cell. This last point indicates that this method is the ideal variant of the finite volume based methods \cite{Zoppou-etal-2017} to be extended to solve the two-dimensional Serre equations on unstructured meshes with parallelised code.
+I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order FEVM which will be referred to as $\text{FEVM}_2$ was a main objective of this thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is robust in the presence of steep gradients in the free surface \cite{Pitt-2018-61}, robust during the wetting and drying of beds and the FEM provides a complete profile of the horizontal velocity inside a cell. This last point indicates that this method is the ideal variant of the finite volume based methods \cite{Zoppou-etal-2017} to be extended to solve the two-dimensional Serre equations on unstructured meshes with parallelised code.
  
  
 In addition to the $\text{FEVM}_2$, the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced. These methods will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore, the third-order $\text{FDVM}_3$ was implemented during my research. I have also reproduced the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006}; which I refer to as $\mathcal{D}$ and $\mathcal{W}$ respectively. Descriptions of these methods have already been published \cite{Zoppou-etal-2017,Pitt-2018-61} and therefore, are omitted from this thesis.
@@ -18,7 +18,7 @@ In the $\text{FEVM}_2$, time and space will be discretised in different ways. Ti
 \begin{align*}
 t^n &= t^0 + n \Delta t.
 \end{align*}
-The goal of $\text{FEVM}_2$ is to update the quantities at the current time level $t^n$ to the next time level $t^{n+1}$ by solving the equations. 
+The goal of $\text{FEVM}_2$ is to update the quantities at the current time level $t^n$ to the next time level $t^{n+1}$ by solving the Serre equations. 
 
 The notation for space is a bit more complicated; as we require definitions of multiple locations inside the cells. The cells are defined by their midpoints; which are given from a starting location $x_0$, so that the midpoint of the $j^{th}$ cell where $j \in \mathbb{N}$ is
 \begin{align*}
@@ -187,7 +187,7 @@ In the FEVM we solve for the primitive variable $u$ given $h$, $G$ and $b$ using
 	\int_{\Omega } G v \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} +  \left[\frac{\partial b}{\partial x}\right]^2 \right) v - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) v \; dx.
 \end{equation*}
 
-Integrating by parts with zero Dirichlet boundary conditions we get
+Integrating this equation by parts with zero Dirichlet boundary conditions we get
 \begin{multline}
 \int_{\Omega } G v \; dx = \int_{\Omega } uh \left(1 + \left[\frac{\partial b}{\partial x}\right]^2 \right) v \; dx +  \int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial v}{\partial x} \; dx  \\ - 
 \int_{\Omega }   \frac{1}{2} u h^2\frac{\partial b}{\partial x}  \frac{\partial v }{\partial x}\; dx - 
@@ -536,13 +536,13 @@ These desingularisation transforms act by modifying the calculation of $u$ given
 u = \frac{(uh) h}{h\left(h + h_{base}\right)}
 \label{eqn:calculationofugivenuhandh}
 \end{equation}
-where $h_{base}$ is some small chosen parameter. The error introduced by this transformation is smallest when $h_{base}$ is smallest. However, as noted by \citet{Kurganov-Petrova-2007-707} small values of $h_{base}$ lead to large numerical errors in the calculation of $u$. To avoid such errors $h_{base}$ can be made larger or following \citet{Kurganov-Petrova-2007-707} different desingularisation transformations can be employed. For the main purpose of this thesis; the validation tests reported in Chapter \ref{chp:NumMethodComp} we found the simpler transformation with small values of $h_{base}$ more useful, keeping in mind that large numerical errors in $u$ were possible for small values of $h$. 
+where $h_{base}$ is a small chosen parameter. The analytical error introduced by this transformation decreases as $h_{base}$ decreases. However, as noted by \citet{Kurganov-Petrova-2007-707} small values of $h_{base}$ lead to large numerical errors in the calculation of $u$. To avoid such errors $h_{base}$ can be made larger or following \citet{Kurganov-Petrova-2007-707} different desingularisation transformations can be employed. For the main purpose of this thesis; the validation tests reported in Chapter \ref{chp:NumMethodComp} we found the simpler transformation with small values of $h_{base}$ more useful, keeping in mind that large numerical errors in $u$ were possible for small values of $h$. 
 
 To adapt the calculation of $u$ in \eqref{eqn:calculationofugivenuhandh} to \eqref{defn:SerreEqnConservedQuantity1} we view it as a transformation of the quantity $h$ which is equivalent to
 \begin{equation}
 h \rightarrow h \left( \frac{h + h_{base}}{h} \right).
 \end{equation}
-This transformation is ill-defined when $h = 0$ so we also add in a  small term $h_{tol}$ to the denominator. This $h_{tol}$ also serves as our cut-off value with any cells with $h < h_{tol}$ being considered dry. Therefore, our transformation for the reconstructed values of $h$ in the finite element method is
+This transformation is ill-defined when $h = 0$ so we also add in a  small term $h_{tol}$ to the denominator. The term $h_{tol}$ serves as our cut-off value with any cells with $h < h_{tol}$ being considered dry. Therefore, our transformation for the reconstructed values of $h$ in the finite element method is
 \begin{subequations}
 	\begin{align}
 	h^+_{j-1/2} & = h^+_{j-1/2} \left(\frac{ h^+_{j-1/2}  + h_{base}}{h^+_{j-1/2} + h_{tol}}\right) , \\ \nonumber\\
@@ -553,9 +553,9 @@ This transformation is ill-defined when $h = 0$ so we also add in a  small term 
 where on the right hand side are the reconstructed values of $h$ from \eqref{eqn:ReconforhwG} and the left hand side are the values of $h$ used to defined the basis functions of the FEM \eqref{eqn:FEapproxtohG}. This transformation is applied to all terms in the FEM avoiding the singularity as $h \rightarrow 0$; and in the case where $G = uh$ the transformation is equivalent to \eqref{eqn:calculationofugivenuhandh} for the SWWE.
 
 Even with the transform \eqref{eqn:hdrytransform}, the matrix $\matr{A}$ can become singular.
-The methods of \citet{Zoppou-etal-2017} made use of direct banded matrix solvers such as the Thomas algorithm \cite{Conte-DeBoor-1980} to solve \eqref{eqn:usolvefromGhb} which rely on non-singular matrices making them unsuitable when $h = 0$. This was resolved by employing an LU decomposition algorithm described by \citet{NumRecC-1996}. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting. When the value of a pivot is below some tolerance value $p_{tol}$ the algorithm replaces its value with $p_{tol}$, avoiding the errors associated with small pivot values during an LU decomposition. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard $LU$ decomposition. Typically we set $p_{tol} = 10^{-20}$ allowing the matrix solver to accurately invert $\matr{A}$ and thus solve \eqref{eqn:usolvefromGhb} when $h = 0$. 
+The methods of \citet{Zoppou-etal-2017} made use of direct banded matrix solvers such as the Thomas algorithm \cite{Conte-DeBoor-1980} to solve \eqref{eqn:usolvefromGhb} which rely on non-singular matrices making them unsuitable when $h = 0$. This was resolved by employing an LU decomposition algorithm described by \citet{NumRecC-1996}. This algorithm solves banded matrix problems using an LU decomposition with partial pivoting. When the value of a pivot is below some tolerance value $p_{tol}$ the algorithm replaces its value with $p_{tol}$, avoiding the errors associated with small pivot values during an LU decomposition. It does this while also keeping the banded matrix structure, and so is not as memory intensive as a standard LU decomposition. Typically we set $p_{tol} = 10^{-20}$ allowing the matrix solver to accurately invert $\matr{A}$ and thus solve \eqref{eqn:usolvefromGhb} when $h = 0$. 
 
-Finally, after solving \eqref{eqn:usolvefromGhb} using the LU decomposition algorithm of \citet{NumRecC-1996} where the transformation \eqref{eqn:hdrytransform} has been applied to the reconstructed values of $h$ we possess an approximation to $u$ in the presence of dry beds. Additionally to avoid numerical errors becoming dominant when $h$ is very small we place a cut-off on $h$ beyond which $h=G= u = 0$ and the cells are dry; this is given by $h_{tol}$. This drying of the cells is performed for the whole cell based on the cell average value of $h$ so that if $\overline{h}_j \le h_{tol}$ then
+Solving \eqref{eqn:usolvefromGhb} using the LU decomposition algorithm of \citet{NumRecC-1996} where the transformation \eqref{eqn:hdrytransform} has been applied to the reconstructed values of $h$ an approximation to $u$ is obtained that is valid in the presence of dry beds. Additionally, to avoid numerical errors becoming dominant when $h$ is very small we place a cut-off on $h$ beyond which $h=G= u = 0$ and the cells are dry; this is given by $h_{tol}$. This drying of the cells is performed for the whole cell based on the cell average value of $h$ so that if $\overline{h}_j \le h_{tol}$ then
 \begin{align*}
  & 	h^+_{j-1/2}  = 0   & 	G^+_{j-1/2}  = 0  & & 	w^+_{j-1/2}  = b_{j-1/2}   \\
  &	h_{j} = 0 & 	G_{j}  = 0  & 	&w_{j}  = b_{j},\\
@@ -565,9 +565,9 @@ Finally, after solving \eqref{eqn:usolvefromGhb} using the LU decomposition algo
  \begin{align*}
  & 	u_{j-1/2}  = 0  &\text{if}& &\overline{h}_{j-1}\le h_{tol} \\
  & 	u_{j}  = 0 \\
- & 	u_{j+1/2}  = 0  &\text{if}& &\overline{h}_{j+1} \le h_{tol}
+ & 	u_{j+1/2}  = 0  &\text{if}& &\overline{h}_{j+1} \le h_{tol}.
 \end{align*}
-this drying procedure occurs after the solution of \eqref{eqn:usolvefromGhb}. In the numerical experiments the typical values used were $h_{tol} = 10^{-12}$ and $h_{base} = 10^{-8}$.
+The drying procedure occurs after the solution of \eqref{eqn:usolvefromGhb}. In the numerical experiments the typical values used were $h_{tol} = 10^{-12}$ and $h_{base} = 10^{-8}$.
 
 \medskip
 

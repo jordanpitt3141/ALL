@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+  \usepackage{amssymb}
+  \usepackage{latexsym}
+  \usepackage{amsfonts}
+  \usepackage{amsthm}
+  \usepackage{amsmath}
+  \usepackage{tikz}
+  \usepackage{pgfplotstable}
+  \usepackage{mathtools}
+  \usepackage{subcaption}
+  \usepackage{enumerate}
+  \usepackage{pdflscape}
+  \usepackage{graphicx,psfrag}
+  \usepackage{pgfplotstable}
+  \usepackage{adjustbox}
+  \usepackage{tikz}
+  \usepackage{hyperref}
+  \usepackage{graphicx}
+  \usepackage{tikz}
+  \usepackage{color}
+
+\begin{document}
+
+
+\begin{table}
+	\centering
+	\begin{tabular}{l |c|c|c}
+		Method & Average Run Time ($s$) & Comparison to $\text{FEVM}_2$  & Average Run Time per Time Step ($s$) \\
+		\hline
+		$\text{FDVM}_1$ & $1.32$ & $0.19$ & $3.15 \times 10^{-4}$\\
+		$\text{FDVM}_2$ & $2.72$ & $0.40$ & $6.50 \times 10^{-4}$ \\
+		$\text{FDVM}_3$ & $6.11$ &$0.90$ & $1.46 \times 10^{-3}$\\
+		$\text{FEVM}_2$ & $6.77$& $1$  & $1.62 \times 10^{-3}$\\
+		$\text{FEVM}_2$* & $4.66$& $0.69$  & $1.11 \times 10^{-3}$\\
+		$\mathcal{D}$ & $1.01$ & $0.15$ & $2.42 \times 10^{-4}$ \\
+		$\mathcal{W}$ & $1.04$ & $0.15$ &  $2.48 \times 10^{-4}$
+	\end{tabular}
+	\caption{Runtimes.}
+	\label{tab:ConservationSegurFEVM1cm}
+\end{table} 
+
+ 
+
+
+
+\end{document}
