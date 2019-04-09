@@ -63,7 +63,7 @@ TotTimes = []
 trials = 10
 for nt in range(trials):
     
-    ki = 10
+    ki = 11
     
     start_time = time.time()
     wdir = wdirb + str(ki) + "/"

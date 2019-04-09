@@ -67,10 +67,10 @@ if not os.path.exists(wdirb):
 
 TotTimes = []
 
-trials = 10
+trials = 11
 for nt in range(trials):
     
-    ki = 10
+    ki = 11
     start_time = time.time()
     wdir = wdirb + str(ki) + "/"
     

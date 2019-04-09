@@ -112,12 +112,12 @@ To calculate the velocity perturbation $\mu_{j+1/2}$ we use a second-order FEM. 
 \end{equation*}
 The FEM then proceeds for \eqref{eqn:LinConSerreG} as in Chapter \ref{chp:HFVMMethod} for the non-linear Serre equation using the basis functions defined in Appendix \ref{app:FEMIntegrals}. So that $G$ has the basis functions $\psi^+_{j - 1/2}$ and $\psi^-_{j + 1/2}$ \eqref{eqn:App1:PsiDef}, which means our approximation to $G$ is linear inside a cell with discontinuous jumps at the cell edges. For $v$ and $\mu$ the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ \eqref{eqn:App1:PhiDef} are used so that $v$ and our approximation to $\mu$ are quadratic polynomials inside a cell and are continuous across the cell edges.
 
-Given the detailed description of the method in Chapter \ref{chp:HFVMMethod}, we will just present the element wise matrix $\matr{A}_j$ and vector $\vecn{g}_j$ for the finite element approximation to \eqref{eqn:LinSerreG} 
+Given the detailed description of the method in Chapter \ref{chp:HFVMMethod}, we will just present the elementwise matrix $\matr{A}_j$ and vector $\vecn{g}_j$ for the finite element approximation to \eqref{eqn:LinSerreG} 
 \begin{align*}
 \matr{A}_j &= H \frac{\Delta x}{30 } \begin{bmatrix} \TM 4 &2 &-1 \\2 &16 &2  \\-1 &2 &4 \BM \end{bmatrix} +  \frac{H^3 }{3} \frac{1 }{3\Delta x}\begin{bmatrix} \TM 7 &-8 &1  \\-8 &16 &-8  \\1 &-8 &7 \BM \end{bmatrix}, \\
 \vecn{g}_j &=  \frac{\Delta x}{6} \left(\begin{bmatrix} \TM G^+_{j -1/2} \\2 G^+_{j -1/2}+2 G^-_{j +1/2} \\ G^-_{j +1/2} \BM \end{bmatrix} - UH\begin{bmatrix} \TM 1 \\4 \\ 1  \BM\end{bmatrix} - U\begin{bmatrix} \TM \eta^+_{j -1/2} \\2 \eta^+_{j -1/2}+2 \eta^-_{j +1/2} \\ \eta^-_{j +1/2} \end{bmatrix} \BM \right).
 \end{align*}
-To calculate the intercell flux we require $\mu$ at $x_{j+1/2}$. From the element wise matrices and vectors for the $j^{th}$ and $\left(j+1\right)^{th}$ cells the equation that relates all the quantities at $x_{j+1/2}$ is
+To calculate the intercell flux we require $\mu$ at $x_{j+1/2}$. From the elementwise matrices and vectors for the $j^{th}$ and $\left(j+1\right)^{th}$ cells the equation that relates all the quantities at $x_{j+1/2}$ is
 \begin{multline*}
 \frac{\Delta x}{6} \left(G^-_{j +1/2} + G^+_{j +1/2} \right) \\
 =2UH \frac{\Delta x}{6}   + U\frac{\Delta x}{6} \left(\eta^-_{j +1/2} + \eta^+_{j +1/2} \right) \\ +   \Bigg(H\frac{\Delta x}{30} \Bigg[ -\mu_{j-1/2} +  2\mu_{j} + 8\mu_{j+1/2}  +  2 \mu_{j+1}  - \mu_{j+3/2}\Bigg]   \\ + \frac{H^3 }{3}\frac{1 }{3\Delta x} \Bigg[  \mu_{j-1/2} -8\mu_{j} + 14 \mu_{j+1/2} -8\mu_{j+1} + \mu_{j+3/2}  \Bigg]    \Bigg).
@@ -480,9 +480,9 @@ e^{i \omega^\pm \Delta t}\begin{bmatrix}
 \end{bmatrix}^{n}_j.
 \label{eqn:dispanalomeganum1}
 \end{equation*}
-Therefore, the evolution matrix $\matr{E}$ of an exact method has the eigenvalues $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ where $\omega^\pm$ are the positive and negative branches of the dispersion relation of the linearised Serre equations \eqref{eqn:DispersionRelation}. For approximate numerical methods the dispersion relation for $\widetilde{\omega}^\pm$ can be calculated by taking the eigenvalues of its evolution matrix $\lambda^\pm$ like so
+Therefore, the evolution matrix $\matr{E}$ of an exact method has the eigenvalues $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ where $\omega^\pm$ are the positive and negative branches of the dispersion relation of the linearised Serre equations \eqref{eqn:DispersionRelation}. For approximate numerical methods the dispersion relation for $\widetilde{\omega}^\pm$ can be calculated by taking the eigenvalues of its evolution matrix $\tau^\pm$ like so
 \begin{equation*}
-\widetilde{\omega}^\pm = \frac{1}{i \Delta t} \log\left[ \lambda^\pm\right].
+\widetilde{\omega}^\pm = \frac{1}{i \Delta t} \log\left[ \tau^\pm\right].
 \end{equation*}
 By comparing $\widetilde{\omega}^\pm$ with the analytic $\omega^\pm$ given by the linearised Serre equations \eqref{eqn:DispersionRelation} we can determine the error in the dispersion relation for the numerical method. The real part of the frequency determines the speed of a wave, while the imaginary part determines the change in amplitude. For the linearised Serre equations the imaginary part of $\omega^\pm$ is zero and so the amplitude of waves are constant in time. We only present the results for the positive branch of the dispersion relation comparing $\widetilde{\omega}^+$ and $\omega^+$ as the behaviour of the negative branch is very similar. 
 

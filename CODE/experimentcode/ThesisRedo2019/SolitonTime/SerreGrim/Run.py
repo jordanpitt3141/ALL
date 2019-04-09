@@ -58,7 +58,7 @@ TotTimes = []
 trials = 10
 for nt in range(trials):
     
-    k = 10
+    k = 11
     start_time = time.time()
     dx = 100.0 / (2**k)
     Cr = 0.5

@@ -6,7 +6,7 @@ A variety of numerical methods have been used to solve the Serre equations; from
 
 Numerical methods that make use of the conservation law form of the Serre equations \eqref{eqn:FullSerreCon} \cite{Hank-etal-2010-2034,Li-2014-169,Zoppou-etal-2017} are the most promising for the two dimensional Serre equations with variable bathymetry. The primary reason for this is that these methods are robust and extend well to unstructured meshes with complex geometries which are the meshes most commonly used for modelling physical scenarios. Secondly, to properly handle the elliptic operator produced by the non-linear and dispersive splitting requires overly restrictive assumptions about the smoothness of the physical quantities, particularly the water depth. 
 
-I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order FEVM which will be referred to as $\text{FEVM}_2$ was a main objective of this thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is robust in the presence of steep gradients in the free surface \cite{Pitt-2018-61}, robust during the wetting and drying of beds and the FEM provides a complete profile of the horizontal velocity inside a cell. This last point indicates that this method is the ideal variant of the finite volume based methods \cite{Zoppou-etal-2017} to be extended to solve the two-dimensional Serre equations on unstructured meshes with parallelised code.
+I have developed an extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method. This second-order FEVM which will be referred to as $\text{FEVM}_2$ was a main objective of this thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon} hence its name. Making use of these two methods results in a numerical method with a number of desirable properties. It is accurate in the presence of steep gradients in the free surface \cite{Pitt-2018-61}, accurately models the wetting and drying of beds and the FEM provides a complete profile of the horizontal velocity inside a cell. This last point indicates that this method is the ideal variant of the finite volume based methods \cite{Zoppou-etal-2017} to be extended to solve the two-dimensional Serre equations on unstructured meshes with parallelised code.
  
  
 In addition to the $\text{FEVM}_2$, the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced. These methods will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore, the third-order $\text{FDVM}_3$ was implemented during my research. I have also reproduced the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006}; which I refer to as $\mathcal{D}$ and $\mathcal{W}$ respectively. Descriptions of these methods have already been published \cite{Zoppou-etal-2017,Pitt-2018-61} and therefore, are omitted from this thesis.
@@ -51,7 +51,7 @@ In the FEVM we reconstruct quantities at various points inside the cell using th
 \section{Structure Overview}
 \label{sec:StructOverview}
 %define w,b
-To describe the FEVM we first present an overview of the evolution step and then provide the details for each component. We begin our evolution step given all the cell averages for $h$, $w$ and $G$ at time $t^n$ and all the nodal values of $b$. We write these as vectors from the starting $0^{th}$ to the final $m^{th}$ cell in the following way
+To describe the FEVM we first present an overview of the evolution step and then provide the details for each component. We begin our evolution step given all the cell averages for the height of the water above the bed $h$, the absolute location of the free-surface $w$ and the conserved quantity $G$ at time $t^n$ and all the nodal values of the bed profile $b$. We write these as vectors from the starting $0^{th}$ to the final $m^{th}$ cell in the following way
 \begin{align*} \overline{\vecn{q}}^n = \begin{bmatrix} \TM
 \overline{q}_0^n \\\overline{q}_1^n \\ \vdots \\ \overline{q}_m^n \BM\end{bmatrix} & , & \vecn{b} = \begin{bmatrix} \TM
 b_{0} \\ b_{1} \\ \vdots \\b_{m} \BM
@@ -79,7 +79,7 @@ where $q$ is a generic quantity representing the vectors for $h$, $G$ and $w$. T
 	b_{-1/2} \\ b_{-1/6} \\ b_{1/6}  \\b_{1/2}  \\ \vdots \\ b_{m+1/2} \BM
 	\end{bmatrix}
 	\end{align*}
-	where $q$ is a generic quantity demonstrating these vectors for $h$, $w$ and $G$.	
+	where $q$ is a generic quantity demonstrating these vectors for $h$, $w$ and $G$. Note that since the domain contains all the cells from the $0^{th}$ cell to the $m^{th}$ cell that $q^+_{-1/2}$ and $q^-_{m+1/2}$ are the reconstructed values of $q$ at the left and right boundaries of the domain, respectively.	
 	\item Fluid Velocity: The remaining unknown quantity, the horizontal velocity of the fluid column, $u$ is calculated at $x_{j-1/2}$, $x_j$ and $x_{j+1/2}$ in each cell by solving \eqref{defn:SerreEqnConservedQuantity1} with a second-order FEM. We denote the solution map of the FEM by $\mathcal{G}$, which takes $\vecn{\hat{h}}$, $\vecn{\hat{G}}$ and $\vecn{\hat{b}}$ as inputs. So that
 	\begin{equation*}
 	\vecn{\hat{u}} = 
@@ -132,12 +132,15 @@ The minmod function
 \end{equation*}
 takes a list of $a_i \in \mathbb{R}$. If all the inputs have the same sign then minmod returns the input with smallest absolute value, otherwise it returns zero. 
 \end{defn}
-The non-linear limiting used to calculate $d_j$ ensures that the reconstruction of $h$, $w$ and $G$ inside the cell is Total Variation Diminishing (TVD) \cite{Harten-1983-357}, hence it does not introduce non-physical oscillations. The TVD property of this reconstruction is achieved by constraining the slope $d_j$ to zero near local extrema, resulting in a piecewise constant reconstruction which is TVD. Away from local extrema $d_j$ will be the gradient with the smallest absolute value, making our reconstruction second-order accurate.
+The non-linear limiting used to calculate $d_j$ ensures that the reconstruction of $h$, $w$ and $G$ inside the cell is Total Variation Diminishing (TVD) \cite{Harten-1983-357}, hence it does not introduce non-physical oscillations and is thus stable. The TVD property of this reconstruction is achieved by constraining the slope $d_j$ to zero near local extrema, resulting in a piecewise constant reconstruction which is TVD. Away from local extrema $d_j$ will be the gradient with the smallest absolute value, making our reconstruction second-order accurate.
 
 The reconstruction operator $\mathcal{R}_{j} $ is second-order accurate regardless of the presence of local extrema. This can be seen through the error analysis of the midpoint quadrature rule \cite{Davis-Rabinowitz-1984} for which we have that
 \begin{equation}
 \overline{q}^n_j = \frac{1}{\Delta x} \int_{x_{j-1/2}}^{x_{j+1/2}} q(x,t^n) \; dx = q_j^n + \mathcal{O}\left(\Delta x^2\right).
 \end{equation}
+
+%why[]
+%second-order accurate, TVD
 
 \subsubsection{Reconstruction of the Bed Profile}
 For the bed profile we require a reconstruction that is at least second-order accurate for $b$, $\partial b / \partial x$ and $\partial^2 b / \partial x^2$. To accomplish this $b$ is reconstructed with a cubic polynomial $C_j(x)$ centred around $x_j$
@@ -496,7 +499,7 @@ b_{m+1/2} \\ b_{m+5/6} \\ b_{m+7/6} \\ b_{m+3/2} \BM\end{bmatrix}&, &\vecn{\hat{
 b_{m+3/2} \\ b_{m+11/6} \\ b_{m+13/6} \\ b_{m+5/2} \BM\end{bmatrix}.
 \end{align*}
 
-To ensure that the solution of $u$ using \eqref{eqn:usolvefromGhb} agrees with the boundary conditions $\vecn{\hat{u}}_{-1}$ and $\vecn{\hat{u}}_{m}$ the element-wise stiffness matrices $\matr{A}_0$ and $\matr{A}_m$ and vectors $\vecn{g}_0$ and $\vecn{g}_m$ must be modified in the following way 
+To ensure that the solution of $u$ using \eqref{eqn:usolvefromGhb} agrees with the boundary conditions $\vecn{\hat{u}}_{-1}$ and $\vecn{\hat{u}}_{m}$ the elementwise stiffness matrices $\matr{A}_0$ and $\matr{A}_m$ and vectors $\vecn{g}_0$ and $\vecn{g}_m$ must be modified in the following way 
 
 \begin{align*}
 \matr{A}_{0} = 

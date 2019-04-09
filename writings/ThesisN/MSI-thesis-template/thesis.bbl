@@ -1,4 +1,4 @@
-\begin{thebibliography}{64}
+\begin{thebibliography}{69}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -62,6 +62,13 @@ X.~Wang.
 S.G. Roberts.
 \newblock {ANUGA}, 2018.
 \newblock URL \url{https://anuga.anu.edu.au/}.
+
+\bibitem[Eskilsson and Sherwin(2004)]{Eskilsson}
+C.~Eskilsson and S.~J. Sherwin.
+\newblock A triangular spectral/hp discontinuous galerkin method for modelling
+  2d shallow water equations.
+\newblock \emph{International Journal for Numerical Methods in Fluids},
+  45\penalty0 (6):\penalty0 605--623, 2004.
 
 \bibitem[Grue et~al.(2008)Grue, Pelinovsky, Fructus, Talipova, and
   Kharif]{Grue-etal-2008-113}
@@ -418,5 +425,30 @@ A.~Bollermann, S.~Noelle, and M.~Luk{\'a}{\v{c}}ov{\'a}-Medvid’ov{\'a}.
   equations with dry beds.
 \newblock \emph{Communications in Computational Physics}, 10\penalty0
   (2):\penalty0 371--404, 2011.
+
+\bibitem[Tissier et~al.(2011)Tissier, Bonneton, Marche, Chazel, and
+  Lannes]{Tissier-2011}
+M.~Tissier, P.~Bonneton, F.~Marche, F.~Chazel, and D.~Lannes.
+\newblock {S}erre {G}reen-{N}aghdi modelling of wave transformation breaking
+  and run-up using a high-order finite-volume finite-difference scheme.
+\newblock \emph{Coastal Engineering Proceedings}, 1\penalty0 (32):\penalty0
+  1--13, 2011.
+
+\bibitem[do~Carmo et~al.(2019)do~Carmo, Ferreira, and Pinto]{DoCarmo-2019-125}
+J.S.A. do~Carmo, J.A. Ferreira, and L.~Pinto.
+\newblock On the accurate simulation of nearshore and dam break problems
+  involving dispersive breaking waves.
+\newblock \emph{Wave Motion}, 85:\penalty0 125 -- 143, 2019.
+
+\bibitem[Chow(2008)]{ChowVenTe}
+V.~T. Chow.
+\newblock \emph{Open-channel hydraulics}.
+\newblock Caldwell, New Jersey : Blackburn Press, 2008.
+
+\bibitem[LeVeque(2002)]{LeVeque-2002}
+R.J. LeVeque.
+\newblock \emph{Finite volume methods for hyperbolic problems}, volume~54 of
+  \emph{Cambridge Texts in Applied Mathematics}.
+\newblock Cambridge University Press, New York, 2002.
 
 \end{thebibliography}

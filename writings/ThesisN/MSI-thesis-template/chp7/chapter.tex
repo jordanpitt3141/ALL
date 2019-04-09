@@ -41,6 +41,53 @@ Following the work conducted in this thesis; some possible extensions are:
 	\item Extension of $\text{FEVM}_2$ to the two-dimensional Serre equations on unstructured meshes.
 \end{itemize}
 
+[]
+\subsection{Including Wave-breaking}
+In the presence of wave-breaking the Serre equations are no longer appropriate [], as was demonstrated in Chapter \ref{chp:ExpMethodComp}. One technique to improve numerical models based on the Serre equations in the presence of wave-breaking, is to revert to a Shallow Water Wave Equation (SWWE) solver under some criteria, typically based on wave steepness \cite{Tissier-2011,Filippini-etal-2016-381,DoCarmo-2019-125}. These numerical methods benefit from the particular splitting technique employed, resulting in a method which solves the hyperbolic part of the Serre equations, the SWWE followed by a method to solve the remaining dispersive part. Therefore, when the wave-breaking criteria is met the dispersive part is neglected, producing a solution of the SWWE for the breaking wave. 
+
+The method in this thesis is not based on this splitting technique. However, by introducing a quantity $\beta$ to the Serre equations in conservation law form \eqref{eqn:FullSerreCon} 
+	\begin{align*}
+	& \frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0 ,  \\ \nonumber \\
+	\begin{split}
+	\frac{\partial G}{\partial t}  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} - \beta \left[ \frac{2}{3}h^3 \left[\frac{\partial {u}}{\partial x}\right]^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right] \right) \\ \\ +  \beta\left( \frac{1}{2}h^2 {u} \frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  - h {u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2} \right) + gh\frac{\partial b}{\partial x}  = 0,
+	\end{split}
+	\end{align*}
+	\begin{equation*}
+	G = uh + \beta \left[{u}h \left(\frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} + \left[\frac{\partial b}{\partial x}\right]^2 \right) - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right)\right]
+	\end{equation*}
+such a technique could be employed by setting $\beta = 0$ in the presence of wave-breaking and $\beta = 1$ otherwise. Since when $\beta = 0$, these modified Serre equations are equivalent to the SWWE.
+
+\subsection{Implementation of Different Boundary Conditions}
+When imposing boundary conditions other than the Dirichlet boundary conditions implemented in this thesis special care must be taken to ensure that the appropriate weak form of \eqref{defn:SerreEqnConservedQuantity1} is used. The presented weak form \eqref{eqn:WeakFormDomain} is only valid because when integrating by parts the surface integral of all those terms were zero due to the use of Dirichlet boundary conditions. 
+
+The general weak form of \eqref{defn:SerreEqnConservedQuantity1} is
+\begin{multline}
+\int_{\Omega } G v \; dx = \int_{\Omega } uh \left(1 + \left[\frac{\partial b}{\partial x}\right]^2 \right) v \; dx +  \int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial v}{\partial x} \; dx - 
+\int_{\Omega }   \frac{1}{2} u h^2\frac{\partial b}{\partial x}  \frac{\partial v }{\partial x}\; dx  \\ - 
+\int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}v \; dx  - \left[\frac{1}{3} h^3  \frac{\partial {u}}{\partial x} v\right]_{x_{-1/2}}^{x_{m+1/2}} + \left[\frac{1}{2} uh^2  \frac{\partial {b}}{\partial x} v\right]_{x_{-1/2}}^{x_{m+1/2}}
+\label{eqn:WeakFormGen}
+\end{multline}
+where $\Omega = \left[x_{-1/2},x_{m+1/2}\right]$ as in Chapter \ref{chp:HFVMMethod}. Given the appropriate representation of $h$, $G$ and $b$ in the ghost cells, any appropriate boundary condition problem can be solved with the general weak form \ref{eqn:WeakFormGen}.
+
+\subsection{Incorporation of Discontinuous Bed Profiles}
+In the current derivation of the Serre equations, the bed profile is assumed to be smooth. To be able to model dispersive waves with non-smooth bed profiles requires a new derivation of the Serre equations.
+??? [thoughts] ???
+
+\subsection{Incorporation of Bed Friction}
+The Serre equations presented in this thesis \eqref{eqn:FullSerreCon} assume no bottom friction. To include bottom friction approximation there are many options as noted by \citet{DoCarmo-2019-125}. Although all introduce some quadratic friction term to \eqref{eqn:FullSerreNonConMome}, such as the Manning's bottom roughness \cite{Tissier-2011,Filippini-etal-2016-381,DoCarmo-2019-125}. An equivalent formulation for the momentum equation in conservation law form \eqref{eqn:Serreconsconmom} including Manning's bottom friction \cite{ChowVenTe} is 
+\begin{equation}
+	\begin{split}
+		\frac{\partial G}{\partial t}  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} -  \frac{2}{3}h^3 \left[\frac{\partial {u}}{\partial x}\right]^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right) \\ \\ +   \frac{1}{2}h^2 {u} \frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  - h {u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2}  + gh \left(\frac{\partial b}{\partial x} + \frac{n^2 u \left|u\right|}{h^{4/3}} \right)   = 0.
+	\end{split}
+\end{equation}
+
+\subsection{Complete Convergence Analysis}
+The presented convergence analysis in Chapter \ref{chp:AnalNumMethod} is only performed for the linearised Serre equations with a horizontal bed. Given the difficulty of proving convergence for Finite Volume Methods for the SWWE \cite{LeVeque-2002} this task currently seems out of reach but is of great interest to us.
+
+\subsection{Extension to two-dimensional Serre equations on unstructured meshes}
+%Div space, give equations
+%cite ANUGA
+
 
 
 
