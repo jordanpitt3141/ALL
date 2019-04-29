@@ -1,6 +1,6 @@
 \chapter{Additional Conservation Information}
 \label{app:ConQuant}
-To calculate the conservation errors requires an analytic expression for the total amount of $h$, $uh$, $G$ and $\mathcal{H}$ present in the initial conditions. Therefore, to facilitate the validation tests against the analytic solutions performed in Chapter \ref{chp:NumMethodComp} we present these analytic expressions for the initial conditions of the solitary travelling wave and the lake at rest solutions described in Chapter \ref{chp:Serreeqns}. To allow for the simple calculation of the integrals in a concise way for any domains we present the integrals in indefinite form. 
+To calculate the conservation errors requires an analytic expression for the total amount of $h$, $uh$, $G$ and $\mathcal{H}$ present in the initial conditions. Therefore, to facilitate the validation tests against the analytic solutions performed in Chapter \ref{chp:NumMethodComp} analytic expressions for total amounts of these quantities contained in the initial conditions of the solitary travelling wave and the lake at rest solutions described in Chapter \ref{chp:Serreeqns} are presented here. To allow for the simple calculation of the integrals in a concise way for any domain the integrals are provided in indefinite form. 
 
 \section{Solitary Travelling Wave Solution}
 The solitary wave solution \eqref{eqn:Solitondefhub} is
@@ -32,15 +32,13 @@ where the integrals making up $\mathcal{H}$ are
 \int g\left[h(x,0)\right]^2 \; dx ={}& \frac{g}{12 \kappa }\text{sech}^3\left(\kappa x\right) \Bigg(9a_0^2 \kappa x \cosh\left(\kappa x\right) \\ &+ 4 a_1 \left[3a_0 + 2 a_1 + \left(3a_0 + a_1\right)\cosh\left(2\kappa x\right)\right] \sinh\left(\kappa x\right) \\ & + 3 a_0^2 \kappa x \cosh\left(3\kappa x\right)\Bigg) + \text{constant},
 \end{align*}
 \begin{align*}
-\int h(x,0)\left[u(x,0)\right]^2 \; dx = {}& \frac{\sqrt{a_1}c^2}{\kappa} \Bigg( -\frac{a0}{\sqrt{a_0 + a_1}} \text{arctanh}\left(\dfrac{\sqrt{a1} \tanh\left(\kappa x\right)}{\sqrt{a_0 + a1}}\right)\\ &+ \frac{\sqrt{a_1}}{\kappa}\tanh\left(\kappa x\right)\Bigg)  + \text{constant},
+\int h(x,0)\left[u(x,0)\right]^2 \; dx = {}& \frac{\sqrt{a_1}c^2}{\kappa} \Bigg( -\frac{a_0}{\sqrt{a_0 + a_1}} \text{arctanh}\left(\dfrac{\sqrt{a_1} \tanh\left(\kappa x\right)}{\sqrt{a_0 + a_1}}\right)\\ &+ \frac{\sqrt{a_1}}{\kappa}\tanh\left(\kappa x\right)\Bigg)  + \text{constant},
 \end{align*} 
 \begin{align*}
-\int \left[h(x,0)\right]^3 \left[\frac{\partial u(x,0)}{\partial x}\right]^2 \; dx = {}& \frac{2a_0^2c^2 \kappa }{9 \sqrt{a_1} \left(a_0 + a_1\text{sech}^2\left(\kappa x \right) \right)}   \\ &\times\left(a_0 + 2a_1 + a_0 \cosh\left(2\kappa x\right) \right) \text{sech}^2\left(\kappa x\right) \\&\times \Bigg(-3 a_0 \sqrt{a_0 + a_1}\text{arctanh}\left(\dfrac{\sqrt{a1} \tanh\left(\kappa x\right)}{\sqrt{a_0 + a1}}\right)  \\ &+ \sqrt{a_1}\left[3a_0 + a_1 - a_1\text{sech}^2\left(\kappa x\right)\right]\tanh(\kappa x) \Bigg) \\&+ \text{constant}.
+\int \left[h(x,0)\right]^3 \left[\frac{\partial u(x,0)}{\partial x}\right]^2 \; dx = {}& \frac{2a_0^2c^2 \kappa }{9 \sqrt{a_1} \left(a_0 + a_1\text{sech}^2\left(\kappa x \right) \right)}   \\ &\times\left(a_0 + 2a_1 + a_0 \cosh\left(2\kappa x\right) \right) \text{sech}^2\left(\kappa x\right) \\&\times \Bigg(-3 a_0 \sqrt{a_0 + a_1}\text{arctanh}\left(\dfrac{\sqrt{a_1} \tanh\left(\kappa x\right)}{\sqrt{a_0 + a_1}}\right)  \\ &+ \sqrt{a_1}\left[3a_0 + a_1 - a_1\text{sech}^2\left(\kappa x\right)\right]\tanh(\kappa x) \Bigg) \\&+ \text{constant}.
 \end{align*}
 \endgroup
-
-Therefore, we have the analytic values of the total amounts of our conserved quantities for the solitary travelling wave solution \eqref{eqn:Solitondefhub} when $t=0s$, as desired.
-
+From these expressions the total amount of $h$, $uh$, $G$ and $\mathcal{H}$ for the solitary travelling wave solution \eqref{eqn:Solitondefhub} can be calculated over any domain at $t=0$.
 
 \section{Lake At Rest Solution}
 The lake at rest solution \eqref{eqn:LARdefhub} for an arbitrary bed profile $b(x)$ is
@@ -50,7 +48,7 @@ The lake at rest solution \eqref{eqn:LARdefhub} for an arbitrary bed profile $b(
 	&G(x,t) = 0 .
 	\end{align*}
 
-The total amount of $uh$ and $G$ in the system are straightforward to calculate as both are zero everywhere and so we have 
+The total amount of $uh$ and $G$ in the system are straightforward to calculate as both are zero everywhere and thus it follows that
 %\begin{subequations*}
 %	\label{eqn:AppLARu}
 \begin{align*}
@@ -58,7 +56,7 @@ The total amount of $uh$ and $G$ in the system are straightforward to calculate 
 &\int G(x,0) \; dx = {} 0 + \text{constant}.
 \end{align*}
 %\end{subequations*}
-To calculate the total $h$ and $\mathcal{H}$ in the solution we must partition the domain into wet regions where $b(x) < a_0$ and dry regions where $b(x) \ge a_0$. For the dry regions $h$ and $\mathcal{H}$ are zero everywhere and so we have 
+To calculate the total amount of $h$ and $\mathcal{H}$ in the solution the domain is partioned into wet regions where $b(x) < a_0$ and dry regions where $b(x) \ge a_0$. For the dry regions $h$ and $\mathcal{H}$ are zero everywhere and therefore 
 %\begin{subequations}
 	%\label{eqn:AppLARhdry}
 	\begin{align*}
@@ -66,7 +64,7 @@ To calculate the total $h$ and $\mathcal{H}$ in the solution we must partition t
 	\int \mathcal{H}(x,0) \; dx = {} & 0 + \text{constant}
 	\end{align*}
 %\end{subequations}
-whilst in wet regions we have 
+whilst in the wet regions
 \begin{subequations}
 	\label{eqn:AppLARhwet}
 	\begin{align}
@@ -74,4 +72,4 @@ whilst in wet regions we have
 	\int \mathcal{H}(x,0) \; dx = {} & \frac{g}{2} \left(a_0^2x  -  2a_0 \int b(x) \; dx + \int b(x)^2 \; dx \right) + \text{constant}.
 	\end{align}
 \end{subequations}
-By summing all the wet regions in a given domain together we can calculate the total amount of $h$ and $\mathcal{H}$ in the system from these expressions, in terms of the bed profile $b(x)$, as desired. 
+By summing all the wet regions in a given domain together the total amount of $h$ and $\mathcal{H}$ in the system can be calculated from these expressions for an arbitrary bed profile $b(x)$. 

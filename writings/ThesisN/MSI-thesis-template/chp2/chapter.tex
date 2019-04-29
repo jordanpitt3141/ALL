@@ -3,9 +3,9 @@
 \label{chp:Serreeqns}
 In this chapter the Serre equations are introduced and their relevant properties are presented.
 
-The Serre equations are a system of partial differential equations that describe the free-surface waves of fluids whose motion is dominated by gravitational forces. The Serre equations are an approximation to the Euler equations \cite{Euler-1755-274}; describing waves in shallow water where the characteristic depth of the water $h_0$ is much smaller than the characteristic wavelength of the waves $\lambda_0$ thus the shallowness parameter $ \sigma = h_0 / \lambda_0  \ll 1 $. Typically, water is considered to be shallow when $\sigma  \le  1/ 20$ \cite{Sorenson-2006}. Tsunamis and storm surges are shallow water waves as the typical ocean depth in which they occur is $4km$ and both can have wavelengths up to $100km$ long.
+The Serre equations are a system of partial differential equations that describe the free-surface waves of fluids whose motion is dominated by gravitational forces. The Serre equations are an approximation to the Euler equations \cite{Euler-1755-274}; describing waves in shallow water where the characteristic depth of the water $h_0$ is much smaller than the characteristic wavelength of the waves $\lambda_0$ thus, the shallowness parameter $ \sigma = h_0 / \lambda_0  \ll 1 $. Typically, water is considered to be shallow when $\sigma  \le  1/ 20$ \cite{Sorenson-2006}. Tsunamis and storm surges are shallow water waves as the typical ocean depth in which they occur is $4km$ and both can have wavelengths up to $100km$ long.
 
-The Serre equations for one-dimensional flows over horizontal beds were first derived by \citet{Serre-F-1953-857} using asymptotic expansion. They were later derived using depth integration by \citet{Su-Gardener-1969-536}. They are equivalent to the Green-Naghdi equations \cite{Green-Naghdi-1976-237} derived using the theory of directed fluid sheets. The Serre equations were then extended to spatially varying bathymetry by \citet{Seabra-Santos-etal-1987-117}. 
+The Serre equations for one-dimensional flows over horizontal beds were first derived by \citet{Serre-F-1953-857} using asymptotic expansion. They were later derived using depth integration by \citet{Su-Gardener-1969-536} and are equivalent to the Green-Naghdi equations \cite{Green-Naghdi-1976-237} derived using the theory of directed fluid sheets. The Serre equations were extended to spatially varying bathymetry by \citet{Seabra-Santos-etal-1987-117}. 
 
 The Serre equations are fully non-linear and thus applicable across the entire range of wave amplitudes $a_0$, which are commonly characterised by the non-linearity parameter $\epsilon = a_0 / h_0$. They describe fluids under gravity without assuming a hydrostatic pressure distribution and thus allow for dispersion. Furthermore, the dispersion relationship for linear waves of the Serre equations approximates the linear wave theory for the Euler equations well \cite{Barthelemy-2004-315}. Therefore, the Serre equations are considered one of the best approximate water wave models up to wave-breaking \cite{Bonneton-Lannes-2009-16601,Bonneton-etal-2011-1479}. 
 
@@ -89,7 +89,7 @@ G =  {u}h \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} +
 \end{equation}
 The introduced quantity $G$ resembles $h$ multiplied by the irrotationality \cite{Choi-Camassa-1999-1,Carter-Cienfuegos-2011-259}.
 
-Being in conservation law form with a source term the Serre equations can be numerically solved using the finite volume method to approximate the evolution of $h$ and $G$ equations \eqref{eqn:FullSerreCon}. However, a finite volume method for \eqref{eqn:FullSerreCon} requires a method to solve \eqref{defn:SerreEqnConservedQuantity1} for the remaining primitive variable $u$ given $h$, $G$ and $b$.
+Since the Serre equations can be written in conservation law form with a source term they can be numerically solved with a finite volume method to evolve $h$ and $G$ through time. However, a finite volume method for \eqref{eqn:FullSerreCon} which evolves $h$ and $G$ requires a numerical method to solve \eqref{defn:SerreEqnConservedQuantity1} for the remaining primitive variable $u$ given $h$, $G$ and $b$.
 
 For a horizontal bed $\partial b / \partial x = 0$ the conservation law form of the Serre equations using the new quantity $G$ is
 \begin{subequations}
@@ -106,11 +106,7 @@ For a horizontal bed $\partial b / \partial x = 0$ the conservation law form of 
 
 
 \section{Properties}
-The Serre equations possess a number of desirable properties for the modelling of water waves; in particular their conservation of fundamental quantities and their dispersion relation. If a numerical method accurately approximates the Serre equations then the numerical method should reproduce the conservation and dispersion properties of the Serre equations. Furthermore, the numerical method should accurately reproduce the analytic solutions of the Serre equations. In this thesis the conservation and dispersion properties and the analytic solutions of the Serre equations are used to assess the veracity of numerical methods. 
-
-%To complement the available analytic solutions, the Serre equations are modified to force certain solutions using a source term, which are called forced solutions. These forced solutions will be used to assess the validity of the numerical methods for a wider array of flow scenarios then possible given the limited number of analytic solutions currently available for the Serre equations.
-%
-%Finally the results of \citet{Pitt-2017-1725} for the behaviour of the Serre equations in the presence of steep gradients are summarised. These results demonstrate that the developed numerical method is robust in the presence of steep gradients; one of the main objectives of the thesis. 
+The Serre equations possess a number of desirable properties for the modelling of water waves; in particular their conservation of fundamental quantities and their dispersion relation. If a numerical method accurately approximates the Serre equations then the numerical method should reproduce the conservation and dispersion properties of the Serre equations. Furthermore, the numerical method should accurately reproduce the analytic solutions of the Serre equations. In this thesis the conservation and dispersion properties and the analytic solutions of the Serre equations introduced below are used to assess the veracity of numerical methods. 
 
 \subsection{Conservation Properties}
 A quantity is conserved if the total amount of a quantity $q$ in a closed system remains constant through time.
@@ -123,7 +119,7 @@ A quantity is conserved if the total amount of a quantity $q$ in a closed system
 \end{defn}
 Using this notation conservation of a quantity $q$ implies that $\mathcal{C}_{q}(0) = \mathcal{C}_{q}(t)$ for all $t$, provided the system is closed and thus has no flux across its boundary. 
 
-Integrating the canonical Serre equations \eqref{eqn:FullSerreNonCon} and the Serre equations in conservation law form with a source term \eqref{eqn:FullSerreCon} for a closed system implies that $h$, $uh$ and $G$ are conserved by the Serre equations. The conservation of $uh$ and $G$ only occurs when the contribution of the source term over the domain vanishes. Additionally, the Green-Naghdi equations \cite{Green-Naghdi-1976-237} which are equivalent to the Serre equations for one-dimensional flows were derived by conserving the energy
+Integrating the canonical Serre equations \eqref{eqn:FullSerreNonCon} and the Serre equations in conservation law form with a source term \eqref{eqn:FullSerreCon} for a closed system implies that $h$, $uh$ and $G$ are conserved by the Serre equations. However, $uh$ and $G$ are only conserved when the contribution of their respective source terms over the domain vanishes. Additionally, the Green-Naghdi equations \cite{Green-Naghdi-1976-237} which are equivalent to the Serre equations for one-dimensional flows were derived by conserving the energy
 \begin{equation*}
 	\mathcal{H}(x,t) = \frac{1}{2} \left( gh\left(h + 2b\right) + hu^2  + \frac{h^3}{3} \left[\frac{\partial u}{\partial x}\right]^2 + u^2h\left[\frac{\partial b}{\partial x}\right]^2 - uh^2 \frac{\partial u}{\partial x} \frac{\partial b}{\partial x}  \right).
 	\label{eqn:Hamildef}
@@ -142,8 +138,7 @@ The dispersion properties are studied by linearising the Serre equations with a 
 \label{eqn:DispersionRelation}
 \omega^\pm = Uk \pm k \sqrt{gH} \sqrt{\frac{3}{\left(kH\right)^2 + 3}}
 \end{equation}
-where $U$ and $H$ are the mean velocity and height of the fluid respectively. For the dispersion relation two wave frequencies $\omega^+$ and $\omega^-$ are possible for each wavenumber allowing for downwind and upwind travelling waves respectively. \citet{Barthelemy-2004-315} compared this dispersion relation to the dispersion relation given by the linear theory for water waves and demonstrated its utility when $k$ is small. However, when $k$ is large the difference between the dispersion relation of the Serre equations and that of the linear water wave theory increases. 
-%The dispersion relation of the Serre equations can be modified by introducing additional terms to reduce this difference \cite{Barthelemy-2004-315}, but such modifications are beyond the scope of this thesis.
+where $U$ and $H$ are the mean velocity and height of the fluid respectively. For the dispersion relation two wave frequencies $\omega^+$ and $\omega^-$ are possible for each wavenumber allowing for downwind and upwind travelling waves respectively. \citet{Barthelemy-2004-315} compared this dispersion relation to the dispersion relation given by the linear theory for water waves and demonstrated its utility when $k$ is small. However, as $k$ increases so does the difference between the dispersion relation of the Serre equations and that of the linear water wave theory. 
 
 
 From the dispersion relation \eqref{eqn:DispersionRelation} the phase velocity $v_p^\pm = \omega^\pm / k$ and the group velocity $v_g^\pm = \partial \omega^\pm / \partial  k$ can be written in terms of the wave number as
@@ -172,7 +167,7 @@ Currently, few analytic solutions have been discovered for the Serre equations. 
 
 
 \subsubsection{Solitary Travelling Wave Solution}
-The Serre equations admit a travelling wave solution that propagates at a constant speed without deformation due to a balance between the non-linear and dispersive effects. Unlike the Euler equations this travelling wave solution has a closed form
+The Serre equations admit a family of travelling wave solutions that propagate at a constant speed without deformation due to a balance between the non-linear and dispersive effects \cite{El-etal-2006}. One particular member of this family is the solitary travelling wave solution, which unlike the Euler equations has a closed form
 \begin{subequations}
 	\begin{align}
 	&h(x,t) = a_0 + a_1\text{sech}^2\left(\kappa \left[x - ct\right]\right), \\  \nonumber \\
@@ -188,7 +183,7 @@ with
 \end{align*}
 From these equations the total amounts of $h$ \eqref{eqn:SolitonConservationh}, $uh$ \eqref{eqn:SolitonConservationuh}, $G$ \eqref{eqn:SolitonConservationG} and $\mathcal{H}$ \eqref{eqn:SolitonConservationH} at $t=0s$ can be derived and are provided in Appendix \ref{app:ConQuant}.
 
-The solitary wave solution has an amplitude of $a_1$, an infinite wavelength and propagates on water $a_0$ deep. In \eqref{eqn:Solitondefhub} it is written as travelling in the positive $x$ direction, but can travel in either direction, depending on the sign of $u(x,t)$. This solution is one member of a family of smooth periodic travelling wave solutions \cite{El-etal-2006}. Note that these solitary wave solutions are not true solitons, due to their inelastic collisions with one another \cite{Dutykh-etal-2013-761}. 
+The solitary wave solution has an amplitude of $a_1$, an infinite wavelength and propagates on water $a_0$ deep. In \eqref{eqn:Solitondefhub} it is written as travelling in the positive $x$ direction, but can travel in either direction, depending on the sign of $u(x,t)$. Although, it is a solitary travelling wave this solution is not a true soliton as these solitary waves do not collide elastically \cite{Dutykh-etal-2013-761}. 
 
 This analytic solution can only be reproduced with the appropriate order of accuracy if all terms of the Serre equations with a horizontal bed \eqref{eqn:FullSerreConHorizBed} are adequately approximated by the numerical method. Furthermore, since this solution is maintained by a balance between non-linear and dispersive effects it tests the balance of these effects in the numerical method. Therefore, this analytic solution is a good test for assessing the accuracy of numerical methods for solving the Serre equations with a horizontal bed \eqref{eqn:FullSerreConHorizBed}.
 
@@ -266,7 +261,7 @@ There have been a number of numerical solutions to dam-break problems presented 
 
 The convergence and conservation properties of many numerical solutions of the first-, second- and third-order finite difference volume methods as well as two second-order finite difference methods were investigated \cite{Pitt-2018-61}. All the numerical solutions affirmed the existence of a previously unreported behaviour of the Serre equations in the presence of steep gradients over short time spans. This new behaviour was justified using the convergence of the numerical solutions to one another as the resolution of the method increased. Since this convergence was observed for all high-order accurate methods; the likelihood that this new behaviour was a result of a particular quirk of the method was small. Therefore, it was concluded that this behaviour was representative of the true solution of the Serre equations in the presence of steep gradients.
 
-The analytic solution of the Serre equations to the dam-break problem is not currently known. These numerical solutions \cite{Pitt-2018-61} currently provide the best approximation to the solution of the Serre equations to the dam-break problem over short time spans. Furthermore, by varying the resolution of the numerical methods and the smoothing applied to the initial conditions, their impact on the observed behaviour was determined. These results allow others to appropriately choose the smoothness of the initial conditions and the resolution of their numerical method.
+The analytic solution of the Serre equations to the dam-break problem is not currently known. The numerical solutions of \citet{Pitt-2018-61} currently provide the best approximation to the solution of the Serre equations to the dam-break problem over short time spans. Furthermore, the impact of varying the resolution of the numerical methods and the smoothing applied to the initial conditions on the observed behaviour was determined. These results allow others to appropriately choose the smoothness of the initial conditions and the resolution of their numerical method.
 
 The relevant results garnered from the asymptotic \cite{El-etal-2006} and linear \cite{Dougalis-etal-2007} analyses for the evolution of the dam-break problem are presented here, followed by a summary of the numerical results \cite{Pitt-2018-61}, which constituted a significant portion of the research underpinning this thesis. Since the rest of this thesis is focused around the development and validation of the second-order finite element volume method and the paper \cite{Pitt-2018-61} is focused on other methods, only a brief summary of this work is provided in this thesis.
 
@@ -299,7 +294,7 @@ To resolve the differences present in the literature a variety of numerical meth
 	\end{align}
 	\label{eqn:SmoothDB}
 \end{subequations}
-where $\alpha$ controls the width of the transition from $h_l$ to $h_r$ and thus the steepness of the initial gradient in the water surface. Most of the presented numerical simulations were focused on solutions for $h_l = 1.8m$, $h_r = 1m$ and $x_0 = 500m$ with a final time of $t=30s$. The smoothing parameter $\alpha$ and the resolution of the methods were varied to investigate their influence on the observed behaviour of the numerical solution. Four structures were observed in the numerical solutions; the non-oscillatory structure, the flat structure, the node structure and the growth structure. Numerical solutions at $t=30s$ for the mentioned $h_l$, $h_r$ and $x_0$ values demonstrating examples of the observed structures are shown in Figure \ref{fig:DBExAll}. 
+where $\alpha$ controls the width of the transition from $h_l$ to $h_r$ and thus the steepness of the initial gradient in the water surface. Most of the presented numerical simulations were focused on solutions to smooth dam break problems where $h_l = 1.8m$, $h_r = 1m$ and $x_0 = 500m$ with a final time of $t=30s$. The smoothing parameter $\alpha$ and the resolution of the methods were varied to investigate their influence on the observed behaviour of the numerical solution. Four structures were observed in the numerical solutions; the non-oscillatory structure, the flat structure, the node structure and the growth structure. Numerical solutions at $t=30s$ for the mentioned $h_l$, $h_r$ and $x_0$ values demonstrating examples of the observed structures are shown in Figure \ref{fig:DBExAll}. 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -322,19 +317,19 @@ where $\alpha$ controls the width of the transition from $h_l$ to $h_r$ and thus
 		\subcaption{Growth Structure}
 		\vspace{0.5cm}
 	\end{subfigure}
-	\caption{Examples of the different structures observed in numerical solutions to the smoothed dam-break problem \eqref{eqn:SmoothDB} displayed by \citet{Pitt-2018-61}.}
+	\caption{Examples of the different structures observed in numerical solutions pf the smoothed dam-break problem \eqref{eqn:SmoothDB} displayed by \citet{Pitt-2018-61}.}
 	\label{fig:DBExAll}
 \end{figure}
 
 The growth structure was previously not reported in the literature. The growth structure was consistently observed in numerical solutions of the smoothed dam-break problem for high-order accurate methods as $\alpha$ and the grid resolution were increased. Therefore, the growth structure represents the true structure of the solution of the Serre equations for the dam-break problem with the corresponding $h_l$ and $h_r$ values at $t=30s$. This conclusion was supported by increasing the resolution of the numerical methods and observing the convergence of the numerical solutions to one another and the conservation of $h$, $uh$ and $\mathcal{H}$. 
 
-The finite difference volume methods introduced diffusive errors caused by their flux approximation causing the amplitude and number of oscillations in the dispersive wave train to increase as the resolution increased. The finite difference methods introduce dispersive errors, causing a decrease in the amplitude and number of oscillations in the dispersive wave train as the resolution was increased. Therefore, the numerical solutions of both classes of methods serve as upper and lower bounds on the amplitude and number of oscillations in the dispersive wave train. These bounds affirmed that the observed growth structure best represented the true solution of the Serre equations to this dam-break problem. 
+The finite difference volume methods introduced diffusive errors due to their flux approximation causing the amplitude and number of oscillations in the dispersive wave train to increase as the resolution increased. The finite difference methods introduce dispersive errors, causing a decrease in the amplitude and number of oscillations in the dispersive wave train as the resolution was increased. Therefore, the numerical solutions of both classes of methods serve as upper and lower bounds on the amplitude and number of oscillations in the dispersive wave train. These bounds affirmed that the observed growth structure best represented the true solution of the Serre equations to this dam-break problem. 
 
 The observation of other behaviours at $t=30s$ was caused by; small $\alpha$ values which overly smooth the initial conditions, low-order numerical methods which introduce large diffusive errors and low numerical resolutions which cannot resolve the high frequency waves observed in the growth structure. The structures exist on a spectrum where the severity of these effects determine the observed behaviour. Hence, the most severe damping effects produced the non-oscillatory structure and the least severe effects produced the growth structure. These effects explained the observations of different structures previously present in the literature \cite{El-etal-2006,Hank-etal-2010-2034,Mitsotakis-etal-2014,Mitsotakis-etal-2017}. 
 
 The differences in the observed structures are primarily driven by the different internal structures of the dispersive shock wave while the front of the waves are indistinguishable, as demonstrated in Figure \ref{fig:DBExAll} for the flat, node and growth structures. Therefore, the results of numerical solutions that have not resolved all the internal structure present in the growth structure still agree well with the Whitham modulation results \eqref{eqn:ELWhitMod} of \citet{El-etal-2006}.
 
-The amplitude of waves at the centre of the growth structure decays over time, resulting in the observation of the flat structure when $t$ is large. These results agree with the linear argument put forth by \citet{Dougalis-etal-2007}. Therefore, for smaller times the non-linear terms of the Serre equations play a significant role in the evolution of steep gradients while over longer times the linear terms dominant and thus a separation of the dispersive wave trains is observed. 
+The amplitude of waves at the centre of the growth structure decays over time, resulting in the observation of the flat structure when $t$ is large. These results agree with the linear argument put forth by \citet{Dougalis-etal-2007}. Therefore, for smaller times the non-linear terms of the Serre equations play a significant role in the evolution of steep gradients while over longer times the linear terms dominate and thus a separation of the dispersive wave trains is observed. 
 
 \medskip
 

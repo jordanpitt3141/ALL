@@ -1,32 +1,28 @@
 
 \chapter{Conclusion}
 \label{chp:Conclusion}
+The evolution of the dam-break problem for the Serre equations was comprehensively studied using various numerical methods. The variety of numerical solutions provided a justification for the newly observed growth structure, the main feature of which is the growth in amplitude in the dispersive wave train around the contact discontinuity. Furthermore, it was found that the effects of smoothing of the initial conditions, the resolution and the diffusive error of the numerical method all contributed to produce different structures in the numerical solutions. These effects were the cause of the different structures previously published in the literature. 
 
+A well-balanced second-order Finite Element Volume Method (FEVM) termed $\text{FEVM}_2$ was described for the one-dimensional Serre equations. The method uses a finite element and a finite volume method and thus is robust to steep gradients in the conserved variables $h$ and $G$. The use of these methods also makes the FEVM well suited to solve the two-dimensional Serre equations using unstructured meshes with parallelised code. 
 
-%Described method
-%Performed a Linear Analysis
-%Validated against analytic, forced solutions
-%Validated against experimental results
+A linear analysis of the convergence and dispersion properties of $\text{FEVM}_2$ was performed and the results presented. The results of the linear analysis for the Finite Difference Volume Methods of first- ($\text{FDVM}_1$), second- ($\text{FDVM}_2$) and third-order ($\text{FDVM}_3$) described by \citet{Zoppou-etal-2017} and the second-order finite difference methods $\mathcal{D}$ and $\mathcal{W}$ described by \citet{Pitt-2018-61} were also provided. The analysis demonstrated that $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\text{FEVM}_2$ and $\mathcal{D}$ are convergent methods, while $\mathcal{W}$ is only convergent when the mean background flow velocity is zero. The dispersion analysis demonstrated that all methods approximated the dispersion relation of the Serre equations with the expected order of accuracy. The presented linear analysis extended a previous analysis of the dispersion relationships of numerical methods \cite{Filippini-etal-2016-381} by allowing non-zero mean flow, combining the spatial and temporal analyses and comparing the real and imaginary parts of the dispersion error. 
 
-The evolution of the dam-break problem for the Serre equations was comprehensively studied using various numerical methods resulting in the observation of new behaviours and the resolution of differences previously reported in the literature. 
+A comparison of the solutions of various numerical methods for the analytic solitary travelling wave solution of the Serre equations was performed. The order of accuracy and the conservation properties of the methods were as expected. Furthermore, the results demonstrated that the increase in accuracy achieved by a third-order method over a second-order method did not warrant the extra computational effort, justifying the further development of second-order methods over third-order methods for future work. For this reason only the second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were developed further to allow varying bathymetry and dry beds.
 
-A well-balanced second-order Finite Element Volume Method (FEVM) termed $\text{FEVM}_2$ was described for the one-dimensional Serre equations. The method uses a finite element and a finite volume method and thus is robust to steep gradients present in the conserved variables $h$ and $G$. The use of these methods also makes the FEVM well suited to solve the two-dimensional Serre equations using unstructured meshes with parallelised code. 
+The second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were then validated against the lake at rest steady state and the forced solutions. The validation against the lake at rest steady state demonstrated that both methods are well-balanced, as they both accurately reproduced the lake at rest steady state. The necessity of the well-balancing modifications outlined in Chapter \ref{chp:HFVMMethod} was also demonstrated, as without these modifications the lake at rest steady state was not accurately reproduced. The validation using forced solutions demonstrated that both methods accurately approximated all terms in the Serre equations in the presence of dry beds. 
 
-A linear analysis of the convergence and dispersion properties of $\text{FEVM}_2$ was performed. The results of the linear analysis were also given for the Finite Difference Volume Methods of first- ($\text{FDVM}_1$), second- ($\text{FDVM}_2$) and third-order ($\text{FDVM}_3$) described by \citet{Zoppou-etal-2017}. Also provided were the linear results for the second-order finite difference methods $\mathcal{D}$ and $\mathcal{W}$ described by \citet{Pitt-2018-61}. The analysis demonstrated that $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\text{FEVM}_2$ and $\mathcal{D}$ are convergent methods, while $\mathcal{W}$ is only convergent when the mean background flow velocity is zero. The dispersion analysis demonstrated that all methods approximated the dispersion relation of the Serre equations with the expected order of accuracy. This analysis extended a previous analysis of the dispersion relationships of numerical methods \cite{Filippini-etal-2016-381} by allowing non-zero mean flow, combining the spatial and temporal analyses and comparing the real and imaginary parts of the dispersion error. 
+Finally, the second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were compared to experimental data; demonstrating their modelling capabilities across a wide array of physical scenarios. The experimental comparison results established the greater robustness of $\text{FEVM}_2$; as $\text{FDVM}_2$ was found to be unstable for the solitary wave over a fringing reef experiment due to the presence of steep gradients in the water surface as the wave broke. Due to the greater robustness of $\text{FEVM}_2$ and its potential to be extended to unstructured meshes, $\text{FEVM}_2$ is the most promising of the methods presented in this thesis for solving the two-dimensional Serre equations in the future. For these reasons the $\text{FEVM}_2$ satisfies the overarching goal of the thesis as it is a method for the one-dimensional Serre equations that is robust in the presence of steep gradients in the free surface and during the inundation of a beach and it is extendable to the two-dimensional Serre equations using unstructured meshes.
 
-A comparison of the various numerical methods and the analytic solitary travelling wave solution of the Serre equations was performed. The expected order of accuracy and conservation properties of all the methods was observed. However, these results also demonstrated that the increase in accuracy achieved by a third-order method over a second-order method did not warrant the extra computational effort, justifying the further development of second-order methods over third-order methods for future work. For this reason only the second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were developed further to allow varying bathymetry and dry beds.
-
-The second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were then validated against the lake at rest steady state and the forced solutions. These results demonstrated that these methods are well-balanced and accurately approximate all terms in the Serre equations in the presence of dry beds. 
-
-Finally the second-order $\text{FDVM}_2$ and $\text{FEVM}_2$ were compared to experimental data; demonstrating their modelling capabilities across a wide array of physical scenarios. These results established the greater robustness of $\text{FEVM}_2$; as $\text{FDVM}_2$ was found to be unstable for the solitary wave over a fringing reef experiment due to the presence of large jumps in the water surface as the wave broke. 
-
-To summarise the major contributions of my research are:
+To summarise the major contributions of the research underpinning this thesis are:
 \begin{itemize}
-	\item Observation and justification of a new structure in the solution of the Serre equations to the dam-break problem.
-	\item Development and description of the well-balanced $\text{FEVM}_2$ that can handle dry beds and conserves $h$ and $G$.
-	\item Linear analysis of the convergence properties of $\text{FEVM}_2$, $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$.
-	\item Analysis of the dispersion properties of $\text{FEVM}_2$, $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$. This analysis allowed for non-zero mean flow velocity and accounted for the total dispersion error.
-	\item Validation of $\text{FEVM}_2$ against analytic and forced solutions and experimental results. 
+	\item Description and implementation of the third-order FDVM. The description of the third-order FDVM was primarily produced by me and was published by \citet{Zoppou-etal-2017}.
+	\item Observation and justification of a new structure in the solution of the Serre equations in the presence of steep gradients in the free surface. This work was published by \citet{Pitt-2018-61} and was summarised in Chapter \ref{chp:Serreeqns}.
+	\item Extension of the second-order FDVM to allow for dry beds. A description of the second-order FDVM was published by \citet{Zoppou-etal-2017}. To extend the second-order FDVM to allow for dry beds the desingularisation transformation in Chapter \ref{chp:HFVMMethod} was used, as well as the banded diagonal matrix solver of \citet{NumRecC-1996}. Given the available description of the core components of the method, a complete description is not provided in this thesis.
+	\item Development and description of the well-balanced second-order FEVM that is capable of modelling flows over dry beds. The second-order FEVM which is well-balanced and capable of modelling flows over dry beds is described in Chapter \ref{chp:HFVMMethod} and its desired properties are validated in Chapters \ref{chp:NumMethodComp} and \ref{chp:ExpMethodComp}.
+	\item A linear analysis of convergence for all developed finite volume based methods as well as some finite difference methods was performed in Chapter \ref{chp:AnalNumMethod}.
+	\item A complete linear analysis of the dispersion properties for all developed finite volume based methods as well as some finite difference methods was performed in Chapter \ref{chp:AnalNumMethod}.
+	\item  In Chapter \ref{chp:NumMethodComp} a validation of FEVM and the second-order FDVM using forced solutions where all terms of the Serre equations are present for both wet and dry beds was performed.
+	\item Comparison of the numerical solutions of FEVM and the second-order FDVM with experimental results in the presence of dry beds and with wave breaking was presented in Chapter \ref{chp:ExpMethodComp}. 
 \end{itemize}
 
 %A bit more indepth would be good
@@ -41,11 +37,10 @@ Following the work conducted in this thesis; some possible extensions are:
 	\item Extension of $\text{FEVM}_2$ to the two-dimensional Serre equations on unstructured meshes.
 \end{itemize}
 
-[]
 \subsection{Including Wave-breaking}
-In the presence of wave-breaking the Serre equations are no longer appropriate [], as was demonstrated in Chapter \ref{chp:ExpMethodComp}. One technique to improve numerical models based on the Serre equations in the presence of wave-breaking, is to revert to a Shallow Water Wave Equation (SWWE) solver under some criteria, typically based on wave steepness \cite{Tissier-2011,Filippini-etal-2016-381,DoCarmo-2019-125}. These numerical methods benefit from the particular splitting technique employed, resulting in a method which solves the hyperbolic part of the Serre equations, the SWWE followed by a method to solve the remaining dispersive part. Therefore, when the wave-breaking criteria is met the dispersive part is neglected, producing a solution of the SWWE for the breaking wave. 
+In the presence of wave-breaking the Serre equations are no longer appropriate as was demonstrated in Chapter \ref{chp:ExpMethodComp}. One technique to improve numerical models based on the Serre equations in the presence of wave-breaking, is to revert to a Shallow Water Wave Equation (SWWE) solver under some criteria, typically based on wave steepness \cite{Tissier-2011,Filippini-etal-2016-381,DoCarmo-2019-125}. These numerical methods benefit from the splitting technique employed, resulting in a method which solves the hyperbolic part of the Serre equations, the SWWE followed by a method to solve the remaining dispersive part. Therefore, when the wave-breaking criteria is met the dispersive part is neglected, producing a solution of the SWWE for the breaking wave. 
 
-The method in this thesis is not based on this splitting technique. However, by introducing a quantity $\beta$ to the Serre equations in conservation law form \eqref{eqn:FullSerreCon} 
+The method in this thesis is not based on such a splitting technique. However, by introducing a quantity $\beta$ to the Serre equations in conservation law form \eqref{eqn:FullSerreCon} as follows
 	\begin{align*}
 	& \frac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0 ,  \\ \nonumber \\
 	\begin{split}
@@ -58,7 +53,7 @@ The method in this thesis is not based on this splitting technique. However, by 
 such a technique could be employed by setting $\beta = 0$ in the presence of wave-breaking and $\beta = 1$ otherwise. Since when $\beta = 0$, these modified Serre equations are equivalent to the SWWE.
 
 \subsection{Implementation of Different Boundary Conditions}
-When imposing boundary conditions other than the Dirichlet boundary conditions implemented in this thesis special care must be taken to ensure that the appropriate weak form of \eqref{defn:SerreEqnConservedQuantity1} is used. The presented weak form \eqref{eqn:WeakFormDomain} is only valid because when integrating by parts the surface integral of all those terms were zero due to the use of Dirichlet boundary conditions. 
+When imposing boundary conditions other than the Dirichlet boundary conditions implemented in this thesis special care must be taken to ensure that the appropriate weak form of \eqref{defn:SerreEqnConservedQuantity1} is used. The presented weak form \eqref{eqn:WeakFormDomain} is only valid because the surface integral of the terms were zero due to the use of Dirichlet boundary conditions. 
 
 The general weak form of \eqref{defn:SerreEqnConservedQuantity1} is
 \begin{multline}
@@ -67,26 +62,28 @@ The general weak form of \eqref{defn:SerreEqnConservedQuantity1} is
 \int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}v \; dx  - \left[\frac{1}{3} h^3  \frac{\partial {u}}{\partial x} v\right]_{x_{-1/2}}^{x_{m+1/2}} + \left[\frac{1}{2} uh^2  \frac{\partial {b}}{\partial x} v\right]_{x_{-1/2}}^{x_{m+1/2}}
 \label{eqn:WeakFormGen}
 \end{multline}
-where $\Omega = \left[x_{-1/2},x_{m+1/2}\right]$ as in Chapter \ref{chp:HFVMMethod}. Given the appropriate representation of $h$, $G$ and $b$ in the ghost cells, any appropriate boundary condition problem can be solved with the general weak form \ref{eqn:WeakFormGen}.
+where $\Omega = \left[x_{-1/2},x_{m+1/2}\right]$ as in Chapter \ref{chp:HFVMMethod}. Given the appropriate representation of $h$, $G$ and $b$ in the ghost cells, any appropriate boundary condition problem can be solved with the general weak form \eqref{eqn:WeakFormGen}.
 
 \subsection{Incorporation of Discontinuous Bed Profiles}
-In the current derivation of the Serre equations, the bed profile is assumed to be smooth. To be able to model dispersive waves with non-smooth bed profiles requires a new derivation of the Serre equations.
-??? [thoughts] ???
+In the current derivation of the Serre equations, the bed profile is assumed to be smooth. To be able to model dispersive waves with non-smooth bed profiles requires a new derivation of the Serre equations. Although for most practical purposes smoothing the bed sufficiently will produce adequate results.
 
 \subsection{Incorporation of Bed Friction}
-The Serre equations presented in this thesis \eqref{eqn:FullSerreCon} assume no bottom friction. To include bottom friction approximation there are many options as noted by \citet{DoCarmo-2019-125}. Although all introduce some quadratic friction term to \eqref{eqn:FullSerreNonConMome}, such as the Manning's bottom roughness \cite{Tissier-2011,Filippini-etal-2016-381,DoCarmo-2019-125}. An equivalent formulation for the momentum equation in conservation law form \eqref{eqn:Serreconsconmom} including Manning's bottom friction \cite{ChowVenTe} is 
+The Serre equations presented in this thesis \eqref{eqn:FullSerreCon} assume no bottom friction. To include bottom friction approximation there are many options as noted by \citet{DoCarmo-2019-125}. Although, all bottom friction approximations introduce some quadratic friction term to \eqref{eqn:FullSerreNonConMome}, such as the Manning's bottom roughness \cite{Tissier-2011,Filippini-etal-2016-381,DoCarmo-2019-125}. An equivalent formulation for the momentum equation in conservation law form \eqref{eqn:Serreconsconmom} including Manning's bottom friction \cite{ChowVenTe} is 
 \begin{equation}
 	\begin{split}
 		\frac{\partial G}{\partial t}  + \frac{\partial}{\partial x} \left( {u} G + \frac{gh^2}{2} -  \frac{2}{3}h^3 \left[\frac{\partial {u}}{\partial x}\right]^2 + h^2 {u}\frac{\partial {u}}{\partial x}\frac{\partial b}{\partial x} \right) \\ \\ +   \frac{1}{2}h^2 {u} \frac{\partial {u}}{\partial x} \frac{\partial^2 b}{\partial x^2}  - h {u}^2\frac{\partial b}{\partial x}\frac{\partial^2 b}{\partial x^2}  + gh \left(\frac{\partial b}{\partial x} + \frac{n^2 u \left|u\right|}{h^{4/3}} \right)   = 0.
 	\end{split}
 \end{equation}
 
+Since the second-order FEVM in its current form already possesses $u$ and $h$ over every cell, this extra term could be added into the centred source term approximation in subsection \ref{subsec:SourceTerm}. 
+
 \subsection{Complete Convergence Analysis}
-The presented convergence analysis in Chapter \ref{chp:AnalNumMethod} is only performed for the linearised Serre equations with a horizontal bed. Given the difficulty of proving convergence for Finite Volume Methods for the SWWE \cite{LeVeque-2002} this task currently seems out of reach but is of great interest to us.
+The presented convergence analysis in Chapter \ref{chp:AnalNumMethod} is only performed for the linearised Serre equations with a horizontal bed. Given the difficulty of proving convergence for Finite Volume Methods for the SWWE \cite{LeVeque-2002} this task currently seems out of reach for the Serre equations but remains of great interest.
 
 \subsection{Extension to two-dimensional Serre equations on unstructured meshes}
 %Div space, give equations
 %cite ANUGA
+The two-dimensional Serre equations have been written in conservation law form with a source term \cite{Zoppou-2014}. Given the experience in solving equations in conservation law form with a source term \cite{ANUGA,ClawPack} using unstructured meshes and the utility of the Finite Element Method to solve the elliptic equation for the new conserved quantity on unstructured meshes, producing an extension to the FEVM seems straightforward, but is not without its challenges. Since ANUGA \cite{ANUGA} uses a second-order reconstruction and the same flux approximation scheme as the FEVM, the real challenge lies in extending the reconstruction of the bed profile and the elliptic solver to the two-dimensional Serre equations. For the reconstruction of the bed profile splines seem an obvious choice, as they would permit the use of unstructured meshes and allow continuity across the volume edges to be enforced as is also required for the two-dimensional Serre equations. While for the elliptic solver, an investigation into the derivatives required to approximate the flux and source functions would need to preformed to determine the relevant basis function spaces. 
 
 
 
