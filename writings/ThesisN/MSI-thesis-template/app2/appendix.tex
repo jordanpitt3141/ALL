@@ -76,7 +76,7 @@ In Chapter \ref{chp:AnalNumMethod} the evolution matrix for $\text{FEVM}_2$ is g
 	\label{tab:RKstepfactor}
 \end{table}
 
-The flux matrix $\matr{F}$ from the finite volume methods approximation to the flux terms \eqref{eqn:singleEvolveStep} is
+The flux matrix $\matr{F}$ from the finite volume methods approximation to the flux terms \eqref{eqn:singleEvolveStep} for all finite volume based methods is
 \begin{equation}
  \matr{F} = - \dfrac{\left(1 - e^{-ik\Delta x}\right)}{ \Delta x}\begin{bmatrix}
  \mathcal{F}^{\eta,\eta} & \mathcal{F}^{\eta,G} \\\mathcal{F}^{G,\eta} &\mathcal{F}^{G,G}
@@ -239,7 +239,7 @@ E_{1,0} + e^{-i \omega^{\pm }\Delta t} E_{1,2} & E_{1,1} + e^{-i \omega^{\pm }\D
 \end{bmatrix}.
 \end{equation}
 
-Since the evolution matrix can be represented in two ways, it will now be stated whether $\matr{E}$ or $\matr{E}^{\left(2 \times 2\right)}$ were used in the convergence and dispersion analysis of the FDM. 
+Since the evolution matrix can be represented in two ways, it will now be stated whether $\matr{E}$ or $\matr{E}^{\left(2 \times 2\right)}$ was used in the convergence and dispersion analysis of the FDM. 
 
 Using the Lax-Equivalence theorem the convergence of the methods were analysed by analysing their stability and consistency separately. The stability analysis was performed by finding the spectral radius of the naive evolution matrix $\matr{E}$ of the FDM \eqref{eqn:App4x4Def}. The consistency analysis was performed by comparing the $2\times2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ \eqref{eqn:App4x4D1} to the exact evolution matrix $e^{i \omega^\pm \Delta t}\matr{I} $ for \eqref{eqn:APPCE22}. Finally, the dispersion error was derived using the eigenvalues of $\matr{E}$ \eqref{eqn:App4x4Def}, this matrix has an additional two eigenvalues beyond the ones given by $e^{i \omega^+ \Delta t}$ and $e^{i \omega^- \Delta t}$ that were ignored. It was found that the methods had the same stability and dispersion properties when $\matr{E}^{\left(2 \times 2\right)}$ was investigated. The $4\times4$ evolution matrices for $\mathcal{D}$ and $\mathcal{W}$ are now presented. Given these matrices the corresponding $2\times 2$ evolution matrix $\matr{E}^{\left(2 \times 2\right)}$ can be calculated using \eqref{eqn:App4x4D1}.
 

@@ -29,7 +29,7 @@ The linear analyses of convergence and dispersion properties for the finite volu
 \end{equation}
 where $\matr{E}$ is the $2 \times 2$ evolution matrix relating the cell average conserved quantities $h$ and $G$ at time level $t^n$ with the cell average conserved quantities at time level $t^{n+1}$. For a linear analysis the evolution matrix $\matr{E}$ will be independent of $n$ and $j$. The evolution matrix $\matr{E}$ is obtained in the analyses by representing the numerical solution in terms of Fourier modes. By analysing the properties of $\matr{E}$ and comparing it with the exact evolution matrix the convergence and dispersion properties of its associated numerical method can be determined.
  
-The evolution matrix $\matr{E}$ \eqref{eqn:linearanalaim} is derived for $\text{FEVM}_2$ and then used to perform a convergence and dispersion analysis. Additionally, the results of the analyses for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ are also provided. Appendix \ref{app:LinAnal} provides a description of the process to produce the evolution matrix $\matr{E}$ for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$ and provides the evolution matrices for $\mathcal{D}$ and $\mathcal{W}$. The results in this thesis extend those of \citet{Zoppou-etal-2017} by including more methods, analysing the convergence properties and allowing non-zero background mean velocities.
+The evolution matrix $\matr{E}$ \eqref{eqn:linearanalaim} is derived for $\text{FEVM}_2$ and then used to perform a convergence and dispersion analysis. Additionally, the results of the analyses for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$, $\mathcal{D}$ and $\mathcal{W}$ are also provided. Appendix \ref{app:LinAnal} describes the process to produce the evolution matrix $\matr{E}$ for $\text{FDVM}_1$, $\text{FDVM}_2$, $\text{FDVM}_3$ and provides the evolution matrices for $\mathcal{D}$ and $\mathcal{W}$. The results in this thesis extend those of \citet{Zoppou-etal-2017} by including more methods, analysing the convergence properties and allowing non-zero background mean velocities.
  
 \section{Linearised Serre Equations}
 The Serre equations with a horizontal bed \eqref{eqn:FullSerreNonConHorizbed} are linearised by considering waves as small perturbations $\delta\times\eta(x,t)$ and $\delta \times\mu(x,t)$ on a flow with a mean height $H$ and a mean velocity $U$ respectively, where $\delta \ll 1$. Therefore,
@@ -98,7 +98,7 @@ Given the cell averages $\overline{\vecn{\eta}}$ and $\overline{\vecn{G}}$ at $t
 	q_j &= \overline{q}_j = \mathcal{R}_{j} \overline{q}_j,\\
 	q^-_{j+\frac{1}{2}} &=\overline{q}_j + \frac{- \overline{q}_{j} e^{-ik\Delta x} + \overline{q}_{j} e^{ik\Delta x}}{4} = \left(1  + \frac{i\sin\left(k\Delta x\right)}{2} \right)\overline{q}_{j} =\mathcal{R}^-_{j+1/2} \overline{q}_{j}.
 	\end{align}
-Note that the factors given by the reconstructions operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ are independent of $j$. Furthermore, from \eqref{eqn:fourierfactor} implies that the reconstructions of $\eta$ and $G$ at other locations are $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ multiplied by a shift factor. In particular, the reconstruction operator $\mathcal{R}^+_{j+1/2}$ for $q^+_{j+\frac{1}{2}} $ is given by
+Note that the factors given by the reconstructions operators $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ are independent of $j$. Furthermore, \eqref{eqn:fourierfactor} implies that the reconstructions of $\eta$ and $G$ at other locations are $\mathcal{R}^+_{j-1/2}$, $\mathcal{R}_{j}$ and $\mathcal{R}^-_{j+1/2}$ multiplied by a shift factor. In particular, the reconstruction operator $\mathcal{R}^+_{j+1/2}$ for $q^+_{j+\frac{1}{2}} $ is given by
 \begin{equation}
 	q^+_{j+\frac{1}{2}} = e^{ik\Delta x} q^+_{j-\frac{1}{2}} = e^{ik\Delta x} \mathcal{R}^+_{j-1/2}\overline{q}_{j} = \mathcal{R}^+_{j+1/2}\overline{q}_{j}.
 \end{equation}
@@ -112,7 +112,7 @@ To calculate the velocity perturbation $\mu_{j+1/2}$ a second-order FEM is used.
 \end{equation*}
 The FEM then proceeds for \eqref{eqn:LinConSerreG} as in Chapter \ref{chp:HFVMMethod} for the non-linear Serre equation using the basis functions defined in Appendix \ref{app:FEMIntegrals}. Therefore, $G$ has the basis functions $\psi^+_{j - 1/2}$ and $\psi^-_{j + 1/2}$ \eqref{eqn:App1:PsiDef}, which means the approximation to $G$ is linear inside a cell with discontinuous jumps at the cell edges. For $v$ and $\mu$ the basis functions $\phi_{j-1/2}$, $\phi_{j}$ and $\phi_{j+1/2}$ \eqref{eqn:App1:PhiDef} are used thus, $v$ and the approximation to $\mu$ are quadratic polynomials inside a cell and are continuous across the cell edges.
 
-Given the detailed description of the method in Chapter \ref{chp:HFVMMethod}, the full derivation is omitted. The elementwise matrix $\matr{A}_j$ and vector $\vecn{g}_j$ for the finite element approximation to \eqref{eqn:LinSerreG} are
+Given the detailed description of the FEM in Chapter \ref{chp:HFVMMethod}, the full derivation is omitted. The elementwise matrix $\matr{A}_j$ and vector $\vecn{g}_j$ for the finite element approximation to \eqref{eqn:LinSerreG} are
 \begin{align*}
 \matr{A}_j &= H \frac{\Delta x}{30 } \begin{bmatrix} \TM 4 &2 &-1 \\2 &16 &2  \\-1 &2 &4 \BM \end{bmatrix} +  \frac{H^3 }{3} \frac{1 }{3\Delta x}\begin{bmatrix} \TM 7 &-8 &1  \\-8 &16 &-8  \\1 &-8 &7 \BM \end{bmatrix}, \\
 \vecn{g}_j &=  \frac{\Delta x}{6} \left(\begin{bmatrix} \TM G^+_{j -1/2} \\2 G^+_{j -1/2}+2 G^-_{j +1/2} \\ G^-_{j +1/2} \BM \end{bmatrix} - UH\begin{bmatrix} \TM 1 \\4 \\ 1  \BM\end{bmatrix} - U\begin{bmatrix} \TM \eta^+_{j -1/2} \\2 \eta^+_{j -1/2}+2 \eta^-_{j +1/2} \\ \eta^-_{j +1/2} \end{bmatrix} \BM \right).
@@ -209,7 +209,7 @@ When the flow is subcritical $-1\le Fr \le 1$, implying that $a^-_{j+ 1/2} =U-\s
 F_{j+\frac{1}{2}} &= \frac{U}{2 \sqrt{gH}} \left[f\left(q^-_{j+\frac{1}{2}}\right) - f\left(q^+_{j+\frac{1}{2}}\right) \right]  + \frac{1}{2}\left[f\left(q^-_{j+\frac{1}{2}}\right) + f\left(q^+_{j+\frac{1}{2}}\right)\right] \nonumber \\ & \quad  + \dfrac{U^2 - gH}{2\sqrt{g H}} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ].
 \label{eqn:fluxsubcrit}
 \end{align}
-Substituting in the flux function for $\eta$ given by \eqref{eqn:LinContG} we get
+Substituting in the flux function for $\eta$ given by \eqref{eqn:LinContG} it is obtained that
 \begin{align*}
 F^\eta_{j+\frac{1}{2}} &= \frac{U}{2 \sqrt{gH}} \left( H\mu_{j+1/2} + U\eta^-_{j+\frac{1}{2}} -  H\mu_{j+1/2} - U \eta^+_{j+\frac{1}{2}} \right)   \nonumber \\ & \quad + \frac{1}{2}\left(H\mu_{j+1/2} + U\eta^-_{j+\frac{1}{2}} +  H\mu_{j+1/2} + U \eta^+_{j+\frac{1}{2}}\right) \nonumber \\ &\quad + \dfrac{U^2 - gH}{2\sqrt{g H}} \left (\eta^+_{j+\frac{1}{2}} - \eta^-_{j+\frac{1}{2}} \right).
 \end{align*}
@@ -390,11 +390,11 @@ In Figure~\ref{fig:StabShall} it can be seen that all methods have $\rho\left(\m
 	\label{fig:StabShall}
 \end{figure}
 
-Similar results were observed for a wide range of $k$, $H$ and $U$ values and Froude numbers. All methods except $\mathcal{W}$ were found to be stable for any combination of these variables. While $\mathcal{W}$ was only stable when $U = 0m/s$. This differs from the stability result for $\mathcal{D}$ and $\mathcal{W}$ reported by \citet{Pitt-2018-61} as that analysis assumed that $U=0m/s$.
+Similar results were observed for a wide range of $k$, $H$ and $U$ values and Froude numbers. All methods except $\mathcal{W}$ were found to be stable for any combination of these variables. While $\mathcal{W}$ was only stable when $U = 0m/s$. This differs from the stability result for $\mathcal{W}$ reported by \citet{Pitt-2018-61} as that analysis assumed that $U=0m/s$.
 
 \subsection{Consistency}
 %Define identity matrix?
-For a numerical method to be consistent the error introduced by the method for a single time step must approach zero as the spatial and temporal resolution is increased. It is sufficient to demonstrate consistency for the eigenfunctions of the linearised Serre equations, which are the Fourier modes as the eigenfunctions form a basis of the solution space. Therefore, the consistency of the methods are demonstrated using the evolution matrix $\matr{E}$. 
+For a numerical method to be consistent the error introduced by the method for a single time step must vanish as the spatial and temporal resolution is increased. It is sufficient to demonstrate consistency for the eigenfunctions of the linearised Serre equations, which are the Fourier modes as the eigenfunctions form a basis of the solution space. Therefore, the consistency of the methods are demonstrated using the evolution matrix $\matr{E}$. 
 
 The error introduced for a single time step from $t^n$ to $t^{n+1}$, $\mathcal{T}^n_j$ is
 \begin{equation}
@@ -512,7 +512,7 @@ For the real part of the dispersion error all the FEVM and the FDVM outperform t
 
 Figures~\ref{fig:Dispu0Shall}~and~\ref{fig:Dispu1Shall} demonstrate that $\text{FDVM}_2$ is superior to $\text{FEVM}_2$ for the complete dispersion error and the real and imaginary parts separately as well. Therefore, $\text{FDVM}_2$ should more accurately model the speed and amplitude of waves.
 
-Similar results were observed across a wide array of $k$, $H$ and $U$ values. However, as $kH$ increases the distinction between $\text{FDVM}_2$ and $\text{FEVM}_2$ becomes less pronounced, as can is observed in  Figure~\ref{fig:Dispu0Fill}.
+Similar results were observed across a wide array of $k$, $H$ and $U$ values. However, as $kH$ increases the distinction between $\text{FDVM}_2$ and $\text{FEVM}_2$ becomes less pronounced, as observed in Figure~\ref{fig:Dispu0Fill}.
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}

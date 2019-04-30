@@ -1,16 +1,16 @@
 \chapter{Finite Element Volume Method}
 %[][][][][] Leveque Reference
 \label{chp:HFVMMethod}
-In this chapter we introduce the notation for the numerical grids and then describe the second-order Finite Element Volume Method (FEVM) in detail.
+In this chapter the notation for the numerical grids is introduced, followed by a detailed description of the second-order Finite Element Volume Method (FEVM).
 
 A variety of numerical methods have been used to solve the Serre equations; from complete finite difference methods \cite{Cienfuegos-etal-2006-1217,El-etal-2006} and finite element methods \cite{Mitsotakis-etal-2014,Li-2014-169,Mitsotakis-etal-2017} to combinations of finite difference and finite volume methods \cite{Hank-etal-2010-2034,Zoppou-etal-2017}. Splitting techniques have also been employed, most commonly to split the Serre equations into their non-linear and dispersive parts; resulting in an elliptic operator for the dispersive part and the SWWE for the non-linear part \cite{Bradford-Sanders-2002-953,Dutykh-etal-2013-761,Filippini-etal-2016-381}. 
 
 Numerical methods that make use of the conservation law form of the Serre equations \eqref{eqn:FullSerreCon} \cite{Hank-etal-2010-2034,Li-2014-169,Zoppou-etal-2017} are the most promising for the two dimensional Serre equations with variable bathymetry. The primary reason for this is that these methods are robust and extend well to unstructured meshes with complex geometries which are the meshes most commonly used for modelling physical scenarios. Additionally, to properly handle the elliptic operator produced by the non-linear and dispersive splitting requires overly restrictive assumptions about the smoothness of the physical quantities, particularly the water depth. 
 
-An extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method was developed during the research underpinning this thesis. This second-order FEVM which will be referred to as $\text{FEVM}_2$ was a main objective of this thesis; it consists of two main parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon}, hence its name. Making use of a FEM and a FVM results in a numerical method with a number of desirable properties: it is accurate in the presence of steep gradients in the free surface \cite{Pitt-2018-61}, it accurately models the wetting and drying of beds and the FEM provides a complete profile of the horizontal velocity inside a cell. This last point indicates that this method is the ideal variant of the finite volume based methods \cite{Zoppou-etal-2017} for solving the two-dimensional Serre equations on unstructured meshes with parallelised code.
+An extension of the Finite Difference Volume Methods (FDVM) \cite{Hank-etal-2010-2034,Zoppou-etal-2017} that uses a finite element method in place of the finite difference method was developed during the research underpinning this thesis. This second-order FEVM which will be referred to as $\text{FEVM}_2$ was a main objective of this thesis; it consists of two parts a Finite Element Method (FEM) to solve \eqref{defn:SerreEqnConservedQuantity1} and a Finite Volume Method (FVM) to solve \eqref{eqn:FullSerreCon}, hence its name. Making use of a FEM and a FVM results in a numerical method with a number of desirable properties: it is accurate in the presence of steep gradients in the free surface \cite{Pitt-2018-61}, it accurately models the wetting and drying of beds and the FEM provides a complete profile of the horizontal velocity inside a cell. This last point indicates that this method is the ideal variant of the finite volume based methods \cite{Zoppou-etal-2017} for solving the two-dimensional Serre equations on unstructured meshes with parallelised code.
  
  
-In addition to the $\text{FEVM}_2$, the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced. These methods will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore, the third-order $\text{FDVM}_3$ was implemented during the research underpinning this thesis. Finally, the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006} which are referred to as $\mathcal{D}$ and $\mathcal{W}$ respectively were reproduced. Descriptions of these methods have already been published \cite{Zoppou-etal-2017,Pitt-2018-61} and therefore, are omitted from this thesis.
+In addition to the $\text{FEVM}_2$, the first- and second-order FDVM of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} were reproduced and will be referred to as $\text{FDVM}_1$ and $\text{FDVM}_2$ respectively. Furthermore, the third-order $\text{FDVM}_3$ was implemented during the research underpinning this thesis. Finally, the second-order naive finite difference method \cite{Pitt-J-2014} and the finite difference method of \citet{El-etal-2006} which are referred to as $\mathcal{D}$ and $\mathcal{W}$ respectively were reproduced. Descriptions of all of these methods have previously been published \cite{Zoppou-etal-2017,Pitt-2018-61} and therefore, are omitted from this thesis.
 
 
 \section{Notation for Numerical Grids}
@@ -29,7 +29,7 @@ Other points inside the $j^{th}$ cell can be defined in relation to the midpoint
 \begin{align*}
 x_{j + s} &= x_j + s \Delta x
 \end{align*}
-where $s \in \left[-\frac{1}{2} , \frac{1}{2}\right] \subset\mathbb{R}$, although for the remainder of the thesis only rational values of $s$ are required. With this notation the $j^{th}$ cell spans $\left[x_{j -1/2},x_{j + 1/2}\right]$. These discretisations in space and time result in the grids displayed in Figure \ref{fig:NumericalGrid}.
+where $s \in \left[-\frac{1}{2} , \frac{1}{2}\right] \subset\mathbb{R}$, although for the remainder of the thesis only rational values of $s$ are required. Utilising the spatial notation the $j^{th}$ cell spans $\left[x_{j -1/2},x_{j + 1/2}\right]$. These discretisations in space and time result in the grids displayed in Figure \ref{fig:NumericalGrid}.
 
 \begin{figure}
 	\centering
@@ -38,7 +38,7 @@ where $s \in \left[-\frac{1}{2} , \frac{1}{2}\right] \subset\mathbb{R}$, althoug
 	\label{fig:NumericalGrid}
 \end{figure}
 
-The temporal and spatial grid notation naturally extends to the quantities of interest, for example, for a general quantity $q$
+The grid notation in space and time naturally extends to the quantities of interest, for example, for a general quantity $q$
 \begin{equation*}
 q^n_j = q(x_j ,t^n) 
 \end{equation*}
@@ -52,7 +52,7 @@ In the FEVM the quantities are reconstructed at various points inside the cell u
 \section{Structure Overview}
 \label{sec:StructOverview}
 %define w,b
-The description of the FEVM begins with an overview of the evolution step, followed by the details of each of its components. 
+The description of the FEVM begins with an overview of the evolution step, followed by a detailed explanation for each of its components. 
 
 The evolution step from $t^n$ to $t^{n+1}$ begins with the cell averages for the height of the water above the bed $h$, the absolute location of the free-surface $w$ and the conserved quantity $G$ at time $t^n$. Additionally, all the nodal values of the bed profile $b$ are known. These quantities are written as vectors capturing their values from the $0^{th}$ to the $m^{th}$ cell in the following way
 \begin{align*} \overline{\vecn{q}}^n = \begin{bmatrix} \TM
@@ -83,7 +83,7 @@ where $q$ is a generic quantity representing the vectors for $h$, $G$ and $w$. T
 	\end{bmatrix}
 	\end{align*}
 	where $q$ is a generic quantity demonstrating the vectors for $h$, $w$ and $G$. Note that since the domain contains all the cells from the $0^{th}$ cell to the $m^{th}$ cell that $q^+_{-1/2}$ and $q^-_{m+1/2}$ are the reconstructed values of $q$ at the left and right boundaries of the domain, respectively.	
-	\item Fluid Velocity: The remaining unknown quantity, the horizontal velocity of the fluid column, $u$ is calculated at $x_{j-1/2}$, $x_j$ and $x_{j+1/2}$ in each cell by solving \eqref{defn:SerreEqnConservedQuantity1} with a second-order FEM. The solution of the FEM for $u$ is denoted by the function $\mathcal{G}$, which takes $\vecn{\hat{h}}$, $\vecn{\hat{G}}$ and $\vecn{\hat{b}}$ as inputs and thus,
+	\item Fluid Velocity: The remaining unknown quantity, the depth-averaged horizontal velocity of the fluid column, $u$ is calculated at $x_{j-1/2}$, $x_j$ and $x_{j+1/2}$ in each cell by solving \eqref{defn:SerreEqnConservedQuantity1} with a second-order FEM. The solution of the FEM for $u$ is denoted by the function $\mathcal{G}$, which takes $\vecn{\hat{h}}$, $\vecn{\hat{G}}$ and $\vecn{\hat{b}}$ as inputs and thus,
 	\begin{equation*}
 	\vecn{\hat{u}} = 
 	\begin{bmatrix} \TM	u_{-1/2} \\ u_0 \\ u_{1/2} \\ \vdots \\ u_{m+1/2} \BM
@@ -189,7 +189,6 @@ To calculate the remaining unknown primitive variable $u$ from the known quantit
 \begin{equation*}
 	\int_{\Omega } G v \; dx =  \int_{\Omega } uh \left(1 + \frac{\partial h}{\partial x}\frac{\partial b}{\partial x} + \frac{1}{2}h\frac{\partial^2 b}{\partial x^2} +  \left[\frac{\partial b}{\partial x}\right]^2 \right) v - \frac{\partial}{\partial x}\left(\frac{1}{3}h^3  \frac{\partial {u}}{\partial x}\right) v \; dx.
 \end{equation*}
-
 Integrating this equation by parts with zero Dirichlet boundary conditions produces
 \begin{multline}
 \int_{\Omega } G v \; dx = \int_{\Omega } uh \left(1 + \left[\frac{\partial b}{\partial x}\right]^2 \right) v \; dx +  \int_{\Omega } \frac{1}{3}h^3  \frac{\partial {u}}{\partial x} \frac{\partial v}{\partial x} \; dx  \\ - 
@@ -197,6 +196,9 @@ Integrating this equation by parts with zero Dirichlet boundary conditions produ
 \int_{\Omega }   \frac{1}{2}h^2\frac{\partial b}{\partial x}  \frac{\partial u }{\partial x}v \; dx.
 \label{eqn:WeakFormDomain}
 \end{multline}
+Note that this formulation of the weak form of \eqref{defn:SerreEqnConservedQuantity1} has moved the second derivative of $b$ and the derivative of $h^3 {\partial u}/{ \partial x}$ onto the test function, reducing the smoothness of these quantities required to produce a solution of \eqref{defn:SerreEqnConservedQuantity1}.
+
+
 Assuming that time is fixed so that all the functions only vary in space, this formulation implies that by ensuring that $G$, $h$, $b$ and $\partial b / \partial x$ have finite integrals over $\Omega$, then $u$ and $\partial u / \partial x$ must have finite integrals as well. To approximate the flux and source terms \eqref{eqn:FullSerreCon} requires $u$ and $\partial u / \partial x$ to be well defined, and thus integrable. Therefore, it will be assumed that for each time $t$ that $h,G \in \mathbb{L}^2(\Omega)$, the space of square integrable functions and $b \in\mathbb{W}^{1,2}(\Omega)$ the space of square integrable functions whose first weak derivatives are also square integrable. These assumptions imply $u \in \mathbb{W}^{1,2}(\Omega) $ when solving \eqref{eqn:WeakFormDomain} and thus $u$ and $\partial u / \partial x$ will be well defined, as desired. For a precise definition of $\mathbb{L}^2(\Omega)$ and $\mathbb{W}^{1,2}(\Omega)$, see Appendix \ref{app:FEMIntegrals}.
 
 
@@ -317,10 +319,10 @@ This is a penta-diagonal matrix equation which can be solved by direct banded ma
 \end{equation}
 as desired.
 
-The matrix $\matr{A}$ is well conditioned as long as $h\gg0$. However, as $h$ vanishes the condition number of the matrix increases. To avoid an inaccurate solution for $u$ when $h$ is small the techniques described in section \ref{sec:DryBeds} are employed.  
+The matrix $\matr{A}$ is well conditioned as long as $h\gg0$. However, as $h$ vanishes the condition number of the matrix increases. To avoid an inaccurate solution for $u$ when $h$ is small the techniques described in Section \ref{sec:DryBeds} are employed.  
 \subsection{Flux Across the Cell Interfaces}
 
-The method of \citet{Kurganov-etal-2001-707} is used to calculate the flux across a cell interface. This method was employed because it can handle discontinuities across the cell boundary and only requires an estimate of the maximum and minimum wave speeds. This is precisely the situation for the Serre equations which do not have a known expression for the characteristics but do possess estimates on the maximum and minimum wave speeds \eqref{eqn:WaveVelocitiesBound}.
+The method of \citet{Kurganov-etal-2001-707} is used to approximate the flux across a cell interface. This method was employed because it can handle discontinuities across the cell boundary and only requires an estimate of the maximum and minimum wave speeds. This is precisely the situation for the Serre equations which do not have a known expression for the characteristics but do possess estimates on the maximum and minimum wave speeds \eqref{eqn:WaveVelocitiesBound}.
 
 Only the calculation of the flux term $F_{j+1/2}$ is demonstrated as the process to calculate the flux term $F_{j-1/2}$ is identical but with different cells. For a general quantity $q$ the approximation of the flux term given by \citet{Kurganov-etal-2001-707} is
 \begin{equation}\label{eqn:HLL_flux}
@@ -430,7 +432,7 @@ The centred source term is calculated like so
 \begin{equation*}
  S_{ci} = -\frac{1}{2}\left(h_j\right)^2 {u_j}\left( \frac{\partial {u}}{\partial x} \right)_j \left(\frac{\partial^2 b}{\partial x^2} \right)_j  + h_j \left(u_j\right)^2 \left(\frac{\partial b}{\partial x}\right)_j \left(\frac{\partial^2 b}{\partial x^2}\right)_j - gh_j\left(\frac{\partial b}{\partial x}\right)_j.
 \end{equation*}
-Where $h_j$ from the reconstruction process \eqref{eqn:ReconforhwG} and $u_j$ from the solution of \eqref{eqn:usolvefromGhb} are used. To calculate the derivatives of $u$ and $b$ their polynomial representations \eqref{eqn:Polyforucell} and \eqref{eqn:Polyforbcell} inside a cell are used. However, to ensure that the terms cancel properly for a lake at rest the approximation to $\dfrac{\partial b}{\partial x}$ is modified to use $\dot{b}^-_{j+1/2}$ and $\dot{b}^+_{j+1/2}$ from \eqref{eqn:BedReDefWmH}. Therefore, the following approximations are used to calculate $S_{ci}$
+Where $h_j$ from the reconstruction process \eqref{eqn:ReconforhwG} and $u_j$ from the solution of \eqref{eqn:usolvefromGhb} are used. To calculate the derivatives of $u$ and $b$ their polynomial representations \eqref{eqn:Polyforucell} and \eqref{eqn:Polyforbcell} inside a cell are used. However, to ensure that the terms cancel properly for a lake at rest, the approximation to ${\partial b}/{\partial x}$ is modified to use $\dot{b}^-_{j+1/2}$ and $\dot{b}^+_{j+1/2}$ from \eqref{eqn:BedReDefWmH}. Therefore, the following approximations are used to calculate $S_{ci}$
 	\begin{align*}
 	\left(\dfrac{\partial {u}}{\partial x} \right)_{j} &= \frac{\partial }{\partial x}P^u_j(x_{j}),  \\
 \left(\dfrac{\partial {b}}{\partial x} \right)_{j} &=  \frac{\dot{b}^-_{j+1/2} - \dot{b}^+_{j-1/2}}{\Delta x} , \\	
@@ -480,7 +482,7 @@ To ensure the stability of the FEVM the Courant-Friedrichs-Lewy (CFL) condition 
 where $a^\pm_{j+1/2} $ are the wave-speed bounds used in the flux approximation \eqref{eqn:WaveSpeedBoundsFluxApprox} and $0\le Cr \le 1$ is the Courant number. Typically, the conservative $Cr = 0.5$ is used in the numerical experiments in this thesis. 
 
 \section{Boundary Conditions}
-To numerically model the Serre equations over finite spatial domains boundary conditions must be enforced at the left and right edge of the domain; $x_{-1/2}$ and $x_{m+1/2}$ respectively. For simplicity, only Dirichlet boundary conditions for the FEVM were considered in this thesis. These Dirichlet boundary conditions are enforced using ghost cells located outside the domain boundaries. These ghost cells contain the complete representation of their respective quantities over the cell. Additionally, since a finite volume based method is employed, only a first-order accurate approximation at the boundaries is required to maintain global second-order accuracy \cite{Gustafsson}. For $h$, $w$, $G$ and $u$ one ghost cell at each boundary is required, while for $b$ two ghost cells at each boundary are required. The ghost cells for $h$, $w$ and $G$ written for a generic quantity $q$ are
+To numerically model the Serre equations over finite spatial domains boundary conditions must be enforced at the left and right edge of the domain; $x_{-1/2}$ and $x_{m+1/2}$ respectively. For simplicity, only Dirichlet boundary conditions for the FEVM were considered in this thesis. These Dirichlet boundary conditions are enforced using ghost cells located outside the domain boundaries. These ghost cells contain the complete representation of their respective quantities over the cell. Additionally, since a finite volume based method is employed, only a first-order accurate approximation to the quantities at the boundaries is required to maintain global second-order accuracy \cite{Gustafsson}. For $h$, $w$, $G$ and $u$ one ghost cell at each boundary is required, while for $b$ two ghost cells at each boundary are required. The ghost cells for $h$, $w$ and $G$ written for a generic quantity $q$ are
 \begin{align*}
 &\vecn{\hat{q}}_{-1} = \begin{bmatrix} \TM
 q^+_{-3/2} \\ q_{-1} \\ q^-_{-1/2} \BM \end{bmatrix},&\vecn{\hat{q}}_{m+1} = \begin{bmatrix} \TM
@@ -527,15 +529,13 @@ u_{m+1/2} \BM
 These are then assembled with the other element contributions in the global stiffness matrix $\matr{A}$ and right hand side vector $\vecn{g}$ in \eqref{eqn:FEMElemMatrixJ}.
 \section{Dry Beds}
 \label{sec:DryBeds}
-%Other desingularisation transforms
-%[][][][][]
 Dry beds are handled adequately by all steps of the FEVM in their current form, except the FEM for $u$. A dry bed presents two issues; when $h$ and $G$ are small then small errors in $h$ and $G$ can produce large errors in $u$ leading to instabilities and when $h=0$ the stiffness matrix $\matr{A}$ \eqref{eqn:usolvefromGhb} becomes singular.
 
-The issue of large errors in $u$ when $h$ is small also arises when solving the SWWE; due to $u = (uh)/h $ being undefined as $u h $ and $h$ go to zero. For the Serre equations with horizontal beds when $h \ll 1$ \eqref{defn:SerreEqnConservedQuantity1HorizBed} becomes
+The issue of large errors in $u$ when $h$ is small also arises when solving the SWWE \cite{RICCHIUTO20091071}; due to $u = (uh)/h $ being undefined as $u h $ and $h$ go to zero. For the Serre equations with horizontal beds when $h \ll 1$ \eqref{defn:SerreEqnConservedQuantity1HorizBed} becomes
 \begin{equation}
 G = uh + \mathcal{O}\left(h^3\right).
 \end{equation}
-Since $h \ll 1$ the $\mathcal{O}\left(h^3\right)$ terms are neglected, and thus when $h$ is small $G$ is equal to the momentum $uh$, and the challenges posed by $h \rightarrow 0$ for the SWWE and the Serre equations are equivalent. Therefore, the dry bed handling techniques for the SWWE can be applied to the Serre equations; in particular a desingularisation transformation \cite{Kurganov-Petrova-2007-707}. 
+Since $h \ll 1$ the $\mathcal{O}\left(h^3\right)$ terms are neglected, and thus when $h$ is small $G$ is equal to the momentum $uh$, and the challenges posed by $h \rightarrow 0$ for the SWWE and the Serre equations are equivalent. Therefore, the dry bed handling techniques for the SWWE can be applied to the Serre equations such a desingularisation transformations \cite{Kurganov-Petrova-2007-707} or zeroing of the velocity when $h$ is small \cite{RICCHIUTO20091071}. Since the first derivative of $u$ is required in the flux approximation the smooth desingularisation transformations of \citet{Kurganov-Petrova-2007-707} were preferred for the Serre equations.
 
 These desingularisation transforms act by modifying the calculation of $u$ given $h$ and $uh$ to avoid the singularity as the numerator and denominator go to zero, hence their name. The simplest such transformation is
 \begin{equation}
