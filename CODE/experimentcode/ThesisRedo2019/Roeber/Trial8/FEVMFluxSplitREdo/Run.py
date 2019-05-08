@@ -212,6 +212,7 @@ def find_nearestidx(array1, value1):
 
 
 
+
 #Roeber Problem    
 expdir = "/home/jp/Documents/PhD/project/data/Experimental/Roeber/Out/Trial8/"
 wdir = "/home/jp/Documents/PhD/project/data/ThesisRedo2019/FEVM/"  

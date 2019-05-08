@@ -15,21 +15,18 @@
 \citation{Tissier-2011,Li-2014-169,Filippini-etal-2016-381,DoCarmo-2019-125}
 \citation{Zoppou-etal-2017}
 \citation{Synolakis-1987-523}
-\citation{Seabra-Santos-etal-1987-117}
 \citation{Zoppou-etal-2017}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Serre Equations}{2}}
-\newlabel{eqn:FullSerreCon}{{1}{2}}
-\newlabel{eqn:FullSerreConMass}{{1a}{2}}
-\newlabel{eqn:Serreconsconmom}{{1b}{2}}
-\citation{Zoppou-etal-2017}
 \citation{Green-Naghdi-1976-237}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Diagram demonstrating a free surface flow (\squareF  {blue}) over a bed (\squareF  {brown!80!black}) where $w(x,t)$ is the absolute location of the free surface, $h(x,t)$ is the height of a column of fluid, $u(x,t)$ is the depth-averaged horizontal velocity of a column of fluid and $b(x)$ is the stationary bed profile.\relax }}{3}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:SerreModel}{{1}{3}}
+\newlabel{eqn:FullSerreCon}{{1}{3}}
+\newlabel{eqn:FullSerreConMass}{{1a}{3}}
+\newlabel{eqn:Serreconsconmom}{{1b}{3}}
 \newlabel{defn:SerreEqnConservedQuantity1}{{2}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Conservation Properties}{3}}
 \newlabel{eqn:Hamildef}{{2.1}{3}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Description of Numerical Method}{3}}
 \citation{Gottlieb-etal-2003-89}
 \citation{Kurganov-etal-2001-707}
 \citation{Klein-etal-2004-2050}
@@ -37,6 +34,7 @@
 \citation{Zoppou-etal-2017}
 \citation{Kurganov-etal-2001-707}
 \citation{Zoppou-etal-2017}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Description of Numerical Method}{4}}
 \newlabel{eqn:FVMUpdate}{{3}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Flux Approximation}{4}}
 \newlabel{eqn:HLL_flux}{{4}{4}}
@@ -47,28 +45,28 @@
 \newlabel{eqn:FluxMassNum}{{6}{5}}
 \newlabel{eqn:FluxIrrotNum}{{7}{5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Reconstruction}{5}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}The conserved quantities, $h$ and $G$ }{5}}
-\newlabel{eqn:ReconforhwG}{{8}{5}}
-\newlabel{eqn:slopehGrecon}{{9}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}The conserved quantities, $h$ and $G$ }{6}}
+\newlabel{eqn:ReconforhwG}{{8}{6}}
+\newlabel{eqn:slopehGrecon}{{9}{6}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Bed profile }{6}}
 \newlabel{eqn:cubicforbedrecon}{{3.2.2}{6}}
 \newlabel{eqn:BedReconDef}{{10}{6}}
-\newlabel{eqn:PolyDerivb}{{11}{6}}
+\newlabel{eqn:PolyDerivb}{{11}{7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Calculating $u$ and $\partial u / \partial x$}{7}}
 \newlabel{eqn:WeakFormDomain}{{12}{7}}
 \newlabel{eq:elementwiseint}{{13}{7}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Support of the basis functions $\psi $, $\phi $ and $\gamma $ which are non-zero over the $j^{th}$ cell.\relax }}{8}}
 \newlabel{fig:P1DiscBasis}{{3}{8}}
+\newlabel{eqn:FEapproxtohG}{{14a}{8}}
+\newlabel{eqn:FEapproxtou}{{14b}{8}}
+\newlabel{eqn:FEapproxtob}{{14c}{8}}
 \citation{NumRecC-1996}
-\newlabel{eqn:FEapproxtohG}{{14a}{9}}
-\newlabel{eqn:FEapproxtou}{{14b}{9}}
-\newlabel{eqn:FEapproxtob}{{14c}{9}}
+\citation{Courant-etal-1967-215}
 \newlabel{eqn:FEapprox}{{14}{9}}
 \newlabel{eqn:usolvefromGhb}{{15}{9}}
 \newlabel{eqn:PolyDerivu}{{16}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Source Term Approximation}{9}}
 \newlabel{eqn:SourceTermNaive}{{17}{9}}
-\citation{Courant-etal-1967-215}
 \citation{Gottlieb-etal-2003-89}
 \citation{Klein-etal-2004-2050}
 \citation{Pitt-J-2014}
@@ -77,44 +75,44 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Time-Stepping}{10}}
 \newlabel{eqn:SSPRKStep1}{{20}{10}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Well Balancing Modifications}{10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.1}Modified Reconstruction of $h$}{10}}
 \citation{Kurganov-Petrova-2007-707}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.1}Modified Reconstruction of $h$}{11}}
 \newlabel{eqn:ModifiedHValue}{{21}{11}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.2}Modified Source Term}{11}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Dry Bed Handling Modifications}{11}}
 \citation{Kurganov-Petrova-2007-707}
 \citation{Kurganov-Petrova-2007-707}
+\citation{NumRecC-1996}
 \newlabel{eqn:calculationofugivenuhandh}{{22}{12}}
 \newlabel{eqn:hsimpletransform}{{23}{12}}
 \newlabel{eqn:hdrytransform}{{24}{12}}
-\citation{NumRecC-1996}
 \citation{Synolakis-1987-523}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Validation}{13}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Measures of Error}{13}}
 \newlabel{eqn:L1qdef}{{4.1}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Lake at Rest Solution Validation}{13}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Numerical solution for $w$ (\squareF  {blue}) and $b$ (\squareF  {brown!60!black}) with $\Delta x = {100} / {2^{10}}m $ for the lake at rest problem at $t=10s$.\relax }}{14}}
 \newlabel{fig:LAR}{{4}{14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Lake at Rest Solution Validation}{14}}
-\newlabel{fig:LARL1}{{5a}{15}}
-\newlabel{sub@fig:LARL1}{{a}{15}}
-\newlabel{fig:LARC}{{5b}{15}}
-\newlabel{sub@fig:LARC}{{b}{15}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The numerical error ($h$, $u$ and $G$) and conservation error ($h$, $uh$, $G$ $\mathcal  {H}$) against $\Delta x$ for the lake at rest problem at $t=10s$. \relax }}{15}}
-\newlabel{fig:LARL2C}{{5}{15}}
+\newlabel{fig:LARL1}{{5a}{14}}
+\newlabel{sub@fig:LARL1}{{a}{14}}
+\newlabel{fig:LARC}{{5b}{14}}
+\newlabel{sub@fig:LARC}{{b}{14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The numerical error ($h$, $u$ and $G$) and conservation error ($h$, $uh$, $G$ $\mathcal  {H}$) against $\Delta x$ for the lake at rest problem at $t=10s$. \relax }}{14}}
+\newlabel{fig:LARL2C}{{5}{14}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Numerical solution for $w$ with (\squareF  {blue}) and without ({\color  {red}\unhbox \voidb@x \hbox {\solidrule [2mm]\hspace  {2mm}\solidrule [2mm]}}) well-balancing modifications over $\left [-25,0\right ]$ for the lake at rest problem at $t=10s$ where $\Delta x = {100} / {2^{10}}m $.\relax }}{15}}
 \newlabel{fig:WBnWBComp}{{6}{15}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Forced Solution Validation}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Forced Solution Validation}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Dry Bed Forced Solution Problem}{16}}
+\newlabel{eqn:ForcedSolutionxt}{{25a}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Example numerical solutions for $w$, $b$, $h$, $G$ with $\Delta x = 100 / 2^{14}m$ at various times to the dry bed forced solution problem.\relax }}{17}}
+\newlabel{fig:ExampleForcedSolutionDry}{{7}{17}}
 \citation{Kurganov-Petrova-2007-707}
-\citation{Kurganov-Petrova-2007-707}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Dry Bed Forced Solution Problem}{17}}
-\newlabel{eqn:ForcedSolutionxt}{{25a}{17}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Example numerical solutions for $w$, $b$, $h$, $G$ with $\Delta x = 100 / 2^{12}m$ at various times to the dry bed forced solution problem.\relax }}{18}}
-\newlabel{fig:ExampleForcedSolutionDry}{{7}{18}}
+\citation{Synolakis-1987-523}
+\citation{Synolakis-1987-523}
+\citation{Synolakis-1987-523}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Errors as measured by $L_2$ against $\Delta x$ for $h$, $u$, and $G$ for the dry bed forced solution problem at $t=10s$.\relax }}{18}}
 \newlabel{fig:L1convergenceforcedWet}{{8}{18}}
-\citation{Synolakis-1987-523}
-\citation{Synolakis-1987-523}
-\citation{Synolakis-1987-523}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Run-up of a Solitary Wave}{18}}
 \citation{Li-2014-169}
 \citation{Synolakis-1987-523}
 \citation{Synolakis-1987-523}
@@ -123,13 +121,10 @@
 \citation{Li-2014-169,Filippini-etal-2016-381}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Diagram showing a longitudinal section of the wave tank for the run-up experiment with the water (\squareF  {blue}) and the bed (\squareF  {brown!80!black}) where the coordinates have been non-dimensionalised \cite  {Synolakis-1987-523}.\relax }}{19}}
 \newlabel{fig:SynolakisWT}{{9}{19}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Run-up of a Solitary Wave}{19}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces  Initial water surface profile (\squareF  {blue}) over the bed (\squareF  {brown!80!black}) for the run-up experiment of \citet  {Synolakis-1987-523}.\relax }}{20}}
-\newlabel{fig:SynolakisInit}{{10}{20}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Initial and final ($t'=250$) total amounts and the conservation error for the conserved quantities in the numerical solution of the run-up experiment. Here the absolute value of the total amount of $uh$ and $G$ are taken in the error as the wave has reflected off the beach.\relax }}{20}}
-\newlabel{tab:ConservationSynFEVM}{{1}{20}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces A comparison of the water surface profiles $w'(x',t')$ for the experiment (\circlet  {red}) and the numerical solution (\squareF  {blue}) over the bed (\squareF  {brown!60!black}) at various times.\relax }}{21}}
-\newlabel{fig:SynolakisFEVMNoBreak}{{11}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces  Initial water surface profile (\squareF  {blue}) over the bed (\squareF  {brown!80!black}) for the run-up experiment of \citet  {Synolakis-1987-523}.\relax }}{19}}
+\newlabel{fig:SynolakisInit}{{10}{19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces A comparison of the water surface profiles $w'(x',t')$ for the experiment (\circlet  {red}) and the numerical solution (\squareF  {blue}) over the bed (\squareF  {brown!60!black}) at various times.\relax }}{20}}
+\newlabel{fig:SynolakisFEVMNoBreak}{{11}{20}}
 \citation{Synolakis-1987-523}
 \citation{Zoppou-etal-2017}
 \citation{Synolakis-1987-523}
@@ -137,12 +132,14 @@
 \bibstyle{unsrtnat}
 \bibdata{DryBed}
 \bibcite{Pitt-2018-61}{{1}{2018}{{Pitt et~al.}}{{Pitt, Zoppou, and Roberts}}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Initial and final ($t'=250$) total amounts and the conservation error for the conserved quantities in the numerical solution of the run-up experiment. Here the absolute value of the total amount of $uh$ and $G$ are taken in the error as the wave has reflected off the beach.\relax }}{21}}
+\newlabel{tab:ConservationSynFEVM}{{1}{21}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{21}}
 \bibcite{Bonneton-Lannes-2009-16601}{{2}{2009}{{Lannes and Bonneton}}{{}}}
 \bibcite{Serre-F-1953-857}{{3}{1953}{{Serre}}{{}}}
 \bibcite{Tissier-2011}{{4}{2011}{{Tissier et~al.}}{{Tissier, Bonneton, Marche, Chazel, and Lannes}}}
 \bibcite{Li-2014-169}{{5}{2014}{{Li et~al.}}{{Li, Guyenne, Li, and Xu}}}
 \bibcite{Filippini-etal-2016-381}{{6}{2016}{{Filippini et~al.}}{{Filippini, Kazolea, and Ricchiuto}}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{22}}
 \bibcite{DoCarmo-2019-125}{{7}{2019}{{do~Carmo et~al.}}{{do~Carmo, Ferreira, and Pinto}}}
 \bibcite{Zoppou-etal-2017}{{8}{2017}{{Zoppou et~al.}}{{Zoppou, Pitt, and Roberts}}}
 \bibcite{Synolakis-1987-523}{{9}{1987}{{Synolakis}}{{}}}

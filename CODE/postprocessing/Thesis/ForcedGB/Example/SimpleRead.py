@@ -14,15 +14,15 @@ def IterateIn(list1,word):
 meth1 = "FEVM2"
 num = "10"
 
-wdir = "/home/jp/Documents/PhD/project/data/ThesisRaw/Forced/Wet/" +meth1+ "/" +num+ "/"
-sdir = "/home/jp/Documents/PhD/project/master/FigureData/Thesis/Forced/Wet/" +meth1+"/Ex"+num+"/"
+#wdir = "/home/jp/Documents/PhD/project/data/ThesisRaw/Forced/Wet/" +meth1+ "/" +num+ "/"
+sdir = "/home/jp/Documents/PhD/project/master/FigureData/DryBedPaper/Forced/Ex/"
 
 
-wdir = "/home/jp/Documents/PhD/project/data/ThesisRedo2019/DryForced/FEVM2/12/"
+wdir = "/home/jp/Documents/PhD/project/data/ThesisRedo2019/DryForced/FEVM2/14/"
 if not os.path.exists(sdir):
         os.makedirs(sdir)
 
-ts = "10.0"
+ts = "7.5"
 outfiles=os.listdir(wdir)
 sname = IterateIn(outfiles,"Sing"+ts)
 lname = IterateIn(outfiles,"List"+ts)  
@@ -60,11 +60,11 @@ with open(s,'r') as file1:
     G = array(G)  
 
 dx = x[1] - x[0]
-incr = 1
+incr = 4
 x0 = -50
 x1 = 25
 
-"""
+
 x0i = int((x0 - x[0]) / dx)
 x1i = int((x1 - x[0]) / dx)
 
@@ -106,4 +106,3 @@ with open(s,'w') as file1:
     for i in range(n):
         s ="%3.8f%5s%1.20f\n" %(rx[i]," ",rG[i])
         file1.write(s)
-"""
