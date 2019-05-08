@@ -476,7 +476,7 @@ To test whether the method is well-balanced the following lake at rest solution
 	\end{align*}
 was used. To demonstrate the capability of the method in the presence of dry and wet regions of the bed, the parameter values $a_0 = 0m$, $a_1 = 1m$ and $a_2 = 2 \pi / 50 m^{-1} $ were chosen. These parameter values result in lakes with a horizontal free surface surrounded by dry regions.
 
-For the numerical solutions the spatial domain was $x \in \left[-112.5 m,87.5 m\right]$ and the final time was $t=10s$, with the standard gravitational acceleration $g= 9.81 m/s^2$. The spatial resolution of the method was varied so that $\Delta x = 100 / 2^k m$ with $k \in \left[8, \dots ,17\right]$ and the CFL condition \eqref{eqn:CFLcond} was satisfied by having $\Delta t = Cr \Delta x / \sqrt{g}$ with condition number $Cr = 0.5$. The generalised limiter parameter $\theta = 1.2$ was used in \eqref{eqn:slopehGrecon}. Dirichlet boundary conditions were used at both ends as the analytic solution is stationary.
+For the numerical solutions the spatial domain was $x \in \left[-112.5 m,87.5 m\right]$ and the final time was $t=10s$, with the standard gravitational acceleration $g= 9.81 m/s^2$. The spatial resolution of the method was varied so that $\Delta x = 100 / 2^k m$ with $k \in \left[8, \dots ,17\right]$ and the CFL condition \eqref{eqn:CFLcond} was satisfied by having $\Delta t = Cr\, \Delta x / \sqrt{g}$ with condition number $Cr = 0.5$. The generalised limiter parameter $\theta = 1.2$ was used in \eqref{eqn:slopehGrecon}. Dirichlet boundary conditions were used at both ends as the analytic solution is stationary.
 
 The numerical method is assessed by comparing the numerical solution at $t=10s$ to the analytic solution, which are the initial conditions.
 
@@ -506,7 +506,7 @@ An example numerical solution with $\Delta x = 100/2^{10}m \approx 0.0977m$ at $
 	\label{fig:LARL2C}
 \end{figure}
 
-Examination of the $L_2$ errors depicted in Figure \ref{fig:LARL2C}(a) reveals that the method reproduced $h$, $G$ and $u$ precisely, accounting for round-off errors. The errors for $h$, $G$ and $u$ are increasing as $\Delta x \rightarrow 0$ due to an accumulation of the round-off errors. 
+Examination of the $L_2$ errors depicted in Figure \ref{fig:LARL2C}(a) reveals that the method reproduced $h$, $G$ and $u$ precisely, accounting for round-off errors. The errors for $h$, $G$ and $u$ are increasing as $\Delta x \rightarrow 0$ due to an accumulation of round-off errors. 
 
 The conservation errors as measured by $C^*$ for $h$, $uh$, $G$ and $\mathcal{H}$ are shown in Figure \ref{fig:LARL2C}(b). The conservation error of these conserved quantities demonstrates that all quantities are conserved within machine precision, with $\mathcal{H}$ being conserved exactly for most numerical solutions, hence its disappearance from the log-log plot. The conservation error of $\mathcal{H}$ is small for the lake at rest solution since $u$ and therefore the kinetic energy vanish.
 
@@ -556,7 +556,7 @@ for the primitive variables. These functions produce a Gaussian bump for $h$ and
 The values $a_0 = 0.5m$, $a_1 = 2 \pi / \left(10 a_7\right) m/s$, $a_2 =- 3\pi/ \left(2 a_6\right)m$, $a_3 = \pi / (16 a_6) m^2$, $a_4 = 0.5 m/s$, $a_5 = 1.0 m$ and $a_6 = \pi / 25 m^{-1}$ were used. These parameter values produce a Gaussian bump in $h$ and $u$ that has a width much smaller than the wavelength of the bed profile and travels precisely one wavelength of the bed in $10s$. 
 
 The domain of the numerical solutions was $x \in \left[-112.5 m,87.5 m\right]$ with $t \in \left[0s,10s\right]$. The standard gravitational acceleration $g= 9.81 m/s^2$ was used. The spatial resolution of numerical methods was varied so that $\Delta x = 100 / 2^k m$ with $k \in \left[8,\dots,17\right]$. To satisfy the CFL condition \eqref{eqn:CFLcond} the temporal resolution
-$\Delta t = Cr \Delta x / \left(a_1 + a_4 + \sqrt{g\left(a_0\right)}\right)$ was chosen with condition number $Cr = 0.5$. The value $\theta = 1.2$ was used in the generalised minmod limiter \eqref{eqn:slopehGrecon} and Dirichlet boundary conditions were applied at the boundaries of the domain. 
+$\Delta t = Cr \, \Delta x / \left(a_1 + a_4 + \sqrt{g\left(a_0\right)}\right)$ was chosen with condition number $Cr = 0.5$. The value $\theta = 1.2$ was used in the generalised minmod limiter \eqref{eqn:slopehGrecon} and Dirichlet boundary conditions were applied at the boundaries of the domain. 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -579,13 +579,13 @@ $\Delta t = Cr \Delta x / \left(a_1 + a_4 + \sqrt{g\left(a_0\right)}\right)$ was
 \subcaption{$G$}
 		\vspace{0.2cm}
 	\end{subfigure}
-	\caption{Example numerical solutions for $w$, $b$, $h$, $G$ with $\Delta x = 100 / 2^{14}m$ at various times to the dry bed forced solution problem.}
+	\caption{Example numerical solutions for $w$, $b$, $h$, $G$ with $\Delta x = 100 / 2^{14}m$ at various times for the dry bed forced solution problem.}
 	\label{fig:ExampleForcedSolutionDry}
 \end{figure}
 \begin{figure}
 	\centering
 		\includegraphics[width=0.5\textwidth]{./Figures/Forced/Dry1/L2.pdf}
-	\caption{Errors as measured by $L_2$ against $\Delta x$ for $h$, $u$, and $G$ for the dry bed forced solution problem at $t=10s$.}
+	\caption{Errors as measured by $L_2$ against $\Delta x$ for $h$, $u$, and $G$ for numerical solutions to the dry bed forced solution problem at $t=10s$.}
 	\label{fig:L1convergenceforcedWet}
 \end{figure}
 
@@ -670,7 +670,7 @@ Both $h'$ and $\mathcal{H}'$ are well conserved by the method throughout the run
 The Serre equations have reproduced the experimental result of \citet{Synolakis-1987-523} well, experimentally validating the numerical methods ability to solve the Serre equations for flows over dry beds.
 
 \section{Conclusion}
-A second-order numerical method for the one-dimensional Serre equations with varying bathymetry was described. The method uses a FVM to solve the Serre equations in conservation law form and improves previous versions of the FVM solvers for the Serre equations \cite{Zoppou-etal-2017}, by using a FEM to solve for the depth-averaged horizontal velocity. The method is modified to ensure that it is well-balanced, maintaining a steady state solution over arbitrary bathymetry and is able to handle flows over dry beds. The numerical method was validated against the lake at rest stationary solution and shown to be well-balanced. Furthermore, it reproduced forced solutions containing the wetting and drying of variable beds with second-order accuracy, affirming its ability to adequately solve the Serre equations for flows over dry beds. Finally, the numerical solution was compared to the experimental results of \citet{Synolakis-1987-523}, demonstrating the ability of the numerical method to accurately reproduce physical results involving wave run-up on a dry bed. These validation results extend those produced by other solvers of the Serre equations for flows over dry beds
+A second-order numerical method for the one-dimensional Serre equations with varying bathymetry was described. The method uses a FVM to solve the Serre equations in conservation law form and improves previous versions of the FVM solvers for the Serre equations \cite{Zoppou-etal-2017}, by using a FEM to solve for the depth-averaged horizontal velocity. The method is modified to ensure that it is well-balanced, maintaining a steady state solution over arbitrary bathymetry and is able to handle flows over dry beds. The numerical method was validated against the lake at rest stationary solution and shown to be well-balanced. Furthermore, it reproduced forced solutions containing the wetting and drying of a variable bed with second-order accuracy, affirming its ability to adequately solve the Serre equations for flows over a dry bed. Finally, the numerical solution was compared to the experimental results of \citet{Synolakis-1987-523}, demonstrating the ability of the numerical method to accurately reproduce physical results involving wave run-up on a dry bed. These validation results extend those produced by other solvers of the Serre equations for flows over dry beds
 \cite{Tissier-2011,Li-2014-169,Filippini-etal-2016-381,DoCarmo-2019-125} by demonstrating convergence using forced solutions.
 
 
